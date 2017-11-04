@@ -65,11 +65,15 @@ namespace SOC.UI
 
                 case 2:
                     QuestDefinitionLua info = new QuestDefinitionLua(setupPage.textBoxFPKName.Text, setupPage.textBoxQuestNum.Text, setupPage.locationID, setupPage.comboBoxLoadArea.Text, new Coordinates(setupPage.textBoxXCoord.Text, setupPage.textBoxYCoord.Text, setupPage.textBoxZCoord.Text), setupPage.comboBoxRadius.Text, setupPage.comboBoxCategory.Text, setupPage.comboBoxReward.Text, setupPage.comboBoxProgressNotifs.SelectedIndex, setupPage.comboBoxObjective.Text, setupPage.comboBoxCP.Text, setupPage.textBoxQuestTitle.Text, setupPage.textBoxQuestDesc.Text); //string fpk, string quest, int locID, object loada, Coordinates c, string rad, string cat, string rew, int prog)
-                    LangBuilder.WriteQuestLang(info);
+                    LangBuilder.WriteQuestLangs(info);
+
                     LuaBuilder.WriteDefinitionLua(info, detailPage.questDetails, detailPage.comboBox_Gender.Text);
                     LuaBuilder.WriteMainQuestLua(info, detailPage.questDetails, detailPage.h_checkBox_intrgt.Checked);
-                    Fox2Builder.WriteItemFox2(detailPage.questDetails);
+
+                    Fox2Builder.WriteItemFox2(info, detailPage.questDetails);
                     Fox2Builder.WriteQuestFox2(info, detailPage.questDetails, detailPage.comboBox_Gender.Text);
+
+
                     panelNum--;
                     break;
                     

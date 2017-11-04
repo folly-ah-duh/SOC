@@ -1,4 +1,4 @@
-﻿namespace SOC
+﻿namespace SOC.UI
 {
     partial class formCustomProgressLang
     {

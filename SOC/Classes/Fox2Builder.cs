@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -179,10 +180,13 @@ namespace SOC.Classes
             int baseAddress = QuestComponents.baseQuestAddress;
             List<QuestEntity> entityList = BuildQuestEntityList(questDetails);
             SetAddresses(entityList, baseAddress);
-            
 
+            string fox2Path = string.Format("Sideop_Build//Assets//tpp//pack//mission2//quest//ih//{0}_fpkd//Assets//tpp//level//mission2//quest//ih", definitionInfo.FpkName);
+            string fox2QuestFile = Path.Combine(fox2Path, string.Format("{0}.fox2.xml", definitionInfo.FpkName));
+
+            Directory.CreateDirectory(fox2Path);
             using (System.IO.StreamWriter questFox2 =
-            new System.IO.StreamWriter(@"test.fox2.xml"))
+            new System.IO.StreamWriter(fox2QuestFile))
             {
                 questFox2.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
                 questFox2.WriteLine("<fox formatVersion=\"2\" fileVersion=\"0\" originalVersion=\"Sun Mar 16 00:00:00 UTC-05:00 1975\">");
@@ -605,15 +609,19 @@ namespace SOC.Classes
             return classList;
         }
 
-        public static void WriteItemFox2(QuestDetails questDetails)
+        public static void WriteItemFox2(QuestDefinitionLua definitionInfo, QuestDetails questDetails)
         {
             int baseAddress = QuestComponents.baseItemAddress;
 
             List<QuestEntity> entityList = BuildItemEntityList(questDetails);
             SetAddresses(entityList, baseAddress);
 
+            string fox2Path = string.Format("Sideop_Build//Assets//tpp//pack//mission2//quest//ih//{0}_fpkd//Assets//tpp//level//mission2//quest//ih", definitionInfo.FpkName);
+            string fox2ItemFile = Path.Combine(fox2Path, string.Format("{0}_items.fox2.xml", definitionInfo.FpkName));
+
+            Directory.CreateDirectory(fox2Path);
             using (System.IO.StreamWriter questFox2 =
-                new System.IO.StreamWriter(@"test_Item.fox2.xml"))
+            new System.IO.StreamWriter(fox2ItemFile))
             {
                 questFox2.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
                 questFox2.WriteLine("<fox formatVersion=\"2\" fileVersion=\"0\" originalVersion=\"Sun Mar 16 00:00:00 UTC-05:00 1975\">");

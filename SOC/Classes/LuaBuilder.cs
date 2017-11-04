@@ -73,11 +73,15 @@ namespace SOC.Classes
             string requestEquipIds = string.Format("\trequestEquipIds={{ {0} }},", equipIds);
 
             string hasEnemyHeli = "\thasEnemyHeli = true, --reserves an enemy helicopter for the sideop.";
+            
 
-            string definitionFilename = string.Format("ih_quest_q{0}.lua", info.QuestNum);
+            string DefinitionLuaPath = "Sideop_Build//GameDir//mod//quests//";
+            string DefinitionLuaFile = Path.Combine(DefinitionLuaPath, string.Format("ih_quest_q{0}.lua", info.QuestNum));
+
+            Directory.CreateDirectory(DefinitionLuaPath);
 
             using (StreamWriter defFile =
-            new StreamWriter(definitionFilename, true))
+            new StreamWriter(DefinitionLuaFile))
             {
                 defFile.WriteLine("local this={");
                 defFile.WriteLine(questPackList);
@@ -107,7 +111,12 @@ namespace SOC.Classes
             questLua.InsertRange(GetLineOf("targetList = {", questLua) + 1, BuildTargetList(questDetails));
             questLua.InsertRange(GetLineOf("Hostage Attributes List", questLua) + 1, BuildHostageAttributes(questDetails));
 
-            File.WriteAllLines(definitionDetails.FpkName + ".lua", questLua);
+
+            string LuaScriptPath = string.Format("Sideop_Build//Assets//tpp//pack//mission2//quest//ih//{0}_fpkd//Assets//tpp//level//mission2//quest//ih", definitionDetails.FpkName);
+            string LuaScriptFile = Path.Combine(LuaScriptPath, definitionDetails.FpkName + ".lua");
+
+            Directory.CreateDirectory(LuaScriptPath);
+            File.WriteAllLines(LuaScriptFile, questLua);
         }
 
         public static int GetLineOf(string text, List<string> questLua)

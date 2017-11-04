@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SOC
+namespace SOC.UI
 {
     public partial class formCustomProgressLang : Form
     {

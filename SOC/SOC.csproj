@@ -123,7 +123,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="questScript.lua" />
-    <None Include="UpdateNotifsList.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -290,16 +290,16 @@ namespace SOC.Classes
                             if (gender.Equals("Male")) // todo swap out with different part files
                             {
                                 if (locName.Equals("AFGH")) //afgh male
-                                    questFox2.WriteLine("          <value>/Assets/tpp/parts/chara/prs/prs2_main0_def_v00.parts</value>");
+                                    questFox2.WriteLine("          <value>/Assets/tpp/parts/chara/prs/prs2_main0_def_v00_ih_hos.parts</value>");
                                 else if (locName.Equals("MAFR")) //mafr male
-                                    questFox2.WriteLine("          <value>/Assets/tpp/parts/chara/prs/prs5_main0_def_v00.parts</value>");
+                                    questFox2.WriteLine("          <value>/Assets/tpp/parts/chara/prs/prs5_main0_def_v00_ih_hos.parts</value>");
                             }
                             else
                             {
                                 if (locName.Equals("AFGH")) //afgh female
-                                    questFox2.WriteLine("          <value>/Assets/tpp/parts/chara/prs/prs3_main0_def_v00.parts</value>");
+                                    questFox2.WriteLine("          <value>/Assets/tpp/parts/chara/prs/prs3_main0_def_v00_ih_hos.parts</value>");
                                 else if (locName.Equals("MAFR")) //mafr female
-                                    questFox2.WriteLine("          <value>/Assets/tpp/parts/chara/prs/prs6_main0_def_v00.parts</value>");
+                                    questFox2.WriteLine("          <value>/Assets/tpp/parts/chara/prs/prs6_main0_def_v00_ih_hos.parts</value>");
                             }
                             
                             questFox2.WriteLine("        </property>");

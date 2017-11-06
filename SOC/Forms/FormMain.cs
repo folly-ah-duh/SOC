@@ -68,7 +68,7 @@ namespace SOC.UI
                     LangBuilder.WriteQuestLangs(definitionInfo);
 
                     LuaBuilder.WriteDefinitionLua(definitionInfo, detailPage.questDetails, detailPage.comboBox_Gender.Text);
-                    LuaBuilder.WriteMainQuestLua(definitionInfo, detailPage.questDetails, detailPage.h_checkBox_intrgt.Checked);
+                    LuaBuilder.WriteMainQuestLua(definitionInfo, detailPage.questDetails, detailPage.h_checkBox_intrgt.Checked, detailPage.comboBox_Gender.Text);
 
                     Fox2Builder.WriteItemFox2(definitionInfo, detailPage.questDetails);
                     Fox2Builder.WriteQuestFox2(definitionInfo, detailPage.questDetails, detailPage.comboBox_Gender.Text);

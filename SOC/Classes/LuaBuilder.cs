@@ -89,7 +89,7 @@ namespace SOC.Classes
                 defFile.WriteLine(string.Format("\tcategory=TppQuest.QUEST_CATEGORIES_ENUM.{0},", info.category));
                 defFile.WriteLine(progressLangId);
                 defFile.WriteLine(canOpenQuestFunction);
-                defFile.WriteLine(string.Format("\tquestRank={0},", info.reward));
+                defFile.WriteLine(string.Format("\tquestRank=TppDefine.QUEST_RANK.{0},", info.reward));
                 defFile.WriteLine(disableLzs);
                 defFile.WriteLine(requestEquipIds);
                 defFile.WriteLine(hasEnemyHeli);
@@ -97,7 +97,7 @@ namespace SOC.Classes
             }
         }
 
-        public static void WriteMainQuestLua(QuestDefinitionLua definitionDetails, QuestDetails questDetails, bool enableInterogate)
+        public static void WriteMainQuestLua(QuestDefinitionLua definitionDetails, QuestDetails questDetails, bool enableInterogate, string gender)
         {
             List<string> questLua = new List<string>(questLuaInput);
 
@@ -107,7 +107,7 @@ namespace SOC.Classes
             questLua[GetLineOf("local qType =", questLua)] = string.Format("local qType = TppDefine.QUEST_TYPE.{0}", definitionDetails.objectiveType); //add questtype combobox to setup
 
             questLua.InsertRange(GetLineOf("vehicleList = {", questLua) + 1, BuildVehicleList(questDetails));
-            questLua.InsertRange(GetLineOf("hostageList = {", questLua) + 1, BuildHostageList(questDetails));
+            questLua.InsertRange(GetLineOf("hostageList = {", questLua) + 1, BuildHostageList(definitionDetails, questDetails, gender));
             questLua.InsertRange(GetLineOf("targetList = {", questLua) + 1, BuildTargetList(questDetails));
             questLua.InsertRange(GetLineOf("Hostage Attributes List", questLua) + 1, BuildHostageAttributes(questDetails));
 
@@ -128,9 +128,16 @@ namespace SOC.Classes
             return -1;
         }
 
-        public static List<string> BuildHostageList(QuestDetails questDetails)
+        public static List<string> BuildHostageList(QuestDefinitionLua definitionDetails, QuestDetails questDetails, string gender)
         {
             List<string> hostageList = new List<string>();
+
+            string locName = "";
+
+            if (definitionDetails.locationID == 10)
+                locName = "AFGH";
+            else if (definitionDetails.locationID == 20)
+                locName = "MAFR";
 
             if (questDetails.hostageDetails.Count == 0)
                 hostageList.Add("nil");
@@ -146,13 +153,15 @@ namespace SOC.Classes
                     else
                         hostageList.Add("			voiceType = { \"hostage_a\", \"hostage_b\", },");
 
-                    hostageList.Add(string.Format("			langType = {0},", hostageDetail.h_comboBox_lang.Text));
+                    hostageList.Add(string.Format("			langType = \"{0}\",", hostageDetail.h_comboBox_lang.Text));
 
                     if (!hostageDetail.h_comboBox_staff.Text.Equals("NONE"))
-                        hostageList.Add(string.Format("			staffTypeId = {0},", hostageDetail.h_comboBox_staff.Text));
+                        hostageList.Add(string.Format("			staffTypeId = TppDefine.STAFF_TYPE_ID.{0},", hostageDetail.h_comboBox_staff.Text));
 
                     if (!hostageDetail.h_comboBox_skill.Text.Equals("NONE"))
-                        hostageList.Add(string.Format("			skill = {0},", hostageDetail.h_comboBox_skill.Text));
+                        hostageList.Add(string.Format("			skill = \"{0}\",", hostageDetail.h_comboBox_skill.Text));
+
+                    hostageList.Add(string.Format("			bodyId = TppDefine.QUEST_BODY_ID_LIST.{0}_HOSTAGE_{1},", locName.ToUpper(), gender.ToUpper())); // All gender/body related params seriously need a better implementation
 
                     hostageList.Add(string.Format("			position={{pos={{{0},{1},{2}}},rotY={3},}},", hostageDetail.h_textBox_xcoord.Text, hostageDetail.h_textBox_ycoord.Text, hostageDetail.h_textBox_zcoord.Text, hostageDetail.h_comboBox_rot.Text));
 

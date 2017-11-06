@@ -301,11 +301,11 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(270, 161);
+            this.label5.Location = new System.Drawing.Point(277, 161);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(74, 13);
+            this.label5.Size = new System.Drawing.Size(67, 13);
             this.label5.TabIndex = 10;
-            this.label5.Text = "GMP Reward:";
+            this.label5.Text = "Quest Rank:";
             // 
             // label4
             // 
@@ -374,16 +374,16 @@
             this.comboBoxReward.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxReward.FormattingEnabled = true;
             this.comboBoxReward.Items.AddRange(new object[] {
-            "300000",
-            "200000",
-            "180000",
-            "140000",
-            "120000",
-            "100000",
-            "90000",
-            "80000",
-            "60000",
-            "30000"});
+            "S",
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H",
+            "I"});
             this.comboBoxReward.Location = new System.Drawing.Point(350, 158);
             this.comboBoxReward.Name = "comboBoxReward";
             this.comboBoxReward.Size = new System.Drawing.Size(134, 21);

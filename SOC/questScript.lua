@@ -59,7 +59,7 @@ end
 this.questCpInterrogation = {
   
 
-  { name = "enqt1000_1i1310", func = this.InterCall_hostage_pos01, }, 
+  { name = "enqt1000_271b10", func = this.InterCall_hostage_pos01, }, 
 
 
 }
@@ -167,12 +167,10 @@ quest_step.QStep_Main = {
           msg = "ChangeToEnable",
           func = function ( arg0, arg1 )
             Fox.Log("### Marker ChangeToEnable  ###"..arg0 )
-            for i,hostageInfo in ipairs(this.QUEST_TABLE.hostageList)do
-				if arg0 == StrCode32(hostageInfo.hostageName) then
-					i = i + 1
-					if i >= hostageCount then
-						this.SwitchEnableQuestHighIntTable( false, CPNAME, this.questCpInterrogation )
-					end
+            if arg0 == StrCode32("Hostage_0") then
+				i = i + 1
+				if i >= hostageCount then
+					this.SwitchEnableQuestHighIntTable( false, CPNAME, this.questCpInterrogation )
 				end
 			end
           end

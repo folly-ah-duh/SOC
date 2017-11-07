@@ -20,7 +20,7 @@ namespace SOC.Classes
             if (!Directory.Exists(destinyDir))
                 Directory.CreateDirectory(destinyDir);
             foreach (FileInfo fileInfo in dirInfo.GetFiles())
-                fileInfo.CopyTo(Path.Combine(destinyDir, fileInfo.Name), false);
+                fileInfo.CopyTo(Path.Combine(destinyDir, fileInfo.Name), true);
             foreach (DirectoryInfo subDirInfo in dirInfo.GetDirectories())
                 CopyDirectory(subDirInfo.FullName, Path.Combine(destinyDir, subDirInfo.Name));
 

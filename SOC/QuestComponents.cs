@@ -1095,12 +1095,21 @@ namespace SOC
         public string xCoord;
         public string yCoord;
         public string zCoord;
+        public string roty;
 
         public Coordinates(string x, string y, string z)
         {
             xCoord = x;
             yCoord = y;
             zCoord = z;
+        }
+
+        public Coordinates(string x, string y, string z, string rot)
+        {
+            xCoord = x;
+            yCoord = y;
+            zCoord = z;
+            roty = rot;
         }
     }
 

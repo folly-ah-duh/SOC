@@ -24,7 +24,7 @@ namespace SOC.Classes
             else if (info.locationID == 20)
                 locName = "MAFR";
 
-            if (details.hostageDetails.Count > 0)
+            if (details.hostageDetails.Count > 0) //todo - better implementation
             {
                 packFiles += "\n\t\t\"/Assets/tpp/pack/mission2/ih/ih_hostage_base.fpk\", ";
                 if (gender.Equals("Male"))

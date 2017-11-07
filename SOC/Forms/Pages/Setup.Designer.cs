@@ -352,7 +352,6 @@
             // 
             // comboBoxRadius
             // 
-            this.comboBoxRadius.Enabled = false;
             this.comboBoxRadius.FormattingEnabled = true;
             this.comboBoxRadius.Items.AddRange(new object[] {
             "1",
@@ -364,6 +363,8 @@
             "7",
             "8",
             "9"});
+            this.comboBoxRadius.SelectedIndex = 0;
+            this.comboBoxRadius.Enabled = false;
             this.comboBoxRadius.Location = new System.Drawing.Point(100, 116);
             this.comboBoxRadius.Name = "comboBoxRadius";
             this.comboBoxRadius.Size = new System.Drawing.Size(153, 21);
@@ -448,36 +449,36 @@
             this.label18.AutoSize = true;
             this.label18.Location = new System.Drawing.Point(6, 336);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(124, 13);
+            this.label18.Size = new System.Drawing.Size(160, 13);
             this.label18.TabIndex = 22;
-            this.label18.Text = "Static Model Location(s):";
+            this.label18.Text = "Static Model Locations: (X, Y, Z)";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
             this.label17.Location = new System.Drawing.Point(6, 227);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(85, 13);
+            this.label17.Size = new System.Drawing.Size(121, 13);
             this.label17.TabIndex = 20;
-            this.label17.Text = "Item Location(s):";
+            this.label17.Text = "Item Locations: (X, Y, Z)";
             // 
             // label16
             // 
             this.label16.AutoSize = true;
             this.label16.Location = new System.Drawing.Point(6, 121);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(100, 13);
+            this.label16.Size = new System.Drawing.Size(182, 13);
             this.label16.TabIndex = 18;
-            this.label16.Text = "Vehicle Location(s):";
+            this.label16.Text = "Vehicle Locations: (X, Y, Z, Rotation)";
             // 
             // label15
             // 
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(6, 16);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(103, 13);
+            this.label15.Size = new System.Drawing.Size(185, 13);
             this.label15.TabIndex = 16;
-            this.label15.Text = "Prisoner Location(s):";
+            this.label15.Text = "Prisoner Locations: (X, Y, Z, Rotation)";
             // 
             // textBoxHosCoords
             // 

@@ -574,13 +574,14 @@ namespace SOC.Classes
             {
 
                 entityList.Add(new QuestEntity(itemDetail.i_groupBox_main.Text, unassignedAddress, entityClass.GameObjectLocator_Item, unnassignedObject, unnassignedObject));
-                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity_Item, new Coordinates(itemDetail.i_textBox_xcoord.Text, itemDetail.i_textBox_ycoord.Text, itemDetail.i_textBox_zcoord.Text), new RotationQuat("0", "0", "0", "1")));
+                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity_Item, new Coordinates(itemDetail.i_textBox_xcoord.Text, itemDetail.i_textBox_ycoord.Text, itemDetail.i_textBox_zcoord.Text), new RotationQuat(itemDetail.i_textBox_xrot.Text, itemDetail.i_textBox_yrot.Text, itemDetail.i_textBox_zrot.Text, itemDetail.i_textBox_wrot.Text)));
 
                 boxed = "0";
                 if (itemDetail.i_checkBox_boxed.Checked)
                 {
                     boxed = "1";
                 }
+
                 EquipID = QuestComponents.EquipIDLookup(itemDetail.i_comboBox_item.Text);
 
                 entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppPickableLocatorParameter, EquipID, itemDetail.i_comboBox_count.Text, boxed));

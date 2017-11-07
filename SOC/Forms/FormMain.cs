@@ -38,7 +38,18 @@ namespace SOC.UI
             panelNum--;
             this.GoToPanel();
         }
+        private bool isFilled()
+        {
+            if (string.IsNullOrEmpty(setupPage.textBoxFPKName.Text) || string.IsNullOrEmpty(setupPage.textBoxQuestNum.Text) || string.IsNullOrEmpty(setupPage.textBoxQuestTitle.Text) || string.IsNullOrEmpty(setupPage.textBoxQuestDesc.Text))
+                return false;
+            if (setupPage.comboBoxCategory.SelectedIndex == -1 || setupPage.comboBoxReward.SelectedIndex == -1 || setupPage.comboBoxObjective.SelectedIndex == -1 || setupPage.comboBoxProgressNotifs.SelectedIndex == -1 || setupPage.comboBoxRegion.SelectedIndex == -1)
+                return false;
+            if (setupPage.comboBoxCP.Enabled)
+                if (setupPage.comboBoxCP.SelectedIndex == -1 || setupPage.comboBoxLoadArea.SelectedIndex == -1 || setupPage.comboBoxRadius.SelectedIndex == -1 || string.IsNullOrEmpty(setupPage.textBoxXCoord.Text) || string.IsNullOrEmpty(setupPage.textBoxYCoord.Text) || string.IsNullOrEmpty(setupPage.textBoxZCoord.Text))
+                    return false;
 
+            return true;
+        }
         private void GoToPanel()
         {
             switch (panelNum)
@@ -51,16 +62,27 @@ namespace SOC.UI
                     break;
 
                 case 1:
-                    List<Coordinates> HostageCoords = BuildCoordinatesList(setupPage.textBoxHosCoords.Text);
-                    List<Coordinates> VehicleCoords = BuildCoordinatesList(setupPage.textBoxVehCoords.Text);
-                    List<Coordinates> ItemCoords = BuildCoordinatesList(setupPage.textBoxItemCoords.Text);
-                    List<Coordinates> ModelCoords = BuildCoordinatesList(setupPage.textBoxStMdCoords.Text);
-                    detailPage = new Details(HostageCoords, VehicleCoords, ItemCoords, ModelCoords);
+                    if (isFilled())
+                    {
+                        List<Coordinates> HostageCoords = BuildCoordinatesList(setupPage.textBoxHosCoords.Text, 4);
+                        List<Coordinates> VehicleCoords = BuildCoordinatesList(setupPage.textBoxVehCoords.Text, 4);
+                        List<Coordinates> ItemCoords = BuildCoordinatesList(setupPage.textBoxItemCoords.Text, 3);
+                        List<Coordinates> ModelCoords = BuildCoordinatesList(setupPage.textBoxStMdCoords.Text, 3);
+                        detailPage = new Details(HostageCoords, VehicleCoords, ItemCoords, ModelCoords);
 
-                    buttonBack.Visible = true;
-                    panelMain.Controls.Clear();
-                    panelMain.Controls.Add(detailPage);
-                    buttonNext.Text = "Build";
+                        buttonBack.Visible = true;
+                        panelMain.Controls.Clear();
+                        panelMain.Controls.Add(detailPage);
+                        buttonNext.Text = "Build";
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please fill in the remaining Setup and Flavor Text fields.", "Missing Details", MessageBoxButtons.OK, MessageBoxIcon.None);
+                        panelNum--;
+                        return;
+                    }
+
+                    
                     break;
 
                 case 2:
@@ -70,11 +92,14 @@ namespace SOC.UI
                     LuaBuilder.WriteDefinitionLua(definitionInfo, detailPage.questDetails, detailPage.comboBox_Gender.Text);
                     LuaBuilder.WriteMainQuestLua(definitionInfo, detailPage.questDetails, detailPage.h_checkBox_intrgt.Checked, detailPage.comboBox_Gender.Text);
 
-                    Fox2Builder.WriteItemFox2(definitionInfo, detailPage.questDetails);
+                    if (detailPage.questDetails.itemDetails.Count() > 0)
+                        Fox2Builder.WriteItemFox2(definitionInfo, detailPage.questDetails);
                     Fox2Builder.WriteQuestFox2(definitionInfo, detailPage.questDetails, detailPage.comboBox_Gender.Text);
 
                     AssetsBuilder.BuildFPKAssets(definitionInfo, detailPage.questDetails);
                     AssetsBuilder.BuildFPKDAssets(definitionInfo, detailPage.questDetails);
+
+                    MessageBox.Show("Build Complete");
                     panelNum--;
                     break;
                     
@@ -94,7 +119,7 @@ namespace SOC.UI
             detailPage.groupStMdDet.Width = detailPage.Width / 4 - 3;
         }
 
-        public static List<Coordinates> BuildCoordinatesList(string rawString)
+        public static List<Coordinates> BuildCoordinatesList(string rawString, int set)
         {
             List<Coordinates> coordList = new List<Coordinates>();
             Coordinates coords;
@@ -102,14 +127,24 @@ namespace SOC.UI
 
             MatchCollection matches = Regex.Matches(rawString, coordPattern);
             var list = matches.Cast<Match>().Select(match => match.Value).ToList();
-            while (list.Count % 3 != 0)
+            while (list.Count % set != 0)
             {
                 list.Add("0.00");
             }
-            for (int i = 0; i < list.Count; i += 3)
+            for (int i = 0; i < list.Count; i += set)
             {
-                coords = new Coordinates(list[i], list[i + 1], list[i + 2]);
-                coordList.Add(coords);
+                switch(set)
+                {
+                    case 3:
+                        coords = new Coordinates(list[i], list[i + 1], list[i + 2]);
+                        coordList.Add(coords);
+                        break;
+                    case 4:
+                        coords = new Coordinates(list[i], list[i + 1], list[i + 2], list[i + 3]);
+                        coordList.Add(coords);
+                        break;
+                }
+                
             }
 
             return coordList;

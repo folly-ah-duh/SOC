@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace SOC.UI
 {
@@ -123,7 +124,7 @@ namespace SOC.UI
             this.h_comboBox_rot.Name = "h_comboBox_rot";
             this.h_comboBox_rot.Size = new System.Drawing.Size(150, 21);
             this.h_comboBox_rot.TabIndex = 5;
-            this.h_comboBox_rot.Text = "0";
+            this.h_comboBox_rot.Text = hostageCoords.roty;
             // 
             // h_textBox_xcoord
             // 
@@ -426,7 +427,7 @@ namespace SOC.UI
             this.v_comboBox_rot.Name = "v_comboBox_rot";
             this.v_comboBox_rot.Size = new System.Drawing.Size(150, 21);
             this.v_comboBox_rot.TabIndex = 5;
-            this.v_comboBox_rot.Text = "0";
+            this.v_comboBox_rot.Text = vehicleCoords.roty;
             // 
             // v_textBox_xcoord
             // 
@@ -534,7 +535,13 @@ namespace SOC.UI
         public GroupBox i_groupBox_main;
         public TextBox i_textBox_zcoord;
         public TextBox i_textBox_ycoord;
-        public ComboBox i_comboBox_rot;
+        //public ComboBox i_comboBox_rot;
+
+        public TextBox i_textBox_zrot;
+        public TextBox i_textBox_yrot;
+        public TextBox i_textBox_xrot;
+        public TextBox i_textBox_wrot;
+
         public TextBox i_textBox_xcoord;
         public Label i_label_rot;
         public Label i_label_coords;
@@ -557,7 +564,13 @@ namespace SOC.UI
             this.i_groupBox_main = new System.Windows.Forms.GroupBox();
             this.i_textBox_zcoord = new System.Windows.Forms.TextBox();
             this.i_textBox_ycoord = new System.Windows.Forms.TextBox();
-            this.i_comboBox_rot = new System.Windows.Forms.ComboBox();
+            //this.i_comboBox_rot = new System.Windows.Forms.ComboBox();
+
+            this.i_textBox_xrot = new System.Windows.Forms.TextBox();
+            this.i_textBox_yrot = new System.Windows.Forms.TextBox();
+            this.i_textBox_zrot = new System.Windows.Forms.TextBox();
+            this.i_textBox_wrot = new System.Windows.Forms.TextBox();
+
             this.i_textBox_xcoord = new System.Windows.Forms.TextBox();
             this.i_label_rot = new System.Windows.Forms.Label();
             this.i_label_coords = new System.Windows.Forms.Label();
@@ -578,9 +591,15 @@ namespace SOC.UI
             this.i_groupBox_main.AutoSize = true;
             this.i_groupBox_main.Controls.Add(this.i_textBox_zcoord);
             this.i_groupBox_main.Controls.Add(this.i_textBox_ycoord);
-            this.i_groupBox_main.Controls.Add(this.i_comboBox_rot);
+            //this.i_groupBox_main.Controls.Add(this.i_comboBox_rot);
             this.i_groupBox_main.Controls.Add(this.i_textBox_xcoord);
             this.i_groupBox_main.Controls.Add(this.i_label_rot);
+
+            this.i_groupBox_main.Controls.Add(this.i_textBox_xrot);
+            this.i_groupBox_main.Controls.Add(this.i_textBox_yrot);
+            this.i_groupBox_main.Controls.Add(this.i_textBox_zrot);
+            this.i_groupBox_main.Controls.Add(this.i_textBox_wrot);
+
             this.i_groupBox_main.Controls.Add(this.i_label_coords);
             this.i_groupBox_main.Controls.Add(this.i_groupBox_attributes);
             this.i_groupBox_main.Location = new System.Drawing.Point(3, 3 + (191 * itemNum));
@@ -608,12 +627,36 @@ namespace SOC.UI
             // 
             // i_comboBox_rot
             // 
-            this.i_comboBox_rot.FormattingEnabled = true;
-            this.i_comboBox_rot.Location = new System.Drawing.Point(84, 39);
-            this.i_comboBox_rot.Items.AddRange(QuestComponents.rotation);
-            this.i_comboBox_rot.Name = "i_comboBox_rot";
-            this.i_comboBox_rot.Size = new System.Drawing.Size(150, 21);
-            this.i_comboBox_rot.TabIndex = 5;
+            //this.i_comboBox_rot.FormattingEnabled = true;
+            //this.i_comboBox_rot.Location = new System.Drawing.Point(84, 39);
+            //this.i_comboBox_rot.Items.AddRange(QuestComponents.rotation);
+            //this.i_comboBox_rot.Name = "i_comboBox_rot";
+            //this.i_comboBox_rot.Size = new System.Drawing.Size(150, 21);
+            //this.i_comboBox_rot.TabIndex = 5;
+            //
+            this.i_textBox_xrot.Location = new System.Drawing.Point(84, 39);
+            this.i_textBox_xrot.Name = "m_textBox_xrocoords";
+            this.i_textBox_xrot.Size = new System.Drawing.Size(31, 20);
+            this.i_textBox_xrot.TabIndex = 5;
+            this.i_textBox_xrot.Text = "0";
+            this.i_textBox_yrot.Location = new System.Drawing.Point(123, 39);
+            this.i_textBox_yrot.Name = "m_textBox_yrocoords";
+            this.i_textBox_yrot.Size = new System.Drawing.Size(31, 20);
+            this.i_textBox_yrot.TabIndex = 6;
+            this.i_textBox_yrot.Text = "0";
+            this.i_textBox_zrot.Location = new System.Drawing.Point(163, 39);
+            this.i_textBox_zrot.Name = "m_textBox_zrocoords";
+            this.i_textBox_zrot.Size = new System.Drawing.Size(31, 20);
+            this.i_textBox_zrot.TabIndex = 7;
+            this.i_textBox_zrot.Text = "0";
+            this.i_textBox_wrot.Location = new System.Drawing.Point(203, 39);
+            this.i_textBox_wrot.Name = "m_textBox_wrocoords";
+            this.i_textBox_wrot.Size = new System.Drawing.Size(31, 20);
+            this.i_textBox_wrot.TabIndex = 8;
+            this.i_textBox_wrot.Text = "1";
+
+
+
             // 
             // i_textBox_xcoord
             // 
@@ -626,11 +669,11 @@ namespace SOC.UI
             // i_label_rot
             // 
             this.i_label_rot.AutoSize = true;
-            this.i_label_rot.Location = new System.Drawing.Point(28, 42);
+            this.i_label_rot.Location = new System.Drawing.Point(1, 42);
             this.i_label_rot.Name = "i_label_rot";
             this.i_label_rot.Size = new System.Drawing.Size(50, 13);
             this.i_label_rot.TabIndex = 7;
-            this.i_label_rot.Text = "Rotation:";
+            this.i_label_rot.Text = "Rotate XYZW:";
             // 
             // i_label_coords
             // 
@@ -663,12 +706,12 @@ namespace SOC.UI
             this.i_comboBox_count.FormattingEnabled = true;
             this.i_comboBox_count.Location = new System.Drawing.Point(78, 49);
             this.i_comboBox_count.Items.AddRange(new object[] {
-                "0","4","8","12","16"
+                "1","4","8","12","16"
             });
             this.i_comboBox_count.Name = "i_comboBox_count";
             this.i_comboBox_count.Size = new System.Drawing.Size(144, 21);
             this.i_comboBox_count.TabIndex = 8;
-            this.i_comboBox_count.Text = "0";
+            this.i_comboBox_count.Text = "1";
             // 
             // i_checkBox_boxed
             // 
@@ -697,6 +740,7 @@ namespace SOC.UI
             this.i_comboBox_item.Size = new System.Drawing.Size(144, 21);
             this.i_comboBox_item.TabIndex = 7;
             this.i_comboBox_item.Text = "EQP_SWP_Magazine";
+            this.i_comboBox_item.SelectedIndexChanged += new System.EventHandler(this.i_comboBox_item_SelectedIndexChanged);
             // 
             // i_label_count
             // 
@@ -722,6 +766,19 @@ namespace SOC.UI
             this.i_groupBox_attributes.PerformLayout();
         }
 
+        private void i_comboBox_item_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(this.i_comboBox_item.Text.Contains("EQP_WP_"))
+            {
+                this.i_comboBox_count.Text = "0";
+                this.i_comboBox_count.Enabled = false;
+            }
+            else
+            {
+                this.i_comboBox_count.Text = "1";
+                this.i_comboBox_count.Enabled = true;
+            }
+        }
     }
     public class ModelDetail
     {
@@ -797,6 +854,7 @@ namespace SOC.UI
             this.m_textBox_filename.Location = new System.Drawing.Point(84, 66);
             this.m_textBox_filename.Name = "m_textBox_filename";
             this.m_textBox_filename.Size = new System.Drawing.Size(150, 20);
+            this.m_textBox_filename.Text = "mdl_" + StMdNum;
             this.m_textBox_filename.TabIndex = 9;
             // 
             // m_textBox_zcoords

@@ -32,8 +32,8 @@ namespace SOC.UI
         {
             InitializeComponent();
             SendMessage(textBoxQuestNum.Handle, EM_SETCUEBANNER, 1, "30100");
-            SendMessage(textBoxFPKName.Handle, EM_SETCUEBANNER, 1, "ih_sheep_quest");
-            SendMessage(textBoxQuestTitle.Handle, EM_SETCUEBANNER, 1, "Sheep in the Keep");
+            SendMessage(textBoxFPKName.Handle, EM_SETCUEBANNER, 1, "Example_Quest_Name");
+            SendMessage(textBoxQuestTitle.Handle, EM_SETCUEBANNER, 1, "Example Quest Title Text");
             refreshNotifsList();
         }
 

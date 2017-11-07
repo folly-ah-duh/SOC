@@ -91,6 +91,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.BackColor = System.Drawing.Color.Transparent;
             this.groupBox2.Controls.Add(this.comboBoxCP);
             this.groupBox2.Controls.Add(this.label20);
             this.groupBox2.Controls.Add(this.label19);
@@ -216,6 +217,7 @@
             // 
             // textBoxFPKName
             // 
+            this.textBoxFPKName.BackColor = System.Drawing.Color.Silver;
             this.textBoxFPKName.Location = new System.Drawing.Point(100, 19);
             this.textBoxFPKName.Name = "textBoxFPKName";
             this.textBoxFPKName.Size = new System.Drawing.Size(153, 20);
@@ -224,14 +226,16 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(206, 93);
+            this.label12.BackColor = System.Drawing.Color.Transparent;
+            this.label12.Location = new System.Drawing.Point(203, 93);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(17, 13);
+            this.label12.Size = new System.Drawing.Size(14, 13);
             this.label12.TabIndex = 22;
-            this.label12.Text = "Z:";
+            this.label12.Text = "Z";
             // 
             // textBoxZCoord
             // 
+            this.textBoxZCoord.BackColor = System.Drawing.Color.Silver;
             this.textBoxZCoord.Enabled = false;
             this.textBoxZCoord.Location = new System.Drawing.Point(220, 90);
             this.textBoxZCoord.Name = "textBoxZCoord";
@@ -242,14 +246,16 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(153, 93);
+            this.label10.BackColor = System.Drawing.Color.Transparent;
+            this.label10.Location = new System.Drawing.Point(150, 93);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(17, 13);
+            this.label10.Size = new System.Drawing.Size(14, 13);
             this.label10.TabIndex = 18;
-            this.label10.Text = "Y:";
+            this.label10.Text = "Y";
             // 
             // textBoxYCoord
             // 
+            this.textBoxYCoord.BackColor = System.Drawing.Color.Silver;
             this.textBoxYCoord.Enabled = false;
             this.textBoxYCoord.Location = new System.Drawing.Point(167, 90);
             this.textBoxYCoord.Name = "textBoxYCoord";
@@ -260,14 +266,16 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(100, 93);
+            this.label9.BackColor = System.Drawing.Color.Transparent;
+            this.label9.Location = new System.Drawing.Point(97, 93);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(17, 13);
+            this.label9.Size = new System.Drawing.Size(14, 13);
             this.label9.TabIndex = 16;
-            this.label9.Text = "X:";
+            this.label9.Text = "X";
             // 
             // textBoxXCoord
             // 
+            this.textBoxXCoord.BackColor = System.Drawing.Color.Silver;
             this.textBoxXCoord.Enabled = false;
             this.textBoxXCoord.Location = new System.Drawing.Point(114, 90);
             this.textBoxXCoord.Name = "textBoxXCoord";
@@ -345,6 +353,7 @@
             // 
             // textBoxQuestNum
             // 
+            this.textBoxQuestNum.BackColor = System.Drawing.Color.Silver;
             this.textBoxQuestNum.Location = new System.Drawing.Point(350, 19);
             this.textBoxQuestNum.Name = "textBoxQuestNum";
             this.textBoxQuestNum.Size = new System.Drawing.Size(134, 20);
@@ -352,6 +361,9 @@
             // 
             // comboBoxRadius
             // 
+            this.comboBoxRadius.BackColor = System.Drawing.Color.Silver;
+            this.comboBoxRadius.Enabled = false;
+            this.comboBoxRadius.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxRadius.FormattingEnabled = true;
             this.comboBoxRadius.Items.AddRange(new object[] {
             "1",
@@ -363,8 +375,6 @@
             "7",
             "8",
             "9"});
-            this.comboBoxRadius.SelectedIndex = 0;
-            this.comboBoxRadius.Enabled = false;
             this.comboBoxRadius.Location = new System.Drawing.Point(100, 116);
             this.comboBoxRadius.Name = "comboBoxRadius";
             this.comboBoxRadius.Size = new System.Drawing.Size(153, 21);
@@ -402,6 +412,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.BackColor = System.Drawing.Color.Transparent;
             this.groupBox3.Controls.Add(this.textBoxStMdCoords);
             this.groupBox3.Controls.Add(this.textBoxItemCoords);
             this.groupBox3.Controls.Add(this.textBoxVehCoords);
@@ -420,6 +431,7 @@
             // textBoxStMdCoords
             // 
             this.textBoxStMdCoords.AcceptsReturn = true;
+            this.textBoxStMdCoords.BackColor = System.Drawing.Color.Silver;
             this.textBoxStMdCoords.Location = new System.Drawing.Point(9, 352);
             this.textBoxStMdCoords.Multiline = true;
             this.textBoxStMdCoords.Name = "textBoxStMdCoords";
@@ -429,6 +441,7 @@
             // textBoxItemCoords
             // 
             this.textBoxItemCoords.AcceptsReturn = true;
+            this.textBoxItemCoords.BackColor = System.Drawing.Color.Silver;
             this.textBoxItemCoords.Location = new System.Drawing.Point(9, 243);
             this.textBoxItemCoords.Multiline = true;
             this.textBoxItemCoords.Name = "textBoxItemCoords";
@@ -438,6 +451,7 @@
             // textBoxVehCoords
             // 
             this.textBoxVehCoords.AcceptsReturn = true;
+            this.textBoxVehCoords.BackColor = System.Drawing.Color.Silver;
             this.textBoxVehCoords.Location = new System.Drawing.Point(9, 137);
             this.textBoxVehCoords.Multiline = true;
             this.textBoxVehCoords.Name = "textBoxVehCoords";
@@ -483,6 +497,7 @@
             // textBoxHosCoords
             // 
             this.textBoxHosCoords.AcceptsReturn = true;
+            this.textBoxHosCoords.BackColor = System.Drawing.Color.Silver;
             this.textBoxHosCoords.Location = new System.Drawing.Point(9, 32);
             this.textBoxHosCoords.Multiline = true;
             this.textBoxHosCoords.Name = "textBoxHosCoords";
@@ -491,6 +506,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.buttonAddNotif);
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.label8);
@@ -553,6 +569,7 @@
             // 
             // textBoxQuestDesc
             // 
+            this.textBoxQuestDesc.BackColor = System.Drawing.Color.Silver;
             this.textBoxQuestDesc.Location = new System.Drawing.Point(6, 84);
             this.textBoxQuestDesc.Multiline = true;
             this.textBoxQuestDesc.Name = "textBoxQuestDesc";
@@ -561,6 +578,7 @@
             // 
             // textBoxQuestTitle
             // 
+            this.textBoxQuestTitle.BackColor = System.Drawing.Color.Silver;
             this.textBoxQuestTitle.Location = new System.Drawing.Point(6, 36);
             this.textBoxQuestTitle.Name = "textBoxQuestTitle";
             this.textBoxQuestTitle.Size = new System.Drawing.Size(478, 20);

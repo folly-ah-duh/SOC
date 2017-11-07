@@ -37,6 +37,7 @@
             // 
             // textBoxLangId
             // 
+            this.textBoxLangId.BackColor = System.Drawing.Color.LightGray;
             this.textBoxLangId.Location = new System.Drawing.Point(12, 25);
             this.textBoxLangId.Name = "textBoxLangId";
             this.textBoxLangId.Size = new System.Drawing.Size(312, 20);
@@ -44,6 +45,7 @@
             // 
             // textBoxLangValue
             // 
+            this.textBoxLangValue.BackColor = System.Drawing.Color.LightGray;
             this.textBoxLangValue.Location = new System.Drawing.Point(12, 68);
             this.textBoxLangValue.Name = "textBoxLangValue";
             this.textBoxLangValue.Size = new System.Drawing.Size(312, 20);
@@ -81,6 +83,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.DarkGray;
             this.ClientSize = new System.Drawing.Size(336, 128);
             this.Controls.Add(this.buttonCreateEntry);
             this.Controls.Add(this.label2);

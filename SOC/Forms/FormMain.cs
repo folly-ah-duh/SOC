@@ -40,6 +40,7 @@ namespace SOC.UI
         }
         private bool isFilled()
         {
+            return true;
             if (string.IsNullOrEmpty(setupPage.textBoxFPKName.Text) || string.IsNullOrEmpty(setupPage.textBoxQuestNum.Text) || string.IsNullOrEmpty(setupPage.textBoxQuestTitle.Text) || string.IsNullOrEmpty(setupPage.textBoxQuestDesc.Text))
                 return false;
             if (setupPage.comboBoxCategory.SelectedIndex == -1 || setupPage.comboBoxReward.SelectedIndex == -1 || setupPage.comboBoxObjective.SelectedIndex == -1 || setupPage.comboBoxProgressNotifs.SelectedIndex == -1 || setupPage.comboBoxRegion.SelectedIndex == -1)
@@ -59,6 +60,7 @@ namespace SOC.UI
                     panelMain.Controls.Clear();
                     panelMain.Controls.Add(setupPage);
                     buttonNext.Text = "Next >>";
+                    this.Width = 1120;
                     break;
 
                 case 1:
@@ -74,6 +76,7 @@ namespace SOC.UI
                         panelMain.Controls.Clear();
                         panelMain.Controls.Add(detailPage);
                         buttonNext.Text = "Build";
+                        this.Width = 1180;
                     }
                     else
                     {
@@ -81,7 +84,6 @@ namespace SOC.UI
                         panelNum--;
                         return;
                     }
-
                     
                     break;
 

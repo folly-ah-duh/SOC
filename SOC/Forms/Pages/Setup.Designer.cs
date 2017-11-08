@@ -298,8 +298,8 @@
             this.comboBoxRegion.FormattingEnabled = true;
             this.comboBoxRegion.Items.AddRange(new object[] {
             "Afghanistan",
-            "Mother Base",
-            "Central Africa"});
+            "Central Africa",
+            "Mother Base"});
             this.comboBoxRegion.Location = new System.Drawing.Point(100, 62);
             this.comboBoxRegion.Name = "comboBoxRegion";
             this.comboBoxRegion.Size = new System.Drawing.Size(153, 21);

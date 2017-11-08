@@ -52,6 +52,7 @@ namespace SOC.UI
             comboBoxLoadArea.Items.Clear();
             comboBoxCP.Items.Clear();
             enableRegionInput();
+            comboBoxCP.Text = "NONE";
             switch (comboBoxRegion.SelectedIndex)
             {
                 case 0:
@@ -60,17 +61,15 @@ namespace SOC.UI
                     locationID = 10;
                     break;
                 case 1:
-                    comboBoxLoadArea.Items.AddRange(mtbsLoadAreas);
-                    comboBoxCP.Items.AddRange(mtbsCP);
-                    comboBoxCP.Text = "NONE";
-                    locationID = 50;
-                    comboBoxRadius.Enabled = false;
-                    textBoxXCoord.Enabled = false; textBoxYCoord.Enabled = false; textBoxZCoord.Enabled = false;
-                    break;
-                case 2:
                     locationID = 20;
                     comboBoxLoadArea.Items.AddRange(mafrLoadAreas);
                     comboBoxCP.Items.AddRange(mafrCP);
+                    break;
+                case 2:
+                    comboBoxLoadArea.Items.AddRange(mtbsLoadAreas);
+                    comboBoxCP.Items.AddRange(mtbsCP);
+                    locationID = 50;
+                    disableRegionInput();
                     break;
                 default:
                     locationID = -1;

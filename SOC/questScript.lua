@@ -245,11 +245,12 @@ function this.WarpVehicles()
     local gameObjectId=GameObject.GetGameObjectId(vehicleInfo.locator)
     if gameObjectId~=GameObject.NULL_ID then
       local position=vehicleInfo.position
-      local command={id="Warp",degRotationY=position.rotY,position=Vector3(position.pos[1],position.pos[2],position.pos[3])}
+      local command={id="SetPosition",rotY=position.rotY,position=Vector3(position.pos[1],position.pos[2],position.pos[3])}
       GameObject.SendCommand(gameObjectId,command)
     end
   end
 end
+
 
 this.SwitchEnableQuestHighIntTable = function( flag, commandPostName, questCpInterrogation)
 	  local commandPostId = GameObject.GetGameObjectId( "TppCommandPost2" , commandPostName ) 

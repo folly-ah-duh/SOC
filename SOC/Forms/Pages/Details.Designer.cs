@@ -578,7 +578,7 @@ namespace SOC.UI
             this.i_comboBox_count.Name = "i_comboBox_count";
             this.i_comboBox_count.Size = new System.Drawing.Size(150, 21);
             this.i_comboBox_count.TabIndex = 8;
-            this.i_comboBox_count.Text = "1";
+            this.i_comboBox_count.SelectedIndex = 0;
             // 
             // i_checkBox_boxed
             // 

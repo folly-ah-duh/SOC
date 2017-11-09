@@ -72,7 +72,7 @@ namespace SOC.Classes
 
             string requestEquipIds = string.Format("\trequestEquipIds={{ {0} }},", equipIds);
 
-            string hasEnemyHeli = "\thasEnemyHeli = true, --reserves an enemy helicopter for the sideop.";
+            string hasEnemyHeli = "\thasEnemyHeli = false, --reserves an enemy helicopter for the sideop. set to true if the sideop has a heli.";
             
 
             string DefinitionLuaPath = "Sideop_Build//GameDir//mod//quests//";

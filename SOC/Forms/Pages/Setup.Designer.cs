@@ -362,8 +362,9 @@
             // comboBoxRadius
             // 
             this.comboBoxRadius.BackColor = System.Drawing.Color.Silver;
+            this.comboBoxRadius.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxRadius.Enabled = false;
-            this.comboBoxRadius.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBoxRadius.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.comboBoxRadius.FormattingEnabled = true;
             this.comboBoxRadius.Items.AddRange(new object[] {
             "1",

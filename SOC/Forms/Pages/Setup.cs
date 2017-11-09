@@ -52,7 +52,6 @@ namespace SOC.UI
             comboBoxLoadArea.Items.Clear();
             comboBoxCP.Items.Clear();
             enableRegionInput();
-            comboBoxCP.Text = "NONE";
             switch (comboBoxRegion.SelectedIndex)
             {
                 case 0:
@@ -70,12 +69,14 @@ namespace SOC.UI
                     comboBoxCP.Items.AddRange(mtbsCP);
                     locationID = 50;
                     disableRegionInput();
+                    comboBoxRadius.Text = "1";
                     break;
                 default:
                     locationID = -1;
                     disableRegionInput();
                     break;
             }
+            comboBoxCP.Text = "NONE";
 
         }
         private void disableRegionInput()

@@ -5,22 +5,66 @@ local StrCode32Table = Tpp.StrCode32Table
 local GetGameObjectId = GameObject.GetGameObjectId
 local i = 0
 
-local hostageCount = 
-local CPNAME =
-local useInter = 
+local hostageCount = 0
+local CPNAME = "afgh_field_cp"
+local useInter = true
 local qType = TppDefine.QUEST_TYPE.RECOVERED
 
 this.QUEST_TABLE = {
-  
+
   questType = qType,
+  
   isQuestArmor = true,
+  
+  --soldierSubType = "PF_A", -- CFA				If the sideop is located in Central Africa, you should assign the sideop with a soldier subtype.
+  --soldierSubType = "PF_B", -- ZRS
+  --soldierSubType = "PF_C", -- Rogue Coyote
   
   cpList = {
     nil
   },
   
   enemyList = {
-
+    {
+      enemyName = "sol_quest_0000",  							-- sol_quest_0000 through sol_quest_0007 are available to use for any sideop.
+      route_d = "rt_field_d_0000",  							-- route_d is the "sneak route", the route that the enemy will walk if they are unaware of the player. Check Afghanistan_CP_Reference.lua -> sneakRoutes = { }.
+	  route_c = "rt_field_c_0000",								-- route_c is the "caution route", the route travelled if the enemy is on alert. Check Afghanistan_CP_Reference.lua -> cautionRoutes = { }.
+      cpName = CPNAME,											-- cpName is the CP that the soldier belongs to.
+      powerSetting = { "SNIPER", "HELMET", "SOFT_ARMOR", },		-- powerSetting determines the specific equipment and tactics of the soldier. Check Soldier_Settings_Reference.lua -> powerSetting={} for a list of settings.
+	},
+	{
+	  enemyName = "sol_quest_0001",		
+      route_d = "rt_field_c_0001",  	-- you can assign caution routes to sneak routes, and vice versa. Using a c_route instead of a d_route will make the soldier look like he is on alert during sneak phases.
+	  route_c = "rt_field_d_0001",		-- soldiers with d_routes instead of c_routes will still appear alert during the caution phases.
+      cpName = CPNAME,
+      powerSetting = {},
+	  staffTypeId = TppDefine.STAFF_TYPE_ID.COMBAT,		-- you can assign a staff preference for each soldier. Check Soldier_Settings_Reference.lua -> staffTypeId = {} for preference types.
+	  skill = "Counselor",								-- you can assign a skill to each soldier. Check Soldier_Settings_Reference.lua -> skill = {} for skill types.
+	  bodyId = TppEnemyBodyId.svs0_unq_v421,			-- you can assign a unique outfit to each soldier. These outfits need to be added to the bodyIdList in the sideop definition. (GameDir\mod\quests\ih_quest_q# -> bodyIdList={})
+														-- Check InfBodyInfo.lua in MGS_TPP\mod\modules\ for bodyIds and descriptions.
+	},
+	{
+	  enemyName = "sol_quest_0002",
+      route_d = "rt_field_d_0001",  
+	  route_c = "rt_field_c_0001",
+      cpName = CPNAME,
+      powerSetting = { "QUEST_ARMOR", },		-- QUEST_ARMOR is the powerSetting for the heavily armored sideop soldiers. This should only be assigned to 8 soldiers at most, for any sideop.
+	  --soldierSubType = "PF_A",				-- If the sideop is located in Central Africa, you should assign each soldier with a PF subtype.
+	},
+	{
+	  enemyName = "sol_field_0000",  			-- Soldiers that are already loaded can also be retooled for sideops. Check Afghanistan_CP_Reference.lua -> soldier_names = {} for enemyNames
+      route_d = "rt_field_d_0002",  
+	  route_c = "rt_field_c_0002",
+      cpName = CPNAME,
+      powerSetting = { },
+	},
+	{
+	  enemyName = "sol_fieldWest_0000",  		-- You can retool enemies from nearby outposts too. Check Afghanistan_OB_Reference.lua -> soldier_names = {} for enemyNames
+      route_d = "rt_field_d_0003",  
+	  route_c = "rt_field_c_0003",
+      cpName = CPNAME,
+      powerSetting = {},
+	},
   },
   
   vehicleList = {
@@ -36,7 +80,8 @@ this.QUEST_TABLE = {
   },
   
   targetList = {
-
+	"sol_quest_0000",
+	"sol_quest_0002",
   },
 }
 

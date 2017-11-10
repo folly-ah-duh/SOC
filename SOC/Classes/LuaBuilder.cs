@@ -64,11 +64,15 @@ namespace SOC.Classes
 
             string disableLzs = "\tdisableLzs={ }, --disables lzs while the quest is active. Turn on the debugMessages option and look in ih_log.txt for StartedMoveToLandingZone after calling in a support heli to find the lz name."; // todo in future update
 
-            string equipIds = "";
+            string equipIds = ""; List<string> requestHistory = new List<string>();
 
             foreach (ItemDetail item in details.itemDetails)
-                if (item.i_comboBox_item.Text.Contains("EQP_WP_"))
+                if (item.i_comboBox_item.Text.Contains("EQP_WP_") && !requestHistory.Contains(item.i_comboBox_item.Text))
+                {
                     equipIds += string.Format("\"{0}\", ", item.i_comboBox_item.Text);
+                    requestHistory.Add(item.i_comboBox_item.Text);
+                }
+                    
 
             string requestEquipIds = string.Format("\trequestEquipIds={{ {0} }},", equipIds);
 

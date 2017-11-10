@@ -65,10 +65,10 @@ namespace SOC.UI
                 case 1:
                     if (isFilled())
                     {
-                        List<Coordinates> HostageCoords = BuildCoordinatesList(setupPage.textBoxHosCoords.Text, 4);
-                        List<Coordinates> VehicleCoords = BuildCoordinatesList(setupPage.textBoxVehCoords.Text, 4);
-                        List<Coordinates> ItemCoords = BuildCoordinatesList(setupPage.textBoxItemCoords.Text, 3);
-                        List<Coordinates> ModelCoords = BuildCoordinatesList(setupPage.textBoxStMdCoords.Text, 3);
+                        List<Coordinates> HostageCoords = BuildCoordinatesList(setupPage.textBoxHosCoords.Text);
+                        List<Coordinates> VehicleCoords = BuildCoordinatesList(setupPage.textBoxVehCoords.Text);
+                        List<Coordinates> ItemCoords = BuildCoordinatesList(setupPage.textBoxItemCoords.Text);
+                        List<Coordinates> ModelCoords = BuildCoordinatesList(setupPage.textBoxStMdCoords.Text);
                         detailPage = new Details(HostageCoords, VehicleCoords, ItemCoords, ModelCoords);
 
                         buttonBack.Visible = true;
@@ -120,7 +120,7 @@ namespace SOC.UI
             detailPage.groupStMdDet.Width = detailPage.Width / 4 - 3;
         }
 
-        public static List<Coordinates> BuildCoordinatesList(string rawString, int set)
+        public static List<Coordinates> BuildCoordinatesList(string rawString)
         {
             List<Coordinates> coordList = new List<Coordinates>();
             Coordinates coords;
@@ -128,24 +128,14 @@ namespace SOC.UI
 
             MatchCollection matches = Regex.Matches(rawString, coordPattern);
             var list = matches.Cast<Match>().Select(match => match.Value).ToList();
-            while (list.Count % set != 0)
+            while (list.Count % 4 != 0)
             {
                 list.Add("0.00");
             }
-            for (int i = 0; i < list.Count; i += set)
+            for (int i = 0; i < list.Count; i += 4)
             {
-                switch(set)
-                {
-                    case 3:
-                        coords = new Coordinates(list[i], list[i + 1], list[i + 2]);
-                        coordList.Add(coords);
-                        break;
-                    case 4:
-                        coords = new Coordinates(list[i], list[i + 1], list[i + 2], list[i + 3]);
-                        coordList.Add(coords);
-                        break;
-                }
-                
+                coords = new Coordinates(list[i], list[i + 1], list[i + 2], list[i + 3]);
+                coordList.Add(coords);
             }
 
             return coordList;

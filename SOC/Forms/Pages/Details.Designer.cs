@@ -428,6 +428,7 @@ namespace SOC.UI
     {
         Coordinates itemCoords;
         int itemNum;
+        double quatNum = 0;
 
         public GroupBox i_groupBox_main;
         public TextBox i_textBox_zcoord;
@@ -450,6 +451,8 @@ namespace SOC.UI
         {
             itemCoords = itcoords;
             itemNum = inum;
+            Double.TryParse(itemCoords.roty, out quatNum);
+            quatNum = quatNum * Math.PI / 360;
         }
 
         public void BuildDetail()
@@ -547,7 +550,7 @@ namespace SOC.UI
             this.i_textBox_yrot.Name = "m_textBox_yrocoords";
             this.i_textBox_yrot.Size = new System.Drawing.Size(31, 20);
             this.i_textBox_yrot.TabIndex = 6;
-            this.i_textBox_yrot.Text = "0";
+            this.i_textBox_yrot.Text = Math.Sin(quatNum).ToString();
             this.i_textBox_zrot.Location = new System.Drawing.Point(157, 39);
             this.i_textBox_zrot.Name = "m_textBox_zrocoords";
             this.i_textBox_zrot.Size = new System.Drawing.Size(31, 20);
@@ -557,7 +560,7 @@ namespace SOC.UI
             this.i_textBox_wrot.Name = "m_textBox_wrocoords";
             this.i_textBox_wrot.Size = new System.Drawing.Size(31, 20);
             this.i_textBox_wrot.TabIndex = 8;
-            this.i_textBox_wrot.Text = "1";
+            this.i_textBox_wrot.Text = Math.Cos(quatNum).ToString();
             // 
             // i_comboBox_count
             // 
@@ -638,6 +641,7 @@ namespace SOC.UI
     {
         Coordinates StMdCoords;
         int StMdNum;
+        double quatNum = 0;
 
         public GroupBox m_groupBox_main;
         public TextBox m_textBox_zcoords;
@@ -658,6 +662,8 @@ namespace SOC.UI
         {
             StMdCoords = StMdC;
             StMdNum = StMdN;
+            Double.TryParse(StMdC.roty, out quatNum);
+            quatNum = quatNum * Math.PI / 360;
         }
 
         public void BuildDetail()
@@ -774,7 +780,7 @@ namespace SOC.UI
             this.m_textBox_yrot.Name = "m_textBox_yrocoords";
             this.m_textBox_yrot.Size = new System.Drawing.Size(31, 20);
             this.m_textBox_yrot.TabIndex = 6;
-            this.m_textBox_yrot.Text = "0";
+            this.m_textBox_yrot.Text = Math.Sin(quatNum).ToString();
             this.m_textBox_zrot.Location = new System.Drawing.Point(163, 39);
             this.m_textBox_zrot.Name = "m_textBox_zrocoords";
             this.m_textBox_zrot.Size = new System.Drawing.Size(31, 20);
@@ -784,7 +790,7 @@ namespace SOC.UI
             this.m_textBox_wrot.Name = "m_textBox_wrocoords";
             this.m_textBox_wrot.Size = new System.Drawing.Size(31, 20);
             this.m_textBox_wrot.TabIndex = 8;
-            this.m_textBox_wrot.Text = "1";
+            this.m_textBox_wrot.Text = Math.Cos(quatNum).ToString();
             // 
             // m_label_coords
             // 

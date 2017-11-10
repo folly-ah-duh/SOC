@@ -464,36 +464,36 @@
             this.label18.AutoSize = true;
             this.label18.Location = new System.Drawing.Point(6, 336);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(160, 13);
+            this.label18.Size = new System.Drawing.Size(238, 13);
             this.label18.TabIndex = 22;
-            this.label18.Text = "Static Model Locations: (X, Y, Z)";
+            this.label18.Text = "Static Model Locations: (X, Y, Z, Y-Axis Rotation)";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
             this.label17.Location = new System.Drawing.Point(6, 227);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(121, 13);
+            this.label17.Size = new System.Drawing.Size(199, 13);
             this.label17.TabIndex = 20;
-            this.label17.Text = "Item Locations: (X, Y, Z)";
+            this.label17.Text = "Item Locations: (X, Y, Z, Y-Axis Rotation)";
             // 
             // label16
             // 
             this.label16.AutoSize = true;
             this.label16.Location = new System.Drawing.Point(6, 121);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(182, 13);
+            this.label16.Size = new System.Drawing.Size(214, 13);
             this.label16.TabIndex = 18;
-            this.label16.Text = "Vehicle Locations: (X, Y, Z, Rotation)";
+            this.label16.Text = "Vehicle Locations: (X, Y, Z, Y-Axis Rotation)";
             // 
             // label15
             // 
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(6, 16);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(185, 13);
+            this.label15.Size = new System.Drawing.Size(217, 13);
             this.label15.TabIndex = 16;
-            this.label15.Text = "Prisoner Locations: (X, Y, Z, Rotation)";
+            this.label15.Text = "Prisoner Locations: (X, Y, Z, Y-Axis Rotation)";
             // 
             // textBoxHosCoords
             // 

@@ -161,9 +161,11 @@ namespace SOC.Classes
                     if (!hostageDetail.h_comboBox_skill.Text.Equals("NONE"))
                         hostageList.Add(string.Format("			skill = \"{0}\",", hostageDetail.h_comboBox_skill.Text));
 
+                    double rotation = 0; Double.TryParse(hostageDetail.h_comboBox_rot.Text, out rotation); rotation += 90;
+                    
                     hostageList.Add(string.Format("			bodyId = TppDefine.QUEST_BODY_ID_LIST.{0}_HOSTAGE_{1},", locName.ToUpper(), gender.ToUpper())); // All gender/body related params seriously need a better implementation
 
-                    hostageList.Add(string.Format("			position={{pos={{{0},{1},{2}}},rotY={3},}},", hostageDetail.h_textBox_xcoord.Text, hostageDetail.h_textBox_ycoord.Text, hostageDetail.h_textBox_zcoord.Text, hostageDetail.h_comboBox_rot.Text));
+                    hostageList.Add(string.Format("			position={{pos={{{0},{1},{2}}},rotY={3},}},", hostageDetail.h_textBox_xcoord.Text, hostageDetail.h_textBox_ycoord.Text, hostageDetail.h_textBox_zcoord.Text, rotation));
 
                     hostageList.Add("		},");
                 }
@@ -205,7 +207,10 @@ namespace SOC.Classes
                     if (!vehicleDetail.v_comboBox_class.Text.Equals("DEFAULT"))
                         vehicleList.Add(string.Format("			class	= Vehicle.class.{0},", vehicleDetail.v_comboBox_class.Text));
 
-                    vehicleList.Add(string.Format("			position={{pos={{{0},{1},{2}}},rotY={3},}},", vehicleDetail.v_textBox_xcoord.Text, vehicleDetail.v_textBox_ycoord.Text, vehicleDetail.v_textBox_zcoord.Text, vehicleDetail.v_comboBox_rot.Text));
+                    double rotationdegrees = 0; Double.TryParse(vehicleDetail.v_comboBox_rot.Text, out rotationdegrees); rotationdegrees += 90;
+                    double toRadians = rotationdegrees * Math.PI / 180;
+
+                    vehicleList.Add(string.Format("			position={{pos={{{0},{1},{2}}},rotY={3},}},", vehicleDetail.v_textBox_xcoord.Text, vehicleDetail.v_textBox_ycoord.Text, vehicleDetail.v_textBox_zcoord.Text, toRadians));
 
                     vehicleList.Add("		},");
                 }

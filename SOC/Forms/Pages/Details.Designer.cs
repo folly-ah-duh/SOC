@@ -711,7 +711,7 @@ namespace SOC.UI
             this.m_textBox_filename.Location = new System.Drawing.Point(84, 66);
             this.m_textBox_filename.Name = "m_textBox_filename";
             this.m_textBox_filename.Size = new System.Drawing.Size(150, 20);
-            this.m_textBox_filename.Text = "mdl_" + StMdNum;
+            this.m_textBox_filename.Text = "/Assets/mdl_" + StMdNum;
             this.m_textBox_filename.TabIndex = 9;
             // 
             // m_textBox_zcoords

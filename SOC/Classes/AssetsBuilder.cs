@@ -12,7 +12,8 @@ namespace SOC.Classes
 
     static class AssetsBuilder
     {
-        public static string VehAssetsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "VehicleAssets");
+        public static string VehAssetsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "assets//VehicleAssets");
+        public static string modelAssetsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "assets//ModelAssets");
 
         public static void CopyDirectory(string sourceDir, string destinyDir)
         {
@@ -25,6 +26,7 @@ namespace SOC.Classes
                 CopyDirectory(subDirInfo.FullName, Path.Combine(destinyDir, subDirInfo.Name));
 
         }
+       
         
         public static void BuildFPKAssets(QuestDefinitionLua definitionInfo, QuestDetails detailInfo) { //v0.1.0 add required vehicle files. future: add route files? add preselected model files?
 
@@ -38,6 +40,21 @@ namespace SOC.Classes
                 string sourceDirPath = Path.Combine(VehFPKAssetsPath, string.Format("{0}_fpk", vehicleName));
 
                 CopyDirectory(sourceDirPath, destPath);
+            }
+            destPath += "//Assets";
+            if (!Directory.Exists(destPath))
+                Directory.CreateDirectory(destPath);
+            foreach (ModelDetail modelDetail in detailInfo.modelDetails)
+            {
+
+                string SourcemodelFileName = Path.Combine(modelAssetsPath, modelDetail.m_comboBox_preset.Text);
+                string DestModelFileName = Path.Combine(destPath, modelDetail.m_comboBox_preset.Text);
+
+                File.Copy(SourcemodelFileName + ".fmdl", DestModelFileName + ".fmdl", true);
+                if (!modelDetail.m_label_GeomNotFound.Visible)
+                {
+                    File.Copy(SourcemodelFileName + ".geom", DestModelFileName + ".geom", true);
+                }
             }
         }
         public static void BuildFPKDAssets(QuestDefinitionLua definitionInfo, QuestDetails detailInfo)

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SOC.Classes;
+using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace SOC.UI
@@ -581,7 +583,7 @@ namespace SOC.UI
             this.i_comboBox_count.Name = "i_comboBox_count";
             this.i_comboBox_count.Size = new System.Drawing.Size(150, 21);
             this.i_comboBox_count.TabIndex = 8;
-            this.i_comboBox_count.Text = "1";
+            this.i_comboBox_count.Text = i_comboBox_count.Items[0].ToString();
             // 
             // i_checkBox_boxed
             // 
@@ -632,7 +634,7 @@ namespace SOC.UI
             }
             else
             {
-                this.i_comboBox_count.Text = "1";
+                this.i_comboBox_count.Text = i_comboBox_count.Items[0].ToString();
                 this.i_comboBox_count.Enabled = true;
             }
         }
@@ -642,21 +644,21 @@ namespace SOC.UI
         Coordinates StMdCoords;
         int StMdNum;
         double quatNum = 0;
-
+        
+        public string modelAssetsPath = AssetsBuilder.modelAssetsPath;
         public GroupBox m_groupBox_main;
         public TextBox m_textBox_zcoords;
         public TextBox m_textBox_ycoords;
         public TextBox m_textBox_xcoords;
-
+        public Label m_label_preset;
         public TextBox m_textBox_zrot;
         public TextBox m_textBox_yrot;
         public TextBox m_textBox_xrot;
         public TextBox m_textBox_wrot;
-
+        public ComboBox m_comboBox_preset;
         public Label m_label_rot;
         public Label m_label_coords;
-        public TextBox m_textBox_filename;
-        public Label m_label_filename;
+        public Label m_label_GeomNotFound;
 
         public ModelDetail(Coordinates StMdC, int StMdN)
         {
@@ -670,19 +672,18 @@ namespace SOC.UI
         {
 
             this.m_groupBox_main = new System.Windows.Forms.GroupBox();
-            this.m_textBox_filename = new System.Windows.Forms.TextBox();
             this.m_textBox_zcoords = new System.Windows.Forms.TextBox();
-            this.m_label_filename = new System.Windows.Forms.Label();
             this.m_textBox_ycoords = new System.Windows.Forms.TextBox();
             this.m_textBox_xcoords = new System.Windows.Forms.TextBox();
-
+            this.m_label_preset = new System.Windows.Forms.Label();
             this.m_textBox_xrot = new System.Windows.Forms.TextBox();
             this.m_textBox_yrot = new System.Windows.Forms.TextBox();
             this.m_textBox_zrot = new System.Windows.Forms.TextBox();
             this.m_textBox_wrot = new System.Windows.Forms.TextBox();
-
+            this.m_comboBox_preset = new System.Windows.Forms.ComboBox();
             this.m_label_rot = new System.Windows.Forms.Label();
             this.m_label_coords = new System.Windows.Forms.Label();
+            this.m_label_GeomNotFound = new System.Windows.Forms.Label();
             this.m_groupBox_main.SuspendLayout();
 
             // 
@@ -691,9 +692,7 @@ namespace SOC.UI
             this.m_groupBox_main.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.m_groupBox_main.AutoSize = true;
-            this.m_groupBox_main.Controls.Add(this.m_textBox_filename);
             this.m_groupBox_main.Controls.Add(this.m_textBox_zcoords);
-            this.m_groupBox_main.Controls.Add(this.m_label_filename);
             this.m_groupBox_main.Controls.Add(this.m_textBox_ycoords);
             this.m_groupBox_main.Controls.Add(this.m_textBox_xcoords);
             this.m_groupBox_main.Controls.Add(this.m_label_rot);
@@ -702,6 +701,9 @@ namespace SOC.UI
             this.m_groupBox_main.Controls.Add(this.m_textBox_yrot);
             this.m_groupBox_main.Controls.Add(this.m_textBox_zrot);
             this.m_groupBox_main.Controls.Add(this.m_textBox_wrot);
+            this.m_groupBox_main.Controls.Add(this.m_comboBox_preset);
+            this.m_groupBox_main.Controls.Add(this.m_label_preset);
+            this.m_groupBox_main.Controls.Add(this.m_label_GeomNotFound);
             this.m_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
             this.m_groupBox_main.Location = new System.Drawing.Point(3, 3 + (StMdNum * 118));
             this.m_groupBox_main.Name = "m_groupBox_main";
@@ -709,16 +711,6 @@ namespace SOC.UI
             this.m_groupBox_main.TabIndex = 1;
             this.m_groupBox_main.TabStop = false;
             this.m_groupBox_main.Text = "Model_" + StMdNum;
-            // 
-            // m_textBox_filename
-            // 
-            this.m_textBox_filename.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.m_textBox_filename.Location = new System.Drawing.Point(84, 66);
-            this.m_textBox_filename.Name = "m_textBox_filename";
-            this.m_textBox_filename.Size = new System.Drawing.Size(150, 20);
-            this.m_textBox_filename.Text = "/Assets/mdl_" + StMdNum;
-            this.m_textBox_filename.TabIndex = 9;
             // 
             // m_textBox_zcoords
             // 
@@ -730,12 +722,13 @@ namespace SOC.UI
             // 
             // m_label_filename
             // 
-            this.m_label_filename.AutoSize = true;
-            this.m_label_filename.Location = new System.Drawing.Point(16, 69);
-            this.m_label_filename.Name = "m_label_filename";
-            this.m_label_filename.Size = new System.Drawing.Size(54, 13);
-            this.m_label_filename.TabIndex = 6;
-            this.m_label_filename.Text = "FileName:";
+            this.m_label_GeomNotFound.AutoSize = true;
+            this.m_label_GeomNotFound.Location = new System.Drawing.Point(22, 94);
+            this.m_label_GeomNotFound.Name = "m_label_filePath";
+            this.m_label_GeomNotFound.Size = new System.Drawing.Size(54, 13);
+            this.m_label_GeomNotFound.TabIndex = 6;
+            this.m_label_GeomNotFound.ForeColor = System.Drawing.Color.Yellow;
+            this.m_label_GeomNotFound.Text = "";
             // 
             // m_textBox_ycoords
             // 
@@ -801,11 +794,67 @@ namespace SOC.UI
             this.m_label_coords.TabIndex = 6;
             this.m_label_coords.Text = "Coordinates:";
 
+            this.m_comboBox_preset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.m_comboBox_preset.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.m_comboBox_preset.FormattingEnabled = true;
+            this.m_comboBox_preset.Location = new System.Drawing.Point(84, 66);
+            this.m_comboBox_preset.Items.AddRange(getPresetModelList());
+            this.m_comboBox_preset.Name = "m_comboBox_preset";
+            this.m_comboBox_preset.Size = new System.Drawing.Size(150, 21);
+            this.m_comboBox_preset.TabIndex = 7;
+            this.m_comboBox_preset.SelectedIndexChanged += new System.EventHandler(this.m_comboBox_preset_selectedIndexChanged);
+            this.m_comboBox_preset.SelectedIndex = 0;
+
+            this.m_label_preset.AutoSize = true;
+            this.m_label_preset.Location = new System.Drawing.Point(31, 69);
+            this.m_label_preset.Name = "m_label_preset";
+            this.m_label_preset.Size = new System.Drawing.Size(50, 13);
+            this.m_label_preset.TabIndex = 6;
+            this.m_label_preset.Text = "Model:";
+
             this.m_groupBox_main.ResumeLayout(false);
             this.m_groupBox_main.PerformLayout();
 
         }
 
+        private string[] getPresetModelList()
+        {
+            
+            string[] FileNames = Directory.GetFiles(modelAssetsPath, "*.fmdl");
+            for (int i = 0; i < FileNames.Length; i++)
+            {
+                int filenameLength = FileNames[i].Substring(FileNames[i].LastIndexOf('\\') + 1).Length - 1;
+                FileNames[i] = FileNames[i].Substring(FileNames[i].LastIndexOf('\\') + 1, filenameLength - 4);
+            }
+            return FileNames;
+        }
+
+        private bool hasGeom()
+        {
+            if (!string.IsNullOrEmpty(m_comboBox_preset.Text))
+            {
+                string[] geomNames = Directory.GetFiles(modelAssetsPath, "*.geom");
+                for (int i = 0; i < geomNames.Length; i++)
+                {
+                    if (geomNames[i].Contains(m_comboBox_preset.Text + ".geom"))
+                        return true;
+                }
+            }
+            return false;
+        }
+
+        private void m_comboBox_preset_selectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!hasGeom() && !string.IsNullOrEmpty(m_comboBox_preset.Text))
+            {
+                m_label_GeomNotFound.Visible = true;
+                m_label_GeomNotFound.Text = "Geom File Not Found For " + m_comboBox_preset.Text;
+            }
+            else
+                m_label_GeomNotFound.Visible = false;
+
+        }
     }
     partial class Details
     {

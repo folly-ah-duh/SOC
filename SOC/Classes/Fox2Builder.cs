@@ -130,7 +130,7 @@ namespace SOC.Classes
             
             foreach (ModelDetail modelDetail in questDetails.modelDetails)
             {
-                entityList.Add(new QuestEntity(modelDetail.m_groupBox_main.Text, unassignedAddress, entityClass.StaticModel, modelDetail.m_textBox_filename.Text, unnassignedObject));
+                entityList.Add(new QuestEntity(modelDetail.m_groupBox_main.Text, unassignedAddress, entityClass.StaticModel, modelDetail.m_comboBox_preset.Text, modelDetail.m_label_GeomNotFound.Visible));
                 entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity_StaticModel, new Coordinates(modelDetail.m_textBox_xcoords.Text, modelDetail.m_textBox_ycoords.Text, modelDetail.m_textBox_zcoords.Text), new RotationQuat(modelDetail.m_textBox_xrot.Text, modelDetail.m_textBox_yrot.Text, modelDetail.m_textBox_zrot.Text, modelDetail.m_textBox_wrot.Text)));
             }
 
@@ -501,10 +501,13 @@ namespace SOC.Classes
                             questFox2.WriteLine("          <value>7</value>");
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"modelFile\" type=\"FilePtr\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}.fmdl</value>", entity.info1));
+                            questFox2.WriteLine(string.Format("          <value>/Assets/{0}.fmdl</value>", entity.info1));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"geomFile\" type=\"FilePtr\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}.geom</value>", entity.info1));
+                            if ((bool)entity.info2)
+                                questFox2.WriteLine(string.Format("          <value></value>", entity.info1));
+                            else
+                                questFox2.WriteLine(string.Format("          <value>/Assets/{0}.geom</value>", entity.info1));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"isVisibleGeom\" type=\"bool\" container=\"StaticArray\" arraySize=\"1\">");
                             questFox2.WriteLine("          <value>false</value>");

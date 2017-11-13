@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SOC.UI;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using static SOC.QuestComponents.GameObjectInfo;
 
 namespace SOC.Classes
 {
@@ -11,15 +8,15 @@ namespace SOC.Classes
     {
         static string[] lngLanguages = { "eng", "fre", "ger", "ita", "jpn", "por", "rus", "spa" };
 
-        public static void WriteQuestLangs(QuestDefinitionLua definitionInfo)
+        public static void WriteQuestLangs(DefinitionDetails definitionDetails)
         {
-            string[] NotificationList = File.ReadAllLines("UpdateNotifsList.txt");
-            int progressNotifIndex = definitionInfo.progNotif;
+            string[] NotificationList = File.ReadAllLines(Setup.NotifsListPath);
+            int progressNotifIndex = definitionDetails.progNotif;
 
             string entryLines = "";
 
-            entryLines += string.Format("\n\t\t<Entry LangId=\"name_q{0}\" Color=\"5\" Value=\"{1}\" />", definitionInfo.QuestNum, definitionInfo.QuestTitle);
-            entryLines += string.Format("\n\t\t<Entry LangId=\"info_q{0}\" Color=\"5\" Value=\"{1}\" />\n", definitionInfo.QuestNum, definitionInfo.QuestDesc);
+            entryLines += string.Format("\n\t\t<Entry LangId=\"name_q{0}\" Color=\"5\" Value=\"{1}\" />", definitionDetails.QuestNum, definitionDetails.QuestTitle);
+            entryLines += string.Format("\n\t\t<Entry LangId=\"info_q{0}\" Color=\"5\" Value=\"{1}\" />\n", definitionDetails.QuestNum, definitionDetails.QuestDesc);
 
             if (progressNotifIndex > 17)
             {
@@ -36,7 +33,7 @@ namespace SOC.Classes
             foreach (string language in lngLanguages)
             {
                 string lngPath = string.Format("Sideop_Build//Assets//tpp/pack//ui//lang//lang_default_data_{0}_fpk//Assets//tpp//lang//ui", language);
-                string lngFile = Path.Combine(lngPath, string.Format(@"ih_quest_q{0}.{1}.lng2.xml", definitionInfo.QuestNum, language));
+                string lngFile = Path.Combine(lngPath, string.Format(@"ih_quest_q{0}.{1}.lng2.xml", definitionDetails.QuestNum, language));
 
                 Directory.CreateDirectory(lngPath);
                 File.WriteAllText(lngFile, lngText);

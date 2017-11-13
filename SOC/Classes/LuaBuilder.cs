@@ -1,64 +1,52 @@
-﻿using SOC.UI;
+﻿using SOC.QuestComponents;
+using SOC.UI;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Windows.Forms;
+using static SOC.QuestComponents.GameObjectInfo;
 
 namespace SOC.Classes
 {
     static class LuaBuilder
     {
 
-        static string[] questLuaInput = File.ReadAllLines(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "questScript.lua"));
+        static string[] questLuaInput = File.ReadAllLines(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "assets//questScript.lua"));
 
-        public static void WriteDefinitionLua(QuestDefinitionLua info, QuestDetails details, string gender)
+        public static void WriteDefinitionLua(DefinitionDetails definitionDetails, QuestDetails questDetails)
         {
-            
+            BodyInfoEntry bodyInfo = BodyInfo.BodyInfoArray[questDetails.hostageBodyIndex];
             string packFiles = "";
             string locName = "";
+            string gender = "MALE";
+            if (bodyInfo.isFemale)
+                gender = "FEMALE";
 
-            if (info.locationID == 10)
+            if (definitionDetails.locationID == 10)
                 locName = "AFGH";
 
-            else if (info.locationID == 20)
+            else if (definitionDetails.locationID == 20)
                 locName = "MAFR";
 
-            if (details.hostageDetails.Count > 0) //todo - better implementation
+            if (questDetails.hostageDetails.Count > 0)
             {
                 packFiles += "\n\t\t\"/Assets/tpp/pack/mission2/ih/ih_hostage_base.fpk\", ";
-                if (gender.Equals("Male"))
-                {
-                    if (locName.Equals("AFGH")) //afgh male
-                        packFiles += "\n\t\t\"/Assets/tpp/pack/mission2/ih/prs2_main0_mdl.fpk\", ";
-
-                    else if (locName.Equals("MAFR")) //mafr male
-                        packFiles += "\n\t\t\"/Assets/tpp/pack/mission2/ih/prs5_main0_mdl.fpk\", ";
-                }
-                else
-                {
-                    if (locName.Equals("AFGH")) // afgh female
-                        packFiles += "\n\t\t\"/Assets/tpp/pack/mission2/ih/prs3_main0_mdl.fpk\", ";
-
-                    else if (locName.Equals("MAFR")) // mafr female
-                        packFiles += "\n\t\t\"/Assets/tpp/pack/mission2/ih/prs6_main0_mdl.fpk\", ";
-                }
-
+                packFiles += string.Format("\n\t\t\"{0}\", ", bodyInfo.missionPackPath);
             }
 
-            packFiles += string.Format("\n\t\t\"/Assets/tpp/pack/mission2/quest/ih/{0}.fpk\", ", info.FpkName);
+            packFiles += string.Format("\n\t\t\"/Assets/tpp/pack/mission2/quest/ih/{0}.fpk\", ", definitionDetails.FpkName);
 
-            if (details.hostageDetails.Count > 0)
-                packFiles += string.Format("\n\t\trandomFaceListIH = {{gender = \"{0}\", count = {1}}}, ", gender.ToUpper(), details.hostageDetails.Count);
+            if (questDetails.hostageDetails.Count > 0)
+                packFiles += string.Format("\n\t\trandomFaceListIH = {{gender = \"{0}\", count = {1}}}, ", gender, questDetails.hostageDetails.Count);
 
             if (locName.Equals("AFGH") || locName.Equals("MAFR"))
                 packFiles += string.Format("\n\t\tbodyIdList={{ TppDefine.QUEST_BODY_ID_LIST.{0}_ARMOR, }}, ", locName);
 
             string questPackList = string.Format("\tquestPackList = {{ {0} \n\t}},", packFiles);
 
-            string locationInfo = string.Format("\tlocationId={0}, areaName=\"{1}\", iconPos=Vector3({2},{3},{4}), radius={5},", info.locationID, info.loadArea, info.coords.xCoord, info.coords.yCoord, info.coords.zCoord, info.radius);
+            string locationInfo = string.Format("\tlocationId={0}, areaName=\"{1}\", iconPos=Vector3({2},{3},{4}), radius={5},", definitionDetails.locationID, definitionDetails.loadArea, definitionDetails.coords.xCoord, definitionDetails.coords.yCoord, definitionDetails.coords.zCoord, definitionDetails.radius);
 
-            string progressLangId = string.Format("\tquestCompleteLangId=\"{0}\",", UI.Setup.UpdateNotifsList[info.progNotif * 2 + 1]);
+            string progressLangId = string.Format("\tquestCompleteLangId=\"{0}\",", UI.Setup.UpdateNotifsList[definitionDetails.progNotif * 2 + 1]);
 
             string canOpenQuestFunction = "\tcanOpenQuest=InfQuest.AllwaysOpenQuest, --function that decides whether the quest is open or not"; //todo in future update?
 
@@ -66,7 +54,7 @@ namespace SOC.Classes
 
             string equipIds = ""; List<string> requestHistory = new List<string>();
 
-            foreach (ItemDetail item in details.itemDetails)
+            foreach (ItemDetail item in questDetails.itemDetails)
                 if (item.i_comboBox_item.Text.Contains("EQP_WP_") && !requestHistory.Contains(item.i_comboBox_item.Text))
                 {
                     equipIds += string.Format("\"{0}\", ", item.i_comboBox_item.Text);
@@ -80,7 +68,7 @@ namespace SOC.Classes
             
 
             string DefinitionLuaPath = "Sideop_Build//GameDir//mod//quests//";
-            string DefinitionLuaFile = Path.Combine(DefinitionLuaPath, string.Format("ih_quest_q{0}.lua", info.QuestNum));
+            string DefinitionLuaFile = Path.Combine(DefinitionLuaPath, string.Format("ih_quest_q{0}.lua", definitionDetails.QuestNum));
 
             Directory.CreateDirectory(DefinitionLuaPath);
 
@@ -90,10 +78,10 @@ namespace SOC.Classes
                 defFile.WriteLine("local this={");
                 defFile.WriteLine(questPackList);
                 defFile.WriteLine(locationInfo);
-                defFile.WriteLine(string.Format("\tcategory=TppQuest.QUEST_CATEGORIES_ENUM.{0},", info.category));
+                defFile.WriteLine(string.Format("\tcategory=TppQuest.QUEST_CATEGORIES_ENUM.{0},", definitionDetails.category));
                 defFile.WriteLine(progressLangId);
                 defFile.WriteLine(canOpenQuestFunction);
-                defFile.WriteLine(string.Format("\tquestRank=TppDefine.QUEST_RANK.{0},", info.reward));
+                defFile.WriteLine(string.Format("\tquestRank=TppDefine.QUEST_RANK.{0},", definitionDetails.reward));
                 defFile.WriteLine(disableLzs);
                 defFile.WriteLine(requestEquipIds);
                 defFile.WriteLine(hasEnemyHeli);
@@ -101,17 +89,17 @@ namespace SOC.Classes
             }
         }
 
-        public static void WriteMainQuestLua(QuestDefinitionLua definitionDetails, QuestDetails questDetails, bool enableInterogate, string gender)
+        public static void WriteMainQuestLua(DefinitionDetails definitionDetails, QuestDetails questDetails)
         {
             List<string> questLua = new List<string>(questLuaInput);
 
             questLua[GetLineOf("local hostageCount =", questLua)] = string.Format("local hostageCount = {0}", questDetails.hostageDetails.Count);
             questLua[GetLineOf("local CPNAME =", questLua)] = string.Format("local CPNAME = \"{0}\"", definitionDetails.CPName); //add cp combobox to setup
-            questLua[GetLineOf("local useInter =", questLua)] = string.Format("local useInter = {0}", enableInterogate.ToString().ToLower()); //add interogation checkbox to setup
+            questLua[GetLineOf("local useInter =", questLua)] = string.Format("local useInter = {0}", questDetails.canInter.ToString().ToLower()); //add interogation checkbox to setup
             questLua[GetLineOf("local qType =", questLua)] = string.Format("local qType = TppDefine.QUEST_TYPE.{0}", definitionDetails.objectiveType); //add questtype combobox to setup
 
             questLua.InsertRange(GetLineOf("vehicleList = {", questLua) + 1, BuildVehicleList(questDetails));
-            questLua.InsertRange(GetLineOf("hostageList = {", questLua) + 1, BuildHostageList(definitionDetails, questDetails, gender));
+            questLua.InsertRange(GetLineOf("hostageList = {", questLua) + 1, BuildHostageList(definitionDetails, questDetails));
             questLua.InsertRange(GetLineOf("targetList = {", questLua) + 1, BuildTargetList(questDetails));
             questLua.InsertRange(GetLineOf("Hostage Attributes List", questLua) + 1, BuildHostageAttributes(questDetails));
 
@@ -132,16 +120,10 @@ namespace SOC.Classes
             return -1;
         }
 
-        public static List<string> BuildHostageList(QuestDefinitionLua definitionDetails, QuestDetails questDetails, string gender)
+        public static List<string> BuildHostageList(DefinitionDetails definitionDetails, QuestDetails questDetails)
         {
             List<string> hostageList = new List<string>();
-
-            string locName = "";
-
-            if (definitionDetails.locationID == 10)
-                locName = "AFGH";
-            else if (definitionDetails.locationID == 20)
-                locName = "MAFR";
+            BodyInfoEntry bodyInfo = BodyInfo.BodyInfoArray[questDetails.hostageBodyIndex];
 
             if (questDetails.hostageDetails.Count == 0)
                 hostageList.Add("nil");
@@ -167,7 +149,7 @@ namespace SOC.Classes
 
                     double rotation = 0; Double.TryParse(hostageDetail.h_comboBox_rot.Text, out rotation); rotation += 90;
                     
-                    hostageList.Add(string.Format("			bodyId = TppDefine.QUEST_BODY_ID_LIST.{0}_HOSTAGE_{1},", locName.ToUpper(), gender.ToUpper())); // All gender/body related params seriously need a better implementation
+                    hostageList.Add(string.Format("			bodyId = {0},", bodyInfo.bodyId));
 
                     hostageList.Add(string.Format("			position={{pos={{{0},{1},{2}}},rotY={3},}},", hostageDetail.h_textBox_xcoord.Text, hostageDetail.h_textBox_ycoord.Text, hostageDetail.h_textBox_zcoord.Text, rotation));
 
@@ -185,7 +167,7 @@ namespace SOC.Classes
             else
                 foreach (VehicleDetail vehicleDetail in questDetails.vehicleDetails)
                 {
-                    string vehicleName = QuestComponents.vehicleNames[vehicleDetail.v_comboBox_vehicle.SelectedIndex];
+                    string vehicleName = vehicleNames[vehicleDetail.v_comboBox_vehicle.SelectedIndex];
                     
 
                     vehicleList.Add("		{");

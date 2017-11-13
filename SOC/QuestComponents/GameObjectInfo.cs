@@ -1,17 +1,10 @@
 ﻿using SOC.UI;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SOC
+namespace SOC.QuestComponents
 {
-    public static class QuestComponents
+    public static class GameObjectInfo
     {
-        public const int baseQuestAddress = 0x02D7BCA0;
-        public const int baseItemAddress = 0x10000000;
-        
 
         public static string[] skills =
         {
@@ -83,17 +76,7 @@ namespace SOC
             "SPY",
             "MEDICAL"
         };
-        public static string[] rotation =
-        {
-            "0",
-            "45",
-            "90",
-            "135",
-            "180",
-            "225",
-            "270",
-            "315"
-        };
+
         public static string[] vehicleNames = {
             "EASTERN_TRACKED_TANK",
             "WESTERN_TRACKED_TANK",
@@ -837,7 +820,7 @@ namespace SOC
         {
             string ID = "NONE";
 
-            foreach(string WpIDPair in Str32Array)
+            foreach (string WpIDPair in Str32Array)
             {
                 if (WpIDPair.Contains(wpName))
                 {
@@ -849,284 +832,113 @@ namespace SOC
             return ID;
         }
 
-        public static int[] entityClassSizes =
+
+        public class QuestDetails
         {
-            0x0,
-            0x70,
-            0x70,
-            0x70,
-            0x70,
-            0x70,
-            0xE0,
-            0x70,
-            0xE0,
-            0x70,
-            0x70,
-            0x150,
-            0x1,
-            0xE,
-            0x70,
-            0x150,
-            0x0,
-            0x1,
-        };
-    }
+            public List<HostageDetail> hostageDetails;
+            public List<VehicleDetail> vehicleDetails;
+            public List<ItemDetail> itemDetails;
+            public List<ModelDetail> modelDetails;
+            public int hostageBodyIndex;
+            public bool canInter;
 
-    public enum entityClass
-    {
-        UNASSIGNED,
-        DataSet,
-        ScriptBlockScript,
-        GameObject,
-        TppHostage2Parameter,
-        GameObjectLocator,
-        TransformEntity_Hostage,
-        TppHostage2LocatorParameter,
-        TppVehicle2AttachmentData,
-        TppVehicle2LocatorParameter,
-        TppVehicle2BodyData,
-        TransformEntity_Vehicle,
-        TransformEntity_Item,
-        TppPickableLocatorParameter,
-        StaticModel,
-        TransformEntity_StaticModel,
-        TexturePackLoadConditioner,
-        GameObjectLocator_Item,
-    }
-
-
-    public class QuestEntity
-    {
-        public string entityName { get; set; }
-
-        public int hexAddress { get; set; }
-
-        public entityClass className { get; set; }
-
-        public object info1 { get; set; }
-
-        public object info2 { get; set; }
-
-        public object info3 { get; set; }
-
-        public QuestEntity(string ename, int address, entityClass cname)
-        {
-            entityName = ename;
-            hexAddress = address;
-            className = cname;
-        }
-        public QuestEntity(string ename, int address, entityClass cname, object inf1)
-        {
-            entityName = ename;
-            hexAddress = address;
-            className = cname;
-            info1 = inf1;
-        }
-        public QuestEntity(string ename, int address, entityClass cname, object inf1, object inf2)
-        {
-            entityName = ename;
-            hexAddress = address;
-            className = cname;
-            info1 = inf1;
-            info2 = inf2;
-        }
-
-        public QuestEntity(string ename, int address, entityClass cname, object inf1, object inf2, object inf3)
-        {
-            entityName = ename;
-            hexAddress = address;
-            className = cname;
-            info1 = inf1;
-            info2 = inf2;
-            info3 = inf3;
-        }
-
-    }
-    public class QuestDetails
-    {
-        public List<HostageDetail> hostageDetails;
-        public List<VehicleDetail> vehicleDetails;
-        public List<ItemDetail> itemDetails;
-        public List<ModelDetail> modelDetails;
-
-        public QuestDetails(List<HostageDetail> hosDets, List<VehicleDetail> vehDets, List<ItemDetail> itDets, List<ModelDetail> MdDets)
-        {
-            hostageDetails = hosDets;
-            vehicleDetails = vehDets;
-            itemDetails = itDets;
-            modelDetails = MdDets;
-        }
-    }
-    public class Vehicle2Body
-    {
-        public string vehicleType { get; set; }
-
-        public int TypeIndex { get; set; }
-
-        public int ImplTypeIndex { get; set; }
-
-        public string partsFileName { get; set; }
-
-        public Vehicle2Body(string name)
-        {
-            vehicleType = name;
-            switch(name) {
-                case "veh_bd_east_tnk":
-                    TypeIndex = 8;
-                    ImplTypeIndex = 5;
-                    partsFileName = "/Assets/tpp/parts/mecha/mbt/mbt0_main0_def.parts";
-                    break;
-                case "veh_bd_west_tnk":
-                    TypeIndex = 7;
-                    ImplTypeIndex = 5;
-                    partsFileName = "/Assets/tpp/parts/mecha/nbt/nbt0_main0_def.parts";
-                    break;
-                case "veh_bd_east_wav":
-                    TypeIndex = 6;
-                    ImplTypeIndex = 3;
-                    partsFileName = "/Assets/tpp/parts/mecha/sav/sav0_main0_def.parts";
-                    break;
-                case "veh_bd_west_wav":
-                    TypeIndex = 5;
-                    ImplTypeIndex = 4;
-                    partsFileName = "/Assets/tpp/parts/mecha/wav/wav0_main0_def.parts";
-                    break;
-            }
-        }
-    }
-    public class Vehicle2Attachment
-    {
-        public string attachmentType { get; set; }
-
-        public int typeCode { get; set; }
-
-        public int ImplTypeIndex { get; set; }
-
-        public int instanceCount { get; set; }
-
-        public string partsFileName { get; set; }
-
-        public string CnpName { get; set; }
-
-        public Vehicle2Attachment(string name)
-        {
-            attachmentType = name;
-            switch(name)
+            public QuestDetails(List<HostageDetail> hosDets, List<VehicleDetail> vehDets, List<ItemDetail> itDets, List<ModelDetail> MdDets, int bodyIndex, bool inter)
             {
-                case "veh_at_east_wav_rocket":
-                    typeCode = 97;
-                    ImplTypeIndex = 4;
-                    partsFileName = "/Assets/tpp/parts/mecha/sav/sav0_wepn0_def.parts";
-                    instanceCount = 2;
-                    CnpName = "CNP_weapon";
-                    break;
-                case "veh_at_west_wav_trt_machinegun":
-                    typeCode = 81;
-                    ImplTypeIndex = 2;
-                    partsFileName = "/Assets/tpp/parts/mecha/wav/wav0_turt1_def.parts";
-                    instanceCount = 1;
-                    CnpName = "CNP_TURRET";
-                    break;
-                case "veh_at_west_wav_trt_cannon":
-                    typeCode = 82;
-                    ImplTypeIndex = 3;
-                    partsFileName = "/Assets/tpp/parts/mecha/wav/wav0_turt0_def.parts";
-                    instanceCount = 2;
-                    CnpName = "CNP_TURRET";
-                    break;
+                hostageDetails = hosDets;
+                vehicleDetails = vehDets;
+                itemDetails = itDets;
+                modelDetails = MdDets;
+                hostageBodyIndex = bodyIndex;
+                canInter = inter;
+            }
+        }
+        
+        public class DefinitionDetails
+        {
+
+            public DefinitionDetails(string fpk, string quest, int locID, object loada, Coordinates c, string rad, string cat, string rew, int prog, string type, string CP, string qtitle, string qdesc)
+            {
+                FpkName = fpk;
+                QuestNum = quest;
+                locationID = locID;
+                loadArea = loada;
+                coords = c;
+                radius = rad;
+                category = cat;
+                reward = rew;
+                progNotif = prog;
+                objectiveType = type;
+                CPName = CP;
+                QuestTitle = qtitle;
+                QuestDesc = qdesc;
+            }
+
+            public string QuestTitle { get; set; }
+
+            public string QuestDesc { get; set; }
+
+            public string FpkName { get; set; }
+
+            public string QuestNum { get; set; }
+
+            public int locationID { get; set; }
+
+            public object loadArea { get; set; }
+
+            public Coordinates coords { get; set; }
+
+            public string radius { get; set; }
+
+            public string category { get; set; }
+
+            public string objectiveType { get; set; }
+
+            public string CPName { get; set; }
+
+            public string reward { get; set; }
+
+            public int progNotif { get; set; }
+
+        }
+
+        public class Coordinates
+        {
+            public string xCoord;
+            public string yCoord;
+            public string zCoord;
+            public string roty;
+
+            public Coordinates(string x, string y, string z)
+            {
+                xCoord = x;
+                yCoord = y;
+                zCoord = z;
+            }
+
+            public Coordinates(string x, string y, string z, string rot)
+            {
+                xCoord = x;
+                yCoord = y;
+                zCoord = z;
+                roty = rot;
+            }
+        }
+
+        public class RotationQuat
+        {
+            public string xval;
+            public string yval;
+            public string zval;
+            public string wval;
+
+            public RotationQuat(string x, string y, string z, string w)
+            {
+                xval = x;
+                yval = y;
+                zval = z;
+                wval = w;
             }
         }
 
     }
-    public class QuestDefinitionLua
-    {
-
-        public QuestDefinitionLua()
-        {
-        }
-
-        public QuestDefinitionLua(string fpk, string quest, int locID, object loada, Coordinates c, string rad, string cat, string rew, int prog, string type, string CP, string qtitle, string qdesc)
-        {
-            FpkName = fpk;
-            QuestNum = quest;
-            locationID = locID;
-            loadArea = loada;
-            coords = c;
-            radius = rad;
-            category = cat;
-            reward = rew;
-            progNotif = prog;
-            objectiveType = type;
-            CPName = CP;
-            QuestTitle = qtitle;
-            QuestDesc = qdesc;
-        }
-
-        public string QuestTitle { get; set; }
-
-        public string QuestDesc { get; set; }
-
-        public string FpkName { get; set; }
-
-        public string QuestNum { get; set; }
-
-        public int locationID { get; set; }
-
-        public object loadArea { get; set; }
-
-        public Coordinates coords { get; set; }
-
-        public string radius { get; set; }
-
-        public string category { get; set; }
-
-        public string objectiveType { get; set; }
-
-        public string CPName { get; set; }
-
-        public string reward { get; set; }
-
-        public int progNotif { get; set; }
-
-    }
-
-    public class Coordinates
-    {
-        public string xCoord;
-        public string yCoord;
-        public string zCoord;
-        public string roty;
-
-        public Coordinates(string x, string y, string z)
-        {
-            xCoord = x;
-            yCoord = y;
-            zCoord = z;
-        }
-
-        public Coordinates(string x, string y, string z, string rot)
-        {
-            xCoord = x;
-            yCoord = y;
-            zCoord = z;
-            roty = rot;
-        }
-    }
-
-    public class RotationQuat
-    {
-        public string xval;
-        public string yval;
-        public string zval;
-        public string wval;
-
-        public RotationQuat(string x, string y, string z, string w)
-        {
-            xval = x;
-            yval = y;
-            zval = z;
-            wval = w;
-        }
-    }
-    
 }

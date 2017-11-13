@@ -1,10 +1,9 @@
-﻿using SOC.UI;
-using System;
+﻿using SOC.QuestComponents;
+using SOC.UI;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
-using System.Text;
-using System.Threading.Tasks;
+using static SOC.QuestComponents.GameObjectInfo;
+using static SOC.QuestComponents.Fox2Info;
 
 namespace SOC.Classes
 {
@@ -22,7 +21,7 @@ namespace SOC.Classes
             for (int i = 0; i < QuestEntities.Count; i++)
             {
                 QuestEntities[i].hexAddress = baseOffset;
-                baseOffset += QuestComponents.entityClassSizes[(int)QuestEntities[i].className];
+                baseOffset += Fox2Info.entityClassSizes[(int)QuestEntities[i].className];
             }
         }
 
@@ -175,14 +174,16 @@ namespace SOC.Classes
             return classList;
         }
 
-        public static void WriteQuestFox2(QuestDefinitionLua definitionInfo, QuestDetails questDetails, string gender)
+        public static void WriteQuestFox2(DefinitionDetails definitionDetails, QuestDetails questDetails)
         {
-            int baseAddress = QuestComponents.baseQuestAddress;
             List<QuestEntity> entityList = BuildQuestEntityList(questDetails);
+            BodyInfoEntry bodyInfo = BodyInfo.BodyInfoArray[questDetails.hostageBodyIndex];
+
+            int baseAddress = baseQuestAddress;
             SetAddresses(entityList, baseAddress);
 
-            string fox2Path = string.Format("Sideop_Build//Assets//tpp//pack//mission2//quest//ih//{0}_fpkd//Assets//tpp//level//mission2//quest//ih", definitionInfo.FpkName);
-            string fox2QuestFile = Path.Combine(fox2Path, string.Format("{0}.fox2.xml", definitionInfo.FpkName));
+            string fox2Path = string.Format("Sideop_Build//Assets//tpp//pack//mission2//quest//ih//{0}_fpkd//Assets//tpp//level//mission2//quest//ih", definitionDetails.FpkName);
+            string fox2QuestFile = Path.Combine(fox2Path, string.Format("{0}.fox2.xml", definitionDetails.FpkName));
 
             Directory.CreateDirectory(fox2Path);
             using (System.IO.StreamWriter questFox2 =
@@ -235,7 +236,7 @@ namespace SOC.Classes
                             questFox2.WriteLine(string.Format("          <value>0x{0:X8}</value>", baseAddress));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"script\" type=\"FilePtr\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>/Assets/tpp/level/mission2/quest/ih/{0}.lua</value>", definitionInfo.FpkName));
+                            questFox2.WriteLine(string.Format("          <value>/Assets/tpp/level/mission2/quest/ih/{0}.lua</value>", definitionDetails.FpkName));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("      </staticProperties>");
                             questFox2.WriteLine("      <dynamicProperties />");
@@ -272,36 +273,13 @@ namespace SOC.Classes
                             break;
 
                         case entityClass.TppHostage2Parameter:
-                            string locName = "";
-
-                            if (definitionInfo.locationID == 10)
-                                locName = "AFGH";
-
-                            else if (definitionInfo.locationID == 20)
-                                locName = "MAFR";
-
                             questFox2.WriteLine(string.Format("    <entity class=\"TppHostage2Parameter\" classVersion=\"1\" addr=\"0x{0:X8}\" unknown1=\"176\" unknown2=\"29245\">", entity.hexAddress));
                             questFox2.WriteLine("      <staticProperties>");
                             questFox2.WriteLine("        <property name=\"owner\" type=\"EntityHandle\" container=\"StaticArray\" arraySize=\"1\">");
                             questFox2.WriteLine(string.Format("          <value>0x{0:X8}</value>", entityList[i - 1].hexAddress));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"partsFile\" type=\"FilePtr\" container=\"StaticArray\" arraySize=\"1\">");
-
-                            if (gender.Equals("Male")) // todo swap out with different part files
-                            {
-                                if (locName.Equals("AFGH")) //afgh male
-                                    questFox2.WriteLine("          <value>/Assets/tpp/parts/chara/prs/prs2_main0_def_v00_ih_hos.parts</value>");
-                                else if (locName.Equals("MAFR")) //mafr male
-                                    questFox2.WriteLine("          <value>/Assets/tpp/parts/chara/prs/prs5_main0_def_v00_ih_hos.parts</value>");
-                            }
-                            else
-                            {
-                                if (locName.Equals("AFGH")) //afgh female
-                                    questFox2.WriteLine("          <value>/Assets/tpp/parts/chara/prs/prs3_main0_def_v00_ih_hos.parts</value>");
-                                else if (locName.Equals("MAFR")) //mafr female
-                                    questFox2.WriteLine("          <value>/Assets/tpp/parts/chara/prs/prs6_main0_def_v00_ih_hos.parts</value>");
-                            }
-                            
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", bodyInfo.partsPath));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"motionGraphFile\" type=\"FilePtr\" container=\"StaticArray\" arraySize=\"1\">");
                             questFox2.WriteLine("          <value>/Assets/tpp/motion/motion_graph/hostage2/Hostage2_layers.mog</value>");
@@ -585,7 +563,7 @@ namespace SOC.Classes
                     boxed = "1";
                 }
 
-                EquipID = QuestComponents.EquipIDLookup(itemDetail.i_comboBox_item.Text);
+                EquipID = EquipIDLookup(itemDetail.i_comboBox_item.Text);
 
                 entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppPickableLocatorParameter, EquipID, itemDetail.i_comboBox_count.Text, boxed));
             }
@@ -613,15 +591,15 @@ namespace SOC.Classes
             return classList;
         }
 
-        public static void WriteItemFox2(QuestDefinitionLua definitionInfo, QuestDetails questDetails)
+        public static void WriteItemFox2(DefinitionDetails definitionDetails, QuestDetails questDetails)
         {
-            int baseAddress = QuestComponents.baseItemAddress;
+            int baseAddress = baseItemAddress;
 
             List<QuestEntity> entityList = BuildItemEntityList(questDetails);
             SetAddresses(entityList, baseAddress);
 
-            string fox2Path = string.Format("Sideop_Build//Assets//tpp//pack//mission2//quest//ih//{0}_fpkd//Assets//tpp//level//mission2//quest//ih", definitionInfo.FpkName);
-            string fox2ItemFile = Path.Combine(fox2Path, string.Format("{0}_items.fox2.xml", definitionInfo.FpkName));
+            string fox2Path = string.Format("Sideop_Build//Assets//tpp//pack//mission2//quest//ih//{0}_fpkd//Assets//tpp//level//mission2//quest//ih", definitionDetails.FpkName);
+            string fox2ItemFile = Path.Combine(fox2Path, string.Format("{0}_items.fox2.xml", definitionDetails.FpkName));
 
             Directory.CreateDirectory(fox2Path);
             using (System.IO.StreamWriter questFox2 =

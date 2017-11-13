@@ -59,41 +59,5 @@ namespace SOC.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        public static byte[] questScript {
-            get {
-                object obj = ResourceManager.GetObject("questScript", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Highly-Skilled Soldier Extracted [%d/%d]
-        ///quest_extract_elite
-        ///Heavy Infantry Eliminated [%d/%d]
-        ///quest_defeat_armor
-        ///Wandering Puppet Eliminated [%d/%d]
-        ///quest_defeat_zombie
-        ///Prisoner Extracted [%d/%d]
-        ///quest_extract_hostage
-        ///Armored Vehicle Unit Eliminated [%d/%d]
-        ///quest_defeat_armor_vehicle
-        ///Tank Unit Eliminated [%d/%d]
-        ///quest_defeat_tunk
-        ///Target Destroyed [%d/%d]
-        ///quest_target_eliminate
-        ///Mine Cleared [%d/%d]
-        ///mine_quest_log
-        ///Animal Extracted [%d/%d]
-        ///quest_extract_animal.
-        /// </summary>
-        public static string UpdateNotifsList {
-            get {
-                return ResourceManager.GetString("UpdateNotifsList", resourceCulture);
-            }
-        }
     }
 }

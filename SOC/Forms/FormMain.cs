@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
 using System.Text.RegularExpressions;
 using SOC.Classes;
+using static SOC.QuestComponents.GameObjectInfo;
 
 namespace SOC.UI
 {
@@ -40,6 +35,7 @@ namespace SOC.UI
         }
         private bool isFilled()
         {
+            //return true; // FOR DEBUG
             if (string.IsNullOrEmpty(setupPage.textBoxFPKName.Text) || string.IsNullOrEmpty(setupPage.textBoxQuestNum.Text) || string.IsNullOrEmpty(setupPage.textBoxQuestTitle.Text) || string.IsNullOrEmpty(setupPage.textBoxQuestDesc.Text))
                 return false;
             if (setupPage.comboBoxCategory.SelectedIndex == -1 || setupPage.comboBoxReward.SelectedIndex == -1 || setupPage.comboBoxObjective.SelectedIndex == -1 || setupPage.comboBoxProgressNotifs.SelectedIndex == -1 || setupPage.comboBoxRegion.SelectedIndex == -1)
@@ -79,7 +75,7 @@ namespace SOC.UI
                     }
                     else
                     {
-                        MessageBox.Show("Please fill in the remaining Setup and Flavor Text fields.", "Missing Details", MessageBoxButtons.OK, MessageBoxIcon.None);
+                        MessageBox.Show("Please fill in the remaining Setup and Flavor Text fields.", "Missing Details", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         panelNum--;
                         return;
                     }
@@ -87,20 +83,23 @@ namespace SOC.UI
                     break;
 
                 case 2:
-                    QuestDefinitionLua definitionInfo = new QuestDefinitionLua(setupPage.textBoxFPKName.Text, setupPage.textBoxQuestNum.Text, setupPage.locationID, setupPage.comboBoxLoadArea.Text, new Coordinates(setupPage.textBoxXCoord.Text, setupPage.textBoxYCoord.Text, setupPage.textBoxZCoord.Text), setupPage.comboBoxRadius.Text, setupPage.comboBoxCategory.Text, setupPage.comboBoxReward.Text, setupPage.comboBoxProgressNotifs.SelectedIndex, setupPage.comboBoxObjective.Text, setupPage.comboBoxCP.Text, setupPage.textBoxQuestTitle.Text, setupPage.textBoxQuestDesc.Text); //string fpk, string quest, int locID, object loada, Coordinates c, string rad, string cat, string rew, int prog)
-                    LangBuilder.WriteQuestLangs(definitionInfo);
+                    DefinitionDetails definitionDetails = new DefinitionDetails(setupPage.textBoxFPKName.Text, setupPage.textBoxQuestNum.Text, setupPage.locationID, setupPage.comboBoxLoadArea.Text, new Coordinates(setupPage.textBoxXCoord.Text, setupPage.textBoxYCoord.Text, setupPage.textBoxZCoord.Text), setupPage.comboBoxRadius.Text, setupPage.comboBoxCategory.Text, setupPage.comboBoxReward.Text, setupPage.comboBoxProgressNotifs.SelectedIndex, setupPage.comboBoxObjective.Text, setupPage.comboBoxCP.Text, setupPage.textBoxQuestTitle.Text, setupPage.textBoxQuestDesc.Text); //string fpk, string quest, int locID, object loada, Coordinates c, string rad, string cat, string rew, int prog)
+                    QuestDetails questDetails = detailPage.getQuestDetails();
 
-                    LuaBuilder.WriteDefinitionLua(definitionInfo, detailPage.questDetails, detailPage.comboBox_Gender.Text);
-                    LuaBuilder.WriteMainQuestLua(definitionInfo, detailPage.questDetails, detailPage.h_checkBox_intrgt.Checked, detailPage.comboBox_Gender.Text);
+                    LangBuilder.WriteQuestLangs(definitionDetails);
 
-                    if (detailPage.questDetails.itemDetails.Count() > 0)
-                        Fox2Builder.WriteItemFox2(definitionInfo, detailPage.questDetails);
-                    Fox2Builder.WriteQuestFox2(definitionInfo, detailPage.questDetails, detailPage.comboBox_Gender.Text);
+                    LuaBuilder.WriteDefinitionLua(definitionDetails, questDetails);
+                    LuaBuilder.WriteMainQuestLua(definitionDetails, questDetails);
 
-                    AssetsBuilder.BuildFPKAssets(definitionInfo, detailPage.questDetails);
-                    AssetsBuilder.BuildFPKDAssets(definitionInfo, detailPage.questDetails);
+                    if (questDetails.itemDetails.Count() > 0)
+                        Fox2Builder.WriteItemFox2(definitionDetails, questDetails);
 
-                    MessageBox.Show("Build Complete");
+                    Fox2Builder.WriteQuestFox2(definitionDetails, questDetails);
+
+                    AssetsBuilder.BuildFPKAssets(definitionDetails, questDetails);
+                    AssetsBuilder.BuildFPKDAssets(definitionDetails, questDetails);
+
+                    MessageBox.Show("Build Complete", "Sideop Companion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     panelNum--;
                     break;
                     

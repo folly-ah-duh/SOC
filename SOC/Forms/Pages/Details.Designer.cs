@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Windows.Forms;
+using static SOC.QuestComponents.GameObjectInfo;
 
 namespace SOC.UI
 {
@@ -143,7 +144,16 @@ namespace SOC.UI
             | System.Windows.Forms.AnchorStyles.Right)));
             this.h_comboBox_rot.FormattingEnabled = true;
             this.h_comboBox_rot.Location = new System.Drawing.Point(84, 39);
-            this.h_comboBox_rot.Items.AddRange(QuestComponents.rotation);
+            this.h_comboBox_rot.Items.AddRange(new string[] {
+            "0",
+            "45",
+            "90",
+            "135",
+            "180",
+            "225",
+            "270",
+            "315"
+            });
             this.h_comboBox_rot.Name = "h_comboBox_rot";
             this.h_comboBox_rot.Size = new System.Drawing.Size(150, 21);
             this.h_comboBox_rot.TabIndex = 5;
@@ -221,7 +231,7 @@ namespace SOC.UI
             this.h_comboBox_staff.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.h_comboBox_staff.FormattingEnabled = true;
             this.h_comboBox_staff.Location = new System.Drawing.Point(84, 171);
-            this.h_comboBox_staff.Items.AddRange(QuestComponents.Staff_Type_ID);
+            this.h_comboBox_staff.Items.AddRange(Staff_Type_ID);
             this.h_comboBox_staff.Name = "h_comboBox_staff";
             this.h_comboBox_staff.Size = new System.Drawing.Size(150, 21);
             this.h_comboBox_staff.TabIndex = 10;
@@ -239,7 +249,7 @@ namespace SOC.UI
             this.h_comboBox_skill.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.h_comboBox_skill.FormattingEnabled = true;
             this.h_comboBox_skill.Location = new System.Drawing.Point(84, 196);
-            this.h_comboBox_skill.Items.AddRange(QuestComponents.skills);
+            this.h_comboBox_skill.Items.AddRange(skills);
             this.h_comboBox_skill.Name = "h_comboBox_skill";
             this.h_comboBox_skill.Size = new System.Drawing.Size(150, 21);
             this.h_comboBox_skill.TabIndex = 11;
@@ -367,7 +377,16 @@ namespace SOC.UI
             | System.Windows.Forms.AnchorStyles.Right)));
             this.v_comboBox_rot.FormattingEnabled = true;
             this.v_comboBox_rot.Location = new System.Drawing.Point(78, 39);
-            this.v_comboBox_rot.Items.AddRange(QuestComponents.rotation);
+            this.v_comboBox_rot.Items.AddRange(new string[] {
+            "0",
+            "45",
+            "90",
+            "135",
+            "180",
+            "225",
+            "270",
+            "315"
+            });
             this.v_comboBox_rot.Name = "v_comboBox_rot";
             this.v_comboBox_rot.Size = new System.Drawing.Size(150, 21);
             this.v_comboBox_rot.TabIndex = 5;
@@ -614,7 +633,7 @@ namespace SOC.UI
             this.i_comboBox_item.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.i_comboBox_item.FormattingEnabled = true;
             this.i_comboBox_item.Location = new System.Drawing.Point(78, 68);
-            this.i_comboBox_item.Items.AddRange(QuestComponents.items);
+            this.i_comboBox_item.Items.AddRange(items);
             this.i_comboBox_item.Name = "i_comboBox_item";
             this.i_comboBox_item.Size = new System.Drawing.Size(150, 21);
             this.i_comboBox_item.TabIndex = 7;
@@ -896,8 +915,8 @@ namespace SOC.UI
             this.panelHosDet = new System.Windows.Forms.Panel();
             this.h_label_intrgt = new System.Windows.Forms.Label();
             this.h_checkBox_intrgt = new System.Windows.Forms.CheckBox();
-            this.comboBox_Gender = new System.Windows.Forms.ComboBox();
-            this.label_Gender = new System.Windows.Forms.Label();
+            this.comboBox_Body = new System.Windows.Forms.ComboBox();
+            this.label_Body = new System.Windows.Forms.Label();
             this.panelDetails.SuspendLayout();
             this.groupVehDet.SuspendLayout();
             this.groupStMdDet.SuspendLayout();
@@ -998,8 +1017,8 @@ namespace SOC.UI
             this.panelHosDet.AutoScroll = true;
             this.panelHosDet.Controls.Add(this.h_label_intrgt);
             this.panelHosDet.Controls.Add(this.h_checkBox_intrgt);
-            this.panelHosDet.Controls.Add(this.comboBox_Gender);
-            this.panelHosDet.Controls.Add(this.label_Gender);
+            this.panelHosDet.Controls.Add(this.comboBox_Body);
+            this.panelHosDet.Controls.Add(this.label_Body);
             this.panelHosDet.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelHosDet.Location = new System.Drawing.Point(3, 16);
             this.panelHosDet.Name = "panelHosDet";
@@ -1026,31 +1045,28 @@ namespace SOC.UI
             this.h_checkBox_intrgt.TabIndex = 0;
             this.h_checkBox_intrgt.UseVisualStyleBackColor = true;
             // 
-            // comboBox_Gender
+            // comboBox_Body
             // 
-            this.comboBox_Gender.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.comboBox_Body.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox_Gender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_Gender.FormattingEnabled = true;
-            this.comboBox_Gender.Items.AddRange(new object[] {
-            "Male",
-            "Female"});
-            this.comboBox_Gender.Location = new System.Drawing.Point(88, 3);
-            this.comboBox_Gender.Name = "comboBox_Gender";
-            this.comboBox_Gender.Size = new System.Drawing.Size(157, 21);
-            this.comboBox_Gender.TabIndex = 1;
-            this.comboBox_Gender.SelectedIndexChanged += new System.EventHandler(this.comboBox_Gender_SelectedIndexChanged);
+            this.comboBox_Body.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_Body.FormattingEnabled = true;
+            this.comboBox_Body.Location = new System.Drawing.Point(88, 3);
+            this.comboBox_Body.Name = "comboBox_Body";
+            this.comboBox_Body.Size = new System.Drawing.Size(157, 21);
+            this.comboBox_Body.TabIndex = 1;
+            this.comboBox_Body.SelectedIndexChanged += new System.EventHandler(this.comboBox_Body_SelectedIndexChanged);
             // 
-            // label_Gender
+            // label_Body
             // 
-            this.label_Gender.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.label_Body.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label_Gender.AutoSize = true;
-            this.label_Gender.Location = new System.Drawing.Point(37, 6);
-            this.label_Gender.Name = "label_Gender";
-            this.label_Gender.Size = new System.Drawing.Size(45, 13);
-            this.label_Gender.TabIndex = 2;
-            this.label_Gender.Text = "Gender:";
+            this.label_Body.AutoSize = true;
+            this.label_Body.Location = new System.Drawing.Point(48, 6);
+            this.label_Body.Name = "label_Body";
+            this.label_Body.Size = new System.Drawing.Size(34, 13);
+            this.label_Body.TabIndex = 2;
+            this.label_Body.Text = "Body:";
             // 
             // Details
             // 
@@ -1074,8 +1090,8 @@ namespace SOC.UI
         private System.Windows.Forms.Panel panelDetails;
         public System.Windows.Forms.GroupBox groupHosDet;
         private System.Windows.Forms.Panel panelHosDet;
-        private System.Windows.Forms.Label label_Gender;
-        public System.Windows.Forms.ComboBox comboBox_Gender;
+        private System.Windows.Forms.Label label_Body;
+        public System.Windows.Forms.ComboBox comboBox_Body;
         public System.Windows.Forms.GroupBox groupItemDet;
         private System.Windows.Forms.Panel panelItemDet;
         public System.Windows.Forms.GroupBox groupVehDet;

@@ -1,12 +1,8 @@
-﻿using System;
+﻿using SOC.QuestComponents;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using static SOC.QuestComponents.GameObjectInfo;
 
 namespace SOC.UI
 {
@@ -60,33 +56,39 @@ namespace SOC.UI
                 panelStMdDet.Controls.Add(stmdDet.m_groupBox_main);
             }
 
-            questDetails = new QuestDetails(hostageDetails, vehicleDetails, itemDetails, modelDetails);
+            this.comboBox_Body.Items.Clear();
+            foreach (BodyInfoEntry infoEntry in BodyInfo.BodyInfoArray)
+            {
+                this.comboBox_Body.Items.Add(infoEntry.bodyName);
+            }
 
-            if (questDetails.hostageDetails.Count > 0)
+            if (hostageDetails.Count > 0)
             {
                 h_checkBox_intrgt.Visible = true;
                 h_label_intrgt.Visible = true;
-                label_Gender.Visible = true;
-                comboBox_Gender.Visible = true;
-                comboBox_Gender.Text = "Male";
+                label_Body.Visible = true;
+                comboBox_Body.Visible = true;
+                comboBox_Body.Text = "DRAB";
 
             } else
             {
                 h_checkBox_intrgt.Visible = false;
                 h_label_intrgt.Visible = false;
-                label_Gender.Visible = false;
-                comboBox_Gender.Visible = false;
+                label_Body.Visible = false;
+                comboBox_Body.Visible = false;
             }
 
         }
-        public Details()
+
+        public QuestDetails getQuestDetails()
         {
-            InitializeComponent();
+            questDetails = new QuestDetails(hostageDetails, vehicleDetails, itemDetails, modelDetails, comboBox_Body.SelectedIndex, h_checkBox_intrgt.Checked);
+            return questDetails;
         }
 
-        private void comboBox_Gender_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox_Body_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox_Gender.Text.Equals("Female"))
+            if (comboBox_Body.Text.ToUpper().Contains("FEMALE"))
             {
                 foreach (HostageDetail hostageDetail in hostageDetails)
                 {

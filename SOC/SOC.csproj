@@ -118,15 +118,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="QuestComponents.cs" />
+    <Compile Include="QuestComponents\Fox2Info.cs" />
+    <Compile Include="QuestComponents\GameObjectInfo.cs" />
+    <Compile Include="QuestComponents\BodyInfo.cs" />
     <EmbeddedResource Include="Forms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\formCustomProgressLang.resx">
       <DependentUpon>formCustomProgressLang.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\Details.resx">
       <DependentUpon>Details.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\Setup.resx">
       <DependentUpon>Setup.cs</DependentUpon>
@@ -148,9 +153,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="questScript.lua" />
     <None Include="SOC_TemporaryKey.pfx" />
-    <None Include="UpdateNotifsList.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -37,7 +37,8 @@ namespace SOC.Classes
             packFiles += string.Format("\n\t\t\"/Assets/tpp/pack/mission2/quest/ih/{0}.fpk\", ", definitionDetails.FpkName);
 
             if (questDetails.hostageDetails.Count > 0)
-                packFiles += string.Format("\n\t\trandomFaceListIH = {{gender = \"{0}\", count = {1}}}, ", gender, questDetails.hostageDetails.Count);
+                if (!bodyInfo.hasface)
+                    packFiles += string.Format("\n\t\trandomFaceListIH = {{gender = \"{0}\", count = {1}}}, ", gender, questDetails.hostageDetails.Count);
 
             if (locName.Equals("AFGH") || locName.Equals("MAFR"))
                 packFiles += string.Format("\n\t\tbodyIdList={{ TppDefine.QUEST_BODY_ID_LIST.{0}_ARMOR, }}, ", locName);

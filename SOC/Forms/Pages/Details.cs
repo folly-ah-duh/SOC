@@ -68,7 +68,7 @@ namespace SOC.UI
                 h_label_intrgt.Visible = true;
                 label_Body.Visible = true;
                 comboBox_Body.Visible = true;
-                comboBox_Body.Text = "DRAB";
+                comboBox_Body.Text = "AFGH_HOSTAGE";
 
             } else
             {

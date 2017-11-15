@@ -12,11 +12,13 @@ namespace SOC.UI
         List<VehicleDetail> vehicleDetails;
         List<ItemDetail> itemDetails;
         List<ModelDetail> modelDetails;
+        List<ActiveItemDetail> activeItemDetails;
+        List<AnimalDetail> animalDetails;
         public QuestDetails questDetails;
 
         public string[] Langs = { "english", "russian", "pashto", "kikongo", "afrikaans" };
 
-        public Details(List<Coordinates> HostageCoords, List<Coordinates> VehicleCoords, List<Coordinates> ItemCoords, List<Coordinates> ModelCoords)
+        public Details(List<Coordinates> HostageCoords, List<Coordinates> VehicleCoords, List<Coordinates> ItemCoords, List<Coordinates> ModelCoords, List<Coordinates> ActItemsCoords, List<Coordinates> AnimalCoords)
         {
             InitializeComponent();
 
@@ -54,6 +56,24 @@ namespace SOC.UI
                 stmdDet.BuildDetail();
                 modelDetails.Add(stmdDet);
                 panelStMdDet.Controls.Add(stmdDet.m_groupBox_main);
+            }
+
+            activeItemDetails = new List<ActiveItemDetail>();
+            for (int i = 0; i < ActItemsCoords.Count; i++)
+            {
+                var acitDet = new ActiveItemDetail(ActItemsCoords[i], i);
+                acitDet.BuildDetail();
+                activeItemDetails.Add(acitDet);
+                panelAcItDet.Controls.Add(acitDet.ai_groupBox_main);
+            }
+
+            animalDetails = new List<AnimalDetail>();
+            for (int i = 0; i < AnimalCoords.Count; i++)
+            {
+                var animDet = new AnimalDetail(AnimalCoords[i], i);
+                animDet.BuildDetail();
+                animalDetails.Add(animDet);
+                panelAnimalDet.Controls.Add(animDet.a_groupBox_main);
             }
 
             this.comboBox_Body.Items.Clear();

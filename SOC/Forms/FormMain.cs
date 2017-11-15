@@ -65,7 +65,9 @@ namespace SOC.UI
                         List<Coordinates> VehicleCoords = BuildCoordinatesList(setupPage.textBoxVehCoords.Text);
                         List<Coordinates> ItemCoords = BuildCoordinatesList(setupPage.textBoxItemCoords.Text);
                         List<Coordinates> ModelCoords = BuildCoordinatesList(setupPage.textBoxStMdCoords.Text);
-                        detailPage = new Details(HostageCoords, VehicleCoords, ItemCoords, ModelCoords);
+                        List<Coordinates> activeItemCoords = BuildCoordinatesList(setupPage.textBox_ActiveItem.Text);
+                        List<Coordinates> AnimalCoords = BuildCoordinatesList(setupPage.textBox_Animal.Text);
+                        detailPage = new Details(HostageCoords, VehicleCoords, ItemCoords, ModelCoords, activeItemCoords, AnimalCoords);
 
                         buttonBack.Visible = true;
                         panelMain.Controls.Clear();
@@ -108,15 +110,26 @@ namespace SOC.UI
 
         private void FormMain_SizeChanged(object sender, EventArgs e)
         {
+            int maxPanelWidth = 314;
             detailPage.Height = this.Height - 100;
             detailPage.Width = this.Width - 42;
-            detailPage.groupHosDet.Width = detailPage.Width / 4 - 3;
-            detailPage.groupVehDet.Left = detailPage.groupHosDet.Location.X + detailPage.groupHosDet.Size.Width + 3;
-            detailPage.groupVehDet.Width = detailPage.Width / 4 - 3;
-            detailPage.groupItemDet.Left = detailPage.groupVehDet.Location.X + detailPage.groupVehDet.Size.Width + 3;
-            detailPage.groupItemDet.Width = detailPage.Width / 4 - 3;
-            detailPage.groupStMdDet.Left = detailPage.groupItemDet.Location.X + detailPage.groupItemDet.Size.Width + 3;
-            detailPage.groupStMdDet.Width = detailPage.Width / 4 - 3;
+            int dynamicPanelWidth = detailPage.Width / 4;
+
+            if (dynamicPanelWidth >= maxPanelWidth)
+                dynamicPanelWidth = maxPanelWidth;
+
+            detailPage.groupHosDet.Width = dynamicPanelWidth;
+            detailPage.groupVehDet.Width = dynamicPanelWidth;
+            detailPage.groupItemDet.Width = dynamicPanelWidth;
+            detailPage.groupStMdDet.Width = dynamicPanelWidth;
+            detailPage.groupAcItDet.Width = dynamicPanelWidth;
+            detailPage.groupAnimalDet.Width = dynamicPanelWidth;
+
+            detailPage.groupVehDet.Left = detailPage.groupHosDet.Location.X + dynamicPanelWidth;
+            detailPage.groupItemDet.Left = detailPage.groupHosDet.Location.X + dynamicPanelWidth * 2;
+            detailPage.groupStMdDet.Left = detailPage.groupHosDet.Location.X + dynamicPanelWidth * 3;
+            detailPage.groupAcItDet.Left = detailPage.groupHosDet.Location.X + dynamicPanelWidth * 4;
+            detailPage.groupAnimalDet.Left = detailPage.groupHosDet.Location.X + dynamicPanelWidth * 5;
         }
 
         public static List<Coordinates> BuildCoordinatesList(string rawString)

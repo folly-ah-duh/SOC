@@ -56,14 +56,19 @@
             this.comboBoxReward = new System.Windows.Forms.ComboBox();
             this.comboBoxLoadArea = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.textBoxStMdCoords = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.textBox_Animal = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.textBox_ActiveItem = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
             this.textBoxItemCoords = new System.Windows.Forms.TextBox();
+            this.textBoxStMdCoords = new System.Windows.Forms.TextBox();
+            this.textBoxHosCoords = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.textBoxVehCoords = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.textBoxHosCoords = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonAddNotif = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
@@ -75,6 +80,7 @@
             this.panelSetup.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -413,15 +419,10 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox3.Controls.Add(this.textBoxStMdCoords);
-            this.groupBox3.Controls.Add(this.textBoxItemCoords);
-            this.groupBox3.Controls.Add(this.textBoxVehCoords);
-            this.groupBox3.Controls.Add(this.label18);
-            this.groupBox3.Controls.Add(this.label17);
-            this.groupBox3.Controls.Add(this.label16);
-            this.groupBox3.Controls.Add(this.label15);
-            this.groupBox3.Controls.Add(this.textBoxHosCoords);
+            this.groupBox3.Controls.Add(this.panel1);
             this.groupBox3.Location = new System.Drawing.Point(499, 3);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(578, 444);
@@ -429,40 +430,126 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Locational Data";
             // 
-            // textBoxStMdCoords
+            // panel1
             // 
-            this.textBoxStMdCoords.AcceptsReturn = true;
-            this.textBoxStMdCoords.BackColor = System.Drawing.Color.Silver;
-            this.textBoxStMdCoords.Location = new System.Drawing.Point(9, 352);
-            this.textBoxStMdCoords.Multiline = true;
-            this.textBoxStMdCoords.Name = "textBoxStMdCoords";
-            this.textBoxStMdCoords.Size = new System.Drawing.Size(563, 80);
-            this.textBoxStMdCoords.TabIndex = 20;
+            this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.textBox_Animal);
+            this.panel1.Controls.Add(this.label22);
+            this.panel1.Controls.Add(this.textBox_ActiveItem);
+            this.panel1.Controls.Add(this.label21);
+            this.panel1.Controls.Add(this.textBoxItemCoords);
+            this.panel1.Controls.Add(this.textBoxStMdCoords);
+            this.panel1.Controls.Add(this.textBoxHosCoords);
+            this.panel1.Controls.Add(this.label15);
+            this.panel1.Controls.Add(this.textBoxVehCoords);
+            this.panel1.Controls.Add(this.label16);
+            this.panel1.Controls.Add(this.label18);
+            this.panel1.Controls.Add(this.label17);
+            this.panel1.Location = new System.Drawing.Point(7, 11);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(566, 428);
+            this.panel1.TabIndex = 23;
+            // 
+            // textBox_Animal
+            // 
+            this.textBox_Animal.AcceptsReturn = true;
+            this.textBox_Animal.BackColor = System.Drawing.Color.Silver;
+            this.textBox_Animal.Location = new System.Drawing.Point(3, 522);
+            this.textBox_Animal.Multiline = true;
+            this.textBox_Animal.Name = "textBox_Animal";
+            this.textBox_Animal.Size = new System.Drawing.Size(540, 75);
+            this.textBox_Animal.TabIndex = 25;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(3, 506);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(245, 13);
+            this.label22.TabIndex = 26;
+            this.label22.Text = "Animal Cluster Locations: (X, Y, Z, Y-Axis Rotation)";
+            // 
+            // textBox_ActiveItem
+            // 
+            this.textBox_ActiveItem.AcceptsReturn = true;
+            this.textBox_ActiveItem.BackColor = System.Drawing.Color.Silver;
+            this.textBox_ActiveItem.Location = new System.Drawing.Point(3, 426);
+            this.textBox_ActiveItem.Multiline = true;
+            this.textBox_ActiveItem.Name = "textBox_ActiveItem";
+            this.textBox_ActiveItem.Size = new System.Drawing.Size(540, 75);
+            this.textBox_ActiveItem.TabIndex = 23;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(3, 410);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(232, 13);
+            this.label21.TabIndex = 24;
+            this.label21.Text = "Active Item Locations: (X, Y, Z, Y-Axis Rotation)";
             // 
             // textBoxItemCoords
             // 
             this.textBoxItemCoords.AcceptsReturn = true;
             this.textBoxItemCoords.BackColor = System.Drawing.Color.Silver;
-            this.textBoxItemCoords.Location = new System.Drawing.Point(9, 243);
+            this.textBoxItemCoords.Location = new System.Drawing.Point(3, 224);
             this.textBoxItemCoords.Multiline = true;
             this.textBoxItemCoords.Name = "textBoxItemCoords";
-            this.textBoxItemCoords.Size = new System.Drawing.Size(563, 80);
+            this.textBoxItemCoords.Size = new System.Drawing.Size(542, 80);
             this.textBoxItemCoords.TabIndex = 19;
+            // 
+            // textBoxStMdCoords
+            // 
+            this.textBoxStMdCoords.AcceptsReturn = true;
+            this.textBoxStMdCoords.BackColor = System.Drawing.Color.Silver;
+            this.textBoxStMdCoords.Location = new System.Drawing.Point(3, 325);
+            this.textBoxStMdCoords.Multiline = true;
+            this.textBoxStMdCoords.Name = "textBoxStMdCoords";
+            this.textBoxStMdCoords.Size = new System.Drawing.Size(542, 80);
+            this.textBoxStMdCoords.TabIndex = 20;
+            // 
+            // textBoxHosCoords
+            // 
+            this.textBoxHosCoords.AcceptsReturn = true;
+            this.textBoxHosCoords.BackColor = System.Drawing.Color.Silver;
+            this.textBoxHosCoords.Location = new System.Drawing.Point(3, 22);
+            this.textBoxHosCoords.Multiline = true;
+            this.textBoxHosCoords.Name = "textBoxHosCoords";
+            this.textBoxHosCoords.Size = new System.Drawing.Size(539, 80);
+            this.textBoxHosCoords.TabIndex = 17;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(0, 6);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(217, 13);
+            this.label15.TabIndex = 16;
+            this.label15.Text = "Prisoner Locations: (X, Y, Z, Y-Axis Rotation)";
             // 
             // textBoxVehCoords
             // 
             this.textBoxVehCoords.AcceptsReturn = true;
             this.textBoxVehCoords.BackColor = System.Drawing.Color.Silver;
-            this.textBoxVehCoords.Location = new System.Drawing.Point(9, 137);
+            this.textBoxVehCoords.Location = new System.Drawing.Point(3, 123);
             this.textBoxVehCoords.Multiline = true;
             this.textBoxVehCoords.Name = "textBoxVehCoords";
-            this.textBoxVehCoords.Size = new System.Drawing.Size(563, 80);
+            this.textBoxVehCoords.Size = new System.Drawing.Size(539, 80);
             this.textBoxVehCoords.TabIndex = 18;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(3, 107);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(214, 13);
+            this.label16.TabIndex = 18;
+            this.label16.Text = "Vehicle Locations: (X, Y, Z, Y-Axis Rotation)";
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(6, 336);
+            this.label18.Location = new System.Drawing.Point(3, 309);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(238, 13);
             this.label18.TabIndex = 22;
@@ -471,39 +558,11 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(6, 227);
+            this.label17.Location = new System.Drawing.Point(3, 208);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(199, 13);
             this.label17.TabIndex = 20;
             this.label17.Text = "Item Locations: (X, Y, Z, Y-Axis Rotation)";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(6, 121);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(214, 13);
-            this.label16.TabIndex = 18;
-            this.label16.Text = "Vehicle Locations: (X, Y, Z, Y-Axis Rotation)";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(6, 16);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(217, 13);
-            this.label15.TabIndex = 16;
-            this.label15.Text = "Prisoner Locations: (X, Y, Z, Y-Axis Rotation)";
-            // 
-            // textBoxHosCoords
-            // 
-            this.textBoxHosCoords.AcceptsReturn = true;
-            this.textBoxHosCoords.BackColor = System.Drawing.Color.Silver;
-            this.textBoxHosCoords.Location = new System.Drawing.Point(9, 32);
-            this.textBoxHosCoords.Multiline = true;
-            this.textBoxHosCoords.Name = "textBoxHosCoords";
-            this.textBoxHosCoords.Size = new System.Drawing.Size(563, 80);
-            this.textBoxHosCoords.TabIndex = 17;
             // 
             // groupBox1
             // 
@@ -598,7 +657,8 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -651,5 +711,10 @@
         public System.Windows.Forms.ComboBox comboBoxObjective;
         public System.Windows.Forms.ComboBox comboBoxCP;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Panel panel1;
+        public System.Windows.Forms.TextBox textBox_Animal;
+        private System.Windows.Forms.Label label22;
+        public System.Windows.Forms.TextBox textBox_ActiveItem;
+        private System.Windows.Forms.Label label21;
     }
 }

@@ -260,6 +260,47 @@ namespace SOC.QuestComponents
             "EQP_IT_CBox_CITY",
             "EQP_IT_CBox_CITY_G01",
         };
+        public static string[] activeItems =
+        {
+            "EQP_SWP_DMine",
+            "EQP_SWP_DMine_G01",
+            "EQP_SWP_DMine_G02",
+            "EQP_SWP_DMine_G03",
+
+            "EQP_SWP_SleepingGusMine",
+            "EQP_SWP_SleepingGusMine_G01",
+            "EQP_SWP_SleepingGusMine_G02",
+
+            "EQP_SWP_AntitankMine",
+            "EQP_SWP_AntitankMine_G01",
+            "EQP_SWP_AntitankMine_G02",
+
+            "EQP_SWP_ElectromagneticNetMine",
+            "EQP_SWP_ElectromagneticNetMine_G01",
+            "EQP_SWP_ElectromagneticNetMine_G02",
+
+            "EQP_SWP_MolotovCocktailPlaced",
+
+            "EQP_SWP_C4",
+            "EQP_SWP_C4_G01",
+            "EQP_SWP_C4_G02",
+            "EQP_SWP_C4_G03",
+            "EQP_SWP_C4_G04",
+
+            "EQP_SWP_Decoy",
+            "EQP_SWP_Decoy_G01",
+            "EQP_SWP_Decoy_G02",
+
+            "EQP_SWP_ActiveDecoy",
+            "EQP_SWP_ActiveDecoy_G01",
+            "EQP_SWP_ActiveDecoy_G02",
+
+            "EQP_SWP_ShockDecoy",
+            "EQP_SWP_ShockDecoy_G01",
+            "EQP_SWP_ShockDecoy_G02",
+            "EQP_SWP_ShockDecoy_G03",
+            "EQP_SWP_ShockDecoy_G04",
+        };
         public static string[] Str32Array =
         {
             "EQP_AB_Item = 3701051719",

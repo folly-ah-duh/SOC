@@ -25,6 +25,8 @@
             0x150,
             0x0,
             0x1,
+            0xE,
+            0x70
         };
     }
 
@@ -48,6 +50,8 @@
         TransformEntity_StaticModel,
         TexturePackLoadConditioner,
         GameObjectLocator_Item,
+        TransformEntity_ActiveItem,
+        TppPlacedLocatorParameter
     }
 
 

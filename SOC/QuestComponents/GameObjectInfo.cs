@@ -882,15 +882,19 @@ namespace SOC.QuestComponents
             public List<VehicleDetail> vehicleDetails;
             public List<ItemDetail> itemDetails;
             public List<ModelDetail> modelDetails;
+            public List<ActiveItemDetail> activeItemDetails;
+            public List<AnimalDetail> animalDetails;
             public int hostageBodyIndex;
             public bool canInter;
 
-            public QuestDetails(List<HostageDetail> hosDets, List<VehicleDetail> vehDets, List<ItemDetail> itDets, List<ModelDetail> MdDets, int bodyIndex, bool inter)
+            public QuestDetails(List<HostageDetail> hosDets, List<VehicleDetail> vehDets, List<ItemDetail> itDets, List<ModelDetail> MdDets, List<ActiveItemDetail> acitdets, List<AnimalDetail> anidets,int bodyIndex, bool inter)
             {
                 hostageDetails = hosDets;
                 vehicleDetails = vehDets;
                 itemDetails = itDets;
                 modelDetails = MdDets;
+                activeItemDetails = acitdets;
+                animalDetails = anidets;
                 hostageBodyIndex = bodyIndex;
                 canInter = inter;
             }

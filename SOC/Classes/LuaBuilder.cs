@@ -15,7 +15,10 @@ namespace SOC.Classes
 
         public static void WriteDefinitionLua(DefinitionDetails definitionDetails, QuestDetails questDetails)
         {
-            BodyInfoEntry bodyInfo = BodyInfo.BodyInfoArray[questDetails.hostageBodyIndex];
+            BodyInfoEntry bodyInfo = new BodyInfoEntry();
+            if (questDetails.hostageBodyIndex >= 0)
+                bodyInfo = BodyInfo.BodyInfoArray[questDetails.hostageBodyIndex];
+
             string packFiles = "";
             string locName = "";
             string gender = "MALE";
@@ -124,7 +127,10 @@ namespace SOC.Classes
         public static List<string> BuildHostageList(DefinitionDetails definitionDetails, QuestDetails questDetails)
         {
             List<string> hostageList = new List<string>();
-            BodyInfoEntry bodyInfo = BodyInfo.BodyInfoArray[questDetails.hostageBodyIndex];
+
+            BodyInfoEntry bodyInfo = new BodyInfoEntry();
+            if (questDetails.hostageBodyIndex >= 0)
+                bodyInfo = BodyInfo.BodyInfoArray[questDetails.hostageBodyIndex];
 
             if (questDetails.hostageDetails.Count == 0)
                 hostageList.Add("nil");

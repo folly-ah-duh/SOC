@@ -102,7 +102,7 @@ namespace SOC.UI
 
         public QuestDetails getQuestDetails()
         {
-            questDetails = new QuestDetails(hostageDetails, vehicleDetails, itemDetails, modelDetails, comboBox_Body.SelectedIndex, h_checkBox_intrgt.Checked);
+            questDetails = new QuestDetails(hostageDetails, vehicleDetails, itemDetails, modelDetails, activeItemDetails, animalDetails,comboBox_Body.SelectedIndex, h_checkBox_intrgt.Checked);
             return questDetails;
         }
 

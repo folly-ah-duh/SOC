@@ -54,14 +54,14 @@ namespace SOC.Classes
 
                 foreach (HostageDetail hostageDetail in questDetails.hostageDetails)
                 {
-                    entityList.Add(new QuestEntity(hostageDetail.h_groupBox_main.Text, unassignedAddress, entityClass.GameObjectLocator, unnassignedObject, unnassignedObject));
+                    entityList.Add(new QuestEntity(hostageDetail.h_groupBox_main.Text, unassignedAddress, entityClass.GameObjectLocator, "TppHostageUnique", unnassignedObject));
                     entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity_Hostage, new Coordinates(hostageDetail.h_textBox_xcoord.Text,hostageDetail.h_textBox_ycoord.Text,hostageDetail.h_textBox_zcoord.Text), new RotationQuat("0","0","0","1")));
                     entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppHostage2LocatorParameter, unnassignedObject, unnassignedObject));
                 }
             }
                 foreach(VehicleDetail vehicleDetail in questDetails.vehicleDetails)
                 {
-                entityList.Add(new QuestEntity(vehicleDetail.v_groupBox_main.Text, unassignedAddress, entityClass.GameObjectLocator, unnassignedObject, unnassignedObject));
+                entityList.Add(new QuestEntity(vehicleDetail.v_groupBox_main.Text, unassignedAddress, entityClass.GameObjectLocator, "TppVehicle2", unnassignedObject));
                 entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity_Vehicle, new Coordinates(vehicleDetail.v_textBox_xcoord.Text, vehicleDetail.v_textBox_ycoord.Text, vehicleDetail.v_textBox_zcoord.Text), new RotationQuat("0", "0", "0", "1")));
                 entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppVehicle2LocatorParameter, unnassignedObject, unnassignedObject));
 
@@ -126,6 +126,16 @@ namespace SOC.Classes
                         break;
                 }
             }
+                foreach(ActiveItemDetail activeItemDetail in questDetails.activeItemDetails)
+            {
+                entityList.Add(new QuestEntity(activeItemDetail.ai_groupBox_main.Text, unassignedAddress, entityClass.GameObjectLocator, "TppPlacedSystem"));
+                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity_ActiveItem, new Coordinates(activeItemDetail.ai_textBox_xcoord.Text, activeItemDetail.ai_textBox_ycoord.Text, activeItemDetail.ai_textBox_zcoord.Text), new RotationQuat(activeItemDetail.ai_textBox_xrot.Text, activeItemDetail.ai_textBox_yrot.Text, activeItemDetail.ai_textBox_zrot.Text, activeItemDetail.ai_textBox_wrot.Text)));
+
+                string equipID = EquipIDLookup(activeItemDetail.ai_comboBox_activeitem.Text);
+
+                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppPlacedLocatorParameter, equipID));
+            }
+
             
             foreach (ModelDetail modelDetail in questDetails.modelDetails)
             {
@@ -169,6 +179,9 @@ namespace SOC.Classes
             {
                 classList.Add("    <class name=\"StaticModel\" super=\"\" version=\"9\" />");
             }
+            if (questDetails.activeItemDetails.Count > 0) {
+                classList.Add("    <class name=\"TppPlacedLocatorParameter\" super=\"\" version=\"0\" />");
+            }
             classList.Add("    <class name=\"TexturePackLoadConditioner\" super=\"\" version=\"0\" />");
             
             return classList;
@@ -177,7 +190,9 @@ namespace SOC.Classes
         public static void WriteQuestFox2(DefinitionDetails definitionDetails, QuestDetails questDetails)
         {
             List<QuestEntity> entityList = BuildQuestEntityList(questDetails);
-            BodyInfoEntry bodyInfo = BodyInfo.BodyInfoArray[questDetails.hostageBodyIndex];
+            BodyInfoEntry bodyInfo = new BodyInfoEntry();
+            if (questDetails.hostageBodyIndex >= 0)
+                bodyInfo = BodyInfo.BodyInfoArray[questDetails.hostageBodyIndex];
 
             int baseAddress = baseQuestAddress;
             SetAddresses(entityList, baseAddress);
@@ -322,10 +337,7 @@ namespace SOC.Classes
                             questFox2.WriteLine("          <value>7</value>");
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"typeName\" type=\"String\" container=\"StaticArray\" arraySize=\"1\">");
-                            if (entityList[i + 1].className == entityClass.TransformEntity_Hostage)
-                                questFox2.WriteLine("          <value>TppHostageUnique</value>");
-                            else
-                                questFox2.WriteLine("          <value>TppVehicle2</value>");
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info1));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"groupId\" type=\"uint32\" container=\"StaticArray\" arraySize=\"1\">");
                             questFox2.WriteLine("          <value>0</value>");
@@ -341,6 +353,7 @@ namespace SOC.Classes
                         case entityClass.TransformEntity_Hostage:
                         case entityClass.TransformEntity_StaticModel:
                         case entityClass.TransformEntity_Vehicle:
+                        case entityClass.TransformEntity_ActiveItem:
                             questFox2.WriteLine(string.Format("    <entity class=\"TransformEntity\" classVersion=\"0\" addr=\"0x{0:X8}\" unknown1=\"80\" unknown2=\"29250\">", entity.hexAddress));
                             questFox2.WriteLine("      <staticProperties>");
                             questFox2.WriteLine("        <property name=\"owner\" type=\"EntityHandle\" container=\"StaticArray\" arraySize=\"1\">");
@@ -513,6 +526,20 @@ namespace SOC.Classes
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"rejectFarRangeShadowCast\" type=\"int32\" container=\"StaticArray\" arraySize=\"1\">");
                             questFox2.WriteLine("          <value>2</value>");
+                            questFox2.WriteLine("        </property>");
+                            questFox2.WriteLine("      </staticProperties>");
+                            questFox2.WriteLine("      <dynamicProperties />");
+                            questFox2.WriteLine("    </entity>");
+                            break;
+
+                        case entityClass.TppPlacedLocatorParameter:
+                            questFox2.WriteLine(string.Format("    <entity class=\"TppPlacedLocatorParameter\" classVersion=\"0\" addr=\"0x{0:X8}\" unknown1=\"32\" unknown2=\"5408\">", entity.hexAddress));
+                            questFox2.WriteLine("      <staticProperties>");
+                            questFox2.WriteLine("        <property name=\"owner\" type=\"EntityHandle\" container=\"StaticArray\" arraySize=\"1\">");
+                            questFox2.WriteLine(string.Format("          <value>0x{0:X8}</value>", entityList[i - 2].hexAddress));
+                            questFox2.WriteLine("        </property>");
+                            questFox2.WriteLine("        <property name=\"equipIdStrCode32\" type=\"uint32\" container=\"StaticArray\" arraySize=\"1\">");
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info1));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("      </staticProperties>");
                             questFox2.WriteLine("      <dynamicProperties />");

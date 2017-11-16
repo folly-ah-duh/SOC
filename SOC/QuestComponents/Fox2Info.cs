@@ -26,7 +26,14 @@
             0x0,
             0x1,
             0xE,
-            0x70
+            0x70,
+            0x70,
+            0x70,
+            0x70,
+            0x70,
+            0x70,
+            0x70,
+            0x150,
         };
     }
 
@@ -51,12 +58,22 @@
         TexturePackLoadConditioner,
         GameObjectLocator_Item,
         TransformEntity_ActiveItem,
-        TppPlacedLocatorParameter
+        TppPlacedLocatorParameter,
+        TppBearParameter,
+        TppBearLocatorParameter, 
+        TppWolfParameter,
+        TppWolfLocatorParameter, 
+        TppAnimalParameter, 
+        TppAnimalLocatorParameter,
+        TransformEntity_Animal
+
     }
 
 
     public class QuestEntity
     {
+        private string fv2Path;
+
         public string entityName { get; set; }
 
         public int hexAddress { get; set; }
@@ -68,6 +85,8 @@
         public object info2 { get; set; }
 
         public object info3 { get; set; }
+
+        public object info4 { get; set; }
 
         public QuestEntity(string ename, int address, entityClass cname)
         {
@@ -101,6 +120,16 @@
             info3 = inf3;
         }
 
+        public QuestEntity(string ename, int address, entityClass cname, object inf1, object inf2, object inf3 object inf4)
+        {
+            entityName = ename;
+            hexAddress = address;
+            className = cname;
+            info1 = inf1;
+            info2 = inf2;
+            info3 = inf3;
+            info4 = inf4;
+        }
     }
 
     public class Vehicle2Body

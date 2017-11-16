@@ -126,7 +126,8 @@ namespace SOC.Classes
                         break;
                 }
             }
-                foreach(ActiveItemDetail activeItemDetail in questDetails.activeItemDetails)
+
+            foreach (ActiveItemDetail activeItemDetail in questDetails.activeItemDetails)
             {
                 entityList.Add(new QuestEntity(activeItemDetail.ai_groupBox_main.Text, unassignedAddress, entityClass.GameObjectLocator, "TppPlacedSystem"));
                 entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity_ActiveItem, new Coordinates(activeItemDetail.ai_textBox_xcoord.Text, activeItemDetail.ai_textBox_ycoord.Text, activeItemDetail.ai_textBox_zcoord.Text), new RotationQuat(activeItemDetail.ai_textBox_xrot.Text, activeItemDetail.ai_textBox_yrot.Text, activeItemDetail.ai_textBox_zrot.Text, activeItemDetail.ai_textBox_wrot.Text)));
@@ -136,6 +137,58 @@ namespace SOC.Classes
                 entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppPlacedLocatorParameter, equipID));
             }
 
+            foreach(AnimalDetail animalDetail in questDetails.animalDetails)
+            {
+                string animalhistory = "", 
+                       animalName = animalDetail.a_comboBox_animal.Text,
+                       typeName = AnimalInfo.getAnimalType(animalName), 
+                       animalCategory = AnimalInfo.getAnimalCategory(animalName);
+
+                if (!animalhistory.Contains(animalName))
+                {
+                    int totalCount = 0;
+
+                    foreach (AnimalDetail animalScan in questDetails.animalDetails)
+                    {
+                        if (animalScan.a_comboBox_animal.Text.Equals(animalName))
+                        {
+                            totalCount += (int.Parse(animalScan.a_comboBox_count.Text));
+                        }
+                    }
+
+                    string partsPath = "", mogPath = "", mtarPath = "", fv2Path = "";
+                    AnimalInfo.getAnimalPaths(animalName , out partsPath, out mogPath, out mtarPath, out fv2Path);
+
+                    entityList.Add(new QuestEntity(animalName + "GameObject", unassignedAddress, entityClass.GameObject, typeName, totalCount));
+                    switch (animalCategory)
+                    {
+                        case "animal":
+                            entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppAnimalParameter, partsPath, mogPath, mtarPath, fv2Path));
+                            break;
+                        case "wolf":
+                            entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppWolfParameter, partsPath, mogPath, mtarPath, fv2Path));
+                            break;
+                        case "bear":
+                            entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppBearParameter, partsPath, mogPath, mtarPath, fv2Path));
+                            break;
+                    }
+                }
+                entityList.Add(new QuestEntity(animalDetail.a_groupBox_main.Text, unassignedAddress, entityClass.GameObjectLocator, typeName));
+                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity_Animal, new Coordinates(animalDetail.a_textBox_xcoord.Text, animalDetail.a_textBox_ycoord.Text, animalDetail.a_textBox_zcoord.Text), new RotationQuat("0", "0", "0", "1")));
+                switch (animalCategory)
+                {
+                    case "animal":
+                        entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppAnimalLocatorParameter, animalDetail.a_comboBox_count.Text));
+                        break;
+                    case "wolf":
+                        entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppWolfLocatorParameter, animalDetail.a_comboBox_count.Text));
+                        break;
+                    case "bear":
+                        entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppBearLocatorParameter, animalDetail.a_comboBox_count.Text));
+                        break;
+                }
+
+            }
             
             foreach (ModelDetail modelDetail in questDetails.modelDetails)
             {
@@ -156,17 +209,20 @@ namespace SOC.Classes
             classList.Add("    <class name=\"Data\" super=\"Entity\" version=\"2\" />");
             classList.Add("    <class name=\"DataSet\" super=\"\" version=\"0\" />");
             classList.Add("    <class name=\"ScriptBlockScript\" super=\"\" version=\"0\" />");
-            if (questDetails.hostageDetails.Count + questDetails.vehicleDetails.Count + questDetails.modelDetails.Count > 0)
+            if (questDetails.hostageDetails.Count + questDetails.vehicleDetails.Count + questDetails.modelDetails.Count + questDetails.animalDetails.Count + questDetails.activeItemDetails.Count > 0)
             {
                 classList.Add("    <class name=\"TransformEntity\" super=\"\" version=\"0\" />");
-                if (questDetails.hostageDetails.Count + questDetails.vehicleDetails.Count > 0)
+                if (questDetails.hostageDetails.Count + questDetails.vehicleDetails.Count + questDetails.animalDetails.Count + questDetails.activeItemDetails.Count > 0)
                 {
                     classList.Add("    <class name=\"GameObjectLocator\" super=\"\" version=\"2\" />");
+                    if (questDetails.hostageDetails.Count + questDetails.animalDetails.Count > 0)
+                    {
+                        classList.Add("    <class name=\"GameObject\" super=\"\" version=\"2\" />");
+                    }
                 }
             }
             if (questDetails.hostageDetails.Count > 0)
             {
-                classList.Add("    <class name=\"GameObject\" super=\"\" version=\"2\" />");
                 classList.Add("    <class name=\"TppHostage2Parameter\" super=\"\" version=\"1\" />");
                 classList.Add("    <class name=\"TppHostage2LocatorParameter\" super=\"\" version=\"2\" />");
             }
@@ -182,6 +238,36 @@ namespace SOC.Classes
             if (questDetails.activeItemDetails.Count > 0) {
                 classList.Add("    <class name=\"TppPlacedLocatorParameter\" super=\"\" version=\"0\" />");
             }
+            if (questDetails.animalDetails.Count > 0)
+            {
+                string animalHistory = "";
+                string animalcat = "";
+                foreach (AnimalDetail animalDetail in questDetails.animalDetails)
+                {
+                    animalcat = AnimalInfo.getAnimalCategory(animalDetail.a_comboBox_animal.Text);
+
+                    if (!animalHistory.Contains(animalcat)) {
+                        animalHistory += animalcat;
+                        switch (animalcat)
+                        {
+                            case "animal":
+                                classList.Add("    <class name=\"TppAnimalLocatorParameter\" super=\"\" version=\"1\" />");
+                                classList.Add("    <class name=\"TppAnimalParameter\" super=\"\" version=\"1\" />");
+                                break;
+                            case "wolf":
+                                classList.Add("    <class name=\"TppWolfLocatorParameter\" super=\"\" version=\"0\" />");
+                                classList.Add("    <class name=\"TppWolfParameter\" super=\"\" version=\"1\" />");
+                                break;
+                            case "bear":
+                                classList.Add("    <class name=\"TppBearLocatorParameter\" super=\"\" version=\"0\" />");
+                                classList.Add("    <class name=\"TppBearParameter\" super=\"\" version=\"1\" />");
+                                break;
+                        }
+                    }
+                }
+
+            }
+
             classList.Add("    <class name=\"TexturePackLoadConditioner\" super=\"\" version=\"0\" />");
             
             return classList;

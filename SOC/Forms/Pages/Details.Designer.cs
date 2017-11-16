@@ -1122,6 +1122,9 @@ namespace SOC.UI
             this.a_comboBox_targetcount.Name = "a_comboBox_targetcount";
             this.a_comboBox_targetcount.Size = new System.Drawing.Size(43, 21);
             this.a_comboBox_targetcount.TabIndex = 13;
+            a_comboBox_targetcount.Items.AddRange(new string[] { "1", "2", "3", "4", "5", "6" });
+            a_comboBox_targetcount.Text = "1";
+            a_comboBox_targetcount.Enabled = false;
             // 
             // a_label_targetcount
             // 
@@ -1142,6 +1145,9 @@ namespace SOC.UI
             this.a_comboBox_count.Name = "a_comboBox_count";
             this.a_comboBox_count.Size = new System.Drawing.Size(152, 21);
             this.a_comboBox_count.TabIndex = 11;
+            a_comboBox_count.Items.AddRange( new string[] { "1", "2", "3", "4", "5", "6"});
+            a_comboBox_count.Text = "1";
+            a_comboBox_count.SelectedIndexChanged += new System.EventHandler(this.a_comboBox_count_selectedindexchanged);
             // 
             // a_label_count
             // 
@@ -1159,9 +1165,12 @@ namespace SOC.UI
             this.a_comboBox_animal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.a_comboBox_animal.FormattingEnabled = true;
             this.a_comboBox_animal.Location = new System.Drawing.Point(84, 81);
+            this.a_comboBox_animal.Items.AddRange(animals);
+            this.a_comboBox_animal.Text = "Sheep";
             this.a_comboBox_animal.Name = "a_comboBox_animal";
             this.a_comboBox_animal.Size = new System.Drawing.Size(152, 21);
             this.a_comboBox_animal.TabIndex = 9;
+            this.a_comboBox_animal.SelectedIndexChanged += new System.EventHandler(this.a_comboBox_animal_selectedIndexChanged);
             // 
             // a_label_animal
             // 
@@ -1180,6 +1189,7 @@ namespace SOC.UI
             this.a_checkBox_isTarget.Size = new System.Drawing.Size(15, 14);
             this.a_checkBox_isTarget.TabIndex = 7;
             this.a_checkBox_isTarget.UseVisualStyleBackColor = true;
+            this.a_checkBox_isTarget.CheckedChanged += new System.EventHandler(this.a_checkBox_isTarget_CheckedChanged);
             // 
             // a_label_isTarget
             // 
@@ -1256,6 +1266,59 @@ namespace SOC.UI
 
             this.a_groupBox_main.ResumeLayout(false);
             this.a_groupBox_main.PerformLayout();
+        }
+
+        private void a_comboBox_count_selectedindexchanged(object sender, EventArgs e)
+        {
+            a_comboBox_targetcount.Items.Clear();
+            for (int i = 1; i <= (Int32.Parse(a_comboBox_count.Text)); i++)
+            {
+                a_comboBox_targetcount.Items.Add(i.ToString());
+            }
+            a_comboBox_targetcount.Text = "1";
+        }
+
+        private void a_checkBox_isTarget_CheckedChanged(object sender, EventArgs e)
+        {
+            if (a_checkBox_isTarget.Checked)
+            {
+                a_comboBox_targetcount.Enabled = true;
+            } else
+            {
+                a_comboBox_targetcount.Enabled = false;
+            }
+        }
+
+        private void a_comboBox_animal_selectedIndexChanged(object sender, EventArgs e)
+        {
+            a_comboBox_count.Items.Clear();
+            a_comboBox_targetcount.Items.Clear();
+
+            switch (a_comboBox_animal.Text)
+            {
+                case "Sheep":
+                case "Cashmere Goat":
+                case "Boer Goat":
+                case "Nubian":
+                case "Donkey":
+                case "Zebra":
+                case "Okapi":
+                    a_comboBox_count.Items.AddRange(new string[] { "1", "2", "3", "4", "5", "6" });
+                    break;
+
+                case "Wolf":
+                case "Jackal":
+                case "African Wild Dog":
+                    a_comboBox_count.Items.AddRange(new string[] { "1", "2" });
+                    break;
+
+                case "Bear":
+                    a_comboBox_count.Items.AddRange(new string[] { "1"});
+                    break;
+            }
+            a_comboBox_targetcount.Items.AddRange(new string[] { "1" });
+            a_comboBox_count.Text = "1";
+            a_comboBox_targetcount.Text = "1"; 
         }
     }
 

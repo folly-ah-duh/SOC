@@ -5,7 +5,6 @@ namespace SOC.QuestComponents
 {
     public static class GameObjectInfo
     {
-
         public static string[] skills =
         {
             "NONE",
@@ -278,8 +277,6 @@ namespace SOC.QuestComponents
             "EQP_SWP_ElectromagneticNetMine",
             "EQP_SWP_ElectromagneticNetMine_G01",
             "EQP_SWP_ElectromagneticNetMine_G02",
-
-            "EQP_SWP_MolotovCocktailPlaced",
 
             "EQP_SWP_C4",
             "EQP_SWP_C4_G01",

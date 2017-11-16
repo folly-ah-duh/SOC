@@ -120,7 +120,7 @@
             info3 = inf3;
         }
 
-        public QuestEntity(string ename, int address, entityClass cname, object inf1, object inf2, object inf3 object inf4)
+        public QuestEntity(string ename, int address, entityClass cname, object inf1, object inf2, object inf3, object inf4)
         {
             entityName = ename;
             hexAddress = address;

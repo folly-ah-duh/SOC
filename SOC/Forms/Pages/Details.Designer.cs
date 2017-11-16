@@ -1165,7 +1165,7 @@ namespace SOC.UI
             this.a_comboBox_animal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.a_comboBox_animal.FormattingEnabled = true;
             this.a_comboBox_animal.Location = new System.Drawing.Point(84, 81);
-            this.a_comboBox_animal.Items.AddRange(animals);
+            this.a_comboBox_animal.Items.AddRange(QuestComponents.AnimalInfo.animals);
             this.a_comboBox_animal.Text = "Sheep";
             this.a_comboBox_animal.Name = "a_comboBox_animal";
             this.a_comboBox_animal.Size = new System.Drawing.Size(152, 21);

@@ -11,15 +11,15 @@ namespace SOC.QuestComponents
         public static string[] animals =
         {
             "Sheep",
-            "Cashmere Goat",
-            "Boer Goat",
+            "Cashmere_Goat",
+            "Boer_Goat",
             "Nubian",
             "Donkey",
             "Zebra",
             "Okapi",
             "Wolf",
             "Jackal",
-            "African Wild Dog",
+            "African_Wild_Dog",
             "Bear",
         };
 
@@ -27,8 +27,8 @@ namespace SOC.QuestComponents
         {
             switch(animalName) {
                 case "Sheep":
-                case "Cashmere Goat":
-                case "Boer Goat":
+                case "Cashmere_Goat":
+                case "Boer_Goat":
                 case "Nubian":
                 case "Donkey":
                 case "Zebra":
@@ -36,7 +36,7 @@ namespace SOC.QuestComponents
                     return "animal";
                 case "Wolf":
                 case "Jackal":
-                case "African Wild Dog":
+                case "African_Wild_Dog":
                     return "wolf";
             }
             return "bear";
@@ -47,11 +47,11 @@ namespace SOC.QuestComponents
             switch(animalName)
             {
                 case "Sheep":
-                case "Cashmere Goat":
+                case "Cashmere_Goat":
                     return "TppGoat";
                 
 
-                case "Boer Goat":
+                case "Boer_Goat":
                 case "Nubian":
                     return "TppNubian";
 
@@ -64,7 +64,7 @@ namespace SOC.QuestComponents
                 case "Wolf":
                     return "TppWolf";
 
-                case "African Wild Dog":
+                case "African_Wild_Dog":
                 case "Jackal":
                     return "TppJackal";
                 
@@ -86,13 +86,13 @@ namespace SOC.QuestComponents
                     mogPath = "/Assets/tpp/motion/mtar/goat/Goat_layers.mtar";
                     fv2Path = "/Assets/tpp/fova/chara/kkl/kkl_v00.fv2";
                     break;
-                case "Cashmere Goat":
+                case "Cashmere_Goat":
                     partsPath = "/Assets/tpp/parts/chara/kkl/kkl0_main0_def_v00.parts";
                     mtarPath = "/Assets/tpp/motion/motion_graph/goat/Goat_layers.mog";
                     mogPath = "/Assets/tpp/motion/mtar/goat/Goat_layers.mtar";
                     fv2Path = "/Assets/tpp/fova/chara/got/got0_kkl_v00.fv2";
                     break;
-                case "Boer Goat":
+                case "Boer_Goat":
                     partsPath = "/Assets/tpp/parts/chara/bor/bor0_main0_def_v00.parts";
                     mtarPath = "/Assets/tpp/motion/motion_graph/goat/Goat_layers.mog";
                     mogPath = "/Assets/tpp/motion/mtar/goat/Goat_layers.mtar";
@@ -134,7 +134,7 @@ namespace SOC.QuestComponents
                     mogPath = "/Assets/tpp/motion/motion_graph/wolf/Wolf_layers.mog";
                     fv2Path = "/Assets/tpp/fova/chara/jcl/jcl0_v00_c00.fv2";
                     break;
-                case "African Wild Dog":
+                case "African_Wild_Dog":
                     partsPath = "/Assets/tpp/parts/chara/lyc/lyc0_main0_def_v00.parts";
                     mtarPath = "/Assets/tpp/motion/mtar/wolf/Wolf_layers.mtar";
                     mogPath = "/Assets/tpp/motion/motion_graph/wolf/Wolf_layers.mog";

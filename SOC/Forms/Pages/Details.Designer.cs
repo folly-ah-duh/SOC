@@ -1297,8 +1297,8 @@ namespace SOC.UI
             switch (a_comboBox_animal.Text)
             {
                 case "Sheep":
-                case "Cashmere Goat":
-                case "Boer Goat":
+                case "Cashmere_Goat":
+                case "Boer_Goat":
                 case "Nubian":
                 case "Donkey":
                 case "Zebra":
@@ -1308,8 +1308,8 @@ namespace SOC.UI
 
                 case "Wolf":
                 case "Jackal":
-                case "African Wild Dog":
-                    a_comboBox_count.Items.AddRange(new string[] { "1", "2" });
+                case "African_Wild_Dog":
+                    a_comboBox_count.Items.AddRange(new string[] { "1", "2", "3", "4" });
                     break;
 
                 case "Bear":

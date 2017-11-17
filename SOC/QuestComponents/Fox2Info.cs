@@ -72,7 +72,6 @@
 
     public class QuestEntity
     {
-        private string fv2Path;
 
         public string entityName { get; set; }
 

@@ -103,8 +103,10 @@ namespace SOC.Classes
             questLua[GetLineOf("local qType =", questLua)] = string.Format("local qType = TppDefine.QUEST_TYPE.{0}", definitionDetails.objectiveType); //add questtype combobox to setup
 
             questLua.InsertRange(GetLineOf("vehicleList = {", questLua) + 1, BuildVehicleList(questDetails));
-            questLua.InsertRange(GetLineOf("hostageList = {", questLua) + 1, BuildHostageList(definitionDetails, questDetails));
+            questLua.InsertRange(GetLineOf("hostageList = {", questLua) + 1, BuildHostageList(questDetails));
+            questLua.InsertRange(GetLineOf("animalList = {", questLua) + 1, BuildAnimalList(questDetails));
             questLua.InsertRange(GetLineOf("targetList = {", questLua) + 1, BuildTargetList(questDetails));
+            questLua.InsertRange(GetLineOf("targetAnimalList = {", questLua) + 1, BuildAnimalTargetList(questDetails));
             questLua.InsertRange(GetLineOf("Hostage Attributes List", questLua) + 1, BuildHostageAttributes(questDetails));
 
 
@@ -124,7 +126,63 @@ namespace SOC.Classes
             return -1;
         }
 
-        public static List<string> BuildHostageList(DefinitionDetails definitionDetails, QuestDetails questDetails)
+        public static List<string> BuildAnimalList(QuestDetails questDetails)
+        {
+            List<string> animalList = new List<string>();
+            if (questDetails.animalDetails.Count == 0)
+                animalList.Add("nil");
+            else
+            {
+                foreach(AnimalDetail animalDetail in questDetails.animalDetails)
+                {
+                    string animalType = AnimalInfo.getAnimalType(animalDetail.a_comboBox_animal.Text);
+                    animalList.Add("	{");
+                    animalList.Add(string.Format("		animalName = \"{0}\",", animalDetail.a_groupBox_main.Text));
+                    animalList.Add(string.Format("		animalType = \"{0}\",", animalType));
+                    animalList.Add("	},");
+                }
+            }
+            return animalList;
+        }
+
+        public static List<string> BuildAnimalTargetList(QuestDetails questDetails)
+        {
+            List<string> animalTargetList = new List<string>();
+
+            bool hasTarget = false;
+            foreach (AnimalDetail animalDetail in questDetails.animalDetails)
+                if (animalDetail.a_checkBox_isTarget.Checked)
+                    hasTarget = true;
+
+            animalTargetList.Add("	markerList = {");
+            if (!hasTarget)
+                animalTargetList.Add("nil");
+            else
+            {
+                foreach (AnimalDetail animalDetail in questDetails.animalDetails)
+                {
+                    if (animalDetail.a_checkBox_isTarget.Checked)
+                        animalTargetList.Add(string.Format("		\"{0}\",", animalDetail.a_groupBox_main.Text));
+                }
+            }
+            animalTargetList.Add("	},");
+            animalTargetList.Add("	nameList={");
+            if (!hasTarget)
+                animalTargetList.Add("nil");
+            else
+            {
+                foreach (AnimalDetail animalDetail in questDetails.animalDetails)
+                {
+                    if (animalDetail.a_checkBox_isTarget.Checked)
+                        animalTargetList.Add(string.Format("		\"{0}\",", animalDetail.a_groupBox_main.Text));
+                }
+            }
+            animalTargetList.Add("	},");
+
+            return animalTargetList;
+        }
+
+        public static List<string> BuildHostageList(QuestDetails questDetails)
         {
             List<string> hostageList = new List<string>();
 

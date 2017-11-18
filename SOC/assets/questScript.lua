@@ -35,8 +35,16 @@ this.QUEST_TABLE = {
     
   },
   
+  animalList = {
+  
+  },
+  
   targetList = {
 
+  },
+  
+  targetAnimalList = {
+  
   },
 }
 
@@ -74,22 +82,19 @@ function this.OnAllocate()
   TppQuest.RegisterQuestStepTable( quest_step )
   TppQuest.RegisterQuestSystemCallbacks{
     OnActivate = function()
-      Fox.Log("quest_recv_child OnActivate")
-      
       TppEnemy.OnActivateQuest( this.QUEST_TABLE )
+	  TppAnimal.OnActivateQuest(this.QUEST_TABLE)
     end,
     OnDeactivate = function()
-      Fox.Log("quest_recv_child OnDeactivate")
-      
       TppEnemy.OnDeactivateQuest( this.QUEST_TABLE )
+	  TppAnimal.OnDeactivateQuest(this.QUEST_TABLE)
     end,
     OnOutOfAcitveArea = function()
     end,
     OnTerminate = function()
-      
-      this.SwitchEnableQuestHighIntTable( false, CPNAME, this.questCpInterrogation ) --
-      
+      this.SwitchEnableQuestHighIntTable( false, CPNAME, this.questCpInterrogation )
       TppEnemy.OnTerminateQuest( this.QUEST_TABLE )
+	  TppAnimal.OnTerminateQuest(this.QUEST_TABLE)
     end,
   }
   

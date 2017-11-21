@@ -163,14 +163,9 @@
             this.comboBoxObjective.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxObjective.FormattingEnabled = true;
             this.comboBoxObjective.Items.AddRange(new object[] {
-            "STORY",
             "RECOVERED",
             "ELIMINATE",
-            "ANIMAL_RECOVERED",
-            "DEVELOP_RECOVERED",
-            "GIMMICK_RECOVERED",
-            "MSF_RECOVERED",
-            "SHOOTING_PRACTIVE"});
+            "MSF_RECOVERED"});
             this.comboBoxObjective.Location = new System.Drawing.Point(100, 185);
             this.comboBoxObjective.Name = "comboBoxObjective";
             this.comboBoxObjective.Size = new System.Drawing.Size(153, 21);
@@ -432,6 +427,8 @@
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(this.textBox_Animal);
             this.panel1.Controls.Add(this.label22);
@@ -711,10 +708,10 @@
         public System.Windows.Forms.ComboBox comboBoxObjective;
         public System.Windows.Forms.ComboBox comboBoxCP;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Panel panel1;
         public System.Windows.Forms.TextBox textBox_Animal;
         private System.Windows.Forms.Label label22;
         public System.Windows.Forms.TextBox textBox_ActiveItem;
         private System.Windows.Forms.Label label21;
+        public System.Windows.Forms.Panel panel1;
     }
 }

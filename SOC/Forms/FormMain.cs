@@ -14,11 +14,13 @@ namespace SOC.UI
         private Setup setupPage = new Setup();
         private Details detailPage;
         private int panelNum = 0;
-
+            
         public FormMain()
         {
             InitializeComponent();
-            panelMain.Controls.Add(setupPage);
+            GoToPanel();
+            Forms.PanelScroll CoordsScrolling = new Forms.PanelScroll(setupPage.panel1, false);
+            Application.AddMessageFilter(CoordsScrolling);
             buttonBack.Visible = false;
         }
 
@@ -48,12 +50,15 @@ namespace SOC.UI
         }
         private void GoToPanel()
         {
+            
+
             switch (panelNum)
             {
                 case 0:
                     buttonBack.Visible = false;
                     panelMain.Controls.Clear();
                     panelMain.Controls.Add(setupPage);
+                    setupPage.EnableScrolling();
                     buttonNext.Text = "Next >>";
                     this.Width = 1120;
                     break;
@@ -61,6 +66,7 @@ namespace SOC.UI
                 case 1:
                     if (isFilled())
                     {
+                        setupPage.DisableScrolling();
                         List<Coordinates> HostageCoords = BuildCoordinatesList(setupPage.textBoxHosCoords.Text);
                         List<Coordinates> VehicleCoords = BuildCoordinatesList(setupPage.textBoxVehCoords.Text);
                         List<Coordinates> ItemCoords = BuildCoordinatesList(setupPage.textBoxItemCoords.Text);
@@ -68,7 +74,6 @@ namespace SOC.UI
                         List<Coordinates> activeItemCoords = BuildCoordinatesList(setupPage.textBox_ActiveItem.Text);
                         List<Coordinates> AnimalCoords = BuildCoordinatesList(setupPage.textBox_Animal.Text);
                         detailPage = new Details(HostageCoords, VehicleCoords, ItemCoords, ModelCoords, activeItemCoords, AnimalCoords);
-
                         buttonBack.Visible = true;
                         panelMain.Controls.Clear();
                         panelMain.Controls.Add(detailPage);

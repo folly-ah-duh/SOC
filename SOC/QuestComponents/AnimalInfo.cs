@@ -23,6 +23,15 @@ namespace SOC.QuestComponents
             "Bear",
         };
 
+        public static string[] AnimalTypes = new string[] {
+            "TppGoat",
+            "TppNubian",
+            "TppZebra",
+            "TppWolf",
+            "TppJackal",
+            "TppBear"
+        };
+
         public static string getAnimalCategory(string animalName)
         {
             switch(animalName) {
@@ -49,8 +58,7 @@ namespace SOC.QuestComponents
                 case "Sheep":
                 case "Cashmere_Goat":
                     return "TppGoat";
-                
-
+                    
                 case "Boer_Goat":
                 case "Nubian":
                     return "TppNubian";

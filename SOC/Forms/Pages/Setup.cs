@@ -10,7 +10,7 @@ namespace SOC.UI
     public partial class Setup : UserControl
     {
         public static string NotifsListPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "assets//UpdateNotifsList.txt");
-
+        Forms.PanelScroll CoordsScrolling;
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern Int32 SendMessage(IntPtr hWnd, int msg, int wParam, [MarshalAs(UnmanagedType.LPWStr)]string lParam);
         internal static string[] afghLoadAreas = new string[] { "tent", "field", "ruins", "waterway", "cliffTown", "commFacility", "sovietBase", "fort", "citadel" };
@@ -27,6 +27,7 @@ namespace SOC.UI
         public Setup()
         {
             InitializeComponent();
+            CoordsScrolling = new Forms.PanelScroll(this.panel1, false);
             SendMessage(textBoxQuestNum.Handle, EM_SETCUEBANNER, 1, "30100");
             SendMessage(textBoxFPKName.Handle, EM_SETCUEBANNER, 1, "Example_Quest_Name");
             SendMessage(textBoxQuestTitle.Handle, EM_SETCUEBANNER, 1, "Example Quest Title Text");
@@ -93,6 +94,16 @@ namespace SOC.UI
             customLang.ShowDialog();
             refreshNotifsList();
         }
+
+        public void EnableScrolling()
+        {
+            Application.AddMessageFilter(CoordsScrolling);
+        }
+        public void DisableScrolling()
+        {
+            Application.RemoveMessageFilter(CoordsScrolling);
+        }
+
         
     }
 }

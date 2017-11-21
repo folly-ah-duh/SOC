@@ -139,7 +139,7 @@ namespace SOC.Classes
             string animalhistory = "";
             foreach (AnimalDetail animalDetail in questDetails.animalDetails)
             {
-                string animalName = animalDetail.a_comboBox_animal.Text, typeName = AnimalInfo.getAnimalType(animalName), animalCategory = AnimalInfo.getAnimalCategory(animalName);
+                string animalName = animalDetail.a_comboBox_animal.Text, typeName = animalDetail.a_comboBox_TypeID.Text, animalCategory = AnimalInfo.getAnimalCategory(animalName);
 
                 if (!animalhistory.Contains(animalName))
                 {

@@ -1047,7 +1047,7 @@ namespace SOC.UI
 
         
         public GroupBox a_groupBox_main;
-        public ComboBox a_comboBox_targetcount;
+        public ComboBox a_comboBox_TypeID;
         public Label a_label_targetcount;
         public ComboBox a_comboBox_count;
         public Label a_label_count;
@@ -1072,7 +1072,7 @@ namespace SOC.UI
         {
 
             this.a_groupBox_main = new System.Windows.Forms.GroupBox();
-            this.a_comboBox_targetcount = new System.Windows.Forms.ComboBox();
+            this.a_comboBox_TypeID = new System.Windows.Forms.ComboBox();
             this.a_label_targetcount = new System.Windows.Forms.Label();
             this.a_comboBox_count = new System.Windows.Forms.ComboBox();
             this.a_label_count = new System.Windows.Forms.Label();
@@ -1091,7 +1091,7 @@ namespace SOC.UI
             this.a_groupBox_main.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.a_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
-            this.a_groupBox_main.Controls.Add(this.a_comboBox_targetcount);
+            this.a_groupBox_main.Controls.Add(this.a_comboBox_TypeID);
             this.a_groupBox_main.Controls.Add(this.a_label_targetcount);
             this.a_groupBox_main.Controls.Add(this.a_comboBox_count);
             this.a_groupBox_main.Controls.Add(this.a_label_count);
@@ -1114,17 +1114,16 @@ namespace SOC.UI
             // 
             // a_comboBox_targetcount
             // 
-            this.a_comboBox_targetcount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.a_comboBox_TypeID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.a_comboBox_targetcount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.a_comboBox_targetcount.FormattingEnabled = true;
-            this.a_comboBox_targetcount.Location = new System.Drawing.Point(193, 137);
-            this.a_comboBox_targetcount.Name = "a_comboBox_targetcount";
-            this.a_comboBox_targetcount.Size = new System.Drawing.Size(43, 21);
-            this.a_comboBox_targetcount.TabIndex = 13;
-            a_comboBox_targetcount.Items.AddRange(new string[] { "1", "2", "3", "4", "5", "6" });
-            a_comboBox_targetcount.Text = "1";
-            a_comboBox_targetcount.Enabled = false;
+            this.a_comboBox_TypeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.a_comboBox_TypeID.FormattingEnabled = true;
+            this.a_comboBox_TypeID.Location = new System.Drawing.Point(173, 137);
+            this.a_comboBox_TypeID.Name = "a_comboBox_TypeID";
+            this.a_comboBox_TypeID.Size = new System.Drawing.Size(63, 21);
+            this.a_comboBox_TypeID.TabIndex = 13;
+            a_comboBox_TypeID.Items.AddRange(new string[] { "TppGoat", "TppNubian" });
+            a_comboBox_TypeID.Text = "TppGoat";
             // 
             // a_label_targetcount
             // 
@@ -1133,7 +1132,7 @@ namespace SOC.UI
             this.a_label_targetcount.Name = "a_label_targetcount";
             this.a_label_targetcount.Size = new System.Drawing.Size(72, 13);
             this.a_label_targetcount.TabIndex = 12;
-            this.a_label_targetcount.Text = "Target Count:";
+            this.a_label_targetcount.Text = "Type ID:";
             // 
             // a_comboBox_count
             // 
@@ -1147,7 +1146,6 @@ namespace SOC.UI
             this.a_comboBox_count.TabIndex = 11;
             a_comboBox_count.Items.AddRange( new string[] { "1", "2", "3", "4", "5", "6"});
             a_comboBox_count.Text = "1";
-            a_comboBox_count.SelectedIndexChanged += new System.EventHandler(this.a_comboBox_count_selectedindexchanged);
             // 
             // a_label_count
             // 
@@ -1189,7 +1187,6 @@ namespace SOC.UI
             this.a_checkBox_isTarget.Size = new System.Drawing.Size(15, 14);
             this.a_checkBox_isTarget.TabIndex = 7;
             this.a_checkBox_isTarget.UseVisualStyleBackColor = true;
-            this.a_checkBox_isTarget.CheckedChanged += new System.EventHandler(this.a_checkBox_isTarget_CheckedChanged);
             // 
             // a_label_isTarget
             // 
@@ -1267,58 +1264,71 @@ namespace SOC.UI
             this.a_groupBox_main.ResumeLayout(false);
             this.a_groupBox_main.PerformLayout();
         }
-
+        /*
         private void a_comboBox_count_selectedindexchanged(object sender, EventArgs e)
         {
-            a_comboBox_targetcount.Items.Clear();
+            a_comboBox_TypeID.Items.Clear();
             for (int i = 1; i <= (Int32.Parse(a_comboBox_count.Text)); i++)
             {
-                a_comboBox_targetcount.Items.Add(i.ToString());
+                a_comboBox_TypeID.Items.Add(i.ToString());
             }
-            a_comboBox_targetcount.Text = "1";
+            a_comboBox_TypeID.Text = "1";
         }
-
+        
         private void a_checkBox_isTarget_CheckedChanged(object sender, EventArgs e)
         {
             if (a_checkBox_isTarget.Checked)
             {
-                a_comboBox_targetcount.Enabled = true;
+                a_comboBox_TypeID.Enabled = true;
             } else
             {
-                a_comboBox_targetcount.Enabled = false;
+                a_comboBox_TypeID.Enabled = false;
             }
         }
-
+        */
         private void a_comboBox_animal_selectedIndexChanged(object sender, EventArgs e)
         {
             a_comboBox_count.Items.Clear();
-            a_comboBox_targetcount.Items.Clear();
+            a_comboBox_TypeID.Items.Clear();
 
             switch (a_comboBox_animal.Text)
             {
                 case "Sheep":
                 case "Cashmere_Goat":
+                    a_comboBox_count.Items.AddRange(new string[] { "1", "2", "3", "4", "5", "6" });
+                    a_comboBox_TypeID.Items.AddRange(new string[] {"TppGoat", "TppNubian" });
+                    break;
                 case "Boer_Goat":
                 case "Nubian":
+                    a_comboBox_count.Items.AddRange(new string[] { "1", "2", "3", "4", "5", "6" });
+                    a_comboBox_TypeID.Items.AddRange(new string[] { "TppGoat", "TppNubian"});
+                    break;
+
                 case "Donkey":
                 case "Zebra":
                 case "Okapi":
                     a_comboBox_count.Items.AddRange(new string[] { "1", "2", "3", "4", "5", "6" });
+                    a_comboBox_TypeID.Items.AddRange(new string[] { "TppZebra" });
                     break;
 
                 case "Wolf":
+                    a_comboBox_count.Items.AddRange(new string[] { "1", "2", "3", "4" });
+                    a_comboBox_TypeID.Items.AddRange(new string[] {"TppWolf", "TppJackal"});
+                    break;
+
                 case "Jackal":
                 case "African_Wild_Dog":
                     a_comboBox_count.Items.AddRange(new string[] { "1", "2", "3", "4" });
+                    a_comboBox_TypeID.Items.AddRange(new string[] { "TppWolf", "TppJackal",});
                     break;
 
                 case "Bear":
                     a_comboBox_count.Items.AddRange(new string[] { "1"});
+                    a_comboBox_TypeID.Items.AddRange(new string[] { "TppBear" });
                     break;
             }
-            a_comboBox_targetcount.Items.AddRange(new string[] { "1" });
+            a_comboBox_TypeID.Text = QuestComponents.AnimalInfo.getAnimalType(a_comboBox_animal.Text);
             a_comboBox_count.Text = "1";
-            a_comboBox_targetcount.Text = "1"; 
         }
     }
 
@@ -1407,11 +1417,13 @@ namespace SOC.UI
             // 
             // panelAcItDet
             // 
+            this.panelAcItDet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelAcItDet.AutoScroll = true;
-            this.panelAcItDet.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelAcItDet.Location = new System.Drawing.Point(3, 16);
             this.panelAcItDet.Name = "panelAcItDet";
-            this.panelAcItDet.Size = new System.Drawing.Size(258, 408);
+            this.panelAcItDet.Size = new System.Drawing.Size(258, 405);
             this.panelAcItDet.TabIndex = 0;
             // 
             // groupAnimalDet
@@ -1428,11 +1440,13 @@ namespace SOC.UI
             // 
             // panelAnimalDet
             // 
+            this.panelAnimalDet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelAnimalDet.AutoScroll = true;
-            this.panelAnimalDet.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelAnimalDet.Location = new System.Drawing.Point(3, 16);
             this.panelAnimalDet.Name = "panelAnimalDet";
-            this.panelAnimalDet.Size = new System.Drawing.Size(258, 408);
+            this.panelAnimalDet.Size = new System.Drawing.Size(258, 405);
             this.panelAnimalDet.TabIndex = 0;
             // 
             // groupVehDet
@@ -1449,11 +1463,13 @@ namespace SOC.UI
             // 
             // panelVehDet
             // 
+            this.panelVehDet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelVehDet.AutoScroll = true;
-            this.panelVehDet.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelVehDet.Location = new System.Drawing.Point(3, 16);
             this.panelVehDet.Name = "panelVehDet";
-            this.panelVehDet.Size = new System.Drawing.Size(258, 408);
+            this.panelVehDet.Size = new System.Drawing.Size(258, 405);
             this.panelVehDet.TabIndex = 0;
             // 
             // groupStMdDet
@@ -1470,11 +1486,13 @@ namespace SOC.UI
             // 
             // panelStMdDet
             // 
+            this.panelStMdDet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelStMdDet.AutoScroll = true;
-            this.panelStMdDet.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelStMdDet.Location = new System.Drawing.Point(3, 16);
             this.panelStMdDet.Name = "panelStMdDet";
-            this.panelStMdDet.Size = new System.Drawing.Size(258, 408);
+            this.panelStMdDet.Size = new System.Drawing.Size(258, 405);
             this.panelStMdDet.TabIndex = 0;
             // 
             // groupItemDet
@@ -1491,11 +1509,13 @@ namespace SOC.UI
             // 
             // panelItemDet
             // 
+            this.panelItemDet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelItemDet.AutoScroll = true;
-            this.panelItemDet.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelItemDet.Location = new System.Drawing.Point(3, 16);
             this.panelItemDet.Name = "panelItemDet";
-            this.panelItemDet.Size = new System.Drawing.Size(258, 408);
+            this.panelItemDet.Size = new System.Drawing.Size(258, 405);
             this.panelItemDet.TabIndex = 0;
             // 
             // groupHosDet
@@ -1512,15 +1532,17 @@ namespace SOC.UI
             // 
             // panelHosDet
             // 
+            this.panelHosDet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelHosDet.AutoScroll = true;
             this.panelHosDet.Controls.Add(this.h_label_intrgt);
             this.panelHosDet.Controls.Add(this.h_checkBox_intrgt);
             this.panelHosDet.Controls.Add(this.comboBox_Body);
             this.panelHosDet.Controls.Add(this.label_Body);
-            this.panelHosDet.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelHosDet.Location = new System.Drawing.Point(3, 16);
             this.panelHosDet.Name = "panelHosDet";
-            this.panelHosDet.Size = new System.Drawing.Size(258, 408);
+            this.panelHosDet.Size = new System.Drawing.Size(258, 405);
             this.panelHosDet.TabIndex = 0;
             // 
             // h_label_intrgt
@@ -1589,13 +1611,11 @@ namespace SOC.UI
 
         private System.Windows.Forms.Panel panelDetails;
         public System.Windows.Forms.GroupBox groupHosDet;
-        private System.Windows.Forms.Panel panelHosDet;
         private System.Windows.Forms.Label label_Body;
         public System.Windows.Forms.ComboBox comboBox_Body;
         public System.Windows.Forms.GroupBox groupItemDet;
         private System.Windows.Forms.Panel panelItemDet;
         public System.Windows.Forms.GroupBox groupVehDet;
-        private System.Windows.Forms.Panel panelVehDet;
         public System.Windows.Forms.GroupBox groupStMdDet;
         private System.Windows.Forms.Panel panelStMdDet;
         private Panel panelAnimalDet;
@@ -1604,6 +1624,7 @@ namespace SOC.UI
         public GroupBox groupAcItDet;
         private Panel panelAcItDet;
         public GroupBox groupAnimalDet;
-
+        public Panel panelHosDet;
+        public Panel panelVehDet;
     }
 }

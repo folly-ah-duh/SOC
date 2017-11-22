@@ -475,6 +475,7 @@
             this.textBox_ActiveItem.Name = "textBox_ActiveItem";
             this.textBox_ActiveItem.Size = new System.Drawing.Size(540, 75);
             this.textBox_ActiveItem.TabIndex = 23;
+            this.textBox_ActiveItem.TextChanged += new System.EventHandler(this.textBoxItemCoords_TextChanged);
             // 
             // label21
             // 
@@ -494,6 +495,7 @@
             this.textBoxItemCoords.Name = "textBoxItemCoords";
             this.textBoxItemCoords.Size = new System.Drawing.Size(542, 80);
             this.textBoxItemCoords.TabIndex = 19;
+            this.textBoxItemCoords.TextChanged += new System.EventHandler(this.textBoxItemCoords_TextChanged);
             // 
             // textBoxStMdCoords
             // 

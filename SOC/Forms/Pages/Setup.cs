@@ -104,6 +104,38 @@ namespace SOC.UI
             Application.RemoveMessageFilter(CoordsScrolling);
         }
 
-        
+        private void textBoxItemCoords_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBoxItemCoords.Text))
+            {
+                textBox_ActiveItem.Enabled = true;
+                textBox_ActiveItem.BackColor = System.Drawing.Color.Silver;
+                label21.Text = "Active Item Locations: (X, Y, Z, Y-Axis Rotation)";
+                label21.ForeColor = System.Drawing.Color.Black;
+            } else
+            {
+                textBox_ActiveItem.Enabled = false;
+                textBox_ActiveItem.BackColor = System.Drawing.Color.DarkGray;
+                label21.Text = "Active Item Locations: (X, Y, Z, Y-Axis Rotation) [Disabled When Items Exist]";
+                label21.ForeColor = System.Drawing.Color.Goldenrod;
+                textBox_ActiveItem.Clear();
+            }
+
+            if (string.IsNullOrEmpty(textBox_ActiveItem.Text))
+            {
+                textBoxItemCoords.Enabled = true;
+                textBoxItemCoords.BackColor = System.Drawing.Color.Silver;
+                label17.Text = "Item Locations: (X, Y, Z, Y-Axis Rotation)";
+                label17.ForeColor = System.Drawing.Color.Black;
+            }
+            else
+            {
+                textBoxItemCoords.Enabled = false;
+                textBoxItemCoords.BackColor = System.Drawing.Color.DarkGray;
+                label17.Text = "Item Locations: (X, Y, Z, Y-Axis Rotation) [Disabled When Active Items Exist]";
+                label17.ForeColor = System.Drawing.Color.Goldenrod;
+                textBoxItemCoords.Clear();
+            }
+        }
     }
 }

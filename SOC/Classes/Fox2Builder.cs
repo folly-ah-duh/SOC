@@ -127,15 +127,6 @@ namespace SOC.Classes
                 }
             }
 
-            foreach (ActiveItemDetail activeItemDetail in questDetails.activeItemDetails)
-            {
-                entityList.Add(new QuestEntity(activeItemDetail.ai_groupBox_main.Text, unassignedAddress, entityClass.GameObjectLocator, "TppPlacedSystem"));
-                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity_ActiveItem, new Coordinates(activeItemDetail.ai_textBox_xcoord.Text, activeItemDetail.ai_textBox_ycoord.Text, activeItemDetail.ai_textBox_zcoord.Text), new RotationQuat(activeItemDetail.ai_textBox_xrot.Text, activeItemDetail.ai_textBox_yrot.Text, activeItemDetail.ai_textBox_zrot.Text, activeItemDetail.ai_textBox_wrot.Text)));
-
-                string equipID = EquipIDLookup(activeItemDetail.ai_comboBox_activeitem.Text);
-
-                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppPlacedLocatorParameter, equipID));
-            }
             string animalhistory = "";
             foreach (AnimalDetail animalDetail in questDetails.animalDetails)
             {
@@ -208,10 +199,10 @@ namespace SOC.Classes
             classList.Add("    <class name=\"Data\" super=\"Entity\" version=\"2\" />");
             classList.Add("    <class name=\"DataSet\" super=\"\" version=\"0\" />");
             classList.Add("    <class name=\"ScriptBlockScript\" super=\"\" version=\"0\" />");
-            if (questDetails.hostageDetails.Count + questDetails.vehicleDetails.Count + questDetails.modelDetails.Count + questDetails.animalDetails.Count + questDetails.activeItemDetails.Count > 0)
+            if (questDetails.hostageDetails.Count + questDetails.vehicleDetails.Count + questDetails.modelDetails.Count + questDetails.animalDetails.Count > 0)
             {
                 classList.Add("    <class name=\"TransformEntity\" super=\"\" version=\"0\" />");
-                if (questDetails.hostageDetails.Count + questDetails.vehicleDetails.Count + questDetails.animalDetails.Count + questDetails.activeItemDetails.Count > 0)
+                if (questDetails.hostageDetails.Count + questDetails.vehicleDetails.Count + questDetails.animalDetails.Count > 0)
                 {
                     classList.Add("    <class name=\"GameObjectLocator\" super=\"\" version=\"2\" />");
                     if (questDetails.hostageDetails.Count + questDetails.animalDetails.Count > 0)
@@ -233,9 +224,6 @@ namespace SOC.Classes
             if (questDetails.modelDetails.Count > 0)
             {
                 classList.Add("    <class name=\"StaticModel\" super=\"\" version=\"9\" />");
-            }
-            if (questDetails.activeItemDetails.Count > 0) {
-                classList.Add("    <class name=\"TppPlacedLocatorParameter\" super=\"\" version=\"0\" />");
             }
             if (questDetails.animalDetails.Count > 0)
             {
@@ -617,20 +605,6 @@ namespace SOC.Classes
                             questFox2.WriteLine("      <dynamicProperties />");
                             questFox2.WriteLine("    </entity>");
                             break;
-
-                        case entityClass.TppPlacedLocatorParameter:
-                            questFox2.WriteLine(string.Format("    <entity class=\"TppPlacedLocatorParameter\" classVersion=\"0\" addr=\"0x{0:X8}\" unknown1=\"32\" unknown2=\"5408\">", entity.hexAddress));
-                            questFox2.WriteLine("      <staticProperties>");
-                            questFox2.WriteLine("        <property name=\"owner\" type=\"EntityHandle\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>0x{0:X8}</value>", entityList[i - 2].hexAddress));
-                            questFox2.WriteLine("        </property>");
-                            questFox2.WriteLine("        <property name=\"equipIdStrCode32\" type=\"uint32\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info1));
-                            questFox2.WriteLine("        </property>");
-                            questFox2.WriteLine("      </staticProperties>");
-                            questFox2.WriteLine("      <dynamicProperties />");
-                            questFox2.WriteLine("    </entity>");
-                            break;
                             
                         case entityClass.TppAnimalParameter:
                             questFox2.WriteLine(string.Format("	<entity class=\"TppAnimalParameter\" classVersion=\"1\" addr=\"0x{0:X8}\" unknown1=\"168\" unknown2=\"54088\">", entity.hexAddress));
@@ -808,7 +782,7 @@ namespace SOC.Classes
             foreach (ItemDetail itemDetail in questDetails.itemDetails)
             {
 
-                entityList.Add(new QuestEntity(itemDetail.i_groupBox_main.Text, unassignedAddress, entityClass.GameObjectLocator_Item, unnassignedObject, unnassignedObject));
+                entityList.Add(new QuestEntity(itemDetail.i_groupBox_main.Text, unassignedAddress, entityClass.GameObjectLocator_Item, "TppPickableSystem"));
                 entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity_Item, new Coordinates(itemDetail.i_textBox_xcoord.Text, itemDetail.i_textBox_ycoord.Text, itemDetail.i_textBox_zcoord.Text), new RotationQuat(itemDetail.i_textBox_xrot.Text, itemDetail.i_textBox_yrot.Text, itemDetail.i_textBox_zrot.Text, itemDetail.i_textBox_wrot.Text)));
 
                 boxed = "0";
@@ -820,6 +794,16 @@ namespace SOC.Classes
                 EquipID = EquipIDLookup(itemDetail.i_comboBox_item.Text);
 
                 entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppPickableLocatorParameter, EquipID, itemDetail.i_comboBox_count.Text, boxed));
+            }
+
+            foreach (ActiveItemDetail activeItemDetail in questDetails.activeItemDetails)
+            {
+                entityList.Add(new QuestEntity(activeItemDetail.ai_groupBox_main.Text, unassignedAddress, entityClass.GameObjectLocator, "TppPlacedSystem"));
+                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity_ActiveItem, new Coordinates(activeItemDetail.ai_textBox_xcoord.Text, activeItemDetail.ai_textBox_ycoord.Text, activeItemDetail.ai_textBox_zcoord.Text), new RotationQuat(activeItemDetail.ai_textBox_xrot.Text, activeItemDetail.ai_textBox_yrot.Text, activeItemDetail.ai_textBox_zrot.Text, activeItemDetail.ai_textBox_wrot.Text)));
+
+                string equipID = EquipIDLookup(activeItemDetail.ai_comboBox_activeitem.Text);
+
+                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppPlacedLocatorParameter, equipID));
             }
 
             entityList.Add(new QuestEntity("TexturePackLoadConditioner0000", unassignedAddress, entityClass.TexturePackLoadConditioner, unnassignedObject, unnassignedObject));
@@ -834,11 +818,18 @@ namespace SOC.Classes
             classList.Add("    <class name=\"Entity\" super=\"\" version=\"2\" />");
             classList.Add("    <class name=\"Data\" super=\"Entity\" version=\"2\" />");
             classList.Add("    <class name=\"DataSet\" super=\"\" version=\"0\" />");
-            if (questDetails.itemDetails.Count > 0)
+            if (questDetails.itemDetails.Count + questDetails.activeItemDetails.Count > 0)
             {
                 classList.Add("    <class name=\"TransformEntity\" super=\"\" version=\"0\" />");
                 classList.Add("    <class name=\"GameObjectLocator\" super=\"\" version=\"2\" />");
+            }
+            if (questDetails.itemDetails.Count > 0)
+            {
                 classList.Add("    <class name=\"TppPickableLocatorParameter\" super=\"\" version=\"0\" />");
+            }
+            if (questDetails.activeItemDetails.Count > 0)
+            {
+                classList.Add("    <class name=\"TppPlacedLocatorParameter\" super=\"\" version=\"0\" />");
             }
             classList.Add("    <class name=\"TexturePackLoadConditioner\" super=\"\" version=\"0\" />");
 
@@ -896,6 +887,7 @@ namespace SOC.Classes
                             questFox2.WriteLine("    </entity>");
                             break;
 
+                        case entityClass.GameObjectLocator:
                         case entityClass.GameObjectLocator_Item:
                             questFox2.WriteLine(string.Format("    <entity class=\"GameObjectLocator\" classVersion=\"2\" addr=\"0x{0:X8}\" unknown1=\"272\" unknown2=\"29247\">", entity.hexAddress));
                             questFox2.WriteLine("      <staticProperties>");
@@ -922,7 +914,7 @@ namespace SOC.Classes
                             questFox2.WriteLine("          <value>7</value>");
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"typeName\" type=\"String\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine("          <value>TppPickableSystem</value>");
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info1));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"groupId\" type=\"uint32\" container=\"StaticArray\" arraySize=\"1\">");
                             questFox2.WriteLine("          <value>0</value>");
@@ -935,6 +927,7 @@ namespace SOC.Classes
                             questFox2.WriteLine("    </entity>");
                             break;
 
+                        case entityClass.TransformEntity_ActiveItem:
                         case entityClass.TransformEntity_Item:
                             questFox2.WriteLine(string.Format("    <entity class=\"TransformEntity\" classVersion=\"0\" addr=\"0x{0:X8}\" unknown1=\"80\" unknown2=\"29250\">", entity.hexAddress));
                             questFox2.WriteLine("      <staticProperties>");
@@ -977,6 +970,20 @@ namespace SOC.Classes
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"reserved\" type=\"uint16\" container=\"StaticArray\" arraySize=\"1\">");
                             questFox2.WriteLine("          <value>0</value>");
+                            questFox2.WriteLine("        </property>");
+                            questFox2.WriteLine("      </staticProperties>");
+                            questFox2.WriteLine("      <dynamicProperties />");
+                            questFox2.WriteLine("    </entity>");
+                            break;
+
+                        case entityClass.TppPlacedLocatorParameter:
+                            questFox2.WriteLine(string.Format("    <entity class=\"TppPlacedLocatorParameter\" classVersion=\"0\" addr=\"0x{0:X8}\" unknown1=\"32\" unknown2=\"5408\">", entity.hexAddress));
+                            questFox2.WriteLine("      <staticProperties>");
+                            questFox2.WriteLine("        <property name=\"owner\" type=\"EntityHandle\" container=\"StaticArray\" arraySize=\"1\">");
+                            questFox2.WriteLine(string.Format("          <value>0x{0:X8}</value>", entityList[i - 2].hexAddress));
+                            questFox2.WriteLine("        </property>");
+                            questFox2.WriteLine("        <property name=\"equipIdStrCode32\" type=\"uint32\" container=\"StaticArray\" arraySize=\"1\">");
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info1));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("      </staticProperties>");
                             questFox2.WriteLine("      <dynamicProperties />");

@@ -98,7 +98,7 @@ namespace SOC.UI
                     LuaBuilder.WriteDefinitionLua(definitionDetails, questDetails);
                     LuaBuilder.WriteMainQuestLua(definitionDetails, questDetails);
 
-                    if (questDetails.itemDetails.Count() > 0)
+                    if (questDetails.itemDetails.Count() + questDetails.activeItemDetails.Count() > 0)
                         Fox2Builder.WriteItemFox2(definitionDetails, questDetails);
 
                     Fox2Builder.WriteQuestFox2(definitionDetails, questDetails);

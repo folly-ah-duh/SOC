@@ -359,6 +359,7 @@
             this.textBoxQuestNum.Name = "textBoxQuestNum";
             this.textBoxQuestNum.Size = new System.Drawing.Size(134, 20);
             this.textBoxQuestNum.TabIndex = 2;
+            this.textBoxQuestNum.Leave += new System.EventHandler(this.textBoxQuestNum_Leave);
             // 
             // comboBoxRadius
             // 

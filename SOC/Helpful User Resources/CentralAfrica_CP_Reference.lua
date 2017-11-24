@@ -128,6 +128,70 @@ mafr_outland_cp = { -- bwala ya masa
     "rt_outland_r_0019",
   },
 
+  --[[
+
+rt_outland_d_0008 roadside
+rt_outland_d_0004 south housing
+rt_outland_d_0005 south housing
+rt_outland_d_0009 centraal canoopy
+rt_outland_d_0010 north buildiinngs lower to mid level
+rt_outland_d_0006
+rt_outland_n_0005 tiny patrol offside road
+rt_outland_n_0010 by white mamba's prisoner building, not patrolling
+rt_outland_d_0011 north buildings mid level
+rt_outland_n_0011
+rt_outland_c_0000 thorough patrols through east side of the camp, crosses road to scout edge of north buildings
+rt_outland_c_0001 patrols basin, up to north buildings mid-level, through the buildings and back down to basin
+rt_outland_c_0002 cuts through bog, stops where children were practicing, and back to west building by water
+rt_outland_c_0003 circles around boat
+rt_outland_c_0004 patrols up the hill towards the south jungle and back down 
+rt_outland_c_0005 thorough patrol around perimeter of south buildings
+rt_outland_c_0006 ventures far beyond the northmost building into the nearby woods and circles around
+rt_outland_r_0019 boat, far side
+rt_outland_r_0011 boat, under canopy in front of hole
+rt_outland_r_0002 boat, behind rts_s10120_n_0002
+rt_outland_r_0005 southern perimeter looking toward boat, anti-cheap
+rt_outland_r_0010 central canopy looking towards r0005
+rt_outland_r_0009 central canopy, between 10 and 7 middle looking towards outside
+rt_outland_r_0007 central canopy looking outside
+rt_outland_r_0013 north buildings mid level, in the corner. anti-cheap
+rt_outland_r_0014 north buildings mid level, by white mamba prs building
+rt_outland_r_0017 northmost buildings
+rt_outland_r_0016 
+rt_outland_r_0012 north lower buildings overlooking bog
+
+
+story routes from the White Mamba mission -- s10120_area.frt
+
+rts_s10120_d_0010 north buildings, lower level
+rts_s10120_d_0003 noorth buildings mid level
+rts_s10120_d_0008
+rts_s10120_d_0005
+rts_s10120_d_0004
+rts_s10120_d_0002 boat patrol
+rts_s10120_n_0005 north buildings basin to lower level
+rts_s10120_n_0007 north buildings lower level
+rts_s10120_n_0006
+rts_s10120_d_0000 west building by the water
+rts_s10120_n_0000 
+rts_s10120_d_0001 boat ramp overlooking bog
+rts_s10120_n_0002 above 0001
+rts_s10120_c_0005 similar to rts 0006
+rts_s10120_c_0002 patrols through south buildings
+rts_s10120_c_0001 patrols along the roadside from southmost entrance to mid-east side
+rts_s10120_s_0002 sleeps in west building by the water
+rts_s10120_h_0001 holds outside of bog, near the middle of the area
+rts_s10120_h_0002 holds by firepit on east side of the camp
+rts_s10120_s_0003 northmost buildings sleepin
+rts_s10120_h_0003 watches north entrance to camp
+rts_s10120_c_0006 thorough patrol through north buildings, all levels
+rts_s10120_c_0005 similar to rts 0006
+rts_s10120_c_0003 circles and cuts through boat
+rts_s10120_c_0002 patrols through south buildings
+rts_s10120_c_0001 patrols along the roadside from southmost entrance to mid-east side
+rts_s10120_c_0000 similar to rt 0000 but doesn't cross over to north buildings
+]]
+  
 }
 
 mafr_flowStation_cp = { -- mfinda oilfield
@@ -223,6 +287,70 @@ mafr_flowStation_cp = { -- mfinda oilfield
       "rt_flowStation_lout_B02",
     },
   },
+  --[[
+	
+	rt_flowStation_d_0000 overwatches tank area from above the ramp, goes up stairs to patrol and overwatch the central square
+	rt_flowStation_d_0001 patrols around central square and stops inside Quiet Life room
+	rt_flowStation_d_0002 patrols central building guardrails, then walks down and walks around behind the central building to overwatch the tank area from the guardrail
+	rt_flowStation_d_0003 patrols central building upper guardrails
+	rt_flowStation_d_0004 patrols on walkway below central building guardrails and overwatches above pipe route. also stops at sandbags near bwala entrance
+	rt_flowStation_d_0005 on watchtower by AA gun
+	rt_flowStation_d_0006 patrols through center of central square, over guardrails
+	rt_flowStation_d_0007 watches kiziba entrance by sandbags, patrols back towards nearby containers within the facility
+	rt_flowStation_d_0008 patrols bwala entrance, moves from sandbags to sandbags
+	rt_flowStation_d_0009 overwatches tank area and then front area before separator area, then patrols area before separator area
+	rt_flowStation_d_0010 hangs in bwala entrance building, then patrols around perimeter of separator tank area.
+	rt_flowStation_d_0011 patrols between lower tank area across the lower bridge and up the stairs
+	rt_flowStation_n_0000 closely patrols perimeter of central building.
+	rt_flowStation_n_0001 patrols central building upper walkways
+	rt_flowStation_n_0002 patrols central building upper walkways, closer to button room window
+	rt_flowStation_n_0003 counterclockwise around the central square
+	rt_flowStation_n_0004 holds by entrance to bwala entrance building, outside door
+	rt_flowStation_n_0005 holds by AA gun during the day, using the searchlight at night.
+	rt_flowStation_n_0006 stands watch outside entrance toward kiziba
+	rt_flowStation_n_0007 hangs out in bwala entrance building, patrols through tank area similar to 0010, but patrols toward the tanks and loops back
+	rt_flowStation_c_0013 patrols perimeter of tank area, similar to c0010 but doesn't stop to overlook much.
+	rt_flowStation_c_0012 central square patrol, checks by car/toilet area
+	rt_flowStation_c_0011 checks pipe drop-down entrance, overwatches above pipe exit
+	rt_flowStation_c_0010 patrols perimeter of tank area, overwatches area before tank area
+	rt_flowStation_c_0009 searches under central square railing, searches room I didn't know existed
+	rt_flowStation_c_0008 sandbags watching kiziba entrance, crosses between the two
+	rt_flowStation_c_0007 watches bwala entrance by AA gun, moves to overwatch bwala road from below watchtower
+	rt_flowStation_c_0006 patrols area before tank area, goes down under the railing by bwala pipe entrance
+	rt_flowStation_c_0005 watches bwala entrance, searches near entrance container/power area, searches bwala entrance building
+	rt_flowStation_c_0004 patrols around central building, overwatches towards tank area twicewa
+	rt_flowStation_c_0003 patrols upper rails of center building, walks down stairs and holds to watch center square, then back up.
+	rt_flowStation_c_0002 patrols rails of central building, goes downstairs and back up. checks in on button room.
+	rt_flowStation_c_0001 central square patrols center railings, goes down to check below railings, checks in on Quiet Life room
+	rt_flowStation_c_0000 overwatches tank area from central building corner, goes up stairs and patrols central building railings
+	rt_flowStation_n_0011 holds by bwala entrance, watching entrance
+	rt_flowStation_n_0010 simple patrol around area before tank area, particularly around the entrance
+	rt_flowStation_n_0009 patrols front central building, down the stairs to the connecting bridge to tank area, below tank area, and through tank area
+	rt_flowStation_n_0008 holds in front of sleeping room
+	]]
+	
+	--[[ story routes from the Pitch Dark mission -- s10080_area.frt
+	
+	rts_flowStation_d_0000 holds before entrance to oil separator tank
+	rts_flowStation_n_0000 stopped in front of oil tanks, beside n0002
+	rts_flowStation_d_0001 patrols underneath separator tank
+	rts_flowStation_n_0001 circles below oil separator tanks
+	rts_flowStation_d_0002 circles the area before the separator tanks, stops in front.
+	rts_flowStation_n_0002 stopped in front of oil separator tank
+	rts_flowStation_d_0003 stopped in front of containers by the exit to kiziba
+	rts_flowStation_n_0003 same as d_0003, but looking towards central building
+	rts_flowStation_d_0004 patrols walkway to the control room
+	rts_flowStation_n_0004 stopped outside building with the "Quiet Life" tape playing
+	
+	
+	rts_flowStation_c_0004 ?
+	rts_flowStation_c_0003 patrol under tanks
+	rts_flowStation_c_0002 ?
+	rts_flowStation_c_0001 ?
+	rts_flowStation_c_0000 ?
+	
+	]]
+  
 
 }
 
@@ -336,6 +464,51 @@ mafr_pfCamp_cp = { -- nova braga airport
     "rt_pfCamp_r_0019",
   },
 
+    --[[
+  
+  rt_pfCamp_n_0000 south spotlight
+  rt_pfCamp_n_0001 east spotlight, hits activearea wall
+  rt_pfCamp_n_0005 rooftop patrol 
+  rt_pfCamp_n_0010 patrol half-loop through central building and down north stairs
+  rt_pfCamp_n_0004 patrols near n0010, goes in central building but not up the stairs
+  rt_pfCamp_n_0009 patrols perimeter of west sector, enters 2 buildings
+  rt_pfCamp_n_0008 patrols inner perimeter of west sector, enters other 2 buildings and central building
+  rt_pfCamp_n_0002 inside central building second floor, walks around near comms equipment
+  rt_pfCamp_n_0011 patrols inside in waiting room of second floor, walks outside to nearby building
+  rt_pfCamp_n_0003 idle by LRRP parking
+  rt_pfCamp_n_0007 east side patrol
+  rt_pfCamp_n_0006 east side patrol
+  
+  rt_pfCamp_d_0000 idle inside south watchtower
+  rt_pfCamp_d_0001 idle inside east watchtower, activearea despawn
+  rt_pfCamp_d_0003 patrols west sector, 1 building and inside the garage
+  rt_pfCamp_d_0004 patrols through west sector, central building, front of central building, north of central building and second floor of central building
+  rt_pfCamp_d_0005 idles by LRRP parking
+  rt_pfCamp_d_0008 walks back and forth in front of main building
+  rt_pfCamp_d_0007 patrols north hangar and nearby
+  rt_pfCamp_d_0002 rooftop patrol, same routhe as n0005
+  rt_pfCamp_d_0006 patrols inside waiting room of second floor walks outside to nearby building. goes up main staircase and watches waiting room's other window that rt_pfCamp_n_0011 doesn't
+  rt_pfCamp_d_0009 exact replica of n0002. lazy.
+  rt_pfCamp_d_0011 east side patrol
+  rt_pfCamp_d_0010 east side patrol
+  
+  rt_pfCamp_c_0001 south spotlight
+  rt_pfCamp_c_0003 patrol west sector, buildings beside beside garage
+  rt_pfCamp_c_0011 patrol west sector, strictly the perimeter and inside garage
+  rt_pfCamp_c_0006 idle by LRRP parking
+  rt_pfCamp_c_0009 patrols second floor of main building and rooftop
+  rt_pfCamp_c_0004 idle in front of main building
+  rt_pfCamp_c_0005 patrols first floor of main building and north hangar
+  rt_pfCamp_c_0010 patrols north hangar
+  rt_pfCamp_c_0008 patrols south hangar
+  rt_pfCamp_c_0007 patrols both rooms of building in front of central building, goes to second floor of central building and through waiting room
+  rt_pfCamp_c_0002 east side patrol
+  rt_pfCamp_c_0000 east spotlight
+  
+  rt_quest_d_0004 patrol front of central building
+  rt_quest_d_0003 patrol front of central building
+  
+  ]]
 }
 
 
@@ -1073,5 +1246,71 @@ mafr_lab_cp = { -- lufwa valley
     "rt_lab_r_0017",
     "rt_lab_r_0018",
   },
-
+ --[[ 
+ 
+ 
+ 
+ 
+ story routes from the Cursed Legacy mission -- lab_q10700.frt
+ 
+ 		routes that walk around:
+				
+			rts_lab_a_035_0022 -- entrance to mid-jungle, on upper crust
+			rts_lab_a_025_0021 -- entrance to mid-jungle, patrolling the backwater
+			rts_lab_a_015_0018 -- entrance to mid-jungle, peeks through entrance briefly
+			rts_lab_a_030_0020 -- late-jungle to jungle exit, walks through a small canyon on his way to the "TGS demo" tent and turns around.
+			rts_lab_a_010_0015 -- by TGS Demo tent, walks between 0021 and the bridge toward lab, but stops short of actually walking over the bridge.
+			rts_lab_a_020_0019 -- below demo tent, walks between 0020's exit and the bridge that 0008 watches over from the other side. doesn't use bridge.
+			rts_lab_a_04x_0001 -- very long route. walks the canyon similar to 0020, but then walks across bridge to boring area and comes back.
+			
+			rts_lab_c_050_0014 -- moves between rts_lab_a_040_0008 and central-boring area
+			rts_lab_c_080_0000 -- moves between middle bridge and central boring area. like rts_lab_c_050_0014
+			rts_lab_c_090_0000 -- short patrol in late-jungle area
+			rts_lab_a_090_0009 -- short patrol in mid to late jungle area. seems familiar.
+			rts_lab_a_110_0014 -- short patrol in late-jungle area, can be seen below TGS tent
+			
+		
+		stationary routes: 
+			
+			rts_lab_a_015_0009 center of jungle, smokes all the time and only moves an inch.
+			rts_lab_a_065_0020 stands beside 0009
+			rts_lab_a_025_0010 stands across from 0009, watches toward lab
+			rts_lab_a_075_0007 stands nearby 0009, but displaced a little farther than the others. watching towards waterfalls.
+			rts_lab_a_045_0018 stands a short distance from the 0009 gang, like 0007. however, he's closer to the lab. watching toward lab.
+			rts_lab_a_055_0019 stands with the 0009 gang, watching toward lab-waterfall
+			rts_lab_a_035_0021 stands under TGS demo tent. same place where the guards were holding Tan.
+			rts_lab_a_030_0014 stands close to 0021, watching toward lab and occasionally moving an inch. 
+			rts_lab_a_040_0008 watches over the middle bridge connecting the jungle to the boring area.
+			rts_lab_a_060_0015 stands in boring area, watching toward jungle. COULD BE rts_lab_a_050_0016
+			rts_lab_a_050_0016 guards the south-most bridge on the jungle-side, watches toward jungle. COULD BE rts_lab_a_060_0015
+			rts_lab_a_070_0007 same as 0015, slightly closer to south-most bridge.
+			rts_lab_a_010_0007 stands in boring area, further back from rts_lab_a_070_0007. smokes all day
+			rts_lab_a_020_0017 same as rts_lab_a_010_0007, stands slightly to the left of him.
+			
+			rts_lab_c_030_0012 TGS tent
+			rts_lab_c_035_0017 TGS tent
+			rts_lab_c_010_0008 back of boring area
+			rts_lab_c_040_0000 central boring area
+			rts_lab_c_020_0015 back of boring area
+			rts_lab_c_070_0008 barely moves. he's between rts_lab_c_050_0014 and rts_lab_c_080_0000.
+			rts_lab_c_060_0013 basically rts_lab_a_050_0016, moves a little 
+			rts_lab_c_100_0008 -- very short walk route, located just after rts_lab_c_090_0000
+			rts_lab_c_075_0008 -- very short walk in central forest
+			rts_lab_c_085_0000 -- very short walk, just below rts_lab_c_075_0008
+			rts_lab_c_095_0000 -- very short walk, located  before rts_lab_c_085_0000 closer to the jungle entrance
+			rts_lab_c_110_0011 -- very short walk late in the jungle
+			rts_lab_c_055_0001 -- central jungle gang, barely walks
+			The others are in the central jungle gang.
+			rts_lab_c_105_0008 -- paces near jungle entrance, quickly back and forth
+			rts_lab_a_105_0010 -- same as 0008, stops for longer
+			rts_lab_a_095_0009 smoking, almost completely stopped, a little further behind 0008 and 0010 -- I think I like it
+			rts_lab_a_085_0008 stopped, further behind 0009. little unnecessary
+			rts_lab_a_115_0014 slightly past the central gang. Watching towards lab. moves ever so slightly
+			rts_lab_c_115_0012 same as 0014, but gun at the ready. does not move.
+			rts_labJungle_In_0000 - 0003 all stopped beside tent. kinda pointless in this case
+			rts_lab_a_080_0008 stopped in boring area, watching towards southern bridge
+			rts_lab_a_100_0010 -- very short path, at jungle exits, watching into the jungle.
+ ]]
+ 
+ ]]
 }

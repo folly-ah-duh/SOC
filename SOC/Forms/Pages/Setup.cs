@@ -137,5 +137,24 @@ namespace SOC.UI
                 textBoxItemCoords.Clear();
             }
         }
+
+        private void textBoxQuestNum_Leave(object sender, EventArgs e)
+        {
+            int qNumInt = 0;
+            bool isvalid = false;
+
+            if (Int32.TryParse(textBoxQuestNum.Text, out qNumInt))
+            {
+                if (qNumInt >= 30103 && qNumInt <= 39009)
+                {
+                    textBoxQuestNum.Text = qNumInt.ToString();
+                    isvalid = true;
+                }
+            }
+            if (!isvalid)
+            {
+                MessageBox.Show(string.Format("Invalid Quest Number: {0} \nThe Quest Number must be an integer between 30103 and 39009", qNumInt.ToString()), "Invalid Quest Number", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
     }
 }

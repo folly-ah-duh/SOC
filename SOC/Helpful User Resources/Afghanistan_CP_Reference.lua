@@ -127,6 +127,40 @@ afgh_field_cp = { -- da shago kallai
     "rt_field_r_0015",
     "rt_field_r_0016",
   },
+  
+  --[[
+	rt_field_d_0011 northeast farmhouse
+	rt_field_d_0012 patrol road
+	rt_field_d_0013 north farmhouse
+	rt_field_d_0005 patrolling north farm
+	rt_field_d_0003 idle by central hub northeast entrance
+	rt_field_d_0004 patrol by central hub northeast entrance
+	rt_field_d_0002 idle front of central hub, beside tables under a little tarp
+	rt_field_d_0007 idle beside d_0002
+	rt_field_d_0006 patrol around and through central hub
+	rt_field_d_0010 watchtower front
+	rt_field_d_0001 patrol from front of central hub to south farmhouse, idle by central if more than 1 soldier?
+	rt_field_d_0008 south farmhouse
+	rt_field_d_0009 second floor idle under tarp
+	rt_field_d_0000 central hub in watchtower 
+	rt_field_d_0015 far west tarp entrance
+	rt_field_d_0014 far west tarp entrance
+	rt_field_n_0012 far west entrance tarp
+	rt_field_n_0011 idle far west tarp? 
+	rt_field_n_0005 patrol around farmhouses
+	rt_field_c_0011 patrol around and through central hub
+	rt_field_n_0004 full patrol around central hub
+	rt_field_c_0009 patrol far north farms
+	
+	sideop routes from the prisoner rescue sideop -- quest_q20025.frt
+	 
+	rt_quest_d_0000 patrol on top of watchtower in central hub
+	rt_quest_d_0002 idle beside north wall entrance to central hub
+	rt_quest_d_0001 second floor outside door
+	
+	]]
+  
+  
 }
 
 afgh_remnants_cp = { -- lamar khaate palace
@@ -379,6 +413,38 @@ afgh_tent_cp = { -- yakho oboo supply outpost
     "rt_tent_r_0018",
     "rt_tent_r_0019",
   },
+  
+  --[[
+rt_tent_d_0004 rampart patrol
+rt_tent_d_0005 rampart patrol
+rt_tent_d_0017 central patrol
+rt_tent_d_0013 interior patrol
+rt_tent_d_0012 interior patrol
+rt_tent_d_0002 perimeter patrol
+rt_tent_d_0003 perimeter patrol
+rt_tent_d_0009 lawn patrol
+rt_tent_d_0007 lawn watch
+rt_tent_c_0007 vigorous lawn watch
+rt_tent_c_0009 west watchtower below
+rt_tent_c_0004 searchlight
+rt_tent_c_0005 searchlight
+rt_tent_c_0008 watchtower searchlight
+rt_tent_c_0011 south entrance watch
+rt_tent_c_0010 soutch entrance watch
+rt_tent_c_0006 back entrance
+rt_tent_c_0015 north overwatch above camp.
+rt_tent_c_0016 front tower
+rt_tent_c_0017 back watchtower
+
+
+	 sideop routes from the volgin corpse retrieval sideop -- tent_q99040.frt
+	 
+rt_quest_d_0001 small stroll in central
+rt_quest_d_0000 small stroll in central
+rt_quest_d_0002 central patrol
+rt_quest_d_0003 central patrol
+]]
+  
 }
 
 afgh_village_cp = { -- da wialo kallai
@@ -1346,6 +1412,89 @@ afgh_sovietBase_cp = { -- afghanistan central base camp
     "rt_sovietBase_r_0018",
     "rt_sovietBase_r_0019",
   },
+  
+  --[[
+	rt_sovietBase_c_0000 long patrol entrance
+	rt_sovietBase_c_0001 patrol frontmid road overwatch south underpass
+	rt_sovietBase_c_0002 patrol in front of north barracks and by garage	
+
+	rt_sovietBase_c_0004 patrol front road overwatch south underpass
+	rt_sovietBase_c_0005 patrol along west side around sniper building north barracks	
+	rt_sovietBase_c_0006 patrols north west side of center barracks
+	rt_sovietBase_c_0007 patrols through garage
+	rt_sovietBase_c_0008 long patrol through base
+	rt_sovietBase_c_0009 underpass patrol
+	rt_sovietBase_c_0010 patrol around gunrange 
+	rt_sovietBase_c_0011 patrols near gunrange and center barracks
+	rt_sovietBase_c_0012 long patrol entrance
+	rt_sovietBase_c_0013 patrol grand loop around base
+	rt_sovietBase_c_0014 patrols frontmid around fork
+	rt_sovietBase_c_0015 patrol beside west building	
+	
+	rt_sovietBase_c_0017 patrols inside ruined barracks
+	rt_sovietBase_c_0018 walks beside LRRP resting tent 
+	rt_sovietBase_c_0019 before entrance to base
+	
+	rt_sovietBase_c_0018 patrols around front of ruined barracks and up the road between the ruined barracks and garage
+	
+	
+	patrols front of ruined barracks
+	
+	rt_sovietBase_d_0001 idle in box overwatching underpass/frontmid area
+	rt_sovietBase_d_0002 on building over looking exit area. typical sniper roof
+	rt_sovietBase_d_0003 idle in box at front entrance
+	rt_sovietBase_d_0003 might also be soldier idle on west side of overpass in front of maintenance platform
+	
+	rt_sovietBase_d_0005 exit watchtower
+	
+	rt_sovietBase_d_0007 idle beside garage watching toward LRRP resting tentw
+	rt_sovietBase_d_0008 at desolate tent across from underpass
+	rt_sovietBase_d_0009 patrols frontmid LZ area
+	rt_sovietBase_d_0010 patrols gunrange road and gunrange tents
+	rt_sovietBase_d_0011 patrol around central road loop
+	rt_sovietBase_d_0012 loops around front entrance. trail to desolate tent and under overpass
+	rt_sovietBase_d_0013 long loop around ruined barracks following the main roads
+	rt_sovietBase_d_0014 	idle at fork			
+	rt_sovietBase_d_0015  loosely patrol beside west building
+	rt_sovietBase_d_0016 patrol exit road loop
+	rt_sovietBase_d_0017 enters front of ruined barracks and idles 
+	
+	 
+	 rt_sovietBase_n_0000 idle entrance box watching entrance
+	 rt_sovietBase_n_0001 idle in frontmid box overlooking overpass and desolate tent
+	 rt_sovietBase_n_0002 halfloop around exit roads, cuts through typical sniper building overlooking exit area
+	 rt_sovietBase_n_0003 walks back and forth by mainenance platform west of overpass
+	 rt_sovietBase_n_0004 patrol down front road, idle at fork
+	 rt_sovietBase_n_0005 exit watchtower
+	 rt_sovietBase_n_0006 idle by LRRP resting tent
+	 rt_sovietBase_n_0007 idle across from garage overlooking north barracks
+	 rt_sovietBase_n_0008 idle at desolate tent across from underpass
+	 rt_sovietBase_n_0009 idle under ruined for doorway overwatching overpass/maintanence area
+	 rt_sovietBase_n_0010 (?)idle frontmid at fork
+	 rt_sovietBase_n_0011 (?) frontmid road holding at fork
+	 rt_sovietBase_n_0012 (?) walks around tent on north side of central barracks	
+	 rt_sovietBase_n_0013 patrol through mid LZ area
+	 rt_sovietBase_n_0014 idle at fork
+	 rt_sovietBase_n_0015 patrol beside west building
+	 rt_sovietBase_n_0016 patrols exit road by armory
+	 rt_sovietBase_n_0017 idles in doorway of ruined barracks overwatching garage
+	 rt_sovietBase_n_0018 patrol outside front of garage
+	 rt_sovietBase_n_0019 outside front entance
+	 
+	 rt_sovietBase_snp_0002c watchtower before entrance
+	 rt_sovietBase_snp_0001c no idea, can't find him
+	 rt_sovietBase_snp_0000c on ruined building?
+	 
+	 rt_quest_d_0000
+	 rt_quest_c_0000 patrol
+	 rt_quest_d_0001
+	 rt_quest_c_0001
+	 rt_quest_c_0005 patrol
+	 rt_quest_c_0006
+	 
+	]]
+  
+  
 }
 
 afgh_citadel_cp = { -- okb0

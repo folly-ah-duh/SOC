@@ -902,7 +902,7 @@ namespace SOC.QuestComponents
 
             public DefinitionDetails(string fpk, string quest, int locID, object loada, Coordinates c, string rad, string cat, string rew, int prog, string type, string CP, string qtitle, string qdesc)
             {
-                FpkName = fpk;
+                FpkName = fpk.Replace(" ","_");
                 QuestNum = quest;
                 locationID = locID;
                 loadArea = loada;

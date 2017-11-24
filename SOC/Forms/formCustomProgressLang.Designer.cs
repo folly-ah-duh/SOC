@@ -42,6 +42,7 @@
             this.textBoxLangId.Name = "textBoxLangId";
             this.textBoxLangId.Size = new System.Drawing.Size(312, 20);
             this.textBoxLangId.TabIndex = 0;
+            this.textBoxLangId.Leave += new System.EventHandler(this.textBoxLangId_Leave);
             // 
             // textBoxLangValue
             // 

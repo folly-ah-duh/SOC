@@ -223,6 +223,7 @@
             this.textBoxFPKName.Name = "textBoxFPKName";
             this.textBoxFPKName.Size = new System.Drawing.Size(153, 20);
             this.textBoxFPKName.TabIndex = 1;
+            this.textBoxFPKName.Leave += new System.EventHandler(this.textBoxFPKName_Leave);
             // 
             // label12
             // 

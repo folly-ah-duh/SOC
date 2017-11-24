@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using static SOC.QuestComponents.GameObjectInfo;
 
@@ -28,7 +29,7 @@ namespace SOC.UI
         {
             InitializeComponent();
             CoordsScrolling = new Forms.PanelScroll(this.panel1, false);
-            SendMessage(textBoxQuestNum.Handle, EM_SETCUEBANNER, 1, "30100");
+            SendMessage(textBoxQuestNum.Handle, EM_SETCUEBANNER, 1, "30103");
             SendMessage(textBoxFPKName.Handle, EM_SETCUEBANNER, 1, "Example_Quest_Name");
             SendMessage(textBoxQuestTitle.Handle, EM_SETCUEBANNER, 1, "Example Quest Title Text");
             refreshNotifsList();
@@ -151,10 +152,18 @@ namespace SOC.UI
                     isvalid = true;
                 }
             }
-            if (!isvalid)
+            if (!isvalid && !string.IsNullOrEmpty(textBoxQuestNum.Text))
             {
                 MessageBox.Show(string.Format("Invalid Quest Number: {0} \nThe Quest Number must be an integer between 30103 and 39009", qNumInt.ToString()), "Invalid Quest Number", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void textBoxFPKName_Leave(object sender, EventArgs e)
+        {
+            string invalidchars = "[\\/\\?\\\\\\|\\*\\:\\\"\\<\\> ]";
+            string replacement = "_";
+            Regex fileNameFixer = new Regex(invalidchars);
+            textBoxFPKName.Text = fileNameFixer.Replace(textBoxFPKName.Text, replacement);
         }
     }
 }

@@ -212,7 +212,7 @@ namespace SOC.Classes
                     if (!hostageDetail.h_comboBox_skill.Text.Equals("NONE"))
                         hostageList.Add(string.Format("			skill = \"{0}\",", hostageDetail.h_comboBox_skill.Text));
 
-                    double rotation = 0; Double.TryParse(hostageDetail.h_comboBox_rot.Text, out rotation); rotation += 90;
+                    double rotation = 0; Double.TryParse(hostageDetail.h_comboBox_rot.Text, out rotation);
                     
                     hostageList.Add(string.Format("			bodyId = {0},", bodyInfo.bodyId));
 

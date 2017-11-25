@@ -37,6 +37,9 @@ namespace SOC.Classes
 
                 Directory.CreateDirectory(lngPath);
                 File.WriteAllText(lngFile, lngText);
+
+                XmlCompiler.CompileFile(lngFile, XmlCompiler.LangToolPath);
+                File.Delete(lngFile);
             }
         }
     }

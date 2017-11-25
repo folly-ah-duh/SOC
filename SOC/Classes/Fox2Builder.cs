@@ -770,6 +770,9 @@ namespace SOC.Classes
                 questFox2.WriteLine("</fox>");
                 
             }
+
+            XmlCompiler.CompileFile(fox2QuestFile, XmlCompiler.FoxToolPath);
+            File.Delete(fox2QuestFile);
         }
 
         public static List<QuestEntity> BuildItemEntityList(QuestDetails questDetails)
@@ -838,8 +841,10 @@ namespace SOC.Classes
 
         public static void WriteItemFox2(DefinitionDetails definitionDetails, QuestDetails questDetails)
         {
-            int baseAddress = baseItemAddress;
+            if (questDetails.itemDetails.Count + questDetails.activeItemDetails.Count == 0)
+                return;
 
+            int baseAddress = baseItemAddress;
             List<QuestEntity> entityList = BuildItemEntityList(questDetails);
             SetAddresses(entityList, baseAddress);
 
@@ -1013,7 +1018,10 @@ namespace SOC.Classes
                 questFox2.WriteLine("</fox>");
 
             }
-        }
 
+            XmlCompiler.CompileFile(fox2ItemFile, XmlCompiler.FoxToolPath);
+            File.Delete(fox2ItemFile);
+
+        }
     }
 }

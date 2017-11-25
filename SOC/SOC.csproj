@@ -85,6 +85,7 @@
   <ItemGroup>
     <Compile Include="Classes\LangBuilder.cs" />
     <Compile Include="Classes\AssetsBuilder.cs" />
+    <Compile Include="Classes\XmlCompiler.cs" />
     <Compile Include="Forms\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>

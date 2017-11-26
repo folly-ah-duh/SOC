@@ -49,8 +49,8 @@ namespace SOC.Classes
             string questPackList = string.Format("\tquestPackList = {{ {0} \n\t}},", packFiles);
 
             string locationInfo = string.Format("\tlocationId={0}, areaName=\"{1}\", iconPos=Vector3({2},{3},{4}), radius={5},", definitionDetails.locationID, definitionDetails.loadArea, definitionDetails.coords.xCoord, definitionDetails.coords.yCoord, definitionDetails.coords.zCoord, definitionDetails.radius);
-
-            string progressLangId = string.Format("\tquestCompleteLangId=\"{0}\",", UI.Setup.UpdateNotifsList[definitionDetails.progNotif * 2 + 1]);
+            
+            string progressLangId = string.Format("\tquestCompleteLangId=\"{0}\",", UpdateNotifsManager.getLangIds()[definitionDetails.progNotif]);
 
             string canOpenQuestFunction = "\tcanOpenQuest=InfQuest.AllwaysOpenQuest, --function that decides whether the quest is open or not"; //todo in future update?
 
@@ -82,6 +82,8 @@ namespace SOC.Classes
                 defFile.WriteLine("local this={");
                 defFile.WriteLine(questPackList);
                 defFile.WriteLine(locationInfo);
+                if (definitionDetails.locationID == 50)
+                    defFile.WriteLine(string.Format("\tclusterName=\"{0}\",", definitionDetails.loadArea.Substring(4)));
                 defFile.WriteLine(string.Format("\tcategory=TppQuest.QUEST_CATEGORIES_ENUM.{0},", definitionDetails.category));
                 defFile.WriteLine(progressLangId);
                 defFile.WriteLine(canOpenQuestFunction);

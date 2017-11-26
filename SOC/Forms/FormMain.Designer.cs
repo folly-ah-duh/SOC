@@ -80,6 +80,7 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sideop Companion";
+            this.Activated += new System.EventHandler(this.FormMain_Activated);
             this.Resize += new System.EventHandler(this.FormMain_SizeChanged);
             this.ResumeLayout(false);
 

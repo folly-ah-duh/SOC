@@ -10,21 +10,19 @@ namespace SOC.UI
     {
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern Int32 SendMessage(IntPtr hWnd, int msg, int wParam, [MarshalAs(UnmanagedType.LPWStr)]string lParam);
-        const int EM_SETCUEBANNER = 0x1501;
         public formCustomProgressLang()
         {
             InitializeComponent();
-            SendMessage(textBoxLangId.Handle, EM_SETCUEBANNER, 1, "quest_extract_animal");
-            SendMessage(textBoxLangValue.Handle, EM_SETCUEBANNER, 1, "Animal Extracted [%d/%d]");
+            SendMessage(textBoxLangId.Handle, 0x1501, 1, "quest_extract_animal");
+            SendMessage(textBoxLangValue.Handle, 0x1501, 1, "Animal Extracted");
         }
 
         private void buttonCreateEntry_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(textBoxLangId.Text) || string.IsNullOrEmpty(textBoxLangValue.Text))
                 return;
-            string[] langEntry = {textBoxLangValue.Text, textBoxLangId.Text};
-            File.AppendAllLines(Setup.NotifsListPath, langEntry);
-            MessageBox.Show("Lang Entry added to UpdateNotifsList.txt", "Entry Added", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Classes.UpdateNotifsManager.addNotification(textBoxLangId.Text, textBoxLangValue.Text + " [%d/%d]");
+            MessageBox.Show(string.Format("\"{0}\" added to UpdateNotifsList.txt", textBoxLangValue.Text), "Entry Added", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
         }
 

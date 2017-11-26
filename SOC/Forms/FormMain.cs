@@ -133,6 +133,7 @@ namespace SOC.UI
             detailPage.groupStMdDet.Left = detailPage.groupHosDet.Location.X + dynamicPanelWidth * 3;
             detailPage.groupAcItDet.Left = detailPage.groupHosDet.Location.X + dynamicPanelWidth * 4;
             detailPage.groupAnimalDet.Left = detailPage.groupHosDet.Location.X + dynamicPanelWidth * 5;
+
         }
 
         public static List<Coordinates> BuildCoordinatesList(string rawString)
@@ -154,6 +155,11 @@ namespace SOC.UI
             }
 
             return coordList;
+        }
+
+        private void FormMain_Activated(object sender, EventArgs e)
+        {
+            setupPage.refreshNotifsList();
         }
     }
 }

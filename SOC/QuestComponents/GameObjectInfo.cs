@@ -5,6 +5,115 @@ namespace SOC.QuestComponents
 {
     public static class GameObjectInfo
     {
+        public static string[] afghLoadAreas = {
+            "tent",
+            "field",
+            "ruins",
+            "waterway",
+            "cliffTown",
+            "commFacility",
+            "sovietBase",
+            "fort",
+            "citadel"
+        };
+        public static string[] mafrLoadAreas = {
+            "outland",
+            "pfCamp",
+            "savannah",
+            "hill",
+            "banana",
+            "diamond",
+            "lab"
+        };
+        public static string[] mtbsLoadAreas =  {
+            "MtbsCommand",
+            "MtbsCombat",
+            "MtbsDevelop",
+            "MtbsMedical",
+            "MtbsSupport",
+            "MtbsSpy",
+            "MtbsBaseDev"
+        };
+        public static string[] afghCP = {
+            "NONE",
+            "afgh_field_cp",
+            "afgh_remnants_cp",
+            "afgh_tent_cp",
+            "afgh_village_cp",
+            "afgh_slopedTown_cp",
+            "afgh_commFacility_cp",
+            "afgh_enemyBase_cp",
+            "afgh_bridge_cp",
+            "afgh_cliffTown_cp",
+            "afgh_fort_cp",
+            "afgh_powerPlant_cp",
+            "afgh_sovietBase_cp",
+            "afgh_citadel_cp", "afgh_fieldEast_ob",
+            "afgh_remnantsNorth_ob",
+            "afgh_fieldWest_ob",
+            "afgh_tentEast_ob",
+            "afgh_tentNorth_ob",
+            "afgh_commWest_ob",
+            "afgh_ruinsNorth_ob",
+            "afgh_slopedWest_ob",
+            "afgh_villageEast_ob",
+            "afgh_villageNorth_ob",
+            "afgh_villageWest_ob",
+            "afgh_enemyEast_ob",
+            "afgh_bridgeNorth_ob",
+            "afgh_bridgeWest_ob",
+            "afgh_cliffEast_ob",
+            "afgh_cliffSouth_ob",
+            "afgh_cliffWest_ob",
+            "afgh_enemyNorth_ob",
+            "afgh_fortSouth_ob",
+            "afgh_fortWest_ob",
+            "afgh_slopedEast_ob",
+            "afgh_plantSouth_ob",
+            "afgh_plantWest_ob",
+            "afgh_sovietSouth_ob",
+            "afgh_waterwayEast_ob",
+            "afgh_citadelSouth_ob" };
+        public static string[] mafrCP = {
+            "NONE",
+            "mafr_outland_cp",
+            "mafr_flowStation_cp",
+            "mafr_swamp_cp",
+            "mafr_savannah_cp",
+            "mafr_pfCamp_cp",
+            "mafr_banana_cp",
+            "mafr_diamond_cp",
+            "mafr_hill_cp",
+            "mafr_factory_cp",
+            "mafr_lab_cp",
+            "mafr_outlandEast_ob",
+            "mafr_outlandNorth_ob",
+            "mafr_swampEast_ob",
+            "mafr_swampSouth_ob",
+            "mafr_swampWest_ob",
+            "mafr_pfCampNorth_ob",
+            "mafr_pfCampEast_ob",
+            "mafr_savannahEast_ob",
+            "mafr_savannahWest_ob",
+            "mafr_chicoVilWest_ob",
+            "mafr_hillSouth_ob",
+            "mafr_factorySouth_ob",
+            "mafr_hillNorth_ob",
+            "mafr_hillWest_ob",
+            "mafr_hillWestNear_ob",
+            "mafr_diamondSouth_ob",
+            "mafr_diamondNorth_ob",
+            "mafr_diamondWest_ob",
+            "mafr_bananaEast_ob",
+            "mafr_savannahNorth_ob",
+            "mafr_bananaSouth_ob",
+            "mafr_factoryWest_ob",
+            "mafr_labWest_ob"
+        };
+        public static string[] mtbsCP = {
+            "NONE"
+        };
+
         public static string[] skills =
         {
             "NONE",
@@ -900,7 +1009,7 @@ namespace SOC.QuestComponents
         public class DefinitionDetails
         {
 
-            public DefinitionDetails(string fpk, string quest, int locID, object loada, Coordinates c, string rad, string cat, string rew, int prog, string type, string CP, string qtitle, string qdesc)
+            public DefinitionDetails(string fpk, string quest, int locID, string loada, Coordinates c, string rad, string cat, string rew, int prog, string type, string CP, string qtitle, string qdesc)
             {
                 FpkName = fpk;
                 QuestNum = quest;
@@ -927,7 +1036,7 @@ namespace SOC.QuestComponents
 
             public int locationID { get; set; }
 
-            public object loadArea { get; set; }
+            public string loadArea { get; set; }
 
             public Coordinates coords { get; set; }
 

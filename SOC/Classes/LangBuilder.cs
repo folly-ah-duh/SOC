@@ -10,18 +10,19 @@ namespace SOC.Classes
 
         public static void WriteQuestLangs(DefinitionDetails definitionDetails)
         {
-            string[] NotificationList = File.ReadAllLines(Setup.NotifsListPath);
-            int progressNotifIndex = definitionDetails.progNotif;
+            string[] LangIdList = UpdateNotifsManager.getLangIds();
+            string[] DisplayList = UpdateNotifsManager.getDispNotifs();
+            int notificationIndex = definitionDetails.progNotif;
 
             string entryLines = "";
 
             entryLines += string.Format("\n\t\t<Entry LangId=\"name_q{0}\" Color=\"5\" Value=\"{1}\" />", definitionDetails.QuestNum, definitionDetails.QuestTitle);
             entryLines += string.Format("\n\t\t<Entry LangId=\"info_q{0}\" Color=\"5\" Value=\"{1}\" />\n", definitionDetails.QuestNum, definitionDetails.QuestDesc);
 
-            if (progressNotifIndex > 17)
+            if (UpdateNotifsManager.isCustomNotification(LangIdList[notificationIndex]))
             {
-                string progressId = NotificationList[progressNotifIndex + 1];
-                string progressdesc = NotificationList[progressNotifIndex];
+                string progressId = LangIdList[notificationIndex];
+                string progressdesc = DisplayList[notificationIndex];
 
                 entryLines += string.Format("\t\t<Entry LangId=\"{0}\" Color=\"5\" Value=\"{1}\" />\n", progressId, progressdesc);
             }

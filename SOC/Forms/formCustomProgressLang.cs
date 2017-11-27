@@ -21,7 +21,7 @@ namespace SOC.UI
         {
             if (string.IsNullOrEmpty(textBoxLangId.Text) || string.IsNullOrEmpty(textBoxLangValue.Text))
                 return;
-            Classes.UpdateNotifsManager.addNotification(textBoxLangId.Text, textBoxLangValue.Text + " [%d/%d]");
+            Classes.UpdateNotifsManager.addNotification(textBoxLangId.Text, textBoxLangValue.Text);
             MessageBox.Show(string.Format("\"{0}\" added to UpdateNotifsList.txt", textBoxLangValue.Text), "Entry Added", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
         }

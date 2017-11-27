@@ -22,7 +22,7 @@ namespace SOC.Classes
             if (UpdateNotifsManager.isCustomNotification(LangIdList[notificationIndex]))
             {
                 string progressId = LangIdList[notificationIndex];
-                string progressdesc = DisplayList[notificationIndex];
+                string progressdesc = DisplayList[notificationIndex] + " [%d/%d]";
 
                 entryLines += string.Format("\t\t<Entry LangId=\"{0}\" Color=\"5\" Value=\"{1}\" />\n", progressId, progressdesc);
             }

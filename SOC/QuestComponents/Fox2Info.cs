@@ -1,4 +1,6 @@
-﻿namespace SOC.QuestComponents
+﻿using System;
+
+namespace SOC.QuestComponents
 {
     public static class Fox2Info
     {
@@ -35,6 +37,21 @@
             0x70,
             0x150,
         };
+
+        public static string getQuaternionY(string roty)
+        {
+            double quatNum = 0;
+            Double.TryParse(roty, out quatNum);
+            quatNum = quatNum * Math.PI / 360;
+            return Math.Sin(quatNum).ToString();
+        } 
+        public static string getQuaternionW(string roty)
+        {
+            double quatNum = 0;
+            Double.TryParse(roty, out quatNum);
+            quatNum = quatNum * Math.PI / 360;
+            return Math.Cos(quatNum).ToString();
+        }
     }
 
     public enum entityClass

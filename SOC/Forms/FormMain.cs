@@ -12,7 +12,7 @@ namespace SOC.UI
     public partial class FormMain : Form
     {
         private Setup setupPage = new Setup();
-        private Details detailPage;
+        private Details detailPage = new Details();
         private int panelNum = 0;
             
         public FormMain()
@@ -37,7 +37,7 @@ namespace SOC.UI
         }
         private bool isFilled()
         {
-            //return true; // FOR DEBUG
+            return true; // FOR DEBUG
             if (string.IsNullOrEmpty(setupPage.textBoxFPKName.Text) || string.IsNullOrEmpty(setupPage.textBoxQuestNum.Text) || string.IsNullOrEmpty(setupPage.textBoxQuestTitle.Text) || string.IsNullOrEmpty(setupPage.textBoxQuestDesc.Text))
                 return false;
             if (setupPage.comboBoxCategory.SelectedIndex == -1 || setupPage.comboBoxReward.SelectedIndex == -1 || setupPage.comboBoxObjective.SelectedIndex == -1 || setupPage.comboBoxProgressNotifs.SelectedIndex == -1 || setupPage.comboBoxRegion.SelectedIndex == -1)
@@ -73,10 +73,10 @@ namespace SOC.UI
                         List<Coordinates> ModelCoords = BuildCoordinatesList(setupPage.textBoxStMdCoords.Text);
                         List<Coordinates> activeItemCoords = BuildCoordinatesList(setupPage.textBox_ActiveItem.Text);
                         List<Coordinates> AnimalCoords = BuildCoordinatesList(setupPage.textBox_Animal.Text);
-                        detailPage = new Details(HostageCoords, VehicleCoords, ItemCoords, ModelCoords, activeItemCoords, AnimalCoords);
                         buttonBack.Visible = true;
                         panelMain.Controls.Clear();
                         panelMain.Controls.Add(detailPage);
+                        detailPage.RefreshDetails(HostageCoords, VehicleCoords, ItemCoords, ModelCoords, activeItemCoords, AnimalCoords);
                         buttonNext.Text = "Build";
                         this.Width = 1180;
                     }

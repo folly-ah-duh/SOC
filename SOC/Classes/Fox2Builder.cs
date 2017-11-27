@@ -183,7 +183,7 @@ namespace SOC.Classes
             foreach (ModelDetail modelDetail in questDetails.modelDetails)
             {
                 entityList.Add(new QuestEntity(modelDetail.m_groupBox_main.Text, unassignedAddress, entityClass.StaticModel, modelDetail.m_comboBox_preset.Text, modelDetail.m_label_GeomNotFound.Visible));
-                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity_StaticModel, new Coordinates(modelDetail.m_textBox_xcoords.Text, modelDetail.m_textBox_ycoords.Text, modelDetail.m_textBox_zcoords.Text), new RotationQuat(modelDetail.m_textBox_xrot.Text, modelDetail.m_textBox_yrot.Text, modelDetail.m_textBox_zrot.Text, modelDetail.m_textBox_wrot.Text)));
+                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity_StaticModel, new Coordinates(modelDetail.m_textBox_xcoord.Text, modelDetail.m_textBox_ycoord.Text, modelDetail.m_textBox_zcoord.Text), new RotationQuat(modelDetail.m_textBox_xrot.Text, modelDetail.m_textBox_yrot.Text, modelDetail.m_textBox_zrot.Text, modelDetail.m_textBox_wrot.Text)));
             }
 
             entityList.Add(new QuestEntity("TexturePackLoadConditioner0000", unassignedAddress, entityClass.TexturePackLoadConditioner, unnassignedObject, unnassignedObject));

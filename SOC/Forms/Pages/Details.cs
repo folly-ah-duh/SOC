@@ -110,11 +110,11 @@ namespace SOC.UI
             }
             for (int i = 0; i < itemDetails.Count; i++)
             {
-                itemDetails[i].i_textBox_xcoord.Text = VehicleCoords[i].xCoord;
-                itemDetails[i].i_textBox_ycoord.Text = VehicleCoords[i].yCoord;
-                itemDetails[i].i_textBox_zcoord.Text = VehicleCoords[i].zCoord;
-                itemDetails[i].i_textBox_yrot.Text = Fox2Info.getQuaternionY(VehicleCoords[i].roty);
-                itemDetails[i].i_textBox_wrot.Text = Fox2Info.getQuaternionW(VehicleCoords[i].roty);
+                itemDetails[i].i_textBox_xcoord.Text = ItemCoords[i].xCoord;
+                itemDetails[i].i_textBox_ycoord.Text = ItemCoords[i].yCoord;
+                itemDetails[i].i_textBox_zcoord.Text = ItemCoords[i].zCoord;
+                itemDetails[i].i_textBox_yrot.Text = Fox2Info.getQuaternionY(ItemCoords[i].roty);
+                itemDetails[i].i_textBox_wrot.Text = Fox2Info.getQuaternionW(ItemCoords[i].roty);
             }
             //
             // Add/Remove for Models

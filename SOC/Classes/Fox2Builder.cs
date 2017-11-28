@@ -49,12 +49,12 @@ namespace SOC.Classes
             entityList.Add(new QuestEntity("ScriptBlockScript0000", unassignedAddress, entityClass.ScriptBlockScript, unnassignedObject, unnassignedObject));
             if (questDetails.hostageDetails.Count > 0)
             {
-                entityList.Add(new QuestEntity("GameObjectTppHostageUnique", unassignedAddress, entityClass.GameObject, "TppHostageUnique", questDetails.hostageDetails.Count));
+                entityList.Add(new QuestEntity("GameObjectTppHostageUnique", unassignedAddress, entityClass.GameObject, "TppHostageUnique2", questDetails.hostageDetails.Count));
                 entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppHostage2Parameter, unnassignedObject, unnassignedObject));
 
                 foreach (HostageDetail hostageDetail in questDetails.hostageDetails)
                 {
-                    entityList.Add(new QuestEntity(hostageDetail.h_groupBox_main.Text, unassignedAddress, entityClass.GameObjectLocator, "TppHostageUnique", unnassignedObject));
+                    entityList.Add(new QuestEntity(hostageDetail.h_groupBox_main.Text, unassignedAddress, entityClass.GameObjectLocator, "TppHostageUnique2", unnassignedObject));
                     entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity_Hostage, new Coordinates(hostageDetail.h_textBox_xcoord.Text,hostageDetail.h_textBox_ycoord.Text,hostageDetail.h_textBox_zcoord.Text), new RotationQuat("0","0","0","1")));
                     entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppHostage2LocatorParameter, unnassignedObject, unnassignedObject));
                 }

@@ -218,7 +218,11 @@ namespace SOC.Classes
                     
                     hostageList.Add(string.Format("			bodyId = {0},", bodyInfo.bodyId));
 
-                    hostageList.Add(string.Format("			position={{pos={{{0},{1},{2}}},rotY={3},}},", hostageDetail.h_textBox_xcoord.Text, hostageDetail.h_textBox_ycoord.Text, hostageDetail.h_textBox_zcoord.Text, rotation));
+                    double yOffset = 0.0;
+                    double.TryParse(hostageDetail.h_textBox_ycoord.Text, out yOffset);
+                    yOffset += 0.783;
+
+                    hostageList.Add(string.Format("			position={{pos={{{0},{1},{2}}},rotY={3},}},", hostageDetail.h_textBox_xcoord.Text, yOffset, hostageDetail.h_textBox_zcoord.Text, rotation));
 
                     hostageList.Add("		},");
                 }
@@ -262,6 +266,10 @@ namespace SOC.Classes
 
                     double rotationdegrees = 0; Double.TryParse(vehicleDetail.v_comboBox_rot.Text, out rotationdegrees);
                     double toRadians = rotationdegrees * Math.PI / 180;
+
+                    double yOffset = 0.0;
+                    double.TryParse(vehicleDetail.v_textBox_ycoord.Text, out yOffset);
+                    yOffset += 0.783;
 
                     vehicleList.Add(string.Format("			position={{pos={{{0},{1},{2}}},rotY={3},}},", vehicleDetail.v_textBox_xcoord.Text, vehicleDetail.v_textBox_ycoord.Text, vehicleDetail.v_textBox_zcoord.Text, toRadians));
 

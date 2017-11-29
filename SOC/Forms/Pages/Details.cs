@@ -8,12 +8,12 @@ namespace SOC.UI
 {
     public partial class Details : UserControl
     {
-        List<HostageDetail> hostageDetails;
-        List<VehicleDetail> vehicleDetails;
-        List<ItemDetail> itemDetails;
-        List<ModelDetail> modelDetails;
-        List<ActiveItemDetail> activeItemDetails;
-        List<AnimalDetail> animalDetails;
+        List<Detail> hostageDetails;
+        List<Detail> vehicleDetails;
+        List<Detail> itemDetails;
+        List<Detail> modelDetails;
+        List<Detail> activeItemDetails;
+        List<Detail> animalDetails;
         public QuestDetails questDetails;
 
         public string[] Langs = { "english", "russian", "pashto", "kikongo", "afrikaans" };
@@ -21,12 +21,12 @@ namespace SOC.UI
         public Details()
         {
             InitializeComponent();
-            hostageDetails = new List<HostageDetail>();
-            vehicleDetails = new List<VehicleDetail>();
-            itemDetails = new List<ItemDetail>();
-            modelDetails = new List<ModelDetail>();
-            activeItemDetails = new List<ActiveItemDetail>();
-            animalDetails = new List<AnimalDetail>();
+            hostageDetails = new List<Detail>();
+            vehicleDetails = new List<Detail>();
+            itemDetails = new List<Detail>();
+            modelDetails = new List<Detail>();
+            activeItemDetails = new List<Detail>();
+            animalDetails = new List<Detail>();
 
             foreach (BodyInfoEntry infoEntry in BodyInfo.BodyInfoArray)
             {
@@ -35,167 +35,91 @@ namespace SOC.UI
             comboBox_Body.Text = "AFGH_HOSTAGE";
         }
 
+        public void AddDetail(Detail newDetail, List<Detail> details, Panel panel)
+        {
+            newDetail.BuildDetail();
+
+            if (newDetail.getIndex() < details.Count)
+            {
+                newDetail.SetDetail(details[newDetail.getIndex()]);
+                panel.Controls.Remove(details[newDetail.getIndex()].getGroupBoxMain());
+                details[newDetail.getIndex()] = newDetail;
+            }
+            else
+            {
+                details.Add(newDetail);
+            }
+
+            panel.Controls.Add(details[newDetail.getIndex()].getGroupBoxMain());
+        }
+
+        public void RemoveExtraDetails(List<Detail> details, int remainder, Panel panel)
+        {
+            for (int i = details.Count - 1; i > -1; i--)
+            {
+                if (i <= remainder - 1)
+                    continue;
+                {
+                    panel.Controls.Remove(details[i].getGroupBoxMain());
+                    details.RemoveAt(i);
+                }
+            }
+        }
+
         public void RefreshDetails(List<Coordinates> HostageCoords, List<Coordinates> VehicleCoords, List<Coordinates> ItemCoords, List<Coordinates> ModelCoords, List<Coordinates> ActItemsCoords, List<Coordinates> AnimalCoords)
         {
-            //
-            // Add/Remove for Hostages
-            //
-            for (int i = 0; i < HostageCoords.Count; i++)
+
+            Tuple<List<Detail>, List<Coordinates>, Panel>[] detailTuples =
             {
-                if (i < hostageDetails.Count)
-                    continue;
-                var hosDet = new HostageDetail(HostageCoords[i], i);
-                hosDet.BuildDetail();
-                hostageDetails.Add(hosDet);
-                panelHosDet.Controls.Add(hosDet.h_groupBox_main);
-            }
-            for (int i = hostageDetails.Count - 1; i > -1; i--)
+                new Tuple<List<Detail>, List<Coordinates>, Panel>(hostageDetails, HostageCoords, panelHosDet),
+                new Tuple<List<Detail>, List<Coordinates>, Panel>(vehicleDetails, VehicleCoords, panelVehDet),
+                new Tuple<List<Detail>, List<Coordinates>, Panel>(animalDetails, AnimalCoords, panelAnimalDet),
+                new Tuple<List<Detail>, List<Coordinates>, Panel>(itemDetails, ItemCoords, panelItemDet),
+                new Tuple<List<Detail>, List<Coordinates>, Panel>(activeItemDetails, ActItemsCoords, panelAcItDet),
+                new Tuple<List<Detail>, List<Coordinates>, Panel>(modelDetails, ModelCoords, panelStMdDet),
+            };
+            Tuple<List<Detail>, List<Coordinates>, Panel> detailTuple;
+
+            for (int i = 0; i < detailTuples.Length; i++)
             {
-                if (i <= HostageCoords.Count - 1)
-                    continue;
-                panelHosDet.Controls.Remove(hostageDetails[i].h_groupBox_main);
-                hostageDetails.RemoveAt(i);
+                detailTuple = detailTuples[i];
+                detailTuple.Item3.AutoScroll = false;
+                switch (i)
+                {
+                    case 0: // hostages
+                        for (int j = 0; j < detailTuple.Item2.Count; j++)
+                            AddDetail(new HostageDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
+                        RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
+                        break;
+                    case 1: // vehicles
+                        for (int j = 0; j < detailTuple.Item2.Count; j++)
+                            AddDetail(new VehicleDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
+                        RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
+                        break;
+                    case 2: // animals
+                        for (int j = 0; j < detailTuple.Item2.Count; j++)
+                            AddDetail(new AnimalDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
+                        RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
+                        break;
+                    case 3: // items
+                        for (int j = 0; j < detailTuple.Item2.Count; j++)
+                            AddDetail(new ItemDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
+                        RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
+                        break;
+                    case 4: // active items
+                        for (int j = 0; j < detailTuple.Item2.Count; j++)
+                            AddDetail(new ActiveItemDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
+                        RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
+                        break;
+                    case 5: // models
+                        for (int j = 0; j < detailTuple.Item2.Count; j++)
+                            AddDetail(new ModelDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
+                        RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
+                        break;
+                }
+                detailTuple.Item3.AutoScroll = true;
             }
-            for (int i = 0; i < hostageDetails.Count; i++)
-            {
-                hostageDetails[i].h_textBox_xcoord.Text = HostageCoords[i].xCoord;
-                hostageDetails[i].h_textBox_ycoord.Text = HostageCoords[i].yCoord;
-                hostageDetails[i].h_textBox_zcoord.Text = HostageCoords[i].zCoord;
-                hostageDetails[i].h_comboBox_rot.Text = HostageCoords[i].roty;
-            }
-            //
-            // Add/Remove for Vehicles
-            //
-            for (int i = 0; i < VehicleCoords.Count; i++)
-            {
-                if (i < vehicleDetails.Count)
-                    continue;
-                var vehDet = new VehicleDetail(VehicleCoords[i], i);
-                vehDet.BuildDetail();
-                vehicleDetails.Add(vehDet);
-                panelVehDet.Controls.Add(vehDet.v_groupBox_main);
-            }
-            for (int i = vehicleDetails.Count - 1; i > -1; i--)
-            {
-                if (i <= VehicleCoords.Count - 1)
-                    continue;
-                panelVehDet.Controls.RemoveAt(i);
-                vehicleDetails.RemoveAt(i);
-            }
-            for (int i = 0; i < vehicleDetails.Count; i++)
-            {
-                vehicleDetails[i].v_textBox_xcoord.Text = VehicleCoords[i].xCoord;
-                vehicleDetails[i].v_textBox_ycoord.Text = VehicleCoords[i].yCoord;
-                vehicleDetails[i].v_textBox_zcoord.Text = VehicleCoords[i].zCoord;
-                vehicleDetails[i].v_comboBox_rot.Text = VehicleCoords[i].roty;
-            }
-            //
-            // Add/Remove for Items
-            //
-            for (int i = 0; i < ItemCoords.Count; i++)
-            {
-                if (i < itemDetails.Count)
-                    continue;
-                var itDet = new ItemDetail(ItemCoords[i], i);
-                itDet.BuildDetail();
-                itemDetails.Add(itDet);
-                panelItemDet.Controls.Add(itDet.i_groupBox_main);
-            }
-            for (int i = itemDetails.Count - 1; i > -1; i--)
-            {
-                if (i <= ItemCoords.Count - 1)
-                    continue;
-                panelItemDet.Controls.RemoveAt(i);
-                itemDetails.RemoveAt(i);
-            }
-            for (int i = 0; i < itemDetails.Count; i++)
-            {
-                itemDetails[i].i_textBox_xcoord.Text = ItemCoords[i].xCoord;
-                itemDetails[i].i_textBox_ycoord.Text = ItemCoords[i].yCoord;
-                itemDetails[i].i_textBox_zcoord.Text = ItemCoords[i].zCoord;
-                itemDetails[i].i_textBox_yrot.Text = Fox2Info.getQuaternionY(ItemCoords[i].roty);
-                itemDetails[i].i_textBox_wrot.Text = Fox2Info.getQuaternionW(ItemCoords[i].roty);
-            }
-            //
-            // Add/Remove for Models
-            //
-            for (int i = 0; i < ModelCoords.Count; i++)
-            {
-                if (i < modelDetails.Count)
-                    continue;
-                var stmdDet = new ModelDetail(ModelCoords[i], i);
-                stmdDet.BuildDetail();
-                modelDetails.Add(stmdDet);
-                panelStMdDet.Controls.Add(stmdDet.m_groupBox_main);
-            }
-            for (int i = modelDetails.Count - 1; i > -1; i--)
-            {
-                if (i <= ModelCoords.Count - 1)
-                    continue;
-                panelStMdDet.Controls.RemoveAt(i);
-                modelDetails.RemoveAt(i);
-            }
-            for (int i = 0; i < modelDetails.Count; i++)
-            {
-                modelDetails[i].m_textBox_xcoord.Text = ModelCoords[i].xCoord;
-                modelDetails[i].m_textBox_ycoord.Text = ModelCoords[i].yCoord;
-                modelDetails[i].m_textBox_zcoord.Text = ModelCoords[i].zCoord;
-                modelDetails[i].m_textBox_yrot.Text = Fox2Info.getQuaternionY(ModelCoords[i].roty);
-                modelDetails[i].m_textBox_wrot.Text = Fox2Info.getQuaternionW(ModelCoords[i].roty);
-            }
-            //
-            // Add/Remove for Active Items
-            //
-            for (int i = 0; i < ActItemsCoords.Count; i++)
-            {
-                if (i < activeItemDetails.Count)
-                    continue;
-                var acitDet = new ActiveItemDetail(ActItemsCoords[i], i);
-                acitDet.BuildDetail();
-                activeItemDetails.Add(acitDet);
-                panelAcItDet.Controls.Add(acitDet.ai_groupBox_main);
-            }
-            for (int i = activeItemDetails.Count - 1; i > -1; i--)
-            {
-                if (i <= ActItemsCoords.Count - 1)
-                    continue;
-                panelAcItDet.Controls.RemoveAt(i);
-                activeItemDetails.RemoveAt(i);
-            }
-            for (int i = 0; i < activeItemDetails.Count; i++)
-            {
-                activeItemDetails[i].ai_textBox_xcoord.Text = ActItemsCoords[i].xCoord;
-                activeItemDetails[i].ai_textBox_ycoord.Text = ActItemsCoords[i].yCoord;
-                activeItemDetails[i].ai_textBox_zcoord.Text = ActItemsCoords[i].zCoord;
-                activeItemDetails[i].ai_textBox_yrot.Text = Fox2Info.getQuaternionY(ActItemsCoords[i].roty);
-                activeItemDetails[i].ai_textBox_wrot.Text = Fox2Info.getQuaternionW(ActItemsCoords[i].roty);
-            }
-            //
-            // Add/Remove for Animals
-            //
-            for (int i = 0; i < AnimalCoords.Count; i++)
-            {
-                if (i < animalDetails.Count)
-                    continue;
-                var animDet = new AnimalDetail(AnimalCoords[i], i);
-                animDet.BuildDetail();
-                animalDetails.Add(animDet);
-                panelAnimalDet.Controls.Add(animDet.a_groupBox_main);
-            }
-            for (int i = animalDetails.Count - 1; i > -1; i--)
-            {
-                if (i <= AnimalCoords.Count - 1)
-                    continue;
-                panelAnimalDet.Controls.RemoveAt(i);
-                animalDetails.RemoveAt(i);
-            }
-            for (int i = 0; i < animalDetails.Count; i++)
-            {
-                animalDetails[i].a_textBox_xcoord.Text = AnimalCoords[i].xCoord;
-                animalDetails[i].a_textBox_ycoord.Text = AnimalCoords[i].yCoord;
-                animalDetails[i].a_textBox_zcoord.Text = AnimalCoords[i].zCoord;
-                animalDetails[i].a_comboBox_rot.Text = AnimalCoords[i].roty;
-            }
+            
             
             if (HostageCoords.Count > 0)
             {
@@ -212,11 +136,49 @@ namespace SOC.UI
                 comboBox_Body.Visible = false;
             }
             RefreshHostageLanguage();
+
+            if (ActItemsCoords.Count == 0)
+            {
+                panelItemDet.Visible = true;
+                groupItemDet.Text = "Item Details";
+                panelAcItDet.Visible = false;
+            }
+            else
+            {
+                panelAcItDet.Visible = true;
+                groupItemDet.Text = "Active Item Details";
+                panelItemDet.Visible = false;
+            }
         }
 
         public QuestDetails getQuestDetails()
         {
-            questDetails = new QuestDetails(hostageDetails, vehicleDetails, itemDetails, modelDetails, activeItemDetails, animalDetails,comboBox_Body.SelectedIndex, h_checkBox_intrgt.Checked);
+            List<HostageDetail> hDetailsCasted = new List<HostageDetail>(); // If there's a better way of doing this....
+            List<VehicleDetail> vDetailsCasted = new List<VehicleDetail>();
+            List<AnimalDetail> aDetailsCasted = new List<AnimalDetail>();
+            List<ItemDetail> iDetailsCasted = new List<ItemDetail>();
+            List<ActiveItemDetail> aiDetailsCasted = new List<ActiveItemDetail>();
+            List<ModelDetail> mDetailsCasted = new List<ModelDetail>();
+
+            foreach (Detail detail in hostageDetails)
+                hDetailsCasted.Add((HostageDetail)detail);
+
+            foreach (Detail detail in vehicleDetails)
+                vDetailsCasted.Add((VehicleDetail)detail);
+
+            foreach (Detail detail in animalDetails)
+                aDetailsCasted.Add((AnimalDetail)detail);
+
+            foreach (Detail detail in itemDetails)
+                iDetailsCasted.Add((ItemDetail)detail);
+
+            foreach (Detail detail in activeItemDetails)
+                aiDetailsCasted.Add((ActiveItemDetail)detail);
+
+            foreach (Detail detail in modelDetails)
+                mDetailsCasted.Add((ModelDetail)detail);
+
+            questDetails = new QuestDetails(hDetailsCasted, vDetailsCasted, aDetailsCasted, iDetailsCasted, aiDetailsCasted, mDetailsCasted, comboBox_Body.SelectedIndex, h_checkBox_intrgt.Checked);
             return questDetails;
         }
 

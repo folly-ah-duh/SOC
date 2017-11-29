@@ -311,16 +311,16 @@ namespace SOC.Classes
             foreach (HostageDetail hostage in questDetails.hostageDetails)
             {
                 if (hostage.h_checkBox_untied.Checked)
-                    hosAttributeList.Add(string.Format("GameObject.SendCommand(GameObject.GetGameObjectId(\"TppHostageUnique\", \"{0}\"),commandUnlocked)", hostage.h_groupBox_main.Text));
+                    hosAttributeList.Add(string.Format("GameObject.SendCommand(GameObject.GetGameObjectId(\"TppHostageUnique2\", \"{0}\"),commandUnlocked)", hostage.h_groupBox_main.Text));
 
                 if (hostage.h_checkBox_injured.Checked)
-                    hosAttributeList.Add(string.Format("GameObject.SendCommand(GameObject.GetGameObjectId(\"TppHostageUnique\", \"{0}\"),commandInjured)", hostage.h_groupBox_main.Text));
+                    hosAttributeList.Add(string.Format("GameObject.SendCommand(GameObject.GetGameObjectId(\"TppHostageUnique2\", \"{0}\"),commandInjured)", hostage.h_groupBox_main.Text));
 
                 if (hostage.h_comboBox_scared.Text.Equals("NEVER")) //"NORMAL", "NEVER", "ALWAYS"
-                    hosAttributeList.Add(string.Format("GameObject.SendCommand(GameObject.GetGameObjectId(\"TppHostageUnique\", \"{0}\"),commandBrave)", hostage.h_groupBox_main.Text));
+                    hosAttributeList.Add(string.Format("GameObject.SendCommand(GameObject.GetGameObjectId(\"TppHostageUnique2\", \"{0}\"),commandBrave)", hostage.h_groupBox_main.Text));
 
                 else if (hostage.h_comboBox_scared.Text.Equals("ALWAYS"))
-                    hosAttributeList.Add(string.Format("GameObject.SendCommand(GameObject.GetGameObjectId(\"TppHostageUnique\", \"{0}\"),commandScared)", hostage.h_groupBox_main.Text));
+                    hosAttributeList.Add(string.Format("GameObject.SendCommand(GameObject.GetGameObjectId(\"TppHostageUnique2\", \"{0}\"),commandScared)", hostage.h_groupBox_main.Text));
             }
 
             return hosAttributeList;

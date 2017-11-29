@@ -6,7 +6,30 @@ using static SOC.QuestComponents.GameObjectInfo;
 
 namespace SOC.UI
 {
-    public class HostageDetail
+    public abstract class Detail
+    {
+        Coordinates detailCoords;
+        int detailNum;
+        public Detail(Coordinates coord, int num)
+        {
+            detailCoords = coord;
+            detailNum = num;
+        }
+        public int getIndex()
+        {
+            return detailNum;
+        }
+
+        public abstract GroupBox getGroupBoxMain();
+
+        public abstract void SetDetail(Detail detail);
+
+        public abstract void BuildDetail();
+
+
+    }
+
+    public class HostageDetail : Detail
     {
         Coordinates hostageCoords;
         int hostageNum;
@@ -33,13 +56,25 @@ namespace SOC.UI
         public CheckBox h_checkBox_injured;
         public CheckBox h_checkBox_untied;
 
-        public HostageDetail(Coordinates hcoord, int hnum)
+        public HostageDetail(Coordinates coord, int num) : base (coord, num)
         {
-            hostageCoords = hcoord;
-            hostageNum = hnum;
+            hostageCoords = coord;
+            hostageNum = num;
         }
 
-        public void BuildDetail()
+        public override void SetDetail(Detail detail)
+        {
+            HostageDetail hostageDetail = (HostageDetail)detail;
+            h_checkBox_injured.Text = hostageDetail.h_checkBox_injured.Text;
+            h_checkBox_target.Text = hostageDetail.h_checkBox_target.Text;
+            h_checkBox_untied.Text = hostageDetail.h_checkBox_untied.Text;
+            h_comboBox_lang.Text = hostageDetail.h_comboBox_lang.Text;
+            h_comboBox_scared.Text = hostageDetail.h_comboBox_scared.Text;
+            h_comboBox_skill.Text = hostageDetail.h_comboBox_skill.Text;
+            h_comboBox_staff.Text = hostageDetail.h_comboBox_staff.Text;
+        }
+
+        public override void BuildDetail()
         {
             this.h_groupBox_main = new System.Windows.Forms.GroupBox();
             this.h_textBox_zcoord = new System.Windows.Forms.TextBox();
@@ -95,7 +130,7 @@ namespace SOC.UI
             this.h_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
             this.h_groupBox_main.Location = new System.Drawing.Point(4, 55 + (253 * hostageNum));
             this.h_groupBox_main.Name = "h_groupBox_main";
-            this.h_groupBox_main.Size = new System.Drawing.Size(245, 236);
+            this.h_groupBox_main.Size = new System.Drawing.Size(252, 236);
             this.h_groupBox_main.TabStop = false;
             this.h_groupBox_main.TabIndex = 1;
             this.h_groupBox_main.Text = "Hostage_" + hostageNum;
@@ -263,8 +298,13 @@ namespace SOC.UI
             this.h_groupBox_main.ResumeLayout(false);
             this.h_groupBox_main.PerformLayout();
         }
+
+        public override GroupBox getGroupBoxMain()
+        {
+            return h_groupBox_main;
+        }
     }
-    public class VehicleDetail
+    public class VehicleDetail : Detail
     {
         Coordinates vehicleCoords;
         int VehicleNum;
@@ -283,12 +323,21 @@ namespace SOC.UI
         public Label v_label_class;
         public Label v_label_vehicle;
 
-        public VehicleDetail(Coordinates vehcoord, int vehnum)
+        public VehicleDetail(Coordinates coord, int num) : base(coord, num)
         {
-            vehicleCoords = vehcoord;
-            VehicleNum = vehnum;
+            vehicleCoords = coord;
+            VehicleNum = num;
         }
-        public void BuildDetail()
+
+        public override void SetDetail(Detail detail)
+        {
+            VehicleDetail vehicleDetail = (VehicleDetail)detail;
+            v_checkBox_target.Checked = vehicleDetail.v_checkBox_target.Checked;
+            v_comboBox_class.Text = vehicleDetail.v_comboBox_class.Text;
+            v_comboBox_vehicle.Text = vehicleDetail.v_comboBox_vehicle.Text;
+        }
+
+        public override void BuildDetail()
         {
             this.v_groupBox_main = new System.Windows.Forms.GroupBox();
             this.v_textBox_zcoord = new System.Windows.Forms.TextBox();
@@ -444,8 +493,13 @@ namespace SOC.UI
             this.v_groupBox_main.ResumeLayout(false);
             this.v_groupBox_main.PerformLayout();
         }
+
+        public override GroupBox getGroupBoxMain()
+        {
+            return v_groupBox_main;
+        }
     }
-    public class ItemDetail
+    public class ItemDetail : Detail
     {
         Coordinates itemCoords;
         int itemNum;
@@ -467,13 +521,22 @@ namespace SOC.UI
         public Label i_label_count;
         public Label i_label_item;
 
-        public ItemDetail(Coordinates itcoord, int inum)
+        public ItemDetail(Coordinates coord, int num) : base(coord, num)
         {
-            itemCoords = itcoord;
-            itemNum = inum;
+            itemCoords = coord;
+            itemNum = num;
         }
 
-        public void BuildDetail()
+        public override void SetDetail(Detail detail)
+        {
+            ItemDetail itemDetail = (ItemDetail)detail;
+            i_comboBox_count.Text = itemDetail.i_comboBox_count.Text;
+            i_label_boxed.Text = itemDetail.i_label_boxed.Text;
+            i_comboBox_item.Text = itemDetail.i_comboBox_item.Text;
+
+        }
+
+        public override void BuildDetail()
         {
             this.i_groupBox_main = new System.Windows.Forms.GroupBox();
             this.i_textBox_zcoord = new System.Windows.Forms.TextBox();
@@ -598,7 +661,7 @@ namespace SOC.UI
             });
             this.i_comboBox_count.Name = "i_comboBox_count";
             this.i_comboBox_count.Size = new System.Drawing.Size(150, 21);
-            this.i_comboBox_count.TabIndex = 8;
+            this.i_comboBox_count.TabIndex = 9;
             this.i_comboBox_count.Text = i_comboBox_count.Items[0].ToString();
             // 
             // i_checkBox_boxed
@@ -613,7 +676,6 @@ namespace SOC.UI
             this.i_checkBox_boxed.Location = new System.Drawing.Point(78, 120);
             this.i_checkBox_boxed.Name = "i_checkBox_boxed";
             this.i_checkBox_boxed.Size = new System.Drawing.Size(17, 18);
-            this.i_checkBox_boxed.TabIndex = 9;
             this.i_checkBox_boxed.UseVisualStyleBackColor = true;
             // 
             // i_comboBox_item
@@ -633,7 +695,7 @@ namespace SOC.UI
             this.i_comboBox_item.Items.AddRange(items);
             this.i_comboBox_item.Name = "i_comboBox_item";
             this.i_comboBox_item.Size = new System.Drawing.Size(150, 21);
-            this.i_comboBox_item.TabIndex = 7;
+            this.i_comboBox_item.TabIndex = 8;
             this.i_comboBox_item.Text = "EQP_SWP_Magazine";
             this.i_comboBox_item.SelectedIndexChanged += new System.EventHandler(this.i_comboBox_item_SelectedIndexChanged);
 
@@ -654,8 +716,13 @@ namespace SOC.UI
                 this.i_comboBox_count.Enabled = true;
             }
         }
+
+        public override GroupBox getGroupBoxMain()
+        {
+            return i_groupBox_main;
+        }
     }
-    public class ModelDetail
+    public class ModelDetail : Detail
     {
         Coordinates StMdCoords;
         int StMdNum;
@@ -675,13 +742,20 @@ namespace SOC.UI
         public Label m_label_coord;
         public Label m_label_GeomNotFound;
 
-        public ModelDetail(Coordinates StMdC, int StMdN)
+        public ModelDetail(Coordinates coord, int num) : base(coord, num)
         {
-            StMdCoords = StMdC;
-            StMdNum = StMdN;
+            StMdCoords = coord;
+            StMdNum = num;
         }
 
-        public void BuildDetail()
+        public override void SetDetail(Detail detail)
+        {
+            ModelDetail modelDetail = (ModelDetail)detail;
+            m_comboBox_preset.Text = modelDetail.m_comboBox_preset.Text;
+            
+        }
+
+        public override void BuildDetail()
         {
 
             this.m_groupBox_main = new System.Windows.Forms.GroupBox();
@@ -868,9 +942,14 @@ namespace SOC.UI
                 m_label_GeomNotFound.Visible = false;
 
         }
+
+        public override GroupBox getGroupBoxMain()
+        {
+            return m_groupBox_main;
+        }
     }
 
-    public class ActiveItemDetail
+    public class ActiveItemDetail : Detail
     {
         Coordinates activeItemCoords;
         int activeItemNum;
@@ -888,13 +967,20 @@ namespace SOC.UI
         public TextBox ai_textBox_yrot;
         public TextBox ai_textBox_xrot;
 
-        public ActiveItemDetail(Coordinates AcItCoord, int AcItN)
+        public ActiveItemDetail(Coordinates coord, int num) : base(coord, num)
         {
-            activeItemCoords = AcItCoord;
-            activeItemNum = AcItN;
+            activeItemCoords = coord;
+            activeItemNum = num;
 
         }
-        public void BuildDetail()
+        
+        public override void SetDetail(Detail detail)
+        {
+            ActiveItemDetail acItDet = (ActiveItemDetail)detail;
+            ai_comboBox_activeitem.Text = acItDet.ai_comboBox_activeitem.Text;
+        }
+
+        public override void BuildDetail()
         {
             this.ai_groupBox_main = new System.Windows.Forms.GroupBox();
             this.ai_label_coord = new System.Windows.Forms.Label();
@@ -1017,6 +1103,8 @@ namespace SOC.UI
             // 
             // ai_comboBox_activeitem
             // 
+            this.ai_comboBox_activeitem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ai_comboBox_activeitem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ai_comboBox_activeitem.FormattingEnabled = true;
             this.ai_comboBox_activeitem.Location = new System.Drawing.Point(84, 65);
@@ -1029,9 +1117,14 @@ namespace SOC.UI
             this.ai_groupBox_main.ResumeLayout(false);
             this.ai_groupBox_main.PerformLayout();
         }
+
+        public override GroupBox getGroupBoxMain()
+        {
+            return ai_groupBox_main;
+        }
     }
 
-    public class AnimalDetail
+    public class AnimalDetail : Detail
     {
         public Coordinates animalCoords;
         int animalNum;
@@ -1053,13 +1146,22 @@ namespace SOC.UI
         public TextBox a_textBox_xcoord;
         public Label a_label_coord;
 
-        public AnimalDetail(Coordinates acoord, int anum)
+        public AnimalDetail(Coordinates coord, int num) : base(coord, num)
         {
-            animalCoords = acoord;
-            animalNum = anum;
+            animalCoords = coord;
+            animalNum = num;
         }
 
-        public void BuildDetail()
+        public override void SetDetail(Detail detail)
+        {
+            AnimalDetail animalDetail = (AnimalDetail)detail;
+            a_checkBox_isTarget.Checked = animalDetail.a_checkBox_isTarget.Checked;
+            a_comboBox_animal.Text = animalDetail.a_comboBox_animal.Text;
+            a_comboBox_TypeID.Text = animalDetail.a_comboBox_TypeID.Text;
+            a_comboBox_count.Text = animalDetail.a_comboBox_count.Text;
+        }
+
+        public override void BuildDetail()
         {
 
             this.a_groupBox_main = new System.Windows.Forms.GroupBox();
@@ -1255,28 +1357,7 @@ namespace SOC.UI
             this.a_groupBox_main.ResumeLayout(false);
             this.a_groupBox_main.PerformLayout();
         }
-        /*
-        private void a_comboBox_count_selectedindexchanged(object sender, EventArgs e)
-        {
-            a_comboBox_TypeID.Items.Clear();
-            for (int i = 1; i <= (Int32.Parse(a_comboBox_count.Text)); i++)
-            {
-                a_comboBox_TypeID.Items.Add(i.ToString());
-            }
-            a_comboBox_TypeID.Text = "1";
-        }
-        
-        private void a_checkBox_isTarget_CheckedChanged(object sender, EventArgs e)
-        {
-            if (a_checkBox_isTarget.Checked)
-            {
-                a_comboBox_TypeID.Enabled = true;
-            } else
-            {
-                a_comboBox_TypeID.Enabled = false;
-            }
-        }
-        */
+
         private void a_comboBox_animal_selectedIndexChanged(object sender, EventArgs e)
         {
             a_comboBox_count.Items.Clear();
@@ -1321,6 +1402,11 @@ namespace SOC.UI
             a_comboBox_TypeID.Text = QuestComponents.AnimalInfo.getAnimalType(a_comboBox_animal.Text);
             a_comboBox_count.Text = "1";
         }
+
+        public override GroupBox getGroupBoxMain()
+        {
+            return a_groupBox_main;
+        }
     }
 
     partial class Details
@@ -1353,8 +1439,8 @@ namespace SOC.UI
         private void InitializeComponent()
         {
             this.panelDetails = new System.Windows.Forms.Panel();
-            this.groupAcItDet = new System.Windows.Forms.GroupBox();
-            this.panelAcItDet = new System.Windows.Forms.Panel();
+            this.groupEneDet = new System.Windows.Forms.GroupBox();
+            this.panelEneDet = new System.Windows.Forms.Panel();
             this.groupAnimalDet = new System.Windows.Forms.GroupBox();
             this.panelAnimalDet = new System.Windows.Forms.Panel();
             this.groupVehDet = new System.Windows.Forms.GroupBox();
@@ -1363,6 +1449,7 @@ namespace SOC.UI
             this.panelStMdDet = new System.Windows.Forms.Panel();
             this.groupItemDet = new System.Windows.Forms.GroupBox();
             this.panelItemDet = new System.Windows.Forms.Panel();
+            this.panelAcItDet = new System.Windows.Forms.Panel();
             this.groupHosDet = new System.Windows.Forms.GroupBox();
             this.panelHosDet = new System.Windows.Forms.Panel();
             this.h_label_intrgt = new System.Windows.Forms.Label();
@@ -1370,7 +1457,7 @@ namespace SOC.UI
             this.comboBox_Body = new System.Windows.Forms.ComboBox();
             this.label_Body = new System.Windows.Forms.Label();
             this.panelDetails.SuspendLayout();
-            this.groupAcItDet.SuspendLayout();
+            this.groupEneDet.SuspendLayout();
             this.groupAnimalDet.SuspendLayout();
             this.groupVehDet.SuspendLayout();
             this.groupStMdDet.SuspendLayout();
@@ -1382,7 +1469,7 @@ namespace SOC.UI
             // panelDetails
             // 
             this.panelDetails.AutoScroll = true;
-            this.panelDetails.Controls.Add(this.groupAcItDet);
+            this.panelDetails.Controls.Add(this.groupEneDet);
             this.panelDetails.Controls.Add(this.groupAnimalDet);
             this.panelDetails.Controls.Add(this.groupVehDet);
             this.panelDetails.Controls.Add(this.groupStMdDet);
@@ -1391,41 +1478,41 @@ namespace SOC.UI
             this.panelDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelDetails.Location = new System.Drawing.Point(0, 0);
             this.panelDetails.Name = "panelDetails";
-            this.panelDetails.Size = new System.Drawing.Size(1080, 450);
+            this.panelDetails.Size = new System.Drawing.Size(1616, 450);
             this.panelDetails.TabIndex = 0;
             // 
-            // groupAcItDet
+            // groupEneDet
             // 
-            this.groupAcItDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.groupEneDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.groupAcItDet.Controls.Add(this.panelAcItDet);
-            this.groupAcItDet.Location = new System.Drawing.Point(1081, 3);
-            this.groupAcItDet.Name = "groupAcItDet";
-            this.groupAcItDet.Size = new System.Drawing.Size(264, 427);
-            this.groupAcItDet.TabIndex = 31;
-            this.groupAcItDet.TabStop = false;
-            this.groupAcItDet.Text = "Active Item Details";
+            this.groupEneDet.Controls.Add(this.panelEneDet);
+            this.groupEneDet.Location = new System.Drawing.Point(3, 3);
+            this.groupEneDet.Name = "groupEneDet";
+            this.groupEneDet.Size = new System.Drawing.Size(264, 444);
+            this.groupEneDet.TabIndex = 32;
+            this.groupEneDet.TabStop = false;
+            this.groupEneDet.Text = "Enemy Details";
             // 
-            // panelAcItDet
+            // panelEneDet
             // 
-            this.panelAcItDet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.panelEneDet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelAcItDet.AutoScroll = true;
-            this.panelAcItDet.Location = new System.Drawing.Point(3, 16);
-            this.panelAcItDet.Name = "panelAcItDet";
-            this.panelAcItDet.Size = new System.Drawing.Size(258, 405);
-            this.panelAcItDet.TabIndex = 0;
+            this.panelEneDet.AutoScroll = true;
+            this.panelEneDet.Location = new System.Drawing.Point(3, 16);
+            this.panelEneDet.Name = "panelEneDet";
+            this.panelEneDet.Size = new System.Drawing.Size(258, 422);
+            this.panelEneDet.TabIndex = 0;
             // 
             // groupAnimalDet
             // 
             this.groupAnimalDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupAnimalDet.Controls.Add(this.panelAnimalDet);
-            this.groupAnimalDet.Location = new System.Drawing.Point(1351, 3);
+            this.groupAnimalDet.Location = new System.Drawing.Point(810, 3);
             this.groupAnimalDet.Name = "groupAnimalDet";
-            this.groupAnimalDet.Size = new System.Drawing.Size(264, 427);
-            this.groupAnimalDet.TabIndex = 31;
+            this.groupAnimalDet.Size = new System.Drawing.Size(264, 444);
+            this.groupAnimalDet.TabIndex = 20;
             this.groupAnimalDet.TabStop = false;
             this.groupAnimalDet.Text = "Animal Details";
             // 
@@ -1437,7 +1524,7 @@ namespace SOC.UI
             this.panelAnimalDet.AutoScroll = true;
             this.panelAnimalDet.Location = new System.Drawing.Point(3, 16);
             this.panelAnimalDet.Name = "panelAnimalDet";
-            this.panelAnimalDet.Size = new System.Drawing.Size(258, 405);
+            this.panelAnimalDet.Size = new System.Drawing.Size(258, 422);
             this.panelAnimalDet.TabIndex = 0;
             // 
             // groupVehDet
@@ -1445,9 +1532,9 @@ namespace SOC.UI
             this.groupVehDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupVehDet.Controls.Add(this.panelVehDet);
-            this.groupVehDet.Location = new System.Drawing.Point(271, 3);
+            this.groupVehDet.Location = new System.Drawing.Point(541, 3);
             this.groupVehDet.Name = "groupVehDet";
-            this.groupVehDet.Size = new System.Drawing.Size(264, 427);
+            this.groupVehDet.Size = new System.Drawing.Size(264, 444);
             this.groupVehDet.TabIndex = 12;
             this.groupVehDet.TabStop = false;
             this.groupVehDet.Text = "Vehicle Details";
@@ -1460,7 +1547,7 @@ namespace SOC.UI
             this.panelVehDet.AutoScroll = true;
             this.panelVehDet.Location = new System.Drawing.Point(3, 16);
             this.panelVehDet.Name = "panelVehDet";
-            this.panelVehDet.Size = new System.Drawing.Size(258, 405);
+            this.panelVehDet.Size = new System.Drawing.Size(258, 422);
             this.panelVehDet.TabIndex = 0;
             // 
             // groupStMdDet
@@ -1468,10 +1555,10 @@ namespace SOC.UI
             this.groupStMdDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupStMdDet.Controls.Add(this.panelStMdDet);
-            this.groupStMdDet.Location = new System.Drawing.Point(811, 3);
+            this.groupStMdDet.Location = new System.Drawing.Point(1350, 3);
             this.groupStMdDet.Name = "groupStMdDet";
-            this.groupStMdDet.Size = new System.Drawing.Size(264, 427);
-            this.groupStMdDet.TabIndex = 30;
+            this.groupStMdDet.Size = new System.Drawing.Size(264, 444);
+            this.groupStMdDet.TabIndex = 31;
             this.groupStMdDet.TabStop = false;
             this.groupStMdDet.Text = "Static Model Details";
             // 
@@ -1483,7 +1570,7 @@ namespace SOC.UI
             this.panelStMdDet.AutoScroll = true;
             this.panelStMdDet.Location = new System.Drawing.Point(3, 16);
             this.panelStMdDet.Name = "panelStMdDet";
-            this.panelStMdDet.Size = new System.Drawing.Size(258, 405);
+            this.panelStMdDet.Size = new System.Drawing.Size(258, 422);
             this.panelStMdDet.TabIndex = 0;
             // 
             // groupItemDet
@@ -1491,10 +1578,11 @@ namespace SOC.UI
             this.groupItemDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupItemDet.Controls.Add(this.panelItemDet);
-            this.groupItemDet.Location = new System.Drawing.Point(541, 3);
+            this.groupItemDet.Controls.Add(this.panelAcItDet);
+            this.groupItemDet.Location = new System.Drawing.Point(1080, 3);
             this.groupItemDet.Name = "groupItemDet";
-            this.groupItemDet.Size = new System.Drawing.Size(264, 427);
-            this.groupItemDet.TabIndex = 20;
+            this.groupItemDet.Size = new System.Drawing.Size(264, 444);
+            this.groupItemDet.TabIndex = 29;
             this.groupItemDet.TabStop = false;
             this.groupItemDet.Text = "Item Details";
             // 
@@ -1506,17 +1594,28 @@ namespace SOC.UI
             this.panelItemDet.AutoScroll = true;
             this.panelItemDet.Location = new System.Drawing.Point(3, 16);
             this.panelItemDet.Name = "panelItemDet";
-            this.panelItemDet.Size = new System.Drawing.Size(258, 405);
+            this.panelItemDet.Size = new System.Drawing.Size(258, 422);
             this.panelItemDet.TabIndex = 0;
+            // 
+            // panelAcItDet
+            // 
+            this.panelAcItDet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelAcItDet.AutoScroll = true;
+            this.panelAcItDet.Location = new System.Drawing.Point(3, 16);
+            this.panelAcItDet.Name = "panelAcItDet";
+            this.panelAcItDet.Size = new System.Drawing.Size(258, 422);
+            this.panelAcItDet.TabIndex = 0;
             // 
             // groupHosDet
             // 
             this.groupHosDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupHosDet.Controls.Add(this.panelHosDet);
-            this.groupHosDet.Location = new System.Drawing.Point(4, 3);
+            this.groupHosDet.Location = new System.Drawing.Point(272, 3);
             this.groupHosDet.Name = "groupHosDet";
-            this.groupHosDet.Size = new System.Drawing.Size(264, 427);
+            this.groupHosDet.Size = new System.Drawing.Size(264, 444);
             this.groupHosDet.TabIndex = 1;
             this.groupHosDet.TabStop = false;
             this.groupHosDet.Text = "Hostage Details";
@@ -1533,7 +1632,7 @@ namespace SOC.UI
             this.panelHosDet.Controls.Add(this.label_Body);
             this.panelHosDet.Location = new System.Drawing.Point(3, 16);
             this.panelHosDet.Name = "panelHosDet";
-            this.panelHosDet.Size = new System.Drawing.Size(258, 405);
+            this.panelHosDet.Size = new System.Drawing.Size(258, 422);
             this.panelHosDet.TabIndex = 0;
             // 
             // h_label_intrgt
@@ -1584,9 +1683,9 @@ namespace SOC.UI
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.panelDetails);
             this.Name = "Details";
-            this.Size = new System.Drawing.Size(1080, 450);
+            this.Size = new System.Drawing.Size(1616, 450);
             this.panelDetails.ResumeLayout(false);
-            this.groupAcItDet.ResumeLayout(false);
+            this.groupEneDet.ResumeLayout(false);
             this.groupAnimalDet.ResumeLayout(false);
             this.groupVehDet.ResumeLayout(false);
             this.groupStMdDet.ResumeLayout(false);
@@ -1612,10 +1711,11 @@ namespace SOC.UI
         private Panel panelAnimalDet;
         private Label h_label_intrgt;
         public CheckBox h_checkBox_intrgt;
-        public GroupBox groupAcItDet;
         private Panel panelAcItDet;
         public GroupBox groupAnimalDet;
         public Panel panelHosDet;
         public Panel panelVehDet;
+        public GroupBox groupEneDet;
+        public Panel panelEneDet;
     }
 }

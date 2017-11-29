@@ -453,16 +453,16 @@
             // 
             this.textBox_Animal.AcceptsReturn = true;
             this.textBox_Animal.BackColor = System.Drawing.Color.Silver;
-            this.textBox_Animal.Location = new System.Drawing.Point(3, 522);
+            this.textBox_Animal.Location = new System.Drawing.Point(3, 224);
             this.textBox_Animal.Multiline = true;
             this.textBox_Animal.Name = "textBox_Animal";
-            this.textBox_Animal.Size = new System.Drawing.Size(540, 75);
-            this.textBox_Animal.TabIndex = 25;
+            this.textBox_Animal.Size = new System.Drawing.Size(542, 80);
+            this.textBox_Animal.TabIndex = 19;
             // 
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(3, 506);
+            this.label22.Location = new System.Drawing.Point(3, 208);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(245, 13);
             this.label22.TabIndex = 26;
@@ -475,8 +475,8 @@
             this.textBox_ActiveItem.Location = new System.Drawing.Point(3, 426);
             this.textBox_ActiveItem.Multiline = true;
             this.textBox_ActiveItem.Name = "textBox_ActiveItem";
-            this.textBox_ActiveItem.Size = new System.Drawing.Size(540, 75);
-            this.textBox_ActiveItem.TabIndex = 23;
+            this.textBox_ActiveItem.Size = new System.Drawing.Size(542, 80);
+            this.textBox_ActiveItem.TabIndex = 21;
             this.textBox_ActiveItem.TextChanged += new System.EventHandler(this.textBoxItemCoords_TextChanged);
             // 
             // label21
@@ -492,22 +492,22 @@
             // 
             this.textBoxItemCoords.AcceptsReturn = true;
             this.textBoxItemCoords.BackColor = System.Drawing.Color.Silver;
-            this.textBoxItemCoords.Location = new System.Drawing.Point(3, 224);
+            this.textBoxItemCoords.Location = new System.Drawing.Point(3, 325);
             this.textBoxItemCoords.Multiline = true;
             this.textBoxItemCoords.Name = "textBoxItemCoords";
             this.textBoxItemCoords.Size = new System.Drawing.Size(542, 80);
-            this.textBoxItemCoords.TabIndex = 19;
+            this.textBoxItemCoords.TabIndex = 20;
             this.textBoxItemCoords.TextChanged += new System.EventHandler(this.textBoxItemCoords_TextChanged);
             // 
             // textBoxStMdCoords
             // 
             this.textBoxStMdCoords.AcceptsReturn = true;
             this.textBoxStMdCoords.BackColor = System.Drawing.Color.Silver;
-            this.textBoxStMdCoords.Location = new System.Drawing.Point(3, 325);
+            this.textBoxStMdCoords.Location = new System.Drawing.Point(3, 527);
             this.textBoxStMdCoords.Multiline = true;
             this.textBoxStMdCoords.Name = "textBoxStMdCoords";
             this.textBoxStMdCoords.Size = new System.Drawing.Size(542, 80);
-            this.textBoxStMdCoords.TabIndex = 20;
+            this.textBoxStMdCoords.TabIndex = 22;
             // 
             // textBoxHosCoords
             // 
@@ -516,13 +516,13 @@
             this.textBoxHosCoords.Location = new System.Drawing.Point(3, 22);
             this.textBoxHosCoords.Multiline = true;
             this.textBoxHosCoords.Name = "textBoxHosCoords";
-            this.textBoxHosCoords.Size = new System.Drawing.Size(539, 80);
+            this.textBoxHosCoords.Size = new System.Drawing.Size(542, 80);
             this.textBoxHosCoords.TabIndex = 17;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(0, 6);
+            this.label15.Location = new System.Drawing.Point(3, 6);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(217, 13);
             this.label15.TabIndex = 16;
@@ -535,7 +535,7 @@
             this.textBoxVehCoords.Location = new System.Drawing.Point(3, 123);
             this.textBoxVehCoords.Multiline = true;
             this.textBoxVehCoords.Name = "textBoxVehCoords";
-            this.textBoxVehCoords.Size = new System.Drawing.Size(539, 80);
+            this.textBoxVehCoords.Size = new System.Drawing.Size(542, 80);
             this.textBoxVehCoords.TabIndex = 18;
             // 
             // label16
@@ -550,7 +550,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(3, 309);
+            this.label18.Location = new System.Drawing.Point(3, 511);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(238, 13);
             this.label18.TabIndex = 22;
@@ -559,7 +559,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(3, 208);
+            this.label17.Location = new System.Drawing.Point(3, 309);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(199, 13);
             this.label17.TabIndex = 20;

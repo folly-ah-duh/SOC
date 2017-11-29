@@ -66,6 +66,7 @@ namespace SOC.UI
                 case 1:
                     if (isFilled())
                     {
+                        this.Width = 1200;
                         setupPage.DisableScrolling();
                         List<Coordinates> HostageCoords = BuildCoordinatesList(setupPage.textBoxHosCoords.Text);
                         List<Coordinates> VehicleCoords = BuildCoordinatesList(setupPage.textBoxVehCoords.Text);
@@ -78,7 +79,6 @@ namespace SOC.UI
                         panelMain.Controls.Add(detailPage);
                         detailPage.RefreshDetails(HostageCoords, VehicleCoords, ItemCoords, ModelCoords, activeItemCoords, AnimalCoords);
                         buttonNext.Text = "Build";
-                        this.Width = 1180;
                     }
                     else
                     {
@@ -113,26 +113,29 @@ namespace SOC.UI
 
         private void FormMain_SizeChanged(object sender, EventArgs e)
         {
-            int maxPanelWidth = 314;
+            int maxPanelWidth = 313;
             detailPage.Height = this.Height - 100;
             detailPage.Width = this.Width - 42;
-            int dynamicPanelWidth = detailPage.Width / 4;
+            int dynamicPanelWidth = detailPage.Width / 4 - 20;
 
             if (dynamicPanelWidth >= maxPanelWidth)
                 dynamicPanelWidth = maxPanelWidth;
 
+            detailPage.groupEneDet.Width = dynamicPanelWidth;
             detailPage.groupHosDet.Width = dynamicPanelWidth;
             detailPage.groupVehDet.Width = dynamicPanelWidth;
             detailPage.groupItemDet.Width = dynamicPanelWidth;
             detailPage.groupStMdDet.Width = dynamicPanelWidth;
-            detailPage.groupAcItDet.Width = dynamicPanelWidth;
             detailPage.groupAnimalDet.Width = dynamicPanelWidth;
 
-            detailPage.groupVehDet.Left = detailPage.groupHosDet.Location.X + dynamicPanelWidth;
-            detailPage.groupItemDet.Left = detailPage.groupHosDet.Location.X + dynamicPanelWidth * 2;
-            detailPage.groupStMdDet.Left = detailPage.groupHosDet.Location.X + dynamicPanelWidth * 3;
-            detailPage.groupAcItDet.Left = detailPage.groupHosDet.Location.X + dynamicPanelWidth * 4;
-            detailPage.groupAnimalDet.Left = detailPage.groupHosDet.Location.X + dynamicPanelWidth * 5;
+            int xOffset = detailPage.groupEneDet.Location.X;
+            int bufferSpace = 2 + dynamicPanelWidth;
+
+            detailPage.groupHosDet.Left = xOffset + bufferSpace * 1;
+            detailPage.groupVehDet.Left = xOffset + bufferSpace * 2;
+            detailPage.groupAnimalDet.Left = xOffset + bufferSpace * 3;
+            detailPage.groupItemDet.Left = xOffset + bufferSpace * 4;
+            detailPage.groupStMdDet.Left = xOffset + bufferSpace * 5;
 
         }
 

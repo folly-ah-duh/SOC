@@ -993,7 +993,7 @@ namespace SOC.QuestComponents
             public int hostageBodyIndex;
             public bool canInter;
 
-            public QuestDetails(List<HostageDetail> hosDets, List<VehicleDetail> vehDets, List<ItemDetail> itDets, List<ModelDetail> MdDets, List<ActiveItemDetail> acitdets, List<AnimalDetail> anidets,int bodyIndex, bool inter)
+            public QuestDetails(List<HostageDetail> hosDets, List<VehicleDetail> vehDets, List<AnimalDetail> anidets, List<ItemDetail> itDets, List<ActiveItemDetail> acitdets, List<ModelDetail> MdDets, int bodyIndex, bool inter)
             {
                 hostageDetails = hosDets;
                 vehicleDetails = vehDets;

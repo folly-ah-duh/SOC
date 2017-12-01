@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using static SOC.QuestComponents.GameObjectInfo;
+using static SOC.QuestComponents.EnemyInfo;
 
 namespace SOC.UI
 {
@@ -19,6 +20,9 @@ namespace SOC.UI
         private static extern Int32 SendMessage(IntPtr hWnd, int msg, int wParam, [MarshalAs(UnmanagedType.LPWStr)]string lParam);
         public static DefinitionDetails DefinitionInfo;
         public int locationID = -1;
+        string[] afghCP = new string[AfghCPs.Length];
+        string[] mafrCP = new string[MafrCPs.Length];
+        string[] mtbsCP = new string[] { "NONE" };
 
         public Setup()
         {
@@ -27,6 +31,12 @@ namespace SOC.UI
             SendMessage(textBoxQuestNum.Handle, 0x1501, 1, "30103");
             SendMessage(textBoxFPKName.Handle, 0x1501, 1, "Example_Quest_Name");
             SendMessage(textBoxQuestTitle.Handle, 0x1501, 1, "Example Quest Title Text");
+
+            for (int i = 0; i < AfghCPs.Length; i++)
+                afghCP[i] = AfghCPs[i].CPname;
+            for (int i = 0; i < MafrCPs.Length; i++)
+                mafrCP[i] = MafrCPs[i].CPname;
+
             refreshNotifsList();
         }
 

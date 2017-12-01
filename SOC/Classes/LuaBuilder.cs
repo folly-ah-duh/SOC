@@ -271,7 +271,7 @@ namespace SOC.Classes
                     double.TryParse(vehicleDetail.v_textBox_ycoord.Text, out yOffset);
                     yOffset += 0.783;
 
-                    vehicleList.Add(string.Format("			position={{pos={{{0},{1},{2}}},rotY={3},}},", vehicleDetail.v_textBox_xcoord.Text, vehicleDetail.v_textBox_ycoord.Text, vehicleDetail.v_textBox_zcoord.Text, toRadians));
+                    vehicleList.Add(string.Format("			position={{pos={{{0},{1},{2}}},rotY={3},}},", vehicleDetail.v_textBox_xcoord.Text, yOffset, vehicleDetail.v_textBox_zcoord.Text, toRadians));
 
                     vehicleList.Add("		},");
                 }

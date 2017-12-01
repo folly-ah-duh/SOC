@@ -8,12 +8,15 @@ namespace SOC.UI
 {
     public partial class Details : UserControl
     {
+        List<Detail> questEnemyDetails;
+        List<Detail> CPEnemyDetails;
         List<Detail> hostageDetails;
         List<Detail> vehicleDetails;
         List<Detail> itemDetails;
         List<Detail> modelDetails;
         List<Detail> activeItemDetails;
         List<Detail> animalDetails;
+
         public QuestDetails questDetails;
 
         public string[] Langs = { "english", "russian", "pashto", "kikongo", "afrikaans" };
@@ -21,6 +24,8 @@ namespace SOC.UI
         public Details()
         {
             InitializeComponent();
+            questEnemyDetails = new List<Detail>();
+            CPEnemyDetails = new List<Detail>();
             hostageDetails = new List<Detail>();
             vehicleDetails = new List<Detail>();
             itemDetails = new List<Detail>();
@@ -35,7 +40,7 @@ namespace SOC.UI
             comboBox_Body.Text = "AFGH_HOSTAGE";
         }
 
-        public void AddDetail(Detail newDetail, List<Detail> details, Panel panel)
+        public void RefreshOrAddDetail(Detail newDetail, List<Detail> details, Panel panel)
         {
             newDetail.BuildDetail();
 
@@ -66,7 +71,7 @@ namespace SOC.UI
             }
         }
 
-        public void RefreshDetails(List<Coordinates> HostageCoords, List<Coordinates> VehicleCoords, List<Coordinates> ItemCoords, List<Coordinates> ModelCoords, List<Coordinates> ActItemsCoords, List<Coordinates> AnimalCoords)
+        public void RefreshDetails(CP questCP, List<Coordinates> HostageCoords, List<Coordinates> VehicleCoords, List<Coordinates> ItemCoords, List<Coordinates> ModelCoords, List<Coordinates> ActItemsCoords, List<Coordinates> AnimalCoords)
         {
 
             Tuple<List<Detail>, List<Coordinates>, Panel>[] detailTuples =
@@ -88,39 +93,57 @@ namespace SOC.UI
                 {
                     case 0: // hostages
                         for (int j = 0; j < detailTuple.Item2.Count; j++)
-                            AddDetail(new HostageDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
+                            RefreshOrAddDetail(new HostageDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
                         RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
                         break;
                     case 1: // vehicles
                         for (int j = 0; j < detailTuple.Item2.Count; j++)
-                            AddDetail(new VehicleDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
+                            RefreshOrAddDetail(new VehicleDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
                         RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
                         break;
                     case 2: // animals
                         for (int j = 0; j < detailTuple.Item2.Count; j++)
-                            AddDetail(new AnimalDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
+                            RefreshOrAddDetail(new AnimalDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
                         RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
                         break;
                     case 3: // items
                         for (int j = 0; j < detailTuple.Item2.Count; j++)
-                            AddDetail(new ItemDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
+                            RefreshOrAddDetail(new ItemDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
                         RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
                         break;
                     case 4: // active items
                         for (int j = 0; j < detailTuple.Item2.Count; j++)
-                            AddDetail(new ActiveItemDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
+                            RefreshOrAddDetail(new ActiveItemDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
                         RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
                         break;
                     case 5: // models
                         for (int j = 0; j < detailTuple.Item2.Count; j++)
-                            AddDetail(new ModelDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
+                            RefreshOrAddDetail(new ModelDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
                         RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
                         break;
                 }
                 detailTuple.Item3.AutoScroll = true;
             }
-            
-            
+
+            panelQuestEnemyDet.AutoScroll = false;
+            panelCPEnemyDet.AutoScroll = false;
+            for (int i = 0; i < 8; i++)
+            {
+                RefreshOrAddDetail(new EnemyDetail(i), questEnemyDetails, panelQuestEnemyDet);
+            }
+            RemoveExtraDetails(questEnemyDetails, 8, panelQuestEnemyDet);
+            for (int i = 0; i < questCP.CPsoldiers.Length; i++)
+            {
+                EnemyDetail enemyDetail = new EnemyDetail(i);
+                RefreshOrAddDetail(enemyDetail, CPEnemyDetails, panelCPEnemyDet);
+                enemyDetail.e_groupBox_main.Text = questCP.CPsoldiers[i];
+            }
+            RemoveExtraDetails(CPEnemyDetails, questCP.CPsoldiers.Length, panelCPEnemyDet);
+            panelQuestEnemyDet.AutoScroll = true;
+            panelCPEnemyDet.AutoScroll = true;
+
+
+
             if (HostageCoords.Count > 0)
             {
                 h_checkBox_intrgt.Visible = true;
@@ -140,13 +163,13 @@ namespace SOC.UI
             if (ActItemsCoords.Count == 0)
             {
                 panelItemDet.Visible = true;
-                groupItemDet.Text = "Item Details";
+                groupItemDet.Text = "Dormant Items";
                 panelAcItDet.Visible = false;
             }
             else
             {
                 panelAcItDet.Visible = true;
-                groupItemDet.Text = "Active Item Details";
+                groupItemDet.Text = "Active Items";
                 panelItemDet.Visible = false;
             }
         }

@@ -122,6 +122,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="QuestComponents\AnimalInfo.cs" />
+    <Compile Include="QuestComponents\EnemyInfo.cs" />
     <Compile Include="QuestComponents\Fox2Info.cs" />
     <Compile Include="QuestComponents\GameObjectInfo.cs" />
     <Compile Include="QuestComponents\BodyInfo.cs" />

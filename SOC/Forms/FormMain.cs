@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using SOC.Classes;
 using static SOC.QuestComponents.GameObjectInfo;
+using SOC.QuestComponents;
 
 namespace SOC.UI
 {
@@ -37,7 +38,7 @@ namespace SOC.UI
         }
         private bool isFilled()
         {
-            //return true; // FOR DEBUG
+            return true; // FOR DEBUG
             if (string.IsNullOrEmpty(setupPage.textBoxFPKName.Text) || string.IsNullOrEmpty(setupPage.textBoxQuestNum.Text) || string.IsNullOrEmpty(setupPage.textBoxQuestTitle.Text) || string.IsNullOrEmpty(setupPage.textBoxQuestDesc.Text))
                 return false;
             if (setupPage.comboBoxCategory.SelectedIndex == -1 || setupPage.comboBoxReward.SelectedIndex == -1 || setupPage.comboBoxObjective.SelectedIndex == -1 || setupPage.comboBoxProgressNotifs.SelectedIndex == -1 || setupPage.comboBoxRegion.SelectedIndex == -1)
@@ -74,10 +75,24 @@ namespace SOC.UI
                         List<Coordinates> ModelCoords = BuildCoordinatesList(setupPage.textBoxStMdCoords.Text);
                         List<Coordinates> activeItemCoords = BuildCoordinatesList(setupPage.textBox_ActiveItem.Text);
                         List<Coordinates> AnimalCoords = BuildCoordinatesList(setupPage.textBox_Animal.Text);
+                        CP selectedCP = new CP();
+                        if (isAfgh(setupPage))
+                        {
+                            selectedCP = EnemyInfo.AfghCPs[setupPage.comboBoxCP.SelectedIndex];
+                        }
+                        else if(isMafr(setupPage))
+                        {
+                            selectedCP = EnemyInfo.MafrCPs[setupPage.comboBoxCP.SelectedIndex];
+                        }
+                        else
+                        {
+                            selectedCP = EnemyInfo.NoneCP;
+                        }
+
                         buttonBack.Visible = true;
                         panelMain.Controls.Clear();
                         panelMain.Controls.Add(detailPage);
-                        detailPage.RefreshDetails(HostageCoords, VehicleCoords, ItemCoords, ModelCoords, activeItemCoords, AnimalCoords);
+                        detailPage.RefreshDetails(selectedCP, HostageCoords, VehicleCoords, ItemCoords, ModelCoords, activeItemCoords, AnimalCoords);
                         buttonNext.Text = "Build";
                     }
                     else
@@ -121,21 +136,23 @@ namespace SOC.UI
             if (dynamicPanelWidth >= maxPanelWidth)
                 dynamicPanelWidth = maxPanelWidth;
 
-            detailPage.groupEneDet.Width = dynamicPanelWidth;
+            detailPage.groupNewEneDet.Width = dynamicPanelWidth;
+            detailPage.groupExistingEneDet.Width = dynamicPanelWidth;
             detailPage.groupHosDet.Width = dynamicPanelWidth;
             detailPage.groupVehDet.Width = dynamicPanelWidth;
             detailPage.groupItemDet.Width = dynamicPanelWidth;
             detailPage.groupStMdDet.Width = dynamicPanelWidth;
             detailPage.groupAnimalDet.Width = dynamicPanelWidth;
 
-            int xOffset = detailPage.groupEneDet.Location.X;
+            int xOffset = detailPage.groupNewEneDet.Location.X;
             int bufferSpace = 2 + dynamicPanelWidth;
 
-            detailPage.groupHosDet.Left = xOffset + bufferSpace * 1;
-            detailPage.groupVehDet.Left = xOffset + bufferSpace * 2;
-            detailPage.groupAnimalDet.Left = xOffset + bufferSpace * 3;
-            detailPage.groupItemDet.Left = xOffset + bufferSpace * 4;
-            detailPage.groupStMdDet.Left = xOffset + bufferSpace * 5;
+            detailPage.groupExistingEneDet.Left = xOffset + bufferSpace * 1;
+            detailPage.groupHosDet.Left = xOffset + bufferSpace * 2;
+            detailPage.groupVehDet.Left = xOffset + bufferSpace * 3;
+            detailPage.groupAnimalDet.Left = xOffset + bufferSpace * 4;
+            detailPage.groupItemDet.Left = xOffset + bufferSpace * 5;
+            detailPage.groupStMdDet.Left = xOffset + bufferSpace * 6;
 
         }
 

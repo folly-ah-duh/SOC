@@ -1409,6 +1409,333 @@ namespace SOC.UI
         }
     }
 
+    public class EnemyDetail : Detail
+    {
+        int enemyNum;
+
+        public GroupBox e_groupBox_main;
+        public CheckBox e_checkBox_target;
+        public Label e_label_target;
+        public CheckBox e_checkBox_armor;
+        public Label e_label_armor;
+        public CheckBox e_checkBox_spawn;
+        public Label e_label_spawn;
+        public Label e_label_body;
+        public ComboBox e_comboBox_body;
+        public ComboBox e_comboBox_cautionroute;
+        public Label e_label_cautionroute;
+        public ComboBox e_comboBox_sneakroute;
+        public Label e_label_sneakroute;
+        public ComboBox e_comboBox_skill;
+        public Label e_label_skill;
+        public ComboBox e_comboBox_staff;
+        public Label e_label_staff;
+        public ComboBox e_comboBox_power;
+        public Button e_button_removepower;
+        public Button e_button_addpower;
+        public Label e_label_power;
+        public ListBox e_listBox_power;
+
+        public EnemyDetail(int num) : base(new Coordinates("","",""), num)
+        {
+            enemyNum = num;
+        }
+
+        public override void BuildDetail()
+        {
+
+            this.e_groupBox_main = new System.Windows.Forms.GroupBox();
+            this.e_comboBox_power = new System.Windows.Forms.ComboBox();
+            this.e_button_removepower = new System.Windows.Forms.Button();
+            this.e_button_addpower = new System.Windows.Forms.Button();
+            this.e_label_power = new System.Windows.Forms.Label();
+            this.e_listBox_power = new System.Windows.Forms.ListBox();
+            this.e_comboBox_skill = new System.Windows.Forms.ComboBox();
+            this.e_label_skill = new System.Windows.Forms.Label();
+            this.e_comboBox_staff = new System.Windows.Forms.ComboBox();
+            this.e_label_staff = new System.Windows.Forms.Label();
+            this.e_comboBox_body = new System.Windows.Forms.ComboBox();
+            this.e_comboBox_cautionroute = new System.Windows.Forms.ComboBox();
+            this.e_label_cautionroute = new System.Windows.Forms.Label();
+            this.e_comboBox_sneakroute = new System.Windows.Forms.ComboBox();
+            this.e_label_sneakroute = new System.Windows.Forms.Label();
+            this.e_label_body = new System.Windows.Forms.Label();
+            this.e_checkBox_target = new System.Windows.Forms.CheckBox();
+            this.e_label_target = new System.Windows.Forms.Label();
+            this.e_checkBox_armor = new System.Windows.Forms.CheckBox();
+            this.e_label_armor = new System.Windows.Forms.Label();
+            this.e_checkBox_spawn = new System.Windows.Forms.CheckBox();
+            this.e_label_spawn = new System.Windows.Forms.Label();
+            this.e_groupBox_main.SuspendLayout();
+
+            // 
+            // e_groupBox_main
+            // 
+            this.e_groupBox_main.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.e_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
+            this.e_groupBox_main.Controls.Add(this.e_comboBox_power);
+            this.e_groupBox_main.Controls.Add(this.e_button_removepower);
+            this.e_groupBox_main.Controls.Add(this.e_button_addpower);
+            this.e_groupBox_main.Controls.Add(this.e_label_power);
+            this.e_groupBox_main.Controls.Add(this.e_listBox_power);
+            this.e_groupBox_main.Controls.Add(this.e_comboBox_skill);
+            this.e_groupBox_main.Controls.Add(this.e_label_skill);
+            this.e_groupBox_main.Controls.Add(this.e_comboBox_staff);
+            this.e_groupBox_main.Controls.Add(this.e_label_staff);
+            this.e_groupBox_main.Controls.Add(this.e_comboBox_body);
+            this.e_groupBox_main.Controls.Add(this.e_comboBox_cautionroute);
+            this.e_groupBox_main.Controls.Add(this.e_label_cautionroute);
+            this.e_groupBox_main.Controls.Add(this.e_comboBox_sneakroute);
+            this.e_groupBox_main.Controls.Add(this.e_label_sneakroute);
+            this.e_groupBox_main.Controls.Add(this.e_label_body);
+            this.e_groupBox_main.Controls.Add(this.e_checkBox_target);
+            this.e_groupBox_main.Controls.Add(this.e_checkBox_armor);
+            this.e_groupBox_main.Controls.Add(this.e_label_armor);
+            this.e_groupBox_main.Controls.Add(this.e_checkBox_spawn);
+            this.e_groupBox_main.Controls.Add(this.e_label_spawn);
+            this.e_groupBox_main.Controls.Add(this.e_label_target);
+            this.e_groupBox_main.Location = new System.Drawing.Point(4, 55 + (319 * enemyNum));
+            this.e_groupBox_main.Name = "e_groupBox_main";
+            this.e_groupBox_main.Size = new System.Drawing.Size(251, 302);
+            this.e_groupBox_main.TabIndex = 0;
+            this.e_groupBox_main.TabStop = false;
+            this.e_groupBox_main.Text = "sol_quest_000" + enemyNum;
+            // 
+            // e_comboBox_power
+            // 
+            this.e_comboBox_power.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.e_comboBox_power.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.e_comboBox_power.FormattingEnabled = true;
+            this.e_comboBox_power.Location = new System.Drawing.Point(99, 106);
+            this.e_comboBox_power.Name = "e_comboBox_power";
+            this.e_comboBox_power.Size = new System.Drawing.Size(100, 21);
+            this.e_comboBox_power.TabIndex = 22;
+            // 
+            // e_button_removepower
+            // 
+            this.e_button_removepower.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.e_button_removepower.Location = new System.Drawing.Point(190, 186);
+            this.e_button_removepower.Name = "e_button_removepower";
+            this.e_button_removepower.Size = new System.Drawing.Size(55, 23);
+            this.e_button_removepower.TabIndex = 21;
+            this.e_button_removepower.Text = "Remove";
+            this.e_button_removepower.UseVisualStyleBackColor = true;
+            // 
+            // e_button_addpower
+            // 
+            this.e_button_addpower.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.e_button_addpower.Location = new System.Drawing.Point(205, 106);
+            this.e_button_addpower.Name = "e_button_addpower";
+            this.e_button_addpower.Size = new System.Drawing.Size(40, 21);
+            this.e_button_addpower.TabIndex = 20;
+            this.e_button_addpower.Text = "Add";
+            this.e_button_addpower.UseVisualStyleBackColor = true;
+            // 
+            // e_label_power
+            // 
+            this.e_label_power.AutoSize = true;
+            this.e_label_power.Location = new System.Drawing.Point(9, 110);
+            this.e_label_power.Name = "e_label_power";
+            this.e_label_power.Size = new System.Drawing.Size(76, 13);
+            this.e_label_power.TabIndex = 19;
+            this.e_label_power.Text = "Gear | Tactics:";
+            // 
+            // e_listBox_power
+            // 
+            this.e_listBox_power.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.e_listBox_power.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.e_listBox_power.FormattingEnabled = true;
+            this.e_listBox_power.Location = new System.Drawing.Point(99, 131);
+            this.e_listBox_power.Name = "e_listBox_power";
+            this.e_listBox_power.Size = new System.Drawing.Size(145, 54);
+            this.e_listBox_power.TabIndex = 18;
+            // 
+            // e_comboBox_skill
+            // 
+            this.e_comboBox_skill.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.e_comboBox_skill.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.e_comboBox_skill.FormattingEnabled = true;
+            this.e_comboBox_skill.Location = new System.Drawing.Point(99, 275);
+            this.e_comboBox_skill.Name = "e_comboBox_skill";
+            this.e_comboBox_skill.Size = new System.Drawing.Size(146, 21);
+            this.e_comboBox_skill.TabIndex = 17;
+            // 
+            // e_label_skill
+            // 
+            this.e_label_skill.AutoSize = true;
+            this.e_label_skill.Location = new System.Drawing.Point(56, 278);
+            this.e_label_skill.Name = "e_label_skill";
+            this.e_label_skill.Size = new System.Drawing.Size(29, 13);
+            this.e_label_skill.TabIndex = 16;
+            this.e_label_skill.Text = "Skill:";
+            // 
+            // e_comboBox_staff
+            // 
+            this.e_comboBox_staff.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.e_comboBox_staff.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.e_comboBox_staff.FormattingEnabled = true;
+            this.e_comboBox_staff.Location = new System.Drawing.Point(99, 250);
+            this.e_comboBox_staff.Name = "e_comboBox_staff";
+            this.e_comboBox_staff.Size = new System.Drawing.Size(146, 21);
+            this.e_comboBox_staff.TabIndex = 15;
+            // 
+            // e_label_staff
+            // 
+            this.e_label_staff.AutoSize = true;
+            this.e_label_staff.Location = new System.Drawing.Point(26, 253);
+            this.e_label_staff.Name = "e_label_staff";
+            this.e_label_staff.Size = new System.Drawing.Size(59, 13);
+            this.e_label_staff.TabIndex = 14;
+            this.e_label_staff.Text = "Staff Type:";
+            // 
+            // e_comboBox_body
+            // 
+            this.e_comboBox_body.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.e_comboBox_body.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.e_comboBox_body.FormattingEnabled = true;
+            this.e_comboBox_body.Location = new System.Drawing.Point(99, 225);
+            this.e_comboBox_body.Name = "e_comboBox_body";
+            this.e_comboBox_body.Size = new System.Drawing.Size(146, 21);
+            this.e_comboBox_body.TabIndex = 13;
+            // 
+            // e_comboBox_cautionroute
+            // 
+            this.e_comboBox_cautionroute.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.e_comboBox_cautionroute.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.e_comboBox_cautionroute.FormattingEnabled = true;
+            this.e_comboBox_cautionroute.Location = new System.Drawing.Point(99, 64);
+            this.e_comboBox_cautionroute.Name = "e_comboBox_cautionroute";
+            this.e_comboBox_cautionroute.Size = new System.Drawing.Size(145, 21);
+            this.e_comboBox_cautionroute.TabIndex = 12;
+            // 
+            // e_label_cautionroute
+            // 
+            this.e_label_cautionroute.AutoSize = true;
+            this.e_label_cautionroute.Location = new System.Drawing.Point(7, 67);
+            this.e_label_cautionroute.Name = "e_label_cautionroute";
+            this.e_label_cautionroute.Size = new System.Drawing.Size(78, 13);
+            this.e_label_cautionroute.TabIndex = 11;
+            this.e_label_cautionroute.Text = "Caution Route:";
+            // 
+            // e_comboBox_sneakroute
+            // 
+            this.e_comboBox_sneakroute.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.e_comboBox_sneakroute.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.e_comboBox_sneakroute.FormattingEnabled = true;
+            this.e_comboBox_sneakroute.Location = new System.Drawing.Point(99, 39);
+            this.e_comboBox_sneakroute.Name = "e_comboBox_sneakroute";
+            this.e_comboBox_sneakroute.Size = new System.Drawing.Size(145, 21);
+            this.e_comboBox_sneakroute.TabIndex = 10;
+            // 
+            // e_label_sneakroute
+            // 
+            this.e_label_sneakroute.AutoSize = true;
+            this.e_label_sneakroute.Location = new System.Drawing.Point(12, 43);
+            this.e_label_sneakroute.Name = "e_label_sneakroute";
+            this.e_label_sneakroute.Size = new System.Drawing.Size(73, 13);
+            this.e_label_sneakroute.TabIndex = 9;
+            this.e_label_sneakroute.Text = "Sneak Route:";
+            // 
+            // e_label_body
+            // 
+            this.e_label_body.AutoSize = true;
+            this.e_label_body.Location = new System.Drawing.Point(51, 228);
+            this.e_label_body.Name = "e_label_body";
+            this.e_label_body.Size = new System.Drawing.Size(34, 13);
+            this.e_label_body.TabIndex = 8;
+            this.e_label_body.Text = "Body:";
+            // 
+            // e_checkBox_target
+            // 
+            this.e_checkBox_target.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.e_checkBox_target.AutoSize = true;
+            this.e_checkBox_target.Location = new System.Drawing.Point(205, 21);
+            this.e_checkBox_target.Name = "e_checkBox_target";
+            this.e_checkBox_target.Size = new System.Drawing.Size(15, 14);
+            this.e_checkBox_target.TabIndex = 5;
+            this.e_checkBox_target.UseVisualStyleBackColor = true;
+            // 
+            // e_label_target
+            // 
+            this.e_label_target.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.e_label_target.AutoSize = true;
+            this.e_label_target.Location = new System.Drawing.Point(139, 21);
+            this.e_label_target.Name = "e_label_target";
+            this.e_label_target.Size = new System.Drawing.Size(52, 13);
+            this.e_label_target.TabIndex = 4;
+            this.e_label_target.Text = "Is Target:";
+            // 
+            // e_checkBox_armor
+            // 
+            this.e_checkBox_armor.AutoSize = true;
+            this.e_checkBox_armor.Location = new System.Drawing.Point(99, 191);
+            this.e_checkBox_armor.Name = "e_checkBox_armor";
+            this.e_checkBox_armor.Size = new System.Drawing.Size(15, 14);
+            this.e_checkBox_armor.TabIndex = 3;
+            this.e_checkBox_armor.UseVisualStyleBackColor = true;
+            // 
+            // e_label_armor
+            // 
+            this.e_label_armor.AutoSize = true;
+            this.e_label_armor.Location = new System.Drawing.Point(14, 191);
+            this.e_label_armor.Name = "e_label_armor";
+            this.e_label_armor.Size = new System.Drawing.Size(71, 13);
+            this.e_label_armor.TabIndex = 2;
+            this.e_label_armor.Text = "Heavy Armor:";
+            // 
+            // e_checkBox_spawn
+            // 
+            this.e_checkBox_spawn.AutoSize = true;
+            this.e_checkBox_spawn.Location = new System.Drawing.Point(99, 21);
+            this.e_checkBox_spawn.Name = "e_checkBox_spawn";
+            this.e_checkBox_spawn.Size = new System.Drawing.Size(15, 14);
+            this.e_checkBox_spawn.TabIndex = 1;
+            this.e_checkBox_spawn.UseVisualStyleBackColor = true;
+            // 
+            // e_label_spawn
+            // 
+            this.e_label_spawn.AutoSize = true;
+            this.e_label_spawn.Location = new System.Drawing.Point(42, 21);
+            this.e_label_spawn.Name = "e_label_spawn";
+            this.e_label_spawn.Size = new System.Drawing.Size(43, 13);
+            this.e_label_spawn.TabIndex = 0;
+            this.e_label_spawn.Text = "Spawn:";
+
+            this.e_groupBox_main.ResumeLayout(false);
+            this.e_groupBox_main.PerformLayout();
+        }
+
+        public override GroupBox getGroupBoxMain()
+        {
+            return e_groupBox_main;
+        }
+
+        public override void SetDetail(Detail detail)
+        {
+            EnemyDetail enemyDetail = (EnemyDetail)detail;
+
+            e_checkBox_armor.Checked = enemyDetail.e_checkBox_armor.Checked;
+            e_checkBox_spawn.Checked = enemyDetail.e_checkBox_spawn.Checked;
+            e_checkBox_target.Checked = enemyDetail.e_checkBox_target.Checked;
+
+            e_listBox_power.Text = enemyDetail.e_listBox_power.Text;
+
+            e_comboBox_body.Text = enemyDetail.e_comboBox_body.Text;
+            e_comboBox_cautionroute.Text = enemyDetail.e_comboBox_cautionroute.Text;
+            e_comboBox_skill.Text = enemyDetail.e_comboBox_skill.Text;
+            e_comboBox_sneakroute.Text = enemyDetail.e_comboBox_sneakroute.Text;
+            e_comboBox_staff.Text = enemyDetail.e_comboBox_staff.Text;
+        }
+    }
+
     partial class Details
     {
         
@@ -1439,8 +1766,16 @@ namespace SOC.UI
         private void InitializeComponent()
         {
             this.panelDetails = new System.Windows.Forms.Panel();
-            this.groupEneDet = new System.Windows.Forms.GroupBox();
-            this.panelEneDet = new System.Windows.Forms.Panel();
+            this.groupExistingEneDet = new System.Windows.Forms.GroupBox();
+            this.panelCPEnemyDet = new System.Windows.Forms.Panel();
+            this.label_customizeall = new System.Windows.Forms.Label();
+            this.checkBox_customizeall = new System.Windows.Forms.CheckBox();
+            this.groupNewEneDet = new System.Windows.Forms.GroupBox();
+            this.panelQuestEnemyDet = new System.Windows.Forms.Panel();
+            this.label_spawnall = new System.Windows.Forms.Label();
+            this.checkBox_spawnall = new System.Windows.Forms.CheckBox();
+            this.comboBox_subtype = new System.Windows.Forms.ComboBox();
+            this.label_subtype = new System.Windows.Forms.Label();
             this.groupAnimalDet = new System.Windows.Forms.GroupBox();
             this.panelAnimalDet = new System.Windows.Forms.Panel();
             this.groupVehDet = new System.Windows.Forms.GroupBox();
@@ -1456,8 +1791,13 @@ namespace SOC.UI
             this.h_checkBox_intrgt = new System.Windows.Forms.CheckBox();
             this.comboBox_Body = new System.Windows.Forms.ComboBox();
             this.label_Body = new System.Windows.Forms.Label();
+            this.label_subtype2 = new System.Windows.Forms.Label();
+            this.comboBox_subtype2 = new System.Windows.Forms.ComboBox();
             this.panelDetails.SuspendLayout();
-            this.groupEneDet.SuspendLayout();
+            this.groupExistingEneDet.SuspendLayout();
+            this.panelCPEnemyDet.SuspendLayout();
+            this.groupNewEneDet.SuspendLayout();
+            this.panelQuestEnemyDet.SuspendLayout();
             this.groupAnimalDet.SuspendLayout();
             this.groupVehDet.SuspendLayout();
             this.groupStMdDet.SuspendLayout();
@@ -1469,7 +1809,8 @@ namespace SOC.UI
             // panelDetails
             // 
             this.panelDetails.AutoScroll = true;
-            this.panelDetails.Controls.Add(this.groupEneDet);
+            this.panelDetails.Controls.Add(this.groupExistingEneDet);
+            this.panelDetails.Controls.Add(this.groupNewEneDet);
             this.panelDetails.Controls.Add(this.groupAnimalDet);
             this.panelDetails.Controls.Add(this.groupVehDet);
             this.panelDetails.Controls.Add(this.groupStMdDet);
@@ -1478,43 +1819,135 @@ namespace SOC.UI
             this.panelDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelDetails.Location = new System.Drawing.Point(0, 0);
             this.panelDetails.Name = "panelDetails";
-            this.panelDetails.Size = new System.Drawing.Size(1616, 450);
+            this.panelDetails.Size = new System.Drawing.Size(1889, 450);
             this.panelDetails.TabIndex = 0;
             // 
-            // groupEneDet
+            // groupExistingEneDet
             // 
-            this.groupEneDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.groupExistingEneDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.groupEneDet.Controls.Add(this.panelEneDet);
-            this.groupEneDet.Location = new System.Drawing.Point(3, 3);
-            this.groupEneDet.Name = "groupEneDet";
-            this.groupEneDet.Size = new System.Drawing.Size(264, 444);
-            this.groupEneDet.TabIndex = 32;
-            this.groupEneDet.TabStop = false;
-            this.groupEneDet.Text = "Enemy Details";
+            this.groupExistingEneDet.Controls.Add(this.panelCPEnemyDet);
+            this.groupExistingEneDet.Location = new System.Drawing.Point(273, 3);
+            this.groupExistingEneDet.Name = "groupExistingEneDet";
+            this.groupExistingEneDet.Size = new System.Drawing.Size(264, 444);
+            this.groupExistingEneDet.TabIndex = 33;
+            this.groupExistingEneDet.TabStop = false;
+            this.groupExistingEneDet.Text = "Existing Enemies";
             // 
-            // panelEneDet
+            // panelExistingEneDet
             // 
-            this.panelEneDet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.panelCPEnemyDet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelEneDet.AutoScroll = true;
-            this.panelEneDet.Location = new System.Drawing.Point(3, 16);
-            this.panelEneDet.Name = "panelEneDet";
-            this.panelEneDet.Size = new System.Drawing.Size(258, 422);
-            this.panelEneDet.TabIndex = 0;
+            this.panelCPEnemyDet.AutoScroll = true;
+            this.panelCPEnemyDet.Controls.Add(this.label_subtype2);
+            this.panelCPEnemyDet.Controls.Add(this.comboBox_subtype2);
+            this.panelCPEnemyDet.Controls.Add(this.label_customizeall);
+            this.panelCPEnemyDet.Controls.Add(this.checkBox_customizeall);
+            this.panelCPEnemyDet.Location = new System.Drawing.Point(3, 16);
+            this.panelCPEnemyDet.Name = "panelExistingEneDet";
+            this.panelCPEnemyDet.Size = new System.Drawing.Size(258, 422);
+            this.panelCPEnemyDet.TabIndex = 0;
+            // 
+            // label_customizeall
+            // 
+            this.label_customizeall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_customizeall.AutoSize = true;
+            this.label_customizeall.Location = new System.Drawing.Point(105, 30);
+            this.label_customizeall.Name = "label_customizeall";
+            this.label_customizeall.Size = new System.Drawing.Size(129, 13);
+            this.label_customizeall.TabIndex = 2;
+            this.label_customizeall.Text = "Customize All CP Soldiers:";
+            // 
+            // checkBox_customizeall
+            // 
+            this.checkBox_customizeall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox_customizeall.AutoSize = true;
+            this.checkBox_customizeall.Location = new System.Drawing.Point(240, 30);
+            this.checkBox_customizeall.Name = "checkBox_customizeall";
+            this.checkBox_customizeall.Size = new System.Drawing.Size(15, 14);
+            this.checkBox_customizeall.TabIndex = 3;
+            this.checkBox_customizeall.UseVisualStyleBackColor = true;
+            // 
+            // groupNewEneDet
+            // 
+            this.groupNewEneDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupNewEneDet.Controls.Add(this.panelQuestEnemyDet);
+            this.groupNewEneDet.Location = new System.Drawing.Point(3, 3);
+            this.groupNewEneDet.Name = "groupNewEneDet";
+            this.groupNewEneDet.Size = new System.Drawing.Size(264, 444);
+            this.groupNewEneDet.TabIndex = 32;
+            this.groupNewEneDet.TabStop = false;
+            this.groupNewEneDet.Text = "New Enemies";
+            // 
+            // panelNewEneDet
+            // 
+            this.panelQuestEnemyDet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelQuestEnemyDet.AutoScroll = true;
+            this.panelQuestEnemyDet.Controls.Add(this.label_spawnall);
+            this.panelQuestEnemyDet.Controls.Add(this.checkBox_spawnall);
+            this.panelQuestEnemyDet.Controls.Add(this.label_subtype);
+            this.panelQuestEnemyDet.Controls.Add(this.comboBox_subtype);
+            this.panelQuestEnemyDet.Location = new System.Drawing.Point(3, 16);
+            this.panelQuestEnemyDet.Name = "panelNewEneDet";
+            this.panelQuestEnemyDet.Size = new System.Drawing.Size(258, 422);
+            this.panelQuestEnemyDet.TabIndex = 0;
+            // 
+            // label_spawnall
+            // 
+            this.label_spawnall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_spawnall.AutoSize = true;
+            this.label_spawnall.Location = new System.Drawing.Point(106, 30);
+            this.label_spawnall.Name = "label_spawnall";
+            this.label_spawnall.Size = new System.Drawing.Size(128, 13);
+            this.label_spawnall.TabIndex = 1;
+            this.label_spawnall.Text = "Spawn All Quest Soldiers:";
+            // 
+            // checkBox_spawnall
+            // 
+            this.checkBox_spawnall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox_spawnall.AutoSize = true;
+            this.checkBox_spawnall.Location = new System.Drawing.Point(240, 30);
+            this.checkBox_spawnall.Name = "checkBox_spawnall";
+            this.checkBox_spawnall.Size = new System.Drawing.Size(15, 14);
+            this.checkBox_spawnall.TabIndex = 2;
+            this.checkBox_spawnall.UseVisualStyleBackColor = true;
+            // 
+            // comboBox_subtype
+            // 
+            this.comboBox_subtype.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox_subtype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_subtype.FormattingEnabled = true;
+            this.comboBox_subtype.Location = new System.Drawing.Point(108, 3);
+            this.comboBox_subtype.Name = "comboBox_subtype";
+            this.comboBox_subtype.Size = new System.Drawing.Size(147, 21);
+            this.comboBox_subtype.TabIndex = 7;
+            // 
+            // label_subtype
+            // 
+            this.label_subtype.AutoSize = true;
+            this.label_subtype.Location = new System.Drawing.Point(14, 6);
+            this.label_subtype.Name = "label_subtype";
+            this.label_subtype.Size = new System.Drawing.Size(88, 13);
+            this.label_subtype.TabIndex = 6;
+            this.label_subtype.Text = "Soldier SubType:";
+            
             // 
             // groupAnimalDet
             // 
             this.groupAnimalDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupAnimalDet.Controls.Add(this.panelAnimalDet);
-            this.groupAnimalDet.Location = new System.Drawing.Point(810, 3);
+            this.groupAnimalDet.Location = new System.Drawing.Point(1081, 3);
             this.groupAnimalDet.Name = "groupAnimalDet";
             this.groupAnimalDet.Size = new System.Drawing.Size(264, 444);
             this.groupAnimalDet.TabIndex = 20;
             this.groupAnimalDet.TabStop = false;
-            this.groupAnimalDet.Text = "Animal Details";
+            this.groupAnimalDet.Text = "Animals";
             // 
             // panelAnimalDet
             // 
@@ -1532,12 +1965,12 @@ namespace SOC.UI
             this.groupVehDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupVehDet.Controls.Add(this.panelVehDet);
-            this.groupVehDet.Location = new System.Drawing.Point(541, 3);
+            this.groupVehDet.Location = new System.Drawing.Point(812, 3);
             this.groupVehDet.Name = "groupVehDet";
             this.groupVehDet.Size = new System.Drawing.Size(264, 444);
             this.groupVehDet.TabIndex = 12;
             this.groupVehDet.TabStop = false;
-            this.groupVehDet.Text = "Vehicle Details";
+            this.groupVehDet.Text = "Heavy Vehicles";
             // 
             // panelVehDet
             // 
@@ -1555,12 +1988,12 @@ namespace SOC.UI
             this.groupStMdDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupStMdDet.Controls.Add(this.panelStMdDet);
-            this.groupStMdDet.Location = new System.Drawing.Point(1350, 3);
+            this.groupStMdDet.Location = new System.Drawing.Point(1621, 3);
             this.groupStMdDet.Name = "groupStMdDet";
             this.groupStMdDet.Size = new System.Drawing.Size(264, 444);
             this.groupStMdDet.TabIndex = 31;
             this.groupStMdDet.TabStop = false;
-            this.groupStMdDet.Text = "Static Model Details";
+            this.groupStMdDet.Text = "Static Models";
             // 
             // panelStMdDet
             // 
@@ -1579,12 +2012,12 @@ namespace SOC.UI
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupItemDet.Controls.Add(this.panelItemDet);
             this.groupItemDet.Controls.Add(this.panelAcItDet);
-            this.groupItemDet.Location = new System.Drawing.Point(1080, 3);
+            this.groupItemDet.Location = new System.Drawing.Point(1351, 3);
             this.groupItemDet.Name = "groupItemDet";
             this.groupItemDet.Size = new System.Drawing.Size(264, 444);
             this.groupItemDet.TabIndex = 29;
             this.groupItemDet.TabStop = false;
-            this.groupItemDet.Text = "Item Details";
+            this.groupItemDet.Text = "Items";
             // 
             // panelItemDet
             // 
@@ -1613,12 +2046,12 @@ namespace SOC.UI
             this.groupHosDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupHosDet.Controls.Add(this.panelHosDet);
-            this.groupHosDet.Location = new System.Drawing.Point(272, 3);
+            this.groupHosDet.Location = new System.Drawing.Point(543, 3);
             this.groupHosDet.Name = "groupHosDet";
             this.groupHosDet.Size = new System.Drawing.Size(264, 444);
             this.groupHosDet.TabIndex = 1;
             this.groupHosDet.TabStop = false;
-            this.groupHosDet.Text = "Hostage Details";
+            this.groupHosDet.Text = "Prisoners";
             // 
             // panelHosDet
             // 
@@ -1639,7 +2072,7 @@ namespace SOC.UI
             // 
             this.h_label_intrgt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.h_label_intrgt.AutoSize = true;
-            this.h_label_intrgt.Location = new System.Drawing.Point(78, 30);
+            this.h_label_intrgt.Location = new System.Drawing.Point(88, 30);
             this.h_label_intrgt.Name = "h_label_intrgt";
             this.h_label_intrgt.Size = new System.Drawing.Size(146, 13);
             this.h_label_intrgt.TabIndex = 0;
@@ -1649,7 +2082,7 @@ namespace SOC.UI
             // 
             this.h_checkBox_intrgt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.h_checkBox_intrgt.AutoSize = true;
-            this.h_checkBox_intrgt.Location = new System.Drawing.Point(230, 30);
+            this.h_checkBox_intrgt.Location = new System.Drawing.Point(240, 30);
             this.h_checkBox_intrgt.Name = "h_checkBox_intrgt";
             this.h_checkBox_intrgt.Size = new System.Drawing.Size(15, 14);
             this.h_checkBox_intrgt.TabIndex = 0;
@@ -1661,9 +2094,9 @@ namespace SOC.UI
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox_Body.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Body.FormattingEnabled = true;
-            this.comboBox_Body.Location = new System.Drawing.Point(88, 3);
+            this.comboBox_Body.Location = new System.Drawing.Point(81, 3);
             this.comboBox_Body.Name = "comboBox_Body";
-            this.comboBox_Body.Size = new System.Drawing.Size(157, 21);
+            this.comboBox_Body.Size = new System.Drawing.Size(174, 21);
             this.comboBox_Body.TabIndex = 1;
             this.comboBox_Body.SelectedIndexChanged += new System.EventHandler(this.comboBox_Body_SelectedIndexChanged);
             // 
@@ -1672,20 +2105,45 @@ namespace SOC.UI
             this.label_Body.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label_Body.AutoSize = true;
-            this.label_Body.Location = new System.Drawing.Point(48, 6);
+            this.label_Body.Location = new System.Drawing.Point(41, 6);
             this.label_Body.Name = "label_Body";
             this.label_Body.Size = new System.Drawing.Size(34, 13);
             this.label_Body.TabIndex = 2;
             this.label_Body.Text = "Body:";
+            // 
+            // label_subtype2
+            // 
+            this.label_subtype2.AutoSize = true;
+            this.label_subtype2.Location = new System.Drawing.Point(14, 6);
+            this.label_subtype2.Name = "label_subtype2";
+            this.label_subtype2.Size = new System.Drawing.Size(88, 13);
+            this.label_subtype2.TabIndex = 8;
+            this.label_subtype2.Text = "Soldier SubType:";
+            // 
+            // comboBox_subtype2
+            // 
+            this.comboBox_subtype2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox_subtype2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_subtype2.FormattingEnabled = true;
+            this.comboBox_subtype2.Location = new System.Drawing.Point(108, 3);
+            this.comboBox_subtype2.Name = "comboBox_subtype2";
+            this.comboBox_subtype2.Size = new System.Drawing.Size(147, 21);
+            this.comboBox_subtype2.TabIndex = 9;
             // 
             // Details
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.panelDetails);
             this.Name = "Details";
-            this.Size = new System.Drawing.Size(1616, 450);
+            this.Size = new System.Drawing.Size(1889, 450);
             this.panelDetails.ResumeLayout(false);
-            this.groupEneDet.ResumeLayout(false);
+            this.groupExistingEneDet.ResumeLayout(false);
+            this.panelCPEnemyDet.ResumeLayout(false);
+            this.panelCPEnemyDet.PerformLayout();
+            this.groupNewEneDet.ResumeLayout(false);
+            this.panelQuestEnemyDet.ResumeLayout(false);
+            this.panelQuestEnemyDet.PerformLayout();
             this.groupAnimalDet.ResumeLayout(false);
             this.groupVehDet.ResumeLayout(false);
             this.groupStMdDet.ResumeLayout(false);
@@ -1715,7 +2173,17 @@ namespace SOC.UI
         public GroupBox groupAnimalDet;
         public Panel panelHosDet;
         public Panel panelVehDet;
-        public GroupBox groupEneDet;
-        public Panel panelEneDet;
+        public GroupBox groupNewEneDet;
+        public Panel panelQuestEnemyDet;
+        public GroupBox groupExistingEneDet;
+        public Panel panelCPEnemyDet;
+        private ComboBox comboBox_subtype;
+        private Label label_subtype;
+        private Label label_customizeall;
+        public CheckBox checkBox_customizeall;
+        private Label label_spawnall;
+        public CheckBox checkBox_spawnall;
+        private Label label_subtype2;
+        private ComboBox comboBox_subtype2;
     }
 }

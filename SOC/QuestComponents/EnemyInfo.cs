@@ -8,10 +8,41 @@ namespace SOC.QuestComponents
 {
     public static class EnemyInfo
     {
+        public const int MAXHEAVYARMOR = 8;
+
+        public static string[] powerSetting = new string[] {
+            "SOFT_ARMOR",
+            "HELMET",
+            "NVG",
+            "GAS_MASK",
+            "SNIPER",
+            "SHIELD",
+            "MISSILE",
+            "MG",
+            "SHOTGUN",
+            "SMG",
+            "NO_KILL_WEAPON",
+            "GUN_LIGHT",
+            "STRONG_WEAPON",
+            "STRONG_PATROL",
+            "STRONG_NOTICE_TRANQ",
+            "FULTON_LOW",
+            "FULTON_HIGH",
+            "FULTON_SPECIAL",
+            "COMBAT_LOW",
+            "COMBAT_HIGH",
+            "COMBAT_SPECIAL",
+            "STEALTH_LOW",
+            "STEALTH_HIGH",
+            "STEALTH_SPECIAL",
+            "HOLDUP_LOW",
+            "HOLDUP_HIGH",
+            "HOLDUP_SPECIAL",
+        };
 
         public static CP[] AfghCPs =
         {
-            new CP("NONE", new string[] { }, new string[] { }),
+            new CP("NONE", new string[] { }, new string[] { "NONE" }),
 
             new CP( "afgh_field_cp",
 
@@ -1848,7 +1879,6 @@ namespace SOC.QuestComponents
             new CP( "afgh_plantSouth_ob",
 
                 new string[] {
-
                 },
                 new string[] {
                     "rt_plantSouth_d_0000",
@@ -2673,10 +2703,9 @@ namespace SOC.QuestComponents
             new CP( "mafr_factory_cp",
 
                 new string[] {
-
                 },
                 new string[] {
-
+                    "NONE"
                 }),
             new CP( "mafr_lab_cp",
 

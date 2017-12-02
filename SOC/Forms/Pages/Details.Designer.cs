@@ -1,5 +1,6 @@
 ﻿using SOC.Classes;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using static SOC.QuestComponents.GameObjectInfo;
@@ -1510,8 +1511,11 @@ namespace SOC.UI
             this.e_comboBox_power.FormattingEnabled = true;
             this.e_comboBox_power.Location = new System.Drawing.Point(99, 106);
             this.e_comboBox_power.Name = "e_comboBox_power";
-            this.e_comboBox_power.Size = new System.Drawing.Size(100, 21);
+            this.e_comboBox_power.Items.AddRange(QuestComponents.EnemyInfo.powerSetting);
+            this.e_comboBox_power.Text = "SOFT_ARMOR";
+            this.e_comboBox_power.Size = new System.Drawing.Size(122, 21);
             this.e_comboBox_power.TabIndex = 22;
+            this.e_comboBox_power.Enabled = false;
             // 
             // e_button_removepower
             // 
@@ -1522,16 +1526,20 @@ namespace SOC.UI
             this.e_button_removepower.TabIndex = 21;
             this.e_button_removepower.Text = "Remove";
             this.e_button_removepower.UseVisualStyleBackColor = true;
+            this.e_button_removepower.Click += new EventHandler(this.e_button_removepower_Click);
+            this.e_button_removepower.Enabled = false;
             // 
             // e_button_addpower
             // 
             this.e_button_addpower.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.e_button_addpower.Location = new System.Drawing.Point(205, 106);
+            this.e_button_addpower.Location = new System.Drawing.Point(222, 106);
             this.e_button_addpower.Name = "e_button_addpower";
-            this.e_button_addpower.Size = new System.Drawing.Size(40, 21);
+            this.e_button_addpower.Size = new System.Drawing.Size(23, 23);
             this.e_button_addpower.TabIndex = 20;
-            this.e_button_addpower.Text = "Add";
+            this.e_button_addpower.Text = "+";
             this.e_button_addpower.UseVisualStyleBackColor = true;
+            e_button_addpower.Enabled = false;
+            this.e_button_addpower.Click += new EventHandler(this.e_button_addpower_Click);
             // 
             // e_label_power
             // 
@@ -1540,6 +1548,7 @@ namespace SOC.UI
             this.e_label_power.Name = "e_label_power";
             this.e_label_power.Size = new System.Drawing.Size(76, 13);
             this.e_label_power.TabIndex = 19;
+            e_label_power.Enabled = false;
             this.e_label_power.Text = "Gear | Tactics:";
             // 
             // e_listBox_power
@@ -1552,6 +1561,8 @@ namespace SOC.UI
             this.e_listBox_power.Name = "e_listBox_power";
             this.e_listBox_power.Size = new System.Drawing.Size(145, 54);
             this.e_listBox_power.TabIndex = 18;
+            e_listBox_power.Enabled = false;
+            this.e_listBox_power.SelectedIndexChanged += new EventHandler(this.e_listBox_power_selectedIndexChanged);
             // 
             // e_comboBox_skill
             // 
@@ -1561,8 +1572,11 @@ namespace SOC.UI
             this.e_comboBox_skill.FormattingEnabled = true;
             this.e_comboBox_skill.Location = new System.Drawing.Point(99, 275);
             this.e_comboBox_skill.Name = "e_comboBox_skill";
+            this.e_comboBox_skill.Items.AddRange(skills);
+            this.e_comboBox_skill.Text = "NONE";
             this.e_comboBox_skill.Size = new System.Drawing.Size(146, 21);
             this.e_comboBox_skill.TabIndex = 17;
+            e_comboBox_skill.Enabled = false;
             // 
             // e_label_skill
             // 
@@ -1572,6 +1586,7 @@ namespace SOC.UI
             this.e_label_skill.Size = new System.Drawing.Size(29, 13);
             this.e_label_skill.TabIndex = 16;
             this.e_label_skill.Text = "Skill:";
+            e_label_skill.Enabled = false;
             // 
             // e_comboBox_staff
             // 
@@ -1582,7 +1597,10 @@ namespace SOC.UI
             this.e_comboBox_staff.Location = new System.Drawing.Point(99, 250);
             this.e_comboBox_staff.Name = "e_comboBox_staff";
             this.e_comboBox_staff.Size = new System.Drawing.Size(146, 21);
+            this.e_comboBox_staff.Items.AddRange(Staff_Type_ID);
+            this.e_comboBox_staff.Text = "NONE";
             this.e_comboBox_staff.TabIndex = 15;
+            e_comboBox_staff.Enabled = false;
             // 
             // e_label_staff
             // 
@@ -1592,6 +1610,7 @@ namespace SOC.UI
             this.e_label_staff.Size = new System.Drawing.Size(59, 13);
             this.e_label_staff.TabIndex = 14;
             this.e_label_staff.Text = "Staff Type:";
+            e_label_staff.Enabled = false;
             // 
             // e_comboBox_body
             // 
@@ -1603,6 +1622,7 @@ namespace SOC.UI
             this.e_comboBox_body.Name = "e_comboBox_body";
             this.e_comboBox_body.Size = new System.Drawing.Size(146, 21);
             this.e_comboBox_body.TabIndex = 13;
+            e_comboBox_body.Enabled = false;
             // 
             // e_comboBox_cautionroute
             // 
@@ -1614,6 +1634,7 @@ namespace SOC.UI
             this.e_comboBox_cautionroute.Name = "e_comboBox_cautionroute";
             this.e_comboBox_cautionroute.Size = new System.Drawing.Size(145, 21);
             this.e_comboBox_cautionroute.TabIndex = 12;
+            e_comboBox_cautionroute.Enabled = false;
             // 
             // e_label_cautionroute
             // 
@@ -1623,6 +1644,7 @@ namespace SOC.UI
             this.e_label_cautionroute.Size = new System.Drawing.Size(78, 13);
             this.e_label_cautionroute.TabIndex = 11;
             this.e_label_cautionroute.Text = "Caution Route:";
+            e_label_cautionroute.Enabled = false;
             // 
             // e_comboBox_sneakroute
             // 
@@ -1634,6 +1656,7 @@ namespace SOC.UI
             this.e_comboBox_sneakroute.Name = "e_comboBox_sneakroute";
             this.e_comboBox_sneakroute.Size = new System.Drawing.Size(145, 21);
             this.e_comboBox_sneakroute.TabIndex = 10;
+            e_comboBox_sneakroute.Enabled = false;
             // 
             // e_label_sneakroute
             // 
@@ -1643,6 +1666,7 @@ namespace SOC.UI
             this.e_label_sneakroute.Size = new System.Drawing.Size(73, 13);
             this.e_label_sneakroute.TabIndex = 9;
             this.e_label_sneakroute.Text = "Sneak Route:";
+            e_label_sneakroute.Enabled = false;
             // 
             // e_label_body
             // 
@@ -1652,6 +1676,7 @@ namespace SOC.UI
             this.e_label_body.Size = new System.Drawing.Size(34, 13);
             this.e_label_body.TabIndex = 8;
             this.e_label_body.Text = "Body:";
+            e_label_body.Enabled = false;
             // 
             // e_checkBox_target
             // 
@@ -1662,6 +1687,7 @@ namespace SOC.UI
             this.e_checkBox_target.Size = new System.Drawing.Size(15, 14);
             this.e_checkBox_target.TabIndex = 5;
             this.e_checkBox_target.UseVisualStyleBackColor = true;
+            e_checkBox_target.Enabled = false;
             // 
             // e_label_target
             // 
@@ -1672,6 +1698,7 @@ namespace SOC.UI
             this.e_label_target.Size = new System.Drawing.Size(52, 13);
             this.e_label_target.TabIndex = 4;
             this.e_label_target.Text = "Is Target:";
+            e_label_target.Enabled = false;
             // 
             // e_checkBox_armor
             // 
@@ -1681,6 +1708,8 @@ namespace SOC.UI
             this.e_checkBox_armor.Size = new System.Drawing.Size(15, 14);
             this.e_checkBox_armor.TabIndex = 3;
             this.e_checkBox_armor.UseVisualStyleBackColor = true;
+            this.e_checkBox_armor.CheckedChanged += new EventHandler(this.e_checkBox_armor_CheckedChanged);
+            e_checkBox_armor.Enabled = false;
             // 
             // e_label_armor
             // 
@@ -1690,6 +1719,7 @@ namespace SOC.UI
             this.e_label_armor.Size = new System.Drawing.Size(71, 13);
             this.e_label_armor.TabIndex = 2;
             this.e_label_armor.Text = "Heavy Armor:";
+            e_label_armor.Enabled = false;
             // 
             // e_checkBox_spawn
             // 
@@ -1699,6 +1729,7 @@ namespace SOC.UI
             this.e_checkBox_spawn.Size = new System.Drawing.Size(15, 14);
             this.e_checkBox_spawn.TabIndex = 1;
             this.e_checkBox_spawn.UseVisualStyleBackColor = true;
+            e_checkBox_spawn.CheckedChanged += new EventHandler(this.e_checkBox_spawn_CheckedChanged);
             // 
             // e_label_spawn
             // 
@@ -1711,6 +1742,75 @@ namespace SOC.UI
 
             this.e_groupBox_main.ResumeLayout(false);
             this.e_groupBox_main.PerformLayout();
+        }
+
+        private void e_checkBox_spawn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (e_checkBox_spawn.Checked)
+            {
+                e_button_addpower.Enabled = true;
+                e_checkBox_armor.Enabled = true;
+                e_checkBox_target.Enabled = true;
+                e_comboBox_body.Enabled = true;
+                e_comboBox_cautionroute.Enabled = true;
+                e_comboBox_power.Enabled = true;
+                e_comboBox_skill.Enabled = true;
+                e_comboBox_sneakroute.Enabled = true;
+                e_comboBox_staff.Enabled = true;
+                e_label_armor.Enabled = true;
+                e_label_body.Enabled = true;
+                e_label_cautionroute.Enabled = true;
+                e_label_power.Enabled = true;
+                e_label_skill.Enabled = true;
+                e_label_sneakroute.Enabled = true;
+                e_label_spawn.Enabled = true;
+                e_label_staff.Enabled = true;
+                e_label_target.Enabled = true;
+                e_listBox_power.Enabled = true;
+            } else
+            {
+                e_button_addpower.Enabled = false;
+                e_checkBox_armor.Enabled = false;
+                e_checkBox_target.Enabled = false;
+                e_comboBox_body.Enabled = false;
+                e_comboBox_cautionroute.Enabled = false;
+                e_comboBox_power.Enabled = false;
+                e_comboBox_skill.Enabled = false;
+                e_comboBox_sneakroute.Enabled = false;
+                e_comboBox_staff.Enabled = false;
+                e_label_armor.Enabled = false;
+                e_label_body.Enabled = false;
+                e_label_cautionroute.Enabled = false;
+                e_label_power.Enabled = false;
+                e_label_skill.Enabled = false;
+                e_label_sneakroute.Enabled = false;
+                e_label_spawn.Enabled = false;
+                e_label_staff.Enabled = false;
+                e_label_target.Enabled = false;
+                e_listBox_power.Enabled = false;
+            }
+        }
+
+        private void e_checkBox_armor_CheckedChanged(object sender, EventArgs e)
+        {
+            if (e_checkBox_armor.Checked)
+            {
+                e_listBox_power.Items.Add("QUEST_ARMOR");
+                e_listBox_power.SelectedIndex = e_listBox_power.Items.Count - 1;
+            }
+            else
+            {
+                e_listBox_power.Items.Remove("QUEST_ARMOR");
+                e_listBox_power.SelectedIndex = e_listBox_power.Items.Count - 1;
+            }
+        }
+
+        private void e_listBox_power_selectedIndexChanged(object sender, EventArgs e)
+        {
+            if (e_listBox_power.SelectedIndex > -1)
+                e_button_removepower.Enabled = true;
+            else
+                e_button_removepower.Enabled = false;
         }
 
         public override GroupBox getGroupBoxMain()
@@ -1728,11 +1828,42 @@ namespace SOC.UI
 
             e_listBox_power.Text = enemyDetail.e_listBox_power.Text;
 
-            e_comboBox_body.Text = enemyDetail.e_comboBox_body.Text;
+            string[] cautionArray = new string[enemyDetail.e_comboBox_cautionroute.Items.Count];
+            enemyDetail.e_comboBox_cautionroute.Items.CopyTo(cautionArray,0);
+            e_comboBox_cautionroute.Items.AddRange(cautionArray);
+
+            string[] sneakArray = new string[enemyDetail.e_comboBox_sneakroute.Items.Count];
+            enemyDetail.e_comboBox_sneakroute.Items.CopyTo(sneakArray, 0);
+            e_comboBox_sneakroute.Items.AddRange(sneakArray);
+
             e_comboBox_cautionroute.Text = enemyDetail.e_comboBox_cautionroute.Text;
-            e_comboBox_skill.Text = enemyDetail.e_comboBox_skill.Text;
             e_comboBox_sneakroute.Text = enemyDetail.e_comboBox_sneakroute.Text;
+
+            e_comboBox_body.Text = enemyDetail.e_comboBox_body.Text;
+            e_comboBox_skill.Text = enemyDetail.e_comboBox_skill.Text;
             e_comboBox_staff.Text = enemyDetail.e_comboBox_staff.Text;
+        }
+
+        private void e_button_addpower_Click(object sender, EventArgs e)
+        {
+            if (!e_listBox_power.Items.Contains(e_comboBox_power.Text))
+            {
+                e_listBox_power.Items.Add(e_comboBox_power.Text);
+                e_listBox_power.SelectedIndex = e_listBox_power.Items.Count - 1;
+            }
+        }
+        private void e_button_removepower_Click(object sender, EventArgs e)
+        {
+
+            if (e_listBox_power.Text.Equals("QUEST_ARMOR"))
+            {
+                e_checkBox_armor.Checked = false;
+            }
+            else if (e_listBox_power.SelectedIndex != -1)
+            {
+                e_listBox_power.Items.RemoveAt(e_listBox_power.SelectedIndex);
+                e_listBox_power.SelectedIndex = e_listBox_power.Items.Count - 1;
+            }
         }
     }
 
@@ -1768,14 +1899,16 @@ namespace SOC.UI
             this.panelDetails = new System.Windows.Forms.Panel();
             this.groupExistingEneDet = new System.Windows.Forms.GroupBox();
             this.panelCPEnemyDet = new System.Windows.Forms.Panel();
+            this.label_subtype2 = new System.Windows.Forms.Label();
+            this.comboBox_subtype2 = new System.Windows.Forms.ComboBox();
             this.label_customizeall = new System.Windows.Forms.Label();
             this.checkBox_customizeall = new System.Windows.Forms.CheckBox();
             this.groupNewEneDet = new System.Windows.Forms.GroupBox();
             this.panelQuestEnemyDet = new System.Windows.Forms.Panel();
             this.label_spawnall = new System.Windows.Forms.Label();
             this.checkBox_spawnall = new System.Windows.Forms.CheckBox();
-            this.comboBox_subtype = new System.Windows.Forms.ComboBox();
             this.label_subtype = new System.Windows.Forms.Label();
+            this.comboBox_subtype = new System.Windows.Forms.ComboBox();
             this.groupAnimalDet = new System.Windows.Forms.GroupBox();
             this.panelAnimalDet = new System.Windows.Forms.Panel();
             this.groupVehDet = new System.Windows.Forms.GroupBox();
@@ -1791,8 +1924,6 @@ namespace SOC.UI
             this.h_checkBox_intrgt = new System.Windows.Forms.CheckBox();
             this.comboBox_Body = new System.Windows.Forms.ComboBox();
             this.label_Body = new System.Windows.Forms.Label();
-            this.label_subtype2 = new System.Windows.Forms.Label();
-            this.comboBox_subtype2 = new System.Windows.Forms.ComboBox();
             this.panelDetails.SuspendLayout();
             this.groupExistingEneDet.SuspendLayout();
             this.panelCPEnemyDet.SuspendLayout();
@@ -1834,7 +1965,7 @@ namespace SOC.UI
             this.groupExistingEneDet.TabStop = false;
             this.groupExistingEneDet.Text = "Existing Enemies";
             // 
-            // panelExistingEneDet
+            // panelCPEnemyDet
             // 
             this.panelCPEnemyDet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -1845,9 +1976,29 @@ namespace SOC.UI
             this.panelCPEnemyDet.Controls.Add(this.label_customizeall);
             this.panelCPEnemyDet.Controls.Add(this.checkBox_customizeall);
             this.panelCPEnemyDet.Location = new System.Drawing.Point(3, 16);
-            this.panelCPEnemyDet.Name = "panelExistingEneDet";
+            this.panelCPEnemyDet.Name = "panelCPEnemyDet";
             this.panelCPEnemyDet.Size = new System.Drawing.Size(258, 422);
             this.panelCPEnemyDet.TabIndex = 0;
+            // 
+            // label_subtype2
+            // 
+            this.label_subtype2.AutoSize = true;
+            this.label_subtype2.Location = new System.Drawing.Point(14, 6);
+            this.label_subtype2.Name = "label_subtype2";
+            this.label_subtype2.Size = new System.Drawing.Size(88, 13);
+            this.label_subtype2.TabIndex = 8;
+            this.label_subtype2.Text = "Soldier SubType:";
+            // 
+            // comboBox_subtype2
+            // 
+            this.comboBox_subtype2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox_subtype2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_subtype2.FormattingEnabled = true;
+            this.comboBox_subtype2.Location = new System.Drawing.Point(108, 3);
+            this.comboBox_subtype2.Name = "comboBox_subtype2";
+            this.comboBox_subtype2.Size = new System.Drawing.Size(147, 21);
+            this.comboBox_subtype2.TabIndex = 9;
             // 
             // label_customizeall
             // 
@@ -1863,11 +2014,14 @@ namespace SOC.UI
             // 
             this.checkBox_customizeall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox_customizeall.AutoSize = true;
+            this.checkBox_customizeall.Checked = true;
+            this.checkBox_customizeall.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox_customizeall.Location = new System.Drawing.Point(240, 30);
             this.checkBox_customizeall.Name = "checkBox_customizeall";
             this.checkBox_customizeall.Size = new System.Drawing.Size(15, 14);
             this.checkBox_customizeall.TabIndex = 3;
             this.checkBox_customizeall.UseVisualStyleBackColor = true;
+            this.checkBox_customizeall.Click += new System.EventHandler(this.checkbox_customizeAll_Click);
             // 
             // groupNewEneDet
             // 
@@ -1881,7 +2035,7 @@ namespace SOC.UI
             this.groupNewEneDet.TabStop = false;
             this.groupNewEneDet.Text = "New Enemies";
             // 
-            // panelNewEneDet
+            // panelQuestEnemyDet
             // 
             this.panelQuestEnemyDet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -1892,7 +2046,7 @@ namespace SOC.UI
             this.panelQuestEnemyDet.Controls.Add(this.label_subtype);
             this.panelQuestEnemyDet.Controls.Add(this.comboBox_subtype);
             this.panelQuestEnemyDet.Location = new System.Drawing.Point(3, 16);
-            this.panelQuestEnemyDet.Name = "panelNewEneDet";
+            this.panelQuestEnemyDet.Name = "panelQuestEnemyDet";
             this.panelQuestEnemyDet.Size = new System.Drawing.Size(258, 422);
             this.panelQuestEnemyDet.TabIndex = 0;
             // 
@@ -1910,11 +2064,23 @@ namespace SOC.UI
             // 
             this.checkBox_spawnall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox_spawnall.AutoSize = true;
+            this.checkBox_spawnall.Checked = true;
+            this.checkBox_spawnall.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox_spawnall.Location = new System.Drawing.Point(240, 30);
             this.checkBox_spawnall.Name = "checkBox_spawnall";
             this.checkBox_spawnall.Size = new System.Drawing.Size(15, 14);
             this.checkBox_spawnall.TabIndex = 2;
             this.checkBox_spawnall.UseVisualStyleBackColor = true;
+            this.checkBox_spawnall.Click += new System.EventHandler(this.checkbox_spawnAll_Click);
+            // 
+            // label_subtype
+            // 
+            this.label_subtype.AutoSize = true;
+            this.label_subtype.Location = new System.Drawing.Point(14, 6);
+            this.label_subtype.Name = "label_subtype";
+            this.label_subtype.Size = new System.Drawing.Size(88, 13);
+            this.label_subtype.TabIndex = 6;
+            this.label_subtype.Text = "Soldier SubType:";
             // 
             // comboBox_subtype
             // 
@@ -1926,16 +2092,6 @@ namespace SOC.UI
             this.comboBox_subtype.Name = "comboBox_subtype";
             this.comboBox_subtype.Size = new System.Drawing.Size(147, 21);
             this.comboBox_subtype.TabIndex = 7;
-            // 
-            // label_subtype
-            // 
-            this.label_subtype.AutoSize = true;
-            this.label_subtype.Location = new System.Drawing.Point(14, 6);
-            this.label_subtype.Name = "label_subtype";
-            this.label_subtype.Size = new System.Drawing.Size(88, 13);
-            this.label_subtype.TabIndex = 6;
-            this.label_subtype.Text = "Soldier SubType:";
-            
             // 
             // groupAnimalDet
             // 
@@ -2110,26 +2266,6 @@ namespace SOC.UI
             this.label_Body.Size = new System.Drawing.Size(34, 13);
             this.label_Body.TabIndex = 2;
             this.label_Body.Text = "Body:";
-            // 
-            // label_subtype2
-            // 
-            this.label_subtype2.AutoSize = true;
-            this.label_subtype2.Location = new System.Drawing.Point(14, 6);
-            this.label_subtype2.Name = "label_subtype2";
-            this.label_subtype2.Size = new System.Drawing.Size(88, 13);
-            this.label_subtype2.TabIndex = 8;
-            this.label_subtype2.Text = "Soldier SubType:";
-            // 
-            // comboBox_subtype2
-            // 
-            this.comboBox_subtype2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox_subtype2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_subtype2.FormattingEnabled = true;
-            this.comboBox_subtype2.Location = new System.Drawing.Point(108, 3);
-            this.comboBox_subtype2.Name = "comboBox_subtype2";
-            this.comboBox_subtype2.Size = new System.Drawing.Size(147, 21);
-            this.comboBox_subtype2.TabIndex = 9;
             // 
             // Details
             // 

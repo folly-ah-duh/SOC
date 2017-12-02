@@ -20,6 +20,7 @@ namespace SOC.UI
         public QuestDetails questDetails;
 
         public string[] Langs = { "english", "russian", "pashto", "kikongo", "afrikaans" };
+        public string lastCP = "";
 
         public Details()
         {
@@ -125,38 +126,71 @@ namespace SOC.UI
                 detailTuple.Item3.AutoScroll = true;
             }
 
+            bool isLastCP = false;
+            if (lastCP.Equals(questCP.CPname))
+            {
+                isLastCP = true;
+            }
+            lastCP = questCP.CPname;
+
             panelQuestEnemyDet.AutoScroll = false;
             panelCPEnemyDet.AutoScroll = false;
-            for (int i = 0; i < 8; i++)
+
+            for (int i = 0; i < EnemyInfo.MAXHEAVYARMOR; i++)
             {
-                RefreshOrAddDetail(new EnemyDetail(i), questEnemyDetails, panelQuestEnemyDet);
+                EnemyDetail enemyDetail = new EnemyDetail(i);
+                RefreshOrAddDetail(enemyDetail, questEnemyDetails, panelQuestEnemyDet);
+                if (!isLastCP)
+                {
+                    enemyDetail.e_comboBox_sneakroute.Items.Clear();
+                    enemyDetail.e_comboBox_cautionroute.Items.Clear();
+
+                    if (questCP.CProutes.Length > 0)
+                    {
+                        enemyDetail.e_comboBox_sneakroute.Items.AddRange(questCP.CProutes);
+                        enemyDetail.e_comboBox_cautionroute.Items.AddRange(questCP.CProutes);
+                        enemyDetail.e_comboBox_sneakroute.SelectedIndex = 0;
+                        enemyDetail.e_comboBox_cautionroute.SelectedIndex = 0;
+                    }
+                }
+
             }
-            RemoveExtraDetails(questEnemyDetails, 8, panelQuestEnemyDet);
+            RemoveExtraDetails(questEnemyDetails, EnemyInfo.MAXHEAVYARMOR, panelQuestEnemyDet);
+
             for (int i = 0; i < questCP.CPsoldiers.Length; i++)
             {
                 EnemyDetail enemyDetail = new EnemyDetail(i);
                 RefreshOrAddDetail(enemyDetail, CPEnemyDetails, panelCPEnemyDet);
                 enemyDetail.e_groupBox_main.Text = questCP.CPsoldiers[i];
+                enemyDetail.e_label_spawn.Text = "Customize:"; enemyDetail.e_label_spawn.Left = 26;
+                if (!isLastCP)
+                {
+                    enemyDetail.e_comboBox_sneakroute.Items.Clear();
+                    enemyDetail.e_comboBox_sneakroute.Items.AddRange(questCP.CProutes);
+                    enemyDetail.e_comboBox_sneakroute.SelectedIndex = 0;
+                    enemyDetail.e_comboBox_cautionroute.Items.Clear();
+                    enemyDetail.e_comboBox_cautionroute.Items.AddRange(questCP.CProutes);
+                    enemyDetail.e_comboBox_cautionroute.SelectedIndex = 0;
+                }
             }
             RemoveExtraDetails(CPEnemyDetails, questCP.CPsoldiers.Length, panelCPEnemyDet);
+
             panelQuestEnemyDet.AutoScroll = true;
             panelCPEnemyDet.AutoScroll = true;
-
-
-
-            if (HostageCoords.Count > 0)
-            {
-                h_checkBox_intrgt.Visible = true;
-                h_label_intrgt.Visible = true;
-                label_Body.Visible = true;
-                comboBox_Body.Visible = true;
-            }
-            else
+            
+            if (HostageCoords.Count == 0)
             {
                 h_checkBox_intrgt.Visible = false;
                 h_label_intrgt.Visible = false;
                 label_Body.Visible = false;
                 comboBox_Body.Visible = false;
+            }
+            else
+            {
+                h_checkBox_intrgt.Visible = true;
+                h_label_intrgt.Visible = true;
+                label_Body.Visible = true;
+                comboBox_Body.Visible = true;
             }
             RefreshHostageLanguage();
 
@@ -171,6 +205,21 @@ namespace SOC.UI
                 panelAcItDet.Visible = true;
                 groupItemDet.Text = "Active Items";
                 panelItemDet.Visible = false;
+            }
+
+            if (CPEnemyDetails.Count == 0)
+            {
+                checkBox_customizeall.Visible = false;
+                comboBox_subtype2.Visible = false;
+                label_customizeall.Visible = false;
+                label_subtype2.Visible = false;
+            }
+            else
+            {
+                checkBox_customizeall.Visible = true;
+                comboBox_subtype2.Visible = true;
+                label_customizeall.Visible = true;
+                label_subtype2.Visible = true;
             }
         }
 
@@ -231,7 +280,26 @@ namespace SOC.UI
                 }
             }
         }
-        
+
+        private void checkbox_spawnAll_Click(object sender, EventArgs e)
+        {
+            checkBox_spawnall.Checked = true;
+            foreach (Control control in panelQuestEnemyDet.Controls.Find("e_checkBox_spawn", true))
+            {
+                CheckBox checkbox = (CheckBox)control;
+                checkbox.Checked = true;
+            }
+        }
+
+        private void checkbox_customizeAll_Click(object sender, EventArgs e)
+        {
+            checkBox_customizeall.Checked = true;
+            foreach (Control control in panelCPEnemyDet.Controls.Find("e_checkBox_spawn", true))
+            {
+                CheckBox checkbox = (CheckBox)control;
+                checkbox.Checked = true;
+            }
+        }
     }
 
     

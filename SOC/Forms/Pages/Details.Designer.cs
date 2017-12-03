@@ -1763,7 +1763,6 @@ namespace SOC.UI
                 e_label_power.Enabled = true;
                 e_label_skill.Enabled = true;
                 e_label_sneakroute.Enabled = true;
-                e_label_spawn.Enabled = true;
                 e_label_staff.Enabled = true;
                 e_label_target.Enabled = true;
                 e_listBox_power.Enabled = true;
@@ -1784,7 +1783,6 @@ namespace SOC.UI
                 e_label_power.Enabled = false;
                 e_label_skill.Enabled = false;
                 e_label_sneakroute.Enabled = false;
-                e_label_spawn.Enabled = false;
                 e_label_staff.Enabled = false;
                 e_label_target.Enabled = false;
                 e_listBox_power.Enabled = false;
@@ -1835,6 +1833,10 @@ namespace SOC.UI
             string[] sneakArray = new string[enemyDetail.e_comboBox_sneakroute.Items.Count];
             enemyDetail.e_comboBox_sneakroute.Items.CopyTo(sneakArray, 0);
             e_comboBox_sneakroute.Items.AddRange(sneakArray);
+
+            string[] bodyArray = new string[enemyDetail.e_comboBox_body.Items.Count];
+            enemyDetail.e_comboBox_body.Items.CopyTo(bodyArray, 0);
+            e_comboBox_body.Items.AddRange(bodyArray);
 
             e_comboBox_cautionroute.Text = enemyDetail.e_comboBox_cautionroute.Text;
             e_comboBox_sneakroute.Text = enemyDetail.e_comboBox_sneakroute.Text;
@@ -1994,6 +1996,7 @@ namespace SOC.UI
             this.comboBox_subtype2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox_subtype2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_subtype2.Enabled = false;
             this.comboBox_subtype2.FormattingEnabled = true;
             this.comboBox_subtype2.Location = new System.Drawing.Point(108, 3);
             this.comboBox_subtype2.Name = "comboBox_subtype2";
@@ -2092,6 +2095,7 @@ namespace SOC.UI
             this.comboBox_subtype.Name = "comboBox_subtype";
             this.comboBox_subtype.Size = new System.Drawing.Size(147, 21);
             this.comboBox_subtype.TabIndex = 7;
+            this.comboBox_subtype.SelectedIndexChanged += new System.EventHandler(this.comboBox_subtype_SelectedIndexChanged);
             // 
             // groupAnimalDet
             // 

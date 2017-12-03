@@ -10,6 +10,16 @@ namespace SOC.QuestComponents
     {
         public const int MAXHEAVYARMOR = 8;
 
+        public static string getRegion(CP currentCP)
+        {
+            if (AfghCPs.Contains(currentCP))
+                return "afgh";
+            else if (MafrCPs.Contains(currentCP))
+                return "mafr";
+            else
+                return "mtbs";
+        }
+
         public static string[] powerSetting = new string[] {
             "SOFT_ARMOR",
             "HELMET",

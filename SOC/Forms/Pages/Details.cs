@@ -21,9 +21,11 @@ namespace SOC.UI
 
         public string[] Langs = { "english", "russian", "pashto", "kikongo", "afrikaans" };
         public string lastCP = "";
+        public string lastRegion = "";
 
         public Details()
         {
+            DoubleBuffered = true;
             InitializeComponent();
             questEnemyDetails = new List<Detail>();
             CPEnemyDetails = new List<Detail>();
@@ -125,59 +127,138 @@ namespace SOC.UI
                 }
                 detailTuple.Item3.AutoScroll = true;
             }
+            string currentRegion = EnemyInfo.getRegion(questCP);
 
-            bool isLastCP = false;
-            if (lastCP.Equals(questCP.CPname))
+            if (!currentRegion.Equals("mtbs"))
             {
-                isLastCP = true;
-            }
-            lastCP = questCP.CPname;
+                string[] enemyBodies = new string[0];
+                bool islastRegion = true;
 
-            panelQuestEnemyDet.AutoScroll = false;
-            panelCPEnemyDet.AutoScroll = false;
-
-            for (int i = 0; i < EnemyInfo.MAXHEAVYARMOR; i++)
-            {
-                EnemyDetail enemyDetail = new EnemyDetail(i);
-                RefreshOrAddDetail(enemyDetail, questEnemyDetails, panelQuestEnemyDet);
-                if (!isLastCP)
+                if (!lastRegion.Equals(currentRegion))
                 {
-                    enemyDetail.e_comboBox_sneakroute.Items.Clear();
-                    enemyDetail.e_comboBox_cautionroute.Items.Clear();
-
-                    if (questCP.CProutes.Length > 0)
+                    islastRegion = false;
+                    comboBox_subtype.Items.Clear();
+                    comboBox_subtype2.Items.Clear();
+                    if (currentRegion.Equals("afgh"))
                     {
-                        enemyDetail.e_comboBox_sneakroute.Items.AddRange(questCP.CProutes);
+                        comboBox_subtype.Items.AddRange(BodyInfo.afghSubTypes);
+                        comboBox_subtype2.Items.AddRange(BodyInfo.afghSubTypes);
+                        enemyBodies = BodyInfo.afghBodies;
+                    }
+                    else
+                    {
+                        comboBox_subtype.Items.AddRange(BodyInfo.mafrSubTypes);
+                        comboBox_subtype2.Items.AddRange(BodyInfo.mafrSubTypes);
+                        enemyBodies = BodyInfo.mafrBodies;
+                    }
+                    comboBox_subtype.SelectedIndex = 0;
+                } else if (lastCP.Equals("NONE"))
+                {
+                    islastRegion = false;
+                    if (currentRegion.Equals("afgh"))
+                        enemyBodies = BodyInfo.afghBodies;
+                    else
+                        enemyBodies = BodyInfo.mafrBodies;
+                }
+                lastRegion = currentRegion;
+
+
+                bool isLastCP = false;
+                if (lastCP.Equals(questCP.CPname))
+                {
+                    isLastCP = true;
+                }
+                lastCP = questCP.CPname;
+
+                panelQuestEnemyDet.AutoScroll = false;
+                panelCPEnemyDet.AutoScroll = false;
+                for (int i = 0; i < EnemyInfo.MAXHEAVYARMOR; i++)
+                {
+                    EnemyDetail enemyDetail = new EnemyDetail(i);
+                    RefreshOrAddDetail(enemyDetail, questEnemyDetails, panelQuestEnemyDet);
+                    if (!isLastCP)
+                    {
+                        enemyDetail.e_comboBox_sneakroute.Items.Clear();
+                        enemyDetail.e_comboBox_cautionroute.Items.Clear();
+
+                        if (questCP.CProutes.Length > 0)
+                        {
+                            enemyDetail.e_comboBox_sneakroute.Items.AddRange(questCP.CProutes);
+                            enemyDetail.e_comboBox_cautionroute.Items.AddRange(questCP.CProutes);
+                            enemyDetail.e_comboBox_sneakroute.SelectedIndex = 0;
+                            enemyDetail.e_comboBox_cautionroute.SelectedIndex = 0;
+                        }
+                    }
+                    if (!islastRegion)
+                    {
+                        enemyDetail.e_comboBox_body.Items.Clear();
+                        enemyDetail.e_comboBox_body.Items.AddRange(enemyBodies);
+                        enemyDetail.e_comboBox_body.SelectedIndex = 0;
+                    }
+
+                }
+                RemoveExtraDetails(questEnemyDetails, EnemyInfo.MAXHEAVYARMOR, panelQuestEnemyDet);
+
+                for (int i = 0; i < questCP.CPsoldiers.Length; i++)
+                {
+                    EnemyDetail enemyDetail = new EnemyDetail(i);
+                    RefreshOrAddDetail(enemyDetail, CPEnemyDetails, panelCPEnemyDet);
+                    enemyDetail.e_groupBox_main.Text = questCP.CPsoldiers[i];
+                    enemyDetail.e_label_spawn.Text = "Customize:"; enemyDetail.e_label_spawn.Left = 26;
+                    if (!isLastCP)
+                    {
+                        enemyDetail.e_comboBox_cautionroute.Items.Clear();
+                        enemyDetail.e_comboBox_sneakroute.Items.Clear();
                         enemyDetail.e_comboBox_cautionroute.Items.AddRange(questCP.CProutes);
-                        enemyDetail.e_comboBox_sneakroute.SelectedIndex = 0;
+                        enemyDetail.e_comboBox_sneakroute.Items.AddRange(questCP.CProutes);
                         enemyDetail.e_comboBox_cautionroute.SelectedIndex = 0;
+                        enemyDetail.e_comboBox_sneakroute.SelectedIndex = 0;
+                    }
+                    if (!islastRegion)
+                    {
+                        enemyDetail.e_comboBox_body.Items.Clear();
+                        enemyDetail.e_comboBox_body.Items.AddRange(enemyBodies);
+                        enemyDetail.e_comboBox_body.SelectedIndex = 0;
                     }
                 }
+                RemoveExtraDetails(CPEnemyDetails, questCP.CPsoldiers.Length, panelCPEnemyDet);
 
-            }
-            RemoveExtraDetails(questEnemyDetails, EnemyInfo.MAXHEAVYARMOR, panelQuestEnemyDet);
+                panelQuestEnemyDet.AutoScroll = true;
+                panelCPEnemyDet.AutoScroll = true;
 
-            for (int i = 0; i < questCP.CPsoldiers.Length; i++)
-            {
-                EnemyDetail enemyDetail = new EnemyDetail(i);
-                RefreshOrAddDetail(enemyDetail, CPEnemyDetails, panelCPEnemyDet);
-                enemyDetail.e_groupBox_main.Text = questCP.CPsoldiers[i];
-                enemyDetail.e_label_spawn.Text = "Customize:"; enemyDetail.e_label_spawn.Left = 26;
-                if (!isLastCP)
+                if (CPEnemyDetails.Count == 0)
                 {
-                    enemyDetail.e_comboBox_sneakroute.Items.Clear();
-                    enemyDetail.e_comboBox_sneakroute.Items.AddRange(questCP.CProutes);
-                    enemyDetail.e_comboBox_sneakroute.SelectedIndex = 0;
-                    enemyDetail.e_comboBox_cautionroute.Items.Clear();
-                    enemyDetail.e_comboBox_cautionroute.Items.AddRange(questCP.CProutes);
-                    enemyDetail.e_comboBox_cautionroute.SelectedIndex = 0;
+                    checkBox_customizeall.Visible = false;
+                    comboBox_subtype2.Visible = false;
+                    label_customizeall.Visible = false;
+                    label_subtype2.Visible = false;
                 }
+                else
+                {
+                    checkBox_customizeall.Visible = true;
+                    comboBox_subtype2.Visible = true;
+                    label_customizeall.Visible = true;
+                    label_subtype2.Visible = true;
+                }
+                checkBox_spawnall.Visible = true;
+                comboBox_subtype.Visible = true;
+                label_spawnall.Visible = true;
+                label_subtype.Visible = true;
             }
-            RemoveExtraDetails(CPEnemyDetails, questCP.CPsoldiers.Length, panelCPEnemyDet);
+            else
+            {
+                RemoveExtraDetails(questEnemyDetails, 0, panelQuestEnemyDet);
+                RemoveExtraDetails(CPEnemyDetails, 0, panelCPEnemyDet);
+                checkBox_customizeall.Visible = false;
+                comboBox_subtype2.Visible = false;
+                label_customizeall.Visible = false;
+                label_subtype2.Visible = false;
+                checkBox_spawnall.Visible = false;
+                comboBox_subtype.Visible = false;
+                label_spawnall.Visible = false;
+                label_subtype.Visible = false;
+            }
 
-            panelQuestEnemyDet.AutoScroll = true;
-            panelCPEnemyDet.AutoScroll = true;
-            
             if (HostageCoords.Count == 0)
             {
                 h_checkBox_intrgt.Visible = false;
@@ -192,6 +273,7 @@ namespace SOC.UI
                 label_Body.Visible = true;
                 comboBox_Body.Visible = true;
             }
+
             RefreshHostageLanguage();
 
             if (ActItemsCoords.Count == 0)
@@ -206,26 +288,11 @@ namespace SOC.UI
                 groupItemDet.Text = "Active Items";
                 panelItemDet.Visible = false;
             }
-
-            if (CPEnemyDetails.Count == 0)
-            {
-                checkBox_customizeall.Visible = false;
-                comboBox_subtype2.Visible = false;
-                label_customizeall.Visible = false;
-                label_subtype2.Visible = false;
-            }
-            else
-            {
-                checkBox_customizeall.Visible = true;
-                comboBox_subtype2.Visible = true;
-                label_customizeall.Visible = true;
-                label_subtype2.Visible = true;
-            }
         }
 
         public QuestDetails getQuestDetails()
         {
-            List<HostageDetail> hDetailsCasted = new List<HostageDetail>(); // If there's a better way of doing this....
+            List<HostageDetail> hDetailsCasted = new List<HostageDetail>();
             List<VehicleDetail> vDetailsCasted = new List<VehicleDetail>();
             List<AnimalDetail> aDetailsCasted = new List<AnimalDetail>();
             List<ItemDetail> iDetailsCasted = new List<ItemDetail>();
@@ -299,6 +366,11 @@ namespace SOC.UI
                 CheckBox checkbox = (CheckBox)control;
                 checkbox.Checked = true;
             }
+        }
+
+        private void comboBox_subtype_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBox_subtype2.SelectedIndex = comboBox_subtype.SelectedIndex;
         }
     }
 

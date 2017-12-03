@@ -8,6 +8,84 @@ namespace SOC.QuestComponents
 {
     public static class BodyInfo
     {
+        public static string[] mafrSubTypes =
+        {
+            "PF_A",
+            "PF_B",
+            "PF_C",
+        };
+        public static string[] afghSubTypes =
+        {
+            "SOVIET_A",
+            "SOVIET_B",
+        };
+        public static string[] mafrBodies =
+        {
+            "DEFAULT",
+            "pfs0_rfl_v00_a",
+            "pfs0_rfl_v01_a",
+            "pfs0_mcg_v00_a",
+            "pfs0_snp_v00_a",
+            "pfs0_rdo_v00_a",
+            "pfs0_rfl_v00_b",
+            "pfs0_rfl_v01_b",
+            "pfs0_mcg_v00_b",
+            "pfs0_snp_v00_b",
+            "pfs0_rdo_v00_b",
+            "pfs0_rfl_v00_c",
+            "pfs0_rfl_v01_c",
+            "pfs0_mcg_v00_c",
+            "pfs0_snp_v00_c",
+            "pfs0_rdo_v00_c",
+            "pfs0_unq_v210",
+            "pfs0_unq_v250",
+            "pfs0_unq_v360",
+            "pfs0_unq_v280",
+            "pfs0_unq_v150",
+            "pfs0_unq_v220",
+            "pfs0_unq_v140",
+            "pfs0_unq_v241",
+            "pfs0_unq_v242",
+            "pfs0_unq_v450",
+            "pfs0_unq_v440",
+            "pfs0_unq_v155",
+            "svs0_dds0_v00",
+        };
+        public static string[] afghBodies =
+        {
+            "DEFAULT",
+            "svs0_rfl_v00_a",
+            "svs0_rfl_v01_a",
+            "svs0_rfl_v02_a",
+            "svs0_mcg_v00_a",
+            "svs0_mcg_v01_a",
+            "svs0_mcg_v02_a",
+            "svs0_snp_v00_a",
+            "svs0_rdo_v00_a",
+            "svs0_rfl_v00_b",
+            "svs0_rfl_v01_b",
+            "svs0_rfl_v02_b",
+            "svs0_mcg_v00_b",
+            "svs0_mcg_v01_b",
+            "svs0_mcg_v02_b",
+            "svs0_snp_v00_b",
+            "svs0_rdo_v00_b",
+            "svs0_unq_v010",
+            "svs0_unq_v080",
+            "svs0_unq_v020",
+            "svs0_unq_v040",
+            "svs0_unq_v050",
+            "svs0_unq_v060",
+            "svs0_unq_v100",
+            "svs0_unq_v070",
+            "svs0_unq_v071",
+            "svs0_unq_v072",
+            "svs0_unq_v420",
+            "svs0_unq_v009",
+            "svs0_unq_v421",
+            "pfs0_dds0_v00",
+        };
+
         public static BodyInfoEntry[] BodyInfoArray = {
              new BodyInfoEntry(
                 "AFGH_HOSTAGE",

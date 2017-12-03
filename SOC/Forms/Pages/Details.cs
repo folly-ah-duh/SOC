@@ -68,8 +68,10 @@ namespace SOC.UI
                 if (i <= remainder - 1)
                     continue;
                 {
-                    panel.Controls.Remove(details[i].getGroupBoxMain());
+                    GroupBox detailGroupBox = details[i].getGroupBoxMain();
+                    panel.Controls.Remove(detailGroupBox);
                     details.RemoveAt(i);
+                    detailGroupBox.Dispose();
                 }
             }
         }
@@ -292,6 +294,7 @@ namespace SOC.UI
 
         public QuestDetails getQuestDetails()
         {
+            List<EnemyDetail> eDetailsCasted = new List<EnemyDetail>();
             List<HostageDetail> hDetailsCasted = new List<HostageDetail>();
             List<VehicleDetail> vDetailsCasted = new List<VehicleDetail>();
             List<AnimalDetail> aDetailsCasted = new List<AnimalDetail>();
@@ -299,31 +302,41 @@ namespace SOC.UI
             List<ActiveItemDetail> aiDetailsCasted = new List<ActiveItemDetail>();
             List<ModelDetail> mDetailsCasted = new List<ModelDetail>();
 
-            foreach (Detail detail in hostageDetails)
-                hDetailsCasted.Add((HostageDetail)detail);
+            foreach (EnemyDetail enemyDetail in questEnemyDetails)
+                eDetailsCasted.Add(enemyDetail);
 
-            foreach (Detail detail in vehicleDetails)
-                vDetailsCasted.Add((VehicleDetail)detail);
+            foreach (EnemyDetail enemyDetail in CPEnemyDetails)
+                eDetailsCasted.Add(enemyDetail);
 
-            foreach (Detail detail in animalDetails)
-                aDetailsCasted.Add((AnimalDetail)detail);
+            foreach (HostageDetail detail in hostageDetails)
+                hDetailsCasted.Add(detail);
 
-            foreach (Detail detail in itemDetails)
-                iDetailsCasted.Add((ItemDetail)detail);
+            foreach (VehicleDetail detail in vehicleDetails)
+                vDetailsCasted.Add(detail);
 
-            foreach (Detail detail in activeItemDetails)
-                aiDetailsCasted.Add((ActiveItemDetail)detail);
+            foreach (AnimalDetail detail in animalDetails)
+                aDetailsCasted.Add(detail);
 
-            foreach (Detail detail in modelDetails)
-                mDetailsCasted.Add((ModelDetail)detail);
+            foreach (ItemDetail detail in itemDetails)
+                iDetailsCasted.Add(detail);
 
-            questDetails = new QuestDetails(hDetailsCasted, vDetailsCasted, aDetailsCasted, iDetailsCasted, aiDetailsCasted, mDetailsCasted, comboBox_Body.SelectedIndex, h_checkBox_intrgt.Checked);
+            foreach (ActiveItemDetail detail in activeItemDetails)
+                aiDetailsCasted.Add(detail);
+
+            foreach (ModelDetail detail in modelDetails)
+                mDetailsCasted.Add(detail);
+
+            questDetails = new QuestDetails(eDetailsCasted, hDetailsCasted, vDetailsCasted, aDetailsCasted, iDetailsCasted, aiDetailsCasted, mDetailsCasted, comboBox_Body.SelectedIndex, h_checkBox_intrgt.Checked, comboBox_subtype.Text);
             return questDetails;
         }
 
         private void comboBox_Body_SelectedIndexChanged(object sender, EventArgs e)
         {
             RefreshHostageLanguage();
+        }
+
+        public static void checkArmorCapacity()
+        {
         }
 
         private void RefreshHostageLanguage()

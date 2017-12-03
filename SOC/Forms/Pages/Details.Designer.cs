@@ -1496,6 +1496,7 @@ namespace SOC.UI
             this.e_groupBox_main.Controls.Add(this.e_checkBox_spawn);
             this.e_groupBox_main.Controls.Add(this.e_label_spawn);
             this.e_groupBox_main.Controls.Add(this.e_label_target);
+            e_groupBox_main.Disposed += new EventHandler(this.e_groupBox_main_Disposed);
             this.e_groupBox_main.Location = new System.Drawing.Point(4, 55 + (319 * enemyNum));
             this.e_groupBox_main.Name = "e_groupBox_main";
             this.e_groupBox_main.Size = new System.Drawing.Size(251, 302);
@@ -1708,7 +1709,7 @@ namespace SOC.UI
             this.e_checkBox_armor.Size = new System.Drawing.Size(15, 14);
             this.e_checkBox_armor.TabIndex = 3;
             this.e_checkBox_armor.UseVisualStyleBackColor = true;
-            this.e_checkBox_armor.CheckedChanged += new EventHandler(this.e_checkBox_armor_CheckedChanged);
+            this.e_checkBox_armor.Click += new EventHandler(this.e_checkBox_armor_CheckedChanged);
             e_checkBox_armor.Enabled = false;
             // 
             // e_label_armor
@@ -1742,6 +1743,12 @@ namespace SOC.UI
 
             this.e_groupBox_main.ResumeLayout(false);
             this.e_groupBox_main.PerformLayout();
+        }
+
+        private void e_groupBox_main_Disposed(object sender, EventArgs e)
+        {
+            if (e_checkBox_armor.Checked)
+                QuestComponents.EnemyInfo.armorCount--;
         }
 
         private void e_checkBox_spawn_CheckedChanged(object sender, EventArgs e)
@@ -1793,11 +1800,23 @@ namespace SOC.UI
         {
             if (e_checkBox_armor.Checked)
             {
-                e_listBox_power.Items.Add("QUEST_ARMOR");
-                e_listBox_power.SelectedIndex = e_listBox_power.Items.Count - 1;
+                if (QuestComponents.EnemyInfo.armorCount >= QuestComponents.EnemyInfo.MAXHEAVYARMOR)
+                {
+                    MessageBox.Show("Heavy Armor can only be applied to 8 soldiers maximum.", "Game Limitation Exceeded", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    e_checkBox_armor.Checked = false;
+                }
+                else
+                {
+                    QuestComponents.EnemyInfo.armorCount++;
+                    e_listBox_power.Items.Add("QUEST_ARMOR");
+                    e_listBox_power.SelectedIndex = e_listBox_power.Items.Count - 1;
+                    e_comboBox_body.Enabled = false;
+                }
             }
             else
             {
+                QuestComponents.EnemyInfo.armorCount--;
+                e_comboBox_body.Enabled = true;
                 e_listBox_power.Items.Remove("QUEST_ARMOR");
                 e_listBox_power.SelectedIndex = e_listBox_power.Items.Count - 1;
             }

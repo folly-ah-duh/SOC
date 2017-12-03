@@ -43,8 +43,12 @@ namespace SOC.Classes
                 if (!bodyInfo.hasface)
                     packFiles += string.Format("\n\t\trandomFaceListIH = {{gender = \"{0}\", count = {1}}}, ", gender, questDetails.hostageDetails.Count);
 
+            string bodies = "";
+            foreach (string body in getEnemyBodies(questDetails.enemyDetails))
+                bodies += string.Format("TppEnemyBodyId.{0}, ", body);
+
             if (locName.Equals("AFGH") || locName.Equals("MAFR"))
-                packFiles += string.Format("\n\t\tbodyIdList={{ TppDefine.QUEST_BODY_ID_LIST.{0}_ARMOR, }}, ", locName);
+                packFiles += string.Format("\n\t\tbodyIdList={{ TppDefine.QUEST_BODY_ID_LIST.{0}_ARMOR, {1}}}, ", locName, bodies);
 
             string questPackList = string.Format("\tquestPackList = {{ {0} \n\t}},", packFiles);
 
@@ -103,7 +107,9 @@ namespace SOC.Classes
             questLua[GetLineOf("local CPNAME =", questLua)] = string.Format("local CPNAME = \"{0}\"", definitionDetails.CPName); //add cp combobox to setup
             questLua[GetLineOf("local useInter =", questLua)] = string.Format("local useInter = {0}", questDetails.canInter.ToString().ToLower()); //add interogation checkbox to setup
             questLua[GetLineOf("local qType =", questLua)] = string.Format("local qType = TppDefine.QUEST_TYPE.{0}", definitionDetails.objectiveType); //add questtype combobox to setup
+            questLua[GetLineOf("local SUBTYPE =", questLua)] = string.Format("local SUBTYPE = \"{0}\"", questDetails.soldierSubType);
 
+            questLua.InsertRange(GetLineOf("    enemyList = {", questLua) + 1, BuildEnemyList(questDetails));
             questLua.InsertRange(GetLineOf("    vehicleList = {", questLua) + 1, BuildVehicleList(questDetails));
             questLua.InsertRange(GetLineOf("    hostageList = {", questLua) + 1, BuildHostageList(questDetails));
             questLua.InsertRange(GetLineOf("    animalList = {", questLua) + 1, BuildAnimalList(questDetails));
@@ -126,6 +132,18 @@ namespace SOC.Classes
                     return i;
 
             return -1;
+        }
+
+        public static List<string> getEnemyBodies(List<EnemyDetail> enemyDetails)
+        {
+            List<string> bodyList = new List<string>();
+
+            foreach (EnemyDetail enemyDetail in enemyDetails)
+                if (enemyDetail.e_comboBox_body.Enabled && !enemyDetail.e_comboBox_body.Text.Equals("DEFAULT"))
+                    if (!bodyList.Contains(enemyDetail.e_comboBox_body.Text))
+                        bodyList.Add(enemyDetail.e_comboBox_body.Text);
+
+            return bodyList;
         }
 
         public static List<string> BuildAnimalList(QuestDetails questDetails)
@@ -182,6 +200,52 @@ namespace SOC.Classes
             animalTargetList.Add("	},");
 
             return animalTargetList;
+        }
+
+        public static List<string> BuildEnemyList(QuestDetails questDetails)
+        {
+            List<string> enemyList = new List<string>();
+
+            List<EnemyDetail> detailList = questDetails.enemyDetails;
+            int enemyCount = 0;
+
+            foreach (EnemyDetail enemyDetail in detailList)
+            {
+
+                string powerlist = "";
+                if (!enemyDetail.e_checkBox_spawn.Checked)
+                    continue;
+                enemyCount++;
+                enemyList.Add("		{");
+                enemyList.Add(string.Format("			enemyName = \"{0}\",", enemyDetail.e_groupBox_main.Text));
+                enemyList.Add(string.Format("			route_d = \"{0}\",", enemyDetail.e_comboBox_sneakroute.Text));
+                enemyList.Add(string.Format("			route_c = \"{0}\",", enemyDetail.e_comboBox_cautionroute.Text));
+                enemyList.Add("			cpName = CPNAME,");
+                if (enemyDetail.e_listBox_power.Items.Count > 0)
+                {
+                    foreach (string power in enemyDetail.e_listBox_power.Items)
+                    {
+                        powerlist += string.Format("\"{0}\", ", power);
+                    }
+                    enemyList.Add(string.Format("			powerSetting = {{ {0} }},", powerlist));
+                }
+                enemyList.Add("			soldierSubType = SUBTYPE,");
+
+                if (!enemyDetail.e_comboBox_staff.Text.Equals("NONE"))
+                    enemyList.Add(string.Format("			staffTypeId = TppDefine.STAFF_TYPE_ID.{0},", enemyDetail.e_comboBox_staff.Text));
+
+                if (!enemyDetail.e_comboBox_skill.Text.Equals("NONE"))
+                    enemyList.Add(string.Format("			skill = \"{0}\",", enemyDetail.e_comboBox_skill.Text));
+
+                if (!enemyDetail.e_comboBox_body.Text.Equals("DEFAULT") && enemyDetail.e_comboBox_body.Enabled)
+                    enemyList.Add(string.Format("			bodyId = TppEnemyBodyId.{0},", enemyDetail.e_comboBox_skill.Text));
+
+                enemyList.Add("		},");
+            }
+            if (enemyCount == 0)
+                enemyList.Add("nil");
+
+            return enemyList;
         }
 
         public static List<string> BuildHostageList(QuestDetails questDetails)
@@ -283,6 +347,13 @@ namespace SOC.Classes
         {
             int totalCount = 0;
             List<string> targetList = new List<string>();
+
+            foreach(EnemyDetail enemy in questDetails.enemyDetails)
+                if (enemy.e_checkBox_spawn.Checked && enemy.e_checkBox_target.Checked)
+                {
+                    targetList.Add(string.Format("		\"{0}\",", enemy.e_groupBox_main.Text));
+                    totalCount++;
+                }
 
             foreach (HostageDetail hostage in questDetails.hostageDetails)
                 if (hostage.h_checkBox_target.Checked)

@@ -914,6 +914,7 @@ namespace SOC.QuestComponents
 
         public class QuestDetails
         {
+            public List<EnemyDetail> enemyDetails;
             public List<HostageDetail> hostageDetails;
             public List<VehicleDetail> vehicleDetails;
             public List<ItemDetail> itemDetails;
@@ -922,9 +923,11 @@ namespace SOC.QuestComponents
             public List<AnimalDetail> animalDetails;
             public int hostageBodyIndex;
             public bool canInter;
+            public string soldierSubType;
 
-            public QuestDetails(List<HostageDetail> hosDets, List<VehicleDetail> vehDets, List<AnimalDetail> anidets, List<ItemDetail> itDets, List<ActiveItemDetail> acitdets, List<ModelDetail> MdDets, int bodyIndex, bool inter)
+            public QuestDetails(List<EnemyDetail> enedets, List<HostageDetail> hosDets, List<VehicleDetail> vehDets, List<AnimalDetail> anidets, List<ItemDetail> itDets, List<ActiveItemDetail> acitdets, List<ModelDetail> MdDets, int bodyIndex, bool inter, string sst)
             {
+                enemyDetails = enedets;
                 hostageDetails = hosDets;
                 vehicleDetails = vehDets;
                 itemDetails = itDets;
@@ -933,6 +936,7 @@ namespace SOC.QuestComponents
                 animalDetails = anidets;
                 hostageBodyIndex = bodyIndex;
                 canInter = inter;
+                soldierSubType = sst;
             }
         }
         

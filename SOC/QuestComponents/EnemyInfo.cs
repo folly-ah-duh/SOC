@@ -10,6 +10,8 @@ namespace SOC.QuestComponents
     {
         public const int MAXHEAVYARMOR = 8;
 
+        public static int armorCount = 0;
+
         public static string getRegion(CP currentCP)
         {
             if (AfghCPs.Contains(currentCP))

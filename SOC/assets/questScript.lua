@@ -9,11 +9,13 @@ local hostageCount = 0
 local CPNAME = ""
 local useInter = true
 local qType = TppDefine.QUEST_TYPE.RECOVERED
+local SUBTYPE = ""
 
 this.QUEST_TABLE = {
 
     questType = qType,
     isQuestArmor = true,
+	soldierSubType = SUBTYPE,
 
     cpList = {
       nil

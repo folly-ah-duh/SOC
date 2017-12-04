@@ -464,9 +464,9 @@
             this.label22.AutoSize = true;
             this.label22.Location = new System.Drawing.Point(3, 208);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(245, 13);
+            this.label22.Size = new System.Drawing.Size(303, 13);
             this.label22.TabIndex = 26;
-            this.label22.Text = "Animal Cluster Locations: (X, Y, Z, Y-Axis Rotation)";
+            this.label22.Text = "Animal Cluster Locations: {pos={X, Y, Z},rotY=Y-Axis Rotation},";
             // 
             // textBox_ActiveItem
             // 
@@ -484,9 +484,9 @@
             this.label21.AutoSize = true;
             this.label21.Location = new System.Drawing.Point(3, 410);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(232, 13);
+            this.label21.Size = new System.Drawing.Size(290, 13);
             this.label21.TabIndex = 24;
-            this.label21.Text = "Active Item Locations: (X, Y, Z, Y-Axis Rotation)";
+            this.label21.Text = "Active Item Locations: {pos={X, Y, Z},rotY=Y-Axis Rotation},";
             // 
             // textBoxItemCoords
             // 
@@ -524,9 +524,9 @@
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(3, 6);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(217, 13);
+            this.label15.Size = new System.Drawing.Size(275, 13);
             this.label15.TabIndex = 16;
-            this.label15.Text = "Prisoner Locations: (X, Y, Z, Y-Axis Rotation)";
+            this.label15.Text = "Prisoner Locations: {pos={X, Y, Z},rotY=Y-Axis Rotation},";
             // 
             // textBoxVehCoords
             // 
@@ -543,27 +543,27 @@
             this.label16.AutoSize = true;
             this.label16.Location = new System.Drawing.Point(3, 107);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(214, 13);
+            this.label16.Size = new System.Drawing.Size(272, 13);
             this.label16.TabIndex = 18;
-            this.label16.Text = "Vehicle Locations: (X, Y, Z, Y-Axis Rotation)";
+            this.label16.Text = "Vehicle Locations: {pos={X, Y, Z},rotY=Y-Axis Rotation},";
             // 
             // label18
             // 
             this.label18.AutoSize = true;
             this.label18.Location = new System.Drawing.Point(3, 511);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(238, 13);
+            this.label18.Size = new System.Drawing.Size(296, 13);
             this.label18.TabIndex = 22;
-            this.label18.Text = "Static Model Locations: (X, Y, Z, Y-Axis Rotation)";
+            this.label18.Text = "Static Model Locations: {pos={X, Y, Z},rotY=Y-Axis Rotation},";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
             this.label17.Location = new System.Drawing.Point(3, 309);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(199, 13);
+            this.label17.Size = new System.Drawing.Size(257, 13);
             this.label17.TabIndex = 20;
-            this.label17.Text = "Item Locations: (X, Y, Z, Y-Axis Rotation)";
+            this.label17.Text = "Item Locations: {pos={X, Y, Z},rotY=Y-Axis Rotation},";
             // 
             // groupBox1
             // 

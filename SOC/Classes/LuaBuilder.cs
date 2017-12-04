@@ -238,7 +238,7 @@ namespace SOC.Classes
                     enemyList.Add(string.Format("			skill = \"{0}\",", enemyDetail.e_comboBox_skill.Text));
 
                 if (!enemyDetail.e_comboBox_body.Text.Equals("DEFAULT") && enemyDetail.e_comboBox_body.Enabled)
-                    enemyList.Add(string.Format("			bodyId = TppEnemyBodyId.{0},", enemyDetail.e_comboBox_skill.Text));
+                    enemyList.Add(string.Format("			bodyId = TppEnemyBodyId.{0},", enemyDetail.e_comboBox_body.Text));
 
                 enemyList.Add("		},");
             }

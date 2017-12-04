@@ -8,6 +8,7 @@ namespace SOC.UI
 {
     public partial class Details : UserControl
     {
+        List<GroupBox> detailLists;
         List<Detail> questEnemyDetails;
         List<Detail> CPEnemyDetails;
         List<Detail> hostageDetails;
@@ -25,8 +26,9 @@ namespace SOC.UI
 
         public Details()
         {
-            DoubleBuffered = true;
             InitializeComponent();
+            DoubleBuffered = true;
+            detailLists = new List<GroupBox>();
             questEnemyDetails = new List<Detail>();
             CPEnemyDetails = new List<Detail>();
             hostageDetails = new List<Detail>();
@@ -79,6 +81,8 @@ namespace SOC.UI
         public void RefreshDetails(CP questCP, List<Coordinates> HostageCoords, List<Coordinates> VehicleCoords, List<Coordinates> ItemCoords, List<Coordinates> ModelCoords, List<Coordinates> ActItemsCoords, List<Coordinates> AnimalCoords)
         {
 
+            string currentRegion = EnemyInfo.getRegion(questCP);
+
             Tuple<List<Detail>, List<Coordinates>, Panel>[] detailTuples =
             {
                 new Tuple<List<Detail>, List<Coordinates>, Panel>(hostageDetails, HostageCoords, panelHosDet),
@@ -129,7 +133,6 @@ namespace SOC.UI
                 }
                 detailTuple.Item3.AutoScroll = true;
             }
-            string currentRegion = EnemyInfo.getRegion(questCP);
 
             if (!currentRegion.Equals("mtbs"))
             {
@@ -277,18 +280,58 @@ namespace SOC.UI
             }
 
             RefreshHostageLanguage();
+            ShiftVisibilities();
+            ShiftGroups();
+        }
 
-            if (ActItemsCoords.Count == 0)
+        private void ShiftVisibilities()
+        {
+            detailLists = new List<GroupBox>();
+            Tuple<List<Detail>, GroupBox>[] detailTuples =
             {
-                panelItemDet.Visible = true;
-                groupItemDet.Text = "Dormant Items";
-                panelAcItDet.Visible = false;
+                new Tuple<List<Detail>, GroupBox>(questEnemyDetails, groupNewEneDet),
+                new Tuple<List<Detail>, GroupBox>(CPEnemyDetails, groupExistingEneDet),
+                new Tuple<List<Detail>, GroupBox>(hostageDetails, groupHosDet),
+                new Tuple<List<Detail>, GroupBox>(vehicleDetails, groupVehDet),
+                new Tuple<List<Detail>, GroupBox>(animalDetails, groupAnimalDet),
+                new Tuple<List<Detail>, GroupBox>(itemDetails, groupItemDet),
+                new Tuple<List<Detail>, GroupBox>(activeItemDetails, groupActiveItemDet),
+                new Tuple<List<Detail>, GroupBox>(modelDetails, groupStMdDet),
+            };
+            foreach (Tuple<List<Detail>, GroupBox> tuple in detailTuples)
+            {
+                if (tuple.Item1.Count > 0)
+                {
+                    tuple.Item2.Visible = true;
+                    detailLists.Add(tuple.Item2);
+                }
+                else tuple.Item2.Visible = false;
             }
-            else
+
+        }
+
+        internal void ShiftGroups()
+        {
+            int dynamicMaxAdjust = 105 / detailLists.Count;
+            int maxPanelWidth = 298 + dynamicMaxAdjust;
+            int dynamicPanelWidth = Width / 4 - 20;
+
+            if (dynamicPanelWidth >= maxPanelWidth)
+                dynamicPanelWidth = maxPanelWidth;
+
+            foreach (GroupBox detailGroupBox in detailLists)
             {
-                panelAcItDet.Visible = true;
-                groupItemDet.Text = "Active Items";
-                panelItemDet.Visible = false;
+                detailGroupBox.Width = dynamicPanelWidth;
+            }
+            if (detailLists.Count > 0)
+            {
+                int xOffset = detailLists[0].Location.X;
+                int bufferSpace = 2 + dynamicPanelWidth;
+
+                for (int i = 1; i < detailLists.Count; i++)
+                {
+                    detailLists[i].Left = xOffset + bufferSpace * i;
+                }
             }
         }
 
@@ -333,10 +376,6 @@ namespace SOC.UI
         private void comboBox_Body_SelectedIndexChanged(object sender, EventArgs e)
         {
             RefreshHostageLanguage();
-        }
-
-        public static void checkArmorCapacity()
-        {
         }
 
         private void RefreshHostageLanguage()

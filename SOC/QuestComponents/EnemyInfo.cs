@@ -33,7 +33,6 @@ namespace SOC.QuestComponents
             "MG",
             "SHOTGUN",
             "SMG",
-            "NO_KILL_WEAPON",
             "GUN_LIGHT",
             "STRONG_WEAPON",
             "STRONG_PATROL",

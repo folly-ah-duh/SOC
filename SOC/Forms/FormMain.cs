@@ -14,6 +14,7 @@ namespace SOC.UI
     {
         private Setup setupPage = new Setup();
         private Details detailPage = new Details();
+        private List<GroupBox> detailPageBoxes = new List<GroupBox>();
         private int panelNum = 0;
             
         public FormMain()
@@ -38,7 +39,7 @@ namespace SOC.UI
         }
         private bool isFilled()
         {
-            return true; // FOR DEBUG
+            //return true; // FOR DEBUG
             if (string.IsNullOrEmpty(setupPage.textBoxFPKName.Text) || string.IsNullOrEmpty(setupPage.textBoxQuestNum.Text) || string.IsNullOrEmpty(setupPage.textBoxQuestTitle.Text) || string.IsNullOrEmpty(setupPage.textBoxQuestDesc.Text))
                 return false;
             if (setupPage.comboBoxCategory.SelectedIndex == -1 || setupPage.comboBoxReward.SelectedIndex == -1 || setupPage.comboBoxObjective.SelectedIndex == -1 || setupPage.comboBoxProgressNotifs.SelectedIndex == -1 || setupPage.comboBoxRegion.SelectedIndex == -1)
@@ -128,32 +129,9 @@ namespace SOC.UI
 
         private void FormMain_SizeChanged(object sender, EventArgs e)
         {
-            int maxPanelWidth = 313;
             detailPage.Height = this.Height - 100;
             detailPage.Width = this.Width - 42;
-            int dynamicPanelWidth = detailPage.Width / 4 - 20;
-
-            if (dynamicPanelWidth >= maxPanelWidth)
-                dynamicPanelWidth = maxPanelWidth;
-
-            detailPage.groupNewEneDet.Width = dynamicPanelWidth;
-            detailPage.groupExistingEneDet.Width = dynamicPanelWidth;
-            detailPage.groupHosDet.Width = dynamicPanelWidth;
-            detailPage.groupVehDet.Width = dynamicPanelWidth;
-            detailPage.groupItemDet.Width = dynamicPanelWidth;
-            detailPage.groupStMdDet.Width = dynamicPanelWidth;
-            detailPage.groupAnimalDet.Width = dynamicPanelWidth;
-
-            int xOffset = detailPage.groupNewEneDet.Location.X;
-            int bufferSpace = 2 + dynamicPanelWidth;
-
-            detailPage.groupExistingEneDet.Left = xOffset + bufferSpace * 1;
-            detailPage.groupHosDet.Left = xOffset + bufferSpace * 2;
-            detailPage.groupVehDet.Left = xOffset + bufferSpace * 3;
-            detailPage.groupAnimalDet.Left = xOffset + bufferSpace * 4;
-            detailPage.groupItemDet.Left = xOffset + bufferSpace * 5;
-            detailPage.groupStMdDet.Left = xOffset + bufferSpace * 6;
-
+            detailPage.ShiftGroups();
         }
 
         public static List<Coordinates> BuildCoordinatesList(string rawString)

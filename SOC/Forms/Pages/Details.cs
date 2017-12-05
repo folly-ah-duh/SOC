@@ -83,7 +83,7 @@ namespace SOC.UI
 
         public void RefreshDetails(CP questCP, List<Coordinates> HostageCoords, List<Coordinates> VehicleCoords, List<Coordinates> ItemCoords, List<Coordinates> ModelCoords, List<Coordinates> ActItemsCoords, List<Coordinates> AnimalCoords)
         {
-            
+            ShiftVisibilities(true);
             string currentRegion = EnemyInfo.getRegion(questCP);
 
             if (!currentRegion.Equals("mtbs"))
@@ -183,38 +183,11 @@ namespace SOC.UI
 
                 panelQuestEnemyDet.AutoScroll = true;
                 panelCPEnemyDet.AutoScroll = true;
-
-                if (CPEnemyDetails.Count == 0)
-                {
-                    checkBox_customizeall.Visible = false;
-                    comboBox_subtype2.Visible = false;
-                    label_customizeall.Visible = false;
-                    label_subtype2.Visible = false;
-                }
-                else
-                {
-                    checkBox_customizeall.Visible = true;
-                    comboBox_subtype2.Visible = true;
-                    label_customizeall.Visible = true;
-                    label_subtype2.Visible = true;
-                }
-                checkBox_spawnall.Visible = true;
-                comboBox_subtype.Visible = true;
-                label_spawnall.Visible = true;
-                label_subtype.Visible = true;
             }
             else
             {
                 RemoveExtraDetails(questEnemyDetails, 0, panelQuestEnemyDet);
                 RemoveExtraDetails(CPEnemyDetails, 0, panelCPEnemyDet);
-                checkBox_customizeall.Visible = false;
-                comboBox_subtype2.Visible = false;
-                label_customizeall.Visible = false;
-                label_subtype2.Visible = false;
-                checkBox_spawnall.Visible = false;
-                comboBox_subtype.Visible = false;
-                label_spawnall.Visible = false;
-                label_subtype.Visible = false;
             }
 
             Tuple<List<Detail>, List<Coordinates>, Panel>[] detailTuples =
@@ -268,24 +241,9 @@ namespace SOC.UI
                 detailTuple.Item3.AutoScroll = true;
             }
 
-            if (HostageCoords.Count == 0)
-            {
-                h_checkBox_intrgt.Visible = false;
-                h_label_intrgt.Visible = false;
-                label_Body.Visible = false;
-                comboBox_Body.Visible = false;
-            }
-            else
-            {
-                h_checkBox_intrgt.Visible = true;
-                h_label_intrgt.Visible = true;
-                label_Body.Visible = true;
-                comboBox_Body.Visible = true;
-            }
-            // set selected visible
+            RefreshHostageLanguage();
             ShiftVisibilities(false);
             ShiftGroups();
-            RefreshHostageLanguage();
         }
 
         private void ShiftVisibilities(bool hideAll)
@@ -315,8 +273,8 @@ namespace SOC.UI
 
         internal void ShiftGroups()
         {
-            int dynamicMaxAdjust = 210 / (detailLists.Count + 1);
-            int maxPanelWidth = 290 + dynamicMaxAdjust;
+            int dynamicMaxAdjust = 310 / (detailLists.Count + 1);
+            int maxPanelWidth = 269 + dynamicMaxAdjust;
             dynamicPanelWidth = Width / 4 - 20;
 
             if (dynamicPanelWidth >= maxPanelWidth)
@@ -328,10 +286,10 @@ namespace SOC.UI
             }
             if (detailLists.Count > 0)
             {
-                int xOffset = detailLists[0].Location.X;
+                int xOffset = 3;
                 int bufferSpace = 2 + dynamicPanelWidth;
 
-                for (int i = 1; i < detailLists.Count; i++)
+                for (int i = 0; i < detailLists.Count; i++)
                 {
                     detailLists[i].Left = xOffset + bufferSpace * i;
                 }
@@ -426,6 +384,11 @@ namespace SOC.UI
         private void comboBox_subtype_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBox_subtype2.SelectedIndex = comboBox_subtype.SelectedIndex;
+        }
+
+        private void DetailFocus(object sender, EventArgs e)
+        {
+            ((Panel)sender).Focus();
         }
     }
 

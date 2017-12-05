@@ -25,7 +25,7 @@ namespace SOC.UI
 
         public abstract void SetDetail(Detail detail);
 
-        public abstract void BuildDetail();
+        public abstract void BuildDetail(int width);
 
 
     }
@@ -75,8 +75,10 @@ namespace SOC.UI
             h_comboBox_staff.Text = hostageDetail.h_comboBox_staff.Text;
         }
 
-        public override void BuildDetail()
+        public override void BuildDetail(int width)
         {
+            width -= 15;
+            int comboboxWidth = width - 100;
             this.h_groupBox_main = new System.Windows.Forms.GroupBox();
             this.h_textBox_zcoord = new System.Windows.Forms.TextBox();
             this.h_textBox_ycoord = new System.Windows.Forms.TextBox();
@@ -129,9 +131,9 @@ namespace SOC.UI
             this.h_groupBox_main.Controls.Add(this.h_label_lang);
 
             this.h_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
-            this.h_groupBox_main.Location = new System.Drawing.Point(4, 55 + (253 * hostageNum));
+            this.h_groupBox_main.Location = new System.Drawing.Point(3, 55 + (253 * hostageNum));
             this.h_groupBox_main.Name = "h_groupBox_main";
-            this.h_groupBox_main.Size = new System.Drawing.Size(252, 236);
+            this.h_groupBox_main.Size = new System.Drawing.Size(width, 236);
             this.h_groupBox_main.TabStop = false;
             this.h_groupBox_main.TabIndex = 1;
             this.h_groupBox_main.Text = "Hostage_" + hostageNum;
@@ -191,7 +193,7 @@ namespace SOC.UI
             "315"
             });
             this.h_comboBox_rot.Name = "h_comboBox_rot";
-            this.h_comboBox_rot.Size = new System.Drawing.Size(150, 21);
+            this.h_comboBox_rot.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.h_comboBox_rot.TabIndex = 5;
             this.h_comboBox_rot.Text = hostageCoords.roty;
             this.h_label_rot.AutoSize = true;
@@ -210,7 +212,7 @@ namespace SOC.UI
             this.h_comboBox_scared.Items.AddRange(new object[] {
             "NORMAL", "ALWAYS", "NEVER"});
             this.h_comboBox_scared.Name = "h_comboBox_scared";
-            this.h_comboBox_scared.Size = new System.Drawing.Size(150, 21);
+            this.h_comboBox_scared.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.h_comboBox_scared.TabIndex = 7;
             this.h_comboBox_scared.Text = "NORMAL";
             this.h_label_scared.AutoSize = true;
@@ -252,7 +254,7 @@ namespace SOC.UI
             this.h_comboBox_lang.Location = new System.Drawing.Point(84, 146);
             this.h_comboBox_lang.Items.AddRange(new object[] { "english", "russian", "pashto", "kikongo", "afrikaans" });
             this.h_comboBox_lang.Name = "h_comboBox_lang";
-            this.h_comboBox_lang.Size = new System.Drawing.Size(150, 21);
+            this.h_comboBox_lang.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.h_comboBox_lang.TabIndex = 9;
             this.h_label_lang.AutoSize = true;
             this.h_label_lang.Location = new System.Drawing.Point(12, 149);
@@ -269,7 +271,7 @@ namespace SOC.UI
             this.h_comboBox_staff.Location = new System.Drawing.Point(84, 171);
             this.h_comboBox_staff.Items.AddRange(Staff_Type_ID);
             this.h_comboBox_staff.Name = "h_comboBox_staff";
-            this.h_comboBox_staff.Size = new System.Drawing.Size(150, 21);
+            this.h_comboBox_staff.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.h_comboBox_staff.TabIndex = 10;
             this.h_comboBox_staff.Text = "NONE";
             this.h_label_staff.AutoSize = true;
@@ -287,7 +289,7 @@ namespace SOC.UI
             this.h_comboBox_skill.Location = new System.Drawing.Point(84, 196);
             this.h_comboBox_skill.Items.AddRange(skills);
             this.h_comboBox_skill.Name = "h_comboBox_skill";
-            this.h_comboBox_skill.Size = new System.Drawing.Size(150, 21);
+            this.h_comboBox_skill.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.h_comboBox_skill.TabIndex = 11;
             this.h_comboBox_skill.Text = "NONE";
             this.h_label_skill.AutoSize = true;
@@ -338,8 +340,10 @@ namespace SOC.UI
             v_comboBox_vehicle.Text = vehicleDetail.v_comboBox_vehicle.Text;
         }
 
-        public override void BuildDetail()
+        public override void BuildDetail(int width)
         {
+            width -= 15;
+            int comboboxWidth = width - 96;
             this.v_groupBox_main = new System.Windows.Forms.GroupBox();
             this.v_textBox_zcoord = new System.Windows.Forms.TextBox();
             this.v_textBox_ycoord = new System.Windows.Forms.TextBox();
@@ -375,7 +379,7 @@ namespace SOC.UI
             this.v_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
             this.v_groupBox_main.Location = new System.Drawing.Point(3, 4 + (170 * VehicleNum));
             this.v_groupBox_main.Name = "v_groupBox_main";
-            this.v_groupBox_main.Size = new System.Drawing.Size(252, 140);
+            this.v_groupBox_main.Size = new System.Drawing.Size(width, 140);
             this.v_groupBox_main.TabIndex = 1;
             this.v_groupBox_main.TabStop = false;
             this.v_groupBox_main.Text = "Vehicle_" + VehicleNum;
@@ -438,7 +442,7 @@ namespace SOC.UI
             "315"
             });
             this.v_comboBox_rot.Name = "v_comboBox_rot";
-            this.v_comboBox_rot.Size = new System.Drawing.Size(150, 21);
+            this.v_comboBox_rot.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.v_comboBox_rot.TabIndex = 5;
             this.v_comboBox_rot.Text = vehicleCoords.roty;
 
@@ -460,7 +464,7 @@ namespace SOC.UI
                 "DEFAULT","DARK_GRAY","OXIDE_RED"
             });
             this.v_comboBox_class.Name = "v_comboBox_class";
-            this.v_comboBox_class.Size = new System.Drawing.Size(150, 21);
+            this.v_comboBox_class.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.v_comboBox_class.TabIndex = 8;
             this.v_comboBox_class.Text = "DEFAULT";
             this.v_label_class.AutoSize = true;
@@ -480,7 +484,7 @@ namespace SOC.UI
                 "TT77 NOSOROG","M84A MAGLOADER", "ZHUK BR-3", "ZHUK RS-ZO","STOUT IFV-SC","STOUT IFV-FS"
             });
             this.v_comboBox_vehicle.Name = "v_comboBox_vehicle";
-            this.v_comboBox_vehicle.Size = new System.Drawing.Size(150, 21);
+            this.v_comboBox_vehicle.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.v_comboBox_vehicle.TabIndex = 7;
             this.v_comboBox_vehicle.Text = "TT77 NOSOROG";
             this.v_label_vehicle.AutoSize = true;
@@ -537,8 +541,10 @@ namespace SOC.UI
 
         }
 
-        public override void BuildDetail()
+        public override void BuildDetail(int width)
         {
+            width -= 15;
+            int comboboxWidth = width - 96;
             this.i_groupBox_main = new System.Windows.Forms.GroupBox();
             this.i_textBox_zcoord = new System.Windows.Forms.TextBox();
             this.i_textBox_ycoord = new System.Windows.Forms.TextBox();
@@ -581,7 +587,7 @@ namespace SOC.UI
             this.i_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
             this.i_groupBox_main.Location = new System.Drawing.Point(3, 3 + (171 * itemNum));
             this.i_groupBox_main.Name = "i_groupBox_main";
-            this.i_groupBox_main.Size = new System.Drawing.Size(252, 150);
+            this.i_groupBox_main.Size = new System.Drawing.Size(width, 150);
             this.i_groupBox_main.TabIndex = 1;
             this.i_groupBox_main.TabStop = false;
             this.i_groupBox_main.Text = "Item_" + itemNum;
@@ -661,7 +667,7 @@ namespace SOC.UI
                 "1","4","8","12","16"
             });
             this.i_comboBox_count.Name = "i_comboBox_count";
-            this.i_comboBox_count.Size = new System.Drawing.Size(150, 21);
+            this.i_comboBox_count.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.i_comboBox_count.TabIndex = 9;
             this.i_comboBox_count.Text = i_comboBox_count.Items[0].ToString();
             // 
@@ -695,7 +701,7 @@ namespace SOC.UI
             this.i_comboBox_item.Location = new System.Drawing.Point(78, 68);
             this.i_comboBox_item.Items.AddRange(items);
             this.i_comboBox_item.Name = "i_comboBox_item";
-            this.i_comboBox_item.Size = new System.Drawing.Size(150, 21);
+            this.i_comboBox_item.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.i_comboBox_item.TabIndex = 8;
             this.i_comboBox_item.Text = "EQP_SWP_Magazine";
             this.i_comboBox_item.SelectedIndexChanged += new System.EventHandler(this.i_comboBox_item_SelectedIndexChanged);
@@ -756,9 +762,11 @@ namespace SOC.UI
             
         }
 
-        public override void BuildDetail()
+        public override void BuildDetail(int width)
         {
 
+            width -= 15;
+            int comboboxWidth = width - 100;
             this.m_groupBox_main = new System.Windows.Forms.GroupBox();
             this.m_textBox_zcoord = new System.Windows.Forms.TextBox();
             this.m_textBox_ycoord = new System.Windows.Forms.TextBox();
@@ -795,7 +803,7 @@ namespace SOC.UI
             this.m_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
             this.m_groupBox_main.Location = new System.Drawing.Point(3, 3 + (StMdNum * 118));
             this.m_groupBox_main.Name = "m_groupBox_main";
-            this.m_groupBox_main.Size = new System.Drawing.Size(252, 95);
+            this.m_groupBox_main.Size = new System.Drawing.Size(width, 95);
             this.m_groupBox_main.TabIndex = 1;
             this.m_groupBox_main.TabStop = false;
             this.m_groupBox_main.Text = "Model_" + StMdNum;
@@ -889,7 +897,7 @@ namespace SOC.UI
             this.m_comboBox_preset.Location = new System.Drawing.Point(84, 66);
             this.m_comboBox_preset.Items.AddRange(getPresetModelList());
             this.m_comboBox_preset.Name = "m_comboBox_preset";
-            this.m_comboBox_preset.Size = new System.Drawing.Size(150, 21);
+            this.m_comboBox_preset.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.m_comboBox_preset.TabIndex = 7;
             this.m_comboBox_preset.SelectedIndexChanged += new System.EventHandler(this.m_comboBox_preset_selectedIndexChanged);
             this.m_comboBox_preset.SelectedIndex = 0;
@@ -981,8 +989,10 @@ namespace SOC.UI
             ai_comboBox_activeitem.Text = acItDet.ai_comboBox_activeitem.Text;
         }
 
-        public override void BuildDetail()
+        public override void BuildDetail(int width)
         {
+            width -= 15;
+            int comboboxWidth = width - 100;
             this.ai_groupBox_main = new System.Windows.Forms.GroupBox();
             this.ai_label_coord = new System.Windows.Forms.Label();
             this.ai_textBox_xcoord = new System.Windows.Forms.TextBox();
@@ -1014,7 +1024,7 @@ namespace SOC.UI
             this.ai_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
             this.ai_groupBox_main.Location = new System.Drawing.Point(3, 3 + (activeItemNum * 118));
             this.ai_groupBox_main.Name = "ai_groupBox_main";
-            this.ai_groupBox_main.Size = new System.Drawing.Size(252, 80);
+            this.ai_groupBox_main.Size = new System.Drawing.Size(width, 80);
             this.ai_groupBox_main.TabIndex = 0;
             this.ai_groupBox_main.TabStop = false;
             this.ai_groupBox_main.Text = "Active_Item_" + activeItemNum;
@@ -1111,7 +1121,7 @@ namespace SOC.UI
             this.ai_comboBox_activeitem.Location = new System.Drawing.Point(84, 65);
             this.ai_comboBox_activeitem.Name = "ai_comboBox_activeitem";
             this.ai_comboBox_activeitem.Items.AddRange(activeItems);
-            this.ai_comboBox_activeitem.Size = new System.Drawing.Size(150, 21);
+            this.ai_comboBox_activeitem.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.ai_comboBox_activeitem.TabIndex = 10;
             this.ai_comboBox_activeitem.Text = "EQP_SWP_DMine";
 
@@ -1162,9 +1172,11 @@ namespace SOC.UI
             a_comboBox_count.Text = animalDetail.a_comboBox_count.Text;
         }
 
-        public override void BuildDetail()
+        public override void BuildDetail(int width)
         {
 
+            width -= 15;
+            int comboboxWidth = width - 96;
             this.a_groupBox_main = new System.Windows.Forms.GroupBox();
             this.a_comboBox_TypeID = new System.Windows.Forms.ComboBox();
             this.a_label_targetcount = new System.Windows.Forms.Label();
@@ -1201,7 +1213,7 @@ namespace SOC.UI
             this.a_groupBox_main.Controls.Add(this.a_label_coord);
             this.a_groupBox_main.Location = new System.Drawing.Point(3, 3 + (animalNum * 180));
             this.a_groupBox_main.Name = "a_groupBox_main";
-            this.a_groupBox_main.Size = new System.Drawing.Size(252, 166);
+            this.a_groupBox_main.Size = new System.Drawing.Size(width, 166);
             this.a_groupBox_main.TabIndex = 0;
             this.a_groupBox_main.TabStop = false;
             this.a_groupBox_main.Text = "Animal_Cluster_" + animalNum;
@@ -1214,7 +1226,7 @@ namespace SOC.UI
             this.a_comboBox_TypeID.FormattingEnabled = true;
             this.a_comboBox_TypeID.Location = new System.Drawing.Point(173, 137);
             this.a_comboBox_TypeID.Name = "a_comboBox_TypeID";
-            this.a_comboBox_TypeID.Size = new System.Drawing.Size(63, 21);
+            this.a_comboBox_TypeID.Size = new System.Drawing.Size(comboboxWidth - 89, 21);
             this.a_comboBox_TypeID.TabIndex = 13;
             a_comboBox_TypeID.Items.AddRange(new string[] { "TppGoat", "TppNubian" });
             a_comboBox_TypeID.Text = "TppGoat";
@@ -1236,7 +1248,7 @@ namespace SOC.UI
             this.a_comboBox_count.FormattingEnabled = true;
             this.a_comboBox_count.Location = new System.Drawing.Point(84, 108);
             this.a_comboBox_count.Name = "a_comboBox_count";
-            this.a_comboBox_count.Size = new System.Drawing.Size(152, 21);
+            this.a_comboBox_count.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.a_comboBox_count.TabIndex = 11;
             a_comboBox_count.Items.AddRange( new string[] { "1", "2", "3", "4", "5", "6"});
             a_comboBox_count.Text = "1";
@@ -1260,7 +1272,7 @@ namespace SOC.UI
             this.a_comboBox_animal.Items.AddRange(QuestComponents.AnimalInfo.animals);
             this.a_comboBox_animal.Text = "Sheep";
             this.a_comboBox_animal.Name = "a_comboBox_animal";
-            this.a_comboBox_animal.Size = new System.Drawing.Size(152, 21);
+            this.a_comboBox_animal.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.a_comboBox_animal.TabIndex = 9;
             this.a_comboBox_animal.SelectedIndexChanged += new System.EventHandler(this.a_comboBox_animal_selectedIndexChanged);
             // 
@@ -1298,7 +1310,7 @@ namespace SOC.UI
             this.a_comboBox_rot.FormattingEnabled = true;
             this.a_comboBox_rot.Location = new System.Drawing.Point(84, 48);
             this.a_comboBox_rot.Name = "a_comboBox_rot";
-            this.a_comboBox_rot.Size = new System.Drawing.Size(152, 21);
+            this.a_comboBox_rot.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.a_comboBox_rot.TabIndex = 5;
             this.a_comboBox_rot.Items.AddRange(new string[] {
             "0",
@@ -1433,7 +1445,6 @@ namespace SOC.UI
         public Label e_label_staff;
         public ComboBox e_comboBox_power;
         public Button e_button_removepower;
-        public Button e_button_addpower;
         public Label e_label_power;
         public ListBox e_listBox_power;
 
@@ -1442,13 +1453,13 @@ namespace SOC.UI
             enemyNum = num;
         }
 
-        public override void BuildDetail()
+        public override void BuildDetail(int width)
         {
-
+            width -= 15;
+            int comboboxWidth = width - 110;
             this.e_groupBox_main = new System.Windows.Forms.GroupBox();
             this.e_comboBox_power = new System.Windows.Forms.ComboBox();
             this.e_button_removepower = new System.Windows.Forms.Button();
-            this.e_button_addpower = new System.Windows.Forms.Button();
             this.e_label_power = new System.Windows.Forms.Label();
             this.e_listBox_power = new System.Windows.Forms.ListBox();
             this.e_comboBox_skill = new System.Windows.Forms.ComboBox();
@@ -1472,15 +1483,12 @@ namespace SOC.UI
             // 
             // e_groupBox_main
             // 
-            this.e_groupBox_main.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.e_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
             this.e_groupBox_main.Controls.Add(this.e_comboBox_power);
             this.e_groupBox_main.Controls.Add(this.e_button_removepower);
-            this.e_groupBox_main.Controls.Add(this.e_button_addpower);
             this.e_groupBox_main.Controls.Add(this.e_label_power);
-            this.e_groupBox_main.Controls.Add(this.e_listBox_power);
             this.e_groupBox_main.Controls.Add(this.e_comboBox_skill);
+            this.e_groupBox_main.Controls.Add(this.e_listBox_power);
             this.e_groupBox_main.Controls.Add(this.e_label_skill);
             this.e_groupBox_main.Controls.Add(this.e_comboBox_staff);
             this.e_groupBox_main.Controls.Add(this.e_label_staff);
@@ -1497,12 +1505,14 @@ namespace SOC.UI
             this.e_groupBox_main.Controls.Add(this.e_label_spawn);
             this.e_groupBox_main.Controls.Add(this.e_label_target);
             e_groupBox_main.Disposed += new EventHandler(this.e_groupBox_main_Disposed);
-            this.e_groupBox_main.Location = new System.Drawing.Point(4, 55 + (319 * enemyNum));
+            this.e_groupBox_main.Location = new System.Drawing.Point(3, 55 + (319 * enemyNum));
             this.e_groupBox_main.Name = "e_groupBox_main";
-            this.e_groupBox_main.Size = new System.Drawing.Size(251, 302);
+            this.e_groupBox_main.Size = new System.Drawing.Size(width, 302);
             this.e_groupBox_main.TabIndex = 0;
             this.e_groupBox_main.TabStop = false;
             this.e_groupBox_main.Text = "sol_quest_000" + enemyNum;
+            this.e_groupBox_main.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // e_comboBox_power
             // 
@@ -1514,14 +1524,15 @@ namespace SOC.UI
             this.e_comboBox_power.Name = "e_comboBox_power";
             this.e_comboBox_power.Items.AddRange(QuestComponents.EnemyInfo.powerSetting);
             this.e_comboBox_power.Text = "SOFT_ARMOR";
-            this.e_comboBox_power.Size = new System.Drawing.Size(122, 21);
+            this.e_comboBox_power.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.e_comboBox_power.TabIndex = 22;
             this.e_comboBox_power.Enabled = false;
+            this.e_comboBox_power.SelectedIndexChanged += new EventHandler(this.powerChanged);
             // 
             // e_button_removepower
             // 
             this.e_button_removepower.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.e_button_removepower.Location = new System.Drawing.Point(190, 186);
+            this.e_button_removepower.Location = new System.Drawing.Point(comboboxWidth + 46, 186);
             this.e_button_removepower.Name = "e_button_removepower";
             this.e_button_removepower.Size = new System.Drawing.Size(55, 23);
             this.e_button_removepower.TabIndex = 21;
@@ -1529,18 +1540,6 @@ namespace SOC.UI
             this.e_button_removepower.UseVisualStyleBackColor = true;
             this.e_button_removepower.Click += new EventHandler(this.e_button_removepower_Click);
             this.e_button_removepower.Enabled = false;
-            // 
-            // e_button_addpower
-            // 
-            this.e_button_addpower.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.e_button_addpower.Location = new System.Drawing.Point(222, 106);
-            this.e_button_addpower.Name = "e_button_addpower";
-            this.e_button_addpower.Size = new System.Drawing.Size(23, 23);
-            this.e_button_addpower.TabIndex = 20;
-            this.e_button_addpower.Text = "+";
-            this.e_button_addpower.UseVisualStyleBackColor = true;
-            e_button_addpower.Enabled = false;
-            this.e_button_addpower.Click += new EventHandler(this.e_button_addpower_Click);
             // 
             // e_label_power
             // 
@@ -1560,7 +1559,7 @@ namespace SOC.UI
             this.e_listBox_power.FormattingEnabled = true;
             this.e_listBox_power.Location = new System.Drawing.Point(99, 131);
             this.e_listBox_power.Name = "e_listBox_power";
-            this.e_listBox_power.Size = new System.Drawing.Size(145, 54);
+            this.e_listBox_power.Size = new System.Drawing.Size(comboboxWidth, 54);
             this.e_listBox_power.TabIndex = 18;
             e_listBox_power.Enabled = false;
             this.e_listBox_power.SelectedIndexChanged += new EventHandler(this.e_listBox_power_selectedIndexChanged);
@@ -1575,7 +1574,7 @@ namespace SOC.UI
             this.e_comboBox_skill.Name = "e_comboBox_skill";
             this.e_comboBox_skill.Items.AddRange(skills);
             this.e_comboBox_skill.Text = "NONE";
-            this.e_comboBox_skill.Size = new System.Drawing.Size(146, 21);
+            this.e_comboBox_skill.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.e_comboBox_skill.TabIndex = 17;
             e_comboBox_skill.Enabled = false;
             // 
@@ -1597,7 +1596,7 @@ namespace SOC.UI
             this.e_comboBox_staff.FormattingEnabled = true;
             this.e_comboBox_staff.Location = new System.Drawing.Point(99, 250);
             this.e_comboBox_staff.Name = "e_comboBox_staff";
-            this.e_comboBox_staff.Size = new System.Drawing.Size(146, 21);
+            this.e_comboBox_staff.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.e_comboBox_staff.Items.AddRange(Staff_Type_ID);
             this.e_comboBox_staff.Text = "NONE";
             this.e_comboBox_staff.TabIndex = 15;
@@ -1621,7 +1620,7 @@ namespace SOC.UI
             this.e_comboBox_body.FormattingEnabled = true;
             this.e_comboBox_body.Location = new System.Drawing.Point(99, 225);
             this.e_comboBox_body.Name = "e_comboBox_body";
-            this.e_comboBox_body.Size = new System.Drawing.Size(146, 21);
+            this.e_comboBox_body.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.e_comboBox_body.TabIndex = 13;
             e_comboBox_body.Enabled = false;
             // 
@@ -1633,7 +1632,7 @@ namespace SOC.UI
             this.e_comboBox_cautionroute.FormattingEnabled = true;
             this.e_comboBox_cautionroute.Location = new System.Drawing.Point(99, 64);
             this.e_comboBox_cautionroute.Name = "e_comboBox_cautionroute";
-            this.e_comboBox_cautionroute.Size = new System.Drawing.Size(145, 21);
+            this.e_comboBox_cautionroute.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.e_comboBox_cautionroute.TabIndex = 12;
             e_comboBox_cautionroute.Enabled = false;
             // 
@@ -1655,7 +1654,7 @@ namespace SOC.UI
             this.e_comboBox_sneakroute.FormattingEnabled = true;
             this.e_comboBox_sneakroute.Location = new System.Drawing.Point(99, 39);
             this.e_comboBox_sneakroute.Name = "e_comboBox_sneakroute";
-            this.e_comboBox_sneakroute.Size = new System.Drawing.Size(145, 21);
+            this.e_comboBox_sneakroute.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.e_comboBox_sneakroute.TabIndex = 10;
             e_comboBox_sneakroute.Enabled = false;
             // 
@@ -1681,7 +1680,6 @@ namespace SOC.UI
             // 
             // e_checkBox_target
             // 
-            this.e_checkBox_target.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.e_checkBox_target.AutoSize = true;
             this.e_checkBox_target.Location = new System.Drawing.Point(205, 21);
             this.e_checkBox_target.Name = "e_checkBox_target";
@@ -1692,7 +1690,6 @@ namespace SOC.UI
             // 
             // e_label_target
             // 
-            this.e_label_target.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.e_label_target.AutoSize = true;
             this.e_label_target.Location = new System.Drawing.Point(139, 21);
             this.e_label_target.Name = "e_label_target";
@@ -1709,7 +1706,7 @@ namespace SOC.UI
             this.e_checkBox_armor.Size = new System.Drawing.Size(15, 14);
             this.e_checkBox_armor.TabIndex = 3;
             this.e_checkBox_armor.UseVisualStyleBackColor = true;
-            this.e_checkBox_armor.Click += new EventHandler(this.e_checkBox_armor_CheckedChanged);
+            this.e_checkBox_armor.Click += new EventHandler(this.armor_Checkbox_Clicked);
             e_checkBox_armor.Enabled = false;
             // 
             // e_label_armor
@@ -1755,7 +1752,11 @@ namespace SOC.UI
         {
             if (e_checkBox_spawn.Checked)
             {
-                e_button_addpower.Enabled = true;
+                e_label_skill.Enabled = true;
+                e_label_sneakroute.Enabled = true;
+                e_label_staff.Enabled = true;
+                e_label_target.Enabled = true;
+                e_listBox_power.Enabled = true;
                 e_checkBox_armor.Enabled = true;
                 e_checkBox_target.Enabled = true;
                 e_comboBox_body.Enabled = true;
@@ -1768,14 +1769,13 @@ namespace SOC.UI
                 e_label_body.Enabled = true;
                 e_label_cautionroute.Enabled = true;
                 e_label_power.Enabled = true;
-                e_label_skill.Enabled = true;
-                e_label_sneakroute.Enabled = true;
-                e_label_staff.Enabled = true;
-                e_label_target.Enabled = true;
-                e_listBox_power.Enabled = true;
             } else
             {
-                e_button_addpower.Enabled = false;
+                e_label_skill.Enabled = false;
+                e_label_sneakroute.Enabled = false;
+                e_label_staff.Enabled = false;
+                e_label_target.Enabled = false;
+                e_listBox_power.Enabled = false;
                 e_checkBox_armor.Enabled = false;
                 e_checkBox_target.Enabled = false;
                 e_comboBox_body.Enabled = false;
@@ -1788,15 +1788,15 @@ namespace SOC.UI
                 e_label_body.Enabled = false;
                 e_label_cautionroute.Enabled = false;
                 e_label_power.Enabled = false;
-                e_label_skill.Enabled = false;
-                e_label_sneakroute.Enabled = false;
-                e_label_staff.Enabled = false;
-                e_label_target.Enabled = false;
-                e_listBox_power.Enabled = false;
             }
         }
 
-        private void e_checkBox_armor_CheckedChanged(object sender, EventArgs e)
+        private void armor_Checkbox_Clicked(object sender, EventArgs e)
+        {
+            updateArmor();
+        }
+
+        private void updateArmor()
         {
             if (e_checkBox_armor.Checked)
             {
@@ -1811,6 +1811,7 @@ namespace SOC.UI
                     e_listBox_power.Items.Add("QUEST_ARMOR");
                     e_listBox_power.SelectedIndex = e_listBox_power.Items.Count - 1;
                     e_comboBox_body.Enabled = false;
+                    e_groupBox_main.Focus();
                 }
             }
             else
@@ -1819,6 +1820,7 @@ namespace SOC.UI
                 e_comboBox_body.Enabled = true;
                 e_listBox_power.Items.Remove("QUEST_ARMOR");
                 e_listBox_power.SelectedIndex = e_listBox_power.Items.Count - 1;
+                e_groupBox_main.Focus();
             }
         }
 
@@ -1865,12 +1867,13 @@ namespace SOC.UI
             e_comboBox_staff.Text = enemyDetail.e_comboBox_staff.Text;
         }
 
-        private void e_button_addpower_Click(object sender, EventArgs e)
+        private void powerChanged(object sender, EventArgs e)
         {
             if (!e_listBox_power.Items.Contains(e_comboBox_power.Text))
             {
                 e_listBox_power.Items.Add(e_comboBox_power.Text);
                 e_listBox_power.SelectedIndex = e_listBox_power.Items.Count - 1;
+                e_groupBox_main.Focus();
             }
         }
         private void e_button_removepower_Click(object sender, EventArgs e)
@@ -1879,11 +1882,13 @@ namespace SOC.UI
             if (e_listBox_power.Text.Equals("QUEST_ARMOR"))
             {
                 e_checkBox_armor.Checked = false;
+                updateArmor();
             }
             else if (e_listBox_power.SelectedIndex != -1)
             {
                 e_listBox_power.Items.RemoveAt(e_listBox_power.SelectedIndex);
                 e_listBox_power.SelectedIndex = e_listBox_power.Items.Count - 1;
+                e_groupBox_main.Focus();
             }
         }
     }

@@ -17,7 +17,7 @@ namespace SOC.UI
         List<Detail> modelDetails;
         List<Detail> activeItemDetails;
         List<Detail> animalDetails;
-
+        int dynamicPanelWidth;
         public QuestDetails questDetails;
 
         public string[] Langs = { "english", "russian", "pashto", "kikongo", "afrikaans" };
@@ -37,6 +37,7 @@ namespace SOC.UI
             modelDetails = new List<Detail>();
             activeItemDetails = new List<Detail>();
             animalDetails = new List<Detail>();
+            dynamicPanelWidth = Width / 4 - 20;
 
             foreach (BodyInfoEntry infoEntry in BodyInfo.BodyInfoArray)
             {
@@ -47,20 +48,22 @@ namespace SOC.UI
 
         public void RefreshOrAddDetail(Detail newDetail, List<Detail> details, Panel panel)
         {
-            newDetail.BuildDetail();
+            newDetail.BuildDetail(dynamicPanelWidth);
+            int detailIndex = newDetail.getIndex();
 
-            if (newDetail.getIndex() < details.Count)
+            if (detailIndex < details.Count)
             {
-                newDetail.SetDetail(details[newDetail.getIndex()]);
-                panel.Controls.Remove(details[newDetail.getIndex()].getGroupBoxMain());
-                details[newDetail.getIndex()] = newDetail;
+                Detail oldDetail = details[detailIndex];
+
+                newDetail.SetDetail(oldDetail);
+                panel.Controls.Remove(oldDetail.getGroupBoxMain());
+                details[detailIndex] = newDetail;
             }
             else
             {
                 details.Add(newDetail);
             }
-
-            panel.Controls.Add(details[newDetail.getIndex()].getGroupBoxMain());
+            panel.Controls.Add(details[detailIndex].getGroupBoxMain());
         }
 
         public void RemoveExtraDetails(List<Detail> details, int remainder, Panel panel)
@@ -80,59 +83,8 @@ namespace SOC.UI
 
         public void RefreshDetails(CP questCP, List<Coordinates> HostageCoords, List<Coordinates> VehicleCoords, List<Coordinates> ItemCoords, List<Coordinates> ModelCoords, List<Coordinates> ActItemsCoords, List<Coordinates> AnimalCoords)
         {
-
+            
             string currentRegion = EnemyInfo.getRegion(questCP);
-
-            Tuple<List<Detail>, List<Coordinates>, Panel>[] detailTuples =
-            {
-                new Tuple<List<Detail>, List<Coordinates>, Panel>(hostageDetails, HostageCoords, panelHosDet),
-                new Tuple<List<Detail>, List<Coordinates>, Panel>(vehicleDetails, VehicleCoords, panelVehDet),
-                new Tuple<List<Detail>, List<Coordinates>, Panel>(animalDetails, AnimalCoords, panelAnimalDet),
-                new Tuple<List<Detail>, List<Coordinates>, Panel>(itemDetails, ItemCoords, panelItemDet),
-                new Tuple<List<Detail>, List<Coordinates>, Panel>(activeItemDetails, ActItemsCoords, panelAcItDet),
-                new Tuple<List<Detail>, List<Coordinates>, Panel>(modelDetails, ModelCoords, panelStMdDet),
-            };
-            Tuple<List<Detail>, List<Coordinates>, Panel> detailTuple;
-
-            for (int i = 0; i < detailTuples.Length; i++)
-            {
-                detailTuple = detailTuples[i];
-                detailTuple.Item3.AutoScroll = false;
-                switch (i)
-                {
-                    case 0: // hostages
-                        for (int j = 0; j < detailTuple.Item2.Count; j++)
-                            RefreshOrAddDetail(new HostageDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
-                        RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
-                        break;
-                    case 1: // vehicles
-                        for (int j = 0; j < detailTuple.Item2.Count; j++)
-                            RefreshOrAddDetail(new VehicleDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
-                        RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
-                        break;
-                    case 2: // animals
-                        for (int j = 0; j < detailTuple.Item2.Count; j++)
-                            RefreshOrAddDetail(new AnimalDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
-                        RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
-                        break;
-                    case 3: // items
-                        for (int j = 0; j < detailTuple.Item2.Count; j++)
-                            RefreshOrAddDetail(new ItemDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
-                        RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
-                        break;
-                    case 4: // active items
-                        for (int j = 0; j < detailTuple.Item2.Count; j++)
-                            RefreshOrAddDetail(new ActiveItemDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
-                        RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
-                        break;
-                    case 5: // models
-                        for (int j = 0; j < detailTuple.Item2.Count; j++)
-                            RefreshOrAddDetail(new ModelDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
-                        RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
-                        break;
-                }
-                detailTuple.Item3.AutoScroll = true;
-            }
 
             if (!currentRegion.Equals("mtbs"))
             {
@@ -157,7 +109,8 @@ namespace SOC.UI
                         enemyBodies = BodyInfo.mafrBodies;
                     }
                     comboBox_subtype.SelectedIndex = 0;
-                } else if (lastCP.Equals("NONE"))
+                }
+                else if (lastCP.Equals("NONE"))
                 {
                     islastRegion = false;
                     if (currentRegion.Equals("afgh"))
@@ -264,6 +217,57 @@ namespace SOC.UI
                 label_subtype.Visible = false;
             }
 
+            Tuple<List<Detail>, List<Coordinates>, Panel>[] detailTuples =
+            {
+                new Tuple<List<Detail>, List<Coordinates>, Panel>(hostageDetails, HostageCoords, panelHosDet),
+                new Tuple<List<Detail>, List<Coordinates>, Panel>(vehicleDetails, VehicleCoords, panelVehDet),
+                new Tuple<List<Detail>, List<Coordinates>, Panel>(animalDetails, AnimalCoords, panelAnimalDet),
+                new Tuple<List<Detail>, List<Coordinates>, Panel>(itemDetails, ItemCoords, panelItemDet),
+                new Tuple<List<Detail>, List<Coordinates>, Panel>(activeItemDetails, ActItemsCoords, panelAcItDet),
+                new Tuple<List<Detail>, List<Coordinates>, Panel>(modelDetails, ModelCoords, panelStMdDet),
+            };
+            Tuple<List<Detail>, List<Coordinates>, Panel> detailTuple;
+
+            for (int i = 0; i < detailTuples.Length; i++)
+            {
+                detailTuple = detailTuples[i];
+                detailTuple.Item3.AutoScroll = false;
+                switch (i)
+                {
+                    case 0: // hostages
+                        for (int j = 0; j < detailTuple.Item2.Count; j++)
+                            RefreshOrAddDetail(new HostageDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
+                        RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
+                        break;
+                    case 1: // vehicles
+                        for (int j = 0; j < detailTuple.Item2.Count; j++)
+                            RefreshOrAddDetail(new VehicleDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
+                        RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
+                        break;
+                    case 2: // animals
+                        for (int j = 0; j < detailTuple.Item2.Count; j++)
+                            RefreshOrAddDetail(new AnimalDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
+                        RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
+                        break;
+                    case 3: // items
+                        for (int j = 0; j < detailTuple.Item2.Count; j++)
+                            RefreshOrAddDetail(new ItemDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
+                        RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
+                        break;
+                    case 4: // active items
+                        for (int j = 0; j < detailTuple.Item2.Count; j++)
+                            RefreshOrAddDetail(new ActiveItemDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
+                        RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
+                        break;
+                    case 5: // models
+                        for (int j = 0; j < detailTuple.Item2.Count; j++)
+                            RefreshOrAddDetail(new ModelDetail(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
+                        RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
+                        break;
+                }
+                detailTuple.Item3.AutoScroll = true;
+            }
+
             if (HostageCoords.Count == 0)
             {
                 h_checkBox_intrgt.Visible = false;
@@ -278,13 +282,13 @@ namespace SOC.UI
                 label_Body.Visible = true;
                 comboBox_Body.Visible = true;
             }
-
-            RefreshHostageLanguage();
-            ShiftVisibilities();
+            // set selected visible
+            ShiftVisibilities(false);
             ShiftGroups();
+            RefreshHostageLanguage();
         }
 
-        private void ShiftVisibilities()
+        private void ShiftVisibilities(bool hideAll)
         {
             detailLists = new List<GroupBox>();
             Tuple<List<Detail>, GroupBox>[] detailTuples =
@@ -300,21 +304,20 @@ namespace SOC.UI
             };
             foreach (Tuple<List<Detail>, GroupBox> tuple in detailTuples)
             {
-                if (tuple.Item1.Count > 0)
+                if (tuple.Item1.Count > 0 && !hideAll)
                 {
                     tuple.Item2.Visible = true;
                     detailLists.Add(tuple.Item2);
                 }
                 else tuple.Item2.Visible = false;
             }
-
         }
 
         internal void ShiftGroups()
         {
-            int dynamicMaxAdjust = 105 / detailLists.Count;
-            int maxPanelWidth = 298 + dynamicMaxAdjust;
-            int dynamicPanelWidth = Width / 4 - 20;
+            int dynamicMaxAdjust = 210 / (detailLists.Count + 1);
+            int maxPanelWidth = 290 + dynamicMaxAdjust;
+            dynamicPanelWidth = Width / 4 - 20;
 
             if (dynamicPanelWidth >= maxPanelWidth)
                 dynamicPanelWidth = maxPanelWidth;

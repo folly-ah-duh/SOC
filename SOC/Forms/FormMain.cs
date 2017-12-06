@@ -14,6 +14,7 @@ namespace SOC.UI
     {
         private Setup setupPage = new Setup();
         private Details detailPage = new Details();
+        private Waiting waitingPage = new Waiting();
         private List<GroupBox> detailPageBoxes = new List<GroupBox>();
         private int panelNum = 0;
             
@@ -68,8 +69,12 @@ namespace SOC.UI
                 case 1:
                     if (isFilled())
                     {
-                        this.Width = 1200;
                         setupPage.DisableScrolling();
+                        panelMain.Controls.Clear();
+                        this.Width = 1200;
+                        panelMain.Controls.Add(waitingPage);
+                        Application.DoEvents();
+
                         List<Coordinates> HostageCoords = BuildCoordinatesList(setupPage.textBoxHosCoords.Text);
                         List<Coordinates> VehicleCoords = BuildCoordinatesList(setupPage.textBoxVehCoords.Text);
                         List<Coordinates> ItemCoords = BuildCoordinatesList(setupPage.textBoxItemCoords.Text);
@@ -90,11 +95,13 @@ namespace SOC.UI
                             selectedCP = EnemyInfo.NoneCP;
                         }
 
-                        buttonBack.Visible = true;
-                        panelMain.Controls.Clear();
-                        panelMain.Controls.Add(detailPage);
                         detailPage.RefreshDetails(selectedCP, HostageCoords, VehicleCoords, ItemCoords, ModelCoords, activeItemCoords, AnimalCoords);
+                        Application.DoEvents();
+
+                        panelMain.Controls.Clear();
+                        buttonBack.Visible = true;
                         buttonNext.Text = "Build";
+                        panelMain.Controls.Add(detailPage);
                     }
                     else
                     {

@@ -112,6 +112,12 @@
     <Compile Include="Forms\Pages\Setup.Designer.cs">
       <DependentUpon>Setup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Pages\Waiting.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\Waiting.Designer.cs">
+      <DependentUpon>Waiting.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\PanelScroll.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -140,6 +146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\Setup.resx">
       <DependentUpon>Setup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\Waiting.resx">
+      <DependentUpon>Waiting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

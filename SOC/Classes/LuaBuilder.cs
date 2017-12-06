@@ -218,8 +218,10 @@ namespace SOC.Classes
                 enemyCount++;
                 enemyList.Add("		{");
                 enemyList.Add(string.Format("			enemyName = \"{0}\",", enemyDetail.e_groupBox_main.Text));
-                enemyList.Add(string.Format("			route_d = \"{0}\",", enemyDetail.e_comboBox_sneakroute.Text));
-                enemyList.Add(string.Format("			route_c = \"{0}\",", enemyDetail.e_comboBox_cautionroute.Text));
+                if (!enemyDetail.e_comboBox_sneakroute.Text.Equals("NONE")) {
+                    enemyList.Add(string.Format("			route_d = \"{0}\",", enemyDetail.e_comboBox_sneakroute.Text));
+                    enemyList.Add(string.Format("			route_c = \"{0}\",", enemyDetail.e_comboBox_cautionroute.Text));
+                }
                 enemyList.Add("			cpName = CPNAME,");
                 if (enemyDetail.e_listBox_power.Items.Count > 0)
                 {

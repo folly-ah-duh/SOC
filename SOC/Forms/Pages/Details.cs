@@ -17,7 +17,7 @@ namespace SOC.UI
         List<Detail> modelDetails;
         List<Detail> activeItemDetails;
         List<Detail> animalDetails;
-        int dynamicPanelWidth;
+        int dynamicPanelWidth = 0;
         public QuestDetails questDetails;
 
         public string[] Langs = { "english", "russian", "pashto", "kikongo", "afrikaans" };
@@ -37,7 +37,6 @@ namespace SOC.UI
             modelDetails = new List<Detail>();
             activeItemDetails = new List<Detail>();
             animalDetails = new List<Detail>();
-            dynamicPanelWidth = Width / 4 - 20;
 
             foreach (BodyInfoEntry infoEntry in BodyInfo.BodyInfoArray)
             {
@@ -48,13 +47,12 @@ namespace SOC.UI
 
         public void RefreshOrAddDetail(Detail newDetail, List<Detail> details, Panel panel)
         {
-            newDetail.BuildDetail(dynamicPanelWidth);
             int detailIndex = newDetail.getIndex();
+            newDetail.BuildDetail(panel.Width);
 
             if (detailIndex < details.Count)
             {
                 Detail oldDetail = details[detailIndex];
-
                 newDetail.SetDetail(oldDetail);
                 panel.Controls.Remove(oldDetail.getGroupBoxMain());
                 details[detailIndex] = newDetail;
@@ -274,26 +272,26 @@ namespace SOC.UI
         internal void ShiftGroups(int height, int width)
         {
             Height = height; Width = width;
-            int dynamicMaxAdjust = 310 / (detailLists.Count + 1);
-            int maxPanelWidth = 269 + dynamicMaxAdjust;
-            dynamicPanelWidth = Width / 4 - 20;
+            dynamicPanelWidth = width / 5 + 30;
+            int maxPanelWidth = 285;
 
             if (dynamicPanelWidth >= maxPanelWidth)
                 dynamicPanelWidth = maxPanelWidth;
+
+            if (detailLists.Count > 0)
+                dynamicPanelWidth += (150 / detailLists.Count);
 
             foreach (GroupBox detailGroupBox in detailLists)
             {
                 detailGroupBox.Width = dynamicPanelWidth;
             }
-            if (detailLists.Count > 0)
-            {
-                int xOffset = 3;
-                int bufferSpace = 2 + dynamicPanelWidth;
 
-                for (int i = 0; i < detailLists.Count; i++)
-                {
-                    detailLists[i].Left = xOffset + bufferSpace * i;
-                }
+            int xOffset = 3;
+            int bufferSpace = 2 + dynamicPanelWidth;
+
+            for (int i = 0; i < detailLists.Count; i++)
+            {
+                detailLists[i].Left = xOffset + bufferSpace * i;
             }
         }
 

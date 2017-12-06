@@ -125,7 +125,7 @@
             this.groupBoxSetup.Controls.Add(this.comboBoxLoadArea);
             this.groupBoxSetup.Location = new System.Drawing.Point(3, 3);
             this.groupBoxSetup.Name = "groupBoxSetup";
-            this.groupBoxSetup.Size = new System.Drawing.Size(490, 217);
+            this.groupBoxSetup.Size = new System.Drawing.Size(514, 217);
             this.groupBoxSetup.TabIndex = 0;
             this.groupBoxSetup.TabStop = false;
             this.groupBoxSetup.Text = "Sideop Setup";
@@ -135,7 +135,7 @@
             this.comboBoxCP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCP.Enabled = false;
             this.comboBoxCP.FormattingEnabled = true;
-            this.comboBoxCP.Location = new System.Drawing.Point(350, 89);
+            this.comboBoxCP.Location = new System.Drawing.Point(363, 89);
             this.comboBoxCP.Name = "comboBoxCP";
             this.comboBoxCP.Size = new System.Drawing.Size(134, 21);
             this.comboBoxCP.TabIndex = 8;
@@ -143,7 +143,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(289, 92);
+            this.label20.Location = new System.Drawing.Point(297, 92);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(55, 13);
             this.label20.TabIndex = 29;
@@ -166,7 +166,7 @@
             "RECOVERED",
             "ELIMINATE",
             "MSF_RECOVERED"});
-            this.comboBoxObjective.Location = new System.Drawing.Point(100, 185);
+            this.comboBoxObjective.Location = new System.Drawing.Point(105, 185);
             this.comboBoxObjective.Name = "comboBoxObjective";
             this.comboBoxObjective.Size = new System.Drawing.Size(153, 21);
             this.comboBoxObjective.TabIndex = 12;
@@ -202,7 +202,7 @@
             "ELIMINATE_TANK_UNIT",
             "ELIMINATE_PUPPETS",
             "TARGET_PRACTICE"});
-            this.comboBoxCategory.Location = new System.Drawing.Point(100, 158);
+            this.comboBoxCategory.Location = new System.Drawing.Point(105, 158);
             this.comboBoxCategory.Name = "comboBoxCategory";
             this.comboBoxCategory.Size = new System.Drawing.Size(153, 21);
             this.comboBoxCategory.TabIndex = 10;
@@ -219,7 +219,7 @@
             // textBoxFPKName
             // 
             this.textBoxFPKName.BackColor = System.Drawing.Color.Silver;
-            this.textBoxFPKName.Location = new System.Drawing.Point(100, 19);
+            this.textBoxFPKName.Location = new System.Drawing.Point(105, 19);
             this.textBoxFPKName.Name = "textBoxFPKName";
             this.textBoxFPKName.Size = new System.Drawing.Size(153, 20);
             this.textBoxFPKName.TabIndex = 1;
@@ -229,7 +229,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.BackColor = System.Drawing.Color.Transparent;
-            this.label12.Location = new System.Drawing.Point(203, 93);
+            this.label12.Location = new System.Drawing.Point(208, 93);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(14, 13);
             this.label12.TabIndex = 22;
@@ -239,7 +239,7 @@
             // 
             this.textBoxZCoord.BackColor = System.Drawing.Color.Silver;
             this.textBoxZCoord.Enabled = false;
-            this.textBoxZCoord.Location = new System.Drawing.Point(220, 90);
+            this.textBoxZCoord.Location = new System.Drawing.Point(225, 90);
             this.textBoxZCoord.Name = "textBoxZCoord";
             this.textBoxZCoord.Size = new System.Drawing.Size(33, 20);
             this.textBoxZCoord.TabIndex = 7;
@@ -249,7 +249,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.Transparent;
-            this.label10.Location = new System.Drawing.Point(150, 93);
+            this.label10.Location = new System.Drawing.Point(155, 93);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(14, 13);
             this.label10.TabIndex = 18;
@@ -259,7 +259,7 @@
             // 
             this.textBoxYCoord.BackColor = System.Drawing.Color.Silver;
             this.textBoxYCoord.Enabled = false;
-            this.textBoxYCoord.Location = new System.Drawing.Point(167, 90);
+            this.textBoxYCoord.Location = new System.Drawing.Point(172, 90);
             this.textBoxYCoord.Name = "textBoxYCoord";
             this.textBoxYCoord.Size = new System.Drawing.Size(33, 20);
             this.textBoxYCoord.TabIndex = 6;
@@ -269,7 +269,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.BackColor = System.Drawing.Color.Transparent;
-            this.label9.Location = new System.Drawing.Point(97, 93);
+            this.label9.Location = new System.Drawing.Point(102, 93);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(14, 13);
             this.label9.TabIndex = 16;
@@ -279,7 +279,7 @@
             // 
             this.textBoxXCoord.BackColor = System.Drawing.Color.Silver;
             this.textBoxXCoord.Enabled = false;
-            this.textBoxXCoord.Location = new System.Drawing.Point(114, 90);
+            this.textBoxXCoord.Location = new System.Drawing.Point(119, 90);
             this.textBoxXCoord.Name = "textBoxXCoord";
             this.textBoxXCoord.Size = new System.Drawing.Size(35, 20);
             this.textBoxXCoord.TabIndex = 5;
@@ -302,7 +302,7 @@
             "Afghanistan",
             "Central Africa",
             "Mother Base"});
-            this.comboBoxRegion.Location = new System.Drawing.Point(100, 62);
+            this.comboBoxRegion.Location = new System.Drawing.Point(105, 62);
             this.comboBoxRegion.Name = "comboBoxRegion";
             this.comboBoxRegion.Size = new System.Drawing.Size(153, 21);
             this.comboBoxRegion.TabIndex = 3;
@@ -311,7 +311,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(277, 161);
+            this.label5.Location = new System.Drawing.Point(285, 161);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(67, 13);
             this.label5.TabIndex = 10;
@@ -320,7 +320,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(261, 65);
+            this.label4.Location = new System.Drawing.Point(269, 65);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(83, 13);
             this.label4.TabIndex = 9;
@@ -347,7 +347,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(266, 22);
+            this.label1.Location = new System.Drawing.Point(274, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 13);
             this.label1.TabIndex = 6;
@@ -356,7 +356,7 @@
             // textBoxQuestNum
             // 
             this.textBoxQuestNum.BackColor = System.Drawing.Color.Silver;
-            this.textBoxQuestNum.Location = new System.Drawing.Point(350, 19);
+            this.textBoxQuestNum.Location = new System.Drawing.Point(363, 19);
             this.textBoxQuestNum.Name = "textBoxQuestNum";
             this.textBoxQuestNum.Size = new System.Drawing.Size(134, 20);
             this.textBoxQuestNum.TabIndex = 2;
@@ -379,7 +379,7 @@
             "7",
             "8",
             "9"});
-            this.comboBoxRadius.Location = new System.Drawing.Point(100, 116);
+            this.comboBoxRadius.Location = new System.Drawing.Point(105, 116);
             this.comboBoxRadius.Name = "comboBoxRadius";
             this.comboBoxRadius.Size = new System.Drawing.Size(153, 21);
             this.comboBoxRadius.TabIndex = 9;
@@ -399,7 +399,7 @@
             "G",
             "H",
             "I"});
-            this.comboBoxReward.Location = new System.Drawing.Point(350, 158);
+            this.comboBoxReward.Location = new System.Drawing.Point(363, 158);
             this.comboBoxReward.Name = "comboBoxReward";
             this.comboBoxReward.Size = new System.Drawing.Size(134, 21);
             this.comboBoxReward.TabIndex = 11;
@@ -409,7 +409,7 @@
             this.comboBoxLoadArea.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxLoadArea.Enabled = false;
             this.comboBoxLoadArea.FormattingEnabled = true;
-            this.comboBoxLoadArea.Location = new System.Drawing.Point(350, 62);
+            this.comboBoxLoadArea.Location = new System.Drawing.Point(363, 62);
             this.comboBoxLoadArea.Name = "comboBoxLoadArea";
             this.comboBoxLoadArea.Size = new System.Drawing.Size(134, 21);
             this.comboBoxLoadArea.TabIndex = 4;
@@ -421,9 +421,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxLocations.BackColor = System.Drawing.Color.Transparent;
             this.groupBoxLocations.Controls.Add(this.panel1);
-            this.groupBoxLocations.Location = new System.Drawing.Point(499, 3);
+            this.groupBoxLocations.Location = new System.Drawing.Point(523, 3);
             this.groupBoxLocations.Name = "groupBoxLocations";
-            this.groupBoxLocations.Size = new System.Drawing.Size(578, 444);
+            this.groupBoxLocations.Size = new System.Drawing.Size(554, 444);
             this.groupBoxLocations.TabIndex = 17;
             this.groupBoxLocations.TabStop = false;
             this.groupBoxLocations.Text = "Locational Data";
@@ -446,7 +446,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 16);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(572, 425);
+            this.panel1.Size = new System.Drawing.Size(548, 425);
             this.panel1.TabIndex = 23;
             // 
             // textBoxAnimalCoords
@@ -458,7 +458,7 @@
             this.textBoxAnimalCoords.Location = new System.Drawing.Point(3, 224);
             this.textBoxAnimalCoords.Multiline = true;
             this.textBoxAnimalCoords.Name = "textBoxAnimalCoords";
-            this.textBoxAnimalCoords.Size = new System.Drawing.Size(549, 80);
+            this.textBoxAnimalCoords.Size = new System.Drawing.Size(542, 80);
             this.textBoxAnimalCoords.TabIndex = 19;
             // 
             // labelAni
@@ -479,7 +479,7 @@
             this.textBoxActiveItemCoords.Location = new System.Drawing.Point(3, 426);
             this.textBoxActiveItemCoords.Multiline = true;
             this.textBoxActiveItemCoords.Name = "textBoxActiveItemCoords";
-            this.textBoxActiveItemCoords.Size = new System.Drawing.Size(549, 80);
+            this.textBoxActiveItemCoords.Size = new System.Drawing.Size(542, 80);
             this.textBoxActiveItemCoords.TabIndex = 21;
             this.textBoxActiveItemCoords.TextChanged += new System.EventHandler(this.textBoxItemCoords_TextChanged);
             // 
@@ -501,7 +501,7 @@
             this.textBoxItemCoords.Location = new System.Drawing.Point(3, 325);
             this.textBoxItemCoords.Multiline = true;
             this.textBoxItemCoords.Name = "textBoxItemCoords";
-            this.textBoxItemCoords.Size = new System.Drawing.Size(549, 80);
+            this.textBoxItemCoords.Size = new System.Drawing.Size(542, 80);
             this.textBoxItemCoords.TabIndex = 20;
             this.textBoxItemCoords.TextChanged += new System.EventHandler(this.textBoxItemCoords_TextChanged);
             // 
@@ -514,7 +514,7 @@
             this.textBoxStMdCoords.Location = new System.Drawing.Point(3, 527);
             this.textBoxStMdCoords.Multiline = true;
             this.textBoxStMdCoords.Name = "textBoxStMdCoords";
-            this.textBoxStMdCoords.Size = new System.Drawing.Size(549, 80);
+            this.textBoxStMdCoords.Size = new System.Drawing.Size(542, 80);
             this.textBoxStMdCoords.TabIndex = 22;
             // 
             // textBoxHosCoords
@@ -526,7 +526,7 @@
             this.textBoxHosCoords.Location = new System.Drawing.Point(3, 22);
             this.textBoxHosCoords.Multiline = true;
             this.textBoxHosCoords.Name = "textBoxHosCoords";
-            this.textBoxHosCoords.Size = new System.Drawing.Size(549, 80);
+            this.textBoxHosCoords.Size = new System.Drawing.Size(542, 80);
             this.textBoxHosCoords.TabIndex = 17;
             // 
             // labelHos
@@ -547,7 +547,7 @@
             this.textBoxVehCoords.Location = new System.Drawing.Point(3, 123);
             this.textBoxVehCoords.Multiline = true;
             this.textBoxVehCoords.Name = "textBoxVehCoords";
-            this.textBoxVehCoords.Size = new System.Drawing.Size(549, 80);
+            this.textBoxVehCoords.Size = new System.Drawing.Size(542, 80);
             this.textBoxVehCoords.TabIndex = 18;
             // 
             // labelVeh
@@ -591,7 +591,7 @@
             this.groupBoxFlavor.Controls.Add(this.textBoxQuestTitle);
             this.groupBoxFlavor.Location = new System.Drawing.Point(3, 226);
             this.groupBoxFlavor.Name = "groupBoxFlavor";
-            this.groupBoxFlavor.Size = new System.Drawing.Size(490, 221);
+            this.groupBoxFlavor.Size = new System.Drawing.Size(514, 221);
             this.groupBoxFlavor.TabIndex = 13;
             this.groupBoxFlavor.TabStop = false;
             this.groupBoxFlavor.Text = "Sideop Flavor Text";
@@ -654,7 +654,7 @@
             this.textBoxQuestDesc.Location = new System.Drawing.Point(6, 84);
             this.textBoxQuestDesc.Multiline = true;
             this.textBoxQuestDesc.Name = "textBoxQuestDesc";
-            this.textBoxQuestDesc.Size = new System.Drawing.Size(478, 74);
+            this.textBoxQuestDesc.Size = new System.Drawing.Size(502, 74);
             this.textBoxQuestDesc.TabIndex = 14;
             // 
             // textBoxQuestTitle
@@ -664,7 +664,7 @@
             this.textBoxQuestTitle.BackColor = System.Drawing.Color.Silver;
             this.textBoxQuestTitle.Location = new System.Drawing.Point(6, 36);
             this.textBoxQuestTitle.Name = "textBoxQuestTitle";
-            this.textBoxQuestTitle.Size = new System.Drawing.Size(478, 20);
+            this.textBoxQuestTitle.Size = new System.Drawing.Size(502, 20);
             this.textBoxQuestTitle.TabIndex = 13;
             // 
             // Setup

@@ -20,6 +20,8 @@ namespace SOC.UI
         public FormMain()
         {
             InitializeComponent();
+            setupPage.ShiftGroups(Height - 100, Width - 42);
+            detailPage.ShiftGroups(Height - 100, Width - 42);
             GoToPanel();
             Forms.PanelScroll CoordsScrolling = new Forms.PanelScroll(setupPage.panel1, false);
             Application.AddMessageFilter(CoordsScrolling);
@@ -39,7 +41,7 @@ namespace SOC.UI
         }
         private bool isFilled()
         {
-            return true; // FOR DEBUG
+            //return true; // FOR DEBUG
             if (string.IsNullOrEmpty(setupPage.textBoxFPKName.Text) || string.IsNullOrEmpty(setupPage.textBoxQuestNum.Text) || string.IsNullOrEmpty(setupPage.textBoxQuestTitle.Text) || string.IsNullOrEmpty(setupPage.textBoxQuestDesc.Text))
                 return false;
             if (setupPage.comboBoxCategory.SelectedIndex == -1 || setupPage.comboBoxReward.SelectedIndex == -1 || setupPage.comboBoxObjective.SelectedIndex == -1 || setupPage.comboBoxProgressNotifs.SelectedIndex == -1 || setupPage.comboBoxRegion.SelectedIndex == -1)
@@ -62,7 +64,6 @@ namespace SOC.UI
                     panelMain.Controls.Add(setupPage);
                     setupPage.EnableScrolling();
                     buttonNext.Text = "Next >>";
-                    this.Width = 1120;
                     break;
 
                 case 1:
@@ -70,9 +71,9 @@ namespace SOC.UI
                     {
                         setupPage.DisableScrolling();
                         panelMain.Controls.Clear();
-                        this.Width = 1200;
                         Waiting waitingPage = new Waiting(this.Size);
                         panelMain.Controls.Add(waitingPage);
+                        buttonNext.Enabled = false;
                         Application.DoEvents();
 
                         List<Coordinates> HostageCoords = BuildCoordinatesList(setupPage.textBoxHosCoords.Text);
@@ -102,6 +103,7 @@ namespace SOC.UI
                         buttonBack.Visible = true;
                         buttonNext.Text = "Build";
                         panelMain.Controls.Add(detailPage);
+                        buttonNext.Enabled = true;
                     }
                     else
                     {

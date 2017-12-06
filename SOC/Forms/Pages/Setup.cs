@@ -194,7 +194,7 @@ namespace SOC.UI
         {
             Height = height; Width = width;
             int dynamicHeight = groupBoxLocations.Height / 4 - 20;
-            int maxHeight = 125;
+            int maxHeight = 124;
 
             if (dynamicHeight >= maxHeight)
                 dynamicHeight = maxHeight;

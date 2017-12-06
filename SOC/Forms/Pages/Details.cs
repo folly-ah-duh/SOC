@@ -246,7 +246,7 @@ namespace SOC.UI
             ShiftGroups(Height, Width);
         }
 
-        private void ShiftVisibilities(bool hideAll)
+        internal void ShiftVisibilities(bool hideAll)
         {
             detailLists = new List<GroupBox>();
             Tuple<List<Detail>, GroupBox>[] detailTuples =

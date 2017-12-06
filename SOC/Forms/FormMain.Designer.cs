@@ -36,7 +36,7 @@
             // buttonNext
             // 
             this.buttonNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonNext.Location = new System.Drawing.Point(983, 468);
+            this.buttonNext.Location = new System.Drawing.Point(1037, 468);
             this.buttonNext.Name = "buttonNext";
             this.buttonNext.Size = new System.Drawing.Size(109, 38);
             this.buttonNext.TabIndex = 40;
@@ -62,7 +62,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelMain.Location = new System.Drawing.Point(12, 12);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(1080, 450);
+            this.panelMain.Size = new System.Drawing.Size(1134, 450);
             this.panelMain.TabIndex = 11;
             // 
             // FormMain
@@ -70,11 +70,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
-            this.ClientSize = new System.Drawing.Size(1104, 512);
+            this.ClientSize = new System.Drawing.Size(1158, 512);
             this.Controls.Add(this.buttonBack);
             this.Controls.Add(this.buttonNext);
             this.Controls.Add(this.panelMain);
-            this.MinimumSize = new System.Drawing.Size(862, 550);
+            this.MinimumSize = new System.Drawing.Size(1160, 550);
             this.Name = "FormMain";
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;

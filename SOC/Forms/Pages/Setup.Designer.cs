@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.panelSetup = new System.Windows.Forms.Panel();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBoxSetup = new System.Windows.Forms.GroupBox();
             this.comboBoxCP = new System.Windows.Forms.ComboBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
@@ -55,21 +55,21 @@
             this.comboBoxRadius = new System.Windows.Forms.ComboBox();
             this.comboBoxReward = new System.Windows.Forms.ComboBox();
             this.comboBoxLoadArea = new System.Windows.Forms.ComboBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBoxLocations = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.textBox_Animal = new System.Windows.Forms.TextBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.textBox_ActiveItem = new System.Windows.Forms.TextBox();
-            this.label21 = new System.Windows.Forms.Label();
+            this.textBoxAnimalCoords = new System.Windows.Forms.TextBox();
+            this.labelAni = new System.Windows.Forms.Label();
+            this.textBoxActiveItemCoords = new System.Windows.Forms.TextBox();
+            this.labelActiveItem = new System.Windows.Forms.Label();
             this.textBoxItemCoords = new System.Windows.Forms.TextBox();
             this.textBoxStMdCoords = new System.Windows.Forms.TextBox();
             this.textBoxHosCoords = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
+            this.labelHos = new System.Windows.Forms.Label();
             this.textBoxVehCoords = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.labelVeh = new System.Windows.Forms.Label();
+            this.labelModel = new System.Windows.Forms.Label();
+            this.labelItem = new System.Windows.Forms.Label();
+            this.groupBoxFlavor = new System.Windows.Forms.GroupBox();
             this.buttonAddNotif = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -78,57 +78,57 @@
             this.textBoxQuestDesc = new System.Windows.Forms.TextBox();
             this.textBoxQuestTitle = new System.Windows.Forms.TextBox();
             this.panelSetup.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.groupBoxSetup.SuspendLayout();
+            this.groupBoxLocations.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.groupBoxFlavor.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelSetup
             // 
-            this.panelSetup.Controls.Add(this.groupBox2);
-            this.panelSetup.Controls.Add(this.groupBox3);
-            this.panelSetup.Controls.Add(this.groupBox1);
+            this.panelSetup.Controls.Add(this.groupBoxSetup);
+            this.panelSetup.Controls.Add(this.groupBoxLocations);
+            this.panelSetup.Controls.Add(this.groupBoxFlavor);
             this.panelSetup.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelSetup.Location = new System.Drawing.Point(0, 0);
             this.panelSetup.Name = "panelSetup";
             this.panelSetup.Size = new System.Drawing.Size(1080, 450);
             this.panelSetup.TabIndex = 11;
             // 
-            // groupBox2
+            // groupBoxSetup
             // 
-            this.groupBox2.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox2.Controls.Add(this.comboBoxCP);
-            this.groupBox2.Controls.Add(this.label20);
-            this.groupBox2.Controls.Add(this.label19);
-            this.groupBox2.Controls.Add(this.comboBoxObjective);
-            this.groupBox2.Controls.Add(this.label14);
-            this.groupBox2.Controls.Add(this.comboBoxCategory);
-            this.groupBox2.Controls.Add(this.label11);
-            this.groupBox2.Controls.Add(this.textBoxFPKName);
-            this.groupBox2.Controls.Add(this.label12);
-            this.groupBox2.Controls.Add(this.textBoxZCoord);
-            this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Controls.Add(this.textBoxYCoord);
-            this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Controls.Add(this.textBoxXCoord);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.comboBoxRegion);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.textBoxQuestNum);
-            this.groupBox2.Controls.Add(this.comboBoxRadius);
-            this.groupBox2.Controls.Add(this.comboBoxReward);
-            this.groupBox2.Controls.Add(this.comboBoxLoadArea);
-            this.groupBox2.Location = new System.Drawing.Point(3, 3);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(490, 217);
-            this.groupBox2.TabIndex = 0;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Sideop Setup";
+            this.groupBoxSetup.BackColor = System.Drawing.Color.Transparent;
+            this.groupBoxSetup.Controls.Add(this.comboBoxCP);
+            this.groupBoxSetup.Controls.Add(this.label20);
+            this.groupBoxSetup.Controls.Add(this.label19);
+            this.groupBoxSetup.Controls.Add(this.comboBoxObjective);
+            this.groupBoxSetup.Controls.Add(this.label14);
+            this.groupBoxSetup.Controls.Add(this.comboBoxCategory);
+            this.groupBoxSetup.Controls.Add(this.label11);
+            this.groupBoxSetup.Controls.Add(this.textBoxFPKName);
+            this.groupBoxSetup.Controls.Add(this.label12);
+            this.groupBoxSetup.Controls.Add(this.textBoxZCoord);
+            this.groupBoxSetup.Controls.Add(this.label10);
+            this.groupBoxSetup.Controls.Add(this.textBoxYCoord);
+            this.groupBoxSetup.Controls.Add(this.label9);
+            this.groupBoxSetup.Controls.Add(this.textBoxXCoord);
+            this.groupBoxSetup.Controls.Add(this.label6);
+            this.groupBoxSetup.Controls.Add(this.comboBoxRegion);
+            this.groupBoxSetup.Controls.Add(this.label5);
+            this.groupBoxSetup.Controls.Add(this.label4);
+            this.groupBoxSetup.Controls.Add(this.label3);
+            this.groupBoxSetup.Controls.Add(this.label2);
+            this.groupBoxSetup.Controls.Add(this.label1);
+            this.groupBoxSetup.Controls.Add(this.textBoxQuestNum);
+            this.groupBoxSetup.Controls.Add(this.comboBoxRadius);
+            this.groupBoxSetup.Controls.Add(this.comboBoxReward);
+            this.groupBoxSetup.Controls.Add(this.comboBoxLoadArea);
+            this.groupBoxSetup.Location = new System.Drawing.Point(3, 3);
+            this.groupBoxSetup.Name = "groupBoxSetup";
+            this.groupBoxSetup.Size = new System.Drawing.Size(490, 217);
+            this.groupBoxSetup.TabIndex = 0;
+            this.groupBoxSetup.TabStop = false;
+            this.groupBoxSetup.Text = "Sideop Setup";
             // 
             // comboBoxCP
             // 
@@ -414,176 +414,191 @@
             this.comboBoxLoadArea.Size = new System.Drawing.Size(134, 21);
             this.comboBoxLoadArea.TabIndex = 4;
             // 
-            // groupBox3
+            // groupBoxLocations
             // 
-            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.groupBoxLocations.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox3.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox3.Controls.Add(this.panel1);
-            this.groupBox3.Location = new System.Drawing.Point(499, 3);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(578, 444);
-            this.groupBox3.TabIndex = 17;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Locational Data";
+            this.groupBoxLocations.BackColor = System.Drawing.Color.Transparent;
+            this.groupBoxLocations.Controls.Add(this.panel1);
+            this.groupBoxLocations.Location = new System.Drawing.Point(499, 3);
+            this.groupBoxLocations.Name = "groupBoxLocations";
+            this.groupBoxLocations.Size = new System.Drawing.Size(578, 444);
+            this.groupBoxLocations.TabIndex = 17;
+            this.groupBoxLocations.TabStop = false;
+            this.groupBoxLocations.Text = "Locational Data";
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
-            this.panel1.Controls.Add(this.textBox_Animal);
-            this.panel1.Controls.Add(this.label22);
-            this.panel1.Controls.Add(this.textBox_ActiveItem);
-            this.panel1.Controls.Add(this.label21);
+            this.panel1.Controls.Add(this.textBoxAnimalCoords);
+            this.panel1.Controls.Add(this.labelAni);
+            this.panel1.Controls.Add(this.textBoxActiveItemCoords);
+            this.panel1.Controls.Add(this.labelActiveItem);
             this.panel1.Controls.Add(this.textBoxItemCoords);
             this.panel1.Controls.Add(this.textBoxStMdCoords);
             this.panel1.Controls.Add(this.textBoxHosCoords);
-            this.panel1.Controls.Add(this.label15);
+            this.panel1.Controls.Add(this.labelHos);
             this.panel1.Controls.Add(this.textBoxVehCoords);
-            this.panel1.Controls.Add(this.label16);
-            this.panel1.Controls.Add(this.label18);
-            this.panel1.Controls.Add(this.label17);
-            this.panel1.Location = new System.Drawing.Point(7, 11);
+            this.panel1.Controls.Add(this.labelVeh);
+            this.panel1.Controls.Add(this.labelModel);
+            this.panel1.Controls.Add(this.labelItem);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 16);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(566, 428);
+            this.panel1.Size = new System.Drawing.Size(572, 425);
             this.panel1.TabIndex = 23;
             // 
-            // textBox_Animal
+            // textBoxAnimalCoords
             // 
-            this.textBox_Animal.AcceptsReturn = true;
-            this.textBox_Animal.BackColor = System.Drawing.Color.Silver;
-            this.textBox_Animal.Location = new System.Drawing.Point(3, 224);
-            this.textBox_Animal.Multiline = true;
-            this.textBox_Animal.Name = "textBox_Animal";
-            this.textBox_Animal.Size = new System.Drawing.Size(542, 80);
-            this.textBox_Animal.TabIndex = 19;
+            this.textBoxAnimalCoords.AcceptsReturn = true;
+            this.textBoxAnimalCoords.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxAnimalCoords.BackColor = System.Drawing.Color.Silver;
+            this.textBoxAnimalCoords.Location = new System.Drawing.Point(3, 224);
+            this.textBoxAnimalCoords.Multiline = true;
+            this.textBoxAnimalCoords.Name = "textBoxAnimalCoords";
+            this.textBoxAnimalCoords.Size = new System.Drawing.Size(549, 80);
+            this.textBoxAnimalCoords.TabIndex = 19;
             // 
-            // label22
+            // labelAni
             // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(3, 208);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(303, 13);
-            this.label22.TabIndex = 26;
-            this.label22.Text = "Animal Cluster Locations: {pos={X, Y, Z},rotY=Y-Axis Rotation},";
+            this.labelAni.AutoSize = true;
+            this.labelAni.Location = new System.Drawing.Point(3, 208);
+            this.labelAni.Name = "labelAni";
+            this.labelAni.Size = new System.Drawing.Size(303, 13);
+            this.labelAni.TabIndex = 26;
+            this.labelAni.Text = "Animal Cluster Locations: {pos={X, Y, Z},rotY=Y-Axis Rotation},";
             // 
-            // textBox_ActiveItem
+            // textBoxActiveItemCoords
             // 
-            this.textBox_ActiveItem.AcceptsReturn = true;
-            this.textBox_ActiveItem.BackColor = System.Drawing.Color.Silver;
-            this.textBox_ActiveItem.Location = new System.Drawing.Point(3, 426);
-            this.textBox_ActiveItem.Multiline = true;
-            this.textBox_ActiveItem.Name = "textBox_ActiveItem";
-            this.textBox_ActiveItem.Size = new System.Drawing.Size(542, 80);
-            this.textBox_ActiveItem.TabIndex = 21;
-            this.textBox_ActiveItem.TextChanged += new System.EventHandler(this.textBoxItemCoords_TextChanged);
+            this.textBoxActiveItemCoords.AcceptsReturn = true;
+            this.textBoxActiveItemCoords.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxActiveItemCoords.BackColor = System.Drawing.Color.Silver;
+            this.textBoxActiveItemCoords.Location = new System.Drawing.Point(3, 426);
+            this.textBoxActiveItemCoords.Multiline = true;
+            this.textBoxActiveItemCoords.Name = "textBoxActiveItemCoords";
+            this.textBoxActiveItemCoords.Size = new System.Drawing.Size(549, 80);
+            this.textBoxActiveItemCoords.TabIndex = 21;
+            this.textBoxActiveItemCoords.TextChanged += new System.EventHandler(this.textBoxItemCoords_TextChanged);
             // 
-            // label21
+            // labelActiveItem
             // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(3, 410);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(290, 13);
-            this.label21.TabIndex = 24;
-            this.label21.Text = "Active Item Locations: {pos={X, Y, Z},rotY=Y-Axis Rotation},";
+            this.labelActiveItem.AutoSize = true;
+            this.labelActiveItem.Location = new System.Drawing.Point(3, 410);
+            this.labelActiveItem.Name = "labelActiveItem";
+            this.labelActiveItem.Size = new System.Drawing.Size(290, 13);
+            this.labelActiveItem.TabIndex = 24;
+            this.labelActiveItem.Text = "Active Item Locations: {pos={X, Y, Z},rotY=Y-Axis Rotation},";
             // 
             // textBoxItemCoords
             // 
             this.textBoxItemCoords.AcceptsReturn = true;
+            this.textBoxItemCoords.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxItemCoords.BackColor = System.Drawing.Color.Silver;
             this.textBoxItemCoords.Location = new System.Drawing.Point(3, 325);
             this.textBoxItemCoords.Multiline = true;
             this.textBoxItemCoords.Name = "textBoxItemCoords";
-            this.textBoxItemCoords.Size = new System.Drawing.Size(542, 80);
+            this.textBoxItemCoords.Size = new System.Drawing.Size(549, 80);
             this.textBoxItemCoords.TabIndex = 20;
             this.textBoxItemCoords.TextChanged += new System.EventHandler(this.textBoxItemCoords_TextChanged);
             // 
             // textBoxStMdCoords
             // 
             this.textBoxStMdCoords.AcceptsReturn = true;
+            this.textBoxStMdCoords.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxStMdCoords.BackColor = System.Drawing.Color.Silver;
             this.textBoxStMdCoords.Location = new System.Drawing.Point(3, 527);
             this.textBoxStMdCoords.Multiline = true;
             this.textBoxStMdCoords.Name = "textBoxStMdCoords";
-            this.textBoxStMdCoords.Size = new System.Drawing.Size(542, 80);
+            this.textBoxStMdCoords.Size = new System.Drawing.Size(549, 80);
             this.textBoxStMdCoords.TabIndex = 22;
             // 
             // textBoxHosCoords
             // 
             this.textBoxHosCoords.AcceptsReturn = true;
+            this.textBoxHosCoords.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxHosCoords.BackColor = System.Drawing.Color.Silver;
             this.textBoxHosCoords.Location = new System.Drawing.Point(3, 22);
             this.textBoxHosCoords.Multiline = true;
             this.textBoxHosCoords.Name = "textBoxHosCoords";
-            this.textBoxHosCoords.Size = new System.Drawing.Size(542, 80);
+            this.textBoxHosCoords.Size = new System.Drawing.Size(549, 80);
             this.textBoxHosCoords.TabIndex = 17;
             // 
-            // label15
+            // labelHos
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(3, 6);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(275, 13);
-            this.label15.TabIndex = 16;
-            this.label15.Text = "Prisoner Locations: {pos={X, Y, Z},rotY=Y-Axis Rotation},";
+            this.labelHos.AutoSize = true;
+            this.labelHos.Location = new System.Drawing.Point(3, 6);
+            this.labelHos.Name = "labelHos";
+            this.labelHos.Size = new System.Drawing.Size(275, 13);
+            this.labelHos.TabIndex = 16;
+            this.labelHos.Text = "Prisoner Locations: {pos={X, Y, Z},rotY=Y-Axis Rotation},";
             // 
             // textBoxVehCoords
             // 
             this.textBoxVehCoords.AcceptsReturn = true;
+            this.textBoxVehCoords.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxVehCoords.BackColor = System.Drawing.Color.Silver;
             this.textBoxVehCoords.Location = new System.Drawing.Point(3, 123);
             this.textBoxVehCoords.Multiline = true;
             this.textBoxVehCoords.Name = "textBoxVehCoords";
-            this.textBoxVehCoords.Size = new System.Drawing.Size(542, 80);
+            this.textBoxVehCoords.Size = new System.Drawing.Size(549, 80);
             this.textBoxVehCoords.TabIndex = 18;
             // 
-            // label16
+            // labelVeh
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(3, 107);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(272, 13);
-            this.label16.TabIndex = 18;
-            this.label16.Text = "Vehicle Locations: {pos={X, Y, Z},rotY=Y-Axis Rotation},";
+            this.labelVeh.AutoSize = true;
+            this.labelVeh.Location = new System.Drawing.Point(3, 107);
+            this.labelVeh.Name = "labelVeh";
+            this.labelVeh.Size = new System.Drawing.Size(272, 13);
+            this.labelVeh.TabIndex = 18;
+            this.labelVeh.Text = "Vehicle Locations: {pos={X, Y, Z},rotY=Y-Axis Rotation},";
             // 
-            // label18
+            // labelModel
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(3, 511);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(296, 13);
-            this.label18.TabIndex = 22;
-            this.label18.Text = "Static Model Locations: {pos={X, Y, Z},rotY=Y-Axis Rotation},";
+            this.labelModel.AutoSize = true;
+            this.labelModel.Location = new System.Drawing.Point(3, 511);
+            this.labelModel.Name = "labelModel";
+            this.labelModel.Size = new System.Drawing.Size(296, 13);
+            this.labelModel.TabIndex = 22;
+            this.labelModel.Text = "Static Model Locations: {pos={X, Y, Z},rotY=Y-Axis Rotation},";
             // 
-            // label17
+            // labelItem
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(3, 309);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(257, 13);
-            this.label17.TabIndex = 20;
-            this.label17.Text = "Item Locations: {pos={X, Y, Z},rotY=Y-Axis Rotation},";
+            this.labelItem.AutoSize = true;
+            this.labelItem.Location = new System.Drawing.Point(3, 309);
+            this.labelItem.Name = "labelItem";
+            this.labelItem.Size = new System.Drawing.Size(257, 13);
+            this.labelItem.TabIndex = 20;
+            this.labelItem.Text = "Item Locations: {pos={X, Y, Z},rotY=Y-Axis Rotation},";
             // 
-            // groupBox1
+            // groupBoxFlavor
             // 
-            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Controls.Add(this.buttonAddNotif);
-            this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.comboBoxProgressNotifs);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.textBoxQuestDesc);
-            this.groupBox1.Controls.Add(this.textBoxQuestTitle);
-            this.groupBox1.Location = new System.Drawing.Point(3, 226);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(490, 221);
-            this.groupBox1.TabIndex = 13;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Sideop Flavor Text";
+            this.groupBoxFlavor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBoxFlavor.BackColor = System.Drawing.Color.Transparent;
+            this.groupBoxFlavor.Controls.Add(this.buttonAddNotif);
+            this.groupBoxFlavor.Controls.Add(this.label13);
+            this.groupBoxFlavor.Controls.Add(this.label8);
+            this.groupBoxFlavor.Controls.Add(this.comboBoxProgressNotifs);
+            this.groupBoxFlavor.Controls.Add(this.label7);
+            this.groupBoxFlavor.Controls.Add(this.textBoxQuestDesc);
+            this.groupBoxFlavor.Controls.Add(this.textBoxQuestTitle);
+            this.groupBoxFlavor.Location = new System.Drawing.Point(3, 226);
+            this.groupBoxFlavor.Name = "groupBoxFlavor";
+            this.groupBoxFlavor.Size = new System.Drawing.Size(490, 221);
+            this.groupBoxFlavor.TabIndex = 13;
+            this.groupBoxFlavor.TabStop = false;
+            this.groupBoxFlavor.Text = "Sideop Flavor Text";
             // 
             // buttonAddNotif
             // 
+            this.buttonAddNotif.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonAddNotif.Location = new System.Drawing.Point(419, 186);
             this.buttonAddNotif.Name = "buttonAddNotif";
             this.buttonAddNotif.Size = new System.Drawing.Size(65, 23);
@@ -594,6 +609,7 @@
             // 
             // label13
             // 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(6, 170);
             this.label13.Name = "label13";
@@ -612,6 +628,7 @@
             // 
             // comboBoxProgressNotifs
             // 
+            this.comboBoxProgressNotifs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.comboBoxProgressNotifs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxProgressNotifs.FormattingEnabled = true;
             this.comboBoxProgressNotifs.Location = new System.Drawing.Point(6, 186);
@@ -630,6 +647,9 @@
             // 
             // textBoxQuestDesc
             // 
+            this.textBoxQuestDesc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxQuestDesc.BackColor = System.Drawing.Color.Silver;
             this.textBoxQuestDesc.Location = new System.Drawing.Point(6, 84);
             this.textBoxQuestDesc.Multiline = true;
@@ -639,6 +659,8 @@
             // 
             // textBoxQuestTitle
             // 
+            this.textBoxQuestTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxQuestTitle.BackColor = System.Drawing.Color.Silver;
             this.textBoxQuestTitle.Location = new System.Drawing.Point(6, 36);
             this.textBoxQuestTitle.Name = "textBoxQuestTitle";
@@ -655,13 +677,13 @@
             this.Name = "Setup";
             this.Size = new System.Drawing.Size(1080, 450);
             this.panelSetup.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
+            this.groupBoxSetup.ResumeLayout(false);
+            this.groupBoxSetup.PerformLayout();
+            this.groupBoxLocations.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.groupBoxFlavor.ResumeLayout(false);
+            this.groupBoxFlavor.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -669,7 +691,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panelSetup;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBoxSetup;
         private System.Windows.Forms.Label label14;
         public System.Windows.Forms.ComboBox comboBoxCategory;
         private System.Windows.Forms.Label label11;
@@ -691,13 +713,9 @@
         public System.Windows.Forms.ComboBox comboBoxRadius;
         public System.Windows.Forms.ComboBox comboBoxReward;
         public System.Windows.Forms.ComboBox comboBoxLoadArea;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.GroupBox groupBoxLocations;
         public System.Windows.Forms.TextBox textBoxHosCoords;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBoxFlavor;
         private System.Windows.Forms.Button buttonAddNotif;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label8;
@@ -712,10 +730,14 @@
         public System.Windows.Forms.ComboBox comboBoxObjective;
         public System.Windows.Forms.ComboBox comboBoxCP;
         private System.Windows.Forms.Label label20;
-        public System.Windows.Forms.TextBox textBox_Animal;
-        private System.Windows.Forms.Label label22;
-        public System.Windows.Forms.TextBox textBox_ActiveItem;
-        private System.Windows.Forms.Label label21;
+        public System.Windows.Forms.TextBox textBoxAnimalCoords;
+        public System.Windows.Forms.TextBox textBoxActiveItemCoords;
         public System.Windows.Forms.Panel panel1;
+        public System.Windows.Forms.Label labelModel;
+        public System.Windows.Forms.Label labelItem;
+        public System.Windows.Forms.Label labelVeh;
+        public System.Windows.Forms.Label labelHos;
+        public System.Windows.Forms.Label labelAni;
+        public System.Windows.Forms.Label labelActiveItem;
     }
 }

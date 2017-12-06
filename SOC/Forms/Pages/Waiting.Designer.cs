@@ -28,24 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelWaiting = new System.Windows.Forms.Label();
             this.panelWaiting = new System.Windows.Forms.Panel();
             this.panelWaiting.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
+            // labelWaiting
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(500, 200);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(179, 25);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Building Details...";
+            this.labelWaiting.AutoSize = true;
+            this.labelWaiting.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelWaiting.Location = new System.Drawing.Point(500, 200);
+            this.labelWaiting.Name = "labelWaiting";
+            this.labelWaiting.Size = new System.Drawing.Size(179, 25);
+            this.labelWaiting.TabIndex = 0;
+            this.labelWaiting.Text = "Building Details...";
             // 
             // panelWaiting
             // 
-            this.panelWaiting.Controls.Add(this.label1);
+            this.panelWaiting.AutoScroll = true;
+            this.panelWaiting.AutoSize = true;
+            this.panelWaiting.Controls.Add(this.labelWaiting);
             this.panelWaiting.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelWaiting.Location = new System.Drawing.Point(0, 0);
             this.panelWaiting.Name = "panelWaiting";
@@ -62,12 +64,13 @@
             this.panelWaiting.ResumeLayout(false);
             this.panelWaiting.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelWaiting;
         private System.Windows.Forms.Panel panelWaiting;
     }
 }

@@ -243,7 +243,7 @@ namespace SOC.UI
 
             RefreshHostageLanguage();
             ShiftVisibilities(false);
-            ShiftGroups();
+            ShiftGroups(Height, Width);
         }
 
         private void ShiftVisibilities(bool hideAll)
@@ -271,8 +271,9 @@ namespace SOC.UI
             }
         }
 
-        internal void ShiftGroups()
+        internal void ShiftGroups(int height, int width)
         {
+            Height = height; Width = width;
             int dynamicMaxAdjust = 310 / (detailLists.Count + 1);
             int maxPanelWidth = 269 + dynamicMaxAdjust;
             dynamicPanelWidth = Width / 4 - 20;

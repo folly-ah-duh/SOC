@@ -12,9 +12,11 @@ namespace SOC.UI
 {
     public partial class Waiting : UserControl
     {
-        public Waiting()
+        public Waiting(Size panelSize)
         {
             InitializeComponent();
+            this.Size = panelSize;
+            labelWaiting.Location = new Point((panelSize.Width / 2) - (labelWaiting.Width / 2), (panelWaiting.Height / 4));
         }
     }
 }

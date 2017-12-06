@@ -14,7 +14,6 @@ namespace SOC.UI
     {
         private Setup setupPage = new Setup();
         private Details detailPage = new Details();
-        private Waiting waitingPage = new Waiting();
         private List<GroupBox> detailPageBoxes = new List<GroupBox>();
         private int panelNum = 0;
             
@@ -40,7 +39,7 @@ namespace SOC.UI
         }
         private bool isFilled()
         {
-            //return true; // FOR DEBUG
+            return true; // FOR DEBUG
             if (string.IsNullOrEmpty(setupPage.textBoxFPKName.Text) || string.IsNullOrEmpty(setupPage.textBoxQuestNum.Text) || string.IsNullOrEmpty(setupPage.textBoxQuestTitle.Text) || string.IsNullOrEmpty(setupPage.textBoxQuestDesc.Text))
                 return false;
             if (setupPage.comboBoxCategory.SelectedIndex == -1 || setupPage.comboBoxReward.SelectedIndex == -1 || setupPage.comboBoxObjective.SelectedIndex == -1 || setupPage.comboBoxProgressNotifs.SelectedIndex == -1 || setupPage.comboBoxRegion.SelectedIndex == -1)
@@ -72,6 +71,7 @@ namespace SOC.UI
                         setupPage.DisableScrolling();
                         panelMain.Controls.Clear();
                         this.Width = 1200;
+                        Waiting waitingPage = new Waiting(this.Size);
                         panelMain.Controls.Add(waitingPage);
                         Application.DoEvents();
 
@@ -79,8 +79,8 @@ namespace SOC.UI
                         List<Coordinates> VehicleCoords = BuildCoordinatesList(setupPage.textBoxVehCoords.Text);
                         List<Coordinates> ItemCoords = BuildCoordinatesList(setupPage.textBoxItemCoords.Text);
                         List<Coordinates> ModelCoords = BuildCoordinatesList(setupPage.textBoxStMdCoords.Text);
-                        List<Coordinates> activeItemCoords = BuildCoordinatesList(setupPage.textBox_ActiveItem.Text);
-                        List<Coordinates> AnimalCoords = BuildCoordinatesList(setupPage.textBox_Animal.Text);
+                        List<Coordinates> activeItemCoords = BuildCoordinatesList(setupPage.textBoxActiveItemCoords.Text);
+                        List<Coordinates> AnimalCoords = BuildCoordinatesList(setupPage.textBoxAnimalCoords.Text);
                         CP selectedCP = new CP();
                         if (isAfgh(setupPage))
                         {
@@ -136,9 +136,8 @@ namespace SOC.UI
 
         private void FormMain_SizeChanged(object sender, EventArgs e)
         {
-            detailPage.Height = this.Height - 100;
-            detailPage.Width = this.Width - 42;
-            detailPage.ShiftGroups();
+            setupPage.ShiftGroups(Height - 100, Width - 42);
+            detailPage.ShiftGroups(Height - 100, Width - 42);
         }
 
         public static List<Coordinates> BuildCoordinatesList(string rawString)

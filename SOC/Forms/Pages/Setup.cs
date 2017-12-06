@@ -23,6 +23,7 @@ namespace SOC.UI
         string[] afghCP = new string[AfghCPs.Length];
         string[] mafrCP = new string[MafrCPs.Length];
         string[] mtbsCP = new string[] { "NONE" };
+        Tuple<Label, TextBox>[] LocationBoxes;
 
         public Setup()
         {
@@ -31,6 +32,17 @@ namespace SOC.UI
             SendMessage(textBoxQuestNum.Handle, 0x1501, 1, "30103");
             SendMessage(textBoxFPKName.Handle, 0x1501, 1, "Example_Quest_Name");
             SendMessage(textBoxQuestTitle.Handle, 0x1501, 1, "Example Quest Title Text");
+
+
+            LocationBoxes = new Tuple<Label, TextBox>[6] {
+                new Tuple<Label, TextBox>(labelHos, textBoxHosCoords),
+                new Tuple<Label, TextBox>(labelVeh, textBoxVehCoords),
+                new Tuple<Label, TextBox>(labelAni, textBoxAnimalCoords),
+                new Tuple<Label, TextBox>(labelItem, textBoxItemCoords),
+                new Tuple<Label, TextBox>(labelActiveItem, textBoxActiveItemCoords),
+                new Tuple<Label, TextBox>(labelModel, textBoxStMdCoords)
+            };
+
 
             for (int i = 0; i < AfghCPs.Length; i++)
                 afghCP[i] = AfghCPs[i].CPname;
@@ -129,32 +141,32 @@ namespace SOC.UI
         {
             if (string.IsNullOrEmpty(textBoxItemCoords.Text))
             {
-                textBox_ActiveItem.Enabled = true;
-                textBox_ActiveItem.BackColor = System.Drawing.Color.Silver;
-                label21.Text = "Active Item Locations: (X, Y, Z, Y-Axis Rotation)";
-                label21.ForeColor = System.Drawing.Color.Black;
+                textBoxActiveItemCoords.Enabled = true;
+                textBoxActiveItemCoords.BackColor = System.Drawing.Color.Silver;
+                labelActiveItem.Text = "Active Item Locations: (X, Y, Z, Y-Axis Rotation)";
+                labelActiveItem.ForeColor = System.Drawing.Color.Black;
             } else
             {
-                textBox_ActiveItem.Enabled = false;
-                textBox_ActiveItem.BackColor = System.Drawing.Color.DarkGray;
-                label21.Text = "Active Item Locations: (X, Y, Z, Y-Axis Rotation) [Disabled When Items Exist]";
-                label21.ForeColor = System.Drawing.Color.Goldenrod;
-                textBox_ActiveItem.Clear();
+                textBoxActiveItemCoords.Enabled = false;
+                textBoxActiveItemCoords.BackColor = System.Drawing.Color.DarkGray;
+                labelActiveItem.Text = "Active Item Locations: (X, Y, Z, Y-Axis Rotation) [Disabled When Items Exist]";
+                labelActiveItem.ForeColor = System.Drawing.Color.Goldenrod;
+                textBoxActiveItemCoords.Clear();
             }
 
-            if (string.IsNullOrEmpty(textBox_ActiveItem.Text))
+            if (string.IsNullOrEmpty(textBoxActiveItemCoords.Text))
             {
                 textBoxItemCoords.Enabled = true;
                 textBoxItemCoords.BackColor = System.Drawing.Color.Silver;
-                label17.Text = "Item Locations: (X, Y, Z, Y-Axis Rotation)";
-                label17.ForeColor = System.Drawing.Color.Black;
+                labelItem.Text = "Item Locations: (X, Y, Z, Y-Axis Rotation)";
+                labelItem.ForeColor = System.Drawing.Color.Black;
             }
             else
             {
                 textBoxItemCoords.Enabled = false;
                 textBoxItemCoords.BackColor = System.Drawing.Color.DarkGray;
-                label17.Text = "Item Locations: (X, Y, Z, Y-Axis Rotation) [Disabled When Active Items Exist]";
-                label17.ForeColor = System.Drawing.Color.Goldenrod;
+                labelItem.Text = "Item Locations: (X, Y, Z, Y-Axis Rotation) [Disabled When Active Items Exist]";
+                labelItem.ForeColor = System.Drawing.Color.Goldenrod;
                 textBoxItemCoords.Clear();
             }
         }
@@ -175,6 +187,30 @@ namespace SOC.UI
             if (!isvalid && !string.IsNullOrEmpty(textBoxQuestNum.Text))
             {
                 MessageBox.Show(string.Format("Invalid Quest Number: {0} \nThe Quest Number must be an integer between 30103 and 39009", qNumInt.ToString()), "Invalid Quest Number", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        internal void ShiftGroups(int height, int width)
+        {
+            Height = height; Width = width;
+            int dynamicHeight = groupBoxLocations.Height / 4 - 20;
+            int maxHeight = 125;
+
+            if (dynamicHeight >= maxHeight)
+                dynamicHeight = maxHeight;
+
+
+            foreach(Tuple<Label, TextBox> box in LocationBoxes)
+            {
+                box.Item2.Height = dynamicHeight;
+            }
+
+            int yOffset = 6; int bufferSpace = 25 + dynamicHeight;
+            for (int i = 0; i < LocationBoxes.Length; i++)
+            {
+                LocationBoxes[i].Item1.Top = yOffset + bufferSpace * i;
+                LocationBoxes[i].Item2.Top = yOffset + 15 + bufferSpace * i;
+
             }
         }
 

@@ -14,8 +14,10 @@ local SUBTYPE = ""
 this.QUEST_TABLE = {
 
     questType = qType,
-    isQuestArmor = true,
 	soldierSubType = SUBTYPE,
+    isQuestArmor = true,
+	isQuestZombie = true,
+	isQuestBalaclava = true,
 
     cpList = {
       nil
@@ -54,7 +56,11 @@ this.InterCall_hostage_pos01 = function( soldier2GameObjectId, cpID, interName )
   Fox.Log("CallBack : Quest InterCall_hostage_pos01")
 
   for i,hostageInfo in ipairs(this.QUEST_TABLE.hostageList)do
-    TppMarker.EnableQuestTargetMarker(hostageInfo.hostageName)
+	if hostageInfo.isTarget then
+		TppMarker.EnableQuestTargetMarker(hostageInfo.hostageName)
+	else
+		TppMarker.Enable(hostageInfo.hostageName,0,"defend","map_and_world_only_icon",0,false,true)
+	end
   end
 end
 

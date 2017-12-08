@@ -44,11 +44,19 @@ namespace SOC.Classes
                     packFiles += string.Format("\n\t\trandomFaceListIH = {{gender = \"{0}\", count = {1}}}, ", gender, questDetails.hostageDetails.Count);
 
             string bodies = "";
+            string faces = "";
+
+            if (locName.Equals("AFGH") || locName.Equals("MAFR"))
+            {
+                if(EnemyInfo.balaCount > 0) { faces += string.Format("TppDefine.QUEST_FACE_ID_LIST.{0}_BALACLAVA, ", locName); }
+                if(EnemyInfo.armorCount > 0) { bodies += string.Format("TppDefine.QUEST_BODY_ID_LIST.{0}_ARMOR, ", locName); }
+            }
+
             foreach (string body in getEnemyBodies(questDetails.enemyDetails))
                 bodies += string.Format("TppEnemyBodyId.{0}, ", body);
 
-            if (locName.Equals("AFGH") || locName.Equals("MAFR"))
-                packFiles += string.Format("\n\t\tbodyIdList={{ TppDefine.QUEST_BODY_ID_LIST.{0}_ARMOR, {1}}}, ", locName, bodies);
+            packFiles += string.Format("\n\t\tfaceIdList={{{0}}}, ", faces);
+            packFiles += string.Format("\n\t\tbodyIdList={{{0}}}, ", bodies);
 
             string questPackList = string.Format("\tquestPackList = {{ {0} \n\t}},", packFiles);
 
@@ -108,6 +116,14 @@ namespace SOC.Classes
             questLua[GetLineOf("local useInter =", questLua)] = string.Format("local useInter = {0}", questDetails.canInter.ToString().ToLower()); //add interogation checkbox to setup
             questLua[GetLineOf("local qType =", questLua)] = string.Format("local qType = TppDefine.QUEST_TYPE.{0}", definitionDetails.objectiveType); //add questtype combobox to setup
             questLua[GetLineOf("local SUBTYPE =", questLua)] = string.Format("local SUBTYPE = \"{0}\"", questDetails.soldierSubType);
+
+            string luaBool;
+            if (EnemyInfo.armorCount > 0) luaBool = "true"; else luaBool = "false";
+            questLua[GetLineOf("	isQuestArmor =", questLua)] = string.Format("	isQuestArmor =  {0},", luaBool);
+            if (EnemyInfo.zombieCount > 0) luaBool = "true"; else luaBool = "false";
+            questLua[GetLineOf("	isQuestZombie =", questLua)] = string.Format("	isQuestZombie = {0},", luaBool);
+            if (EnemyInfo.balaCount > 0) luaBool = "true"; else luaBool = "false";
+            questLua[GetLineOf("	isQuestBalaclava =", questLua)] = string.Format("	isQuestBalaclava = {0},", luaBool);
 
             questLua.InsertRange(GetLineOf("    enemyList = {", questLua) + 1, BuildEnemyList(questDetails));
             questLua.InsertRange(GetLineOf("    vehicleList = {", questLua) + 1, BuildVehicleList(questDetails));
@@ -242,6 +258,23 @@ namespace SOC.Classes
                 if (!enemyDetail.e_comboBox_body.Text.Equals("DEFAULT") && enemyDetail.e_comboBox_body.Enabled)
                     enemyList.Add(string.Format("			bodyId = TppEnemyBodyId.{0},", enemyDetail.e_comboBox_body.Text));
 
+                if (EnemyInfo.balaCount > 0)
+                {
+                    if (enemyDetail.e_checkBox_balaclava.Checked)
+                        enemyList.Add("			isBalaclava = true,");
+                    else
+                        enemyList.Add("			isBalaclava = false,");
+                }
+
+                if (EnemyInfo.zombieCount > 0)
+                {
+                    if (enemyDetail.e_checkBox_zombie.Checked)
+                    {
+                        enemyList.Add("			isZombie = true,");
+                        enemyList.Add("			isZombieUseRoute = true,");
+                    }
+                }
+
                 enemyList.Add("		},");
             }
             if (enemyCount == 0)
@@ -266,7 +299,8 @@ namespace SOC.Classes
                     hostageList.Add("		{");
                     hostageList.Add(string.Format("			hostageName = \"{0}\",", hostageDetail.h_groupBox_main.Text));
                     hostageList.Add("			isFaceRandom = true,");
-
+                    if (hostageDetail.h_checkBox_target.Checked)
+                        hostageList.Add("			isTarget = true,");
                     if (hostageDetail.h_comboBox_lang.Text.Equals("english"))
                         hostageList.Add("			voiceType = { \"hostage_a\", \"hostage_b\", \"hostage_c\", \"hostage_d\",},");
                     else

@@ -11,6 +11,8 @@ namespace SOC.QuestComponents
         public const int MAXHEAVYARMOR = 8;
 
         public static int armorCount = 0;
+        public static int balaCount = 0;
+        public static int zombieCount = 0;
 
         public static string getRegion(CP currentCP)
         {

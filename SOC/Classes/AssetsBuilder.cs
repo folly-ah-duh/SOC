@@ -11,6 +11,7 @@ namespace SOC.Classes
         public static string VehAssetsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "assets//VehicleAssets");
         public static string AniAssetsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "assets//AnimalAssets");
         public static string modelAssetsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "assets//ModelAssets");
+        public static string enemyAssetsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "assets//EnemyAssets");
 
         public static void CopyDirectory(string sourceDir, string destinyDir)
         {
@@ -84,6 +85,13 @@ namespace SOC.Classes
                 string animalName = animalDetail.a_comboBox_animal.Text;
                 string sourceDirPath = Path.Combine(AniFPKDAssetsPath, string.Format("{0}_fpkd", animalName));
 
+                CopyDirectory(sourceDirPath, destPath);
+            }
+
+            string enemyFPKDAssetsPath = Path.Combine(enemyAssetsPath, "FPKD_Files");
+            if (QuestComponents.EnemyInfo.zombieCount > 0)
+            {
+                string sourceDirPath = Path.Combine(enemyFPKDAssetsPath, "zombie_fpkd");
                 CopyDirectory(sourceDirPath, destPath);
             }
         }

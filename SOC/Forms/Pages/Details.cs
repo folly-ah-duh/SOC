@@ -286,7 +286,7 @@ namespace SOC.UI
                 detailGroupBox.Width = dynamicPanelWidth;
             }
 
-            int xOffset = 3;
+            int xOffset = 3 + originAnchor.Left;
             int bufferSpace = 2 + dynamicPanelWidth;
 
             for (int i = 0; i < detailLists.Count; i++)

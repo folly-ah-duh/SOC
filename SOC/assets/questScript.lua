@@ -15,7 +15,7 @@ this.QUEST_TABLE = {
 
     questType = qType,
 	soldierSubType = SUBTYPE,
-    isQuestArmor = true,
+	isQuestArmor = true,
 	isQuestZombie = true,
 	isQuestBalaclava = true,
 

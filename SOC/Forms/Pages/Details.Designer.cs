@@ -1898,6 +1898,7 @@ namespace SOC.UI
         {
             updateBalaclava();
             e_groupBox_main.Focus();
+            
         }
         private void zombie_checkbox_clicked(object sender, EventArgs e)
         {
@@ -1909,7 +1910,7 @@ namespace SOC.UI
         {
             if (e_checkBox_armor.Checked)
             {
-                if (QuestComponents.EnemyInfo.armorCount >= QuestComponents.EnemyInfo.MAXHEAVYARMOR)
+                if (QuestComponents.EnemyInfo.armorCount >= QuestComponents.EnemyInfo.MAXQUESTFOVA)
                 {
                     MessageBox.Show("Heavy Armor can only be applied to 8 soldiers maximum.", "Game Limitation Exceeded", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     e_checkBox_armor.Checked = false;
@@ -1920,12 +1921,18 @@ namespace SOC.UI
                     e_listBox_power.Items.Add("QUEST_ARMOR");
                     e_listBox_power.SelectedIndex = e_listBox_power.Items.Count - 1;
                     e_comboBox_body.Enabled = false;
+                    e_checkBox_balaclava.Enabled = false;
+                    e_label_body.Enabled = false;
+                    e_label_balaclava.Enabled = false;
                 }
             }
             else
             {
                 QuestComponents.EnemyInfo.armorCount--;
                 e_comboBox_body.Enabled = true;
+                e_checkBox_balaclava.Enabled = true;
+                e_label_body.Enabled = true;
+                e_label_balaclava.Enabled = true;
                 e_listBox_power.Items.Remove("QUEST_ARMOR");
                 e_listBox_power.SelectedIndex = e_listBox_power.Items.Count - 1;
             }
@@ -1943,12 +1950,26 @@ namespace SOC.UI
         }
         private void updateBalaclava()
         {
-
             if (e_checkBox_balaclava.Checked)
-                QuestComponents.EnemyInfo.balaCount++;
+            {
+                if (QuestComponents.EnemyInfo.balaCount >= QuestComponents.EnemyInfo.MAXQUESTFOVA)
+                {
+                    MessageBox.Show("Balaclavas can only be applied to 8 soldiers maximum.", "Game Limitation Exceeded", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    e_checkBox_balaclava.Checked = false;
+                }
+                else
+                {
+                    QuestComponents.EnemyInfo.balaCount++;
+                    e_checkBox_armor.Enabled = false;
+                    e_label_armor.Enabled = false;
+                }
+            }
             else
+            {
                 QuestComponents.EnemyInfo.balaCount--;
-            e_groupBox_main.Focus();
+                e_checkBox_armor.Enabled = true;
+                e_label_armor.Enabled = true;
+            }
         }
 
         private void e_listBox_power_selectedIndexChanged(object sender, EventArgs e)
@@ -1972,6 +1993,8 @@ namespace SOC.UI
             e_checkBox_armor.Checked = enemyDetail.e_checkBox_armor.Checked;
             e_checkBox_spawn.Checked = enemyDetail.e_checkBox_spawn.Checked;
             e_checkBox_target.Checked = enemyDetail.e_checkBox_target.Checked;
+            e_checkBox_balaclava.Checked = enemyDetail.e_checkBox_balaclava.Checked;
+            e_checkBox_zombie.Checked = enemyDetail.e_checkBox_zombie.Checked;
 
             e_listBox_power.Text = enemyDetail.e_listBox_power.Text;
 

@@ -8,7 +8,7 @@ namespace SOC.QuestComponents
 {
     public static class EnemyInfo
     {
-        public const int MAXHEAVYARMOR = 8;
+        public const int MAXQUESTFOVA = 8;
 
         public static int armorCount = 0;
         public static int balaCount = 0;

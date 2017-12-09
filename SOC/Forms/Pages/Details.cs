@@ -128,7 +128,7 @@ namespace SOC.UI
 
                 panelQuestEnemyDet.AutoScroll = false;
                 panelCPEnemyDet.AutoScroll = false;
-                for (int i = 0; i < EnemyInfo.MAXHEAVYARMOR; i++)
+                for (int i = 0; i < EnemyInfo.MAXQUESTFOVA; i++)
                 {
                     EnemyDetail enemyDetail = new EnemyDetail(i);
                     RefreshOrAddDetail(enemyDetail, questEnemyDetails, panelQuestEnemyDet);
@@ -153,7 +153,7 @@ namespace SOC.UI
                     }
 
                 }
-                RemoveExtraDetails(questEnemyDetails, EnemyInfo.MAXHEAVYARMOR, panelQuestEnemyDet);
+                RemoveExtraDetails(questEnemyDetails, EnemyInfo.MAXQUESTFOVA, panelQuestEnemyDet);
 
                 for (int i = 0; i < questCP.CPsoldiers.Length; i++)
                 {

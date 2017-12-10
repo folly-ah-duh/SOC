@@ -79,6 +79,29 @@ namespace SOC.UI
             }
         }
 
+        internal void refreshCoordinateBoxes(Setup setupPage)
+        {
+            Tuple<List<Detail>, TextBox>[] detailTuples =
+            {
+                new Tuple<List<Detail>, TextBox>(hostageDetails, setupPage.textBoxHosCoords),
+                new Tuple<List<Detail>, TextBox>(vehicleDetails, setupPage.textBoxVehCoords),
+                new Tuple<List<Detail>, TextBox>(animalDetails, setupPage.textBoxAnimalCoords),
+                new Tuple<List<Detail>, TextBox>(itemDetails, setupPage.textBoxItemCoords),
+                new Tuple<List<Detail>, TextBox>(activeItemDetails, setupPage.textBoxActiveItemCoords),
+                new Tuple<List<Detail>, TextBox>(modelDetails, setupPage.textBoxStMdCoords),
+            };
+            foreach (Tuple<List<Detail>, TextBox> tuple in detailTuples)
+            {
+                string updatedTest = "";
+                foreach (Detail detail in tuple.Item1)
+                {
+                    Coordinates detailCoords = detail.getCoords();
+                    updatedTest += string.Format("{{pos={{{0},{1},{2}}},rotY={3},}}, ", detailCoords.xCoord, detailCoords.yCoord, detailCoords.zCoord, detailCoords.roty);
+                }
+                tuple.Item2.Text = updatedTest;
+            }
+        }
+
         public void RefreshDetails(CP questCP, List<Coordinates> HostageCoords, List<Coordinates> VehicleCoords, List<Coordinates> ItemCoords, List<Coordinates> ModelCoords, List<Coordinates> ActItemsCoords, List<Coordinates> AnimalCoords)
         {
             ShiftVisibilities(true);

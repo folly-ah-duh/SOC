@@ -11,14 +11,21 @@ namespace SOC.UI
     {
         Coordinates detailCoords;
         int detailNum;
+
         public Detail(Coordinates coord, int num)
         {
             detailCoords = coord;
             detailNum = num;
         }
+
         public int getIndex()
         {
             return detailNum;
+        }
+
+        public Coordinates getCoords()
+        {
+            return detailCoords;
         }
 
         public void FocusGroupBox(object sender, EventArgs e)
@@ -52,7 +59,7 @@ namespace SOC.UI
         public TextBox h_textBox_zcoord;
         public TextBox h_textBox_ycoord;
         public CheckBox h_checkBox_target;
-        public ComboBox h_comboBox_rot;
+        public TextBox h_textBox_rot;
         public TextBox h_textBox_xcoord;
         public Label h_label_target;
         public ComboBox h_comboBox_skill;
@@ -88,7 +95,7 @@ namespace SOC.UI
             this.h_textBox_zcoord = new System.Windows.Forms.TextBox();
             this.h_textBox_ycoord = new System.Windows.Forms.TextBox();
             this.h_checkBox_target = new System.Windows.Forms.CheckBox();
-            this.h_comboBox_rot = new System.Windows.Forms.ComboBox();
+            this.h_textBox_rot = new System.Windows.Forms.TextBox();
             this.h_textBox_xcoord = new System.Windows.Forms.TextBox();
             this.h_label_target = new System.Windows.Forms.Label();
             this.h_label_rot = new System.Windows.Forms.Label();
@@ -115,7 +122,7 @@ namespace SOC.UI
             this.h_groupBox_main.Controls.Add(this.h_textBox_zcoord);
             this.h_groupBox_main.Controls.Add(this.h_textBox_ycoord);
             this.h_groupBox_main.Controls.Add(this.h_checkBox_target);
-            this.h_groupBox_main.Controls.Add(this.h_comboBox_rot);
+            this.h_groupBox_main.Controls.Add(this.h_textBox_rot);
             this.h_groupBox_main.Controls.Add(this.h_textBox_xcoord);
             this.h_groupBox_main.Controls.Add(this.h_label_target);
             this.h_groupBox_main.Controls.Add(this.h_label_rot);
@@ -151,18 +158,21 @@ namespace SOC.UI
             this.h_textBox_xcoord.Size = new System.Drawing.Size(41, 20);
             this.h_textBox_xcoord.TabIndex = 2;
             this.h_textBox_xcoord.Text = hostageCoords.xCoord;
+            h_textBox_xcoord.Leave += new EventHandler(onXcoordChange);
 
             this.h_textBox_ycoord.Location = new System.Drawing.Point(139, 14);
             this.h_textBox_ycoord.Name = "h_textBox_ycoord";
             this.h_textBox_ycoord.Size = new System.Drawing.Size(41, 20);
             this.h_textBox_ycoord.TabIndex = 3;
             this.h_textBox_ycoord.Text = hostageCoords.yCoord;
+            h_textBox_ycoord.Leave += new EventHandler(onYcoordChange);
 
             this.h_textBox_zcoord.Location = new System.Drawing.Point(193, 14);
             this.h_textBox_zcoord.Name = "h_textBox_zcoord";
             this.h_textBox_zcoord.Size = new System.Drawing.Size(41, 20);
             this.h_textBox_zcoord.TabIndex = 4;
             this.h_textBox_zcoord.Text = hostageCoords.zCoord;
+            h_textBox_zcoord.Leave += new EventHandler(onZcoordChange);
 
             this.h_label_coord.AutoSize = true;
             this.h_label_coord.Location = new System.Drawing.Point(4, 17);
@@ -182,27 +192,16 @@ namespace SOC.UI
             this.h_label_target.Size = new System.Drawing.Size(52, 13);
             this.h_label_target.Text = "Is Target:";
             // 
-            // h_comboBox_rot
+            // h_textBox_rot
             // 
-            this.h_comboBox_rot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.h_textBox_rot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.h_comboBox_rot.FormattingEnabled = true;
-            this.h_comboBox_rot.Location = new System.Drawing.Point(84, 39);
-            this.h_comboBox_rot.Items.AddRange(new string[] {
-            "0",
-            "45",
-            "90",
-            "135",
-            "180",
-            "225",
-            "270",
-            "315"
-            });
-            this.h_comboBox_rot.Name = "h_comboBox_rot";
-            this.h_comboBox_rot.Size = new System.Drawing.Size(comboboxWidth, 21);
-            this.h_comboBox_rot.TabIndex = 5;
-            this.h_comboBox_rot.Text = hostageCoords.roty;
-            h_comboBox_rot.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
+            this.h_textBox_rot.Location = new System.Drawing.Point(84, 39);
+            this.h_textBox_rot.Name = "h_textBox_rot";
+            this.h_textBox_rot.Size = new System.Drawing.Size(comboboxWidth, 21);
+            this.h_textBox_rot.TabIndex = 5;
+            this.h_textBox_rot.Text = hostageCoords.roty;
+            h_textBox_rot.Leave += new EventHandler(onYRotChange);
             this.h_label_rot.AutoSize = true;
             this.h_label_rot.Location = new System.Drawing.Point(20, 42);
             this.h_label_rot.Name = "h_label_rot";
@@ -318,6 +317,27 @@ namespace SOC.UI
         {
             return h_groupBox_main;
         }
+
+        public void onXcoordChange(object sender, EventArgs e)
+        {
+            hostageCoords.xCoord = h_textBox_xcoord.Text;
+        }
+
+        public void onYcoordChange(object sender, EventArgs e)
+        {
+            hostageCoords.yCoord = h_textBox_ycoord.Text;
+        }
+
+        public void onZcoordChange(object sender, EventArgs e)
+        {
+            hostageCoords.zCoord = h_textBox_zcoord.Text;
+        }
+
+        public void onYRotChange(object sender, EventArgs e)
+        {
+            hostageCoords.roty = h_textBox_rot.Text;
+        }
+
     }
     public class VehicleDetail : Detail
     {
@@ -328,7 +348,7 @@ namespace SOC.UI
         public TextBox v_textBox_zcoord;
         public TextBox v_textBox_ycoord;
         public CheckBox v_checkBox_target;
-        public ComboBox v_comboBox_rot;
+        public TextBox v_textBox_rot;
         public TextBox v_textBox_xcoord;
         public Label v_label_target;
         public Label v_label_rot;
@@ -360,7 +380,7 @@ namespace SOC.UI
             this.v_textBox_zcoord = new System.Windows.Forms.TextBox();
             this.v_textBox_ycoord = new System.Windows.Forms.TextBox();
             this.v_checkBox_target = new System.Windows.Forms.CheckBox();
-            this.v_comboBox_rot = new System.Windows.Forms.ComboBox();
+            this.v_textBox_rot = new System.Windows.Forms.TextBox();
             this.v_textBox_xcoord = new System.Windows.Forms.TextBox();
             this.v_label_target = new System.Windows.Forms.Label();
             this.v_label_rot = new System.Windows.Forms.Label();
@@ -379,7 +399,7 @@ namespace SOC.UI
             this.v_groupBox_main.Controls.Add(this.v_textBox_zcoord);
             this.v_groupBox_main.Controls.Add(this.v_textBox_ycoord);
             this.v_groupBox_main.Controls.Add(this.v_checkBox_target);
-            this.v_groupBox_main.Controls.Add(this.v_comboBox_rot);
+            this.v_groupBox_main.Controls.Add(this.v_textBox_rot);
             this.v_groupBox_main.Controls.Add(this.v_textBox_xcoord);
             this.v_groupBox_main.Controls.Add(this.v_label_target);
             this.v_groupBox_main.Controls.Add(this.v_label_rot);
@@ -412,18 +432,21 @@ namespace SOC.UI
             this.v_textBox_xcoord.Size = new System.Drawing.Size(41, 20);
             this.v_textBox_xcoord.TabIndex = 2;
             this.v_textBox_xcoord.Text = vehicleCoords.xCoord;
+            v_textBox_xcoord.Leave += new EventHandler(onXcoordChange);
 
             this.v_textBox_ycoord.Location = new System.Drawing.Point(133, 14);
             this.v_textBox_ycoord.Name = "v_textBox_ycoord";
             this.v_textBox_ycoord.Size = new System.Drawing.Size(41, 20);
             this.v_textBox_ycoord.TabIndex = 3;
             this.v_textBox_ycoord.Text = vehicleCoords.yCoord;
+            v_textBox_ycoord.Leave += new EventHandler(onYcoordChange);
 
             this.v_textBox_zcoord.Location = new System.Drawing.Point(187, 14);
             this.v_textBox_zcoord.Name = "v_textBox_zcoord";
             this.v_textBox_zcoord.Size = new System.Drawing.Size(41, 20);
             this.v_textBox_zcoord.TabIndex = 4;
             this.v_textBox_zcoord.Text = vehicleCoords.zCoord;
+            v_textBox_zcoord.Leave += new EventHandler(onZcoordChange);
             // 
             // v_checkBox_target
             // 
@@ -439,27 +462,16 @@ namespace SOC.UI
             this.v_label_target.TabIndex = 10;
             this.v_label_target.Text = "Is Target:";
             // 
-            // v_comboBox_rot
+            // v_textBox_rot
             // 
-            this.v_comboBox_rot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.v_textBox_rot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.v_comboBox_rot.FormattingEnabled = true;
-            this.v_comboBox_rot.Location = new System.Drawing.Point(78, 39);
-            this.v_comboBox_rot.Items.AddRange(new string[] {
-            "0",
-            "45",
-            "90",
-            "135",
-            "180",
-            "225",
-            "270",
-            "315"
-            });
-            this.v_comboBox_rot.Name = "v_comboBox_rot";
-            this.v_comboBox_rot.Size = new System.Drawing.Size(comboboxWidth, 21);
-            this.v_comboBox_rot.TabIndex = 5;
-            this.v_comboBox_rot.Text = vehicleCoords.roty;
-            v_comboBox_rot.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
+            this.v_textBox_rot.Location = new System.Drawing.Point(78, 39);
+            this.v_textBox_rot.Name = "v_textBox_rot";
+            this.v_textBox_rot.Size = new System.Drawing.Size(comboboxWidth, 21);
+            this.v_textBox_rot.TabIndex = 5;
+            this.v_textBox_rot.Text = vehicleCoords.roty;
+            v_textBox_rot.Leave += new EventHandler(onYRotChange);
 
             this.v_label_rot.AutoSize = true;
             this.v_label_rot.Location = new System.Drawing.Point(20, 42);
@@ -519,6 +531,26 @@ namespace SOC.UI
         public override GroupBox getGroupBoxMain()
         {
             return v_groupBox_main;
+        }
+
+        public void onXcoordChange(object sender, EventArgs e)
+        {
+            vehicleCoords.xCoord = v_textBox_xcoord.Text;
+        }
+
+        public void onYcoordChange(object sender, EventArgs e)
+        {
+            vehicleCoords.yCoord = v_textBox_ycoord.Text;
+        }
+
+        public void onZcoordChange(object sender, EventArgs e)
+        {
+            vehicleCoords.zCoord = v_textBox_zcoord.Text;
+        }
+
+        public void onYRotChange(object sender, EventArgs e)
+        {
+            vehicleCoords.roty = v_textBox_rot.Text;
         }
     }
     public class ItemDetail : Detail
@@ -624,18 +656,21 @@ namespace SOC.UI
             this.i_textBox_xcoord.Size = new System.Drawing.Size(41, 20);
             this.i_textBox_xcoord.TabIndex = 2;
             this.i_textBox_xcoord.Text = itemCoords.xCoord;
+            i_textBox_xcoord.Leave += new EventHandler(onXcoordChange);
 
             this.i_textBox_ycoord.Location = new System.Drawing.Point(133, 14);
             this.i_textBox_ycoord.Name = "i_textBox_ycoord";
             this.i_textBox_ycoord.Size = new System.Drawing.Size(41, 20);
             this.i_textBox_ycoord.TabIndex = 3;
             this.i_textBox_ycoord.Text = itemCoords.yCoord;
+            i_textBox_ycoord.Leave += new EventHandler(onYcoordChange);
 
             this.i_textBox_zcoord.Location = new System.Drawing.Point(187, 14);
             this.i_textBox_zcoord.Name = "i_textBox_zcoord";
             this.i_textBox_zcoord.Size = new System.Drawing.Size(41, 20);
             this.i_textBox_zcoord.TabIndex = 4;
             this.i_textBox_zcoord.Text = itemCoords.zCoord;
+            i_textBox_zcoord.Leave += new EventHandler(onZcoordChange);
 
             //
             // rotation
@@ -747,6 +782,21 @@ namespace SOC.UI
         {
             return i_groupBox_main;
         }
+
+        public void onXcoordChange(object sender, EventArgs e)
+        {
+            itemCoords.xCoord = i_textBox_xcoord.Text;
+        }
+
+        public void onYcoordChange(object sender, EventArgs e)
+        {
+            itemCoords.yCoord = i_textBox_ycoord.Text;
+        }
+
+        public void onZcoordChange(object sender, EventArgs e)
+        {
+            itemCoords.zCoord = i_textBox_zcoord.Text;
+        }
     }
     public class ModelDetail : Detail
     {
@@ -834,6 +884,7 @@ namespace SOC.UI
             this.m_textBox_zcoord.Size = new System.Drawing.Size(41, 20);
             this.m_textBox_zcoord.TabIndex = 4;
             this.m_textBox_zcoord.Text = StMdCoords.zCoord;
+            m_textBox_zcoord.Leave += new EventHandler(onZcoordChange);
             // 
             // m_label_filename
             // 
@@ -852,15 +903,16 @@ namespace SOC.UI
             this.m_textBox_ycoord.Size = new System.Drawing.Size(41, 20);
             this.m_textBox_ycoord.TabIndex = 3;
             this.m_textBox_ycoord.Text = StMdCoords.yCoord;
+            m_textBox_ycoord.Leave += new EventHandler(onYcoordChange);
             // 
-            // m_comboBox_rot
+            // m_textBox_rot
             // 
-            //this.m_comboBox_rot.FormattingEnabled = true;
-            //this.m_comboBox_rot.Location = new System.Drawing.Point(84, 39);
-            //this.m_comboBox_rot.Name = "m_comboBox_rot";
-            //this.m_comboBox_rot.Size = new System.Drawing.Size(150, 21);
-            //this.m_comboBox_rot.TabIndex = 12;
-            //this.m_comboBox_rot.Items.AddRange(QuestComponents.rotation);
+            //this.m_textBox_rot.FormattingEnabled = true;
+            //this.m_textBox_rot.Location = new System.Drawing.Point(84, 39);
+            //this.m_textBox_rot.Name = "m_textBox_rot";
+            //this.m_textBox_rot.Size = new System.Drawing.Size(150, 21);
+            //this.m_textBox_rot.TabIndex = 12;
+            //this.m_textBox_rot.Items.AddRange(QuestComponents.rotation);
             // 
             // m_textBox_xcoord
             // 
@@ -869,6 +921,7 @@ namespace SOC.UI
             this.m_textBox_xcoord.Size = new System.Drawing.Size(41, 20);
             this.m_textBox_xcoord.TabIndex = 2;
             this.m_textBox_xcoord.Text = StMdCoords.xCoord;
+            m_textBox_xcoord.Leave += new EventHandler(onXcoordChange);
             // 
             // m_label_rot
             // 
@@ -976,6 +1029,21 @@ namespace SOC.UI
         {
             return m_groupBox_main;
         }
+
+        public void onXcoordChange(object sender, EventArgs e)
+        {
+            StMdCoords.xCoord = m_textBox_xcoord.Text;
+        }
+
+        public void onYcoordChange(object sender, EventArgs e)
+        {
+            StMdCoords.yCoord = m_textBox_ycoord.Text;
+        }
+
+        public void onZcoordChange(object sender, EventArgs e)
+        {
+            StMdCoords.zCoord = m_textBox_zcoord.Text;
+        }
     }
 
     public class ActiveItemDetail : Detail
@@ -1066,6 +1134,7 @@ namespace SOC.UI
             this.ai_textBox_xcoord.Size = new System.Drawing.Size(41, 20);
             this.ai_textBox_xcoord.TabIndex = 1;
             this.ai_textBox_xcoord.Text = activeItemCoords.xCoord;
+            ai_textBox_xcoord.Leave += new EventHandler(onXcoordChange);
             // 
             // ai_textBox_ycoord
             // 
@@ -1074,6 +1143,7 @@ namespace SOC.UI
             this.ai_textBox_ycoord.Size = new System.Drawing.Size(41, 20);
             this.ai_textBox_ycoord.TabIndex = 2;
             this.ai_textBox_ycoord.Text = activeItemCoords.yCoord;
+            ai_textBox_ycoord.Leave += new EventHandler(onYcoordChange);
             // 
             // ai_textBox_zcoord
             // 
@@ -1082,6 +1152,7 @@ namespace SOC.UI
             this.ai_textBox_zcoord.Size = new System.Drawing.Size(41, 20);
             this.ai_textBox_zcoord.TabIndex = 3;
             this.ai_textBox_zcoord.Text = activeItemCoords.zCoord;
+            ai_textBox_zcoord.Leave += new EventHandler(onZcoordChange);
             // 
             // ai_label_Rot
             // 
@@ -1154,6 +1225,22 @@ namespace SOC.UI
         {
             return ai_groupBox_main;
         }
+
+        public void onXcoordChange(object sender, EventArgs e)
+        {
+            activeItemCoords.xCoord = ai_textBox_xcoord.Text;
+        }
+
+        public void onYcoordChange(object sender, EventArgs e)
+        {
+            activeItemCoords.yCoord = ai_textBox_ycoord.Text;
+        }
+
+        public void onZcoordChange(object sender, EventArgs e)
+        {
+            activeItemCoords.zCoord = ai_textBox_zcoord.Text;
+        }
+
     }
 
     public class AnimalDetail : Detail
@@ -1171,7 +1258,7 @@ namespace SOC.UI
         public Label a_label_animal;
         public CheckBox a_checkBox_isTarget;
         public Label a_label_isTarget;
-        public ComboBox a_comboBox_rot;
+        public TextBox a_textBox_rot;
         public Label a_label_rot;
         public TextBox a_textBox_zcoord;
         public TextBox a_textBox_ycoord;
@@ -1207,7 +1294,7 @@ namespace SOC.UI
             this.a_label_animal = new System.Windows.Forms.Label();
             this.a_checkBox_isTarget = new System.Windows.Forms.CheckBox();
             this.a_label_isTarget = new System.Windows.Forms.Label();
-            this.a_comboBox_rot = new System.Windows.Forms.ComboBox();
+            this.a_textBox_rot = new System.Windows.Forms.TextBox();
             this.a_label_rot = new System.Windows.Forms.Label();
             this.a_textBox_zcoord = new System.Windows.Forms.TextBox();
             this.a_textBox_ycoord = new System.Windows.Forms.TextBox();
@@ -1226,7 +1313,7 @@ namespace SOC.UI
             this.a_groupBox_main.Controls.Add(this.a_label_animal);
             this.a_groupBox_main.Controls.Add(this.a_checkBox_isTarget);
             this.a_groupBox_main.Controls.Add(this.a_label_isTarget);
-            this.a_groupBox_main.Controls.Add(this.a_comboBox_rot);
+            this.a_groupBox_main.Controls.Add(this.a_textBox_rot);
             this.a_groupBox_main.Controls.Add(this.a_label_rot);
             this.a_groupBox_main.Controls.Add(this.a_textBox_zcoord);
             this.a_groupBox_main.Controls.Add(this.a_textBox_ycoord);
@@ -1328,27 +1415,16 @@ namespace SOC.UI
             this.a_label_isTarget.TabIndex = 6;
             this.a_label_isTarget.Text = "Is Target:";
             // 
-            // a_comboBox_rot
+            // a_textBox_rot
             // 
-            this.a_comboBox_rot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.a_textBox_rot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.a_comboBox_rot.FormattingEnabled = true;
-            this.a_comboBox_rot.Location = new System.Drawing.Point(84, 48);
-            this.a_comboBox_rot.Name = "a_comboBox_rot";
-            this.a_comboBox_rot.Size = new System.Drawing.Size(comboboxWidth, 21);
-            this.a_comboBox_rot.TabIndex = 5;
-            this.a_comboBox_rot.Items.AddRange(new string[] {
-            "0",
-            "45",
-            "90",
-            "135",
-            "180",
-            "225",
-            "270",
-            "315"
-            });
-            this.a_comboBox_rot.Text = animalCoords.roty;
-            a_comboBox_rot.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
+            this.a_textBox_rot.Location = new System.Drawing.Point(84, 48);
+            this.a_textBox_rot.Name = "a_textBox_rot";
+            this.a_textBox_rot.Size = new System.Drawing.Size(comboboxWidth, 21);
+            this.a_textBox_rot.TabIndex = 5;
+            this.a_textBox_rot.Text = animalCoords.roty;
+            a_textBox_rot.Leave += new EventHandler(this.onYRotChange);
 
             // 
             // a_label_rot
@@ -1367,6 +1443,7 @@ namespace SOC.UI
             this.a_textBox_zcoord.Size = new System.Drawing.Size(41, 20);
             this.a_textBox_zcoord.TabIndex = 3;
             this.a_textBox_zcoord.Text = animalCoords.zCoord;
+            a_textBox_zcoord.Leave += new EventHandler(this.onZcoordChange);
             // 
             // a_textBox_ycoord
             // 
@@ -1375,6 +1452,7 @@ namespace SOC.UI
             this.a_textBox_ycoord.Size = new System.Drawing.Size(41, 20);
             this.a_textBox_ycoord.TabIndex = 2;
             this.a_textBox_ycoord.Text = animalCoords.yCoord;
+            a_textBox_ycoord.Leave += new EventHandler(this.onYcoordChange);
             // 
             // a_textBox_xcoord
             // 
@@ -1383,6 +1461,7 @@ namespace SOC.UI
             this.a_textBox_xcoord.Size = new System.Drawing.Size(41, 20);
             this.a_textBox_xcoord.TabIndex = 1;
             this.a_textBox_xcoord.Text = animalCoords.xCoord;
+            a_textBox_xcoord.Leave += new EventHandler(this.onXcoordChange);
             // 
             // a_label_coord
             // 
@@ -1446,6 +1525,26 @@ namespace SOC.UI
         public override GroupBox getGroupBoxMain()
         {
             return a_groupBox_main;
+        }
+
+        public void onXcoordChange(object sender, EventArgs e)
+        {
+            animalCoords.xCoord = a_textBox_xcoord.Text;
+        }
+
+        public void onYcoordChange(object sender, EventArgs e)
+        {
+            animalCoords.yCoord = a_textBox_ycoord.Text;
+        }
+
+        public void onZcoordChange(object sender, EventArgs e)
+        {
+            animalCoords.zCoord = a_textBox_zcoord.Text;
+        }
+
+        public void onYRotChange(object sender, EventArgs e)
+        {
+            animalCoords.roty = a_textBox_rot.Text;
         }
     }
 

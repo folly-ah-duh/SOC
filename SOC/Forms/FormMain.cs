@@ -63,6 +63,7 @@ namespace SOC.UI
                     panelMain.Controls.Clear();
                     panelMain.Controls.Add(setupPage);
                     setupPage.EnableScrolling();
+                    detailPage.refreshCoordinateBoxes(setupPage);
                     buttonNext.Text = "Next >>";
                     break;
 

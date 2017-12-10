@@ -314,7 +314,7 @@ namespace SOC.Classes
                     if (!hostageDetail.h_comboBox_skill.Text.Equals("NONE"))
                         hostageList.Add(string.Format("			skill = \"{0}\",", hostageDetail.h_comboBox_skill.Text));
 
-                    double rotation = 0; Double.TryParse(hostageDetail.h_comboBox_rot.Text, out rotation);
+                    double rotation = 0; Double.TryParse(hostageDetail.h_textBox_rot.Text, out rotation);
                     
                     hostageList.Add(string.Format("			bodyId = {0},", bodyInfo.bodyId));
 
@@ -364,7 +364,7 @@ namespace SOC.Classes
                     if (!vehicleDetail.v_comboBox_class.Text.Equals("DEFAULT"))
                         vehicleList.Add(string.Format("			class	= Vehicle.class.{0},", vehicleDetail.v_comboBox_class.Text));
 
-                    double rotationdegrees = 0; Double.TryParse(vehicleDetail.v_comboBox_rot.Text, out rotationdegrees);
+                    double rotationdegrees = 0; Double.TryParse(vehicleDetail.v_textBox_rot.Text, out rotationdegrees);
                     double toRadians = rotationdegrees * Math.PI / 180;
 
                     double yOffset = 0.0;

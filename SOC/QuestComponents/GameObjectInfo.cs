@@ -1240,7 +1240,7 @@ namespace SOC.QuestComponents
             public Item(bool box, string nme, string cnt, string it, Coordinates coords, RotationQuat qcoords)
             {
                 isBoxed = box;
-                name = nme; count = cnt;
+                name = nme; count = cnt; item = it;
                 coordinates = coords; quatCoordinates = qcoords;
             }
 

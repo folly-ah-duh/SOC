@@ -40,55 +40,55 @@ namespace SOC.Classes
             return dataList;
         }
 
-        public static List<QuestEntity> BuildQuestEntityList(QuestDetails questDetails)
+        public static List<QuestEntity> BuildQuestEntityList(QuestObjects questDetails)
         {
             string vehicleHistory = "";
             List<QuestEntity> entityList = new List<QuestEntity>();
 
             entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.DataSet, unnassignedObject, unnassignedObject));
             entityList.Add(new QuestEntity("ScriptBlockScript0000", unassignedAddress, entityClass.ScriptBlockScript, unnassignedObject, unnassignedObject));
-            if (questDetails.hostageDetails.Count > 0)
+            if (questDetails.hostages.Count > 0)
             {
-                entityList.Add(new QuestEntity("GameObjectTppHostageUnique", unassignedAddress, entityClass.GameObject, "TppHostageUnique2", questDetails.hostageDetails.Count));
+                entityList.Add(new QuestEntity("GameObjectTppHostageUnique", unassignedAddress, entityClass.GameObject, "TppHostageUnique2", questDetails.hostages.Count));
                 entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppHostage2Parameter, unnassignedObject, unnassignedObject));
 
-                foreach (HostageDetail hostageDetail in questDetails.hostageDetails)
+                foreach (Hostage hostage in questDetails.hostages)
                 {
-                    entityList.Add(new QuestEntity(hostageDetail.h_groupBox_main.Text, unassignedAddress, entityClass.GameObjectLocator, "TppHostageUnique2", unnassignedObject));
-                    entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity_Hostage, new Coordinates(hostageDetail.h_textBox_xcoord.Text,hostageDetail.h_textBox_ycoord.Text,hostageDetail.h_textBox_zcoord.Text), new RotationQuat("0","0","0","1")));
+                    entityList.Add(new QuestEntity(hostage.name, unassignedAddress, entityClass.GameObjectLocator, "TppHostageUnique2", unnassignedObject));
+                    entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity_Hostage, hostage.coordinates, new RotationQuat("0","0","0","1")));
                     entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppHostage2LocatorParameter, unnassignedObject, unnassignedObject));
                 }
             }
-                foreach(VehicleDetail vehicleDetail in questDetails.vehicleDetails)
+                foreach(Vehicle vehicle in questDetails.vehicles)
                 {
-                entityList.Add(new QuestEntity(vehicleDetail.v_groupBox_main.Text, unassignedAddress, entityClass.GameObjectLocator, "TppVehicle2", unnassignedObject));
-                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity_Vehicle, new Coordinates(vehicleDetail.v_textBox_xcoord.Text, vehicleDetail.v_textBox_ycoord.Text, vehicleDetail.v_textBox_zcoord.Text), new RotationQuat("0", "0", "0", "1")));
+                entityList.Add(new QuestEntity(vehicle.name, unassignedAddress, entityClass.GameObjectLocator, "TppVehicle2", unnassignedObject));
+                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity_Vehicle, vehicle.coordinates, new RotationQuat("0", "0", "0", "1")));
                 entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppVehicle2LocatorParameter, unnassignedObject, unnassignedObject));
 
-                switch (vehicleDetail.v_comboBox_vehicle.Text)
+                switch (vehicle.vehicleIndex)
                 {
-                    case "TT77 NOSOROG":
+                    case 0:
                         if (!vehicleHistory.Contains("veh_bd_east_tnk"))
                         {
                             entityList.Add(new QuestEntity("veh_bd_east_tnk", unassignedAddress, entityClass.TppVehicle2BodyData, unnassignedObject, unnassignedObject));
                             vehicleHistory += "veh_bd_east_tnk ";
                         }
                         break;
-                    case "M84A MAGLOADER":
+                    case 1:
                         if (!vehicleHistory.Contains("veh_bd_west_tnk"))
                         {
                             entityList.Add(new QuestEntity("veh_bd_west_tnk", unassignedAddress, entityClass.TppVehicle2BodyData, unnassignedObject, unnassignedObject));
                             vehicleHistory += "veh_bd_west_tnk ";
                         }
                         break;
-                    case "ZHUK BR-3":
+                    case 2:
                         if (!vehicleHistory.Contains("veh_bd_east_wav"))
                         {
                             entityList.Add(new QuestEntity("veh_bd_east_wav", unassignedAddress, entityClass.TppVehicle2BodyData, unnassignedObject, unnassignedObject));
                             vehicleHistory += "veh_bd_east_wav ";
                         }
                         break;
-                    case "ZHUK RS-ZO":
+                    case 3:
                         if (!vehicleHistory.Contains("veh_bd_east_wav"))
                         {
                             entityList.Add(new QuestEntity("veh_bd_east_wav", unassignedAddress, entityClass.TppVehicle2BodyData, unnassignedObject, unnassignedObject));
@@ -100,7 +100,7 @@ namespace SOC.Classes
                             vehicleHistory += "veh_at_east_wav_rocket ";
                         }
                         break;
-                    case "STOUT IFV-SC":
+                    case 4:
                         if (!vehicleHistory.Contains("veh_bd_west_wav"))
                         {
                             entityList.Add(new QuestEntity("veh_bd_west_wav", unassignedAddress, entityClass.TppVehicle2BodyData, unnassignedObject, unnassignedObject));
@@ -112,7 +112,7 @@ namespace SOC.Classes
                             vehicleHistory += "veh_at_west_wav_trt_machinegun ";
                         }
                         break;
-                    case "STOUT IFV-FS":
+                    case 5:
                         if (!vehicleHistory.Contains("veh_bd_west_wav"))
                         {
                             entityList.Add(new QuestEntity("veh_bd_west_wav", unassignedAddress, entityClass.TppVehicle2BodyData, unnassignedObject, unnassignedObject));
@@ -128,20 +128,20 @@ namespace SOC.Classes
             }
 
             string animalhistory = "";
-            foreach (AnimalDetail animalDetail in questDetails.animalDetails)
+            foreach (Animal animal in questDetails.animals)
             {
-                string animalName = animalDetail.a_comboBox_animal.Text, typeName = animalDetail.a_comboBox_TypeID.Text, animalCategory = AnimalInfo.getAnimalCategory(animalName);
+                string animalName = animal.animal, typeName = animal.typeID, animalCategory = AnimalInfo.getAnimalCategory(animalName);
 
                 if (!animalhistory.Contains(animalName))
                 {
                     animalhistory += animalName;
                     int totalCount = 0;
 
-                    foreach (AnimalDetail animalScan in questDetails.animalDetails)
+                    foreach (Animal animalScan in questDetails.animals)
                     {
-                        if (animalScan.a_comboBox_animal.Text.Equals(animalName))
+                        if (animalScan.animal.Equals(animalName))
                         {
-                            totalCount += (int.Parse(animalScan.a_comboBox_count.Text));
+                            totalCount += (int.Parse(animal.count));
                         }
                     }
 
@@ -163,27 +163,27 @@ namespace SOC.Classes
                     }
                 }
 
-                entityList.Add(new QuestEntity(animalDetail.a_groupBox_main.Text, unassignedAddress, entityClass.GameObjectLocator, typeName));
-                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity_Animal, new Coordinates(animalDetail.a_textBox_xcoord.Text, animalDetail.a_textBox_ycoord.Text, animalDetail.a_textBox_zcoord.Text), new RotationQuat("0", "0", "0", "1")));
+                entityList.Add(new QuestEntity(animal.name, unassignedAddress, entityClass.GameObjectLocator, typeName));
+                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity_Animal, animal.coordinates, new RotationQuat("0", "0", "0", "1")));
                 switch (animalCategory)
                 {
                     case "animal":
-                        entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppAnimalLocatorParameter, animalDetail.a_comboBox_count.Text));
+                        entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppAnimalLocatorParameter, animal.count));
                         break;
                     case "wolf":
-                        entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppWolfLocatorParameter, animalDetail.a_comboBox_count.Text));
+                        entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppWolfLocatorParameter, animal.count));
                         break;
                     case "bear":
-                        entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppBearLocatorParameter, animalDetail.a_comboBox_count.Text));
+                        entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppBearLocatorParameter, animal.count));
                         break;
                 }
 
             }
             
-            foreach (ModelDetail modelDetail in questDetails.modelDetails)
+            foreach (Model model in questDetails.models)
             {
-                entityList.Add(new QuestEntity(modelDetail.m_groupBox_main.Text, unassignedAddress, entityClass.StaticModel, modelDetail.m_comboBox_preset.Text, modelDetail.m_label_GeomNotFound.Visible));
-                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity_StaticModel, new Coordinates(modelDetail.m_textBox_xcoord.Text, modelDetail.m_textBox_ycoord.Text, modelDetail.m_textBox_zcoord.Text), new RotationQuat(modelDetail.m_textBox_xrot.Text, modelDetail.m_textBox_yrot.Text, modelDetail.m_textBox_zrot.Text, modelDetail.m_textBox_wrot.Text)));
+                entityList.Add(new QuestEntity(model.name, unassignedAddress, entityClass.StaticModel, model.model, model.missingGeom));
+                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity_StaticModel, model.coordinates, model.quatCoordinates));
             }
 
             entityList.Add(new QuestEntity("TexturePackLoadConditioner0000", unassignedAddress, entityClass.TexturePackLoadConditioner, unnassignedObject, unnassignedObject));
@@ -191,7 +191,7 @@ namespace SOC.Classes
             return entityList;
         }
 
-        public static List<string> BuildQuestClassList(QuestDetails questDetails)
+        public static List<string> BuildQuestClassList(QuestObjects questDetails)
         {
             List<string> classList = new List<string>();
 
@@ -199,39 +199,39 @@ namespace SOC.Classes
             classList.Add("    <class name=\"Data\" super=\"Entity\" version=\"2\" />");
             classList.Add("    <class name=\"DataSet\" super=\"\" version=\"0\" />");
             classList.Add("    <class name=\"ScriptBlockScript\" super=\"\" version=\"0\" />");
-            if (questDetails.hostageDetails.Count + questDetails.vehicleDetails.Count + questDetails.modelDetails.Count + questDetails.animalDetails.Count > 0)
+            if (questDetails.hostages.Count + questDetails.vehicles.Count + questDetails.models.Count + questDetails.animals.Count > 0)
             {
                 classList.Add("    <class name=\"TransformEntity\" super=\"\" version=\"0\" />");
-                if (questDetails.hostageDetails.Count + questDetails.vehicleDetails.Count + questDetails.animalDetails.Count > 0)
+                if (questDetails.hostages.Count + questDetails.vehicles.Count + questDetails.animals.Count > 0)
                 {
                     classList.Add("    <class name=\"GameObjectLocator\" super=\"\" version=\"2\" />");
-                    if (questDetails.hostageDetails.Count + questDetails.animalDetails.Count > 0)
+                    if (questDetails.hostages.Count + questDetails.animals.Count > 0)
                     {
                         classList.Add("    <class name=\"GameObject\" super=\"\" version=\"2\" />");
                     }
                 }
             }
-            if (questDetails.hostageDetails.Count > 0)
+            if (questDetails.hostages.Count > 0)
             {
                 classList.Add("    <class name=\"TppHostage2Parameter\" super=\"\" version=\"1\" />");
                 classList.Add("    <class name=\"TppHostage2LocatorParameter\" super=\"\" version=\"2\" />");
             }
-            if (questDetails.vehicleDetails.Count > 0)
+            if (questDetails.vehicles.Count > 0)
             {
                 classList.Add("    <class name=\"TppVehicle2BodyData\" super=\"\" version=\"3\" />");
                 classList.Add("    <class name=\"TppVehicle2LocatorParameter\" super=\"\" version=\"2\" />");
             }
-            if (questDetails.modelDetails.Count > 0)
+            if (questDetails.models.Count > 0)
             {
                 classList.Add("    <class name=\"StaticModel\" super=\"\" version=\"9\" />");
             }
-            if (questDetails.animalDetails.Count > 0)
+            if (questDetails.animals.Count > 0)
             {
                 string animalHistory = "";
                 string animalcat = "";
-                foreach (AnimalDetail animalDetail in questDetails.animalDetails)
+                foreach (Animal animal in questDetails.animals)
                 {
-                    animalcat = AnimalInfo.getAnimalCategory(animalDetail.a_comboBox_animal.Text);
+                    animalcat = AnimalInfo.getAnimalCategory(animal.animal);
 
                     if (!animalHistory.Contains(animalcat)) {
                         animalHistory += animalcat;
@@ -260,7 +260,7 @@ namespace SOC.Classes
             return classList;
         }
 
-        public static void WriteQuestFox2(DefinitionDetails definitionDetails, QuestDetails questDetails)
+        public static void WriteQuestFox2(DefinitionDetails definitionDetails, QuestObjects questDetails)
         {
             List<QuestEntity> entityList = BuildQuestEntityList(questDetails);
             BodyInfoEntry bodyInfo = new BodyInfoEntry();
@@ -775,36 +775,36 @@ namespace SOC.Classes
             File.Delete(fox2QuestFile);
         }
 
-        public static List<QuestEntity> BuildItemEntityList(QuestDetails questDetails)
+        public static List<QuestEntity> BuildItemEntityList(QuestObjects questDetails)
         {
             List<QuestEntity> entityList = new List<QuestEntity>();
             string boxed = "";
             string EquipID = "";
             entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.DataSet, unnassignedObject, unnassignedObject));
 
-            foreach (ItemDetail itemDetail in questDetails.itemDetails)
+            foreach (Item item in questDetails.items)
             {
 
-                entityList.Add(new QuestEntity(itemDetail.i_groupBox_main.Text, unassignedAddress, entityClass.GameObjectLocator_Item, "TppPickableSystem"));
-                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity_Item, new Coordinates(itemDetail.i_textBox_xcoord.Text, itemDetail.i_textBox_ycoord.Text, itemDetail.i_textBox_zcoord.Text), new RotationQuat(itemDetail.i_textBox_xrot.Text, itemDetail.i_textBox_yrot.Text, itemDetail.i_textBox_zrot.Text, itemDetail.i_textBox_wrot.Text)));
+                entityList.Add(new QuestEntity(item.name, unassignedAddress, entityClass.GameObjectLocator_Item, "TppPickableSystem"));
+                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity_Item, item.coordinates, item.quatCoordinates));
 
                 boxed = "0";
-                if (itemDetail.i_checkBox_boxed.Checked)
+                if (item.isBoxed)
                 {
                     boxed = "1";
                 }
 
-                EquipID = EquipIDLookup(itemDetail.i_comboBox_item.Text);
+                EquipID = EquipIDLookup(item.item);
 
-                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppPickableLocatorParameter, EquipID, itemDetail.i_comboBox_count.Text, boxed));
+                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppPickableLocatorParameter, EquipID, item.count, boxed));
             }
 
-            foreach (ActiveItemDetail activeItemDetail in questDetails.activeItemDetails)
+            foreach (ActiveItem activeItem in questDetails.activeItems)
             {
-                entityList.Add(new QuestEntity(activeItemDetail.ai_groupBox_main.Text, unassignedAddress, entityClass.GameObjectLocator, "TppPlacedSystem"));
-                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity_ActiveItem, new Coordinates(activeItemDetail.ai_textBox_xcoord.Text, activeItemDetail.ai_textBox_ycoord.Text, activeItemDetail.ai_textBox_zcoord.Text), new RotationQuat(activeItemDetail.ai_textBox_xrot.Text, activeItemDetail.ai_textBox_yrot.Text, activeItemDetail.ai_textBox_zrot.Text, activeItemDetail.ai_textBox_wrot.Text)));
+                entityList.Add(new QuestEntity(activeItem.name, unassignedAddress, entityClass.GameObjectLocator, "TppPlacedSystem"));
+                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity_ActiveItem, activeItem.coordinates, activeItem.quatCoordinates));
 
-                string equipID = EquipIDLookup(activeItemDetail.ai_comboBox_activeitem.Text);
+                string equipID = EquipIDLookup(activeItem.activeItem);
 
                 entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppPlacedLocatorParameter, equipID));
             }
@@ -814,23 +814,23 @@ namespace SOC.Classes
             return entityList;
         }
 
-        public static List<string> BuildItemClassList(QuestDetails questDetails)
+        public static List<string> BuildItemClassList(QuestObjects questDetails)
         {
             List<string> classList = new List<string>();
 
             classList.Add("    <class name=\"Entity\" super=\"\" version=\"2\" />");
             classList.Add("    <class name=\"Data\" super=\"Entity\" version=\"2\" />");
             classList.Add("    <class name=\"DataSet\" super=\"\" version=\"0\" />");
-            if (questDetails.itemDetails.Count + questDetails.activeItemDetails.Count > 0)
+            if (questDetails.items.Count + questDetails.activeItems.Count > 0)
             {
                 classList.Add("    <class name=\"TransformEntity\" super=\"\" version=\"0\" />");
                 classList.Add("    <class name=\"GameObjectLocator\" super=\"\" version=\"2\" />");
             }
-            if (questDetails.itemDetails.Count > 0)
+            if (questDetails.items.Count > 0)
             {
                 classList.Add("    <class name=\"TppPickableLocatorParameter\" super=\"\" version=\"0\" />");
             }
-            if (questDetails.activeItemDetails.Count > 0)
+            if (questDetails.activeItems.Count > 0)
             {
                 classList.Add("    <class name=\"TppPlacedLocatorParameter\" super=\"\" version=\"0\" />");
             }
@@ -839,9 +839,9 @@ namespace SOC.Classes
             return classList;
         }
 
-        public static void WriteItemFox2(DefinitionDetails definitionDetails, QuestDetails questDetails)
+        public static void WriteItemFox2(DefinitionDetails definitionDetails, QuestObjects questDetails)
         {
-            if (questDetails.itemDetails.Count + questDetails.activeItemDetails.Count == 0)
+            if (questDetails.items.Count + questDetails.activeItems.Count == 0)
                 return;
 
             int baseAddress = baseItemAddress;

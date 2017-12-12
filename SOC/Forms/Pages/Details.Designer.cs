@@ -3,29 +3,30 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 using static SOC.QuestComponents.GameObjectInfo;
 
 namespace SOC.UI
 {
-    public abstract class Detail
+    public abstract class QuestObject
     {
-        Coordinates detailCoords;
-        int detailNum;
+        Coordinates objectCoordinates;
+        int objectNumber;
 
-        public Detail(Coordinates coord, int num)
+        public QuestObject(Coordinates coord, int num)
         {
-            detailCoords = coord;
-            detailNum = num;
+            objectCoordinates = coord;
+            objectNumber = num;
         }
 
         public int getIndex()
         {
-            return detailNum;
+            return objectNumber;
         }
 
         public Coordinates getCoords()
         {
-            return detailCoords;
+            return objectCoordinates;
         }
 
         public void FocusGroupBox(object sender, EventArgs e)
@@ -35,14 +36,14 @@ namespace SOC.UI
 
         public abstract GroupBox getGroupBoxMain();
 
-        public abstract void SetDetail(Detail detail);
+        public abstract void SetObject(QuestObject detail);
 
-        public abstract void BuildDetail(int width);
+        public abstract void BuildObject(int width);
 
 
     }
-
-    public class HostageDetail : Detail
+    
+    public class HostageObject : QuestObject
     {
         Coordinates hostageCoords;
         int hostageNum;
@@ -69,15 +70,15 @@ namespace SOC.UI
         public CheckBox h_checkBox_injured;
         public CheckBox h_checkBox_untied;
 
-        public HostageDetail(Coordinates coord, int num) : base (coord, num)
+        public HostageObject(Coordinates coord, int num) : base (coord, num)
         {
             hostageCoords = coord;
             hostageNum = num;
         }
 
-        public override void SetDetail(Detail detail)
+        public override void SetObject(QuestObject detail)
         {
-            HostageDetail hostageDetail = (HostageDetail)detail;
+            HostageObject hostageDetail = (HostageObject)detail;
             h_checkBox_injured.Text = hostageDetail.h_checkBox_injured.Text;
             h_checkBox_target.Text = hostageDetail.h_checkBox_target.Text;
             h_checkBox_untied.Text = hostageDetail.h_checkBox_untied.Text;
@@ -87,7 +88,7 @@ namespace SOC.UI
             h_comboBox_staff.Text = hostageDetail.h_comboBox_staff.Text;
         }
 
-        public override void BuildDetail(int width)
+        public override void BuildObject(int width)
         {
             width -= 15;
             int comboboxWidth = width - 100;
@@ -339,7 +340,8 @@ namespace SOC.UI
         }
 
     }
-    public class VehicleDetail : Detail
+    
+    public class VehicleObject : QuestObject
     {
         Coordinates vehicleCoords;
         int VehicleNum;
@@ -358,21 +360,21 @@ namespace SOC.UI
         public Label v_label_class;
         public Label v_label_vehicle;
 
-        public VehicleDetail(Coordinates coord, int num) : base(coord, num)
+        public VehicleObject(Coordinates coord, int num) : base(coord, num)
         {
             vehicleCoords = coord;
             VehicleNum = num;
         }
 
-        public override void SetDetail(Detail detail)
+        public override void SetObject(QuestObject detail)
         {
-            VehicleDetail vehicleDetail = (VehicleDetail)detail;
+            VehicleObject vehicleDetail = (VehicleObject)detail;
             v_checkBox_target.Checked = vehicleDetail.v_checkBox_target.Checked;
             v_comboBox_class.Text = vehicleDetail.v_comboBox_class.Text;
             v_comboBox_vehicle.Text = vehicleDetail.v_comboBox_vehicle.Text;
         }
 
-        public override void BuildDetail(int width)
+        public override void BuildObject(int width)
         {
             width -= 15;
             int comboboxWidth = width - 96;
@@ -553,7 +555,8 @@ namespace SOC.UI
             vehicleCoords.roty = v_textBox_rot.Text;
         }
     }
-    public class ItemDetail : Detail
+    
+    public class ItemObject : QuestObject
     {
         Coordinates itemCoords;
         int itemNum;
@@ -575,22 +578,22 @@ namespace SOC.UI
         public Label i_label_count;
         public Label i_label_item;
 
-        public ItemDetail(Coordinates coord, int num) : base(coord, num)
+        public ItemObject(Coordinates coord, int num) : base(coord, num)
         {
             itemCoords = coord;
             itemNum = num;
         }
 
-        public override void SetDetail(Detail detail)
+        public override void SetObject(QuestObject detail)
         {
-            ItemDetail itemDetail = (ItemDetail)detail;
+            ItemObject itemDetail = (ItemObject)detail;
             i_comboBox_count.Text = itemDetail.i_comboBox_count.Text;
             i_label_boxed.Text = itemDetail.i_label_boxed.Text;
             i_comboBox_item.Text = itemDetail.i_comboBox_item.Text;
 
         }
 
-        public override void BuildDetail(int width)
+        public override void BuildObject(int width)
         {
             width -= 15;
             int comboboxWidth = width - 96;
@@ -798,7 +801,8 @@ namespace SOC.UI
             itemCoords.zCoord = i_textBox_zcoord.Text;
         }
     }
-    public class ModelDetail : Detail
+    
+    public class ModelObject : QuestObject
     {
         Coordinates StMdCoords;
         int StMdNum;
@@ -818,20 +822,20 @@ namespace SOC.UI
         public Label m_label_coord;
         public Label m_label_GeomNotFound;
 
-        public ModelDetail(Coordinates coord, int num) : base(coord, num)
+        public ModelObject(Coordinates coord, int num) : base(coord, num)
         {
             StMdCoords = coord;
             StMdNum = num;
         }
 
-        public override void SetDetail(Detail detail)
+        public override void SetObject(QuestObject detail)
         {
-            ModelDetail modelDetail = (ModelDetail)detail;
+            ModelObject modelDetail = (ModelObject)detail;
             m_comboBox_preset.Text = modelDetail.m_comboBox_preset.Text;
             
         }
 
-        public override void BuildDetail(int width)
+        public override void BuildObject(int width)
         {
 
             width -= 15;
@@ -1045,8 +1049,8 @@ namespace SOC.UI
             StMdCoords.zCoord = m_textBox_zcoord.Text;
         }
     }
-
-    public class ActiveItemDetail : Detail
+    
+    public class ActiveItemObject : QuestObject
     {
         Coordinates activeItemCoords;
         int activeItemNum;
@@ -1064,20 +1068,20 @@ namespace SOC.UI
         public TextBox ai_textBox_yrot;
         public TextBox ai_textBox_xrot;
 
-        public ActiveItemDetail(Coordinates coord, int num) : base(coord, num)
+        public ActiveItemObject(Coordinates coord, int num) : base(coord, num)
         {
             activeItemCoords = coord;
             activeItemNum = num;
 
         }
         
-        public override void SetDetail(Detail detail)
+        public override void SetObject(QuestObject detail)
         {
-            ActiveItemDetail acItDet = (ActiveItemDetail)detail;
+            ActiveItemObject acItDet = (ActiveItemObject)detail;
             ai_comboBox_activeitem.Text = acItDet.ai_comboBox_activeitem.Text;
         }
 
-        public override void BuildDetail(int width)
+        public override void BuildObject(int width)
         {
             width -= 15;
             int comboboxWidth = width - 100;
@@ -1243,15 +1247,14 @@ namespace SOC.UI
 
     }
 
-    public class AnimalDetail : Detail
+    public class AnimalObject : QuestObject
     {
         public Coordinates animalCoords;
         int animalNum;
-
         
         public GroupBox a_groupBox_main;
         public ComboBox a_comboBox_TypeID;
-        public Label a_label_targetcount;
+        public Label a_label_typeID;
         public ComboBox a_comboBox_count;
         public Label a_label_count;
         public ComboBox a_comboBox_animal;
@@ -1265,29 +1268,29 @@ namespace SOC.UI
         public TextBox a_textBox_xcoord;
         public Label a_label_coord;
 
-        public AnimalDetail(Coordinates coord, int num) : base(coord, num)
+        public AnimalObject(Coordinates coord, int num) : base(coord, num)
         {
             animalCoords = coord;
             animalNum = num;
         }
 
-        public override void SetDetail(Detail detail)
+        public override void SetObject(QuestObject detail)
         {
-            AnimalDetail animalDetail = (AnimalDetail)detail;
+            AnimalObject animalDetail = (AnimalObject)detail;
             a_checkBox_isTarget.Checked = animalDetail.a_checkBox_isTarget.Checked;
             a_comboBox_animal.Text = animalDetail.a_comboBox_animal.Text;
             a_comboBox_TypeID.Text = animalDetail.a_comboBox_TypeID.Text;
             a_comboBox_count.Text = animalDetail.a_comboBox_count.Text;
         }
 
-        public override void BuildDetail(int width)
+        public override void BuildObject(int width)
         {
 
             width -= 15;
             int comboboxWidth = width - 96;
             this.a_groupBox_main = new System.Windows.Forms.GroupBox();
             this.a_comboBox_TypeID = new System.Windows.Forms.ComboBox();
-            this.a_label_targetcount = new System.Windows.Forms.Label();
+            this.a_label_typeID = new System.Windows.Forms.Label();
             this.a_comboBox_count = new System.Windows.Forms.ComboBox();
             this.a_label_count = new System.Windows.Forms.Label();
             this.a_comboBox_animal = new System.Windows.Forms.ComboBox();
@@ -1306,7 +1309,7 @@ namespace SOC.UI
             | System.Windows.Forms.AnchorStyles.Right)));
             this.a_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
             this.a_groupBox_main.Controls.Add(this.a_comboBox_TypeID);
-            this.a_groupBox_main.Controls.Add(this.a_label_targetcount);
+            this.a_groupBox_main.Controls.Add(this.a_label_typeID);
             this.a_groupBox_main.Controls.Add(this.a_comboBox_count);
             this.a_groupBox_main.Controls.Add(this.a_label_count);
             this.a_groupBox_main.Controls.Add(this.a_comboBox_animal);
@@ -1343,12 +1346,12 @@ namespace SOC.UI
             // 
             // a_label_targetcount
             // 
-            this.a_label_targetcount.AutoSize = true;
-            this.a_label_targetcount.Location = new System.Drawing.Point(115, 141);
-            this.a_label_targetcount.Name = "a_label_targetcount";
-            this.a_label_targetcount.Size = new System.Drawing.Size(72, 13);
-            this.a_label_targetcount.TabIndex = 12;
-            this.a_label_targetcount.Text = "Type ID:";
+            this.a_label_typeID.AutoSize = true;
+            this.a_label_typeID.Location = new System.Drawing.Point(115, 141);
+            this.a_label_typeID.Name = "a_label_typeID";
+            this.a_label_typeID.Size = new System.Drawing.Size(72, 13);
+            this.a_label_typeID.TabIndex = 12;
+            this.a_label_typeID.Text = "Type ID:";
             // 
             // a_comboBox_count
             // 
@@ -1547,8 +1550,8 @@ namespace SOC.UI
             animalCoords.roty = a_textBox_rot.Text;
         }
     }
-
-    public class EnemyDetail : Detail
+    
+    public class EnemyObject : QuestObject
     {
         int enemyNum;
 
@@ -1578,12 +1581,12 @@ namespace SOC.UI
         public Label e_label_power;
         public ListBox e_listBox_power;
 
-        public EnemyDetail(int num) : base(new Coordinates("","",""), num)
+        public EnemyObject(int num) : base(new Coordinates("","",""), num)
         {
             enemyNum = num;
         }
 
-        public override void BuildDetail(int width)
+        public override void BuildObject(int width)
         {
             width -= 15;
             int comboboxWidth = width - 110;
@@ -2085,9 +2088,9 @@ namespace SOC.UI
             return e_groupBox_main;
         }
 
-        public override void SetDetail(Detail detail)
+        public override void SetObject(QuestObject detail)
         {
-            EnemyDetail enemyDetail = (EnemyDetail)detail;
+            EnemyObject enemyDetail = (EnemyObject)detail;
 
             e_checkBox_armor.Checked = enemyDetail.e_checkBox_armor.Checked;
             e_checkBox_spawn.Checked = enemyDetail.e_checkBox_spawn.Checked;

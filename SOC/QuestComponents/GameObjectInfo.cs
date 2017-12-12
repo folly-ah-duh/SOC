@@ -1,5 +1,7 @@
 ﻿using SOC.UI;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace SOC.QuestComponents
 {
@@ -909,36 +911,65 @@ namespace SOC.QuestComponents
             return setupPage.locationID == 20;
         }
 
-        public class QuestDetails
+        [XmlType("Quest")]
+        public class Quest
         {
-            public List<EnemyDetail> enemyDetails;
-            public List<HostageDetail> hostageDetails;
-            public List<VehicleDetail> vehicleDetails;
-            public List<ItemDetail> itemDetails;
-            public List<ModelDetail> modelDetails;
-            public List<ActiveItemDetail> activeItemDetails;
-            public List<AnimalDetail> animalDetails;
-            public int hostageBodyIndex;
-            public bool canInter;
-            public string soldierSubType;
 
-            public QuestDetails(List<EnemyDetail> enedets, List<HostageDetail> hosDets, List<VehicleDetail> vehDets, List<AnimalDetail> anidets, List<ItemDetail> itDets, List<ActiveItemDetail> acitdets, List<ModelDetail> MdDets, int bodyIndex, bool inter, string sst)
+            public Quest() { }
+
+            public Quest(DefinitionDetails d, QuestObjects q)
             {
-                enemyDetails = enedets;
-                hostageDetails = hosDets;
-                vehicleDetails = vehDets;
-                itemDetails = itDets;
-                modelDetails = MdDets;
-                activeItemDetails = acitdets;
-                animalDetails = anidets;
-                hostageBodyIndex = bodyIndex;
-                canInter = inter;
-                soldierSubType = sst;
+                definitionDetails = d;
+                questDetails = q;
             }
+
+            public void Save(string directory, string name)
+            {
+
+                string saveFilePath = Path.Combine(directory, name);
+
+                using (FileStream stream = new FileStream(saveFilePath, FileMode.Create))
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(Quest));
+                    serializer.Serialize(stream, this);
+                }
+
+            }
+
+            public void Load(string directory, string name)
+            {
+
+                string loadFilePath = Path.Combine(directory, name);
+                if (!File.Exists(loadFilePath))
+                {
+                    return;
+                } 
+
+                using (FileStream stream = new FileStream(loadFilePath, FileMode.Open))
+                {
+                    XmlSerializer deserializer = new XmlSerializer(typeof(Quest));
+                    Quest loadedQuest = (Quest)deserializer.Deserialize(stream);
+
+                    questDetails = loadedQuest.questDetails;
+                    definitionDetails = loadedQuest.definitionDetails;
+                }
+
+                return;
+            }
+
+            [XmlElement]
+            public DefinitionDetails definitionDetails { get; set; }
+
+            [XmlElement]
+            public QuestObjects questDetails { get; set; }
+
         }
-        
+
+        [XmlType("DefinitionDetails")]
         public class DefinitionDetails
         {
+
+            public DefinitionDetails() { }
 
             public DefinitionDetails(string fpk, string quest, int locID, string loada, Coordinates c, string rad, string cat, string rew, int prog, string type, string CP, string qtitle, string qdesc)
             {
@@ -957,63 +988,369 @@ namespace SOC.QuestComponents
                 QuestDesc = qdesc;
             }
 
+            [XmlElement]
             public string QuestTitle { get; set; }
 
+            [XmlElement]
             public string QuestDesc { get; set; }
 
+            [XmlAttribute]
             public string FpkName { get; set; }
 
+            [XmlAttribute]
             public string QuestNum { get; set; }
 
+            [XmlElement]
             public int locationID { get; set; }
 
+            [XmlElement]
             public string loadArea { get; set; }
 
+            [XmlElement]
             public Coordinates coords { get; set; }
 
+            [XmlElement]
             public string radius { get; set; }
 
+            [XmlElement]
             public string category { get; set; }
 
+            [XmlElement]
             public string objectiveType { get; set; }
 
+            [XmlElement]
             public string CPName { get; set; }
 
+            [XmlElement]
             public string reward { get; set; }
 
+            [XmlElement]
             public int progNotif { get; set; }
 
         }
 
-        public class Coordinates
+        [XmlType("QuestObjects")]
+        public class QuestObjects
         {
-            public string xCoord;
-            public string yCoord;
-            public string zCoord;
-            public string roty;
 
-            public Coordinates(string x, string y, string z)
+            public QuestObjects() { }
+
+            public QuestObjects(List<Enemy> enedets, List<Hostage> hosDets, List<Vehicle> vehDets, List<Animal> anidets, List<Item> itDets, List<ActiveItem> acitdets, List<Model> MdDets, int bodyIndex, bool inter, string sst)
             {
-                xCoord = x;
-                yCoord = y;
-                zCoord = z;
+                enemies = enedets;
+                hostages = hosDets;
+                vehicles = vehDets;
+                items = itDets;
+                models = MdDets;
+                activeItems = acitdets;
+                animals = anidets;
+                hostageBodyIndex = bodyIndex;
+                canInter = inter;
+                soldierSubType = sst;
             }
 
-            public Coordinates(string x, string y, string z, string rot)
+            [XmlArray]
+            public List<Enemy> enemies { get; set; } = new List<Enemy>();
+
+            [XmlArray]
+            public List<Hostage> hostages { get; set; } = new List<Hostage>();
+
+            [XmlArray]
+            public List<Vehicle> vehicles { get; set; } = new List<Vehicle>();
+
+            [XmlArray]
+            public List<Item> items { get; set; } = new List<Item>();
+
+            [XmlArray]
+            public List<Model> models { get; set; } = new List<Model>();
+
+            [XmlArray]
+            public List<ActiveItem> activeItems { get; set; } = new List<ActiveItem>();
+
+            [XmlArray]
+            public List<Animal> animals { get; set; } = new List<Animal>();
+
+            [XmlAttribute]
+            public int hostageBodyIndex { get; set; } = 0;
+
+            [XmlAttribute]
+            public bool canInter { get; set; } = false;
+
+            [XmlAttribute]
+            public string soldierSubType { get; set; } = "SOVIET_A";
+
+        }
+
+        public class Enemy
+        {
+
+            public Enemy() { }
+
+            public Enemy(bool spawn, bool target, bool clava, bool zombie, bool armored, string nme, string bod, string caution, string sneak, string skll, string staff, string[] pow)
+            {
+                isSpawn = spawn; isTarget = target; isBalaclava = clava; isZombie = zombie; isArmored = armored;
+                name = nme;  body = bod; cRoute = caution; dRoute = sneak; skill = skll; staffType = staff; powers = pow;
+            }
+
+            [XmlElement]
+            public bool isSpawn { get; set; } = false;
+
+            [XmlElement]
+            public bool isTarget { get; set; } = false;
+
+            [XmlElement]
+            public bool isBalaclava { get; set; } = false;
+
+            [XmlElement]
+            public bool isZombie { get; set; } = false;
+
+            [XmlElement]
+            public bool isArmored { get; set; } = false;
+
+            [XmlAttribute]
+            public string name { get; set; } = "sol_quest_0000";
+
+            [XmlElement]
+            public string body { get; set; } = "DEFAULT";
+
+            [XmlElement]
+            public string cRoute { get; set; } = "NONE";
+
+            [XmlElement]
+            public string dRoute { get; set; } = "NONE";
+
+            [XmlElement]
+            public string skill { get; set; } = "NONE";
+
+            [XmlElement]
+            public string staffType { get; set; } = "NONE";
+
+            [XmlArray]
+            public string[] powers { get; set; } = new string[0];
+            
+        }
+
+        public class Hostage
+        {
+
+            public Hostage() { }
+
+            public Hostage(bool target, bool untied, bool injured, string nme, string skll, string staff, string scare, string lang, Coordinates coords)
+            {
+                isTarget = target; isUntied = untied; isInjured = injured;
+                name = nme; skill = skll; staffType = staff; scared = scare; language = lang;
+                coordinates = coords;
+            }
+
+            [XmlElement]
+            public bool isTarget { get; set; } = false;
+
+            [XmlElement]
+            public bool isUntied { get; set; } = false;
+
+            [XmlElement]
+            public bool isInjured { get; set; } = false;
+
+            [XmlAttribute]
+            public string name { get; set; } = "Hostage_0";
+
+            [XmlElement]
+            public string skill { get; set; } = "NONE";
+
+            [XmlElement]
+            public string staffType { get; set; } = "NONE";
+
+            [XmlElement]
+            public string scared { get; set; } = "NORMAL";
+
+            [XmlElement]
+            public string language { get; set; } = "english";
+
+            [XmlElement]
+            public Coordinates coordinates { get; set; } = new Coordinates("0", "0", "0", "0");
+
+        }
+
+        public class Vehicle
+        {
+
+            public Vehicle() { }
+
+            public Vehicle(bool target, string nme, int veh, string clas, Coordinates coords)
+            {
+                isTarget = target;
+                name = nme; vehicleIndex = veh; vehicleClass = clas;
+                coordinates = coords;
+            }
+
+            [XmlElement]
+            public bool isTarget { get; set; } = false;
+
+            [XmlAttribute]
+            public string name { get; set; } = "Vehicle_0";
+
+            [XmlElement]
+            public int vehicleIndex { get; set; } = 0;
+
+            [XmlElement]
+            public string vehicleClass { get; set; } = "DEFAULT";
+
+            [XmlElement]
+            public Coordinates coordinates { get; set; } = new Coordinates("0", "0", "0", "0");
+
+        }
+
+        public class Animal
+        {
+
+            public Animal() { }
+
+            public Animal(bool target, string nme, string cnt, string ani, string type, Coordinates coords)
+            {
+                isTarget = target;
+                name = nme; count = cnt; animal = ani; typeID = type;
+                coordinates = coords;
+            }
+
+            [XmlElement]
+            public bool isTarget { get; set; } = false;
+
+            [XmlAttribute]
+            public string name { get; set; } = "Animal_Cluster_0";
+
+            [XmlElement]
+            public string count { get; set; } = "1";
+
+            [XmlElement]
+            public string animal { get; set; } = "Sheep";
+
+            [XmlElement]
+            public string typeID { get; set; } = "TppGoat";
+
+            [XmlElement]
+            public Coordinates coordinates { get; set; } = new Coordinates("0", "0", "0", "0");
+
+        }
+
+        public class Item
+        {
+            
+            public Item() { }
+
+            public Item(bool box, string nme, string cnt, string it, Coordinates coords, RotationQuat qcoords)
+            {
+                isBoxed = box;
+                name = nme; count = cnt;
+                coordinates = coords; quatCoordinates = qcoords;
+            }
+
+            [XmlElement]
+            public bool isBoxed { get; set; } = false;
+
+            [XmlAttribute]
+            public string name { get; set; } = "Item_0";
+
+            [XmlElement]
+            public string count { get; set; } = "1";
+
+            [XmlElement]
+            public string item { get; set; } = "EQP_SWP_Magazine";
+
+            [XmlElement]
+            public Coordinates coordinates { get; set; } = new Coordinates("0", "0", "0");
+
+            [XmlElement]
+            public RotationQuat quatCoordinates { get; set; } = new RotationQuat("0", "0", "0", "0");
+
+        }
+        
+        public class ActiveItem
+        {
+
+            public ActiveItem() { }
+
+            public ActiveItem(string nme, string acit, Coordinates coords, RotationQuat qcoords)
+            {
+                name = nme; activeItem = acit;
+                coordinates = coords; quatCoordinates = qcoords;
+            }
+
+            [XmlAttribute]
+            public string name { get; set; } = "Active_Item_0";
+
+            [XmlElement]
+            public string activeItem { get; set; } = "EQP_SWP_DMine";
+
+            [XmlElement]
+            public Coordinates coordinates { get; set; } = new Coordinates("0", "0", "0");
+
+            [XmlElement]
+            public RotationQuat quatCoordinates { get; set; } = new RotationQuat("0", "0", "0", "0");
+
+        }
+
+        public class Model
+        {
+
+            public Model() { }
+
+            public Model(bool mGeom, string nme, string stmd, Coordinates coords, RotationQuat qcoords)
+            {
+                missingGeom = mGeom;  name = nme; model = stmd;
+                coordinates = coords; quatCoordinates = qcoords;
+            }
+
+            [XmlElement]
+            public bool missingGeom { get; set; } = true;
+
+            [XmlAttribute]
+            public string name { get; set; } = "Model_0";
+
+            [XmlElement]
+            public string model { get; set; } = "";
+
+            [XmlElement]
+            public Coordinates coordinates { get; set; } = new Coordinates("0", "0", "0");
+
+            [XmlElement]
+            public RotationQuat quatCoordinates { get; set; } = new RotationQuat("0", "0", "0", "0");
+
+        }
+
+
+        [XmlType("Coordinates")]
+        public class Coordinates
+        {
+
+            public Coordinates() { }
+
+            public Coordinates(string x, string y, string z, string rot = "0")
             {
                 xCoord = x;
                 yCoord = y;
                 zCoord = z;
                 roty = rot;
             }
+
+            [XmlElement]
+            public string xCoord;
+
+            [XmlElement]
+            public string yCoord;
+
+            [XmlElement]
+            public string zCoord;
+
+            [XmlElement]
+            public string roty;
+            
         }
 
+        [XmlType("RotationQuat")]
         public class RotationQuat
         {
-            public string xval;
-            public string yval;
-            public string zval;
-            public string wval;
+
+            public RotationQuat() { }
 
             public RotationQuat(string x, string y, string z, string w)
             {
@@ -1022,6 +1359,19 @@ namespace SOC.QuestComponents
                 zval = z;
                 wval = w;
             }
+
+            [XmlElement]
+            public string xval;
+
+            [XmlElement]
+            public string yval;
+
+            [XmlElement]
+            public string zval;
+
+            [XmlElement]
+            public string wval;
+            
         }
 
     }

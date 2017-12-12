@@ -13,7 +13,7 @@ namespace SOC.Classes
 
         static string[] questLuaInput = File.ReadAllLines(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "assets//questScript.lua"));
 
-        public static void WriteDefinitionLua(DefinitionDetails definitionDetails, QuestDetails questDetails)
+        public static void WriteDefinitionLua(DefinitionDetails definitionDetails, QuestObjects questDetails)
         {
             BodyInfoEntry bodyInfo = new BodyInfoEntry();
             if (questDetails.hostageBodyIndex >= 0)
@@ -31,7 +31,7 @@ namespace SOC.Classes
             else if (definitionDetails.locationID == 20)
                 locName = "MAFR";
 
-            if (questDetails.hostageDetails.Count > 0)
+            if (questDetails.hostages.Count > 0)
             {
                 packFiles += "\n\t\t\"/Assets/tpp/pack/mission2/ih/ih_hostage_base.fpk\", ";
                 packFiles += string.Format("\n\t\t\"{0}\", ", bodyInfo.missionPackPath);
@@ -39,9 +39,9 @@ namespace SOC.Classes
 
             packFiles += string.Format("\n\t\t\"/Assets/tpp/pack/mission2/quest/ih/{0}.fpk\", ", definitionDetails.FpkName);
 
-            if (questDetails.hostageDetails.Count > 0)
+            if (questDetails.hostages.Count > 0)
                 if (!bodyInfo.hasface)
-                    packFiles += string.Format("\n\t\trandomFaceListIH = {{gender = \"{0}\", count = {1}}}, ", gender, questDetails.hostageDetails.Count);
+                    packFiles += string.Format("\n\t\trandomFaceListIH = {{gender = \"{0}\", count = {1}}}, ", gender, questDetails.hostages.Count);
 
             string bodies = "";
             string faces = "";
@@ -52,7 +52,7 @@ namespace SOC.Classes
                 if(EnemyInfo.armorCount > 0) { bodies += string.Format("TppDefine.QUEST_BODY_ID_LIST.{0}_ARMOR, ", locName); }
             }
 
-            foreach (string body in getEnemyBodies(questDetails.enemyDetails))
+            foreach (string body in getEnemyBodies(questDetails.enemies))
                 bodies += string.Format("TppEnemyBodyId.{0}, ", body);
 
             packFiles += string.Format("\n\t\tfaceIdList={{{0}}}, ", faces);
@@ -70,11 +70,11 @@ namespace SOC.Classes
 
             string equipIds = ""; List<string> requestHistory = new List<string>();
 
-            foreach (ItemDetail item in questDetails.itemDetails)
-                if (item.i_comboBox_item.Text.Contains("EQP_WP_") && !requestHistory.Contains(item.i_comboBox_item.Text))
+            foreach (Item item in questDetails.items)
+                if (item.item.Contains("EQP_WP_") && !requestHistory.Contains(item.item))
                 {
-                    equipIds += string.Format("\"{0}\", ", item.i_comboBox_item.Text);
-                    requestHistory.Add(item.i_comboBox_item.Text);
+                    equipIds += string.Format("\"{0}\", ", item.item);
+                    requestHistory.Add(item.item);
                 }
                     
 
@@ -107,11 +107,11 @@ namespace SOC.Classes
             }
         }
 
-        public static void WriteMainQuestLua(DefinitionDetails definitionDetails, QuestDetails questDetails)
+        public static void WriteMainQuestLua(DefinitionDetails definitionDetails, QuestObjects questDetails)
         {
             List<string> questLua = new List<string>(questLuaInput);
 
-            questLua[GetLineOf("local hostageCount =", questLua)] = string.Format("local hostageCount = {0}", questDetails.hostageDetails.Count);
+            questLua[GetLineOf("local hostageCount =", questLua)] = string.Format("local hostageCount = {0}", questDetails.hostages.Count);
             questLua[GetLineOf("local CPNAME =", questLua)] = string.Format("local CPNAME = \"{0}\"", definitionDetails.CPName); //add cp combobox to setup
             questLua[GetLineOf("local useInter =", questLua)] = string.Format("local useInter = {0}", questDetails.canInter.ToString().ToLower()); //add interogation checkbox to setup
             questLua[GetLineOf("local qType =", questLua)] = string.Format("local qType = TppDefine.QUEST_TYPE.{0}", definitionDetails.objectiveType); //add questtype combobox to setup
@@ -150,30 +150,30 @@ namespace SOC.Classes
             return -1;
         }
 
-        public static List<string> getEnemyBodies(List<EnemyDetail> enemyDetails)
+        public static List<string> getEnemyBodies(List<Enemy> enemyDetails)
         {
             List<string> bodyList = new List<string>();
 
-            foreach (EnemyDetail enemyDetail in enemyDetails)
-                if (enemyDetail.e_comboBox_body.Enabled && !enemyDetail.e_comboBox_body.Text.Equals("DEFAULT"))
-                    if (!bodyList.Contains(enemyDetail.e_comboBox_body.Text))
-                        bodyList.Add(enemyDetail.e_comboBox_body.Text);
+            foreach (Enemy enemy in enemyDetails)
+                if (!enemy.isArmored && !enemy.body.Equals("DEFAULT"))
+                    if (!bodyList.Contains(enemy.body))
+                        bodyList.Add(enemy.body);
 
             return bodyList;
         }
 
-        public static List<string> BuildAnimalList(QuestDetails questDetails)
+        public static List<string> BuildAnimalList(QuestObjects questDetails)
         {
             List<string> animalList = new List<string>();
-            if (questDetails.animalDetails.Count == 0)
+            if (questDetails.animals.Count == 0)
                 animalList.Add("nil");
             else
             {
-                foreach(AnimalDetail animalDetail in questDetails.animalDetails)
+                foreach(Animal animal in questDetails.animals)
                 {
-                    string animalType = animalDetail.a_comboBox_TypeID.Text;
+                    string animalType = animal.typeID;
                     animalList.Add("	{");
-                    animalList.Add(string.Format("		animalName = \"{0}\",", animalDetail.a_groupBox_main.Text));
+                    animalList.Add(string.Format("		animalName = \"{0}\",", animal.name));
                     animalList.Add(string.Format("		animalType = \"{0}\",", animalType));
                     animalList.Add("	},");
                 }
@@ -181,13 +181,13 @@ namespace SOC.Classes
             return animalList;
         }
 
-        public static List<string> BuildAnimalTargetList(QuestDetails questDetails)
+        public static List<string> BuildAnimalTargetList(QuestObjects questDetails)
         {
             List<string> animalTargetList = new List<string>();
 
             bool hasTarget = false;
-            foreach (AnimalDetail animalDetail in questDetails.animalDetails)
-                if (animalDetail.a_checkBox_isTarget.Checked)
+            foreach (Animal animal in questDetails.animals)
+                if (animal.isTarget)
                     hasTarget = true;
 
             animalTargetList.Add("	markerList = {");
@@ -195,10 +195,10 @@ namespace SOC.Classes
                 animalTargetList.Add("nil");
             else
             {
-                foreach (AnimalDetail animalDetail in questDetails.animalDetails)
+                foreach (Animal animal in questDetails.animals)
                 {
-                    if (animalDetail.a_checkBox_isTarget.Checked)
-                        animalTargetList.Add(string.Format("		\"{0}\",", animalDetail.a_groupBox_main.Text));
+                    if (animal.isTarget)
+                        animalTargetList.Add(string.Format("		\"{0}\",", animal.name));
                 }
             }
             animalTargetList.Add("	},");
@@ -207,10 +207,10 @@ namespace SOC.Classes
                 animalTargetList.Add("nil");
             else
             {
-                foreach (AnimalDetail animalDetail in questDetails.animalDetails)
+                foreach (Animal animal in questDetails.animals)
                 {
-                    if (animalDetail.a_checkBox_isTarget.Checked)
-                        animalTargetList.Add(string.Format("		\"{0}\",", animalDetail.a_groupBox_main.Text));
+                    if (animal.isTarget)
+                        animalTargetList.Add(string.Format("		\"{0}\",", animal.name));
                 }
             }
             animalTargetList.Add("	},");
@@ -218,30 +218,30 @@ namespace SOC.Classes
             return animalTargetList;
         }
 
-        public static List<string> BuildEnemyList(QuestDetails questDetails)
+        public static List<string> BuildEnemyList(QuestObjects questDetails)
         {
             List<string> enemyList = new List<string>();
 
-            List<EnemyDetail> detailList = questDetails.enemyDetails;
+            List<Enemy> detailList = questDetails.enemies;
             int enemyCount = 0;
 
-            foreach (EnemyDetail enemyDetail in detailList)
+            foreach (Enemy enemy in detailList)
             {
 
                 string powerlist = "";
-                if (!enemyDetail.e_checkBox_spawn.Checked)
+                if (!enemy.isSpawn)
                     continue;
                 enemyCount++;
                 enemyList.Add("		{");
-                enemyList.Add(string.Format("			enemyName = \"{0}\",", enemyDetail.e_groupBox_main.Text));
-                if (!enemyDetail.e_comboBox_sneakroute.Text.Equals("NONE")) {
-                    enemyList.Add(string.Format("			route_d = \"{0}\",", enemyDetail.e_comboBox_sneakroute.Text));
-                    enemyList.Add(string.Format("			route_c = \"{0}\",", enemyDetail.e_comboBox_cautionroute.Text));
+                enemyList.Add(string.Format("			enemyName = \"{0}\",", enemy.name));
+                if (!enemy.dRoute.Equals("NONE")) {
+                    enemyList.Add(string.Format("			route_d = \"{0}\",", enemy.dRoute));
+                    enemyList.Add(string.Format("			route_c = \"{0}\",", enemy.cRoute));
                 }
                 enemyList.Add("			cpName = CPNAME,");
-                if (enemyDetail.e_listBox_power.Items.Count > 0)
+                if (enemy.powers.Length > 0)
                 {
-                    foreach (string power in enemyDetail.e_listBox_power.Items)
+                    foreach (string power in enemy.powers)
                     {
                         powerlist += string.Format("\"{0}\", ", power);
                     }
@@ -249,18 +249,18 @@ namespace SOC.Classes
                 }
                 enemyList.Add("			soldierSubType = SUBTYPE,");
 
-                if (!enemyDetail.e_comboBox_staff.Text.Equals("NONE"))
-                    enemyList.Add(string.Format("			staffTypeId = TppDefine.STAFF_TYPE_ID.{0},", enemyDetail.e_comboBox_staff.Text));
+                if (!enemy.staffType.Equals("NONE"))
+                    enemyList.Add(string.Format("			staffTypeId = TppDefine.STAFF_TYPE_ID.{0},", enemy.staffType));
 
-                if (!enemyDetail.e_comboBox_skill.Text.Equals("NONE"))
-                    enemyList.Add(string.Format("			skill = \"{0}\",", enemyDetail.e_comboBox_skill.Text));
+                if (!enemy.skill.Equals("NONE"))
+                    enemyList.Add(string.Format("			skill = \"{0}\",", enemy.skill));
 
-                if (!enemyDetail.e_comboBox_body.Text.Equals("DEFAULT") && enemyDetail.e_comboBox_body.Enabled)
-                    enemyList.Add(string.Format("			bodyId = TppEnemyBodyId.{0},", enemyDetail.e_comboBox_body.Text));
+                if (!enemy.body.Equals("DEFAULT") && !enemy.isArmored)
+                    enemyList.Add(string.Format("			bodyId = TppEnemyBodyId.{0},", enemy.body));
 
                 if (EnemyInfo.balaCount > 0)
                 {
-                    if (enemyDetail.e_checkBox_balaclava.Checked)
+                    if (enemy.isBalaclava)
                         enemyList.Add("			isBalaclava = true,");
                     else
                         enemyList.Add("			isBalaclava = false,");
@@ -268,7 +268,7 @@ namespace SOC.Classes
 
                 if (EnemyInfo.zombieCount > 0)
                 {
-                    if (enemyDetail.e_checkBox_zombie.Checked)
+                    if (enemy.isZombie)
                     {
                         enemyList.Add("			isZombie = true,");
                         enemyList.Add("			isZombieUseRoute = true,");
@@ -283,7 +283,7 @@ namespace SOC.Classes
             return enemyList;
         }
 
-        public static List<string> BuildHostageList(QuestDetails questDetails)
+        public static List<string> BuildHostageList(QuestObjects questDetails)
         {
             List<string> hostageList = new List<string>();
 
@@ -291,38 +291,38 @@ namespace SOC.Classes
             if (questDetails.hostageBodyIndex >= 0)
                 bodyInfo = BodyInfo.BodyInfoArray[questDetails.hostageBodyIndex];
 
-            if (questDetails.hostageDetails.Count == 0)
+            if (questDetails.hostages.Count == 0)
                 hostageList.Add("nil");
             else
-                foreach (HostageDetail hostageDetail in questDetails.hostageDetails)
+                foreach (Hostage hostage in questDetails.hostages)
                 {
                     hostageList.Add("		{");
-                    hostageList.Add(string.Format("			hostageName = \"{0}\",", hostageDetail.h_groupBox_main.Text));
+                    hostageList.Add(string.Format("			hostageName = \"{0}\",", hostage.name));
                     hostageList.Add("			isFaceRandom = true,");
-                    if (hostageDetail.h_checkBox_target.Checked)
+                    if (hostage.isTarget)
                         hostageList.Add("			isTarget = true,");
-                    if (hostageDetail.h_comboBox_lang.Text.Equals("english"))
+                    if (hostage.language.Equals("english"))
                         hostageList.Add("			voiceType = { \"hostage_a\", \"hostage_b\", \"hostage_c\", \"hostage_d\",},");
                     else
                         hostageList.Add("			voiceType = { \"hostage_a\", \"hostage_b\", },");
 
-                    hostageList.Add(string.Format("			langType = \"{0}\",", hostageDetail.h_comboBox_lang.Text));
+                    hostageList.Add(string.Format("			langType = \"{0}\",", hostage.language));
 
-                    if (!hostageDetail.h_comboBox_staff.Text.Equals("NONE"))
-                        hostageList.Add(string.Format("			staffTypeId = TppDefine.STAFF_TYPE_ID.{0},", hostageDetail.h_comboBox_staff.Text));
+                    if (!hostage.staffType.Equals("NONE"))
+                        hostageList.Add(string.Format("			staffTypeId = TppDefine.STAFF_TYPE_ID.{0},", hostage.staffType));
 
-                    if (!hostageDetail.h_comboBox_skill.Text.Equals("NONE"))
-                        hostageList.Add(string.Format("			skill = \"{0}\",", hostageDetail.h_comboBox_skill.Text));
+                    if (!hostage.skill.Equals("NONE"))
+                        hostageList.Add(string.Format("			skill = \"{0}\",", hostage.skill));
 
-                    double rotation = 0; Double.TryParse(hostageDetail.h_textBox_rot.Text, out rotation);
+                    double rotation = 0; Double.TryParse(hostage.coordinates.roty, out rotation);
                     
                     hostageList.Add(string.Format("			bodyId = {0},", bodyInfo.bodyId));
 
                     double yOffset = 0.0;
-                    double.TryParse(hostageDetail.h_textBox_ycoord.Text, out yOffset);
+                    double.TryParse(hostage.coordinates.yCoord, out yOffset);
                     yOffset += 0.783;
 
-                    hostageList.Add(string.Format("			position={{pos={{{0},{1},{2}}},rotY={3},}},", hostageDetail.h_textBox_xcoord.Text, yOffset, hostageDetail.h_textBox_zcoord.Text, rotation));
+                    hostageList.Add(string.Format("			position={{pos={{{0},{1},{2}}},rotY={3},}},", hostage.coordinates.xCoord, yOffset, hostage.coordinates.zCoord, rotation));
 
                     hostageList.Add("		},");
                 }
@@ -330,20 +330,21 @@ namespace SOC.Classes
             return hostageList;
         }
 
-        public static List<string> BuildVehicleList(QuestDetails questDetails)
+        public static List<string> BuildVehicleList(QuestObjects questDetails)
         {
             List<string> vehicleList = new List<string>();
-            if (questDetails.vehicleDetails.Count == 0)
+
+            if (questDetails.vehicles.Count == 0)
                 vehicleList.Add("nil");
             else
-                foreach (VehicleDetail vehicleDetail in questDetails.vehicleDetails)
+                foreach (Vehicle vehicle in questDetails.vehicles)
                 {
-                    string vehicleName = vehicleNames[vehicleDetail.v_comboBox_vehicle.SelectedIndex];
+                    string vehicleName = vehicleNames[vehicle.vehicleIndex];
                     
 
                     vehicleList.Add("		{");
                     vehicleList.Add("			id = \"Spawn\",");
-                    vehicleList.Add(string.Format("			locator = \"{0}\",", vehicleDetail.v_groupBox_main.Text));
+                    vehicleList.Add(string.Format("			locator = \"{0}\",", vehicle.name));
                     
                     if (vehicleName.Equals("EASTERN_WHEELED_ARMORED_VEHICLE_ROCKET_ARTILLERY"))
                     {
@@ -361,17 +362,17 @@ namespace SOC.Classes
                     }
 
 
-                    if (!vehicleDetail.v_comboBox_class.Text.Equals("DEFAULT"))
-                        vehicleList.Add(string.Format("			class	= Vehicle.class.{0},", vehicleDetail.v_comboBox_class.Text));
+                    if (!vehicle.vehicleClass.Equals("DEFAULT"))
+                        vehicleList.Add(string.Format("			class	= Vehicle.class.{0},", vehicle.vehicleClass));
 
-                    double rotationdegrees = 0; Double.TryParse(vehicleDetail.v_textBox_rot.Text, out rotationdegrees);
+                    double rotationdegrees = 0; Double.TryParse(vehicle.coordinates.roty, out rotationdegrees);
                     double toRadians = rotationdegrees * Math.PI / 180;
 
                     double yOffset = 0.0;
-                    double.TryParse(vehicleDetail.v_textBox_ycoord.Text, out yOffset);
+                    double.TryParse(vehicle.coordinates.yCoord, out yOffset);
                     yOffset += 0.783;
 
-                    vehicleList.Add(string.Format("			position={{pos={{{0},{1},{2}}},rotY={3},}},", vehicleDetail.v_textBox_xcoord.Text, yOffset, vehicleDetail.v_textBox_zcoord.Text, toRadians));
+                    vehicleList.Add(string.Format("			position={{pos={{{0},{1},{2}}},rotY={3},}},", vehicle.coordinates.xCoord, yOffset, vehicle.coordinates.zCoord, toRadians));
 
                     vehicleList.Add("		},");
                 }
@@ -379,29 +380,29 @@ namespace SOC.Classes
             return vehicleList;
         }
 
-        public static List<string> BuildTargetList(QuestDetails questDetails)
+        public static List<string> BuildTargetList(QuestObjects questDetails)
         {
             int totalCount = 0;
             List<string> targetList = new List<string>();
 
-            foreach(EnemyDetail enemy in questDetails.enemyDetails)
-                if (enemy.e_checkBox_spawn.Checked && enemy.e_checkBox_target.Checked)
+            foreach(Enemy enemy in questDetails.enemies)
+                if (enemy.isSpawn && enemy.isTarget)
                 {
-                    targetList.Add(string.Format("		\"{0}\",", enemy.e_groupBox_main.Text));
+                    targetList.Add(string.Format("		\"{0}\",", enemy.name));
                     totalCount++;
                 }
 
-            foreach (HostageDetail hostage in questDetails.hostageDetails)
-                if (hostage.h_checkBox_target.Checked)
+            foreach (Hostage hostage in questDetails.hostages)
+                if (hostage.isTarget)
                 {
-                    targetList.Add(string.Format("		\"{0}\",", hostage.h_groupBox_main.Text));
+                    targetList.Add(string.Format("		\"{0}\",", hostage.name));
                     totalCount++;
                 }
 
-            foreach (VehicleDetail vehicle in questDetails.vehicleDetails)
-                if (vehicle.v_checkBox_target.Checked)
+            foreach (Vehicle vehicle in questDetails.vehicles)
+                if (vehicle.isTarget)
                 {
-                    targetList.Add(string.Format("		\"{0}\",", vehicle.v_groupBox_main.Text));
+                    targetList.Add(string.Format("		\"{0}\",", vehicle.name));
                     totalCount++;
                 }
 
@@ -411,23 +412,23 @@ namespace SOC.Classes
             return targetList;
         }
 
-        public static List<string> BuildHostageAttributes(QuestDetails questDetails)
+        public static List<string> BuildHostageAttributes(QuestObjects questDetails)
         {
             List<string> hosAttributeList = new List<string>();
 
-            foreach (HostageDetail hostage in questDetails.hostageDetails)
+            foreach (Hostage hostage in questDetails.hostages)
             {
-                if (hostage.h_checkBox_untied.Checked)
-                    hosAttributeList.Add(string.Format("GameObject.SendCommand(GameObject.GetGameObjectId(\"TppHostageUnique2\", \"{0}\"),commandUnlocked)", hostage.h_groupBox_main.Text));
+                if (hostage.isUntied)
+                    hosAttributeList.Add(string.Format("GameObject.SendCommand(GameObject.GetGameObjectId(\"TppHostageUnique2\", \"{0}\"),commandUnlocked)", hostage.name));
 
-                if (hostage.h_checkBox_injured.Checked)
-                    hosAttributeList.Add(string.Format("GameObject.SendCommand(GameObject.GetGameObjectId(\"TppHostageUnique2\", \"{0}\"),commandInjured)", hostage.h_groupBox_main.Text));
+                if (hostage.isInjured)
+                    hosAttributeList.Add(string.Format("GameObject.SendCommand(GameObject.GetGameObjectId(\"TppHostageUnique2\", \"{0}\"),commandInjured)", hostage.name));
 
-                if (hostage.h_comboBox_scared.Text.Equals("NEVER")) //"NORMAL", "NEVER", "ALWAYS"
-                    hosAttributeList.Add(string.Format("GameObject.SendCommand(GameObject.GetGameObjectId(\"TppHostageUnique2\", \"{0}\"),commandBrave)", hostage.h_groupBox_main.Text));
+                if (hostage.scared.Equals("NEVER")) //"NORMAL", "NEVER", "ALWAYS"
+                    hosAttributeList.Add(string.Format("GameObject.SendCommand(GameObject.GetGameObjectId(\"TppHostageUnique2\", \"{0}\"),commandBrave)", hostage.name));
 
-                else if (hostage.h_comboBox_scared.Text.Equals("ALWAYS"))
-                    hosAttributeList.Add(string.Format("GameObject.SendCommand(GameObject.GetGameObjectId(\"TppHostageUnique2\", \"{0}\"),commandScared)", hostage.h_groupBox_main.Text));
+                else if (hostage.scared.Equals("ALWAYS"))
+                    hosAttributeList.Add(string.Format("GameObject.SendCommand(GameObject.GetGameObjectId(\"TppHostageUnique2\", \"{0}\"),commandScared)", hostage.name));
             }
 
             return hosAttributeList;

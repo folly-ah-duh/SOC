@@ -26,24 +26,24 @@ namespace SOC.Classes
         }
        
         
-        public static void BuildFPKAssets(DefinitionDetails definitionDetails, QuestDetails questDetails) {
+        public static void BuildFPKAssets(DefinitionDetails definitionDetails, QuestObjects questDetails) {
 
             string destPath = string.Format("Sideop_Build//Assets//tpp//pack//mission2//quest//ih//{0}_fpk", definitionDetails.FpkName);
             Directory.CreateDirectory(destPath);
 
             string VehFPKAssetsPath = Path.Combine(VehAssetsPath, "FPK_Files");
-            foreach (VehicleDetail vehicleDetail in questDetails.vehicleDetails)
+            foreach (Vehicle vehicle in questDetails.vehicles)
             {
-                string vehicleName = vehicleNames[vehicleDetail.v_comboBox_vehicle.SelectedIndex];
+                string vehicleName = vehicleNames[vehicle.vehicleIndex];
                 string sourceDirPath = Path.Combine(VehFPKAssetsPath, string.Format("{0}_fpk", vehicleName));
 
                 CopyDirectory(sourceDirPath, destPath);
             }
 
             string AniFPKAssetsPath = Path.Combine(AniAssetsPath, "FPK_Files");
-            foreach (AnimalDetail animalDetail in questDetails.animalDetails)
+            foreach (Animal animal in questDetails.animals)
             {
-                string animalName = animalDetail.a_comboBox_animal.Text;
+                string animalName = animal.animal;
                 string sourceDirPath = Path.Combine(AniFPKAssetsPath, string.Format("{0}_fpk", animalName));
 
                 CopyDirectory(sourceDirPath, destPath);
@@ -52,37 +52,37 @@ namespace SOC.Classes
             destPath += "//Assets";
             if (!Directory.Exists(destPath))
                 Directory.CreateDirectory(destPath);
-            foreach (ModelDetail modelDetail in questDetails.modelDetails)
+            foreach (Model model in questDetails.models)
             {
 
-                string SourcemodelFileName = Path.Combine(modelAssetsPath, modelDetail.m_comboBox_preset.Text);
-                string DestModelFileName = Path.Combine(destPath, modelDetail.m_comboBox_preset.Text);
+                string SourcemodelFileName = Path.Combine(modelAssetsPath, model.model);
+                string DestModelFileName = Path.Combine(destPath, model.model);
 
                 File.Copy(SourcemodelFileName + ".fmdl", DestModelFileName + ".fmdl", true);
-                if (!modelDetail.m_label_GeomNotFound.Visible)
+                if (!model.missingGeom)
                 {
                     File.Copy(SourcemodelFileName + ".geom", DestModelFileName + ".geom", true);
                 }
             }
         }
-        public static void BuildFPKDAssets(DefinitionDetails definitionDetails, QuestDetails questDetails)
+        public static void BuildFPKDAssets(DefinitionDetails definitionDetails, QuestObjects questDetails)
         {
             string destPath = string.Format("Sideop_Build//Assets//tpp//pack//mission2//quest//ih//{0}_fpkd", definitionDetails.FpkName);
             Directory.CreateDirectory(destPath);
 
             string VehFPKDAssetsPath = Path.Combine(VehAssetsPath, "FPKD_Files");
-            foreach (VehicleDetail vehicleDetail in questDetails.vehicleDetails)
+            foreach (Vehicle vehicle in questDetails.vehicles)
             {
-                string vehicleName = vehicleNames[vehicleDetail.v_comboBox_vehicle.SelectedIndex];
+                string vehicleName = vehicleNames[vehicle.vehicleIndex];
                 string sourceDirPath = Path.Combine(VehFPKDAssetsPath, string.Format("{0}_fpkd", vehicleName));
 
                 CopyDirectory(sourceDirPath, destPath);
             }
 
             string AniFPKDAssetsPath = Path.Combine(AniAssetsPath, "FPKD_Files");
-            foreach (AnimalDetail animalDetail in questDetails.animalDetails)
+            foreach (Animal animal in questDetails.animals)
             {
-                string animalName = animalDetail.a_comboBox_animal.Text;
+                string animalName = animal.animal;
                 string sourceDirPath = Path.Combine(AniFPKDAssetsPath, string.Format("{0}_fpkd", animalName));
 
                 CopyDirectory(sourceDirPath, destPath);

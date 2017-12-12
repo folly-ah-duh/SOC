@@ -7,6 +7,8 @@ using System.Text.RegularExpressions;
 using SOC.Classes;
 using static SOC.QuestComponents.GameObjectInfo;
 using SOC.QuestComponents;
+using System.Reflection;
+using System.IO;
 
 namespace SOC.UI
 {
@@ -117,8 +119,9 @@ namespace SOC.UI
 
                 case 2:
                     DefinitionDetails definitionDetails = new DefinitionDetails(setupPage.textBoxFPKName.Text, setupPage.textBoxQuestNum.Text, setupPage.locationID, setupPage.comboBoxLoadArea.Text, new Coordinates(setupPage.textBoxXCoord.Text, setupPage.textBoxYCoord.Text, setupPage.textBoxZCoord.Text), setupPage.comboBoxRadius.Text, setupPage.comboBoxCategory.Text, setupPage.comboBoxReward.Text, setupPage.comboBoxProgressNotifs.SelectedIndex, setupPage.comboBoxObjective.Text, setupPage.comboBoxCP.Text, setupPage.textBoxQuestTitle.Text, setupPage.textBoxQuestDesc.Text); //string fpk, string quest, int locID, object loada, Coordinates c, string rad, string cat, string rew, int prog)
-                    QuestDetails questDetails = detailPage.getQuestDetails();
-
+                    QuestObjects questDetails = detailPage.getQuestDetails();
+                    Quest questBuild = new Quest(definitionDetails, questDetails);
+                    
                     LangBuilder.WriteQuestLangs(definitionDetails);
 
                     LuaBuilder.WriteDefinitionLua(definitionDetails, questDetails);
@@ -131,6 +134,7 @@ namespace SOC.UI
                     AssetsBuilder.BuildFPKDAssets(definitionDetails, questDetails);
 
                     MessageBox.Show("Build Complete", "Sideop Companion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    questBuild.Save(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "TESTING.xml");
                     panelNum--;
                     break;
                     

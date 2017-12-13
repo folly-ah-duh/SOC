@@ -26,7 +26,7 @@ namespace SOC.Classes
         }
        
         
-        public static void BuildFPKAssets(DefinitionDetails definitionDetails, QuestObjects questDetails) {
+        public static void BuildFPKAssets(DefinitionDetails definitionDetails, QuestEntities questDetails) {
 
             string destPath = string.Format("Sideop_Build//Assets//tpp//pack//mission2//quest//ih//{0}_fpk", definitionDetails.FpkName);
             Directory.CreateDirectory(destPath);
@@ -65,7 +65,7 @@ namespace SOC.Classes
                 }
             }
         }
-        public static void BuildFPKDAssets(DefinitionDetails definitionDetails, QuestObjects questDetails)
+        public static void BuildFPKDAssets(DefinitionDetails definitionDetails, QuestEntities questDetails)
         {
             string destPath = string.Format("Sideop_Build//Assets//tpp//pack//mission2//quest//ih//{0}_fpkd", definitionDetails.FpkName);
             Directory.CreateDirectory(destPath);

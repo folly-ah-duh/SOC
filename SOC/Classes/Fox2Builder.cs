@@ -40,7 +40,7 @@ namespace SOC.Classes
             return dataList;
         }
 
-        public static List<QuestEntity> BuildQuestEntityList(QuestObjects questDetails)
+        public static List<QuestEntity> BuildQuestEntityList(QuestEntities questDetails)
         {
             string vehicleHistory = "";
             List<QuestEntity> entityList = new List<QuestEntity>();
@@ -191,7 +191,7 @@ namespace SOC.Classes
             return entityList;
         }
 
-        public static List<string> BuildQuestClassList(QuestObjects questDetails)
+        public static List<string> BuildQuestClassList(QuestEntities questDetails)
         {
             List<string> classList = new List<string>();
 
@@ -260,7 +260,7 @@ namespace SOC.Classes
             return classList;
         }
 
-        public static void WriteQuestFox2(DefinitionDetails definitionDetails, QuestObjects questDetails)
+        public static void WriteQuestFox2(DefinitionDetails definitionDetails, QuestEntities questDetails)
         {
             List<QuestEntity> entityList = BuildQuestEntityList(questDetails);
             BodyInfoEntry bodyInfo = new BodyInfoEntry();
@@ -775,7 +775,7 @@ namespace SOC.Classes
             File.Delete(fox2QuestFile);
         }
 
-        public static List<QuestEntity> BuildItemEntityList(QuestObjects questDetails)
+        public static List<QuestEntity> BuildItemEntityList(QuestEntities questDetails)
         {
             List<QuestEntity> entityList = new List<QuestEntity>();
             string boxed = "";
@@ -814,7 +814,7 @@ namespace SOC.Classes
             return entityList;
         }
 
-        public static List<string> BuildItemClassList(QuestObjects questDetails)
+        public static List<string> BuildItemClassList(QuestEntities questDetails)
         {
             List<string> classList = new List<string>();
 
@@ -839,7 +839,7 @@ namespace SOC.Classes
             return classList;
         }
 
-        public static void WriteItemFox2(DefinitionDetails definitionDetails, QuestObjects questDetails)
+        public static void WriteItemFox2(DefinitionDetails definitionDetails, QuestEntities questDetails)
         {
             if (questDetails.items.Count + questDetails.activeItems.Count == 0)
                 return;

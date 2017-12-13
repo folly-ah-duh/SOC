@@ -83,6 +83,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\EntitiesManager.cs" />
     <Compile Include="Classes\LangBuilder.cs" />
     <Compile Include="Classes\AssetsBuilder.cs" />
     <Compile Include="Classes\UpdateNotifsManager.cs" />

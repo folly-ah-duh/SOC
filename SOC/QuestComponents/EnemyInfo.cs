@@ -2718,7 +2718,6 @@ namespace SOC.QuestComponents
                 new string[] {
                 },
                 new string[] {
-                    "NONE"
                 }),
             new CP( "mafr_lab_cp",
 

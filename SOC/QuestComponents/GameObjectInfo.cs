@@ -1,4 +1,5 @@
 ﻿using SOC.UI;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
@@ -917,18 +918,16 @@ namespace SOC.QuestComponents
 
             public Quest() { }
 
-            public Quest(DefinitionDetails d, QuestObjects q)
+            public Quest(DefinitionDetails d, QuestEntities q)
             {
                 definitionDetails = d;
                 questDetails = q;
             }
 
-            public void Save(string directory, string name)
+            public void Save(string fileName)
             {
 
-                string saveFilePath = Path.Combine(directory, name);
-
-                using (FileStream stream = new FileStream(saveFilePath, FileMode.Create))
+                using (FileStream stream = new FileStream(fileName, FileMode.Create))
                 {
                     XmlSerializer serializer = new XmlSerializer(typeof(Quest));
                     serializer.Serialize(stream, this);
@@ -936,32 +935,38 @@ namespace SOC.QuestComponents
 
             }
 
-            public void Load(string directory, string name)
+            public bool Load(string fileName)
             {
-
-                string loadFilePath = Path.Combine(directory, name);
-                if (!File.Exists(loadFilePath))
+                
+                if (!File.Exists(fileName))
                 {
-                    return;
+                    return false;
                 } 
 
-                using (FileStream stream = new FileStream(loadFilePath, FileMode.Open))
+                using (FileStream stream = new FileStream(fileName, FileMode.Open))
                 {
                     XmlSerializer deserializer = new XmlSerializer(typeof(Quest));
-                    Quest loadedQuest = (Quest)deserializer.Deserialize(stream);
-
-                    questDetails = loadedQuest.questDetails;
-                    definitionDetails = loadedQuest.definitionDetails;
+                    try
+                    {
+                        Quest loadedQuest = (Quest)deserializer.Deserialize(stream);
+                        questDetails = loadedQuest.questDetails;
+                        definitionDetails = loadedQuest.definitionDetails;
+                        return true;
+                    }
+                    catch (InvalidOperationException e)
+                    {
+                        System.Windows.Forms.MessageBox.Show(string.Format("An Exception has occurred and the selected xml file could not be loaded. \n\nInnerException message: \n{0}", e.InnerException), "SOC", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                    }
                 }
 
-                return;
+                return false;
             }
 
             [XmlElement]
             public DefinitionDetails definitionDetails { get; set; }
 
             [XmlElement]
-            public QuestObjects questDetails { get; set; }
+            public QuestEntities questDetails { get; set; }
 
         }
 
@@ -1030,14 +1035,15 @@ namespace SOC.QuestComponents
         }
 
         [XmlType("QuestObjects")]
-        public class QuestObjects
+        public class QuestEntities
         {
 
-            public QuestObjects() { }
+            public QuestEntities() { }
 
-            public QuestObjects(List<Enemy> enedets, List<Hostage> hosDets, List<Vehicle> vehDets, List<Animal> anidets, List<Item> itDets, List<ActiveItem> acitdets, List<Model> MdDets, int bodyIndex, bool inter, string sst)
+            public QuestEntities(List<Enemy> questenedets, List<Enemy> cpenedets, List<Hostage> hosDets, List<Vehicle> vehDets, List<Animal> anidets, List<Item> itDets, List<ActiveItem> acitdets, List<Model> MdDets, int bodyIndex, bool inter, string sst)
             {
-                enemies = enedets;
+                questEnemies = questenedets;
+                cpEnemies = cpenedets;
                 hostages = hosDets;
                 vehicles = vehDets;
                 items = itDets;
@@ -1050,7 +1056,10 @@ namespace SOC.QuestComponents
             }
 
             [XmlArray]
-            public List<Enemy> enemies { get; set; } = new List<Enemy>();
+            public List<Enemy> questEnemies { get; set; } = new List<Enemy>();
+
+            [XmlArray]
+            public List<Enemy> cpEnemies { get; set; } = new List<Enemy>();
 
             [XmlArray]
             public List<Hostage> hostages { get; set; } = new List<Hostage>();
@@ -1086,10 +1095,16 @@ namespace SOC.QuestComponents
 
             public Enemy() { }
 
-            public Enemy(bool spawn, bool target, bool clava, bool zombie, bool armored, string nme, string bod, string caution, string sneak, string skll, string staff, string[] pow)
+            public Enemy(int num, string nme)
+            {
+                number = num; name = nme;
+            }
+
+            public Enemy(bool spawn, bool target, bool clava, bool zombie, bool armored, int num, string nme, string bod, string caution, string sneak, string skll, string staff, string[] pow)
             {
                 isSpawn = spawn; isTarget = target; isBalaclava = clava; isZombie = zombie; isArmored = armored;
-                name = nme;  body = bod; cRoute = caution; dRoute = sneak; skill = skll; staffType = staff; powers = pow;
+                number = num; name = nme;
+                body = bod; cRoute = caution; dRoute = sneak; skill = skll; staffType = staff; powers = pow;
             }
 
             [XmlElement]
@@ -1106,6 +1121,9 @@ namespace SOC.QuestComponents
 
             [XmlElement]
             public bool isArmored { get; set; } = false;
+
+            [XmlElement]
+            public int number { get; set; } = 0;
 
             [XmlAttribute]
             public string name { get; set; } = "sol_quest_0000";
@@ -1129,17 +1147,23 @@ namespace SOC.QuestComponents
             public string[] powers { get; set; } = new string[0];
             
         }
-
+            
         public class Hostage
         {
 
             public Hostage() { }
 
-            public Hostage(bool target, bool untied, bool injured, string nme, string skll, string staff, string scare, string lang, Coordinates coords)
+            public Hostage(bool target, bool untied, bool injured, int num, string nme, string skll, string staff, string scare, string lang, Coordinates coords)
             {
                 isTarget = target; isUntied = untied; isInjured = injured;
-                name = nme; skill = skll; staffType = staff; scared = scare; language = lang;
+                number = num; name = nme;
+                skill = skll; staffType = staff; scared = scare; language = lang;
                 coordinates = coords;
+            }
+
+            public Hostage(Coordinates coords, int num, string nme)
+            {
+                coordinates = coords; number = num; name = nme;
             }
 
             [XmlElement]
@@ -1150,6 +1174,9 @@ namespace SOC.QuestComponents
 
             [XmlElement]
             public bool isInjured { get; set; } = false;
+
+            [XmlElement]
+            public int number { get; set; } = 0;
 
             [XmlAttribute]
             public string name { get; set; } = "Hostage_0";
@@ -1176,15 +1203,24 @@ namespace SOC.QuestComponents
 
             public Vehicle() { }
 
-            public Vehicle(bool target, string nme, int veh, string clas, Coordinates coords)
+            public Vehicle(bool target, int num, string nme, int veh, string clas, Coordinates coords)
             {
                 isTarget = target;
-                name = nme; vehicleIndex = veh; vehicleClass = clas;
+                number = num; name = nme;
+                vehicleIndex = veh; vehicleClass = clas;
                 coordinates = coords;
+            }
+
+            public Vehicle(Coordinates coords, int num, string nme)
+            {
+                coordinates = coords; number = num; name = nme;
             }
 
             [XmlElement]
             public bool isTarget { get; set; } = false;
+
+            [XmlElement]
+            public int number { get; set; } = 0;
 
             [XmlAttribute]
             public string name { get; set; } = "Vehicle_0";
@@ -1205,15 +1241,24 @@ namespace SOC.QuestComponents
 
             public Animal() { }
 
-            public Animal(bool target, string nme, string cnt, string ani, string type, Coordinates coords)
+            public Animal(bool target, int num, string nme, string cnt, string ani, string type, Coordinates coords)
             {
                 isTarget = target;
-                name = nme; count = cnt; animal = ani; typeID = type;
+                number = num; name = nme;
+                count = cnt; animal = ani; typeID = type;
                 coordinates = coords;
+            }
+
+            public Animal(Coordinates coords, int num, string nme)
+            {
+                coordinates = coords; number = num; name = nme;
             }
 
             [XmlElement]
             public bool isTarget { get; set; } = false;
+
+            [XmlElement]
+            public int number { get; set; } = 0;
 
             [XmlAttribute]
             public string name { get; set; } = "Animal_Cluster_0";
@@ -1237,15 +1282,24 @@ namespace SOC.QuestComponents
             
             public Item() { }
 
-            public Item(bool box, string nme, string cnt, string it, Coordinates coords, RotationQuat qcoords)
+            public Item(bool box, int num, string nme, string cnt, string it, Coordinates coords, RotationQuat qcoords)
             {
                 isBoxed = box;
-                name = nme; count = cnt; item = it;
+                number = num; name = nme;
+                count = cnt; item = it;
                 coordinates = coords; quatCoordinates = qcoords;
+            }
+
+            public Item(Coordinates coords, int num, string nme)
+            {
+                coordinates = coords; number = num; name = nme;
             }
 
             [XmlElement]
             public bool isBoxed { get; set; } = false;
+
+            [XmlElement]
+            public int number { get; set; } = 0;
 
             [XmlAttribute]
             public string name { get; set; } = "Item_0";
@@ -1269,11 +1323,20 @@ namespace SOC.QuestComponents
 
             public ActiveItem() { }
 
-            public ActiveItem(string nme, string acit, Coordinates coords, RotationQuat qcoords)
+            public ActiveItem(int num, string nme, string acit, Coordinates coords, RotationQuat qcoords)
             {
-                name = nme; activeItem = acit;
+                number = num; name = nme;
+                activeItem = acit;
                 coordinates = coords; quatCoordinates = qcoords;
             }
+
+            public ActiveItem(Coordinates coords, int num, string nme)
+            {
+                coordinates = coords; number = num; name = nme;
+            }
+
+            [XmlElement]
+            public int number { get; set; } = 0;
 
             [XmlAttribute]
             public string name { get; set; } = "Active_Item_0";
@@ -1294,14 +1357,24 @@ namespace SOC.QuestComponents
 
             public Model() { }
 
-            public Model(bool mGeom, string nme, string stmd, Coordinates coords, RotationQuat qcoords)
+            public Model(bool mGeom, int num, string nme, string stmd, Coordinates coords, RotationQuat qcoords)
             {
-                missingGeom = mGeom;  name = nme; model = stmd;
+                missingGeom = mGeom;
+                number = num; name = nme;
+                model = stmd;
                 coordinates = coords; quatCoordinates = qcoords;
+            }
+
+            public Model(Coordinates coords, int num, string nme)
+            {
+                coordinates = coords; number = num; name = nme;
             }
 
             [XmlElement]
             public bool missingGeom { get; set; } = true;
+
+            [XmlElement]
+            public int number { get; set; } = 0;
 
             [XmlAttribute]
             public string name { get; set; } = "Model_0";

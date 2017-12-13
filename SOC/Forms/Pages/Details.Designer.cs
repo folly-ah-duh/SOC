@@ -43,7 +43,7 @@ namespace SOC.UI
 
     }
     
-    public class HostageObject : QuestObject
+    public class HostageBox : QuestObject
     {
         Coordinates hostageCoords;
         int hostageNum;
@@ -70,7 +70,7 @@ namespace SOC.UI
         public CheckBox h_checkBox_injured;
         public CheckBox h_checkBox_untied;
 
-        public HostageObject(Coordinates coord, int num) : base (coord, num)
+        public HostageBox(Coordinates coord, int num) : base (coord, num)
         {
             hostageCoords = coord;
             hostageNum = num;
@@ -78,7 +78,7 @@ namespace SOC.UI
 
         public override void SetObject(QuestObject detail)
         {
-            HostageObject hostageDetail = (HostageObject)detail;
+            HostageBox hostageDetail = (HostageBox)detail;
             h_checkBox_injured.Text = hostageDetail.h_checkBox_injured.Text;
             h_checkBox_target.Text = hostageDetail.h_checkBox_target.Text;
             h_checkBox_untied.Text = hostageDetail.h_checkBox_untied.Text;
@@ -341,7 +341,7 @@ namespace SOC.UI
 
     }
     
-    public class VehicleObject : QuestObject
+    public class VehicleBox : QuestObject
     {
         Coordinates vehicleCoords;
         int VehicleNum;
@@ -360,7 +360,7 @@ namespace SOC.UI
         public Label v_label_class;
         public Label v_label_vehicle;
 
-        public VehicleObject(Coordinates coord, int num) : base(coord, num)
+        public VehicleBox(Coordinates coord, int num) : base(coord, num)
         {
             vehicleCoords = coord;
             VehicleNum = num;
@@ -368,7 +368,7 @@ namespace SOC.UI
 
         public override void SetObject(QuestObject detail)
         {
-            VehicleObject vehicleDetail = (VehicleObject)detail;
+            VehicleBox vehicleDetail = (VehicleBox)detail;
             v_checkBox_target.Checked = vehicleDetail.v_checkBox_target.Checked;
             v_comboBox_class.Text = vehicleDetail.v_comboBox_class.Text;
             v_comboBox_vehicle.Text = vehicleDetail.v_comboBox_vehicle.Text;
@@ -556,7 +556,7 @@ namespace SOC.UI
         }
     }
     
-    public class ItemObject : QuestObject
+    public class ItemBox : QuestObject
     {
         Coordinates itemCoords;
         int itemNum;
@@ -578,7 +578,7 @@ namespace SOC.UI
         public Label i_label_count;
         public Label i_label_item;
 
-        public ItemObject(Coordinates coord, int num) : base(coord, num)
+        public ItemBox(Coordinates coord, int num) : base(coord, num)
         {
             itemCoords = coord;
             itemNum = num;
@@ -586,7 +586,7 @@ namespace SOC.UI
 
         public override void SetObject(QuestObject detail)
         {
-            ItemObject itemDetail = (ItemObject)detail;
+            ItemBox itemDetail = (ItemBox)detail;
             i_comboBox_count.Text = itemDetail.i_comboBox_count.Text;
             i_label_boxed.Text = itemDetail.i_label_boxed.Text;
             i_comboBox_item.Text = itemDetail.i_comboBox_item.Text;
@@ -802,7 +802,7 @@ namespace SOC.UI
         }
     }
     
-    public class ModelObject : QuestObject
+    public class ModelBox : QuestObject
     {
         Coordinates StMdCoords;
         int StMdNum;
@@ -822,7 +822,7 @@ namespace SOC.UI
         public Label m_label_coord;
         public Label m_label_GeomNotFound;
 
-        public ModelObject(Coordinates coord, int num) : base(coord, num)
+        public ModelBox(Coordinates coord, int num) : base(coord, num)
         {
             StMdCoords = coord;
             StMdNum = num;
@@ -830,7 +830,7 @@ namespace SOC.UI
 
         public override void SetObject(QuestObject detail)
         {
-            ModelObject modelDetail = (ModelObject)detail;
+            ModelBox modelDetail = (ModelBox)detail;
             m_comboBox_preset.Text = modelDetail.m_comboBox_preset.Text;
             
         }
@@ -1050,7 +1050,7 @@ namespace SOC.UI
         }
     }
     
-    public class ActiveItemObject : QuestObject
+    public class ActiveItemBox : QuestObject
     {
         Coordinates activeItemCoords;
         int activeItemNum;
@@ -1068,7 +1068,7 @@ namespace SOC.UI
         public TextBox ai_textBox_yrot;
         public TextBox ai_textBox_xrot;
 
-        public ActiveItemObject(Coordinates coord, int num) : base(coord, num)
+        public ActiveItemBox(Coordinates coord, int num) : base(coord, num)
         {
             activeItemCoords = coord;
             activeItemNum = num;
@@ -1077,7 +1077,7 @@ namespace SOC.UI
         
         public override void SetObject(QuestObject detail)
         {
-            ActiveItemObject acItDet = (ActiveItemObject)detail;
+            ActiveItemBox acItDet = (ActiveItemBox)detail;
             ai_comboBox_activeitem.Text = acItDet.ai_comboBox_activeitem.Text;
         }
 
@@ -1247,7 +1247,7 @@ namespace SOC.UI
 
     }
 
-    public class AnimalObject : QuestObject
+    public class AnimalBox : QuestObject
     {
         public Coordinates animalCoords;
         int animalNum;
@@ -1268,7 +1268,7 @@ namespace SOC.UI
         public TextBox a_textBox_xcoord;
         public Label a_label_coord;
 
-        public AnimalObject(Coordinates coord, int num) : base(coord, num)
+        public AnimalBox(Coordinates coord, int num) : base(coord, num)
         {
             animalCoords = coord;
             animalNum = num;
@@ -1276,7 +1276,7 @@ namespace SOC.UI
 
         public override void SetObject(QuestObject detail)
         {
-            AnimalObject animalDetail = (AnimalObject)detail;
+            AnimalBox animalDetail = (AnimalBox)detail;
             a_checkBox_isTarget.Checked = animalDetail.a_checkBox_isTarget.Checked;
             a_comboBox_animal.Text = animalDetail.a_comboBox_animal.Text;
             a_comboBox_TypeID.Text = animalDetail.a_comboBox_TypeID.Text;
@@ -1551,7 +1551,7 @@ namespace SOC.UI
         }
     }
     
-    public class EnemyObject : QuestObject
+    public class EnemyBox : QuestObject
     {
         int enemyNum;
 
@@ -1581,7 +1581,7 @@ namespace SOC.UI
         public Label e_label_power;
         public ListBox e_listBox_power;
 
-        public EnemyObject(int num) : base(new Coordinates("","",""), num)
+        public EnemyBox(int num) : base(new Coordinates("","",""), num)
         {
             enemyNum = num;
         }
@@ -2090,7 +2090,7 @@ namespace SOC.UI
 
         public override void SetObject(QuestObject detail)
         {
-            EnemyObject enemyDetail = (EnemyObject)detail;
+            EnemyBox enemyDetail = (EnemyBox)detail;
 
             e_checkBox_armor.Checked = enemyDetail.e_checkBox_armor.Checked;
             e_checkBox_spawn.Checked = enemyDetail.e_checkBox_spawn.Checked;

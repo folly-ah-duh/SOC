@@ -85,6 +85,7 @@ namespace SOC.UI
                         List<Coordinates> ModelCoords = BuildCoordinatesList(setupPage.textBoxStMdCoords.Text);
                         List<Coordinates> activeItemCoords = BuildCoordinatesList(setupPage.textBoxActiveItemCoords.Text);
                         List<Coordinates> AnimalCoords = BuildCoordinatesList(setupPage.textBoxAnimalCoords.Text);
+
                         CP selectedCP = new CP();
                         if (isAfgh(setupPage))
                         {
@@ -98,7 +99,7 @@ namespace SOC.UI
                         {
                             selectedCP = EnemyInfo.NoneCP;
                         }
-
+                        // pass details page the lists of entities rather than lists of coordinates
                         detailPage.RefreshDetails(selectedCP, HostageCoords, VehicleCoords, ItemCoords, ModelCoords, activeItemCoords, AnimalCoords);
                         Application.DoEvents();
 
@@ -118,8 +119,8 @@ namespace SOC.UI
                     break;
 
                 case 2:
-                    DefinitionDetails definitionDetails = new DefinitionDetails(setupPage.textBoxFPKName.Text, setupPage.textBoxQuestNum.Text, setupPage.locationID, setupPage.comboBoxLoadArea.Text, new Coordinates(setupPage.textBoxXCoord.Text, setupPage.textBoxYCoord.Text, setupPage.textBoxZCoord.Text), setupPage.comboBoxRadius.Text, setupPage.comboBoxCategory.Text, setupPage.comboBoxReward.Text, setupPage.comboBoxProgressNotifs.SelectedIndex, setupPage.comboBoxObjective.Text, setupPage.comboBoxCP.Text, setupPage.textBoxQuestTitle.Text, setupPage.textBoxQuestDesc.Text); //string fpk, string quest, int locID, object loada, Coordinates c, string rad, string cat, string rew, int prog)
-                    QuestObjects questDetails = detailPage.getQuestDetails();
+                    DefinitionDetails definitionDetails = setupPage.getDefinitionDetails();
+                    QuestEntities questDetails = detailPage.GetChanges();
                     Quest questBuild = new Quest(definitionDetails, questDetails);
                     
                     LangBuilder.WriteQuestLangs(definitionDetails);
@@ -134,7 +135,6 @@ namespace SOC.UI
                     AssetsBuilder.BuildFPKDAssets(definitionDetails, questDetails);
 
                     MessageBox.Show("Build Complete", "Sideop Companion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    questBuild.Save(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "TESTING.xml");
                     panelNum--;
                     break;
                     
@@ -171,6 +171,52 @@ namespace SOC.UI
         private void FormMain_Activated(object sender, EventArgs e)
         {
             setupPage.refreshNotifsList();
+        }
+
+        private void buttonLoad_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog loadFile = new OpenFileDialog();
+            loadFile.Filter = "Xml Files|*.xml|All Files|*.*";
+
+            DialogResult result = loadFile.ShowDialog();
+            if (result != DialogResult.OK) return;
+
+            Quest quest = new Quest();
+            if (quest.Load(loadFile.FileName))
+            {
+                setupPage.setDefinitionDetails(quest.definitionDetails);
+                EntitiesManager.setQuestEntities(quest.questDetails);
+            }
+        }
+
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            Save();
+        }
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (isFilled())
+            {
+                DialogResult result = MessageBox.Show("Do you want to save this Sideop to an Xml file?", "SOC", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+                if (result == DialogResult.Yes)
+                    Save();
+                else if (result == DialogResult.Cancel)
+                    e.Cancel = true;
+            }
+        }
+
+        private void Save()
+        {
+            SaveFileDialog saveFile = new SaveFileDialog();
+            saveFile.Filter = "Xml File|*.xml";
+            DialogResult saveResult = saveFile.ShowDialog();
+            if (saveResult != DialogResult.OK) return;
+
+            Quest quest = new Quest(setupPage.getDefinitionDetails(), EntitiesManager.GetQuestEntities());
+            quest.Save(saveFile.FileName);
+
+            MessageBox.Show("Save Completed.", "SOC", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

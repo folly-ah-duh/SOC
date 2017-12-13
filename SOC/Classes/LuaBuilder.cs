@@ -13,7 +13,7 @@ namespace SOC.Classes
 
         static string[] questLuaInput = File.ReadAllLines(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "assets//questScript.lua"));
 
-        public static void WriteDefinitionLua(DefinitionDetails definitionDetails, QuestObjects questDetails)
+        public static void WriteDefinitionLua(DefinitionDetails definitionDetails, QuestEntities questDetails)
         {
             BodyInfoEntry bodyInfo = new BodyInfoEntry();
             if (questDetails.hostageBodyIndex >= 0)
@@ -52,7 +52,9 @@ namespace SOC.Classes
                 if(EnemyInfo.armorCount > 0) { bodies += string.Format("TppDefine.QUEST_BODY_ID_LIST.{0}_ARMOR, ", locName); }
             }
 
-            foreach (string body in getEnemyBodies(questDetails.enemies))
+            foreach (string body in getEnemyBodies(questDetails.cpEnemies))
+                bodies += string.Format("TppEnemyBodyId.{0}, ", body);
+            foreach (string body in getEnemyBodies(questDetails.questEnemies))
                 bodies += string.Format("TppEnemyBodyId.{0}, ", body);
 
             packFiles += string.Format("\n\t\tfaceIdList={{{0}}}, ", faces);
@@ -107,7 +109,7 @@ namespace SOC.Classes
             }
         }
 
-        public static void WriteMainQuestLua(DefinitionDetails definitionDetails, QuestObjects questDetails)
+        public static void WriteMainQuestLua(DefinitionDetails definitionDetails, QuestEntities questDetails)
         {
             List<string> questLua = new List<string>(questLuaInput);
 
@@ -162,7 +164,7 @@ namespace SOC.Classes
             return bodyList;
         }
 
-        public static List<string> BuildAnimalList(QuestObjects questDetails)
+        public static List<string> BuildAnimalList(QuestEntities questDetails)
         {
             List<string> animalList = new List<string>();
             if (questDetails.animals.Count == 0)
@@ -181,7 +183,7 @@ namespace SOC.Classes
             return animalList;
         }
 
-        public static List<string> BuildAnimalTargetList(QuestObjects questDetails)
+        public static List<string> BuildAnimalTargetList(QuestEntities questDetails)
         {
             List<string> animalTargetList = new List<string>();
 
@@ -218,11 +220,13 @@ namespace SOC.Classes
             return animalTargetList;
         }
 
-        public static List<string> BuildEnemyList(QuestObjects questDetails)
+        public static List<string> BuildEnemyList(QuestEntities questDetails)
         {
             List<string> enemyList = new List<string>();
 
-            List<Enemy> detailList = questDetails.enemies;
+            List<Enemy> detailList = new List<Enemy>();
+            detailList.AddRange(questDetails.questEnemies);
+            detailList.AddRange(questDetails.cpEnemies);
             int enemyCount = 0;
 
             foreach (Enemy enemy in detailList)
@@ -283,7 +287,7 @@ namespace SOC.Classes
             return enemyList;
         }
 
-        public static List<string> BuildHostageList(QuestObjects questDetails)
+        public static List<string> BuildHostageList(QuestEntities questDetails)
         {
             List<string> hostageList = new List<string>();
 
@@ -330,7 +334,7 @@ namespace SOC.Classes
             return hostageList;
         }
 
-        public static List<string> BuildVehicleList(QuestObjects questDetails)
+        public static List<string> BuildVehicleList(QuestEntities questDetails)
         {
             List<string> vehicleList = new List<string>();
 
@@ -380,12 +384,19 @@ namespace SOC.Classes
             return vehicleList;
         }
 
-        public static List<string> BuildTargetList(QuestObjects questDetails)
+        public static List<string> BuildTargetList(QuestEntities questDetails)
         {
             int totalCount = 0;
             List<string> targetList = new List<string>();
 
-            foreach(Enemy enemy in questDetails.enemies)
+            foreach(Enemy enemy in questDetails.questEnemies)
+                if (enemy.isSpawn && enemy.isTarget)
+                {
+                    targetList.Add(string.Format("		\"{0}\",", enemy.name));
+                    totalCount++;
+                }
+
+            foreach (Enemy enemy in questDetails.cpEnemies)
                 if (enemy.isSpawn && enemy.isTarget)
                 {
                     targetList.Add(string.Format("		\"{0}\",", enemy.name));
@@ -412,7 +423,7 @@ namespace SOC.Classes
             return targetList;
         }
 
-        public static List<string> BuildHostageAttributes(QuestObjects questDetails)
+        public static List<string> BuildHostageAttributes(QuestEntities questDetails)
         {
             List<string> hosAttributeList = new List<string>();
 

@@ -52,6 +52,20 @@ namespace SOC.UI
             refreshNotifsList();
         }
 
+        public DefinitionDetails getDefinitionDetails()
+        {
+            return new DefinitionDetails(textBoxFPKName.Text, textBoxQuestNum.Text, locationID, comboBoxLoadArea.Text, new Coordinates(textBoxXCoord.Text, textBoxYCoord.Text, textBoxZCoord.Text), comboBoxRadius.Text, comboBoxCategory.Text, comboBoxReward.Text, comboBoxProgressNotifs.SelectedIndex, comboBoxObjective.Text, comboBoxCP.Text, textBoxQuestTitle.Text, textBoxQuestDesc.Text);
+        }
+
+        public void setDefinitionDetails(DefinitionDetails dd)
+        {
+            textBoxFPKName.Text = dd.FpkName; textBoxQuestNum.Text = dd.QuestNum;
+            locationID = dd.locationID; comboBoxLoadArea.Text = dd.loadArea;
+            textBoxXCoord.Text = dd.coords.xCoord; textBoxYCoord.Text = dd.coords.yCoord; textBoxZCoord.Text = dd.coords.zCoord; comboBoxRadius.Text = dd.radius;
+            comboBoxCategory.Text = dd.category; comboBoxReward.Text = dd.reward; comboBoxProgressNotifs.SelectedIndex = dd.progNotif; comboBoxObjective.Text = dd.objectiveType;
+            comboBoxCP.Text = dd.CPName; textBoxQuestTitle.Text = dd.QuestTitle; textBoxQuestDesc.Text = dd.QuestDesc;
+        }
+
         public void refreshNotifsList()
         {
             string[] notifications = UpdateNotifsManager.getDispNotifs();
@@ -205,7 +219,7 @@ namespace SOC.UI
                 box.Item2.Height = dynamicHeight;
             }
 
-            int yOffset = 6; int bufferSpace = 25 + dynamicHeight;
+            int yOffset = 6 + originAnchor.Location.Y; int bufferSpace = 25 + dynamicHeight;
             for (int i = 0; i < LocationBoxes.Length; i++)
             {
                 LocationBoxes[i].Item1.Top = yOffset + bufferSpace * i;

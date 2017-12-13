@@ -77,6 +77,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.textBoxQuestDesc = new System.Windows.Forms.TextBox();
             this.textBoxQuestTitle = new System.Windows.Forms.TextBox();
+            this.originAnchor = new System.Windows.Forms.Label();
             this.panelSetup.SuspendLayout();
             this.groupBoxSetup.SuspendLayout();
             this.groupBoxLocations.SuspendLayout();
@@ -431,6 +432,7 @@
             // panel1
             // 
             this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.originAnchor);
             this.panel1.Controls.Add(this.textBoxAnimalCoords);
             this.panel1.Controls.Add(this.labelAni);
             this.panel1.Controls.Add(this.textBoxActiveItemCoords);
@@ -667,6 +669,14 @@
             this.textBoxQuestTitle.Size = new System.Drawing.Size(502, 20);
             this.textBoxQuestTitle.TabIndex = 13;
             // 
+            // originAnchor
+            // 
+            this.originAnchor.AutoSize = true;
+            this.originAnchor.Location = new System.Drawing.Point(0, 0);
+            this.originAnchor.Name = "originAnchor";
+            this.originAnchor.Size = new System.Drawing.Size(0, 13);
+            this.originAnchor.TabIndex = 27;
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -739,5 +749,6 @@
         public System.Windows.Forms.Label labelHos;
         public System.Windows.Forms.Label labelAni;
         public System.Windows.Forms.Label labelActiveItem;
+        private System.Windows.Forms.Label originAnchor;
     }
 }

@@ -62,6 +62,7 @@ namespace SOC.UI
             {
                 case 0:
                     buttonBack.Visible = false;
+                    EntitiesManager.setQuestEntities(detailPage.GetNewEntityLists());
                     panelMain.Controls.Clear();
                     panelMain.Controls.Add(setupPage);
                     setupPage.EnableScrolling();
@@ -99,8 +100,10 @@ namespace SOC.UI
                         {
                             selectedCP = EnemyInfo.NoneCP;
                         }
-                        // pass details page the lists of entities rather than lists of coordinates
-                        detailPage.RefreshDetails(selectedCP, HostageCoords, VehicleCoords, ItemCoords, ModelCoords, activeItemCoords, AnimalCoords);
+
+                        EntitiesManager.InitializeEntities(selectedCP, HostageCoords, VehicleCoords, AnimalCoords, ItemCoords, activeItemCoords, ModelCoords);
+                        detailPage.ResetAllPanels();
+                        detailPage.LoadEntityLists(selectedCP, EntitiesManager.GetQuestEntities());
                         Application.DoEvents();
 
                         panelMain.Controls.Clear();
@@ -120,7 +123,7 @@ namespace SOC.UI
 
                 case 2:
                     DefinitionDetails definitionDetails = setupPage.getDefinitionDetails();
-                    QuestEntities questDetails = detailPage.GetChanges();
+                    QuestEntities questDetails = detailPage.GetNewEntityLists();
                     Quest questBuild = new Quest(definitionDetails, questDetails);
                     
                     LangBuilder.WriteQuestLangs(definitionDetails);

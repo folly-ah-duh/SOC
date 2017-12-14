@@ -1,4 +1,5 @@
 ﻿using SOC.Classes;
+using SOC.QuestComponents;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,12 +9,12 @@ using static SOC.QuestComponents.GameObjectInfo;
 
 namespace SOC.UI
 {
-    public abstract class QuestObject
+    public abstract class QuestBox
     {
         Coordinates objectCoordinates;
         int objectNumber;
 
-        public QuestObject(Coordinates coord, int num)
+        public QuestBox(Coordinates coord, int num)
         {
             objectCoordinates = coord;
             objectNumber = num;
@@ -36,17 +37,16 @@ namespace SOC.UI
 
         public abstract GroupBox getGroupBoxMain();
 
-        public abstract void SetObject(QuestObject detail);
+        public abstract void SetObject(QuestBox detail);
 
         public abstract void BuildObject(int width);
 
 
     }
     
-    public class HostageBox : QuestObject
+    public class HostageBox : QuestBox
     {
-        Coordinates hostageCoords;
-        int hostageNum;
+        Hostage hostage;
 
         public GroupBox h_groupBox_main;
         public Label h_label_rot;
@@ -70,13 +70,12 @@ namespace SOC.UI
         public CheckBox h_checkBox_injured;
         public CheckBox h_checkBox_untied;
 
-        public HostageBox(Coordinates coord, int num) : base (coord, num)
+        public HostageBox(Hostage h) : base (h.coordinates, h.number)
         {
-            hostageCoords = coord;
-            hostageNum = num;
+            hostage = h;
         }
 
-        public override void SetObject(QuestObject detail)
+        public override void SetObject(QuestBox detail)
         {
             HostageBox hostageDetail = (HostageBox)detail;
             h_checkBox_injured.Text = hostageDetail.h_checkBox_injured.Text;
@@ -144,12 +143,12 @@ namespace SOC.UI
             this.h_groupBox_main.Controls.Add(this.h_label_lang);
 
             this.h_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
-            this.h_groupBox_main.Location = new System.Drawing.Point(3, 55 + (253 * hostageNum));
+            this.h_groupBox_main.Location = new System.Drawing.Point(3, 55 + (253 * hostage.number));
             this.h_groupBox_main.Name = "h_groupBox_main";
             this.h_groupBox_main.Size = new System.Drawing.Size(width, 236);
             this.h_groupBox_main.TabStop = false;
             this.h_groupBox_main.TabIndex = 1;
-            this.h_groupBox_main.Text = "Hostage_" + hostageNum;
+            this.h_groupBox_main.Text = hostage.name;
             this.h_groupBox_main.Click += new System.EventHandler(FocusGroupBox);
             // 
             // h_textBox_coord
@@ -158,22 +157,19 @@ namespace SOC.UI
             this.h_textBox_xcoord.Name = "h_textBox_xcoord";
             this.h_textBox_xcoord.Size = new System.Drawing.Size(41, 20);
             this.h_textBox_xcoord.TabIndex = 2;
-            this.h_textBox_xcoord.Text = hostageCoords.xCoord;
-            h_textBox_xcoord.Leave += new EventHandler(onXcoordChange);
+            this.h_textBox_xcoord.Text = hostage.coordinates.xCoord;
 
             this.h_textBox_ycoord.Location = new System.Drawing.Point(139, 14);
             this.h_textBox_ycoord.Name = "h_textBox_ycoord";
             this.h_textBox_ycoord.Size = new System.Drawing.Size(41, 20);
             this.h_textBox_ycoord.TabIndex = 3;
-            this.h_textBox_ycoord.Text = hostageCoords.yCoord;
-            h_textBox_ycoord.Leave += new EventHandler(onYcoordChange);
+            this.h_textBox_ycoord.Text = hostage.coordinates.yCoord;
 
             this.h_textBox_zcoord.Location = new System.Drawing.Point(193, 14);
             this.h_textBox_zcoord.Name = "h_textBox_zcoord";
             this.h_textBox_zcoord.Size = new System.Drawing.Size(41, 20);
             this.h_textBox_zcoord.TabIndex = 4;
-            this.h_textBox_zcoord.Text = hostageCoords.zCoord;
-            h_textBox_zcoord.Leave += new EventHandler(onZcoordChange);
+            this.h_textBox_zcoord.Text = hostage.coordinates.zCoord;
 
             this.h_label_coord.AutoSize = true;
             this.h_label_coord.Location = new System.Drawing.Point(4, 17);
@@ -201,8 +197,7 @@ namespace SOC.UI
             this.h_textBox_rot.Name = "h_textBox_rot";
             this.h_textBox_rot.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.h_textBox_rot.TabIndex = 5;
-            this.h_textBox_rot.Text = hostageCoords.roty;
-            h_textBox_rot.Leave += new EventHandler(onYRotChange);
+            this.h_textBox_rot.Text = hostage.coordinates.roty;
             this.h_label_rot.AutoSize = true;
             this.h_label_rot.Location = new System.Drawing.Point(20, 42);
             this.h_label_rot.Name = "h_label_rot";
@@ -221,7 +216,7 @@ namespace SOC.UI
             this.h_comboBox_scared.Name = "h_comboBox_scared";
             this.h_comboBox_scared.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.h_comboBox_scared.TabIndex = 7;
-            this.h_comboBox_scared.Text = "NORMAL";
+            this.h_comboBox_scared.Text = hostage.scared;
             h_comboBox_scared.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
             this.h_label_scared.AutoSize = true;
             this.h_label_scared.Location = new System.Drawing.Point(26, 124);
@@ -235,6 +230,7 @@ namespace SOC.UI
             this.h_checkBox_injured.Name = "h_checkBox_injured";
             this.h_checkBox_injured.Size = new System.Drawing.Size(17, 18);
             this.h_checkBox_injured.UseVisualStyleBackColor = true;
+            h_checkBox_injured.Checked = hostage.isInjured;
             this.h_label_injured.AutoSize = true;
             this.h_label_injured.Location = new System.Drawing.Point(117, 96);
             this.h_label_injured.Name = "h_label_injured";
@@ -247,6 +243,7 @@ namespace SOC.UI
             this.h_checkBox_untied.Name = "h_checkBox_untied";
             this.h_checkBox_untied.Size = new System.Drawing.Size(17, 18);
             this.h_checkBox_untied.UseVisualStyleBackColor = true;
+            h_checkBox_untied.Checked = hostage.isUntied;
             this.h_label_untied.AutoSize = true;
             this.h_label_untied.Location = new System.Drawing.Point(29, 96);
             this.h_label_untied.Name = "h_label_untied";
@@ -265,6 +262,7 @@ namespace SOC.UI
             this.h_comboBox_lang.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.h_comboBox_lang.TabIndex = 9;
             h_comboBox_lang.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
+            h_comboBox_lang.Text = hostage.language;
             this.h_label_lang.AutoSize = true;
             this.h_label_lang.Location = new System.Drawing.Point(12, 149);
             this.h_label_lang.Name = "h_label_lang";
@@ -282,13 +280,13 @@ namespace SOC.UI
             this.h_comboBox_staff.Name = "h_comboBox_staff";
             this.h_comboBox_staff.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.h_comboBox_staff.TabIndex = 10;
-            this.h_comboBox_staff.Text = "NONE";
             h_comboBox_staff.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
+            h_comboBox_staff.Text = hostage.staffType;
             this.h_label_staff.AutoSize = true;
             this.h_label_staff.Location = new System.Drawing.Point(11, 174);
             this.h_label_staff.Name = "h_label_staff";
-            this.h_label_staff.Size = new System.Drawing.Size(59, 13);
             this.h_label_staff.Text = "Staff Type:";
+            this.h_label_staff.Size = new System.Drawing.Size(59, 13);
             // 
             // h_comboBox_skill
             // 
@@ -301,7 +299,7 @@ namespace SOC.UI
             this.h_comboBox_skill.Name = "h_comboBox_skill";
             this.h_comboBox_skill.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.h_comboBox_skill.TabIndex = 11;
-            this.h_comboBox_skill.Text = "NONE";
+            this.h_comboBox_skill.Text = hostage.skill;
             h_comboBox_skill.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
 
             this.h_label_skill.AutoSize = true;
@@ -319,32 +317,11 @@ namespace SOC.UI
             return h_groupBox_main;
         }
 
-        public void onXcoordChange(object sender, EventArgs e)
-        {
-            hostageCoords.xCoord = h_textBox_xcoord.Text;
-        }
-
-        public void onYcoordChange(object sender, EventArgs e)
-        {
-            hostageCoords.yCoord = h_textBox_ycoord.Text;
-        }
-
-        public void onZcoordChange(object sender, EventArgs e)
-        {
-            hostageCoords.zCoord = h_textBox_zcoord.Text;
-        }
-
-        public void onYRotChange(object sender, EventArgs e)
-        {
-            hostageCoords.roty = h_textBox_rot.Text;
-        }
-
     }
     
-    public class VehicleBox : QuestObject
+    public class VehicleBox : QuestBox
     {
-        Coordinates vehicleCoords;
-        int VehicleNum;
+        Vehicle vehicle;
 
         public GroupBox v_groupBox_main;
         public TextBox v_textBox_zcoord;
@@ -360,13 +337,12 @@ namespace SOC.UI
         public Label v_label_class;
         public Label v_label_vehicle;
 
-        public VehicleBox(Coordinates coord, int num) : base(coord, num)
+        public VehicleBox(Vehicle v) : base(v.coordinates, v.number)
         {
-            vehicleCoords = coord;
-            VehicleNum = num;
+            vehicle = v;
         }
 
-        public override void SetObject(QuestObject detail)
+        public override void SetObject(QuestBox detail)
         {
             VehicleBox vehicleDetail = (VehicleBox)detail;
             v_checkBox_target.Checked = vehicleDetail.v_checkBox_target.Checked;
@@ -411,12 +387,12 @@ namespace SOC.UI
             this.v_groupBox_main.Controls.Add(this.v_label_class);
             this.v_groupBox_main.Controls.Add(this.v_label_vehicle);
             this.v_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
-            this.v_groupBox_main.Location = new System.Drawing.Point(3, 4 + (170 * VehicleNum));
+            this.v_groupBox_main.Location = new System.Drawing.Point(3, 4 + (170 * vehicle.number));
             this.v_groupBox_main.Name = "v_groupBox_main";
             this.v_groupBox_main.Size = new System.Drawing.Size(width, 140);
             this.v_groupBox_main.TabIndex = 1;
             this.v_groupBox_main.TabStop = false;
-            this.v_groupBox_main.Text = "Vehicle_" + VehicleNum;
+            this.v_groupBox_main.Text = vehicle.name;
             this.v_groupBox_main.Click += new System.EventHandler(FocusGroupBox);
 
             // 
@@ -433,22 +409,19 @@ namespace SOC.UI
             this.v_textBox_xcoord.Name = "v_textBox_xcoord";
             this.v_textBox_xcoord.Size = new System.Drawing.Size(41, 20);
             this.v_textBox_xcoord.TabIndex = 2;
-            this.v_textBox_xcoord.Text = vehicleCoords.xCoord;
-            v_textBox_xcoord.Leave += new EventHandler(onXcoordChange);
+            this.v_textBox_xcoord.Text = vehicle.coordinates.xCoord;
 
             this.v_textBox_ycoord.Location = new System.Drawing.Point(133, 14);
             this.v_textBox_ycoord.Name = "v_textBox_ycoord";
             this.v_textBox_ycoord.Size = new System.Drawing.Size(41, 20);
             this.v_textBox_ycoord.TabIndex = 3;
-            this.v_textBox_ycoord.Text = vehicleCoords.yCoord;
-            v_textBox_ycoord.Leave += new EventHandler(onYcoordChange);
+            this.v_textBox_ycoord.Text = vehicle.coordinates.yCoord;
 
             this.v_textBox_zcoord.Location = new System.Drawing.Point(187, 14);
             this.v_textBox_zcoord.Name = "v_textBox_zcoord";
             this.v_textBox_zcoord.Size = new System.Drawing.Size(41, 20);
             this.v_textBox_zcoord.TabIndex = 4;
-            this.v_textBox_zcoord.Text = vehicleCoords.zCoord;
-            v_textBox_zcoord.Leave += new EventHandler(onZcoordChange);
+            this.v_textBox_zcoord.Text = vehicle.coordinates.zCoord;
             // 
             // v_checkBox_target
             // 
@@ -456,6 +429,7 @@ namespace SOC.UI
             this.v_checkBox_target.Name = "v_checkBox_target";
             this.v_checkBox_target.Size = new System.Drawing.Size(17, 18);
             this.v_checkBox_target.UseVisualStyleBackColor = true;
+            v_checkBox_target.Checked = vehicle.isTarget;
 
             this.v_label_target.AutoSize = true;
             this.v_label_target.Location = new System.Drawing.Point(18, 67);
@@ -472,8 +446,7 @@ namespace SOC.UI
             this.v_textBox_rot.Name = "v_textBox_rot";
             this.v_textBox_rot.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.v_textBox_rot.TabIndex = 5;
-            this.v_textBox_rot.Text = vehicleCoords.roty;
-            v_textBox_rot.Leave += new EventHandler(onYRotChange);
+            this.v_textBox_rot.Text = vehicle.coordinates.roty;
 
             this.v_label_rot.AutoSize = true;
             this.v_label_rot.Location = new System.Drawing.Point(20, 42);
@@ -496,7 +469,7 @@ namespace SOC.UI
             this.v_comboBox_class.Name = "v_comboBox_class";
             this.v_comboBox_class.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.v_comboBox_class.TabIndex = 8;
-            this.v_comboBox_class.Text = "DEFAULT";
+            this.v_comboBox_class.Text = vehicle.vehicleClass;
             this.v_label_class.AutoSize = true;
             this.v_label_class.Location = new System.Drawing.Point(35, 119);
             this.v_label_class.Name = "v_label_class";
@@ -517,7 +490,7 @@ namespace SOC.UI
             this.v_comboBox_vehicle.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.v_comboBox_vehicle.TabIndex = 7;
             v_comboBox_vehicle.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
-            this.v_comboBox_vehicle.Text = "TT77 NOSOROG";
+            this.v_comboBox_vehicle.SelectedIndex = vehicle.vehicleIndex;
             this.v_label_vehicle.AutoSize = true;
             this.v_label_vehicle.Location = new System.Drawing.Point(25, 94);
             this.v_label_vehicle.Name = "v_label_vehicle";
@@ -534,32 +507,11 @@ namespace SOC.UI
         {
             return v_groupBox_main;
         }
-
-        public void onXcoordChange(object sender, EventArgs e)
-        {
-            vehicleCoords.xCoord = v_textBox_xcoord.Text;
-        }
-
-        public void onYcoordChange(object sender, EventArgs e)
-        {
-            vehicleCoords.yCoord = v_textBox_ycoord.Text;
-        }
-
-        public void onZcoordChange(object sender, EventArgs e)
-        {
-            vehicleCoords.zCoord = v_textBox_zcoord.Text;
-        }
-
-        public void onYRotChange(object sender, EventArgs e)
-        {
-            vehicleCoords.roty = v_textBox_rot.Text;
-        }
     }
     
-    public class ItemBox : QuestObject
+    public class ItemBox : QuestBox
     {
-        Coordinates itemCoords;
-        int itemNum;
+        Item item;
 
         public GroupBox i_groupBox_main;
         public TextBox i_textBox_zcoord;
@@ -578,13 +530,12 @@ namespace SOC.UI
         public Label i_label_count;
         public Label i_label_item;
 
-        public ItemBox(Coordinates coord, int num) : base(coord, num)
+        public ItemBox(Item i) : base(i.coordinates, i.number)
         {
-            itemCoords = coord;
-            itemNum = num;
+            item = i;
         }
 
-        public override void SetObject(QuestObject detail)
+        public override void SetObject(QuestBox detail)
         {
             ItemBox itemDetail = (ItemBox)detail;
             i_comboBox_count.Text = itemDetail.i_comboBox_count.Text;
@@ -637,110 +588,13 @@ namespace SOC.UI
             this.i_groupBox_main.Controls.Add(this.i_label_item);
 
             this.i_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
-            this.i_groupBox_main.Location = new System.Drawing.Point(3, 3 + (171 * itemNum));
+            this.i_groupBox_main.Location = new System.Drawing.Point(3, 3 + (171 * item.number));
             this.i_groupBox_main.Name = "i_groupBox_main";
             this.i_groupBox_main.Size = new System.Drawing.Size(width, 150);
             this.i_groupBox_main.TabIndex = 1;
             this.i_groupBox_main.TabStop = false;
-            this.i_groupBox_main.Text = "Item_" + itemNum;
+            this.i_groupBox_main.Text = "Item_" + item.number;
             this.i_groupBox_main.Click += new System.EventHandler(FocusGroupBox);
-            // 
-            // i_textBox_zcoord
-            // 
-            this.i_label_coord.AutoSize = true;
-            this.i_label_coord.Location = new System.Drawing.Point(4, 17);
-            this.i_label_coord.Name = "i_label_coord";
-            this.i_label_coord.Size = new System.Drawing.Size(66, 13);
-            this.i_label_coord.TabIndex = 6;
-            this.i_label_coord.Text = "Coordinates:";
-
-            this.i_textBox_xcoord.Location = new System.Drawing.Point(78, 14);
-            this.i_textBox_xcoord.Name = "i_textBox_xcoord";
-            this.i_textBox_xcoord.Size = new System.Drawing.Size(41, 20);
-            this.i_textBox_xcoord.TabIndex = 2;
-            this.i_textBox_xcoord.Text = itemCoords.xCoord;
-            i_textBox_xcoord.Leave += new EventHandler(onXcoordChange);
-
-            this.i_textBox_ycoord.Location = new System.Drawing.Point(133, 14);
-            this.i_textBox_ycoord.Name = "i_textBox_ycoord";
-            this.i_textBox_ycoord.Size = new System.Drawing.Size(41, 20);
-            this.i_textBox_ycoord.TabIndex = 3;
-            this.i_textBox_ycoord.Text = itemCoords.yCoord;
-            i_textBox_ycoord.Leave += new EventHandler(onYcoordChange);
-
-            this.i_textBox_zcoord.Location = new System.Drawing.Point(187, 14);
-            this.i_textBox_zcoord.Name = "i_textBox_zcoord";
-            this.i_textBox_zcoord.Size = new System.Drawing.Size(41, 20);
-            this.i_textBox_zcoord.TabIndex = 4;
-            this.i_textBox_zcoord.Text = itemCoords.zCoord;
-            i_textBox_zcoord.Leave += new EventHandler(onZcoordChange);
-
-            //
-            // rotation
-            //
-            this.i_label_rot.AutoSize = true;
-            this.i_label_rot.Location = new System.Drawing.Point(20, 42);
-            this.i_label_rot.Name = "i_label_rot";
-            this.i_label_rot.Size = new System.Drawing.Size(50, 13);
-            this.i_label_rot.TabIndex = 7;
-            this.i_label_rot.Text = "Rotation:";
-
-            this.i_textBox_xrot.Location = new System.Drawing.Point(78, 39);
-            this.i_textBox_xrot.Name = "m_textBox_xrocoord";
-            this.i_textBox_xrot.Size = new System.Drawing.Size(31, 20);
-            this.i_textBox_xrot.TabIndex = 5;
-            this.i_textBox_xrot.Text = "0";
-            this.i_textBox_yrot.Location = new System.Drawing.Point(117, 39);
-            this.i_textBox_yrot.Name = "m_textBox_yrocoord";
-            this.i_textBox_yrot.Size = new System.Drawing.Size(31, 20);
-            this.i_textBox_yrot.TabIndex = 6;
-            this.i_textBox_yrot.Text = QuestComponents.Fox2Info.getQuaternionY(itemCoords.roty);
-            this.i_textBox_zrot.Location = new System.Drawing.Point(157, 39);
-            this.i_textBox_zrot.Name = "m_textBox_zrocoord";
-            this.i_textBox_zrot.Size = new System.Drawing.Size(31, 20);
-            this.i_textBox_zrot.TabIndex = 7;
-            this.i_textBox_zrot.Text = "0";
-            this.i_textBox_wrot.Location = new System.Drawing.Point(197, 39);
-            this.i_textBox_wrot.Name = "m_textBox_wrocoord";
-            this.i_textBox_wrot.Size = new System.Drawing.Size(31, 20);
-            this.i_textBox_wrot.TabIndex = 8;
-            this.i_textBox_wrot.Text = QuestComponents.Fox2Info.getQuaternionW(itemCoords.roty);
-            // 
-            // i_comboBox_count
-            // 
-            this.i_label_count.AutoSize = true;
-            this.i_label_count.Location = new System.Drawing.Point(32, 97);
-            this.i_label_count.Name = "i_label_count";
-            this.i_label_count.Size = new System.Drawing.Size(38, 13);
-            this.i_label_count.TabIndex = 7;
-            this.i_label_count.Text = "Count:";
-
-            this.i_comboBox_count.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.i_comboBox_count.FormattingEnabled = true;
-            this.i_comboBox_count.Location = new System.Drawing.Point(78, 94);
-            this.i_comboBox_count.Items.AddRange(new object[] {
-                "1","4","8","12","16"
-            });
-            this.i_comboBox_count.Name = "i_comboBox_count";
-            this.i_comboBox_count.Size = new System.Drawing.Size(comboboxWidth, 21);
-            this.i_comboBox_count.TabIndex = 9;
-            this.i_comboBox_count.Text = i_comboBox_count.Items[0].ToString();
-            i_comboBox_count.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
-            // 
-            // i_checkBox_boxed
-            // 
-            this.i_label_boxed.AutoSize = true;
-            this.i_label_boxed.Location = new System.Drawing.Point(30, 122);
-            this.i_label_boxed.Name = "i_label_boxed";
-            this.i_label_boxed.Size = new System.Drawing.Size(40, 13);
-            this.i_label_boxed.TabIndex = 20;
-            this.i_label_boxed.Text = "Boxed:";
-
-            this.i_checkBox_boxed.Location = new System.Drawing.Point(78, 120);
-            this.i_checkBox_boxed.Name = "i_checkBox_boxed";
-            this.i_checkBox_boxed.Size = new System.Drawing.Size(17, 18);
-            this.i_checkBox_boxed.UseVisualStyleBackColor = true;
             // 
             // i_comboBox_item
             // 
@@ -761,8 +615,104 @@ namespace SOC.UI
             this.i_comboBox_item.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.i_comboBox_item.TabIndex = 8;
             i_comboBox_item.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
-            this.i_comboBox_item.Text = "EQP_SWP_Magazine";
             this.i_comboBox_item.SelectedIndexChanged += new System.EventHandler(this.i_comboBox_item_SelectedIndexChanged);
+            this.i_comboBox_item.Text = item.item;
+            // 
+            // i_textBox_zcoord
+            // 
+            this.i_label_coord.AutoSize = true;
+            this.i_label_coord.Location = new System.Drawing.Point(4, 17);
+            this.i_label_coord.Name = "i_label_coord";
+            this.i_label_coord.Size = new System.Drawing.Size(66, 13);
+            this.i_label_coord.TabIndex = 6;
+            this.i_label_coord.Text = "Coordinates:";
+
+            this.i_textBox_xcoord.Location = new System.Drawing.Point(78, 14);
+            this.i_textBox_xcoord.Name = "i_textBox_xcoord";
+            this.i_textBox_xcoord.Size = new System.Drawing.Size(41, 20);
+            this.i_textBox_xcoord.TabIndex = 2;
+            this.i_textBox_xcoord.Text = item.coordinates.xCoord;
+
+            this.i_textBox_ycoord.Location = new System.Drawing.Point(133, 14);
+            this.i_textBox_ycoord.Name = "i_textBox_ycoord";
+            this.i_textBox_ycoord.Size = new System.Drawing.Size(41, 20);
+            this.i_textBox_ycoord.TabIndex = 3;
+            this.i_textBox_ycoord.Text = item.coordinates.yCoord;
+
+            this.i_textBox_zcoord.Location = new System.Drawing.Point(187, 14);
+            this.i_textBox_zcoord.Name = "i_textBox_zcoord";
+            this.i_textBox_zcoord.Size = new System.Drawing.Size(41, 20);
+            this.i_textBox_zcoord.TabIndex = 4;
+            this.i_textBox_zcoord.Text = item.coordinates.zCoord;
+
+            //
+            // rotation
+            //
+            this.i_label_rot.AutoSize = true;
+            this.i_label_rot.Location = new System.Drawing.Point(20, 42);
+            this.i_label_rot.Name = "i_label_rot";
+            this.i_label_rot.Size = new System.Drawing.Size(50, 13);
+            this.i_label_rot.TabIndex = 7;
+            this.i_label_rot.Text = "Rotation:";
+
+            this.i_textBox_xrot.Location = new System.Drawing.Point(78, 39);
+            this.i_textBox_xrot.Name = "m_textBox_xrocoord";
+            this.i_textBox_xrot.Size = new System.Drawing.Size(31, 20);
+            this.i_textBox_xrot.TabIndex = 5;
+            this.i_textBox_xrot.Text = item.quatCoordinates.xval;
+            this.i_textBox_yrot.Location = new System.Drawing.Point(117, 39);
+            this.i_textBox_yrot.Name = "m_textBox_yrocoord";
+            this.i_textBox_yrot.Size = new System.Drawing.Size(31, 20);
+            this.i_textBox_yrot.TabIndex = 6;
+            this.i_textBox_yrot.Text = item.quatCoordinates.yval;
+            this.i_textBox_zrot.Location = new System.Drawing.Point(157, 39);
+            this.i_textBox_zrot.Name = "m_textBox_zrocoord";
+            this.i_textBox_zrot.Size = new System.Drawing.Size(31, 20);
+            this.i_textBox_zrot.TabIndex = 7;
+            this.i_textBox_zrot.Text = item.quatCoordinates.zval;
+            this.i_textBox_wrot.Location = new System.Drawing.Point(197, 39);
+            this.i_textBox_wrot.Name = "m_textBox_wrocoord";
+            this.i_textBox_wrot.Size = new System.Drawing.Size(31, 20);
+            this.i_textBox_wrot.TabIndex = 8;
+            this.i_textBox_wrot.Text = item.quatCoordinates.wval;
+            // 
+            // i_comboBox_count
+            // 
+            this.i_label_count.AutoSize = true;
+            this.i_label_count.Location = new System.Drawing.Point(32, 97);
+            this.i_label_count.Name = "i_label_count";
+            this.i_label_count.Size = new System.Drawing.Size(38, 13);
+            this.i_label_count.TabIndex = 7;
+            this.i_label_count.Text = "Count:";
+
+            this.i_comboBox_count.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.i_comboBox_count.FormattingEnabled = true;
+            this.i_comboBox_count.Location = new System.Drawing.Point(78, 94);
+            this.i_comboBox_count.Items.AddRange(new object[] {
+                "1","4","8","12","16"
+            });
+            this.i_comboBox_count.Name = "i_comboBox_count";
+            this.i_comboBox_count.Size = new System.Drawing.Size(comboboxWidth, 21);
+            this.i_comboBox_count.TabIndex = 9;
+            this.i_comboBox_count.Text = item.count;
+            i_comboBox_count.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
+            // 
+            // i_checkBox_boxed
+            // 
+            this.i_label_boxed.AutoSize = true;
+            this.i_label_boxed.Location = new System.Drawing.Point(30, 122);
+            this.i_label_boxed.Name = "i_label_boxed";
+            this.i_label_boxed.Size = new System.Drawing.Size(40, 13);
+            this.i_label_boxed.TabIndex = 20;
+            this.i_label_boxed.Text = "Boxed:";
+
+            this.i_checkBox_boxed.Location = new System.Drawing.Point(78, 120);
+            this.i_checkBox_boxed.Name = "i_checkBox_boxed";
+            this.i_checkBox_boxed.Size = new System.Drawing.Size(17, 18);
+            this.i_checkBox_boxed.UseVisualStyleBackColor = true;
+            i_checkBox_boxed.Checked = item.isBoxed;
+            
             this.i_groupBox_main.ResumeLayout(false);
             this.i_groupBox_main.PerformLayout();
         }
@@ -776,7 +726,7 @@ namespace SOC.UI
             }
             else
             {
-                this.i_comboBox_count.Text = i_comboBox_count.Items[0].ToString();
+                this.i_comboBox_count.Text = "1";
                 this.i_comboBox_count.Enabled = true;
             }
         }
@@ -785,27 +735,11 @@ namespace SOC.UI
         {
             return i_groupBox_main;
         }
-
-        public void onXcoordChange(object sender, EventArgs e)
-        {
-            itemCoords.xCoord = i_textBox_xcoord.Text;
-        }
-
-        public void onYcoordChange(object sender, EventArgs e)
-        {
-            itemCoords.yCoord = i_textBox_ycoord.Text;
-        }
-
-        public void onZcoordChange(object sender, EventArgs e)
-        {
-            itemCoords.zCoord = i_textBox_zcoord.Text;
-        }
     }
     
-    public class ModelBox : QuestObject
+    public class ModelBox : QuestBox
     {
-        Coordinates StMdCoords;
-        int StMdNum;
+        Model model;
         
         public string modelAssetsPath = AssetsBuilder.modelAssetsPath;
         public GroupBox m_groupBox_main;
@@ -822,13 +756,12 @@ namespace SOC.UI
         public Label m_label_coord;
         public Label m_label_GeomNotFound;
 
-        public ModelBox(Coordinates coord, int num) : base(coord, num)
+        public ModelBox(Model m) : base(m.coordinates, m.number)
         {
-            StMdCoords = coord;
-            StMdNum = num;
+            model = m;
         }
 
-        public override void SetObject(QuestObject detail)
+        public override void SetObject(QuestBox detail)
         {
             ModelBox modelDetail = (ModelBox)detail;
             m_comboBox_preset.Text = modelDetail.m_comboBox_preset.Text;
@@ -874,12 +807,12 @@ namespace SOC.UI
             this.m_groupBox_main.Controls.Add(this.m_label_preset);
             this.m_groupBox_main.Controls.Add(this.m_label_GeomNotFound);
             this.m_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
-            this.m_groupBox_main.Location = new System.Drawing.Point(3, 3 + (StMdNum * 118));
+            this.m_groupBox_main.Location = new System.Drawing.Point(3, 3 + (model.number * 118));
             this.m_groupBox_main.Name = "m_groupBox_main";
             this.m_groupBox_main.Size = new System.Drawing.Size(width, 95);
             this.m_groupBox_main.TabIndex = 1;
             this.m_groupBox_main.TabStop = false;
-            this.m_groupBox_main.Text = "Model_" + StMdNum;
+            this.m_groupBox_main.Text = model.name;
             // 
             // m_textBox_zcoord
             // 
@@ -887,8 +820,7 @@ namespace SOC.UI
             this.m_textBox_zcoord.Name = "m_textBox_zcoord";
             this.m_textBox_zcoord.Size = new System.Drawing.Size(41, 20);
             this.m_textBox_zcoord.TabIndex = 4;
-            this.m_textBox_zcoord.Text = StMdCoords.zCoord;
-            m_textBox_zcoord.Leave += new EventHandler(onZcoordChange);
+            this.m_textBox_zcoord.Text = model.coordinates.zCoord;
             // 
             // m_label_filename
             // 
@@ -906,8 +838,7 @@ namespace SOC.UI
             this.m_textBox_ycoord.Name = "m_textBox_ycoord";
             this.m_textBox_ycoord.Size = new System.Drawing.Size(41, 20);
             this.m_textBox_ycoord.TabIndex = 3;
-            this.m_textBox_ycoord.Text = StMdCoords.yCoord;
-            m_textBox_ycoord.Leave += new EventHandler(onYcoordChange);
+            this.m_textBox_ycoord.Text = model.coordinates.yCoord;
             // 
             // m_textBox_rot
             // 
@@ -924,8 +855,7 @@ namespace SOC.UI
             this.m_textBox_xcoord.Name = "m_textBox_xcoord";
             this.m_textBox_xcoord.Size = new System.Drawing.Size(41, 20);
             this.m_textBox_xcoord.TabIndex = 2;
-            this.m_textBox_xcoord.Text = StMdCoords.xCoord;
-            m_textBox_xcoord.Leave += new EventHandler(onXcoordChange);
+            this.m_textBox_xcoord.Text = model.coordinates.xCoord;
             // 
             // m_label_rot
             // 
@@ -940,22 +870,22 @@ namespace SOC.UI
             this.m_textBox_xrot.Name = "m_textBox_xrocoord";
             this.m_textBox_xrot.Size = new System.Drawing.Size(31, 20);
             this.m_textBox_xrot.TabIndex = 5;
-            this.m_textBox_xrot.Text = "0";
+            this.m_textBox_xrot.Text = model.quatCoordinates.xval;
             this.m_textBox_yrot.Location = new System.Drawing.Point(123, 39);
             this.m_textBox_yrot.Name = "m_textBox_yrocoord";
             this.m_textBox_yrot.Size = new System.Drawing.Size(31, 20);
             this.m_textBox_yrot.TabIndex = 6;
-            this.m_textBox_yrot.Text = QuestComponents.Fox2Info.getQuaternionY(StMdCoords.roty);
+            this.m_textBox_yrot.Text = model.quatCoordinates.yval;
             this.m_textBox_zrot.Location = new System.Drawing.Point(163, 39);
             this.m_textBox_zrot.Name = "m_textBox_zrocoord";
             this.m_textBox_zrot.Size = new System.Drawing.Size(31, 20);
             this.m_textBox_zrot.TabIndex = 7;
-            this.m_textBox_zrot.Text = "0";
+            this.m_textBox_zrot.Text = model.quatCoordinates.zval;
             this.m_textBox_wrot.Location = new System.Drawing.Point(203, 39);
             this.m_textBox_wrot.Name = "m_textBox_wrocoord";
             this.m_textBox_wrot.Size = new System.Drawing.Size(31, 20);
             this.m_textBox_wrot.TabIndex = 8;
-            this.m_textBox_wrot.Text = QuestComponents.Fox2Info.getQuaternionW(StMdCoords.roty);
+            this.m_textBox_wrot.Text = model.quatCoordinates.wval;
             // 
             // m_label_coord
             // 
@@ -976,7 +906,10 @@ namespace SOC.UI
             this.m_comboBox_preset.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.m_comboBox_preset.TabIndex = 7;
             this.m_comboBox_preset.SelectedIndexChanged += new System.EventHandler(this.m_comboBox_preset_selectedIndexChanged);
-            this.m_comboBox_preset.SelectedIndex = 0;
+
+            if (m_comboBox_preset.Items.Contains(model.model))
+                this.m_comboBox_preset.Text = model.model;
+            else this.m_comboBox_preset.SelectedIndex = 0;
             m_comboBox_preset.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
 
             this.m_label_preset.AutoSize = true;
@@ -1033,27 +966,11 @@ namespace SOC.UI
         {
             return m_groupBox_main;
         }
-
-        public void onXcoordChange(object sender, EventArgs e)
-        {
-            StMdCoords.xCoord = m_textBox_xcoord.Text;
-        }
-
-        public void onYcoordChange(object sender, EventArgs e)
-        {
-            StMdCoords.yCoord = m_textBox_ycoord.Text;
-        }
-
-        public void onZcoordChange(object sender, EventArgs e)
-        {
-            StMdCoords.zCoord = m_textBox_zcoord.Text;
-        }
     }
     
-    public class ActiveItemBox : QuestObject
+    public class ActiveItemBox : QuestBox
     {
-        Coordinates activeItemCoords;
-        int activeItemNum;
+        ActiveItem activeitem;
 
         public GroupBox ai_groupBox_main;
         public TextBox ai_textBox_zcoord;
@@ -1068,14 +985,12 @@ namespace SOC.UI
         public TextBox ai_textBox_yrot;
         public TextBox ai_textBox_xrot;
 
-        public ActiveItemBox(Coordinates coord, int num) : base(coord, num)
+        public ActiveItemBox(ActiveItem ai) : base(ai.coordinates, ai.number)
         {
-            activeItemCoords = coord;
-            activeItemNum = num;
-
+            activeitem = ai;
         }
         
-        public override void SetObject(QuestObject detail)
+        public override void SetObject(QuestBox detail)
         {
             ActiveItemBox acItDet = (ActiveItemBox)detail;
             ai_comboBox_activeitem.Text = acItDet.ai_comboBox_activeitem.Text;
@@ -1114,12 +1029,12 @@ namespace SOC.UI
             this.ai_groupBox_main.Controls.Add(this.ai_textBox_xcoord);
             this.ai_groupBox_main.Controls.Add(this.ai_label_coord);
             this.ai_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
-            this.ai_groupBox_main.Location = new System.Drawing.Point(3, 3 + (activeItemNum * 118));
+            this.ai_groupBox_main.Location = new System.Drawing.Point(3, 3 + (activeitem.number * 118));
             this.ai_groupBox_main.Name = "ai_groupBox_main";
             this.ai_groupBox_main.Size = new System.Drawing.Size(width, 80);
             this.ai_groupBox_main.TabIndex = 0;
             this.ai_groupBox_main.TabStop = false;
-            this.ai_groupBox_main.Text = "Active_Item_" + activeItemNum;
+            this.ai_groupBox_main.Text = activeitem.name;
             this.ai_groupBox_main.Click += new System.EventHandler(FocusGroupBox);
             // 
             // ai_label_coord
@@ -1137,8 +1052,7 @@ namespace SOC.UI
             this.ai_textBox_xcoord.Name = "ai_textBox_xcoord";
             this.ai_textBox_xcoord.Size = new System.Drawing.Size(41, 20);
             this.ai_textBox_xcoord.TabIndex = 1;
-            this.ai_textBox_xcoord.Text = activeItemCoords.xCoord;
-            ai_textBox_xcoord.Leave += new EventHandler(onXcoordChange);
+            this.ai_textBox_xcoord.Text = activeitem.coordinates.xCoord;
             // 
             // ai_textBox_ycoord
             // 
@@ -1146,8 +1060,7 @@ namespace SOC.UI
             this.ai_textBox_ycoord.Name = "ai_textBox_ycoord";
             this.ai_textBox_ycoord.Size = new System.Drawing.Size(41, 20);
             this.ai_textBox_ycoord.TabIndex = 2;
-            this.ai_textBox_ycoord.Text = activeItemCoords.yCoord;
-            ai_textBox_ycoord.Leave += new EventHandler(onYcoordChange);
+            this.ai_textBox_ycoord.Text = activeitem.coordinates.yCoord;
             // 
             // ai_textBox_zcoord
             // 
@@ -1155,8 +1068,7 @@ namespace SOC.UI
             this.ai_textBox_zcoord.Name = "ai_textBox_zcoord";
             this.ai_textBox_zcoord.Size = new System.Drawing.Size(41, 20);
             this.ai_textBox_zcoord.TabIndex = 3;
-            this.ai_textBox_zcoord.Text = activeItemCoords.zCoord;
-            ai_textBox_zcoord.Leave += new EventHandler(onZcoordChange);
+            this.ai_textBox_zcoord.Text = activeitem.coordinates.zCoord;
             // 
             // ai_label_Rot
             // 
@@ -1173,7 +1085,7 @@ namespace SOC.UI
             this.ai_textBox_xrot.Name = "ai_textBox_xrot";
             this.ai_textBox_xrot.Size = new System.Drawing.Size(31, 20);
             this.ai_textBox_xrot.TabIndex = 5;
-            this.ai_textBox_xrot.Text = "0";
+            this.ai_textBox_xrot.Text = activeitem.quatCoordinates.xval;
             // 
             // ai_textBox_yrot
             // 
@@ -1181,7 +1093,7 @@ namespace SOC.UI
             this.ai_textBox_yrot.Name = "ai_textBox_yrot";
             this.ai_textBox_yrot.Size = new System.Drawing.Size(31, 20);
             this.ai_textBox_yrot.TabIndex = 6;
-            this.ai_textBox_yrot.Text = QuestComponents.Fox2Info.getQuaternionY(activeItemCoords.roty);
+            this.ai_textBox_yrot.Text = activeitem.quatCoordinates.yval;
             // 
             // ai_textBox_zrot
             // 
@@ -1189,7 +1101,7 @@ namespace SOC.UI
             this.ai_textBox_zrot.Name = "ai_textBox_zrot";
             this.ai_textBox_zrot.Size = new System.Drawing.Size(31, 20);
             this.ai_textBox_zrot.TabIndex = 7;
-            this.ai_textBox_zrot.Text = "0";
+            this.ai_textBox_zrot.Text = activeitem.quatCoordinates.zval;
             // 
             // ai_textBox_wrot
             // 
@@ -1197,7 +1109,7 @@ namespace SOC.UI
             this.ai_textBox_wrot.Name = "ai_textBox_wrot";
             this.ai_textBox_wrot.Size = new System.Drawing.Size(31, 20);
             this.ai_textBox_wrot.TabIndex = 8;
-            this.ai_textBox_wrot.Text = QuestComponents.Fox2Info.getQuaternionW(activeItemCoords.roty);
+            this.ai_textBox_wrot.Text = activeitem.quatCoordinates.wval;
             // 
             // ai_label_activeitem
             // 
@@ -1219,7 +1131,7 @@ namespace SOC.UI
             this.ai_comboBox_activeitem.Items.AddRange(activeItems);
             this.ai_comboBox_activeitem.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.ai_comboBox_activeitem.TabIndex = 10;
-            this.ai_comboBox_activeitem.Text = "EQP_SWP_DMine";
+            this.ai_comboBox_activeitem.Text = activeitem.activeItem;
             ai_comboBox_activeitem.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
             this.ai_groupBox_main.ResumeLayout(false);
             this.ai_groupBox_main.PerformLayout();
@@ -1230,27 +1142,11 @@ namespace SOC.UI
             return ai_groupBox_main;
         }
 
-        public void onXcoordChange(object sender, EventArgs e)
-        {
-            activeItemCoords.xCoord = ai_textBox_xcoord.Text;
-        }
-
-        public void onYcoordChange(object sender, EventArgs e)
-        {
-            activeItemCoords.yCoord = ai_textBox_ycoord.Text;
-        }
-
-        public void onZcoordChange(object sender, EventArgs e)
-        {
-            activeItemCoords.zCoord = ai_textBox_zcoord.Text;
-        }
-
     }
 
-    public class AnimalBox : QuestObject
+    public class AnimalBox : QuestBox
     {
-        public Coordinates animalCoords;
-        int animalNum;
+        Animal animal;
         
         public GroupBox a_groupBox_main;
         public ComboBox a_comboBox_TypeID;
@@ -1268,13 +1164,12 @@ namespace SOC.UI
         public TextBox a_textBox_xcoord;
         public Label a_label_coord;
 
-        public AnimalBox(Coordinates coord, int num) : base(coord, num)
+        public AnimalBox(Animal a) : base(a.coordinates, a.number)
         {
-            animalCoords = coord;
-            animalNum = num;
+            animal = a;
         }
 
-        public override void SetObject(QuestObject detail)
+        public override void SetObject(QuestBox detail)
         {
             AnimalBox animalDetail = (AnimalBox)detail;
             a_checkBox_isTarget.Checked = animalDetail.a_checkBox_isTarget.Checked;
@@ -1322,13 +1217,37 @@ namespace SOC.UI
             this.a_groupBox_main.Controls.Add(this.a_textBox_ycoord);
             this.a_groupBox_main.Controls.Add(this.a_textBox_xcoord);
             this.a_groupBox_main.Controls.Add(this.a_label_coord);
-            this.a_groupBox_main.Location = new System.Drawing.Point(3, 3 + (animalNum * 180));
+            this.a_groupBox_main.Location = new System.Drawing.Point(3, 3 + (animal.number * 180));
             this.a_groupBox_main.Name = "a_groupBox_main";
             this.a_groupBox_main.Size = new System.Drawing.Size(width, 166);
             this.a_groupBox_main.TabIndex = 0;
             this.a_groupBox_main.TabStop = false;
-            this.a_groupBox_main.Text = "Animal_Cluster_" + animalNum;
+            this.a_groupBox_main.Text = animal.name;
             this.a_groupBox_main.Click += new System.EventHandler(FocusGroupBox);
+            // 
+            // a_comboBox_animal
+            // 
+            this.a_comboBox_animal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.a_comboBox_animal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.a_comboBox_animal.FormattingEnabled = true;
+            this.a_comboBox_animal.Location = new System.Drawing.Point(84, 81);
+            this.a_comboBox_animal.Items.AddRange(QuestComponents.AnimalInfo.animals);
+            this.a_comboBox_animal.Text = animal.animal;
+            this.a_comboBox_animal.Name = "a_comboBox_animal";
+            this.a_comboBox_animal.Size = new System.Drawing.Size(comboboxWidth, 21);
+            this.a_comboBox_animal.TabIndex = 9;
+            this.a_comboBox_animal.SelectedIndexChanged += new System.EventHandler(this.a_comboBox_animal_selectedIndexChanged);
+            a_comboBox_animal.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
+            // 
+            // a_label_animal
+            // 
+            this.a_label_animal.AutoSize = true;
+            this.a_label_animal.Location = new System.Drawing.Point(29, 84);
+            this.a_label_animal.Name = "a_label_animal";
+            this.a_label_animal.Size = new System.Drawing.Size(41, 13);
+            this.a_label_animal.TabIndex = 8;
+            this.a_label_animal.Text = "Animal:";
             // 
             // a_comboBox_targetcount
             // 
@@ -1342,7 +1261,7 @@ namespace SOC.UI
             this.a_comboBox_TypeID.TabIndex = 13;
             a_comboBox_TypeID.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
             a_comboBox_TypeID.Items.AddRange(new string[] { "TppGoat", "TppNubian" });
-            a_comboBox_TypeID.Text = "TppGoat";
+            a_comboBox_TypeID.Text = animal.typeID;
             // 
             // a_label_targetcount
             // 
@@ -1365,7 +1284,7 @@ namespace SOC.UI
             this.a_comboBox_count.TabIndex = 11;
             a_comboBox_count.Items.AddRange( new string[] { "1", "2", "3", "4", "5", "6"});
             a_comboBox_count.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
-            a_comboBox_count.Text = "1";
+            a_comboBox_count.Text = animal.count;
             // 
             // a_label_count
             // 
@@ -1376,30 +1295,6 @@ namespace SOC.UI
             this.a_label_count.TabIndex = 10;
             this.a_label_count.Text = "Count:";
             // 
-            // a_comboBox_animal
-            // 
-            this.a_comboBox_animal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.a_comboBox_animal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.a_comboBox_animal.FormattingEnabled = true;
-            this.a_comboBox_animal.Location = new System.Drawing.Point(84, 81);
-            this.a_comboBox_animal.Items.AddRange(QuestComponents.AnimalInfo.animals);
-            this.a_comboBox_animal.Text = "Sheep";
-            this.a_comboBox_animal.Name = "a_comboBox_animal";
-            this.a_comboBox_animal.Size = new System.Drawing.Size(comboboxWidth, 21);
-            this.a_comboBox_animal.TabIndex = 9;
-            this.a_comboBox_animal.SelectedIndexChanged += new System.EventHandler(this.a_comboBox_animal_selectedIndexChanged);
-            a_comboBox_animal.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
-            // 
-            // a_label_animal
-            // 
-            this.a_label_animal.AutoSize = true;
-            this.a_label_animal.Location = new System.Drawing.Point(29, 84);
-            this.a_label_animal.Name = "a_label_animal";
-            this.a_label_animal.Size = new System.Drawing.Size(41, 13);
-            this.a_label_animal.TabIndex = 8;
-            this.a_label_animal.Text = "Animal:";
-            // 
             // a_checkBox_isTarget
             // 
             this.a_checkBox_isTarget.AutoSize = true;
@@ -1408,6 +1303,7 @@ namespace SOC.UI
             this.a_checkBox_isTarget.Size = new System.Drawing.Size(15, 14);
             this.a_checkBox_isTarget.TabIndex = 7;
             this.a_checkBox_isTarget.UseVisualStyleBackColor = true;
+            a_checkBox_isTarget.Checked = animal.isTarget;
             // 
             // a_label_isTarget
             // 
@@ -1426,8 +1322,7 @@ namespace SOC.UI
             this.a_textBox_rot.Name = "a_textBox_rot";
             this.a_textBox_rot.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.a_textBox_rot.TabIndex = 5;
-            this.a_textBox_rot.Text = animalCoords.roty;
-            a_textBox_rot.Leave += new EventHandler(this.onYRotChange);
+            this.a_textBox_rot.Text = animal.coordinates.roty;
 
             // 
             // a_label_rot
@@ -1445,8 +1340,7 @@ namespace SOC.UI
             this.a_textBox_zcoord.Name = "a_textBox_zcoord";
             this.a_textBox_zcoord.Size = new System.Drawing.Size(41, 20);
             this.a_textBox_zcoord.TabIndex = 3;
-            this.a_textBox_zcoord.Text = animalCoords.zCoord;
-            a_textBox_zcoord.Leave += new EventHandler(this.onZcoordChange);
+            this.a_textBox_zcoord.Text = animal.coordinates.zCoord;
             // 
             // a_textBox_ycoord
             // 
@@ -1454,8 +1348,7 @@ namespace SOC.UI
             this.a_textBox_ycoord.Name = "a_textBox_ycoord";
             this.a_textBox_ycoord.Size = new System.Drawing.Size(41, 20);
             this.a_textBox_ycoord.TabIndex = 2;
-            this.a_textBox_ycoord.Text = animalCoords.yCoord;
-            a_textBox_ycoord.Leave += new EventHandler(this.onYcoordChange);
+            this.a_textBox_ycoord.Text = animal.coordinates.yCoord;
             // 
             // a_textBox_xcoord
             // 
@@ -1463,8 +1356,7 @@ namespace SOC.UI
             this.a_textBox_xcoord.Name = "a_textBox_xcoord";
             this.a_textBox_xcoord.Size = new System.Drawing.Size(41, 20);
             this.a_textBox_xcoord.TabIndex = 1;
-            this.a_textBox_xcoord.Text = animalCoords.xCoord;
-            a_textBox_xcoord.Leave += new EventHandler(this.onXcoordChange);
+            this.a_textBox_xcoord.Text = animal.coordinates.xCoord;
             // 
             // a_label_coord
             // 
@@ -1529,31 +1421,14 @@ namespace SOC.UI
         {
             return a_groupBox_main;
         }
-
-        public void onXcoordChange(object sender, EventArgs e)
-        {
-            animalCoords.xCoord = a_textBox_xcoord.Text;
-        }
-
-        public void onYcoordChange(object sender, EventArgs e)
-        {
-            animalCoords.yCoord = a_textBox_ycoord.Text;
-        }
-
-        public void onZcoordChange(object sender, EventArgs e)
-        {
-            animalCoords.zCoord = a_textBox_zcoord.Text;
-        }
-
-        public void onYRotChange(object sender, EventArgs e)
-        {
-            animalCoords.roty = a_textBox_rot.Text;
-        }
     }
     
-    public class EnemyBox : QuestObject
+    public class EnemyBox : QuestBox
     {
-        int enemyNum;
+        public int enemyNumber = -1;
+        CP enemyCP = new CP();
+        Enemy enemy = new Enemy();
+        string region = "";
 
         public GroupBox e_groupBox_main;
         public CheckBox e_checkBox_target;
@@ -1581,9 +1456,10 @@ namespace SOC.UI
         public Label e_label_power;
         public ListBox e_listBox_power;
 
-        public EnemyBox(int num) : base(new Coordinates("","",""), num)
+        public EnemyBox(Enemy e, CP cp) : base(new Coordinates("", "", ""), e.number)
         {
-            enemyNum = num;
+            enemy = e; enemyCP = cp; region = enemyCP.CPname.Substring(0, 4);
+            enemyNumber = e.number;
         }
 
         public override void BuildObject(int width)
@@ -1646,12 +1522,12 @@ namespace SOC.UI
             this.e_groupBox_main.Controls.Add(this.e_label_balaclava);
             this.e_groupBox_main.Controls.Add(this.e_checkBox_balaclava);
             e_groupBox_main.Disposed += new EventHandler(this.e_groupBox_main_Disposed);
-            this.e_groupBox_main.Location = new System.Drawing.Point(3, 55 + (334 * enemyNum));
+            this.e_groupBox_main.Location = new System.Drawing.Point(3, 55 + (334 * enemyNumber));
             this.e_groupBox_main.Name = "e_groupBox_main";
             this.e_groupBox_main.Size = new System.Drawing.Size(width, 317);
             this.e_groupBox_main.TabIndex = 0;
             this.e_groupBox_main.TabStop = false;
-            this.e_groupBox_main.Text = "sol_quest_000" + enemyNum;
+            this.e_groupBox_main.Text = enemy.name;
             this.e_groupBox_main.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.e_groupBox_main.Click += new System.EventHandler(FocusGroupBox);
@@ -1668,7 +1544,6 @@ namespace SOC.UI
             this.e_comboBox_power.Text = "SOFT_ARMOR";
             this.e_comboBox_power.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.e_comboBox_power.TabIndex = 22;
-            this.e_comboBox_power.Enabled = false;
             this.e_comboBox_power.SelectedIndexChanged += new EventHandler(this.powerChanged);
             // 
             // e_button_removepower
@@ -1681,7 +1556,6 @@ namespace SOC.UI
             this.e_button_removepower.Text = "Remove";
             this.e_button_removepower.UseVisualStyleBackColor = true;
             this.e_button_removepower.Click += new EventHandler(this.e_button_removepower_Click);
-            this.e_button_removepower.Enabled = false;
             // 
             // e_label_power
             // 
@@ -1690,7 +1564,6 @@ namespace SOC.UI
             this.e_label_power.Name = "e_label_power";
             this.e_label_power.Size = new System.Drawing.Size(76, 13);
             this.e_label_power.TabIndex = 19;
-            e_label_power.Enabled = false;
             this.e_label_power.Text = "Gear | Tactics:";
             // 
             // e_listBox_power
@@ -1703,7 +1576,7 @@ namespace SOC.UI
             this.e_listBox_power.Name = "e_listBox_power";
             this.e_listBox_power.Size = new System.Drawing.Size(comboboxWidth, 54);
             this.e_listBox_power.TabIndex = 18;
-            e_listBox_power.Enabled = false;
+            e_listBox_power.Items.AddRange(enemy.powers);
             this.e_listBox_power.SelectedIndexChanged += new EventHandler(this.e_listBox_power_selectedIndexChanged);
             // 
             // e_comboBox_skill
@@ -1715,11 +1588,10 @@ namespace SOC.UI
             this.e_comboBox_skill.Location = new System.Drawing.Point(99, 290);
             this.e_comboBox_skill.Name = "e_comboBox_skill";
             this.e_comboBox_skill.Items.AddRange(skills);
-            this.e_comboBox_skill.Text = "NONE";
+            this.e_comboBox_skill.Text = enemy.skill;
             this.e_comboBox_skill.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.e_comboBox_skill.TabIndex = 17;
             e_comboBox_skill.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
-            e_comboBox_skill.Enabled = false;
             // 
             // e_label_skill
             // 
@@ -1729,7 +1601,6 @@ namespace SOC.UI
             this.e_label_skill.Size = new System.Drawing.Size(29, 13);
             this.e_label_skill.TabIndex = 16;
             this.e_label_skill.Text = "Skill:";
-            e_label_skill.Enabled = false;
             // 
             // e_comboBox_staff
             // 
@@ -1741,10 +1612,9 @@ namespace SOC.UI
             this.e_comboBox_staff.Name = "e_comboBox_staff";
             this.e_comboBox_staff.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.e_comboBox_staff.Items.AddRange(Staff_Type_ID);
-            this.e_comboBox_staff.Text = "NONE";
+            this.e_comboBox_staff.Text = enemy.staffType;
             this.e_comboBox_staff.TabIndex = 15;
             e_comboBox_staff.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
-            e_comboBox_staff.Enabled = false;
             // 
             // e_label_staff
             // 
@@ -1754,7 +1624,6 @@ namespace SOC.UI
             this.e_label_staff.Size = new System.Drawing.Size(59, 13);
             this.e_label_staff.TabIndex = 14;
             this.e_label_staff.Text = "Staff Type:";
-            e_label_staff.Enabled = false;
             // 
             // e_comboBox_body
             // 
@@ -1766,8 +1635,18 @@ namespace SOC.UI
             this.e_comboBox_body.Name = "e_comboBox_body";
             this.e_comboBox_body.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.e_comboBox_body.TabIndex = 13;
+
+            if (region.Equals("afgh"))
+                e_comboBox_body.Items.AddRange(BodyInfo.afghBodies);
+            else if (region.Equals("mafr"))
+                e_comboBox_body.Items.AddRange(BodyInfo.mafrBodies);
+
+            if (!e_comboBox_body.Items.Contains(enemy.body))
+                e_comboBox_body.SelectedIndex = 0;
+            else
+                this.e_comboBox_body.Text = enemy.body;
+
             e_comboBox_body.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
-            e_comboBox_body.Enabled = false;
             // 
             // e_comboBox_cautionroute
             // 
@@ -1779,7 +1658,14 @@ namespace SOC.UI
             this.e_comboBox_cautionroute.Name = "e_comboBox_cautionroute";
             this.e_comboBox_cautionroute.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.e_comboBox_cautionroute.TabIndex = 12;
-            e_comboBox_cautionroute.Enabled = false;
+
+            e_comboBox_cautionroute.Items.AddRange(enemyCP.CProutes);
+
+            if (!e_comboBox_cautionroute.Items.Contains(enemy.cRoute))
+                e_comboBox_cautionroute.SelectedIndex = 0;
+            else
+                e_comboBox_cautionroute.Text = enemy.cRoute;
+            
             e_comboBox_cautionroute.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
             // 
             // e_label_cautionroute
@@ -1790,7 +1676,6 @@ namespace SOC.UI
             this.e_label_cautionroute.Size = new System.Drawing.Size(78, 13);
             this.e_label_cautionroute.TabIndex = 11;
             this.e_label_cautionroute.Text = "Caution Route:";
-            e_label_cautionroute.Enabled = false;
             // 
             // e_comboBox_sneakroute
             // 
@@ -1802,7 +1687,14 @@ namespace SOC.UI
             this.e_comboBox_sneakroute.Name = "e_comboBox_sneakroute";
             this.e_comboBox_sneakroute.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.e_comboBox_sneakroute.TabIndex = 10;
-            e_comboBox_sneakroute.Enabled = false;
+
+            e_comboBox_sneakroute.Items.AddRange(enemyCP.CProutes);
+
+            if (!e_comboBox_sneakroute.Items.Contains(enemy.dRoute))
+                e_comboBox_sneakroute.SelectedIndex = 0;
+            else
+                e_comboBox_sneakroute.Text = enemy.dRoute;
+
             e_comboBox_sneakroute.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
             // 
             // e_label_sneakroute
@@ -1813,7 +1705,6 @@ namespace SOC.UI
             this.e_label_sneakroute.Size = new System.Drawing.Size(73, 13);
             this.e_label_sneakroute.TabIndex = 9;
             this.e_label_sneakroute.Text = "Sneak Route:";
-            e_label_sneakroute.Enabled = false;
             // 
             // e_label_body
             // 
@@ -1823,28 +1714,6 @@ namespace SOC.UI
             this.e_label_body.Size = new System.Drawing.Size(34, 13);
             this.e_label_body.TabIndex = 8;
             this.e_label_body.Text = "Body:";
-            e_label_body.Enabled = false;
-            // 
-            // e_checkBox_armor
-            // 
-            this.e_checkBox_armor.AutoSize = true;
-            this.e_checkBox_armor.Location = new System.Drawing.Point(99, 210);
-            this.e_checkBox_armor.Name = "e_checkBox_armor";
-            this.e_checkBox_armor.Size = new System.Drawing.Size(15, 14);
-            this.e_checkBox_armor.TabIndex = 3;
-            this.e_checkBox_armor.UseVisualStyleBackColor = true;
-            this.e_checkBox_armor.Click += new EventHandler(this.armor_Checkbox_Clicked);
-            e_checkBox_armor.Enabled = false;
-            // 
-            // e_label_armor
-            // 
-            this.e_label_armor.AutoSize = true;
-            this.e_label_armor.Location = new System.Drawing.Point(14, 210);
-            this.e_label_armor.Name = "e_label_armor";
-            this.e_label_armor.Size = new System.Drawing.Size(71, 13);
-            this.e_label_armor.TabIndex = 2;
-            this.e_label_armor.Text = "Heavy Armor:";
-            e_label_armor.Enabled = false;
             // 
             // e_checkBox_target
             // 
@@ -1854,7 +1723,7 @@ namespace SOC.UI
             this.e_checkBox_target.Size = new System.Drawing.Size(15, 14);
             this.e_checkBox_target.TabIndex = 5;
             this.e_checkBox_target.UseVisualStyleBackColor = true;
-            e_checkBox_target.Enabled = false;
+            e_checkBox_target.Checked = enemy.isTarget;
             // 
             // e_label_target
             // 
@@ -1864,26 +1733,6 @@ namespace SOC.UI
             this.e_label_target.Size = new System.Drawing.Size(52, 13);
             this.e_label_target.TabIndex = 4;
             this.e_label_target.Text = "Is Target:";
-            e_label_target.Enabled = false;
-            // 
-            // e_checkBox_spawn
-            // 
-            this.e_checkBox_spawn.AutoSize = true;
-            this.e_checkBox_spawn.Location = new System.Drawing.Point(99, 21);
-            this.e_checkBox_spawn.Name = "e_checkBox_spawn";
-            this.e_checkBox_spawn.Size = new System.Drawing.Size(15, 14);
-            this.e_checkBox_spawn.TabIndex = 1;
-            this.e_checkBox_spawn.UseVisualStyleBackColor = true;
-            e_checkBox_spawn.CheckedChanged += new EventHandler(this.e_checkBox_spawn_CheckedChanged);
-            // 
-            // e_label_spawn
-            // 
-            this.e_label_spawn.AutoSize = true;
-            this.e_label_spawn.Location = new System.Drawing.Point(42, 21);
-            this.e_label_spawn.Name = "e_label_spawn";
-            this.e_label_spawn.Size = new System.Drawing.Size(43, 13);
-            this.e_label_spawn.TabIndex = 0;
-            this.e_label_spawn.Text = "Spawn:";
             // 
             // e_checkBox_Balaclava
             // 
@@ -1893,7 +1742,7 @@ namespace SOC.UI
             this.e_checkBox_balaclava.Size = new System.Drawing.Size(15, 14);
             this.e_checkBox_balaclava.TabIndex = 5;
             this.e_checkBox_balaclava.UseVisualStyleBackColor = true;
-            e_checkBox_balaclava.Enabled = false;
+            e_checkBox_balaclava.Checked = enemy.isBalaclava;
             e_checkBox_balaclava.CheckedChanged += new EventHandler(this.balaclava_checkbox_clicked);
             // 
             // e_label_Balaclava
@@ -1904,7 +1753,6 @@ namespace SOC.UI
             this.e_label_balaclava.Size = new System.Drawing.Size(52, 13);
             this.e_label_balaclava.TabIndex = 4;
             this.e_label_balaclava.Text = "Balaclava:";
-            e_label_balaclava.Enabled = false;
             // 
             // e_checkBox_zombie
             // 
@@ -1914,7 +1762,7 @@ namespace SOC.UI
             this.e_checkBox_zombie.Size = new System.Drawing.Size(15, 14);
             this.e_checkBox_zombie.TabIndex = 1;
             this.e_checkBox_zombie.UseVisualStyleBackColor = true;
-            e_checkBox_zombie.Enabled = false;
+            e_checkBox_zombie.Checked = enemy.isZombie;
             e_checkBox_zombie.CheckedChanged += new EventHandler(this.zombie_checkbox_clicked);
             // 
             // e_label_zombie
@@ -1925,9 +1773,51 @@ namespace SOC.UI
             this.e_label_zombie.Size = new System.Drawing.Size(43, 13);
             this.e_label_zombie.TabIndex = 0;
             this.e_label_zombie.Text = "Is Zombie:";
-            e_label_zombie.Enabled = false;
             this.e_groupBox_main.ResumeLayout(false);
             this.e_groupBox_main.PerformLayout();
+            // 
+            // e_checkBox_armor
+            // 
+            this.e_checkBox_armor.AutoSize = true;
+            this.e_checkBox_armor.Location = new System.Drawing.Point(99, 210);
+            this.e_checkBox_armor.Name = "e_checkBox_armor";
+            this.e_checkBox_armor.Size = new System.Drawing.Size(15, 14);
+            this.e_checkBox_armor.TabIndex = 3;
+            this.e_checkBox_armor.UseVisualStyleBackColor = true;
+            this.e_checkBox_armor.Click += new EventHandler(this.armor_Checkbox_Clicked);
+            e_checkBox_armor.Checked = enemy.isArmored;
+            // 
+            // e_label_armor
+            // 
+            this.e_label_armor.AutoSize = true;
+            this.e_label_armor.Location = new System.Drawing.Point(14, 210);
+            this.e_label_armor.Name = "e_label_armor";
+            this.e_label_armor.Size = new System.Drawing.Size(71, 13);
+            this.e_label_armor.TabIndex = 2;
+            this.e_label_armor.Text = "Heavy Armor:";
+            // 
+            // e_checkBox_spawn
+            // 
+            this.e_checkBox_spawn.AutoSize = true;
+            this.e_checkBox_spawn.Location = new System.Drawing.Point(99, 21);
+            this.e_checkBox_spawn.Name = "e_checkBox_spawn";
+            this.e_checkBox_spawn.Size = new System.Drawing.Size(15, 14);
+            this.e_checkBox_spawn.TabIndex = 1;
+            this.e_checkBox_spawn.UseVisualStyleBackColor = true;
+            e_checkBox_spawn.CheckedChanged += new EventHandler(this.e_checkBox_spawn_CheckedChanged);
+            e_checkBox_spawn.Checked = enemy.isSpawn;
+            // 
+            // e_label_spawn
+            // 
+            this.e_label_spawn.AutoSize = true;
+            this.e_label_spawn.Location = new System.Drawing.Point(42, 21);
+            this.e_label_spawn.Name = "e_label_spawn";
+            this.e_label_spawn.Size = new System.Drawing.Size(43, 13);
+            this.e_label_spawn.TabIndex = 0;
+            this.e_label_spawn.Text = "Spawn:";
+
+            UpdateSpawn();
+
         }
 
         private void e_groupBox_main_Disposed(object sender, EventArgs e)
@@ -1941,6 +1831,11 @@ namespace SOC.UI
         }
 
         private void e_checkBox_spawn_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateSpawn();
+        }
+
+        private void UpdateSpawn()
         {
             if (e_checkBox_spawn.Checked)
             {
@@ -1965,7 +1860,13 @@ namespace SOC.UI
                 e_checkBox_balaclava.Enabled = true;
                 e_label_zombie.Enabled = true;
                 e_checkBox_zombie.Enabled = true;
-            } else
+                e_button_removepower.Enabled = true;
+
+                if (e_checkBox_balaclava.Checked) { updateBalaclava(); }
+                if (e_checkBox_zombie.Checked) { updateZombie(); }
+                if (e_checkBox_armor.Checked) { updateArmor(); }
+            }
+            else
             {
                 e_label_skill.Enabled = false;
                 e_label_sneakroute.Enabled = false;
@@ -1988,6 +1889,7 @@ namespace SOC.UI
                 e_checkBox_balaclava.Enabled = false;
                 e_label_zombie.Enabled = false;
                 e_checkBox_zombie.Enabled = false;
+                e_button_removepower.Enabled = false;
             }
         }
 
@@ -2020,8 +1922,11 @@ namespace SOC.UI
                 else
                 {
                     QuestComponents.EnemyInfo.armorCount++;
-                    e_listBox_power.Items.Add("QUEST_ARMOR");
-                    e_listBox_power.SelectedIndex = e_listBox_power.Items.Count - 1;
+                    if (!e_listBox_power.Items.Contains("QUEST_ARMOR"))
+                    {
+                        e_listBox_power.Items.Add("QUEST_ARMOR");
+                        e_listBox_power.SelectedIndex = e_listBox_power.Items.Count - 1;
+                    }
                     e_comboBox_body.Enabled = false;
                     e_checkBox_balaclava.Enabled = false;
                     e_label_body.Enabled = false;
@@ -2050,6 +1955,7 @@ namespace SOC.UI
                 QuestComponents.EnemyInfo.zombieCount--;
             e_groupBox_main.Focus();
         }
+
         private void updateBalaclava()
         {
             if (e_checkBox_balaclava.Checked)
@@ -2088,7 +1994,7 @@ namespace SOC.UI
             return e_groupBox_main;
         }
 
-        public override void SetObject(QuestObject detail)
+        public override void SetObject(QuestBox detail)
         {
             EnemyBox enemyDetail = (EnemyBox)detail;
 

@@ -1,5 +1,6 @@
 ﻿using SOC.QuestComponents;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using static SOC.QuestComponents.GameObjectInfo;
 
 namespace SOC.Classes
@@ -19,16 +20,21 @@ namespace SOC.Classes
         private static bool interrogateForHostages = false;
         private static string enemySubType = "SOVIET_A";
 
-        private static QuestEntities qEntities = new QuestEntities(questEnemies, cpEnemies, hostages, vehicles, animals, items, activeItems, models, hostageBodyIndex, interrogateForHostages, enemySubType);
+        public static void check()
+        {
+            MessageBox.Show(questEnemies.Count + "");
+        }
 
         public static QuestEntities GetQuestEntities()
         {
-            return qEntities;
+            return new QuestEntities(questEnemies, cpEnemies, hostages, vehicles, animals, items, activeItems, models, hostageBodyIndex, interrogateForHostages, enemySubType); ;
         }
 
         public static void setQuestEntities(QuestEntities q)
         {
-            qEntities = q;
+            questEnemies = q.questEnemies; cpEnemies = q.cpEnemies;
+            hostages = q.hostages; vehicles = q.vehicles; animals = q.animals; items = q.items; activeItems = q.activeItems; models = q.models;
+            hostageBodyIndex = q.hostageBodyIndex; interrogateForHostages = q.canInter; enemySubType = q.soldierSubType;
         }
 
         public static void ClearEntities()
@@ -39,7 +45,7 @@ namespace SOC.Classes
             enemySubType = "SOVIET_A";
         }
 
-        public static void RecountEntities(CP enemyCP, List<Coordinates> hostageCoords, List<Coordinates> vehicleCoords, List<Coordinates> animalCoords, List<Coordinates> itemCoords, List<Coordinates> activeitemCoords, List<Coordinates> modelCoords)
+        public static void InitializeEntities(CP enemyCP, List<Coordinates> hostageCoords, List<Coordinates> vehicleCoords, List<Coordinates> animalCoords, List<Coordinates> itemCoords, List<Coordinates> activeitemCoords, List<Coordinates> modelCoords)
         {
             int newEntityCount, oldEntityCount;
 
@@ -51,8 +57,6 @@ namespace SOC.Classes
             if (enemyCP.CProutes.Length > 0)
                 for (int i = oldEntityCount; i < newEntityCount; i++)
                     questEnemies.Add(new Enemy(i, "sol_quest_000" + i));
-            else
-                questEnemies.Clear();
 
             //
             // add/remove cp-specific enemies

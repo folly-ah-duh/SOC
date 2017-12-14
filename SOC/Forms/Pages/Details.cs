@@ -9,14 +9,14 @@ namespace SOC.UI
     public partial class Details : UserControl
     {
         List<GroupBox> detailLists;
-        List<QuestObject> questEnemyBoxes;
-        List<QuestObject> CPEnemyBoxes;
-        List<QuestObject> hostageBoxes;
-        List<QuestObject> vehicleBoxes;
-        List<QuestObject> itemBoxes;
-        List<QuestObject> modelBoxes;
-        List<QuestObject> activeItemBoxes;
-        List<QuestObject> animalBoxes;
+        List<QuestBox> questEnemyBoxes;
+        List<QuestBox> CPEnemyBoxes;
+        List<QuestBox> hostageBoxes;
+        List<QuestBox> vehicleBoxes;
+        List<QuestBox> itemBoxes;
+        List<QuestBox> modelBoxes;
+        List<QuestBox> activeItemBoxes;
+        List<QuestBox> animalBoxes;
         int dynamicPanelWidth = 0;
         public QuestEntities questDetails;
         
@@ -28,14 +28,14 @@ namespace SOC.UI
             InitializeComponent();
             DoubleBuffered = true;
             detailLists = new List<GroupBox>();
-            questEnemyBoxes = new List<QuestObject>();
-            CPEnemyBoxes = new List<QuestObject>();
-            hostageBoxes = new List<QuestObject>();
-            vehicleBoxes = new List<QuestObject>();
-            itemBoxes = new List<QuestObject>();
-            modelBoxes = new List<QuestObject>();
-            activeItemBoxes = new List<QuestObject>();
-            animalBoxes = new List<QuestObject>();
+            questEnemyBoxes = new List<QuestBox>();
+            CPEnemyBoxes = new List<QuestBox>();
+            hostageBoxes = new List<QuestBox>();
+            vehicleBoxes = new List<QuestBox>();
+            itemBoxes = new List<QuestBox>();
+            modelBoxes = new List<QuestBox>();
+            activeItemBoxes = new List<QuestBox>();
+            animalBoxes = new List<QuestBox>();
 
             foreach (BodyInfoEntry infoEntry in BodyInfo.BodyInfoArray)
             {
@@ -44,55 +44,21 @@ namespace SOC.UI
             comboBox_Body.Text = "AFGH_HOSTAGE";
         }
 
-        public void RefreshOrAddDetail(QuestObject newDetail, List<QuestObject> details, Panel panel)
-        {
-            int detailIndex = newDetail.getIndex();
-            newDetail.BuildObject(panel.Width);
-
-            if (detailIndex < details.Count)
-            {
-                QuestObject oldDetail = details[detailIndex];
-                newDetail.SetObject(oldDetail);
-                panel.Controls.Remove(oldDetail.getGroupBoxMain());
-                details[detailIndex] = newDetail;
-            }
-            else
-            {
-                details.Add(newDetail);
-            }
-            panel.Controls.Add(details[detailIndex].getGroupBoxMain());
-        }
-
-        public void RemoveExtraDetails(List<QuestObject> details, int remainder, Panel panel)
-        {
-            for (int i = details.Count - 1; i > -1; i--)
-            {
-                if (i <= remainder - 1)
-                    continue;
-                {
-                    GroupBox detailGroupBox = details[i].getGroupBoxMain();
-                    panel.Controls.Remove(detailGroupBox);
-                    details.RemoveAt(i);
-                    detailGroupBox.Dispose();
-                }
-            }
-        }
-
         internal void refreshCoordinateBoxes(Setup setupPage)
         {
-            Tuple<List<QuestObject>, TextBox>[] detailTuples =
+            Tuple<List<QuestBox>, TextBox>[] detailTuples =
             {
-                new Tuple<List<QuestObject>, TextBox>(hostageBoxes, setupPage.textBoxHosCoords),
-                new Tuple<List<QuestObject>, TextBox>(vehicleBoxes, setupPage.textBoxVehCoords),
-                new Tuple<List<QuestObject>, TextBox>(animalBoxes, setupPage.textBoxAnimalCoords),
-                new Tuple<List<QuestObject>, TextBox>(itemBoxes, setupPage.textBoxItemCoords),
-                new Tuple<List<QuestObject>, TextBox>(activeItemBoxes, setupPage.textBoxActiveItemCoords),
-                new Tuple<List<QuestObject>, TextBox>(modelBoxes, setupPage.textBoxStMdCoords),
+                new Tuple<List<QuestBox>, TextBox>(hostageBoxes, setupPage.textBoxHosCoords),
+                new Tuple<List<QuestBox>, TextBox>(vehicleBoxes, setupPage.textBoxVehCoords),
+                new Tuple<List<QuestBox>, TextBox>(animalBoxes, setupPage.textBoxAnimalCoords),
+                new Tuple<List<QuestBox>, TextBox>(itemBoxes, setupPage.textBoxItemCoords),
+                new Tuple<List<QuestBox>, TextBox>(activeItemBoxes, setupPage.textBoxActiveItemCoords),
+                new Tuple<List<QuestBox>, TextBox>(modelBoxes, setupPage.textBoxStMdCoords),
             };
-            foreach (Tuple<List<QuestObject>, TextBox> tuple in detailTuples)
+            foreach (Tuple<List<QuestBox>, TextBox> tuple in detailTuples)
             {
                 string updatedTest = "";
-                foreach (QuestObject detail in tuple.Item1)
+                foreach (QuestBox detail in tuple.Item1)
                 {
                     Coordinates detailCoords = detail.getCoords();
                     updatedTest += string.Format("{{pos={{{0},{1},{2}}},rotY={3},}}, ", detailCoords.xCoord, detailCoords.yCoord, detailCoords.zCoord, detailCoords.roty);
@@ -101,164 +67,150 @@ namespace SOC.UI
             }
         }
 
-        public void RefreshDetails(CP questCP, List<Coordinates> HostageCoords, List<Coordinates> VehicleCoords, List<Coordinates> ItemCoords, List<Coordinates> ModelCoords, List<Coordinates> ActItemsCoords, List<Coordinates> AnimalCoords)
+        internal void clearPanel(Panel panel, List<QuestBox> objectlist)
+        {
+            foreach (QuestBox qbox in objectlist)
+            {
+                panel.Controls.Remove(qbox.getGroupBoxMain());
+            }
+        }
+
+        public void ResetAllPanels()
+        {
+            clearPanel(panelQuestEnemyDet, questEnemyBoxes);
+            clearPanel(panelCPEnemyDet, CPEnemyBoxes);
+            clearPanel(panelHosDet, hostageBoxes);
+            clearPanel(panelVehDet, vehicleBoxes);
+            clearPanel(panelAnimalDet, animalBoxes);
+            clearPanel(panelItemDet, itemBoxes);
+            clearPanel(panelAcItDet, activeItemBoxes);
+            clearPanel(panelStMdDet, modelBoxes);
+            questEnemyBoxes = new List<QuestBox>();
+            CPEnemyBoxes = new List<QuestBox>();
+            hostageBoxes = new List<QuestBox>();
+            vehicleBoxes = new List<QuestBox>();
+            itemBoxes = new List<QuestBox>();
+            modelBoxes = new List<QuestBox>();
+            activeItemBoxes = new List<QuestBox>();
+            animalBoxes = new List<QuestBox>();
+            EnemyInfo.armorCount = 0;
+            EnemyInfo.balaCount = 0;
+            EnemyInfo.zombieCount = 0;
+        }
+
+        public void LoadEntityLists(CP enemyCP, QuestEntities questDetails)
         {
             ShiftVisibilities(true);
-            string currentRegion = EnemyInfo.getRegion(questCP);
+            string currentRegion = enemyCP.CPname.Substring(0,4);
 
             if (!currentRegion.Equals("mtbs"))
             {
-                string[] enemyBodies = new string[0];
-                bool islastRegion = true;
+                string[] subtypes = new string[0];
+                comboBox_subtype.Items.Clear();
+                comboBox_subtype2.Items.Clear();
+                if (currentRegion.Equals("afgh"))
+                    subtypes = BodyInfo.afghSubTypes;
+                else
+                    subtypes = BodyInfo.mafrSubTypes;
+                comboBox_subtype.Items.AddRange(subtypes);
+                comboBox_subtype2.Items.AddRange(subtypes);
 
-                if (!lastRegion.Equals(currentRegion))
-                {
-                    islastRegion = false;
-                    comboBox_subtype.Items.Clear();
-                    comboBox_subtype2.Items.Clear();
-                    if (currentRegion.Equals("afgh"))
-                    {
-                        comboBox_subtype.Items.AddRange(BodyInfo.afghSubTypes);
-                        comboBox_subtype2.Items.AddRange(BodyInfo.afghSubTypes);
-                        enemyBodies = BodyInfo.afghBodies;
-                    }
-                    else
-                    {
-                        comboBox_subtype.Items.AddRange(BodyInfo.mafrSubTypes);
-                        comboBox_subtype2.Items.AddRange(BodyInfo.mafrSubTypes);
-                        enemyBodies = BodyInfo.mafrBodies;
-                    }
+                if (comboBox_subtype.Items.Contains(questDetails.soldierSubType))
+                    comboBox_subtype.Text = questDetails.soldierSubType;
+                else
                     comboBox_subtype.SelectedIndex = 0;
-                }
-                else if (lastCP.Equals("NONE"))
+                
+                
+                //
+                // Quest-Specific Soldiers
+                //
+                Panel currentPanel = panelQuestEnemyDet;
+                foreach (Enemy questEnemy in questDetails.questEnemies)
                 {
-                    islastRegion = false;
-                    if (currentRegion.Equals("afgh"))
-                        enemyBodies = BodyInfo.afghBodies;
-                    else
-                        enemyBodies = BodyInfo.mafrBodies;
+                    EnemyBox questEnemyBox = new EnemyBox(questEnemy, enemyCP);
+                    questEnemyBox.BuildObject(currentPanel.Width);
+                    currentPanel.Controls.Add(questEnemyBox.getGroupBoxMain());
+                    questEnemyBoxes.Add(questEnemyBox);
                 }
-                lastRegion = currentRegion;
-
-
-                bool isLastCP = false;
-                if (lastCP.Equals(questCP.CPname))
+                //
+                // CP-Specific soldiers
+                //
+                currentPanel = panelCPEnemyDet;
+                foreach (Enemy cpEnemy in questDetails.cpEnemies)
                 {
-                    isLastCP = true;
+                    EnemyBox cpEnemyBox = new EnemyBox(cpEnemy, enemyCP);
+                    cpEnemyBox.BuildObject(currentPanel.Width);
+                    cpEnemyBox.e_label_spawn.Text = "Customize:"; cpEnemyBox.e_label_spawn.Left = 26;
+                    currentPanel.Controls.Add(cpEnemyBox.getGroupBoxMain());
+                    CPEnemyBoxes.Add(cpEnemyBox);
                 }
-                lastCP = questCP.CPname;
-
-                panelQuestEnemyDet.AutoScroll = false;
-                panelCPEnemyDet.AutoScroll = false;
-                for (int i = 0; i < EnemyInfo.MAXQUESTFOVA; i++)
+                //
+                // Hostages
+                //
+                currentPanel = panelHosDet;
+                foreach (Hostage hostage in questDetails.hostages)
                 {
-                    EnemyBox enemyDetail = new EnemyBox(i);
-                    RefreshOrAddDetail(enemyDetail, questEnemyBoxes, panelQuestEnemyDet);
-                    if (!isLastCP)
-                    {
-                        enemyDetail.e_comboBox_sneakroute.Items.Clear();
-                        enemyDetail.e_comboBox_cautionroute.Items.Clear();
-
-                        if (questCP.CProutes.Length > 0)
-                        {
-                            enemyDetail.e_comboBox_sneakroute.Items.AddRange(questCP.CProutes);
-                            enemyDetail.e_comboBox_cautionroute.Items.AddRange(questCP.CProutes);
-                            enemyDetail.e_comboBox_sneakroute.SelectedIndex = 0;
-                            enemyDetail.e_comboBox_cautionroute.SelectedIndex = 0;
-                        }
-                    }
-                    if (!islastRegion)
-                    {
-                        enemyDetail.e_comboBox_body.Items.Clear();
-                        enemyDetail.e_comboBox_body.Items.AddRange(enemyBodies);
-                        enemyDetail.e_comboBox_body.SelectedIndex = 0;
-                    }
-
+                    HostageBox hostageBox = new HostageBox(hostage);
+                    hostageBox.BuildObject(currentPanel.Width);
+                    currentPanel.Controls.Add(hostageBox.getGroupBoxMain());
+                    hostageBoxes.Add(hostageBox);
                 }
-                RemoveExtraDetails(questEnemyBoxes, EnemyInfo.MAXQUESTFOVA, panelQuestEnemyDet);
-
-                for (int i = 0; i < questCP.CPsoldiers.Length; i++)
+                //
+                // Heavy Vehicles
+                //
+                currentPanel = panelVehDet;
+                foreach (Vehicle vehicle in questDetails.vehicles)
                 {
-                    EnemyBox enemyDetail = new EnemyBox(i);
-                    RefreshOrAddDetail(enemyDetail, CPEnemyBoxes, panelCPEnemyDet);
-                    enemyDetail.e_groupBox_main.Text = questCP.CPsoldiers[i];
-                    enemyDetail.e_label_spawn.Text = "Customize:"; enemyDetail.e_label_spawn.Left = 26;
-                    if (!isLastCP)
-                    {
-                        enemyDetail.e_comboBox_cautionroute.Items.Clear();
-                        enemyDetail.e_comboBox_sneakroute.Items.Clear();
-                        enemyDetail.e_comboBox_cautionroute.Items.AddRange(questCP.CProutes);
-                        enemyDetail.e_comboBox_sneakroute.Items.AddRange(questCP.CProutes);
-                        enemyDetail.e_comboBox_cautionroute.SelectedIndex = 0;
-                        enemyDetail.e_comboBox_sneakroute.SelectedIndex = 0;
-                    }
-                    if (!islastRegion)
-                    {
-                        enemyDetail.e_comboBox_body.Items.Clear();
-                        enemyDetail.e_comboBox_body.Items.AddRange(enemyBodies);
-                        enemyDetail.e_comboBox_body.SelectedIndex = 0;
-                    }
+                    VehicleBox vehiclebox = new VehicleBox(vehicle);
+                    vehiclebox.BuildObject(currentPanel.Width);
+                    currentPanel.Controls.Add(vehiclebox.getGroupBoxMain());
+                    vehicleBoxes.Add(vehiclebox);
                 }
-                RemoveExtraDetails(CPEnemyBoxes, questCP.CPsoldiers.Length, panelCPEnemyDet);
-
-                panelQuestEnemyDet.AutoScroll = true;
-                panelCPEnemyDet.AutoScroll = true;
-            }
-            else
-            {
-                RemoveExtraDetails(questEnemyBoxes, 0, panelQuestEnemyDet);
-                RemoveExtraDetails(CPEnemyBoxes, 0, panelCPEnemyDet);
-            }
-
-            Tuple<List<QuestObject>, List<Coordinates>, Panel>[] detailTuples =
-            {
-                new Tuple<List<QuestObject>, List<Coordinates>, Panel>(hostageBoxes, HostageCoords, panelHosDet),
-                new Tuple<List<QuestObject>, List<Coordinates>, Panel>(vehicleBoxes, VehicleCoords, panelVehDet),
-                new Tuple<List<QuestObject>, List<Coordinates>, Panel>(animalBoxes, AnimalCoords, panelAnimalDet),
-                new Tuple<List<QuestObject>, List<Coordinates>, Panel>(itemBoxes, ItemCoords, panelItemDet),
-                new Tuple<List<QuestObject>, List<Coordinates>, Panel>(activeItemBoxes, ActItemsCoords, panelAcItDet),
-                new Tuple<List<QuestObject>, List<Coordinates>, Panel>(modelBoxes, ModelCoords, panelStMdDet),
-            };
-            Tuple<List<QuestObject>, List<Coordinates>, Panel> detailTuple;
-
-            for (int i = 0; i < detailTuples.Length; i++)
-            {
-                detailTuple = detailTuples[i];
-                detailTuple.Item3.AutoScroll = false;
-                switch (i)
+                //
+                // Animal Clusters
+                //
+                currentPanel = panelAnimalDet;
+                foreach (Animal animal in questDetails.animals)
                 {
-                    case 0: // hostages
-                        for (int j = 0; j < detailTuple.Item2.Count; j++)
-                            RefreshOrAddDetail(new HostageBox(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
-                        RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
-                        break;
-                    case 1: // vehicles
-                        for (int j = 0; j < detailTuple.Item2.Count; j++)
-                            RefreshOrAddDetail(new VehicleBox(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
-                        RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
-                        break;
-                    case 2: // animals
-                        for (int j = 0; j < detailTuple.Item2.Count; j++)
-                            RefreshOrAddDetail(new AnimalBox(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
-                        RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
-                        break;
-                    case 3: // items
-                        for (int j = 0; j < detailTuple.Item2.Count; j++)
-                            RefreshOrAddDetail(new ItemBox(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
-                        RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
-                        break;
-                    case 4: // active items
-                        for (int j = 0; j < detailTuple.Item2.Count; j++)
-                            RefreshOrAddDetail(new ActiveItemBox(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
-                        RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
-                        break;
-                    case 5: // models
-                        for (int j = 0; j < detailTuple.Item2.Count; j++)
-                            RefreshOrAddDetail(new ModelBox(detailTuple.Item2[j], j), detailTuple.Item1, detailTuple.Item3);
-                        RemoveExtraDetails(detailTuple.Item1, detailTuple.Item2.Count, detailTuple.Item3);
-                        break;
+                    AnimalBox anibox = new AnimalBox(animal);
+                    anibox.BuildObject(currentPanel.Width);
+                    currentPanel.Controls.Add(anibox.getGroupBoxMain());
+                    animalBoxes.Add(anibox);
                 }
-                detailTuple.Item3.AutoScroll = true;
+                //
+                // Dormant Items
+                //
+                currentPanel = panelItemDet;
+                foreach (Item item in questDetails.items)
+                {
+                    ItemBox itemBox = new ItemBox(item);
+                    itemBox.BuildObject(currentPanel.Width);
+                    currentPanel.Controls.Add(itemBox.getGroupBoxMain());
+                    itemBoxes.Add(itemBox);
+                }
+                //
+                // Active Items
+                //
+                currentPanel = panelAcItDet;
+                foreach (ActiveItem acitem in questDetails.activeItems)
+                {
+                    ActiveItemBox activeItemBox = new ActiveItemBox(acitem);
+                    activeItemBox.BuildObject(currentPanel.Width);
+                    currentPanel.Controls.Add(activeItemBox.getGroupBoxMain());
+                    activeItemBoxes.Add(activeItemBox);
+                }
+                //
+                // Models
+                //
+                currentPanel = panelStMdDet;
+                foreach (Model model in questDetails.models)
+                {
+                    ModelBox modelBox = new ModelBox(model);
+                    modelBox.BuildObject(currentPanel.Width);
+                    currentPanel.Controls.Add(modelBox.getGroupBoxMain());
+                    modelBoxes.Add(modelBox);
+                }
+
             }
 
             RefreshHostageLanguage();
@@ -269,18 +221,18 @@ namespace SOC.UI
         internal void ShiftVisibilities(bool hideAll)
         {
             detailLists = new List<GroupBox>();
-            Tuple<List<QuestObject>, GroupBox>[] detailTuples =
+            Tuple<List<QuestBox>, GroupBox>[] detailTuples =
             {
-                new Tuple<List<QuestObject>, GroupBox>(questEnemyBoxes, groupNewEneDet),
-                new Tuple<List<QuestObject>, GroupBox>(CPEnemyBoxes, groupExistingEneDet),
-                new Tuple<List<QuestObject>, GroupBox>(hostageBoxes, groupHosDet),
-                new Tuple<List<QuestObject>, GroupBox>(vehicleBoxes, groupVehDet),
-                new Tuple<List<QuestObject>, GroupBox>(animalBoxes, groupAnimalDet),
-                new Tuple<List<QuestObject>, GroupBox>(itemBoxes, groupItemDet),
-                new Tuple<List<QuestObject>, GroupBox>(activeItemBoxes, groupActiveItemDet),
-                new Tuple<List<QuestObject>, GroupBox>(modelBoxes, groupStMdDet),
+                new Tuple<List<QuestBox>, GroupBox>(questEnemyBoxes, groupNewEneDet),
+                new Tuple<List<QuestBox>, GroupBox>(CPEnemyBoxes, groupExistingEneDet),
+                new Tuple<List<QuestBox>, GroupBox>(hostageBoxes, groupHosDet),
+                new Tuple<List<QuestBox>, GroupBox>(vehicleBoxes, groupVehDet),
+                new Tuple<List<QuestBox>, GroupBox>(animalBoxes, groupAnimalDet),
+                new Tuple<List<QuestBox>, GroupBox>(itemBoxes, groupItemDet),
+                new Tuple<List<QuestBox>, GroupBox>(activeItemBoxes, groupActiveItemDet),
+                new Tuple<List<QuestBox>, GroupBox>(modelBoxes, groupStMdDet),
             };
-            foreach (Tuple<List<QuestObject>, GroupBox> tuple in detailTuples)
+            foreach (Tuple<List<QuestBox>, GroupBox> tuple in detailTuples)
             {
                 if (tuple.Item1.Count > 0 && !hideAll)
                 {
@@ -317,7 +269,7 @@ namespace SOC.UI
             }
         }
 
-        public QuestEntities GetChanges()
+        public QuestEntities GetNewEntityLists()
         {
 
             List<Enemy> qenemies = new List<Enemy>();
@@ -339,7 +291,7 @@ namespace SOC.UI
             {
                 string[] powerlist = new string[d.e_listBox_power.Items.Count];
                 d.e_listBox_power.Items.CopyTo(powerlist, 0);
-                cpenemies.Add(new Enemy(d.e_checkBox_spawn.Checked, d.e_checkBox_target.Checked, d.e_checkBox_balaclava.Checked, d.e_checkBox_zombie.Checked, d.e_checkBox_armor.Checked, questEnemyBoxes.IndexOf(d), d.e_groupBox_main.Text, d.e_comboBox_body.Text, d.e_comboBox_cautionroute.Text, d.e_comboBox_sneakroute.Text, d.e_comboBox_skill.Text, d.e_comboBox_staff.Text, powerlist));
+                cpenemies.Add(new Enemy(d.e_checkBox_spawn.Checked, d.e_checkBox_target.Checked, d.e_checkBox_balaclava.Checked, d.e_checkBox_zombie.Checked, d.e_checkBox_armor.Checked, CPEnemyBoxes.IndexOf(d), d.e_groupBox_main.Text, d.e_comboBox_body.Text, d.e_comboBox_cautionroute.Text, d.e_comboBox_sneakroute.Text, d.e_comboBox_skill.Text, d.e_comboBox_staff.Text, powerlist));
             }
             foreach (HostageBox d in hostageBoxes)
                 hostages.Add(new Hostage(d.h_checkBox_target.Checked, d.h_checkBox_untied.Checked, d.h_checkBox_injured.Checked, hostageBoxes.IndexOf(d), d.h_groupBox_main.Text, d.h_comboBox_skill.Text, d.h_comboBox_staff.Text, d.h_comboBox_scared.Text, d.h_comboBox_lang.Text, new Coordinates(d.h_textBox_xcoord.Text, d.h_textBox_ycoord.Text, d.h_textBox_zcoord.Text, d.h_textBox_rot.Text)));

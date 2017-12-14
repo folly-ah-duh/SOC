@@ -1,8 +1,5 @@
 ﻿using SOC.Classes;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -60,7 +57,16 @@ namespace SOC.UI
         public void setDefinitionDetails(DefinitionDetails dd)
         {
             textBoxFPKName.Text = dd.FpkName; textBoxQuestNum.Text = dd.QuestNum;
-            locationID = dd.locationID; comboBoxLoadArea.Text = dd.loadArea;
+            locationID = dd.locationID;
+
+            if (locationID == 10)
+                comboBoxRegion.Text = "Afghanistan";
+            else if (locationID == 20)
+                comboBoxRegion.Text = "Central Africa";
+            else
+                comboBoxRegion.Text = "Mother Base";
+
+            comboBoxLoadArea.Text = dd.loadArea;
             textBoxXCoord.Text = dd.coords.xCoord; textBoxYCoord.Text = dd.coords.yCoord; textBoxZCoord.Text = dd.coords.zCoord; comboBoxRadius.Text = dd.radius;
             comboBoxCategory.Text = dd.category; comboBoxReward.Text = dd.reward; comboBoxProgressNotifs.SelectedIndex = dd.progNotif; comboBoxObjective.Text = dd.objectiveType;
             comboBoxCP.Text = dd.CPName; textBoxQuestTitle.Text = dd.QuestTitle; textBoxQuestDesc.Text = dd.QuestDesc;

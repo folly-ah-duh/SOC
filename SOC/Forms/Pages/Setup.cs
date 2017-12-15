@@ -188,7 +188,8 @@ namespace SOC.UI
                     disableRegionInput();
                     break;
             }
-            comboBoxCP.Text = "NONE";
+            comboBoxCP.SelectedIndex = 0;
+            comboBoxLoadArea.SelectedIndex = 0;
 
         }
         private void disableRegionInput()

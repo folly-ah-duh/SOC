@@ -51,7 +51,10 @@ namespace SOC.UI
 
         public DefinitionDetails getDefinitionDetails()
         {
-            return new DefinitionDetails(textBoxFPKName.Text, textBoxQuestNum.Text, locationID, comboBoxLoadArea.Text, new Coordinates(textBoxXCoord.Text, textBoxYCoord.Text, textBoxZCoord.Text), comboBoxRadius.Text, comboBoxCategory.Text, comboBoxReward.Text, comboBoxProgressNotifs.SelectedIndex, comboBoxObjective.Text, comboBoxCP.Text, textBoxQuestTitle.Text, textBoxQuestDesc.Text);
+            return new DefinitionDetails(textBoxFPKName.Text, textBoxQuestNum.Text, locationID, comboBoxLoadArea.Text, 
+                new Coordinates(textBoxXCoord.Text, textBoxYCoord.Text, textBoxZCoord.Text), comboBoxRadius.Text, comboBoxCategory.Text, comboBoxReward.Text, comboBoxProgressNotifs.SelectedIndex, 
+                comboBoxObjective.Text, comboBoxCP.Text, textBoxQuestTitle.Text, textBoxQuestDesc.Text,
+                textBoxHosCoords.Text, textBoxVehCoords.Text, textBoxAnimalCoords.Text, textBoxItemCoords.Text, textBoxActiveItemCoords.Text, textBoxStMdCoords.Text);
         }
 
         public void setDefinitionDetails(DefinitionDetails dd)
@@ -68,8 +71,15 @@ namespace SOC.UI
 
             comboBoxLoadArea.Text = dd.loadArea;
             textBoxXCoord.Text = dd.coords.xCoord; textBoxYCoord.Text = dd.coords.yCoord; textBoxZCoord.Text = dd.coords.zCoord; comboBoxRadius.Text = dd.radius;
-            comboBoxCategory.Text = dd.category; comboBoxReward.Text = dd.reward; comboBoxProgressNotifs.SelectedIndex = dd.progNotif; comboBoxObjective.Text = dd.objectiveType;
+            comboBoxCategory.Text = dd.category; comboBoxReward.Text = dd.reward; comboBoxObjective.Text = dd.objectiveType;
             comboBoxCP.Text = dd.CPName; textBoxQuestTitle.Text = dd.QuestTitle; textBoxQuestDesc.Text = dd.QuestDesc;
+
+            if (comboBoxProgressNotifs.Items.Count <= dd.progNotif)
+                comboBoxProgressNotifs.SelectedIndex = 0;
+            else
+                comboBoxProgressNotifs.SelectedIndex = dd.progNotif;
+
+            textBoxHosCoords.Text = dd.hostageCoordinates; textBoxVehCoords.Text = dd.vehicleCoordinates; textBoxAnimalCoords.Text = dd.animalCoordinates; textBoxItemCoords.Text = dd.itemCoordinates; textBoxActiveItemCoords.Text = dd.activeItemCoordinates; textBoxStMdCoords.Text = dd.modelCoordinates;
         }
 
         public void refreshNotifsList()
@@ -96,6 +106,57 @@ namespace SOC.UI
                 comboBoxProgressNotifs.Items.Clear();
                 comboBoxProgressNotifs.Items.AddRange(UpdateNotifsManager.getDispNotifs());
             }
+        }
+
+        internal void refreshCoordinateBoxes(QuestEntities qe)
+        {
+            string updatedTest = "";
+            foreach (Hostage entity in qe.hostages)
+            {
+                Coordinates detailCoords = entity.coordinates;
+                updatedTest += string.Format("{{pos={{{0},{1},{2}}},rotY={3},}}, ", detailCoords.xCoord, detailCoords.yCoord, detailCoords.zCoord, detailCoords.roty);
+            }
+            textBoxHosCoords.Text = updatedTest;
+
+            updatedTest = "";
+            foreach (Vehicle entity in qe.vehicles)
+            {
+                Coordinates detailCoords = entity.coordinates;
+                updatedTest += string.Format("{{pos={{{0},{1},{2}}},rotY={3},}}, ", detailCoords.xCoord, detailCoords.yCoord, detailCoords.zCoord, detailCoords.roty);
+            }
+            textBoxVehCoords.Text = updatedTest;
+
+            updatedTest = "";
+            foreach (Animal entity in qe.animals)
+            {
+                Coordinates detailCoords = entity.coordinates;
+                updatedTest += string.Format("{{pos={{{0},{1},{2}}},rotY={3},}}, ", detailCoords.xCoord, detailCoords.yCoord, detailCoords.zCoord, detailCoords.roty);
+            }
+            textBoxAnimalCoords.Text = updatedTest;
+
+            updatedTest = "";
+            foreach (Item entity in qe.items)
+            {
+                Coordinates detailCoords = entity.coordinates;
+                updatedTest += string.Format("{{pos={{{0},{1},{2}}},rotY={3},}}, ", detailCoords.xCoord, detailCoords.yCoord, detailCoords.zCoord, detailCoords.roty);
+            }
+            textBoxItemCoords.Text = updatedTest;
+
+            updatedTest = "";
+            foreach (ActiveItem entity in qe.activeItems)
+            {
+                Coordinates detailCoords = entity.coordinates;
+                updatedTest += string.Format("{{pos={{{0},{1},{2}}},rotY={3},}}, ", detailCoords.xCoord, detailCoords.yCoord, detailCoords.zCoord, detailCoords.roty);
+            }
+            textBoxActiveItemCoords.Text = updatedTest;
+
+            updatedTest = "";
+            foreach (Model entity in qe.models)
+            {
+                Coordinates detailCoords = entity.coordinates;
+                updatedTest += string.Format("{{pos={{{0},{1},{2}}},rotY={3},}}, ", detailCoords.xCoord, detailCoords.yCoord, detailCoords.zCoord, detailCoords.roty);
+            }
+            textBoxStMdCoords.Text = updatedTest;
         }
 
         private void comboBoxRegion_SelectedIndexChanged(object sender, EventArgs e)

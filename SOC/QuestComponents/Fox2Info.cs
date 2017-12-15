@@ -52,6 +52,13 @@ namespace SOC.QuestComponents
             quatNum = quatNum * Math.PI / 360;
             return Math.Cos(quatNum).ToString();
         }
+        public static string getDegreeRot(string QuaternionY)
+        {
+            double degree = 0;
+            Double.TryParse(QuaternionY, out degree);
+            degree = Math.Asin(degree);
+            return (degree / Math.PI * 360).ToString();
+        }
     }
 
     public enum entityClass

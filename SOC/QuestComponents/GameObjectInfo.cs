@@ -902,14 +902,14 @@ namespace SOC.QuestComponents
             return ID;
         }
 
-        public static bool isAfgh(Setup setupPage)
+        public static bool isAfgh(int locId)
         {
-            return setupPage.locationID == 10;
+            return locId == 10;
         }
 
-        public static bool isMafr(Setup setupPage)
+        public static bool isMafr(int locId)
         {
-            return setupPage.locationID == 20;
+            return locId == 20;
         }
 
         [XmlType("Quest")]
@@ -921,7 +921,7 @@ namespace SOC.QuestComponents
             public Quest(DefinitionDetails d, QuestEntities q)
             {
                 definitionDetails = d;
-                questDetails = q;
+                questEntities = q;
             }
 
             public void Save(string fileName)
@@ -949,7 +949,7 @@ namespace SOC.QuestComponents
                     try
                     {
                         Quest loadedQuest = (Quest)deserializer.Deserialize(stream);
-                        questDetails = loadedQuest.questDetails;
+                        questEntities = loadedQuest.questEntities;
                         definitionDetails = loadedQuest.definitionDetails;
                         return true;
                     }
@@ -966,7 +966,7 @@ namespace SOC.QuestComponents
             public DefinitionDetails definitionDetails { get; set; }
 
             [XmlElement]
-            public QuestEntities questDetails { get; set; }
+            public QuestEntities questEntities { get; set; }
 
         }
 
@@ -976,21 +976,15 @@ namespace SOC.QuestComponents
 
             public DefinitionDetails() { }
 
-            public DefinitionDetails(string fpk, string quest, int locID, string loada, Coordinates c, string rad, string cat, string rew, int prog, string type, string CP, string qtitle, string qdesc)
+            public DefinitionDetails(string fpk, string quest, int locID, string loada, Coordinates c, string rad, string cat, string rew, int prog, string type, string cpnme, string qtitle, string qdesc, string hcoord, string vehcoord, string anicoord, string itcoord, string acitcoord, string mdlcoord)
             {
-                FpkName = fpk;
-                QuestNum = quest;
-                locationID = locID;
-                loadArea = loada;
-                coords = c;
-                radius = rad;
-                category = cat;
-                reward = rew;
-                progNotif = prog;
-                objectiveType = type;
-                CPName = CP;
-                QuestTitle = qtitle;
-                QuestDesc = qdesc;
+                FpkName = fpk; QuestNum = quest; QuestTitle = qtitle; QuestDesc = qdesc;
+
+                locationID = locID; loadArea = loada; coords = c; radius = rad; CPName = cpnme;
+
+                category = cat; progNotif = prog; objectiveType = type; reward = rew;
+                
+                hostageCoordinates = hcoord; vehicleCoordinates = vehcoord; animalCoordinates = anicoord; itemCoordinates = itcoord; activeItemCoordinates = acitcoord; modelCoordinates = mdlcoord;
             }
 
             [XmlElement]
@@ -1031,6 +1025,24 @@ namespace SOC.QuestComponents
 
             [XmlElement]
             public int progNotif { get; set; }
+
+            [XmlElement]
+            public string hostageCoordinates { get; set; }
+
+            [XmlElement]
+            public string vehicleCoordinates { get; set; }
+
+            [XmlElement]
+            public string animalCoordinates { get; set; }
+
+            [XmlElement]
+            public string itemCoordinates { get; set; }
+
+            [XmlElement]
+            public string activeItemCoordinates { get; set; }
+
+            [XmlElement]
+            public string modelCoordinates { get; set; }
 
         }
 
@@ -1288,11 +1300,14 @@ namespace SOC.QuestComponents
                 number = num; name = nme;
                 count = cnt; item = it;
                 coordinates = coords; quatCoordinates = qcoords;
+                coordinates.roty = Fox2Info.getDegreeRot(qcoords.yval);
             }
 
             public Item(Coordinates coords, int num, string nme)
             {
                 coordinates = coords; number = num; name = nme;
+                quatCoordinates.yval = Fox2Info.getQuaternionY(coords.roty);
+                quatCoordinates.wval = Fox2Info.getQuaternionW(coords.roty);
             }
 
             [XmlElement]
@@ -1328,11 +1343,14 @@ namespace SOC.QuestComponents
                 number = num; name = nme;
                 activeItem = acit;
                 coordinates = coords; quatCoordinates = qcoords;
+                coordinates.roty = Fox2Info.getDegreeRot(qcoords.yval);
             }
 
             public ActiveItem(Coordinates coords, int num, string nme)
             {
                 coordinates = coords; number = num; name = nme;
+                quatCoordinates.yval = Fox2Info.getQuaternionY(coords.roty);
+                quatCoordinates.wval = Fox2Info.getQuaternionW(coords.roty);
             }
 
             [XmlElement]
@@ -1363,11 +1381,14 @@ namespace SOC.QuestComponents
                 number = num; name = nme;
                 model = stmd;
                 coordinates = coords; quatCoordinates = qcoords;
+                coordinates.roty = Fox2Info.getDegreeRot(qcoords.yval);
             }
 
             public Model(Coordinates coords, int num, string nme)
             {
                 coordinates = coords; number = num; name = nme;
+                quatCoordinates.yval = Fox2Info.getQuaternionY(coords.roty);
+                quatCoordinates.wval = Fox2Info.getQuaternionW(coords.roty);
             }
 
             [XmlElement]

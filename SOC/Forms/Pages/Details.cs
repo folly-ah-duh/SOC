@@ -19,9 +19,6 @@ namespace SOC.UI
         List<QuestBox> animalBoxes;
         int dynamicPanelWidth = 0;
         public QuestEntities questDetails;
-        
-        public string lastCP = "";
-        public string lastRegion = "";
 
         public Details()
         {
@@ -42,29 +39,6 @@ namespace SOC.UI
                 this.comboBox_Body.Items.Add(infoEntry.bodyName);
             }
             comboBox_Body.Text = "AFGH_HOSTAGE";
-        }
-
-        internal void refreshCoordinateBoxes(Setup setupPage)
-        {
-            Tuple<List<QuestBox>, TextBox>[] detailTuples =
-            {
-                new Tuple<List<QuestBox>, TextBox>(hostageBoxes, setupPage.textBoxHosCoords),
-                new Tuple<List<QuestBox>, TextBox>(vehicleBoxes, setupPage.textBoxVehCoords),
-                new Tuple<List<QuestBox>, TextBox>(animalBoxes, setupPage.textBoxAnimalCoords),
-                new Tuple<List<QuestBox>, TextBox>(itemBoxes, setupPage.textBoxItemCoords),
-                new Tuple<List<QuestBox>, TextBox>(activeItemBoxes, setupPage.textBoxActiveItemCoords),
-                new Tuple<List<QuestBox>, TextBox>(modelBoxes, setupPage.textBoxStMdCoords),
-            };
-            foreach (Tuple<List<QuestBox>, TextBox> tuple in detailTuples)
-            {
-                string updatedTest = "";
-                foreach (QuestBox detail in tuple.Item1)
-                {
-                    Coordinates detailCoords = detail.getCoords();
-                    updatedTest += string.Format("{{pos={{{0},{1},{2}}},rotY={3},}}, ", detailCoords.xCoord, detailCoords.yCoord, detailCoords.zCoord, detailCoords.roty);
-                }
-                tuple.Item2.Text = updatedTest;
-            }
         }
 
         internal void clearPanel(Panel panel, List<QuestBox> objectlist)
@@ -119,8 +93,10 @@ namespace SOC.UI
                     comboBox_subtype.Text = questDetails.soldierSubType;
                 else
                     comboBox_subtype.SelectedIndex = 0;
-                
-                
+
+                h_checkBox_intrgt.Checked = questDetails.canInter;
+                comboBox_Body.SelectedIndex = questDetails.hostageBodyIndex;
+
                 //
                 // Quest-Specific Soldiers
                 //
@@ -150,7 +126,7 @@ namespace SOC.UI
                 currentPanel = panelHosDet;
                 foreach (Hostage hostage in questDetails.hostages)
                 {
-                    HostageBox hostageBox = new HostageBox(hostage);
+                    HostageBox hostageBox = new HostageBox(hostage, questDetails.hostageBodyIndex);
                     hostageBox.BuildObject(currentPanel.Width);
                     currentPanel.Controls.Add(hostageBox.getGroupBoxMain());
                     hostageBoxes.Add(hostageBox);
@@ -212,8 +188,7 @@ namespace SOC.UI
                 }
 
             }
-
-            RefreshHostageLanguage();
+            
             ShiftVisibilities(false);
             ShiftGroups(Height, Width);
         }
@@ -261,7 +236,7 @@ namespace SOC.UI
             }
 
             int xOffset = 3 + originAnchor.Left;
-            int bufferSpace = 2 + dynamicPanelWidth;
+            int bufferSpace = 4 + dynamicPanelWidth;
 
             for (int i = 0; i < detailLists.Count; i++)
             {
@@ -269,7 +244,7 @@ namespace SOC.UI
             }
         }
 
-        public QuestEntities GetNewEntityLists()
+        public QuestEntities GetEntityLists()
         {
 
             List<Enemy> qenemies = new List<Enemy>();
@@ -335,9 +310,10 @@ namespace SOC.UI
             {
                 foreach (HostageBox hostageDetail in hostageBoxes)
                 {
+                    int languageindex = hostageDetail.h_comboBox_lang.SelectedIndex;
                     hostageDetail.h_comboBox_lang.Items.Clear();
                     hostageDetail.h_comboBox_lang.Items.AddRange(new string[] { "english", "russian", "pashto", "kikongo", "afrikaans" });
-                    hostageDetail.h_comboBox_lang.SelectedIndex = 0;
+                    hostageDetail.h_comboBox_lang.SelectedIndex = languageindex;
                 }
             }
         }

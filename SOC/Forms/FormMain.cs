@@ -18,7 +18,9 @@ namespace SOC.UI
         private Details detailPage = new Details();
         private List<GroupBox> detailPageBoxes = new List<GroupBox>();
         private int panelNum = 0;
-            
+        DefinitionDetails definitionDetails = new DefinitionDetails();
+        QuestEntities questDetails = new QuestEntities();
+
         public FormMain()
         {
             InitializeComponent();
@@ -56,61 +58,34 @@ namespace SOC.UI
         }
         private void GoToPanel()
         {
-            
-
             switch (panelNum)
             {
                 case 0:
-                    buttonBack.Visible = false;
-                    EntitiesManager.setQuestEntities(detailPage.GetNewEntityLists());
-                    panelMain.Controls.Clear();
-                    panelMain.Controls.Add(setupPage);
-                    setupPage.EnableScrolling();
-                    detailPage.refreshCoordinateBoxes(setupPage);
-                    buttonNext.Text = "Next >>";
+                    EntitiesManager.setQuestEntities(detailPage.GetEntityLists());
+                    ShowSetup();
                     break;
 
                 case 1:
                     if (isFilled())
                     {
-                        setupPage.DisableScrolling();
-                        panelMain.Controls.Clear();
-                        Waiting waitingPage = new Waiting(this.Size);
-                        panelMain.Controls.Add(waitingPage);
-                        buttonNext.Enabled = false;
-                        Application.DoEvents();
+                        ShowWait();
+                        definitionDetails = setupPage.getDefinitionDetails();
 
-                        List<Coordinates> HostageCoords = BuildCoordinatesList(setupPage.textBoxHosCoords.Text);
-                        List<Coordinates> VehicleCoords = BuildCoordinatesList(setupPage.textBoxVehCoords.Text);
-                        List<Coordinates> ItemCoords = BuildCoordinatesList(setupPage.textBoxItemCoords.Text);
-                        List<Coordinates> ModelCoords = BuildCoordinatesList(setupPage.textBoxStMdCoords.Text);
-                        List<Coordinates> activeItemCoords = BuildCoordinatesList(setupPage.textBoxActiveItemCoords.Text);
-                        List<Coordinates> AnimalCoords = BuildCoordinatesList(setupPage.textBoxAnimalCoords.Text);
+                        CP selectedCP = EnemyInfo.GetCPIndex(definitionDetails.CPName, definitionDetails.locationID);
 
-                        CP selectedCP = new CP();
-                        if (isAfgh(setupPage))
-                        {
-                            selectedCP = EnemyInfo.AfghCPs[setupPage.comboBoxCP.SelectedIndex];
-                        }
-                        else if(isMafr(setupPage))
-                        {
-                            selectedCP = EnemyInfo.MafrCPs[setupPage.comboBoxCP.SelectedIndex];
-                        }
-                        else
-                        {
-                            selectedCP = EnemyInfo.NoneCP;
-                        }
+                        EntitiesManager.InitializeEntities(selectedCP, 
+                            BuildCoords(definitionDetails.hostageCoordinates), 
+                            BuildCoords(definitionDetails.vehicleCoordinates), 
+                            BuildCoords(definitionDetails.animalCoordinates), 
+                            BuildCoords(definitionDetails.itemCoordinates), 
+                            BuildCoords(definitionDetails.activeItemCoordinates), 
+                            BuildCoords(definitionDetails.modelCoordinates));
 
-                        EntitiesManager.InitializeEntities(selectedCP, HostageCoords, VehicleCoords, AnimalCoords, ItemCoords, activeItemCoords, ModelCoords);
                         detailPage.ResetAllPanels();
                         detailPage.LoadEntityLists(selectedCP, EntitiesManager.GetQuestEntities());
                         Application.DoEvents();
 
-                        panelMain.Controls.Clear();
-                        buttonBack.Visible = true;
-                        buttonNext.Text = "Build";
-                        panelMain.Controls.Add(detailPage);
-                        buttonNext.Enabled = true;
+                        ShowDetails();
                     }
                     else
                     {
@@ -118,30 +93,60 @@ namespace SOC.UI
                         panelNum--;
                         return;
                     }
-                    
                     break;
 
                 case 2:
-                    DefinitionDetails definitionDetails = setupPage.getDefinitionDetails();
-                    QuestEntities questDetails = detailPage.GetNewEntityLists();
-                    Quest questBuild = new Quest(definitionDetails, questDetails);
-                    
-                    LangBuilder.WriteQuestLangs(definitionDetails);
-
-                    LuaBuilder.WriteDefinitionLua(definitionDetails, questDetails);
-                    LuaBuilder.WriteMainQuestLua(definitionDetails, questDetails);
-
-                    Fox2Builder.WriteItemFox2(definitionDetails, questDetails);
-                    Fox2Builder.WriteQuestFox2(definitionDetails, questDetails);
-
-                    AssetsBuilder.BuildFPKAssets(definitionDetails, questDetails);
-                    AssetsBuilder.BuildFPKDAssets(definitionDetails, questDetails);
-
+                    BuildQuest();
                     MessageBox.Show("Build Complete", "Sideop Companion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     panelNum--;
                     break;
-                    
             }
+        }
+
+        private void ShowSetup()
+        {
+            buttonBack.Visible = false;
+            panelMain.Controls.Clear();
+            panelMain.Controls.Add(setupPage);
+            setupPage.EnableScrolling();
+            setupPage.refreshCoordinateBoxes(EntitiesManager.GetQuestEntities());
+            buttonNext.Text = "Next >>";
+        }
+
+        private void ShowWait()
+        {
+            setupPage.DisableScrolling();
+            panelMain.Controls.Clear();
+            Waiting waitingPage = new Waiting(this.Size);
+            panelMain.Controls.Add(waitingPage);
+            buttonNext.Enabled = false;
+            Application.DoEvents();
+        }
+
+        private void ShowDetails()
+        {
+            panelMain.Controls.Clear();
+            buttonBack.Visible = true;
+            buttonNext.Text = "Build";
+            panelMain.Controls.Add(detailPage);
+            buttonNext.Enabled = true;
+        }
+
+        private void BuildQuest()
+        {
+            definitionDetails = setupPage.getDefinitionDetails();
+            questDetails = detailPage.GetEntityLists();
+
+            LangBuilder.WriteQuestLangs(definitionDetails);
+
+            LuaBuilder.WriteDefinitionLua(definitionDetails, questDetails);
+            LuaBuilder.WriteMainQuestLua(definitionDetails, questDetails);
+
+            Fox2Builder.WriteItemFox2(definitionDetails, questDetails);
+            Fox2Builder.WriteQuestFox2(definitionDetails, questDetails);
+
+            AssetsBuilder.BuildFPKAssets(definitionDetails, questDetails);
+            AssetsBuilder.BuildFPKDAssets(definitionDetails, questDetails);
         }
 
         private void FormMain_SizeChanged(object sender, EventArgs e)
@@ -150,7 +155,7 @@ namespace SOC.UI
             detailPage.ShiftGroups(Height - 100, Width - 42);
         }
 
-        public static List<Coordinates> BuildCoordinatesList(string rawString)
+        public static List<Coordinates> BuildCoords(string rawString)
         {
             List<Coordinates> coordList = new List<Coordinates>();
             Coordinates coords;
@@ -183,43 +188,35 @@ namespace SOC.UI
 
             DialogResult result = loadFile.ShowDialog();
             if (result != DialogResult.OK) return;
-
+            if (panelNum != 0)
+            {
+                panelNum = 0; GoToPanel();
+            }
             Quest quest = new Quest();
             if (quest.Load(loadFile.FileName))
             {
                 setupPage.setDefinitionDetails(quest.definitionDetails);
-                EntitiesManager.setQuestEntities(quest.questDetails);
+                EntitiesManager.setQuestEntities(quest.questEntities);
             }
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            Save();
-        }
-
-        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (isFilled())
             {
-                DialogResult result = MessageBox.Show("Do you want to save this Sideop to an Xml file?", "SOC", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
-                if (result == DialogResult.Yes)
-                    Save();
-                else if (result == DialogResult.Cancel)
-                    e.Cancel = true;
+                SaveFileDialog saveFile = new SaveFileDialog();
+                saveFile.Filter = "Xml File|*.xml";
+                DialogResult saveResult = saveFile.ShowDialog();
+                if (saveResult != DialogResult.OK) return;
+                if (panelNum != 0)
+                {
+                    panelNum = 0; GoToPanel();
+                }
+                Quest quest = new Quest(setupPage.getDefinitionDetails(), EntitiesManager.GetQuestEntities());
+                quest.Save(saveFile.FileName);
+
+                MessageBox.Show("Save Completed.", "SOC", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-
-        private void Save()
-        {
-            SaveFileDialog saveFile = new SaveFileDialog();
-            saveFile.Filter = "Xml File|*.xml";
-            DialogResult saveResult = saveFile.ShowDialog();
-            if (saveResult != DialogResult.OK) return;
-
-            Quest quest = new Quest(setupPage.getDefinitionDetails(), EntitiesManager.GetQuestEntities());
-            quest.Save(saveFile.FileName);
-
-            MessageBox.Show("Save Completed.", "SOC", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+        
     }
 }

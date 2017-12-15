@@ -47,6 +47,7 @@ namespace SOC.UI
     public class HostageBox : QuestBox
     {
         Hostage hostage;
+        int hostageBodyIndex;
 
         public GroupBox h_groupBox_main;
         public Label h_label_rot;
@@ -70,9 +71,10 @@ namespace SOC.UI
         public CheckBox h_checkBox_injured;
         public CheckBox h_checkBox_untied;
 
-        public HostageBox(Hostage h) : base (h.coordinates, h.number)
+        public HostageBox(Hostage h, int bodyindex) : base (h.coordinates, h.number)
         {
             hostage = h;
+            hostageBodyIndex = bodyindex;
         }
 
         public override void SetObject(QuestBox detail)
@@ -183,6 +185,7 @@ namespace SOC.UI
             this.h_checkBox_target.Name = "h_checkBox_target";
             this.h_checkBox_target.Size = new System.Drawing.Size(17, 18);
             this.h_checkBox_target.UseVisualStyleBackColor = true;
+            h_checkBox_target.Checked = hostage.isTarget;
             this.h_label_target.AutoSize = true;
             this.h_label_target.Location = new System.Drawing.Point(18, 67);
             this.h_label_target.Name = "h_label_target";
@@ -257,7 +260,10 @@ namespace SOC.UI
             this.h_comboBox_lang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList; //genderDependant
             this.h_comboBox_lang.FormattingEnabled = true;
             this.h_comboBox_lang.Location = new System.Drawing.Point(84, 146);
-            this.h_comboBox_lang.Items.AddRange(new object[] { "english", "russian", "pashto", "kikongo", "afrikaans" });
+            if (BodyInfo.BodyInfoArray[hostageBodyIndex].bodyName.Contains("FEMALE"))
+                this.h_comboBox_lang.Items.AddRange(new object[] { "english", });
+            else
+                this.h_comboBox_lang.Items.AddRange(new object[] { "english", "russian", "pashto", "kikongo", "afrikaans" });
             this.h_comboBox_lang.Name = "h_comboBox_lang";
             this.h_comboBox_lang.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.h_comboBox_lang.TabIndex = 9;
@@ -909,7 +915,9 @@ namespace SOC.UI
 
             if (m_comboBox_preset.Items.Contains(model.model))
                 this.m_comboBox_preset.Text = model.model;
-            else this.m_comboBox_preset.SelectedIndex = 0;
+            else if (m_comboBox_preset.Items.Count > 0)
+                this.m_comboBox_preset.SelectedIndex = 0;
+
             m_comboBox_preset.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
 
             this.m_label_preset.AutoSize = true;
@@ -1641,10 +1649,10 @@ namespace SOC.UI
             else if (region.Equals("mafr"))
                 e_comboBox_body.Items.AddRange(BodyInfo.mafrBodies);
 
-            if (!e_comboBox_body.Items.Contains(enemy.body))
-                e_comboBox_body.SelectedIndex = 0;
-            else
+            if (e_comboBox_body.Items.Contains(enemy.body))
                 this.e_comboBox_body.Text = enemy.body;
+            else if (e_comboBox_body.Items.Count > 0)
+                e_comboBox_body.SelectedIndex = 0;
 
             e_comboBox_body.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
             // 

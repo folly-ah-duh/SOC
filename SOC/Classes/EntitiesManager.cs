@@ -57,6 +57,8 @@ namespace SOC.Classes
             if (enemyCP.CProutes.Length > 0)
                 for (int i = oldEntityCount; i < newEntityCount; i++)
                     questEnemies.Add(new Enemy(i, "sol_quest_000" + i));
+            else
+                questEnemies.Clear();
 
             //
             // add/remove cp-specific enemies
@@ -121,7 +123,6 @@ namespace SOC.Classes
             if (newEntityCount > oldEntityCount)
                 for (int i = oldEntityCount; i < newEntityCount; i++)
                     items.Add(new Item(itemCoords[i], i, "Item_" + i));
-
             //
             // add/remove activeitems
             //

@@ -55,7 +55,7 @@ namespace SOC.QuestComponents
 
         public static CP[] AfghCPs =
         {
-            new CP("NONE", new string[] { }, new string[] { "NONE" }),
+            new CP("NONE", new string[] { }, new string[] { }),
 
             new CP( "afgh_field_cp",
 
@@ -3769,7 +3769,24 @@ namespace SOC.QuestComponents
 
         public static CP NoneCP = new CP("NONE", new string[] { }, new string[] { });
 
+        public static CP GetCPIndex(string CPName, int locId)
+        {
+            CP[] cpArray;
+            if (locId == 10)
+                cpArray = AfghCPs;
+            else if (locId == 20)
+                cpArray = MafrCPs;
+            else
+                return NoneCP;
 
+            foreach (CP cp in cpArray)
+            {
+                if (cp.CPname.Equals(CPName))
+                    return cp;
+            }
+
+            return NoneCP;
+        }
     }
 
     public struct CP // each CP contains a CP name, The CP soldiers, the CP routes

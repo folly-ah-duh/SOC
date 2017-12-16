@@ -1241,12 +1241,12 @@ namespace SOC.UI
             this.a_comboBox_animal.FormattingEnabled = true;
             this.a_comboBox_animal.Location = new System.Drawing.Point(84, 81);
             this.a_comboBox_animal.Items.AddRange(QuestComponents.AnimalInfo.animals);
-            this.a_comboBox_animal.Text = animal.animal;
             this.a_comboBox_animal.Name = "a_comboBox_animal";
             this.a_comboBox_animal.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.a_comboBox_animal.TabIndex = 9;
             this.a_comboBox_animal.SelectedIndexChanged += new System.EventHandler(this.a_comboBox_animal_selectedIndexChanged);
             a_comboBox_animal.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
+            this.a_comboBox_animal.Text = animal.animal;
             // 
             // a_label_animal
             // 
@@ -1792,8 +1792,8 @@ namespace SOC.UI
             this.e_checkBox_armor.Size = new System.Drawing.Size(15, 14);
             this.e_checkBox_armor.TabIndex = 3;
             this.e_checkBox_armor.UseVisualStyleBackColor = true;
-            this.e_checkBox_armor.Click += new EventHandler(this.armor_Checkbox_Clicked);
             e_checkBox_armor.Checked = enemy.isArmored;
+            this.e_checkBox_armor.Click += new EventHandler(this.armor_Checkbox_Clicked);
             // 
             // e_label_armor
             // 
@@ -1812,8 +1812,8 @@ namespace SOC.UI
             this.e_checkBox_spawn.Size = new System.Drawing.Size(15, 14);
             this.e_checkBox_spawn.TabIndex = 1;
             this.e_checkBox_spawn.UseVisualStyleBackColor = true;
-            e_checkBox_spawn.CheckedChanged += new EventHandler(this.e_checkBox_spawn_CheckedChanged);
             e_checkBox_spawn.Checked = enemy.isSpawn;
+            e_checkBox_spawn.CheckedChanged += new EventHandler(this.e_checkBox_spawn_CheckedChanged);
             // 
             // e_label_spawn
             // 

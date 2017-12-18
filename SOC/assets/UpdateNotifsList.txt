@@ -1,26 +1,26 @@
-Highly-Skilled Soldier Extracted [%d/%d]
+Highly-Skilled Soldier Extracted
 quest_extract_elite
 
-Heavy Infantry Eliminated [%d/%d]
+Heavy Infantry Eliminated
 quest_defeat_armor
 
-Wandering Puppet Eliminated [%d/%d]
+Wandering Puppet Eliminated
 quest_defeat_zombie
 
-Prisoner Extracted [%d/%d]
+Prisoner Extracted
 quest_extract_hostage
 
-Armored Vehicle Unit Eliminated [%d/%d]
+Armored Vehicle Unit Eliminated
 quest_defeat_armor_vehicle
 
-Tank Unit Eliminated [%d/%d]
+Tank Unit Eliminated
 quest_defeat_tunk
 
-Target Destroyed [%d/%d]
+Target Destroyed
 quest_target_eliminate
 
-Mine Cleared [%d/%d]
+Mine Cleared
 mine_quest_log
 
-Animal Extracted [%d/%d]
+Animal Extracted
 quest_extract_animal

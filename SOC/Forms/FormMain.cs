@@ -205,6 +205,7 @@ namespace SOC.UI
             {
                 SaveFileDialog saveFile = new SaveFileDialog();
                 saveFile.Filter = "Xml File|*.xml";
+                saveFile.FileName = setupPage.getDefinitionDetails().FpkName;
                 DialogResult saveResult = saveFile.ShowDialog();
                 if (saveResult != DialogResult.OK) return;
                 if (panelNum != 0)

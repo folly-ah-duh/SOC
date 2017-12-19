@@ -106,7 +106,7 @@ There are several different types of detail boxes:
   * Coordinates: Determines the X, Y, Z coordinates of the item.
   * Rotation: Determines 3D space rotation of the item. The rotation is in [Quaternion format](http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-17-quaternions/).
   * Item: Determines what item will spawn at the coordinates.
-    * Items with _WP_ in their name are guns, _SWP_ are support weapons, _IT_ are items, _AB_ are ammo boxes.
+    * Items with \_WP_ in their name are guns, \_SWP_ are support weapons, \_IT_ are items, \_AB_ are ammo boxes.
     * While most of the items on the list should work properly, some items may be bugged due to game limitations.
     * The items have undescriptive names. The user can check Tex's notes on the item names by opening the MGS_TPP directory with Infinite Heaven installed, then navigating to \mod\modules\InfEquip.lua.
   * Count: Determines the number of uses for items/support weapons. Guns are unaffected by the Count.
@@ -124,15 +124,75 @@ There are several different types of detail boxes:
     * a number of preset models are included with SOC by default. The user can add new models to the Model list by going to the SOC directory and navigating to assets\ModelAssets\, where they can add .fmdl and .geom files from the game. The .geom file is not required, but recommended.
     * a number of models will spawn above or below the origin of their coordinate. The user will need to compensate by manually adjusting the Y coordinate.
     
-When the user has input all of their desired changes to the Details Panel, they can click the "Build" button in the bottom right to build the sideop, or "<< Back" to review the Setup Page before continuing.
+When the user has input all of their desired changes to the Details Page, they can click the "Build" button in the bottom right to build the sideop, or "<< Back" to review the Setup Page before continuing.
 
 ## Building A Sideop - Adding the Sideop To The Game
-TBC
-## Loading And Saving Sideops With SOC
-TBC
+Once the Setup and Details Pages are completed and the user is ready to test the sideop in-game. It is recommended that the user save the sideop to an Xml file prior to closing SOC.
+
+1. Click the "Build" button on the Details Page to create a "Sideop_Build" folder which contains the mod files, ready to be packed for Makebite.
+2. Open Makebite, and click the ellipses button in the top-right corner.
+3. Navigate to the Sideop_Build folder and select it, then Click "Select Folder".
+  * If the folder was selected properly, a number of filepaths should appear in the Makebite Mod Files. The filepaths should begin with /Assets/ (except one, which begins with /GameDir/).
+4. Fill out the Makebite Mod Information.
+5. Click the "Do it (build archive)" button in the bottom-right corner and name the file.
+  * This will build the .MGSV file, which can be installed via SnakeBite.
+6. Install the sideop .mgsv file, as well as Infinite Heaven if it isn't already installed.
+7. Start the game and open the Infinite Heaven ACC Main menu.
+8. In the ACC menu, open "10:Side ops menu" and in that menu, find "2:Open Specific Sideop".
+  * By default, the number begins with 0. The user can loop to the last Sideop on the list by dropping below 0.
+9. Select the new sideop. 
+  * Without any other sideops installed, the new sideop should be #162 or #161.
+  
+The user can now test the sideop and make adjustments as necessary by loading the sideop's xml file back into SOC.
+## Saving And Loading Sideops With SOC
+SOC can save sideops to an xml file, and also load the sideop xml file at any point during the sideop's creation process.
+
+* To save a sideop, click the "Save To Xml..." button at the bottom-left corner of the application. Name the Xml and click Save.
+* To load a sideop, click the "Load From Xml.." button at the Bottom-left corner. Select the Xml and click Open.
 ## SOC QuickMenu Guide
-TBC
+In the SOC directory, a folder named "Helpful User Resources" contains a .mgsv file named "_SOC QuickMenu For Infinite Heaven.mgsv_". This QuickMenu preset is immensely useful for gathering in-game information for custom sideops. The user must have Infinite Heaven r223+ installed in order to utilize the QuickMenu.
+
+SOC QuickMenu maps a number of useful hotkey functions to the keyboard/gamepad, so the user does not need to navigate the Infinite Heaven menu to get sideop information.
+
+The hotkeys are mapped as followed:
+
+* While holding down the **[Call]** button:
+  * Press the **[Action]** Button to **set all enemies to friendly**.
+    * Setting enemies to Friendly will allow the user to gather information without interference.
+  * Press the **[Crouch]** Button to **write the player's position to ih_log.txt**.
+    * This will write the player's current coordinate set to Infinite Heaven's ih_log, located in \MGS_TPP\mod\ih_log.txt. These coordinates can be easily copy/pasted into SOC's Locational Data textboxes.
+    * Additionally, the Quest Area of the player's position will be written to ih_log.txt. 
+    * Certain areas of the map are not covered by the Quest Areas. In that event, this hotkey will notify the user if the coordinates are not suitable for a sideop.
+  * Press the **[Reload]** or **[Dive]** Buttons to **warp the player to the most-recent iDroid marker**.
+    * Useful for jumping between locations in the encampment. Warping can also teleport the player to distant encampments (occasionally results in falling through the map, but mostly reliable).
+  * If a marker is placed on an enemy, press **[Binoculars]** to **show the enemy name and the closest CP name**.
+    * This hotkey is useful for finding the correct CP Name for the Setup Page, as well as recording the soldier routes.
+  * Press the **[Up]** Button to **Toggle Free-cam**.
+    * Free Cam can be nice for getting into tight or precise places where the player normally could not. The Free Cam speed can be controlled by holding down the [Fire] button and moving forward/backward. The camera can be moved up and down with the [Sprint] and [Camera Zoom] buttons, respectively.
+  * Press the **[Down]** Button to **write the Free-cam position to ih_log.txt**.
+    * When gathering coordinate sets with the Free Cam, note that the camera must be as close as possible to the surface of the ground/object. Otherwise, the sideop object may noticably float above the surface in-game.
+  * Press the **[Left]** or **[Right]** Buttons to **warp the player to the Free-cam position**.
+    * Like with the Marker Warping, Free-cam warping is an effective way to jump across the encampent and map.
+
 ## Custom Notifications Guide
-TBC
+When choosing a sideop's progress notification, the user can choose from 9 default notifications. Additionally, the user can create new notifications by clicking the "Custom..." button beside the Progress Notification form. Custom notifications are saved to UpdateNotifsList.txt within SOC's assets folder.
+
+* Upon clicking "Custom...", the user is prompted to input a Unique LangId and an In-game Notification.
+  * The Unique LangId is a unique Id referenced by the game files, so the user should choose an appropriate name (ex: example_notif, quest_extract_vip, assassinate_notification)
+  * The In-game Notification is the text that the player see in-game, upon completing a sideop task. The user can write any notification that will fit their sideop the best (ex: Example Sideop Notification, VIP Extracted, Commander Eliminated)
+  
 ## Enemy Routes Guide
-TBC
+Currently, route information is still being researched by [Sai/youarebritish](https://github.com/youarebritish), so (for now) new routes cannot be created and old routes can only be previewed in-game.
+For a given route name (ex: rt_powerPlant_d_0000):
+ * Routes with \_d_ in their names are the encampment's **daytime routes**. These routes are typically more patrol-oriented, so the user is more likely to find patrol routes by assigning soldiers to \_d_ routes.
+ * Routes with \_n_ in their names are the encampment's **nighttime routes**. Nighttime routes tend to be more stationary than their daytime counterparts, with occasional patrol routes.
+ * Routes with \_snp_ in their names are **sniper routes**. Soldiers assigned to sniper routes will stand in place as they sweep the landscape with their gun at the ready. Assigning soldiers with the 'SNIPER' gear is recommended for these routes, but not required.
+ * Routes with \_c_ in their name are the encampment's **caution routes**. Soldiers with these routes will walk cautiously with their guns at the ready.
+   * \_c_ routes can be used as a soldier's Sneak Route, although the soldier will still patrol as if they are on alert. \_d_ and \_n_ routes can be used as a soldier's Caution Route, but the soldier will still act alert as they patrol.
+ * Routes with \_h_ in their name are **hold routes**. Soldiers with hold routes will stand in place, alert as they wait for the player.
+ * Routes with \_s_ in their name are **sleep routes**. Soldiers assigned to a sleep route as their Sneak Route will lay in bed sleeping until disturbed by the player. 
+   * If the soldier has a sleep route assigned as their Caution Route, they will stand over their bed and hold their gun at the ready (similar to \_h_ routes).
+ 
+A few outpost routes have been roughly documented in Afghanistan_CP_Reference.lua and CentralAfrica_CP_Reference.lua in the Helpful User Resources folder, but the user will need to learn the routes in-game if they wish to have precise patrols for their sideops (although sideops with randomly assigned routes work well enough). These are some tips for gathering route information:
+* Build a sideop with each soldier assigned to a unique route, the QuickMenu [Binoculars] hotkey will notify the user of the soldier's name. The user can then match the route by the name of the soldier, and take note of the patrol.
+* Using Infinite Heaven's timescale functionality to make soldiers move more quickly can allow the user to learn about the route much faster.

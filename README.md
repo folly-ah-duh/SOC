@@ -157,22 +157,23 @@ SOC QuickMenu maps a number of useful hotkey functions to the keyboard/gamepad, 
 The hotkeys are mapped as followed:
 
 * While holding down the **[Call]** button:
-  * Press the **[Action]** Button to **set all enemies to friendly**.
-    * Setting enemies to Friendly will allow the user to gather information without interference.
-  * Press the **[Crouch]** Button to **write the player's position to ih_log.txt**.
-    * This will write the player's current coordinate set to Infinite Heaven's ih_log, located in \MGS_TPP\mod\ih_log.txt. These coordinates can be easily copy/pasted into SOC's Locational Data textboxes.
-    * Additionally, the Quest Area of the player's position will be written to ih_log.txt. 
-    * Certain areas of the map are not covered by the Quest Areas. In that event, this hotkey will notify the user if the coordinates are not suitable for a sideop.
-  * Press the **[Reload]** or **[Dive]** Buttons to **warp the player to the most-recent iDroid marker**.
-    * Useful for jumping between locations in the encampment. Warping can also teleport the player to distant encampments (occasionally results in falling through the map, but mostly reliable).
-  * If a marker is placed on an enemy, press **[Binoculars]** to **show the enemy name and the closest CP name**.
-    * This hotkey is useful for finding the correct CP Name for the Setup Page, as well as recording the soldier routes.
-  * Press the **[Up]** Button to **Toggle Free-cam**.
-    * Free Cam can be nice for getting into tight or precise places where the player normally could not. The Free Cam speed can be controlled by holding down the [Fire] button and moving forward/backward. The camera can be moved up and down with the [Sprint] and [Camera Zoom] buttons, respectively.
-  * Press the **[Down]** Button to **write the Free-cam position to ih_log.txt**.
+  * Press the **[Action]** Button to **toggle Free Cam**.
+    * Free Cam can be nice for getting into tight or precise places where the player normally could not. The Free Cam speed can be controlled by holding down the [Action] button and moving forward/backward. The camera can be moved up and down with the [Camera Zoom] and [Sprint] buttons, respectively.
+  * Press the **[Crouch]** Button to **write the player's position to ih_log.txt**. If Free Cam is active, the Free Cam position will be written to ih_log.txt instead.
+    * This will write the player's current coordinate set to Infinite Heaven's ih_log, located in \MGS_TPP\mod\ih_log.txt. These coordinates are the key to placing prisoners, items, static models and other side op objects. Once written to ih_log, these coordinates can be easily copy/pasted into SOC's Locational Data textboxes.
+    * Additionally, the **Quest Area** of the player's position will be written to ih_log.txt. 
+    * Certain areas of the map are not covered by the Quest Areas. In that event, this hotkey will notify the user if the coordinates are not suitable for a sideop. (Free Cam cannot notify the user of sideop suitability.)
     * When gathering coordinate sets with the Free Cam, note that the camera must be as close as possible to the surface of the ground/object. Otherwise, the sideop object may noticably float above the surface in-game.
-  * Press the **[Left]** or **[Right]** Buttons to **warp the player to the Free-cam position**.
-    * Like with the Marker Warping, Free-cam warping is an effective way to jump across the encampent and map.
+  * Press the **[Reload]** or **[Dive]** Buttons to **warp the player to the most-recent iDroid marker**. If Free Cam is active, the player will **warp to the Free Cam position**.
+    * Useful for jumping between locations in the encampment. Warping can also teleport the player to distant encampments (occasionally results in falling through the map, but mostly reliable).
+  * Press the **[Up]** Button to **mark all soldiers AND set all soldiers to Friendly**.
+    * Particularly useful for observing soldier routes and gathering locational information in an outpost.
+  * If a marker is placed on an enemy, press **[Down]** to **show the enemy name and the closest CP name**.
+    * This hotkey is useful for finding the correct CP Name for the Setup Page, as well as recording the soldier routes.
+  * Press the **[Left]** Button to **toggle the enemy phase between Sneak and Caution**.
+    * This will help the user observe and test the \_d_ and \_c_ routes of the outpost's soldiers.
+  * Press the **[Right]** Button to **speed up the world timescale for a moment**. During this time, soldiers will move very quickly along their routes.
+    * When determining which routes to use, watching how and where the soldier patrols move is vital. Speeding up the world timescale will allow the user to learn about patrols much faster than watching in real-time.
 
 ## Custom Notifications Guide
 When choosing a sideop's progress notification, the user can choose from 9 default notifications. Additionally, the user can create new notifications by clicking the "Custom..." button beside the Progress Notification form. Custom notifications are saved to UpdateNotifsList.txt within SOC's assets folder.

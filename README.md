@@ -195,5 +195,7 @@ For a given route name (ex: rt_powerPlant_d_0000):
    * If the soldier has a sleep route assigned as their Caution Route, they will stand over their bed and hold their gun at the ready (similar to \_h_ routes).
  
 A few outpost routes have been roughly documented in Afghanistan_CP_Reference.lua and CentralAfrica_CP_Reference.lua in the Helpful User Resources folder, but the user will need to learn the routes in-game if they wish to have precise patrols for their sideops (although sideops with randomly assigned routes work well enough). These are some tips for gathering route information:
-* Build a sideop with each soldier assigned to a unique route, the QuickMenu [Binoculars] hotkey will notify the user of the soldier's name. The user can then match the route by the name of the soldier, and take note of the patrol.
-* Using Infinite Heaven's timescale functionality to make soldiers move more quickly can allow the user to learn about the route much faster.
+* Build a sideop with each soldier assigned to a unique route, the QuickMenu [Down] hotkey will notify the user of the soldier's name. The user can then match the route by the name of the soldier, and take note of how they patrol.
+* Use the QuickMenu [Up] hotkey to mark all enemies and set them to Friendly. The user will be able to survey routes easier without interference or having to hunt down every soldier.
+* Using the QuickMenu [Right] hotkey will speed up the world timescale, causing soldiers to move along their routes at high speeds. This hotkey will allow the user to quickly learn about where the soldier routes travel.
+* Using the QuickMenu [Left] hotkey will toggle the soldiers between their \_d_ routes and their \_c_ routes. This will allow users to document the soldier's \_c_ routes more easily.

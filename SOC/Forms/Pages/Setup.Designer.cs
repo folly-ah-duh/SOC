@@ -57,6 +57,7 @@
             this.comboBoxLoadArea = new System.Windows.Forms.ComboBox();
             this.groupBoxLocations = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.originAnchor = new System.Windows.Forms.Label();
             this.textBoxAnimalCoords = new System.Windows.Forms.TextBox();
             this.labelAni = new System.Windows.Forms.Label();
             this.textBoxActiveItemCoords = new System.Windows.Forms.TextBox();
@@ -77,7 +78,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.textBoxQuestDesc = new System.Windows.Forms.TextBox();
             this.textBoxQuestTitle = new System.Windows.Forms.TextBox();
-            this.originAnchor = new System.Windows.Forms.Label();
             this.panelSetup.SuspendLayout();
             this.groupBoxSetup.SuspendLayout();
             this.groupBoxLocations.SuspendLayout();
@@ -451,6 +451,14 @@
             this.panel1.Size = new System.Drawing.Size(548, 425);
             this.panel1.TabIndex = 23;
             // 
+            // originAnchor
+            // 
+            this.originAnchor.AutoSize = true;
+            this.originAnchor.Location = new System.Drawing.Point(0, 0);
+            this.originAnchor.Name = "originAnchor";
+            this.originAnchor.Size = new System.Drawing.Size(0, 13);
+            this.originAnchor.TabIndex = 27;
+            // 
             // textBoxAnimalCoords
             // 
             this.textBoxAnimalCoords.AcceptsReturn = true;
@@ -575,9 +583,9 @@
             this.labelItem.AutoSize = true;
             this.labelItem.Location = new System.Drawing.Point(3, 309);
             this.labelItem.Name = "labelItem";
-            this.labelItem.Size = new System.Drawing.Size(260, 13);
+            this.labelItem.Size = new System.Drawing.Size(303, 13);
             this.labelItem.TabIndex = 20;
-            this.labelItem.Text = "Item Locations: {pos={X, Y, Z},rotY=Y-Axis Rotation,},";
+            this.labelItem.Text = "Dormant Item Locations: {pos={X, Y, Z},rotY=Y-Axis Rotation,},";
             // 
             // groupBoxFlavor
             // 
@@ -668,14 +676,6 @@
             this.textBoxQuestTitle.Name = "textBoxQuestTitle";
             this.textBoxQuestTitle.Size = new System.Drawing.Size(502, 20);
             this.textBoxQuestTitle.TabIndex = 13;
-            // 
-            // originAnchor
-            // 
-            this.originAnchor.AutoSize = true;
-            this.originAnchor.Location = new System.Drawing.Point(0, 0);
-            this.originAnchor.Name = "originAnchor";
-            this.originAnchor.Size = new System.Drawing.Size(0, 13);
-            this.originAnchor.TabIndex = 27;
             // 
             // Setup
             // 

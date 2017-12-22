@@ -2090,6 +2090,7 @@ namespace SOC.UI
         private void InitializeComponent()
         {
             this.panelDetails = new System.Windows.Forms.Panel();
+            this.originAnchor = new System.Windows.Forms.Label();
             this.groupActiveItemDet = new System.Windows.Forms.GroupBox();
             this.panelAcItDet = new System.Windows.Forms.Panel();
             this.groupExistingEneDet = new System.Windows.Forms.GroupBox();
@@ -2118,7 +2119,6 @@ namespace SOC.UI
             this.h_checkBox_intrgt = new System.Windows.Forms.CheckBox();
             this.comboBox_Body = new System.Windows.Forms.ComboBox();
             this.label_Body = new System.Windows.Forms.Label();
-            this.originAnchor = new System.Windows.Forms.Label();
             this.panelDetails.SuspendLayout();
             this.groupActiveItemDet.SuspendLayout();
             this.groupExistingEneDet.SuspendLayout();
@@ -2150,6 +2150,14 @@ namespace SOC.UI
             this.panelDetails.Name = "panelDetails";
             this.panelDetails.Size = new System.Drawing.Size(2169, 452);
             this.panelDetails.TabIndex = 0;
+            // 
+            // originAnchor
+            // 
+            this.originAnchor.AutoSize = true;
+            this.originAnchor.Location = new System.Drawing.Point(0, 0);
+            this.originAnchor.Name = "originAnchor";
+            this.originAnchor.Size = new System.Drawing.Size(0, 13);
+            this.originAnchor.TabIndex = 34;
             // 
             // groupActiveItemDet
             // 
@@ -2485,14 +2493,6 @@ namespace SOC.UI
             this.label_Body.Size = new System.Drawing.Size(34, 13);
             this.label_Body.TabIndex = 2;
             this.label_Body.Text = "Body:";
-            // 
-            // originAnchor
-            // 
-            this.originAnchor.AutoSize = true;
-            this.originAnchor.Location = new System.Drawing.Point(0, 0);
-            this.originAnchor.Name = "originAnchor";
-            this.originAnchor.Size = new System.Drawing.Size(0, 13);
-            this.originAnchor.TabIndex = 34;
             // 
             // Details
             // 

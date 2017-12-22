@@ -570,7 +570,7 @@ namespace SOC.Classes
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"geomFile\" type=\"FilePtr\" container=\"StaticArray\" arraySize=\"1\">");
                             if ((bool)entity.info2)
-                                questFox2.WriteLine(string.Format("          <value></value>", entity.info1));
+                                questFox2.WriteLine("          <value></value>");
                             else
                                 questFox2.WriteLine(string.Format("          <value>/Assets/{0}.geom</value>", entity.info1));
                             questFox2.WriteLine("        </property>");
@@ -723,7 +723,7 @@ namespace SOC.Classes
                             questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info1));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"radius\" type=\"uint8\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine("          <value>50</value>");
+                            questFox2.WriteLine("          <value>40</value>");
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("      </staticProperties>");
                             questFox2.WriteLine("      <dynamicProperties />");

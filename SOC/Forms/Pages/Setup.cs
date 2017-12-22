@@ -231,7 +231,7 @@ namespace SOC.UI
             {
                 textBoxActiveItemCoords.Enabled = false;
                 textBoxActiveItemCoords.BackColor = System.Drawing.Color.DarkGray;
-                labelActiveItem.Text = "Active Item Locations: (X, Y, Z, Y-Axis Rotation) [Disabled When Items Exist]";
+                labelActiveItem.Text = "Active Item Locations: (X, Y, Z, Y-Axis Rotation) [Disabled When Dormant Items Exist]";
                 labelActiveItem.ForeColor = System.Drawing.Color.Goldenrod;
                 textBoxActiveItemCoords.Clear();
             }
@@ -240,14 +240,14 @@ namespace SOC.UI
             {
                 textBoxItemCoords.Enabled = true;
                 textBoxItemCoords.BackColor = System.Drawing.Color.Silver;
-                labelItem.Text = "Item Locations: (X, Y, Z, Y-Axis Rotation)";
+                labelItem.Text = "Dormant Item Locations: (X, Y, Z, Y-Axis Rotation)";
                 labelItem.ForeColor = System.Drawing.Color.Black;
             }
             else
             {
                 textBoxItemCoords.Enabled = false;
                 textBoxItemCoords.BackColor = System.Drawing.Color.DarkGray;
-                labelItem.Text = "Item Locations: (X, Y, Z, Y-Axis Rotation) [Disabled When Active Items Exist]";
+                labelItem.Text = "Dormant Item Locations: (X, Y, Z, Y-Axis Rotation) [Disabled When Active Items Exist]";
                 labelItem.ForeColor = System.Drawing.Color.Goldenrod;
                 textBoxItemCoords.Clear();
             }

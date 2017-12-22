@@ -202,6 +202,23 @@ namespace SOC.UI
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
+            Save();
+        }
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (isFilled())
+            {
+                DialogResult result = MessageBox.Show("Do you want to save this Sideop to an Xml file?", "SOC", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+                if (result == DialogResult.Yes)
+                    Save();
+                else if (result == DialogResult.Cancel)
+                    e.Cancel = true;
+            }
+        }
+
+        private void Save()
+        {
             {
                 SaveFileDialog saveFile = new SaveFileDialog();
                 saveFile.Filter = "Xml File|*.xml";
@@ -214,10 +231,7 @@ namespace SOC.UI
                 }
                 Quest quest = new Quest(setupPage.getDefinitionDetails(), EntitiesManager.GetQuestEntities());
                 quest.Save(saveFile.FileName);
-
-                MessageBox.Show("Save Completed.", "SOC", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-        
     }
 }

@@ -2,6 +2,7 @@
 using SOC.UI;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using static SOC.QuestComponents.GameObjectInfo;
@@ -15,6 +16,8 @@ namespace SOC.Classes
 
         public static void WriteDefinitionLua(DefinitionDetails definitionDetails, QuestEntities questDetails)
         {
+            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
+
             BodyInfoEntry bodyInfo = new BodyInfoEntry();
             if (questDetails.hostageBodyIndex >= 0)
                 bodyInfo = BodyInfo.BodyInfoArray[questDetails.hostageBodyIndex];
@@ -111,6 +114,8 @@ namespace SOC.Classes
 
         public static void WriteMainQuestLua(DefinitionDetails definitionDetails, QuestEntities questDetails)
         {
+            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
+
             List<string> questLua = new List<string>(questLuaInput);
 
             questLua[GetLineOf("local hostageCount =", questLua)] = string.Format("local hostageCount = {0}", questDetails.hostages.Count);

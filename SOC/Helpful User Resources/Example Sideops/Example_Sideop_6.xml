@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<Quest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <definitionDetails FpkName="Example_Sideop_6" QuestNum="30355">
+    <QuestTitle>Example: Extract the Bears</QuestTitle>
+    <QuestDesc>Extract all the bears at the Aabe Shifap Ruins along the river.</QuestDesc>
+    <locationID>10</locationID>
+    <loadArea>waterway</loadArea>
+    <coords>
+      <xCoord>-1810</xCoord>
+      <yCoord>340</yCoord>
+      <zCoord>-320</zCoord>
+      <roty>0</roty>
+    </coords>
+    <radius>5</radius>
+    <category>CAPTURE_ANIMAL</category>
+    <objectiveType>RECOVERED</objectiveType>
+    <CPName>NONE</CPName>
+    <reward>C</reward>
+    <progNotif>8</progNotif>
+    <hostageCoordinates>{pos={-1843.320,335.863,-228.165},rotY=115.178,}, 
+{pos={-1828.530,360.378,-359.566},rotY=76.962,}, 
+</hostageCoordinates>
+    <vehicleCoordinates />
+    <animalCoordinates>{pos={-1802.899,328.711,-241.198},rotY=-50.996,}, 
+{pos={-1818.639,343.487,-403.223},rotY=2.940,}, 
+{pos={-1809.470,343.848,-361.095},rotY=6.959,}, 
+</animalCoordinates>
+    <itemCoordinates>{pos={-1852.963,338.119,-258.723},rotY=-5.031,}, 
+{pos={-1850.695,342.909,-297.241},rotY=36.54,}, 
+</itemCoordinates>
+    <activeItemCoordinates />
+    <modelCoordinates />
+  </definitionDetails>
+  <questEntities hostageBodyIndex="5" canInter="false" soldierSubType="PF_A">
+    <questEnemies />
+    <cpEnemies />
+    <hostages>
+      <Hostage name="Hostage_0">
+        <isTarget>false</isTarget>
+        <isUntied>true</isUntied>
+        <isInjured>false</isInjured>
+        <number>0</number>
+        <skill>Zoologist</skill>
+        <staffType>DEVELOP</staffType>
+        <scared>NEVER</scared>
+        <language>english</language>
+        <coordinates>
+          <xCoord>-1843.320</xCoord>
+          <yCoord>335.863</yCoord>
+          <zCoord>-228.165</zCoord>
+          <roty>115.178</roty>
+        </coordinates>
+      </Hostage>
+      <Hostage name="Hostage_1">
+        <isTarget>false</isTarget>
+        <isUntied>true</isUntied>
+        <isInjured>false</isInjured>
+        <number>1</number>
+        <skill>Zoologist</skill>
+        <staffType>SUPPORT</staffType>
+        <scared>NEVER</scared>
+        <language>english</language>
+        <coordinates>
+          <xCoord>-1828.530</xCoord>
+          <yCoord>360.378</yCoord>
+          <zCoord>-359.566</zCoord>
+          <roty>76.962</roty>
+        </coordinates>
+      </Hostage>
+    </hostages>
+    <vehicles />
+    <items>
+      <Item name="Item_0">
+        <isBoxed>false</isBoxed>
+        <number>0</number>
+        <count>1</count>
+        <item>EQP_SWP_ElectromagneticNetMine_G02</item>
+        <coordinates>
+          <xCoord>-1852.963</xCoord>
+          <yCoord>338.119</yCoord>
+          <zCoord>-258.723</zCoord>
+          <roty>-5.031</roty>
+        </coordinates>
+        <quatCoordinates>
+          <xval>0</xval>
+          <yval>-0.0438896543191299</yval>
+          <zval>0</zval>
+          <wval>0.99903638484479</wval>
+        </quatCoordinates>
+      </Item>
+      <Item name="Item_1">
+        <isBoxed>true</isBoxed>
+        <number>1</number>
+        <count>0</count>
+        <item>EQP_WP_EX_hg_000_G04</item>
+        <coordinates>
+          <xCoord>-1850.695</xCoord>
+          <yCoord>342.909</yCoord>
+          <zCoord>-297.241</zCoord>
+          <roty>36.54</roty>
+        </coordinates>
+        <quatCoordinates>
+          <xval>0</xval>
+          <yval>0.313495294931098</yval>
+          <zval>0</zval>
+          <wval>0.949589753554694</wval>
+        </quatCoordinates>
+      </Item>
+    </items>
+    <models />
+    <activeItems />
+    <animals>
+      <Animal name="Animal_Cluster_0">
+        <isTarget>true</isTarget>
+        <number>0</number>
+        <count>1</count>
+        <animal>Bear</animal>
+        <typeID>TppBear</typeID>
+        <coordinates>
+          <xCoord>-1802.899</xCoord>
+          <yCoord>328.711</yCoord>
+          <zCoord>-241.198</zCoord>
+          <roty>-50.996</roty>
+        </coordinates>
+      </Animal>
+      <Animal name="Animal_Cluster_1">
+        <isTarget>true</isTarget>
+        <number>1</number>
+        <count>1</count>
+        <animal>Bear</animal>
+        <typeID>TppBear</typeID>
+        <coordinates>
+          <xCoord>-1818.639</xCoord>
+          <yCoord>343.487</yCoord>
+          <zCoord>-403.223</zCoord>
+          <roty>2.940</roty>
+        </coordinates>
+      </Animal>
+      <Animal name="Animal_Cluster_2">
+        <isTarget>true</isTarget>
+        <number>2</number>
+        <count>1</count>
+        <animal>Bear</animal>
+        <typeID>TppBear</typeID>
+        <coordinates>
+          <xCoord>-1809.470</xCoord>
+          <yCoord>343.848</yCoord>
+          <zCoord>-361.095</zCoord>
+          <roty>6.959</roty>
+        </coordinates>
+      </Animal>
+    </animals>
+  </questEntities>
+</Quest>

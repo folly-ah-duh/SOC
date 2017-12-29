@@ -6,7 +6,7 @@ SideOp Companion is a UI-driven program, designed to help automate the process o
 
 Custom Sideops are playable, user-created side-missions which can be added to the game through [TinManTex's Infinite Heaven mod](https://www.nexusmods.com/metalgearsolidvtpp/mods/45/?). Creating custom sideops manually can be difficult, even for experienced MGSV modders. Without an acute understanding of the game's files, formats and limitations, the user can often find themselves lost and confused.
 
-SOC, or SideOp Companion, is my attempt to automate the process of creating custom sideops. The program alleviates a great deal of the difficult, tedious work involved in creating a custom sideop. Even with minimal understanding of modding, users can create and test their own custom sideops with relative ease. SOC can even create sideops with greater detail than those found in the base game, without even touching the game files. It is perhaps possible that this will make Custom Sideops the simplest and most accessible form of MGSV modding.
+SOC, or SideOp Companion, is my attempt to automate the process of creating custom sideops. The program alleviates a great deal of the difficult, tedious work involved in creating a custom sideop. Even with minimal understanding of modding, users can create and test their own custom sideops with relative ease. SOC can even create sideops with greater detail than those found in the base game, without even touching the game files. It is perhaps possible that SOC will make Custom Sideops the simplest and most accessible form of MGSV modding.
 
 ## Setup Page - Understanding The SOC Setup Page
 
@@ -14,7 +14,8 @@ Upon opening SOC.exe, the user is met with the Setup Page. This page prompts the
 
 * **.FPK Filename**: This is what the sideop will be named in the gamefiles. The user should think of a name which will be unique to the sideop.
   * Examples: MorbidQuest00, MorbidQuest01, ih_sheep_quest, ih_pilot_quest, Example_QuestName
-* **Quest Number**: This quest number is how Infinite Heaven adds new sideops to the game. The user should use a unique number between 30103 and 39009.
+* **Quest Number**: This quest number is how Infinite Heaven adds new sideops to the game. The quest number can range between 30103 and 39009. **Users should check which quest numbers have already been taken by other mod authors by opening the MGS_TPP directory with Infinite Heaven installed, then navigating to \mod\modules\InfQuest.lua. The user can pick any quest number they wish for testing purposes, but prior to publishing custom sideops to nexusmods, users should contact [Tinmantex](https://www.nexusmods.com/metalgearsolidvtpp/users/26892144) to reserve their quest numbers, which will then be recorded in InfQuest.lua.**
+  * If the user is unsure of what to write to Tinmantex, simply tell him: "I am making a custom sideop(s), and I wish to reserve \<X Amount Of> Quest Numbers." He can tell you which numbers to use. 
 * **Quest Map**: The Area of Operations for the sideop. The user can choose to create a sideop for Afghanistan, Central Africa or even Mother Base (with limitations).
 * **Quest Area**: Quest Areas are fractions of the map where a single sideop is available. The user should choose the appropriate area that the sideop will be located within. 
   * Read '[SOC QuickMenu Guide](https://github.com/Morbidslinky/SOC#soc-quickmenu-guide)' for information about *how* to get the correct area name.
@@ -39,7 +40,7 @@ Upon opening SOC.exe, the user is met with the Setup Page. This page prompts the
 * **Locational Data textboxes**: These textboxes will read sets of coordinates (x, y, z and y-axis rotation) and create a 'box' on the Details Page for the specified coordinate.
   * Read '[SOC QuickMenu Guide](https://github.com/Morbidslinky/SOC#soc-quickmenu-guide)' for how to get in-game coordinates.
   * The user does not need to fill out every Locational Data textbox, only the textboxes for the objects they wish to use in the sideop.
-  * There is no enforced limit on how many coordinate sets can be used in a sideop, although the user should still consider the game limitations when setting coordinates (ex: only 3 heavy vehicles can be reliably spawned into a quest).
+  * **There is no enforced limit on how many coordinate sets can be used in a sideop, although the user should still consider the game limitations when setting coordinates (ex: only 3 heavy vehicles can be reliably spawned into a quest). Additionally, the extra resources used in sideops can strain the game's allocation and cause crashes (ex: spawning 40 prisoners in a sideop). Certain Infinite Heaven features, such as helicopters and walker gears in free roam, may already be using additional resources. As such, a player may encounter game crashes if they have such features enabled when they enter a quest area. The user should be considerate of these limitations when creating their custom sideops.**
   * While the textboxes prompt the user to input {pos={X, Y, Z},rotY=Y-Axis Rotation,}, SOC will accept any 4 numbers as a coordinate set (ex: {pos={1, 2, 3},rotY=4,} and 1 2 3 4 are both valid inputs). If there are less than 4 numbers in a set, the coordinate is auto-filled with 0.00 as the remaining numbers.
 
 Once the user has filled out the required Setup information, and input their desired Locational Data, they can click the "Next >>" button in the bottom-right corner to build the Details Page. The user can return to the Setup Page at any time, without losing any changes.
@@ -100,7 +101,7 @@ There are several different types of detail boxes:
   * Count: Determines the number of animals which will spawn at the coordinates.
   * Is Target: Determines whether one of the animals in the cluster is a target objective.
   * Type ID: Gives the animal cluster a specified type ID, to avoid conflicting with existing animals near the sideop.
-    * Generally, the user should use TppNubian/TppJackal type IDs in Afghanistan, and TppGoat/TppWolf IDs in Africa to avoid conflicting with the preexisting animals. A conflict will result in the sideop animals spawning exclusively (preexisting animals despawn).
+    * Generally, the user should use TppNubian/TppJackal type IDs in Afghanistan, and TppGoat/TppWolf IDs in Africa to avoid conflicting with the preexisting animals and their animal IDs. **A conflict will result in missing animals and game crashes, so it is very important to assign the proper animal ID. The user should be certain of any animals that spawn within the quest area and spawn animals accordingly.**
 
 * **Dormant Items**: Dormant Items are items like guns, ammunition and innactive support weapons which the player can pick up and use during gameplay. The user can spawn dormant items by inputting coordinate sets into the Item Locations textbox on the Setup Page.
   * Coordinates: Determines the X, Y, Z coordinates of the item.
@@ -149,6 +150,7 @@ SOC can save sideops to an xml file, and also load the sideop xml file at any po
 
 * To save a sideop, click the "Save To Xml..." button at the bottom-left corner of the application. Name the Xml and click Save.
 * To load a sideop, click the "Load From Xml.." button at the Bottom-left corner. Select the Xml and click Open.
+  * Six example sideops are included by defaul with SOC. The user can load these examples from the Example Sideops folder, inside Helpful User Resources. Each example can be built and tested ingame, to help the user better understand SOC and it's capabilities.
 ## SOC QuickMenu Guide
 In the SOC directory, a folder named "Helpful User Resources" contains a .mgsv file named "_SOC QuickMenu For Infinite Heaven.mgsv_". This QuickMenu preset is immensely useful for gathering in-game information for custom sideops. The user must have Infinite Heaven r223+ installed in order to utilize the QuickMenu.
 

@@ -6,9 +6,9 @@
     <locationID>20</locationID>
     <loadArea>hill</loadArea>
     <coords>
-      <xCoord>2050</xCoord>
+      <xCoord>2150</xCoord>
       <yCoord>52</yCoord>
-      <zCoord>375</zCoord>
+      <zCoord>389</zCoord>
       <roty>0</roty>
     </coords>
     <radius>3</radius>
@@ -20,7 +20,7 @@
     <hostageCoordinates>{pos={2105.081,60.628,386.173},rotY=-105.895,}, {pos={2068.739,52.183,392.912},rotY=177.245,}, {pos={2210.213,60.562,416.400},rotY=-157.135,}, </hostageCoordinates>
     <vehicleCoordinates />
     <animalCoordinates />
-    <itemCoordinates>{pos={2072.561,52.055,355.083},rotY=-179.616000000014,}, {pos={2069.326,52.424,355.859},rotY=173.625,}, {pos={2069.258,52.432,353.648},rotY=93.771,}, {pos={2157.142,56.642,404.894},rotY=-168.208,}, {pos={2135.770,56.640,358.037},rotY=-74.137,}, </itemCoordinates>
+    <itemCoordinates>{pos={2072.561,52.055,355.083},rotY=-179.616000000014,}, {pos={2069.326,52.424,355.859},rotY=173.625,}, {pos={2069.258,52.5,353.648},rotY=93.771,}, {pos={2157.142,56.642,404.894},rotY=-168.208,}, {pos={2135.770,56.640,358.037},rotY=-74.137,}, </itemCoordinates>
     <activeItemCoordinates />
     <modelCoordinates />
   </definitionDetails>
@@ -433,7 +433,7 @@
         <item>EQP_SWP_MolotovCocktail_G02</item>
         <coordinates>
           <xCoord>2069.258</xCoord>
-          <yCoord>52.432</yCoord>
+          <yCoord>52.5</yCoord>
           <zCoord>353.648</zCoord>
           <roty>93.771</roty>
         </coordinates>

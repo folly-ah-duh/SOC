@@ -77,118 +77,134 @@ namespace SOC.UI
             ShiftVisibilities(true);
             string currentRegion = enemyCP.CPname.Substring(0,4);
 
-            if (!currentRegion.Equals("mtbs"))
-            {
-                string[] subtypes = new string[0];
-                comboBox_subtype.Items.Clear();
-                comboBox_subtype2.Items.Clear();
-                if (currentRegion.Equals("afgh"))
-                    subtypes = BodyInfo.afghSubTypes;
-                else
-                    subtypes = BodyInfo.mafrSubTypes;
-                comboBox_subtype.Items.AddRange(subtypes);
-                comboBox_subtype2.Items.AddRange(subtypes);
+            string[] subtypes = new string[0];
+            comboBox_subtype.Items.Clear();
+            comboBox_subtype2.Items.Clear();
+            if (currentRegion.Equals("afgh"))
+                subtypes = BodyInfo.afghSubTypes;
+            else
+                subtypes = BodyInfo.mafrSubTypes;
 
-                if (comboBox_subtype.Items.Contains(questDetails.soldierSubType))
-                    comboBox_subtype.Text = questDetails.soldierSubType;
-                else
-                    comboBox_subtype.SelectedIndex = 0;
+            comboBox_subtype.Items.AddRange(subtypes);
+            comboBox_subtype2.Items.AddRange(subtypes);
 
-                h_checkBox_intrgt.Checked = questDetails.canInter;
+            if (comboBox_subtype.Items.Contains(questDetails.soldierSubType))
+                comboBox_subtype.Text = questDetails.soldierSubType;
+            else
+                comboBox_subtype.SelectedIndex = 0;
+
+            h_checkBox_intrgt.Checked = questDetails.canInter;
+
+            comboBox_Body.Items.Clear();
+            if (currentRegion.Equals("mtbs"))
+                foreach (BodyInfoEntry infoEntry in BodyInfo.BodyInfoArray)
+                {
+                    if (infoEntry.hasface)
+                        this.comboBox_Body.Items.Add(infoEntry.bodyName);
+                }
+            else
+                foreach (BodyInfoEntry infoEntry in BodyInfo.BodyInfoArray)
+                {
+                    this.comboBox_Body.Items.Add(infoEntry.bodyName);
+                }
+
+            if (comboBox_Body.Items.Count <= questDetails.hostageBodyIndex)
+                comboBox_Body.SelectedIndex = 0;
+            else
                 comboBox_Body.SelectedIndex = questDetails.hostageBodyIndex;
 
-                //
-                // Quest-Specific Soldiers
-                //
-                Panel currentPanel = panelQuestEnemyDet;
-                foreach (Enemy questEnemy in questDetails.questEnemies)
-                {
-                    EnemyBox questEnemyBox = new EnemyBox(questEnemy, enemyCP);
-                    questEnemyBox.BuildObject(currentPanel.Width);
-                    currentPanel.Controls.Add(questEnemyBox.getGroupBoxMain());
-                    questEnemyBoxes.Add(questEnemyBox);
-                }
-                //
-                // CP-Specific soldiers
-                //
-                currentPanel = panelCPEnemyDet;
-                foreach (Enemy cpEnemy in questDetails.cpEnemies)
-                {
-                    EnemyBox cpEnemyBox = new EnemyBox(cpEnemy, enemyCP);
-                    cpEnemyBox.BuildObject(currentPanel.Width);
-                    cpEnemyBox.e_label_spawn.Text = "Customize:"; cpEnemyBox.e_label_spawn.Left = 26;
-                    currentPanel.Controls.Add(cpEnemyBox.getGroupBoxMain());
-                    CPEnemyBoxes.Add(cpEnemyBox);
-                }
-                //
-                // Hostages
-                //
-                currentPanel = panelHosDet;
-                foreach (Hostage hostage in questDetails.hostages)
-                {
-                    HostageBox hostageBox = new HostageBox(hostage, questDetails.hostageBodyIndex);
-                    hostageBox.BuildObject(currentPanel.Width);
-                    currentPanel.Controls.Add(hostageBox.getGroupBoxMain());
-                    hostageBoxes.Add(hostageBox);
-                }
-                //
-                // Heavy Vehicles
-                //
-                currentPanel = panelVehDet;
-                foreach (Vehicle vehicle in questDetails.vehicles)
-                {
-                    VehicleBox vehiclebox = new VehicleBox(vehicle);
-                    vehiclebox.BuildObject(currentPanel.Width);
-                    currentPanel.Controls.Add(vehiclebox.getGroupBoxMain());
-                    vehicleBoxes.Add(vehiclebox);
-                }
-                //
-                // Animal Clusters
-                //
-                currentPanel = panelAnimalDet;
-                foreach (Animal animal in questDetails.animals)
-                {
-                    AnimalBox anibox = new AnimalBox(animal);
-                    anibox.BuildObject(currentPanel.Width);
-                    currentPanel.Controls.Add(anibox.getGroupBoxMain());
-                    animalBoxes.Add(anibox);
-                }
-                //
-                // Dormant Items
-                //
-                currentPanel = panelItemDet;
-                foreach (Item item in questDetails.items)
-                {
-                    ItemBox itemBox = new ItemBox(item);
-                    itemBox.BuildObject(currentPanel.Width);
-                    currentPanel.Controls.Add(itemBox.getGroupBoxMain());
-                    itemBoxes.Add(itemBox);
-                }
-                //
-                // Active Items
-                //
-                currentPanel = panelAcItDet;
-                foreach (ActiveItem acitem in questDetails.activeItems)
-                {
-                    ActiveItemBox activeItemBox = new ActiveItemBox(acitem);
-                    activeItemBox.BuildObject(currentPanel.Width);
-                    currentPanel.Controls.Add(activeItemBox.getGroupBoxMain());
-                    activeItemBoxes.Add(activeItemBox);
-                }
-                //
-                // Models
-                //
-                currentPanel = panelStMdDet;
-                foreach (Model model in questDetails.models)
-                {
-                    ModelBox modelBox = new ModelBox(model);
-                    modelBox.BuildObject(currentPanel.Width);
-                    currentPanel.Controls.Add(modelBox.getGroupBoxMain());
-                    modelBoxes.Add(modelBox);
-                }
-
+            //
+            // Quest-Specific Soldiers
+            //
+            Panel currentPanel = panelQuestEnemyDet;
+            foreach (Enemy questEnemy in questDetails.questEnemies)
+            {
+                EnemyBox questEnemyBox = new EnemyBox(questEnemy, enemyCP);
+                questEnemyBox.BuildObject(currentPanel.Width);
+                currentPanel.Controls.Add(questEnemyBox.getGroupBoxMain());
+                questEnemyBoxes.Add(questEnemyBox);
             }
-            
+            //
+            // CP-Specific soldiers
+            //
+            currentPanel = panelCPEnemyDet;
+            foreach (Enemy cpEnemy in questDetails.cpEnemies)
+            {
+                EnemyBox cpEnemyBox = new EnemyBox(cpEnemy, enemyCP);
+                cpEnemyBox.BuildObject(currentPanel.Width);
+                cpEnemyBox.e_label_spawn.Text = "Customize:"; cpEnemyBox.e_label_spawn.Left = 26;
+                currentPanel.Controls.Add(cpEnemyBox.getGroupBoxMain());
+                CPEnemyBoxes.Add(cpEnemyBox);
+            }
+            //
+            // Hostages
+            //
+            currentPanel = panelHosDet;
+            foreach (Hostage hostage in questDetails.hostages)
+            {
+                HostageBox hostageBox = new HostageBox(hostage, questDetails.hostageBodyIndex);
+                hostageBox.BuildObject(currentPanel.Width);
+                currentPanel.Controls.Add(hostageBox.getGroupBoxMain());
+                hostageBoxes.Add(hostageBox);
+            }
+            //
+            // Heavy Vehicles
+            //
+            currentPanel = panelVehDet;
+            foreach (Vehicle vehicle in questDetails.vehicles)
+            {
+                VehicleBox vehiclebox = new VehicleBox(vehicle);
+                vehiclebox.BuildObject(currentPanel.Width);
+                currentPanel.Controls.Add(vehiclebox.getGroupBoxMain());
+                vehicleBoxes.Add(vehiclebox);
+            }
+            //
+            // Animal Clusters
+            //
+            currentPanel = panelAnimalDet;
+            foreach (Animal animal in questDetails.animals)
+            {
+                AnimalBox anibox = new AnimalBox(animal);
+                anibox.BuildObject(currentPanel.Width);
+                currentPanel.Controls.Add(anibox.getGroupBoxMain());
+                animalBoxes.Add(anibox);
+            }
+            //
+            // Dormant Items
+            //
+            currentPanel = panelItemDet;
+            foreach (Item item in questDetails.items)
+            {
+                ItemBox itemBox = new ItemBox(item);
+                itemBox.BuildObject(currentPanel.Width);
+                currentPanel.Controls.Add(itemBox.getGroupBoxMain());
+                itemBoxes.Add(itemBox);
+            }
+            //
+            // Active Items
+            //
+            currentPanel = panelAcItDet;
+            foreach (ActiveItem acitem in questDetails.activeItems)
+            {
+                ActiveItemBox activeItemBox = new ActiveItemBox(acitem);
+                activeItemBox.BuildObject(currentPanel.Width);
+                currentPanel.Controls.Add(activeItemBox.getGroupBoxMain());
+                activeItemBoxes.Add(activeItemBox);
+            }
+            //
+            // Models
+            //
+            currentPanel = panelStMdDet;
+            foreach (Model model in questDetails.models)
+            {
+                ModelBox modelBox = new ModelBox(model);
+                modelBox.BuildObject(currentPanel.Width);
+                currentPanel.Controls.Add(modelBox.getGroupBoxMain());
+                modelBoxes.Add(modelBox);
+            }
+
+
+
             ShiftVisibilities(false);
             ShiftGroups(Height, Width);
         }

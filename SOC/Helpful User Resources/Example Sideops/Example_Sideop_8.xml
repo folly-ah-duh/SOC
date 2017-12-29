@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<Quest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <definitionDetails FpkName="Example_Sideop_8" QuestNum="30357">
+    <QuestTitle>Example: Extract the Mother Base Slackers</QuestTitle>
+    <QuestDesc>Extract the slacking soldiers on the main Development platform.</QuestDesc>
+    <locationID>50</locationID>
+    <loadArea>MtbsDevelop</loadArea>
+    <coords>
+      <xCoord>0</xCoord>
+      <yCoord>0</yCoord>
+      <zCoord>0</zCoord>
+      <roty>0</roty>
+    </coords>
+    <radius>1</radius>
+    <category>PRISONER</category>
+    <objectiveType>RECOVERED</objectiveType>
+    <CPName>NONE</CPName>
+    <reward>F</reward>
+    <progNotif>0</progNotif>
+    <hostageCoordinates>{pos={1167.531,12.017,298.170},rotY=47.585,}, 
+{pos={1182.026,15.883,283.999},rotY=-34.265,}, 
+{pos={1179.752,19.883,286.288},rotY=139.986,}, 
+</hostageCoordinates>
+    <vehicleCoordinates />
+    <animalCoordinates />
+    <itemCoordinates />
+    <activeItemCoordinates />
+    <modelCoordinates />
+  </definitionDetails>
+  <questEntities hostageBodyIndex="17" canInter="false" soldierSubType="PF_A">
+    <questEnemies />
+    <cpEnemies />
+    <hostages>
+      <Hostage name="Hostage_0">
+        <isTarget>true</isTarget>
+        <isUntied>true</isUntied>
+        <isInjured>false</isInjured>
+        <number>0</number>
+        <skill>Moodmaker</skill>
+        <staffType>DEVELOP</staffType>
+        <scared>NEVER</scared>
+        <language>english</language>
+        <coordinates>
+          <xCoord>1167.531</xCoord>
+          <yCoord>12.017</yCoord>
+          <zCoord>298.170</zCoord>
+          <roty>47.585</roty>
+        </coordinates>
+      </Hostage>
+      <Hostage name="Hostage_1">
+        <isTarget>true</isTarget>
+        <isUntied>true</isUntied>
+        <isInjured>false</isInjured>
+        <number>1</number>
+        <skill>GunsmithHandGun</skill>
+        <staffType>DEVELOP</staffType>
+        <scared>NEVER</scared>
+        <language>english</language>
+        <coordinates>
+          <xCoord>1182.026</xCoord>
+          <yCoord>15.883</yCoord>
+          <zCoord>283.999</zCoord>
+          <roty>-34.265</roty>
+        </coordinates>
+      </Hostage>
+      <Hostage name="Hostage_2">
+        <isTarget>true</isTarget>
+        <isUntied>true</isUntied>
+        <isInjured>false</isInjured>
+        <number>2</number>
+        <skill>Grappler</skill>
+        <staffType>COMBAT</staffType>
+        <scared>NEVER</scared>
+        <language>english</language>
+        <coordinates>
+          <xCoord>1179.752</xCoord>
+          <yCoord>19.883</yCoord>
+          <zCoord>286.288</zCoord>
+          <roty>139.986</roty>
+        </coordinates>
+      </Hostage>
+    </hostages>
+    <vehicles />
+    <items />
+    <models />
+    <activeItems />
+    <animals />
+  </questEntities>
+</Quest>

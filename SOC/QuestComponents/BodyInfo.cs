@@ -329,7 +329,7 @@ namespace SOC.QuestComponents
                 ),
         };
         
-         
+
     }
 
     public struct BodyInfoEntry

@@ -1310,6 +1310,12 @@ namespace SOC.QuestComponents
                 quatCoordinates.wval = Fox2Info.getQuaternionW(coords.roty);
             }
 
+            public void setRotation(Coordinates coords)
+            {
+                quatCoordinates.yval = Fox2Info.getQuaternionY(coords.roty);
+                quatCoordinates.wval = Fox2Info.getQuaternionW(coords.roty);
+            }
+
             [XmlElement]
             public bool isBoxed { get; set; } = false;
 
@@ -1353,6 +1359,12 @@ namespace SOC.QuestComponents
                 quatCoordinates.wval = Fox2Info.getQuaternionW(coords.roty);
             }
 
+            public void setRotation(Coordinates coords)
+            {
+                quatCoordinates.yval = Fox2Info.getQuaternionY(coords.roty);
+                quatCoordinates.wval = Fox2Info.getQuaternionW(coords.roty);
+            }
+
             [XmlElement]
             public int number { get; set; } = 0;
 
@@ -1387,6 +1399,12 @@ namespace SOC.QuestComponents
             public Model(Coordinates coords, int num, string nme)
             {
                 coordinates = coords; number = num; name = nme;
+                quatCoordinates.yval = Fox2Info.getQuaternionY(coords.roty);
+                quatCoordinates.wval = Fox2Info.getQuaternionW(coords.roty);
+            }
+
+            public void setRotation(Coordinates coords)
+            {
                 quatCoordinates.yval = Fox2Info.getQuaternionY(coords.roty);
                 quatCoordinates.wval = Fox2Info.getQuaternionW(coords.roty);
             }

@@ -3767,6 +3767,8 @@ namespace SOC.QuestComponents
                 }),
         };
 
+        public static CP MtbsCP = new CP("mtbs", new string[] { }, new string[] { });
+
         public static CP NoneCP = new CP("NONE", new string[] { }, new string[] { });
 
         public static CP GetCPIndex(string CPName, int locId)
@@ -3777,7 +3779,7 @@ namespace SOC.QuestComponents
             else if (locId == 20)
                 cpArray = MafrCPs;
             else
-                return NoneCP;
+                return MtbsCP;
 
             foreach (CP cp in cpArray)
             {

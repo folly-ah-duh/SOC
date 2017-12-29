@@ -19,7 +19,7 @@ namespace SOC.UI
         public int locationID = -1;
         string[] afghCP = new string[AfghCPs.Length];
         string[] mafrCP = new string[MafrCPs.Length];
-        string[] mtbsCP = new string[] { "NONE" };
+        string[] mtbsCP = new string[1];
         Tuple<Label, TextBox>[] LocationBoxes;
 
         public Setup()
@@ -45,6 +45,7 @@ namespace SOC.UI
                 afghCP[i] = AfghCPs[i].CPname;
             for (int i = 0; i < MafrCPs.Length; i++)
                 mafrCP[i] = MafrCPs[i].CPname;
+            mtbsCP[0] = MtbsCP.CPname;
 
             refreshNotifsList();
         }
@@ -79,7 +80,12 @@ namespace SOC.UI
             else
                 comboBoxProgressNotifs.SelectedIndex = dd.progNotif;
 
-            textBoxHosCoords.Text = dd.hostageCoordinates; textBoxVehCoords.Text = dd.vehicleCoordinates; textBoxAnimalCoords.Text = dd.animalCoordinates; textBoxItemCoords.Text = dd.itemCoordinates; textBoxActiveItemCoords.Text = dd.activeItemCoordinates; textBoxStMdCoords.Text = dd.modelCoordinates;
+            textBoxHosCoords.Text = dd.hostageCoordinates.Replace("\n", "\r\n");
+            textBoxVehCoords.Text = dd.vehicleCoordinates.Replace("\n", "\r\n");
+            textBoxAnimalCoords.Text = dd.animalCoordinates.Replace("\n", "\r\n");
+            textBoxItemCoords.Text = dd.itemCoordinates.Replace("\n", "\r\n");
+            textBoxActiveItemCoords.Text = dd.activeItemCoordinates.Replace("\n", "\r\n");
+            textBoxStMdCoords.Text = dd.modelCoordinates.Replace("\n", "\r\n");
         }
 
         public void refreshNotifsList()
@@ -114,7 +120,7 @@ namespace SOC.UI
             foreach (Hostage entity in qe.hostages)
             {
                 Coordinates detailCoords = entity.coordinates;
-                updatedTest += string.Format("{{pos={{{0},{1},{2}}},rotY={3},}}, ", detailCoords.xCoord, detailCoords.yCoord, detailCoords.zCoord, detailCoords.roty);
+                updatedTest += string.Format("{{pos={{{0},{1},{2}}},rotY={3},}}, \r\n", detailCoords.xCoord, detailCoords.yCoord, detailCoords.zCoord, detailCoords.roty);
             }
             textBoxHosCoords.Text = updatedTest;
 
@@ -122,7 +128,7 @@ namespace SOC.UI
             foreach (Vehicle entity in qe.vehicles)
             {
                 Coordinates detailCoords = entity.coordinates;
-                updatedTest += string.Format("{{pos={{{0},{1},{2}}},rotY={3},}}, ", detailCoords.xCoord, detailCoords.yCoord, detailCoords.zCoord, detailCoords.roty);
+                updatedTest += string.Format("{{pos={{{0},{1},{2}}},rotY={3},}}, \r\n", detailCoords.xCoord, detailCoords.yCoord, detailCoords.zCoord, detailCoords.roty);
             }
             textBoxVehCoords.Text = updatedTest;
 
@@ -130,7 +136,7 @@ namespace SOC.UI
             foreach (Animal entity in qe.animals)
             {
                 Coordinates detailCoords = entity.coordinates;
-                updatedTest += string.Format("{{pos={{{0},{1},{2}}},rotY={3},}}, ", detailCoords.xCoord, detailCoords.yCoord, detailCoords.zCoord, detailCoords.roty);
+                updatedTest += string.Format("{{pos={{{0},{1},{2}}},rotY={3},}}, \r\n", detailCoords.xCoord, detailCoords.yCoord, detailCoords.zCoord, detailCoords.roty);
             }
             textBoxAnimalCoords.Text = updatedTest;
 
@@ -138,7 +144,7 @@ namespace SOC.UI
             foreach (Item entity in qe.items)
             {
                 Coordinates detailCoords = entity.coordinates;
-                updatedTest += string.Format("{{pos={{{0},{1},{2}}},rotY={3},}}, ", detailCoords.xCoord, detailCoords.yCoord, detailCoords.zCoord, detailCoords.roty);
+                updatedTest += string.Format("{{pos={{{0},{1},{2}}},rotY={3},}}, \r\n", detailCoords.xCoord, detailCoords.yCoord, detailCoords.zCoord, detailCoords.roty);
             }
             textBoxItemCoords.Text = updatedTest;
 
@@ -146,7 +152,7 @@ namespace SOC.UI
             foreach (ActiveItem entity in qe.activeItems)
             {
                 Coordinates detailCoords = entity.coordinates;
-                updatedTest += string.Format("{{pos={{{0},{1},{2}}},rotY={3},}}, ", detailCoords.xCoord, detailCoords.yCoord, detailCoords.zCoord, detailCoords.roty);
+                updatedTest += string.Format("{{pos={{{0},{1},{2}}},rotY={3},}}, \r\n", detailCoords.xCoord, detailCoords.yCoord, detailCoords.zCoord, detailCoords.roty);
             }
             textBoxActiveItemCoords.Text = updatedTest;
 
@@ -154,7 +160,7 @@ namespace SOC.UI
             foreach (Model entity in qe.models)
             {
                 Coordinates detailCoords = entity.coordinates;
-                updatedTest += string.Format("{{pos={{{0},{1},{2}}},rotY={3},}}, ", detailCoords.xCoord, detailCoords.yCoord, detailCoords.zCoord, detailCoords.roty);
+                updatedTest += string.Format("{{pos={{{0},{1},{2}}},rotY={3},}}, \r\n", detailCoords.xCoord, detailCoords.yCoord, detailCoords.zCoord, detailCoords.roty);
             }
             textBoxStMdCoords.Text = updatedTest;
         }
@@ -170,17 +176,30 @@ namespace SOC.UI
                     comboBoxLoadArea.Items.AddRange(afghLoadAreas);
                     comboBoxCP.Items.AddRange(afghCP);
                     locationID = 10;
+                    textBoxVehCoords.Enabled = true;
+                    textBoxVehCoords.BackColor = System.Drawing.Color.Silver;
+                    labelVeh.ForeColor = System.Drawing.Color.Black;
+                    labelVeh.Text = "Vehicle Locations: (X, Y, Z, Y-Axis Rotation)";
                     break;
                 case 1:
                     locationID = 20;
                     comboBoxLoadArea.Items.AddRange(mafrLoadAreas);
                     comboBoxCP.Items.AddRange(mafrCP);
+                    textBoxVehCoords.Enabled = true;
+                    textBoxVehCoords.BackColor = System.Drawing.Color.Silver;
+                    labelVeh.ForeColor = System.Drawing.Color.Black;
+                    labelVeh.Text = "Vehicle Locations: (X, Y, Z, Y-Axis Rotation)";
                     break;
                 case 2:
                     comboBoxLoadArea.Items.AddRange(mtbsLoadAreas);
                     comboBoxCP.Items.AddRange(mtbsCP);
                     locationID = 50;
                     disableRegionInput();
+                    textBoxVehCoords.Enabled = false;
+                    textBoxVehCoords.Text = "";
+                    textBoxVehCoords.BackColor = System.Drawing.Color.DarkGray;
+                    labelVeh.ForeColor = System.Drawing.Color.Goldenrod;
+                    labelVeh.Text = "Vehicle Locations: (X, Y, Z, Y-Axis Rotation) [Disabled On Mother Base]";
                     comboBoxRadius.Text = "1";
                     break;
                 default:

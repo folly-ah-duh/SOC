@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<Quest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <definitionDetails FpkName="Example_Sideop_10" QuestNum="30359">
+    <QuestTitle>Example: Reach the Prisoner</QuestTitle>
+    <QuestDesc>Reach the prisoner at Serak Powerplant</QuestDesc>
+    <locationID>10</locationID>
+    <loadArea>sovietBase</loadArea>
+    <coords>
+      <xCoord>-730</xCoord>
+      <yCoord>540</yCoord>
+      <zCoord>-1356</zCoord>
+      <roty>0</roty>
+    </coords>
+    <radius>1</radius>
+    <category>PRISONER</category>
+    <objectiveType>RECOVERED</objectiveType>
+    <CPName>NONE</CPName>
+    <reward>D</reward>
+    <progNotif>3</progNotif>
+    <hostageCoordinates>{pos={-730.489,543.334,-1356.322},rotY=-128.087,}, 
+</hostageCoordinates>
+    <vehicleCoordinates />
+    <animalCoordinates />
+    <itemCoordinates />
+    <activeItemCoordinates />
+    <modelCoordinates>{pos={-726.679,534.328,-1366.811},rotY=-109.527,}, 
+{pos={-712.273,538.261,-1387.468},rotY=-11.335,}, 
+</modelCoordinates>
+  </definitionDetails>
+  <questEntities hostageBodyIndex="1" canInter="false" soldierSubType="PF_A">
+    <questEnemies />
+    <cpEnemies />
+    <hostages>
+      <Hostage name="Hostage_0">
+        <isTarget>true</isTarget>
+        <isUntied>false</isUntied>
+        <isInjured>false</isInjured>
+        <number>0</number>
+        <skill>SuppressorEngineer</skill>
+        <staffType>DEVELOP</staffType>
+        <scared>NEVER</scared>
+        <language>english</language>
+        <coordinates>
+          <xCoord>-730.489</xCoord>
+          <yCoord>543.334</yCoord>
+          <zCoord>-1356.322</zCoord>
+          <roty>-128.087</roty>
+        </coordinates>
+      </Hostage>
+    </hostages>
+    <vehicles />
+    <items />
+    <models>
+      <Model name="Model_0">
+        <missingGeom>false</missingGeom>
+        <number>0</number>
+        <model>AfghanRockMedium</model>
+        <coordinates>
+          <xCoord>-726.679</xCoord>
+          <yCoord>534.328</yCoord>
+          <zCoord>-1366.811</zCoord>
+          <roty>-109.527</roty>
+        </coordinates>
+        <quatCoordinates>
+          <xval>0</xval>
+          <yval>-0.816777519123551</yval>
+          <zval>0</zval>
+          <wval>0.576952757385193</wval>
+        </quatCoordinates>
+      </Model>
+      <Model name="Model_1">
+        <missingGeom>false</missingGeom>
+        <number>1</number>
+        <model>MetalStaircase</model>
+        <coordinates>
+          <xCoord>-712.273</xCoord>
+          <yCoord>538.261</yCoord>
+          <zCoord>-1387.468</zCoord>
+          <roty>-11.335</roty>
+        </coordinates>
+        <quatCoordinates>
+          <xval>0</xval>
+          <yval>-0.0987553064278113</yval>
+          <zval>0</zval>
+          <wval>0.995111747218547</wval>
+        </quatCoordinates>
+      </Model>
+    </models>
+    <activeItems />
+    <animals />
+  </questEntities>
+</Quest>

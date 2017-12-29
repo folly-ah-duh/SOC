@@ -88,6 +88,9 @@ namespace SOC.Classes
                 for (int i = oldEntityCount; i < newEntityCount; i++)
                     hostages.Add(new Hostage(hostageCoords[i], i, "Hostage_" + i));
 
+            for (int i = 0; i < newEntityCount && i < oldEntityCount; i++)
+                hostages[i].coordinates = hostageCoords[i];
+
             //
             // add/remove vehicles
             //
@@ -100,6 +103,8 @@ namespace SOC.Classes
                 for (int i = oldEntityCount; i < newEntityCount; i++)
                     vehicles.Add(new Vehicle(vehicleCoords[i], i, "Vehicle_" + i));
 
+            for (int i = 0; i < newEntityCount && i < oldEntityCount; i++)
+                vehicles[i].coordinates = vehicleCoords[i];
             //
             // add/remove animals
             //
@@ -112,6 +117,8 @@ namespace SOC.Classes
                 for (int i = oldEntityCount; i < newEntityCount; i++)
                     animals.Add(new Animal(animalCoords[i], i, "Animal_Cluster_" + i));
 
+            for (int i = 0; i < newEntityCount && i < oldEntityCount; i++)
+                animals[i].coordinates = animalCoords[i];
             //
             // add/remove items
             //
@@ -123,6 +130,12 @@ namespace SOC.Classes
             if (newEntityCount > oldEntityCount)
                 for (int i = oldEntityCount; i < newEntityCount; i++)
                     items.Add(new Item(itemCoords[i], i, "Item_" + i));
+
+            for (int i = 0; i < newEntityCount && i < oldEntityCount; i++)
+            {
+                items[i].coordinates = itemCoords[i];
+                items[i].setRotation(itemCoords[i]);
+            }
             //
             // add/remove activeitems
             //
@@ -135,6 +148,11 @@ namespace SOC.Classes
                 for (int i = oldEntityCount; i < newEntityCount; i++)
                     activeItems.Add(new ActiveItem(activeitemCoords[i], i, "Active_Item_" + i));
 
+            for (int i = 0; i < newEntityCount && i < oldEntityCount; i++)
+            {
+                activeItems[i].coordinates = activeitemCoords[i];
+                activeItems[i].setRotation(activeitemCoords[i]);
+            }
             //
             // add/remove models
             //
@@ -146,6 +164,12 @@ namespace SOC.Classes
             if (newEntityCount > oldEntityCount)
                 for (int i = oldEntityCount; i < newEntityCount; i++)
                     models.Add(new Model(modelCoords[i], i, "Model_" + i));
+
+            for (int i = 0; i < newEntityCount && i < oldEntityCount; i++)
+            {
+                models[i].coordinates = modelCoords[i];
+                models[i].setRotation(modelCoords[i]);
+            }
         }
 
     }

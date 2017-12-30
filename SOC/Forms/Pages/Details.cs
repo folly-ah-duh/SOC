@@ -205,8 +205,10 @@ namespace SOC.UI
 
 
 
+            panelDetails.AutoScroll = false;
             ShiftVisibilities(false);
             ShiftGroups(Height, Width);
+            panelDetails.AutoScroll = true;
         }
 
         internal void ShiftVisibilities(bool hideAll)
@@ -239,13 +241,13 @@ namespace SOC.UI
             Height = height; Width = width;
             dynamicPanelWidth = width / 5 + 30;
             int maxPanelWidth = 285;
-
+            
             if (dynamicPanelWidth >= maxPanelWidth)
                 dynamicPanelWidth = maxPanelWidth;
 
             if (detailLists.Count > 0)
                 dynamicPanelWidth += (150 / detailLists.Count);
-
+            
             foreach (GroupBox detailGroupBox in detailLists)
             {
                 detailGroupBox.Width = dynamicPanelWidth;
@@ -253,7 +255,7 @@ namespace SOC.UI
 
             int xOffset = 3 + originAnchor.Left;
             int bufferSpace = 4 + dynamicPanelWidth;
-
+            
             for (int i = 0; i < detailLists.Count; i++)
             {
                 detailLists[i].Left = xOffset + bufferSpace * i;

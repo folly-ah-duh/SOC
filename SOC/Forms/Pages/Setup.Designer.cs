@@ -165,8 +165,7 @@
             this.comboBoxObjective.FormattingEnabled = true;
             this.comboBoxObjective.Items.AddRange(new object[] {
             "RECOVERED",
-            "ELIMINATE",
-            "MSF_RECOVERED"});
+            "ELIMINATE"});
             this.comboBoxObjective.Location = new System.Drawing.Point(105, 185);
             this.comboBoxObjective.Name = "comboBoxObjective";
             this.comboBoxObjective.Size = new System.Drawing.Size(153, 21);

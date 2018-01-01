@@ -2214,7 +2214,7 @@ namespace SOC.UI
             // label_subtype2
             // 
             this.label_subtype2.AutoSize = true;
-            this.label_subtype2.Location = new System.Drawing.Point(14, 6);
+            this.label_subtype2.Location = new System.Drawing.Point(7, 3);
             this.label_subtype2.Name = "label_subtype2";
             this.label_subtype2.Size = new System.Drawing.Size(88, 13);
             this.label_subtype2.TabIndex = 8;
@@ -2227,7 +2227,7 @@ namespace SOC.UI
             this.comboBox_subtype2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_subtype2.Enabled = false;
             this.comboBox_subtype2.FormattingEnabled = true;
-            this.comboBox_subtype2.Location = new System.Drawing.Point(108, 3);
+            this.comboBox_subtype2.Location = new System.Drawing.Point(101, 0);
             this.comboBox_subtype2.Name = "comboBox_subtype2";
             this.comboBox_subtype2.Size = new System.Drawing.Size(147, 21);
             this.comboBox_subtype2.TabIndex = 9;
@@ -2236,7 +2236,7 @@ namespace SOC.UI
             // 
             this.label_customizeall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_customizeall.AutoSize = true;
-            this.label_customizeall.Location = new System.Drawing.Point(105, 30);
+            this.label_customizeall.Location = new System.Drawing.Point(98, 27);
             this.label_customizeall.Name = "label_customizeall";
             this.label_customizeall.Size = new System.Drawing.Size(129, 13);
             this.label_customizeall.TabIndex = 2;
@@ -2248,7 +2248,7 @@ namespace SOC.UI
             this.checkBox_customizeall.AutoSize = true;
             this.checkBox_customizeall.Checked = true;
             this.checkBox_customizeall.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_customizeall.Location = new System.Drawing.Point(240, 30);
+            this.checkBox_customizeall.Location = new System.Drawing.Point(233, 27);
             this.checkBox_customizeall.Name = "checkBox_customizeall";
             this.checkBox_customizeall.Size = new System.Drawing.Size(15, 14);
             this.checkBox_customizeall.TabIndex = 3;
@@ -2287,7 +2287,7 @@ namespace SOC.UI
             // 
             this.label_spawnall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_spawnall.AutoSize = true;
-            this.label_spawnall.Location = new System.Drawing.Point(106, 30);
+            this.label_spawnall.Location = new System.Drawing.Point(99, 27);
             this.label_spawnall.Name = "label_spawnall";
             this.label_spawnall.Size = new System.Drawing.Size(128, 13);
             this.label_spawnall.TabIndex = 1;
@@ -2299,7 +2299,7 @@ namespace SOC.UI
             this.checkBox_spawnall.AutoSize = true;
             this.checkBox_spawnall.Checked = true;
             this.checkBox_spawnall.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_spawnall.Location = new System.Drawing.Point(240, 30);
+            this.checkBox_spawnall.Location = new System.Drawing.Point(233, 27);
             this.checkBox_spawnall.Name = "checkBox_spawnall";
             this.checkBox_spawnall.Size = new System.Drawing.Size(15, 14);
             this.checkBox_spawnall.TabIndex = 2;
@@ -2309,7 +2309,7 @@ namespace SOC.UI
             // label_subtype
             // 
             this.label_subtype.AutoSize = true;
-            this.label_subtype.Location = new System.Drawing.Point(14, 6);
+            this.label_subtype.Location = new System.Drawing.Point(7, 3);
             this.label_subtype.Name = "label_subtype";
             this.label_subtype.Size = new System.Drawing.Size(88, 13);
             this.label_subtype.TabIndex = 6;
@@ -2321,7 +2321,7 @@ namespace SOC.UI
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox_subtype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_subtype.FormattingEnabled = true;
-            this.comboBox_subtype.Location = new System.Drawing.Point(108, 3);
+            this.comboBox_subtype.Location = new System.Drawing.Point(101, 0);
             this.comboBox_subtype.Name = "comboBox_subtype";
             this.comboBox_subtype.Size = new System.Drawing.Size(147, 21);
             this.comboBox_subtype.TabIndex = 7;
@@ -2455,7 +2455,7 @@ namespace SOC.UI
             // 
             this.h_label_intrgt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.h_label_intrgt.AutoSize = true;
-            this.h_label_intrgt.Location = new System.Drawing.Point(88, 30);
+            this.h_label_intrgt.Location = new System.Drawing.Point(81, 27);
             this.h_label_intrgt.Name = "h_label_intrgt";
             this.h_label_intrgt.Size = new System.Drawing.Size(146, 13);
             this.h_label_intrgt.TabIndex = 0;
@@ -2465,7 +2465,7 @@ namespace SOC.UI
             // 
             this.h_checkBox_intrgt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.h_checkBox_intrgt.AutoSize = true;
-            this.h_checkBox_intrgt.Location = new System.Drawing.Point(240, 30);
+            this.h_checkBox_intrgt.Location = new System.Drawing.Point(233, 27);
             this.h_checkBox_intrgt.Name = "h_checkBox_intrgt";
             this.h_checkBox_intrgt.Size = new System.Drawing.Size(15, 14);
             this.h_checkBox_intrgt.TabIndex = 0;
@@ -2477,7 +2477,7 @@ namespace SOC.UI
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox_Body.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Body.FormattingEnabled = true;
-            this.comboBox_Body.Location = new System.Drawing.Point(81, 3);
+            this.comboBox_Body.Location = new System.Drawing.Point(74, 0);
             this.comboBox_Body.Name = "comboBox_Body";
             this.comboBox_Body.Size = new System.Drawing.Size(174, 21);
             this.comboBox_Body.TabIndex = 1;
@@ -2488,7 +2488,7 @@ namespace SOC.UI
             this.label_Body.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label_Body.AutoSize = true;
-            this.label_Body.Location = new System.Drawing.Point(41, 6);
+            this.label_Body.Location = new System.Drawing.Point(34, 3);
             this.label_Body.Name = "label_Body";
             this.label_Body.Size = new System.Drawing.Size(34, 13);
             this.label_Body.TabIndex = 2;

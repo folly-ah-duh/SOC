@@ -117,6 +117,7 @@ namespace SOC.UI
             // Quest-Specific Soldiers
             //
             Panel currentPanel = panelQuestEnemyDet;
+            currentPanel.AutoScroll = false;
             foreach (Enemy questEnemy in questDetails.questEnemies)
             {
                 EnemyBox questEnemyBox = new EnemyBox(questEnemy, enemyCP);
@@ -124,10 +125,12 @@ namespace SOC.UI
                 currentPanel.Controls.Add(questEnemyBox.getGroupBoxMain());
                 questEnemyBoxes.Add(questEnemyBox);
             }
+            currentPanel.AutoScroll = true;
             //
             // CP-Specific soldiers
             //
             currentPanel = panelCPEnemyDet;
+            currentPanel.AutoScroll = false;
             foreach (Enemy cpEnemy in questDetails.cpEnemies)
             {
                 EnemyBox cpEnemyBox = new EnemyBox(cpEnemy, enemyCP);
@@ -136,10 +139,12 @@ namespace SOC.UI
                 currentPanel.Controls.Add(cpEnemyBox.getGroupBoxMain());
                 CPEnemyBoxes.Add(cpEnemyBox);
             }
+            currentPanel.AutoScroll = true;
             //
             // Hostages
             //
             currentPanel = panelHosDet;
+            currentPanel.AutoScroll = false;
             foreach (Hostage hostage in questDetails.hostages)
             {
                 HostageBox hostageBox = new HostageBox(hostage, questDetails.hostageBodyIndex);
@@ -147,10 +152,12 @@ namespace SOC.UI
                 currentPanel.Controls.Add(hostageBox.getGroupBoxMain());
                 hostageBoxes.Add(hostageBox);
             }
+            currentPanel.AutoScroll = true;
             //
             // Heavy Vehicles
             //
             currentPanel = panelVehDet;
+            currentPanel.AutoScroll = false;
             foreach (Vehicle vehicle in questDetails.vehicles)
             {
                 VehicleBox vehiclebox = new VehicleBox(vehicle);
@@ -158,10 +165,12 @@ namespace SOC.UI
                 currentPanel.Controls.Add(vehiclebox.getGroupBoxMain());
                 vehicleBoxes.Add(vehiclebox);
             }
+            currentPanel.AutoScroll = true;
             //
             // Animal Clusters
             //
             currentPanel = panelAnimalDet;
+            currentPanel.AutoScroll = false;
             foreach (Animal animal in questDetails.animals)
             {
                 AnimalBox anibox = new AnimalBox(animal);
@@ -169,10 +178,12 @@ namespace SOC.UI
                 currentPanel.Controls.Add(anibox.getGroupBoxMain());
                 animalBoxes.Add(anibox);
             }
+            currentPanel.AutoScroll = true;
             //
             // Dormant Items
             //
             currentPanel = panelItemDet;
+            currentPanel.AutoScroll = false;
             foreach (Item item in questDetails.items)
             {
                 ItemBox itemBox = new ItemBox(item);
@@ -180,10 +191,12 @@ namespace SOC.UI
                 currentPanel.Controls.Add(itemBox.getGroupBoxMain());
                 itemBoxes.Add(itemBox);
             }
+            currentPanel.AutoScroll = true;
             //
             // Active Items
             //
             currentPanel = panelAcItDet;
+            currentPanel.AutoScroll = false;
             foreach (ActiveItem acitem in questDetails.activeItems)
             {
                 ActiveItemBox activeItemBox = new ActiveItemBox(acitem);
@@ -191,10 +204,12 @@ namespace SOC.UI
                 currentPanel.Controls.Add(activeItemBox.getGroupBoxMain());
                 activeItemBoxes.Add(activeItemBox);
             }
+            currentPanel.AutoScroll = true;
             //
             // Models
             //
             currentPanel = panelStMdDet;
+            currentPanel.AutoScroll = false;
             foreach (Model model in questDetails.models)
             {
                 ModelBox modelBox = new ModelBox(model);
@@ -202,7 +217,7 @@ namespace SOC.UI
                 currentPanel.Controls.Add(modelBox.getGroupBoxMain());
                 modelBoxes.Add(modelBox);
             }
-
+            currentPanel.AutoScroll = true;
 
 
             panelDetails.AutoScroll = false;
@@ -317,6 +332,7 @@ namespace SOC.UI
         {
             if (comboBox_Body.Text.ToUpper().Contains("FEMALE"))
             {
+
                 foreach (HostageBox hostageDetail in hostageBoxes)
                 {
                     hostageDetail.h_comboBox_lang.Items.Clear();
@@ -334,6 +350,8 @@ namespace SOC.UI
                     hostageDetail.h_comboBox_lang.SelectedIndex = languageindex;
                 }
             }
+            comboBox_Body.Focus(); panelHosDet.Focus();
+
         }
 
         private void checkbox_spawnAll_Click(object sender, EventArgs e)
@@ -344,6 +362,7 @@ namespace SOC.UI
                 CheckBox checkbox = (CheckBox)control;
                 checkbox.Checked = true;
             }
+            comboBox_subtype.Focus(); panelQuestEnemyDet.Focus();
         }
 
         private void checkbox_customizeAll_Click(object sender, EventArgs e)
@@ -354,6 +373,10 @@ namespace SOC.UI
                 CheckBox checkbox = (CheckBox)control;
                 checkbox.Checked = true;
             }
+            comboBox_subtype2.Enabled = true;
+            comboBox_subtype2.Focus();
+            comboBox_subtype2.Enabled = false;
+            panelCPEnemyDet.Focus();
         }
 
         private void comboBox_subtype_SelectedIndexChanged(object sender, EventArgs e)

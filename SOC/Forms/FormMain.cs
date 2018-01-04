@@ -137,6 +137,8 @@ namespace SOC.UI
             definitionDetails = setupPage.getDefinitionDetails();
             questDetails = detailPage.GetEntityLists();
 
+            AssetsBuilder.ClearQuestFolders(definitionDetails);
+
             LangBuilder.WriteQuestLangs(definitionDetails);
 
             LuaBuilder.WriteDefinitionLua(definitionDetails, questDetails);

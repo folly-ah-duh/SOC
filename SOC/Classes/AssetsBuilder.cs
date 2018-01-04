@@ -24,6 +24,18 @@ namespace SOC.Classes
                 CopyDirectory(subDirInfo.FullName, Path.Combine(destinyDir, subDirInfo.Name));
 
         }
+
+        public static void ClearQuestFolders(DefinitionDetails definitionDetails)
+        {
+            string FPKPath = string.Format("Sideop_Build//Assets//tpp//pack//mission2//quest//ih//{0}_fpk", definitionDetails.FpkName);
+            string FPKDPath = string.Format("Sideop_Build//Assets//tpp//pack//mission2//quest//ih//{0}_fpkd", definitionDetails.FpkName);
+
+            if (Directory.Exists(FPKPath))
+                Directory.Delete(FPKPath, true);
+
+            if (Directory.Exists(FPKDPath))
+                Directory.Delete(FPKDPath, true);
+        }
        
         
         public static void BuildFPKAssets(DefinitionDetails definitionDetails, QuestEntities questDetails) {

@@ -9,6 +9,7 @@ using static SOC.QuestComponents.GameObjectInfo;
 using SOC.QuestComponents;
 using System.Reflection;
 using System.IO;
+using System.Diagnostics;
 
 namespace SOC.UI
 {
@@ -72,8 +73,10 @@ namespace SOC.UI
                         definitionDetails = setupPage.getDefinitionDetails();
 
                         CP selectedCP = EnemyInfo.GetCPIndex(definitionDetails.CPName, definitionDetails.locationID);
+                        string routeName = definitionDetails.routeName;
+                        string[] frtRouteNames = RouteManager.GetRouteNames(routeName);
 
-                        EntitiesManager.InitializeEntities(selectedCP, 
+                        EntitiesManager.InitializeEntities(selectedCP, routeName,
                             BuildCoords(definitionDetails.hostageCoordinates), 
                             BuildCoords(definitionDetails.vehicleCoordinates), 
                             BuildCoords(definitionDetails.animalCoordinates), 
@@ -82,7 +85,7 @@ namespace SOC.UI
                             BuildCoords(definitionDetails.modelCoordinates));
 
                         detailPage.ResetAllPanels();
-                        detailPage.LoadEntityLists(selectedCP, EntitiesManager.GetQuestEntities());
+                        detailPage.LoadEntityLists(selectedCP, EntitiesManager.GetQuestEntities(), frtRouteNames);
                         Application.DoEvents();
 
                         ShowDetails();
@@ -147,8 +150,7 @@ namespace SOC.UI
             Fox2Builder.WriteItemFox2(definitionDetails, questDetails);
             Fox2Builder.WriteQuestFox2(definitionDetails, questDetails);
 
-            AssetsBuilder.BuildFPKAssets(definitionDetails, questDetails);
-            AssetsBuilder.BuildFPKDAssets(definitionDetails, questDetails);
+            AssetsBuilder.BuildAssets(definitionDetails, questDetails);
         }
 
         private void FormMain_SizeChanged(object sender, EventArgs e)
@@ -234,6 +236,15 @@ namespace SOC.UI
                 Quest quest = new Quest(setupPage.getDefinitionDetails(), EntitiesManager.GetQuestEntities());
                 quest.Save(saveFile.FileName);
             }
+        }
+
+        private void buttonOpenFolder_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start(AppDomain.CurrentDomain.BaseDirectory);
+            }
+            catch { }
         }
     }
 }

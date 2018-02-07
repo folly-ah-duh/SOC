@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using static SOC.QuestComponents.GameObjectInfo;
+using SOC.Forms.Pages.QuestBoxes;
 
 namespace SOC.UI
 {
@@ -72,7 +73,7 @@ namespace SOC.UI
             EnemyInfo.zombieCount = 0;
         }
 
-        public void LoadEntityLists(CP enemyCP, QuestEntities questDetails)
+        public void LoadEntityLists(CP enemyCP, QuestEntities questDetails, string[] frtRouteNames)
         {
             ShiftVisibilities(true);
             string currentRegion = enemyCP.CPname.Substring(0,4);
@@ -120,7 +121,7 @@ namespace SOC.UI
             currentPanel.AutoScroll = false;
             foreach (Enemy questEnemy in questDetails.questEnemies)
             {
-                EnemyBox questEnemyBox = new EnemyBox(questEnemy, enemyCP);
+                EnemyBox questEnemyBox = new EnemyBox(questEnemy, enemyCP, frtRouteNames);
                 questEnemyBox.BuildObject(currentPanel.Width);
                 currentPanel.Controls.Add(questEnemyBox.getGroupBoxMain());
                 questEnemyBoxes.Add(questEnemyBox);
@@ -133,7 +134,7 @@ namespace SOC.UI
             currentPanel.AutoScroll = false;
             foreach (Enemy cpEnemy in questDetails.cpEnemies)
             {
-                EnemyBox cpEnemyBox = new EnemyBox(cpEnemy, enemyCP);
+                EnemyBox cpEnemyBox = new EnemyBox(cpEnemy, enemyCP, frtRouteNames);
                 cpEnemyBox.BuildObject(currentPanel.Width);
                 cpEnemyBox.e_label_spawn.Text = "Customize:"; cpEnemyBox.e_label_spawn.Left = 26;
                 currentPanel.Controls.Add(cpEnemyBox.getGroupBoxMain());

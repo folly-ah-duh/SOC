@@ -173,7 +173,7 @@ namespace SOC.Classes
         {
             List<string> animalList = new List<string>();
             if (questDetails.animals.Count == 0)
-                animalList.Add("nil");
+                animalList.Add("        nil");
             else
             {
                 foreach(Animal animal in questDetails.animals)
@@ -199,7 +199,7 @@ namespace SOC.Classes
 
             animalTargetList.Add("	markerList = {");
             if (!hasTarget)
-                animalTargetList.Add("nil");
+                animalTargetList.Add("      nil");
             else
             {
                 foreach (Animal animal in questDetails.animals)
@@ -211,7 +211,7 @@ namespace SOC.Classes
             animalTargetList.Add("	},");
             animalTargetList.Add("	nameList={");
             if (!hasTarget)
-                animalTargetList.Add("nil");
+                animalTargetList.Add("      nil");
             else
             {
                 foreach (Animal animal in questDetails.animals)
@@ -243,9 +243,18 @@ namespace SOC.Classes
                 enemyCount++;
                 enemyList.Add("		{");
                 enemyList.Add(string.Format("			enemyName = \"{0}\",", enemy.name));
-                if (!enemy.dRoute.Equals("NONE")) {
-                    enemyList.Add(string.Format("			route_d = \"{0}\",", enemy.dRoute));
-                    enemyList.Add(string.Format("			route_c = \"{0}\",", enemy.cRoute));
+                uint unhashedRouteName;
+                if (!enemy.dRoute.Equals("NONE"))
+                {
+                    if (uint.TryParse(enemy.dRoute, out unhashedRouteName))
+                        enemyList.Add(string.Format("			route_d = {0},", unhashedRouteName));
+                    else
+                        enemyList.Add(string.Format("			route_d = \"{0}\",", enemy.dRoute));
+
+                    if (uint.TryParse(enemy.cRoute, out unhashedRouteName))
+                        enemyList.Add(string.Format("			route_c = {0},", unhashedRouteName));
+                    else
+                        enemyList.Add(string.Format("			route_c = \"{0}\",", enemy.cRoute));
                 }
                 enemyList.Add("			cpName = CPNAME,");
                 if (enemy.powers.Length > 0)
@@ -287,7 +296,7 @@ namespace SOC.Classes
                 enemyList.Add("		},");
             }
             if (enemyCount == 0)
-                enemyList.Add("nil");
+                enemyList.Add("     nil");
 
             return enemyList;
         }
@@ -301,7 +310,7 @@ namespace SOC.Classes
                 bodyInfo = BodyInfo.BodyInfoArray[questDetails.hostageBodyIndex];
 
             if (questDetails.hostages.Count == 0)
-                hostageList.Add("nil");
+                hostageList.Add("       nil");
             else
                 foreach (Hostage hostage in questDetails.hostages)
                 {
@@ -344,7 +353,7 @@ namespace SOC.Classes
             List<string> vehicleList = new List<string>();
 
             if (questDetails.vehicles.Count == 0)
-                vehicleList.Add("nil");
+                vehicleList.Add("       nil");
             else
                 foreach (Vehicle vehicle in questDetails.vehicles)
                 {
@@ -423,7 +432,7 @@ namespace SOC.Classes
                 }
 
             if (totalCount == 0)
-                targetList.Add("nil");
+                targetList.Add("        nil");
 
             return targetList;
         }

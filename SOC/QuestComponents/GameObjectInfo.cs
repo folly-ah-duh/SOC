@@ -976,7 +976,7 @@ namespace SOC.QuestComponents
 
             public DefinitionDetails() { }
 
-            public DefinitionDetails(string fpk, string quest, int locID, string loada, Coordinates c, string rad, string cat, string rew, int prog, string type, string cpnme, string qtitle, string qdesc, string hcoord, string vehcoord, string anicoord, string itcoord, string acitcoord, string mdlcoord)
+            public DefinitionDetails(string fpk, string quest, int locID, string loada, Coordinates c, string rad, string cat, string rew, int prog, string type, string cpnme, string qtitle, string qdesc, string hcoord, string vehcoord, string anicoord, string itcoord, string acitcoord, string mdlcoord, string route)
             {
                 FpkName = fpk; QuestNum = quest; QuestTitle = qtitle; QuestDesc = qdesc;
 
@@ -985,6 +985,8 @@ namespace SOC.QuestComponents
                 category = cat; progNotif = prog; objectiveType = type; reward = rew;
                 
                 hostageCoordinates = hcoord; vehicleCoordinates = vehcoord; animalCoordinates = anicoord; itemCoordinates = itcoord; activeItemCoordinates = acitcoord; modelCoordinates = mdlcoord;
+
+                routeName = route;
             }
 
             [XmlElement]
@@ -1043,6 +1045,9 @@ namespace SOC.QuestComponents
 
             [XmlElement]
             public string modelCoordinates { get; set; }
+
+            [XmlElement]
+            public string routeName { get; set; }
 
         }
 

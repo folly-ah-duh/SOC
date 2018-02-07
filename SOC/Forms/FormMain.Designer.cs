@@ -33,6 +33,7 @@
             this.panelMain = new System.Windows.Forms.Panel();
             this.buttonLoad = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
+            this.buttonOpenFolder = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonNext
@@ -89,12 +90,24 @@
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
+            // buttonOpenFolder
+            // 
+            this.buttonOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonOpenFolder.Location = new System.Drawing.Point(398, 468);
+            this.buttonOpenFolder.Name = "buttonOpenFolder";
+            this.buttonOpenFolder.Size = new System.Drawing.Size(129, 38);
+            this.buttonOpenFolder.TabIndex = 12;
+            this.buttonOpenFolder.Text = "Open SOC Folder";
+            this.buttonOpenFolder.UseVisualStyleBackColor = true;
+            this.buttonOpenFolder.Click += new System.EventHandler(this.buttonOpenFolder_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
             this.ClientSize = new System.Drawing.Size(1158, 512);
+            this.Controls.Add(this.buttonOpenFolder);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonLoad);
             this.Controls.Add(this.buttonBack);
@@ -119,6 +132,7 @@
         private System.Windows.Forms.Panel panelMain;
         private System.Windows.Forms.Button buttonLoad;
         private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Button buttonOpenFolder;
     }
 }
 

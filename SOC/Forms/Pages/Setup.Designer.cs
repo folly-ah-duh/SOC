@@ -30,6 +30,8 @@
         {
             this.panelSetup = new System.Windows.Forms.Panel();
             this.groupBoxSetup = new System.Windows.Forms.GroupBox();
+            this.comboBoxRoute = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.comboBoxCP = new System.Windows.Forms.ComboBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
@@ -99,6 +101,8 @@
             // groupBoxSetup
             // 
             this.groupBoxSetup.BackColor = System.Drawing.Color.Transparent;
+            this.groupBoxSetup.Controls.Add(this.comboBoxRoute);
+            this.groupBoxSetup.Controls.Add(this.label15);
             this.groupBoxSetup.Controls.Add(this.comboBoxCP);
             this.groupBoxSetup.Controls.Add(this.label20);
             this.groupBoxSetup.Controls.Add(this.label19);
@@ -130,6 +134,25 @@
             this.groupBoxSetup.TabIndex = 0;
             this.groupBoxSetup.TabStop = false;
             this.groupBoxSetup.Text = "Sideop Setup";
+            // 
+            // comboBoxRoute
+            // 
+            this.comboBoxRoute.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRoute.FormattingEnabled = true;
+            this.comboBoxRoute.Location = new System.Drawing.Point(363, 116);
+            this.comboBoxRoute.Name = "comboBoxRoute";
+            this.comboBoxRoute.Size = new System.Drawing.Size(134, 21);
+            this.comboBoxRoute.TabIndex = 31;
+            this.comboBoxRoute.DropDown += new System.EventHandler(this.comboBoxRoute_DropDown);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(294, 118);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(58, 13);
+            this.label15.TabIndex = 30;
+            this.label15.Text = "Route File:";
             // 
             // comboBoxCP
             // 
@@ -749,5 +772,7 @@
         public System.Windows.Forms.Label labelAni;
         public System.Windows.Forms.Label labelActiveItem;
         private System.Windows.Forms.Label originAnchor;
+        public System.Windows.Forms.ComboBox comboBoxRoute;
+        private System.Windows.Forms.Label label15;
     }
 }

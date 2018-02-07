@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using static SOC.QuestComponents.GameObjectInfo;
 using static SOC.QuestComponents.EnemyInfo;
+using System.IO;
 
 namespace SOC.UI
 {
@@ -48,6 +49,7 @@ namespace SOC.UI
             mtbsCP[0] = MtbsCP.CPname;
 
             refreshNotifsList();
+            refreshRoutesList();
         }
 
         public DefinitionDetails getDefinitionDetails()
@@ -55,7 +57,8 @@ namespace SOC.UI
             return new DefinitionDetails(textBoxFPKName.Text, textBoxQuestNum.Text, locationID, comboBoxLoadArea.Text, 
                 new Coordinates(textBoxXCoord.Text, textBoxYCoord.Text, textBoxZCoord.Text), comboBoxRadius.Text, comboBoxCategory.Text, comboBoxReward.Text, comboBoxProgressNotifs.SelectedIndex, 
                 comboBoxObjective.Text, comboBoxCP.Text, textBoxQuestTitle.Text, textBoxQuestDesc.Text,
-                textBoxHosCoords.Text, textBoxVehCoords.Text, textBoxAnimalCoords.Text, textBoxItemCoords.Text, textBoxActiveItemCoords.Text, textBoxStMdCoords.Text);
+                textBoxHosCoords.Text, textBoxVehCoords.Text, textBoxAnimalCoords.Text, textBoxItemCoords.Text, textBoxActiveItemCoords.Text, textBoxStMdCoords.Text,
+                comboBoxRoute.Text);
         }
 
         public void setDefinitionDetails(DefinitionDetails dd)
@@ -75,6 +78,13 @@ namespace SOC.UI
             comboBoxCategory.Text = dd.category; comboBoxReward.Text = dd.reward; comboBoxObjective.Text = dd.objectiveType;
             comboBoxCP.Text = dd.CPName; textBoxQuestTitle.Text = dd.QuestTitle; textBoxQuestDesc.Text = dd.QuestDesc;
 
+            refreshRoutesList();
+            if (!string.IsNullOrEmpty(dd.routeName) && comboBoxRoute.Items.Contains(dd.routeName))
+                comboBoxRoute.SelectedItem = dd.routeName;
+            else
+                comboBoxRoute.SelectedItem = "NONE";
+
+            refreshNotifsList();
             if (comboBoxProgressNotifs.Items.Count <= dd.progNotif)
                 comboBoxProgressNotifs.SelectedIndex = 0;
             else
@@ -91,27 +101,50 @@ namespace SOC.UI
         public void refreshNotifsList()
         {
             string[] notifications = UpdateNotifsManager.getDispNotifs();
-            bool refresh = false;
-
-            if (notifications.Length == comboBoxProgressNotifs.Items.Count)
-            {
-                for (int i = 0; i < notifications.Length; i++)
-                {
-                    if (!notifications[i].Equals(comboBoxProgressNotifs.Items[i]))
-                    {
-                        refresh = true;
-                    }
-                }
-            } else
-            {
-                refresh = true;
-            }
-
-            if (refresh)
+            
+            if (FilesUpdated(notifications, comboBoxProgressNotifs))
             {
                 comboBoxProgressNotifs.Items.Clear();
                 comboBoxProgressNotifs.Items.AddRange(UpdateNotifsManager.getDispNotifs());
             }
+        }
+        public void refreshRoutesList()
+        {
+            string routeDir = AssetsBuilder.routeAssetsPath;
+
+
+            string[] RouteFiles = Directory.GetFiles(routeDir, "*.frt");
+            for (int i = 0; i < RouteFiles.Length; i++)
+            {
+                int filenameLength = RouteFiles[i].Substring(RouteFiles[i].LastIndexOf('\\') + 1).Length - 1;
+                RouteFiles[i] = RouteFiles[i].Substring(RouteFiles[i].LastIndexOf('\\') + 1, filenameLength - 3);
+            }
+
+            string[] RouteFilesAndNone = new string[RouteFiles.Length + 1];
+            RouteFilesAndNone[0] = "NONE"; RouteFiles.CopyTo(RouteFilesAndNone, 1);
+            if (FilesUpdated(RouteFilesAndNone, comboBoxRoute))
+            {
+                comboBoxRoute.Items.Clear();
+                comboBoxRoute.Items.AddRange(RouteFilesAndNone);
+                comboBoxRoute.SelectedIndex = 0;
+            }
+        }
+
+        public bool FilesUpdated(string[] newList, ComboBox comboBox)
+        {
+
+            if (newList.Length == comboBox.Items.Count)
+                for (int i = 0; i < newList.Length; i++)
+                {
+                    if (!newList[i].Equals(comboBox.Items[i]))
+                    {
+                        return true;
+                    }
+                }
+            else
+                return true;
+
+            return false;
         }
 
         internal void refreshCoordinateBoxes(QuestEntities qe)
@@ -321,6 +354,11 @@ namespace SOC.UI
             string replacement = "_";
             Regex fileNameFixer = new Regex(invalidchars);
             textBoxFPKName.Text = fileNameFixer.Replace(textBoxFPKName.Text, replacement);
+        }
+
+        private void comboBoxRoute_DropDown(object sender, EventArgs e)
+        {
+            refreshRoutesList();
         }
     }
 }

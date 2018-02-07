@@ -9,10 +9,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SOC</RootNamespace>
     <AssemblyName>SOC</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>C:\Users\Joe\Desktop\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -70,6 +71,9 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FoxLib">
+      <HintPath>..\..\..\..\..\Downloads\FoxLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -86,6 +90,7 @@
     <Compile Include="Classes\EntitiesManager.cs" />
     <Compile Include="Classes\LangBuilder.cs" />
     <Compile Include="Classes\AssetsBuilder.cs" />
+    <Compile Include="Classes\RouteManager.cs" />
     <Compile Include="Classes\UpdateNotifsManager.cs" />
     <Compile Include="Classes\XmlCompiler.cs" />
     <Compile Include="Forms\FormMain.cs">
@@ -107,6 +112,14 @@
     <Compile Include="Forms\Pages\Details.Designer.cs">
       <DependentUpon>Details.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Pages\QuestBoxes\ActiveItemBox.cs" />
+    <Compile Include="Forms\Pages\QuestBoxes\AnimalBox.cs" />
+    <Compile Include="Forms\Pages\QuestBoxes\EnemyBox.cs" />
+    <Compile Include="Forms\Pages\QuestBoxes\HostageBox.cs" />
+    <Compile Include="Forms\Pages\QuestBoxes\ItemBox.cs" />
+    <Compile Include="Forms\Pages\QuestBoxes\ModelBox.cs" />
+    <Compile Include="Forms\Pages\QuestBoxes\QuestBox.cs" />
+    <Compile Include="Forms\Pages\QuestBoxes\VehicleBox.cs" />
     <Compile Include="Forms\Pages\Setup.cs">
       <SubType>UserControl</SubType>
     </Compile>

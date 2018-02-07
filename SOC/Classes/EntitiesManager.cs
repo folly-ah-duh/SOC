@@ -45,7 +45,7 @@ namespace SOC.Classes
             enemySubType = "SOVIET_A";
         }
 
-        public static void InitializeEntities(CP enemyCP, List<Coordinates> hostageCoords, List<Coordinates> vehicleCoords, List<Coordinates> animalCoords, List<Coordinates> itemCoords, List<Coordinates> activeitemCoords, List<Coordinates> modelCoords)
+        public static void InitializeEntities(CP enemyCP, string routeFile, List<Coordinates> hostageCoords, List<Coordinates> vehicleCoords, List<Coordinates> animalCoords, List<Coordinates> itemCoords, List<Coordinates> activeitemCoords, List<Coordinates> modelCoords)
         {
             int newEntityCount, oldEntityCount;
 
@@ -54,7 +54,7 @@ namespace SOC.Classes
             //
             newEntityCount = EnemyInfo.MAXQUESTFOVA;
             oldEntityCount = questEnemies.Count;
-            if (enemyCP.CProutes.Length > 0)
+            if (enemyCP.CProutes.Length > 0 || !routeFile.Equals("NONE"))
                 for (int i = oldEntityCount; i < newEntityCount; i++)
                     questEnemies.Add(new Enemy(i, "sol_quest_000" + i));
             else

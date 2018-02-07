@@ -193,6 +193,7 @@ For a given route name (ex: rt_powerPlant_d_0000):
  * Routes with \_c_ in their name are the encampment's **caution routes**. Soldiers with these routes will walk cautiously with their guns at the ready.
    * \_c_ routes can be used as a soldier's Sneak Route, although the soldier will still patrol as if they are on alert. \_d_ and \_n_ routes can be used as a soldier's Caution Route, but the soldier will still act alert as they patrol.
  * Routes with \_h_ in their name are **hold routes**. Soldiers with hold routes will stand in place, alert as they wait for the player.
+ * Routes with \_r_ in their name are **rain routes**. A soldier assigned to a rain route will stand under shelter (ex: a tent or roof). Soldiers with rain routes are almost always completely stationary.
  * Routes with \_s_ in their name are **sleep routes**. Soldiers assigned to a sleep route as their Sneak Route will lay in bed sleeping until disturbed by the player. 
    * If the soldier has a sleep route assigned as their Caution Route, they will stand over their bed and hold their gun at the ready (similar to \_h_ routes).
  

@@ -912,6 +912,11 @@ namespace SOC.QuestComponents
             return locId == 20;
         }
 
+        public static bool isMtbs(int locId)
+        {
+            return locId == 50;
+        }
+
         [XmlType("Quest")]
         public class Quest
         {

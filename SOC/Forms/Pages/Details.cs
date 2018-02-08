@@ -19,7 +19,6 @@ namespace SOC.UI
         List<QuestBox> activeItemBoxes;
         List<QuestBox> animalBoxes;
         int dynamicPanelWidth = 0;
-        public QuestEntities questDetails;
 
         public Details()
         {
@@ -73,46 +72,11 @@ namespace SOC.UI
             EnemyInfo.zombieCount = 0;
         }
 
-        public void LoadEntityLists(CP enemyCP, QuestEntities questDetails, string[] frtRouteNames)
+        public void LoadEntityLists(CP enemyCP, QuestEntities questDetails, string[] frtRouteNames, int locId)
         {
             ShiftVisibilities(true);
-            string currentRegion = enemyCP.CPname.Substring(0,4);
-
-            string[] subtypes = new string[0];
-            comboBox_subtype.Items.Clear();
-            comboBox_subtype2.Items.Clear();
-            if (currentRegion.Equals("afgh"))
-                subtypes = BodyInfo.afghSubTypes;
-            else
-                subtypes = BodyInfo.mafrSubTypes;
-
-            comboBox_subtype.Items.AddRange(subtypes);
-            comboBox_subtype2.Items.AddRange(subtypes);
-
-            if (comboBox_subtype.Items.Contains(questDetails.soldierSubType))
-                comboBox_subtype.Text = questDetails.soldierSubType;
-            else
-                comboBox_subtype.SelectedIndex = 0;
-
+            SetEnemySubType(questDetails, locId); SetHostageBodies(questDetails, locId);
             h_checkBox_intrgt.Checked = questDetails.canInter;
-
-            comboBox_Body.Items.Clear();
-            if (currentRegion.Equals("mtbs"))
-                foreach (BodyInfoEntry infoEntry in BodyInfo.BodyInfoArray)
-                {
-                    if (infoEntry.hasface)
-                        this.comboBox_Body.Items.Add(infoEntry.bodyName);
-                }
-            else
-                foreach (BodyInfoEntry infoEntry in BodyInfo.BodyInfoArray)
-                {
-                    this.comboBox_Body.Items.Add(infoEntry.bodyName);
-                }
-
-            if (comboBox_Body.Items.Count <= questDetails.hostageBodyIndex)
-                comboBox_Body.SelectedIndex = 0;
-            else
-                comboBox_Body.SelectedIndex = questDetails.hostageBodyIndex;
 
             //
             // Quest-Specific Soldiers
@@ -121,7 +85,7 @@ namespace SOC.UI
             currentPanel.AutoScroll = false;
             foreach (Enemy questEnemy in questDetails.questEnemies)
             {
-                EnemyBox questEnemyBox = new EnemyBox(questEnemy, enemyCP, frtRouteNames);
+                EnemyBox questEnemyBox = new EnemyBox(questEnemy, enemyCP, frtRouteNames, locId);
                 questEnemyBox.BuildObject(currentPanel.Width);
                 currentPanel.Controls.Add(questEnemyBox.getGroupBoxMain());
                 questEnemyBoxes.Add(questEnemyBox);
@@ -134,7 +98,7 @@ namespace SOC.UI
             currentPanel.AutoScroll = false;
             foreach (Enemy cpEnemy in questDetails.cpEnemies)
             {
-                EnemyBox cpEnemyBox = new EnemyBox(cpEnemy, enemyCP, frtRouteNames);
+                EnemyBox cpEnemyBox = new EnemyBox(cpEnemy, enemyCP, frtRouteNames, locId);
                 cpEnemyBox.BuildObject(currentPanel.Width);
                 cpEnemyBox.e_label_spawn.Text = "Customize:"; cpEnemyBox.e_label_spawn.Left = 26;
                 currentPanel.Controls.Add(cpEnemyBox.getGroupBoxMain());
@@ -225,6 +189,46 @@ namespace SOC.UI
             ShiftVisibilities(false);
             ShiftGroups(Height, Width);
             panelDetails.AutoScroll = true;
+        }
+
+        public void SetEnemySubType(QuestEntities questDetails, int locId)
+        {
+            string[] subtypes = new string[0];
+            comboBox_subtype.Items.Clear();
+            comboBox_subtype2.Items.Clear();
+            if (isAfgh(locId))
+                subtypes = BodyInfo.afghSubTypes;
+            else if (isMafr(locId))
+                subtypes = BodyInfo.mafrSubTypes;
+
+            comboBox_subtype.Items.AddRange(subtypes);
+            comboBox_subtype2.Items.AddRange(subtypes);
+
+            if (comboBox_subtype.Items.Contains(questDetails.soldierSubType))
+                comboBox_subtype.Text = questDetails.soldierSubType;
+            else
+                comboBox_subtype.SelectedIndex = 0;
+        }
+
+        public void SetHostageBodies(QuestEntities questDetails, int locId)
+        {
+            comboBox_Body.Items.Clear();
+            if (isMtbs(locId))
+                foreach (BodyInfoEntry infoEntry in BodyInfo.BodyInfoArray)
+                {
+                    if (infoEntry.hasface)
+                        this.comboBox_Body.Items.Add(infoEntry.bodyName);
+                }
+            else
+                foreach (BodyInfoEntry infoEntry in BodyInfo.BodyInfoArray)
+                {
+                    this.comboBox_Body.Items.Add(infoEntry.bodyName);
+                }
+
+            if (comboBox_Body.Items.Count <= questDetails.hostageBodyIndex)
+                comboBox_Body.SelectedIndex = 0;
+            else
+                comboBox_Body.SelectedIndex = questDetails.hostageBodyIndex;
         }
 
         internal void ShiftVisibilities(bool hideAll)
@@ -319,9 +323,8 @@ namespace SOC.UI
 
             foreach (ModelBox d in modelBoxes)
                 models.Add(new Model(d.m_label_GeomNotFound.Visible, modelBoxes.IndexOf(d), d.m_groupBox_main.Text, d.m_comboBox_preset.Text, new Coordinates(d.m_textBox_xcoord.Text, d.m_textBox_ycoord.Text, d.m_textBox_zcoord.Text), new RotationQuat(d.m_textBox_xrot.Text, d.m_textBox_yrot.Text, d.m_textBox_zrot.Text, d.m_textBox_wrot.Text)));
-
-            questDetails = new QuestEntities(qenemies, cpenemies, hostages, vehicles, animals, items, activeItems, models, comboBox_Body.SelectedIndex, h_checkBox_intrgt.Checked, comboBox_subtype.Text);
-            return questDetails;
+            
+            return new QuestEntities(qenemies, cpenemies, hostages, vehicles, animals, items, activeItems, models, comboBox_Body.SelectedIndex, h_checkBox_intrgt.Checked, comboBox_subtype.Text);
         }
 
         private void comboBox_Body_SelectedIndexChanged(object sender, EventArgs e)

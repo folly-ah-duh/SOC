@@ -71,6 +71,9 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CityHash">
+      <HintPath>assets\ToolAssets\CityHash.dll</HintPath>
+    </Reference>
     <Reference Include="FoxLib">
       <HintPath>..\..\..\..\..\Downloads\FoxLib.dll</HintPath>
     </Reference>

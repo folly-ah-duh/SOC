@@ -85,7 +85,7 @@ namespace SOC.UI
                             BuildCoords(definitionDetails.modelCoordinates));
 
                         detailPage.ResetAllPanels();
-                        detailPage.LoadEntityLists(selectedCP, EntitiesManager.GetQuestEntities(), frtRouteNames);
+                        detailPage.LoadEntityLists(selectedCP, EntitiesManager.GetQuestEntities(), frtRouteNames, definitionDetails.locationID);
                         Application.DoEvents();
 
                         ShowDetails();

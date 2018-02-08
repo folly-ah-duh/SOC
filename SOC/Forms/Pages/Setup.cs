@@ -66,11 +66,11 @@ namespace SOC.UI
             textBoxFPKName.Text = dd.FpkName; textBoxQuestNum.Text = dd.QuestNum;
             locationID = dd.locationID;
 
-            if (locationID == 10)
+            if (isAfgh(locationID))
                 comboBoxRegion.Text = "Afghanistan";
-            else if (locationID == 20)
+            else if (isMafr(locationID))
                 comboBoxRegion.Text = "Central Africa";
-            else
+            else if (isMtbs(locationID))
                 comboBoxRegion.Text = "Mother Base";
 
             comboBoxLoadArea.Text = dd.loadArea;

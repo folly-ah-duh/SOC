@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using static FoxLib.Tpp.RouteSet;
 
 namespace SOC.Classes
@@ -9,11 +13,39 @@ namespace SOC.Classes
     class RouteManager
     {
 
+        public static string RouteNameDictionaryFile = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "assets\\ToolAssets\\route_name_dictionary.txt");
+        public static Dictionary<uint, string> RouteNameHashDictionary = new Dictionary<uint, string>();
+
+
         public static string[] GetRouteNames(string frtName)
         {
             string frtPath = GetRouteFileName(frtName);
+            uint[] frtUintNames = GetUintNames(frtPath);
+
+            if (File.Exists(RouteNameDictionaryFile))
+                RouteNameHashDictionary = MakeHashLookupTableFromFile(RouteNameDictionaryFile);
+            else
+                MessageBox.Show("Route Dictionary Not Found. \n\n" + RouteNameDictionaryFile, "Dictionary Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            List<string> routeStringNames = new List<string>();
+
+            foreach (uint routeUintName in frtUintNames)
+            {
+                string routeStringName = "";
+                if (RouteNameHashDictionary.TryGetValue(routeUintName, out routeStringName))
+                    routeStringNames.Add(routeStringName);
+                else
+                    routeStringNames.Add(routeUintName.ToString());
+            }
+
+            routeStringNames.Sort();
+            return routeStringNames.ToArray();
+        }
+
+        public static uint[] GetUintNames(string frtPath)
+        {
             RouteSet frtRoutes;
-            string[] routeNames = new string[0];
+            uint[] routeNames = new uint[0];
 
             if (File.Exists(frtPath))
             {
@@ -24,8 +56,8 @@ namespace SOC.Classes
                     frtRoutes = Read(readFunctions);
                 }
 
-                IEnumerable<string> routes = from route in frtRoutes.Routes
-                                                 select route.Name.ToString();
+                IEnumerable<uint> routes = from route in frtRoutes.Routes
+                                                 select route.Name;
 
                 routeNames = routes.ToArray();
             }
@@ -41,5 +73,41 @@ namespace SOC.Classes
         {
             return Path.Combine(AssetsBuilder.routeAssetsPath, frtName) + ".frt";
         }
+
+        public static uint HashString(string text)
+        {
+            if (text == null) throw new ArgumentNullException("null text!");
+            const ulong seed0 = 0x9ae16a3b2f90404f;
+            ulong seed1 = text.Length > 0 ? (uint)((text[0]) << 16) + (uint)text.Length : 0;
+            return (uint)(CityHash.CityHash.CityHash64WithSeeds(text + "\0", seed0, seed1) & 0xFFFFFFFFFFFF);
+        }
+
+        static Dictionary<uint, string> MakeHashLookupTableFromFile(string path)
+        {
+            ConcurrentDictionary<uint, string> table = new ConcurrentDictionary<uint, string>();
+
+
+            List<string> stringLiterals = new List<string>();
+            using (StreamReader file = new StreamReader(path))
+            {
+
+                string line;
+                while ((line = file.ReadLine()) != null)
+                {
+                    stringLiterals.Add(line);
+                }
+            }
+
+            // Hash entries
+            Parallel.ForEach(stringLiterals, delegate (string entry)
+            {
+                uint hash = HashString(entry);
+                table.TryAdd(hash, entry);
+            });
+
+            // Return lookup table
+            return new Dictionary<uint, string>(table);
+        }
+
     }
 }

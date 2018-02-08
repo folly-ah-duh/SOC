@@ -14,7 +14,7 @@ namespace SOC.Forms.Pages.QuestBoxes
         public int enemyNumber = -1;
         CP enemyCP = new CP();
         Enemy enemy = new Enemy();
-        string region = "";
+        int region;
         string[] frtRouteNames;
 
         public GroupBox e_groupBox_main;
@@ -43,9 +43,9 @@ namespace SOC.Forms.Pages.QuestBoxes
         public Label e_label_power;
         public ListBox e_listBox_power;
 
-        public EnemyBox(Enemy e, CP cp, string[] frtRoutes) : base(new Coordinates("", "", ""), e.number)
+        public EnemyBox(Enemy e, CP cp, string[] frtRoutes, int locId) : base(new Coordinates("", "", ""), e.number)
         {
-            enemy = e; enemyCP = cp; region = enemyCP.CPname.Substring(0, 4);
+            enemy = e; enemyCP = cp; region = locId;
             enemyNumber = e.number; frtRouteNames = frtRoutes;
         }
 
@@ -223,9 +223,9 @@ namespace SOC.Forms.Pages.QuestBoxes
             this.e_comboBox_body.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.e_comboBox_body.TabIndex = 13;
 
-            if (region.Equals("afgh"))
+            if (isAfgh(region))
                 e_comboBox_body.Items.AddRange(BodyInfo.afghBodies);
-            else if (region.Equals("mafr"))
+            else if (isMafr(region))
                 e_comboBox_body.Items.AddRange(BodyInfo.mafrBodies);
 
             if (e_comboBox_body.Items.Contains(enemy.body))

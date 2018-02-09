@@ -118,6 +118,7 @@
     <Compile Include="Forms\Pages\QuestBoxes\ActiveItemBox.cs" />
     <Compile Include="Forms\Pages\QuestBoxes\AnimalBox.cs" />
     <Compile Include="Forms\Pages\QuestBoxes\EnemyBox.cs" />
+    <Compile Include="Forms\Pages\QuestBoxes\HelicopterBox.cs" />
     <Compile Include="Forms\Pages\QuestBoxes\HostageBox.cs" />
     <Compile Include="Forms\Pages\QuestBoxes\ItemBox.cs" />
     <Compile Include="Forms\Pages\QuestBoxes\ModelBox.cs" />

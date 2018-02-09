@@ -82,12 +82,12 @@ namespace SOC.Classes
                     requestHistory.Add(item.item);
                 }
                     
-
             string requestEquipIds = string.Format("\trequestEquipIds={{ {0} }},", equipIds);
 
-            string hasEnemyHeli = "\thasEnemyHeli = false, --reserves an enemy helicopter for the sideop. set to true if the sideop has a heli.";
+            string luaBool;
+            if (isAnyHeliSpawned(questDetails.enemyHelicopters)) luaBool = "true"; else luaBool = "false";
+            string hasEnemyHeli = string.Format("\thasEnemyHeli = {0},", luaBool);
             
-
             string DefinitionLuaPath = "Sideop_Build//GameDir//mod//quests//";
             string DefinitionLuaFile = Path.Combine(DefinitionLuaPath, string.Format("ih_quest_q{0}.lua", definitionDetails.QuestNum));
 
@@ -134,6 +134,7 @@ namespace SOC.Classes
 
             questLua.InsertRange(GetLineOf("    enemyList = {", questLua) + 1, BuildEnemyList(questDetails));
             questLua.InsertRange(GetLineOf("    vehicleList = {", questLua) + 1, BuildVehicleList(questDetails));
+            questLua.InsertRange(GetLineOf("    heliList = {", questLua) + 1, BuildHelicopterList(questDetails));
             questLua.InsertRange(GetLineOf("    hostageList = {", questLua) + 1, BuildHostageList(questDetails));
             questLua.InsertRange(GetLineOf("    animalList = {", questLua) + 1, BuildAnimalList(questDetails));
             questLua.InsertRange(GetLineOf("    targetList = {", questLua) + 1, BuildTargetList(questDetails));
@@ -240,6 +241,7 @@ namespace SOC.Classes
                 string powerlist = "";
                 if (!enemy.isSpawn)
                     continue;
+
                 enemyCount++;
                 enemyList.Add("		{");
                 enemyList.Add(string.Format("			enemyName = \"{0}\",", enemy.name));
@@ -299,6 +301,48 @@ namespace SOC.Classes
                 enemyList.Add("     nil");
 
             return enemyList;
+        }
+
+        public static List<string> BuildHelicopterList(QuestEntities questDetails)
+        {
+            List<string> heliList = new List<string>();
+
+            if (!isAnyHeliSpawned(questDetails.enemyHelicopters))
+                heliList.Add("       nil");
+            else
+                foreach (Helicopter heli in questDetails.enemyHelicopters)
+                {
+                    if (!heli.isSpawn)
+                        continue;
+
+                    heliList.Add("		{");
+
+                    uint unhashedRouteName;
+                    if (!heli.heliRoute.Equals("NONE"))
+                    {
+                        if (uint.TryParse(heli.heliRoute, out unhashedRouteName))
+                            heliList.Add(string.Format("			routeName = {0},", unhashedRouteName));
+                        else
+                            heliList.Add(string.Format("			routeName = \"{0}\",", heli.heliRoute));
+                    }
+
+                    if (!heli.heliClass.Equals("DEFAULT"))
+                        heliList.Add(string.Format("			coloringType = TppDefine.ENEMY_HELI_COLORING_TYPE.{0},", heli.heliClass));
+
+                    heliList.Add("		},");
+                }
+
+            return heliList;
+        }
+
+        public static bool isAnyHeliSpawned(List<Helicopter> helicopters)
+        {
+
+            foreach (Helicopter helicopter in helicopters)
+                if (helicopter.isSpawn)
+                    return true;
+
+            return false;
         }
 
         public static List<string> BuildHostageList(QuestEntities questDetails)
@@ -414,6 +458,13 @@ namespace SOC.Classes
                 if (enemy.isSpawn && enemy.isTarget)
                 {
                     targetList.Add(string.Format("		\"{0}\",", enemy.name));
+                    totalCount++;
+                }
+
+            foreach (Helicopter heli in questDetails.enemyHelicopters)
+                if (heli.isSpawn && heli.isTarget)
+                {
+                    targetList.Add("		TppReinforceBlock.REINFORCE_HELI_NAME,");
                     totalCount++;
                 }
 

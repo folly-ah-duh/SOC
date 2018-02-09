@@ -45,7 +45,7 @@ namespace SOC.Forms.Pages.QuestBoxes
 
         public override void BuildObject(int width)
         {
-            width -= 15;
+            width -= 6;
             int comboboxWidth = width - 96;
             this.i_groupBox_main = new System.Windows.Forms.GroupBox();
             this.i_textBox_zcoord = new System.Windows.Forms.TextBox();
@@ -69,7 +69,6 @@ namespace SOC.Forms.Pages.QuestBoxes
             // 
             this.i_groupBox_main.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.i_groupBox_main.AutoSize = true;
             this.i_groupBox_main.Controls.Add(this.i_textBox_zcoord);
             this.i_groupBox_main.Controls.Add(this.i_textBox_ycoord);
             this.i_groupBox_main.Controls.Add(this.i_textBox_xcoord);

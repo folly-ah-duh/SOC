@@ -15,6 +15,7 @@ namespace SOC.Classes
         private static List<Item> items = new List<Item>();
         private static List<ActiveItem> activeItems = new List<ActiveItem>();
         private static List<Model> models = new List<Model>();
+        private static List<Helicopter> helicopters = new List<Helicopter>();
 
         private static int hostageBodyIndex = 0;
         private static bool interrogateForHostages = false;
@@ -27,19 +28,19 @@ namespace SOC.Classes
 
         public static QuestEntities GetQuestEntities()
         {
-            return new QuestEntities(questEnemies, cpEnemies, hostages, vehicles, animals, items, activeItems, models, hostageBodyIndex, interrogateForHostages, enemySubType); ;
+            return new QuestEntities(questEnemies, cpEnemies, helicopters, hostages, vehicles, animals, items, activeItems, models, hostageBodyIndex, interrogateForHostages, enemySubType); ;
         }
 
         public static void setQuestEntities(QuestEntities q)
         {
-            questEnemies = q.questEnemies; cpEnemies = q.cpEnemies;
+            questEnemies = q.questEnemies; cpEnemies = q.cpEnemies; helicopters = q.enemyHelicopters;
             hostages = q.hostages; vehicles = q.vehicles; animals = q.animals; items = q.items; activeItems = q.activeItems; models = q.models;
             hostageBodyIndex = q.hostageBodyIndex; interrogateForHostages = q.canInter; enemySubType = q.soldierSubType;
         }
 
         public static void ClearEntities()
         {
-            questEnemies.Clear(); cpEnemies.Clear(); hostages.Clear(); vehicles.Clear(); animals.Clear(); items.Clear(); activeItems.Clear(); models.Clear();
+            questEnemies.Clear(); cpEnemies.Clear(); hostages.Clear(); vehicles.Clear(); animals.Clear(); items.Clear(); activeItems.Clear(); models.Clear(); helicopters.Clear();
             hostageBodyIndex = 0;
             interrogateForHostages = false;
             enemySubType = "SOVIET_A";
@@ -54,7 +55,7 @@ namespace SOC.Classes
             //
             newEntityCount = EnemyInfo.MAXQUESTFOVA;
             oldEntityCount = questEnemies.Count;
-            if (enemyCP.CProutes.Length > 0 || !routeFile.Equals("NONE"))
+            if (enemyCP.CPsoldierRoutes.Length > 0 || !routeFile.Equals("NONE"))
                 for (int i = oldEntityCount; i < newEntityCount; i++)
                     questEnemies.Add(new Enemy(i, "sol_quest_000" + i));
             else
@@ -75,7 +76,16 @@ namespace SOC.Classes
             if (newEntityCount > oldEntityCount) // more than current count
                 for (int i = oldEntityCount; i < newEntityCount; i++)
                     cpEnemies.Add(new Enemy(i, enemyCP.CPsoldiers[i]));
-
+            //
+            // add/remove enemy heli
+            //
+            newEntityCount = 1;
+            oldEntityCount = helicopters.Count;
+            if (enemyCP.CPheliRoutes.Length > 0 || !routeFile.Equals("NONE"))
+                for (int i = oldEntityCount; i < newEntityCount; i++)
+                    helicopters.Add(new Helicopter());
+            else
+                helicopters.Clear();
             //
             // add/remove hostages
             //

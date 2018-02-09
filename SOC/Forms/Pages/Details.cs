@@ -18,6 +18,7 @@ namespace SOC.UI
         List<QuestBox> modelBoxes;
         List<QuestBox> activeItemBoxes;
         List<QuestBox> animalBoxes;
+        List<QuestBox> heliBoxes;
         int dynamicPanelWidth = 0;
 
         public Details()
@@ -33,6 +34,7 @@ namespace SOC.UI
             modelBoxes = new List<QuestBox>();
             activeItemBoxes = new List<QuestBox>();
             animalBoxes = new List<QuestBox>();
+            heliBoxes = new List<QuestBox>();
 
             foreach (BodyInfoEntry infoEntry in BodyInfo.BodyInfoArray)
             {
@@ -59,6 +61,7 @@ namespace SOC.UI
             clearPanel(panelItemDet, itemBoxes);
             clearPanel(panelAcItDet, activeItemBoxes);
             clearPanel(panelStMdDet, modelBoxes);
+            clearPanel(panelHeliDetail, heliBoxes);
             questEnemyBoxes = new List<QuestBox>();
             CPEnemyBoxes = new List<QuestBox>();
             hostageBoxes = new List<QuestBox>();
@@ -67,6 +70,7 @@ namespace SOC.UI
             modelBoxes = new List<QuestBox>();
             activeItemBoxes = new List<QuestBox>();
             animalBoxes = new List<QuestBox>();
+            heliBoxes = new List<QuestBox>();
             EnemyInfo.armorCount = 0;
             EnemyInfo.balaCount = 0;
             EnemyInfo.zombieCount = 0;
@@ -103,6 +107,19 @@ namespace SOC.UI
                 cpEnemyBox.e_label_spawn.Text = "Customize:"; cpEnemyBox.e_label_spawn.Left = 26;
                 currentPanel.Controls.Add(cpEnemyBox.getGroupBoxMain());
                 CPEnemyBoxes.Add(cpEnemyBox);
+            }
+            currentPanel.AutoScroll = true;
+            //
+            // Helicopter
+            //
+            currentPanel = panelHeliDetail;
+            currentPanel.AutoScroll = false;
+            foreach (Helicopter heli in questDetails.enemyHelicopters)
+            {
+                HelicopterBox heliBox = new HelicopterBox(heli, enemyCP, frtRouteNames);
+                heliBox.BuildObject(currentPanel.Width);
+                currentPanel.Controls.Add(heliBox.getGroupBoxMain());
+                heliBoxes.Add(heliBox);
             }
             currentPanel.AutoScroll = true;
             //
@@ -238,6 +255,7 @@ namespace SOC.UI
             {
                 new Tuple<List<QuestBox>, GroupBox>(questEnemyBoxes, groupNewEneDet),
                 new Tuple<List<QuestBox>, GroupBox>(CPEnemyBoxes, groupExistingEneDet),
+                new Tuple<List<QuestBox>, GroupBox>(heliBoxes, groupHeliDet),
                 new Tuple<List<QuestBox>, GroupBox>(hostageBoxes, groupHosDet),
                 new Tuple<List<QuestBox>, GroupBox>(vehicleBoxes, groupVehDet),
                 new Tuple<List<QuestBox>, GroupBox>(animalBoxes, groupAnimalDet),
@@ -293,6 +311,7 @@ namespace SOC.UI
             List<Item> items = new List<Item>();
             List<ActiveItem> activeItems = new List<ActiveItem>();
             List<Model> models = new List<Model>();
+            List<Helicopter> helicopters = new List<Helicopter>();
 
             foreach (EnemyBox d in questEnemyBoxes)
             {
@@ -306,6 +325,9 @@ namespace SOC.UI
                 d.e_listBox_power.Items.CopyTo(powerlist, 0);
                 cpenemies.Add(new Enemy(d.e_checkBox_spawn.Checked, d.e_checkBox_target.Checked, d.e_checkBox_balaclava.Checked, d.e_checkBox_zombie.Checked, d.e_checkBox_armor.Checked, CPEnemyBoxes.IndexOf(d), d.e_groupBox_main.Text, d.e_comboBox_body.Text, d.e_comboBox_cautionroute.Text, d.e_comboBox_sneakroute.Text, d.e_comboBox_skill.Text, d.e_comboBox_staff.Text, powerlist));
             }
+            foreach (HelicopterBox he in heliBoxes)
+                helicopters.Add(new Helicopter(he.He_checkBox_spawn.Checked, he.He_checkBox_target.Checked, he.He_comboBox_route.Text, he.He_comboBox_class.Text));
+
             foreach (HostageBox d in hostageBoxes)
                 hostages.Add(new Hostage(d.h_checkBox_target.Checked, d.h_checkBox_untied.Checked, d.h_checkBox_injured.Checked, hostageBoxes.IndexOf(d), d.h_groupBox_main.Text, d.h_comboBox_skill.Text, d.h_comboBox_staff.Text, d.h_comboBox_scared.Text, d.h_comboBox_lang.Text, new Coordinates(d.h_textBox_xcoord.Text, d.h_textBox_ycoord.Text, d.h_textBox_zcoord.Text, d.h_textBox_rot.Text)));
 
@@ -324,7 +346,7 @@ namespace SOC.UI
             foreach (ModelBox d in modelBoxes)
                 models.Add(new Model(d.m_label_GeomNotFound.Visible, modelBoxes.IndexOf(d), d.m_groupBox_main.Text, d.m_comboBox_preset.Text, new Coordinates(d.m_textBox_xcoord.Text, d.m_textBox_ycoord.Text, d.m_textBox_zcoord.Text), new RotationQuat(d.m_textBox_xrot.Text, d.m_textBox_yrot.Text, d.m_textBox_zrot.Text, d.m_textBox_wrot.Text)));
             
-            return new QuestEntities(qenemies, cpenemies, hostages, vehicles, animals, items, activeItems, models, comboBox_Body.SelectedIndex, h_checkBox_intrgt.Checked, comboBox_subtype.Text);
+            return new QuestEntities(qenemies, cpenemies, helicopters, hostages, vehicles, animals, items, activeItems, models, comboBox_Body.SelectedIndex, h_checkBox_intrgt.Checked, comboBox_subtype.Text);
         }
 
         private void comboBox_Body_SelectedIndexChanged(object sender, EventArgs e)

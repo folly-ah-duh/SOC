@@ -1062,10 +1062,11 @@ namespace SOC.QuestComponents
 
             public QuestEntities() { }
 
-            public QuestEntities(List<Enemy> questenedets, List<Enemy> cpenedets, List<Hostage> hosDets, List<Vehicle> vehDets, List<Animal> anidets, List<Item> itDets, List<ActiveItem> acitdets, List<Model> MdDets, int bodyIndex, bool inter, string sst)
+            public QuestEntities(List<Enemy> questenedets, List<Enemy> cpenedets, List<Helicopter> helis, List<Hostage> hosDets, List<Vehicle> vehDets, List<Animal> anidets, List<Item> itDets, List<ActiveItem> acitdets, List<Model> MdDets, int bodyIndex, bool inter, string sst)
             {
                 questEnemies = questenedets;
                 cpEnemies = cpenedets;
+                enemyHelicopters = helis;
                 hostages = hosDets;
                 vehicles = vehDets;
                 items = itDets;
@@ -1085,6 +1086,9 @@ namespace SOC.QuestComponents
 
             [XmlArray]
             public List<Hostage> hostages { get; set; } = new List<Hostage>();
+
+            [XmlArray]
+            public List<Helicopter> enemyHelicopters { get; set; } = new List<Helicopter>();
 
             [XmlArray]
             public List<Vehicle> vehicles { get; set; } = new List<Vehicle>();
@@ -1168,6 +1172,32 @@ namespace SOC.QuestComponents
             [XmlArray]
             public string[] powers { get; set; } = new string[0];
             
+        }
+
+        public class Helicopter
+        {
+            public Helicopter() { }
+
+            public Helicopter(bool spwn, bool target, string rt, string clas)
+            {
+                isSpawn = spwn;
+                isTarget = target;
+                heliRoute = rt;
+                heliClass = clas;
+            }
+
+            [XmlElement]
+            public bool isTarget { get; set; } = false;
+
+            [XmlElement]
+            public bool isSpawn { get; set; } = false;
+
+            [XmlElement]
+            public string heliRoute { get; set; } = "NONE";
+
+            [XmlElement]
+            public string heliClass { get; set; } = "DEFAULT";
+
         }
             
         public class Hostage

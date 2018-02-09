@@ -93,7 +93,7 @@
             // buttonOpenFolder
             // 
             this.buttonOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonOpenFolder.Location = new System.Drawing.Point(398, 468);
+            this.buttonOpenFolder.Location = new System.Drawing.Point(258, 468);
             this.buttonOpenFolder.Name = "buttonOpenFolder";
             this.buttonOpenFolder.Size = new System.Drawing.Size(129, 38);
             this.buttonOpenFolder.TabIndex = 12;

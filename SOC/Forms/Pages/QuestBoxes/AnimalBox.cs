@@ -45,7 +45,7 @@ namespace SOC.Forms.Pages.QuestBoxes
         public override void BuildObject(int width)
         {
 
-            width -= 15;
+            width -= 6;
             int comboboxWidth = width - 96;
             this.a_groupBox_main = new System.Windows.Forms.GroupBox();
             this.a_comboBox_TypeID = new System.Windows.Forms.ComboBox();

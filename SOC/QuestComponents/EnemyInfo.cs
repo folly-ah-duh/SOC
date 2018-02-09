@@ -55,7 +55,10 @@ namespace SOC.QuestComponents
 
         public static CP[] AfghCPs =
         {
-            new CP("NONE", new string[] { }, new string[] { }),
+            new CP("NONE", new string[] { }, new string[] { },
+                new string[] { 
+
+                }),
 
             new CP( "afgh_field_cp",
 
@@ -140,6 +143,9 @@ namespace SOC.QuestComponents
                     "rt_field_r_0014",
                     "rt_field_r_0015",
                     "rt_field_r_0016",
+                },
+                new string[] {
+                    "lz_drp_field_I0000|rt_drp_field_I_0000",
                 }),
             new CP( "afgh_remnants_cp",
 
@@ -226,6 +232,9 @@ namespace SOC.QuestComponents
                     "rt_remnants_r_0017",
                     "rt_remnants_r_0018",
                     "rt_remnants_r_0019",
+                },
+                new string[] {
+                    "lz_drp_remnants_I0000|rt_drp_remnants_I_0000",
                 }),
             new CP( "afgh_tent_cp",
 
@@ -334,6 +343,9 @@ namespace SOC.QuestComponents
                     "rt_tent_r_0017",
                     "rt_tent_r_0018",
                     "rt_tent_r_0019",
+                },
+                new string[] {
+                    "lz_drp_tent_I0000|rt_drp_tent_I_0000"
                 }),
             new CP( "afgh_village_cp",
 
@@ -397,6 +409,9 @@ namespace SOC.QuestComponents
                     "rt_village_r_0004",
                     "rt_village_r_0005",
                     "rt_village_r_0006",
+                },
+                new string[] {
+                    "lz_drp_village_N0000|rt_drp_village_N_0000",
                 }),
             new CP( "afgh_slopedTown_cp",
 
@@ -453,6 +468,9 @@ namespace SOC.QuestComponents
                     "rt_slopedTown_s_0001",
                     "rt_slopedTown_s_0002",
                     "rt_slopedTown_s_0003",
+                },
+                new string[] {
+                    "lz_drp_slopedTown_I0000|rt_drp_slopedTown_I_0000",
                 }),
             new CP( "afgh_commFacility_cp",
 
@@ -509,6 +527,9 @@ namespace SOC.QuestComponents
                     "rt_commFacility_r_0008",
                     "rt_commFacility_r_0009",
                     "rt_commFacility_r_0010",
+                },
+                new string[] {
+                    "lz_drp_commFacility_I0000|rt_drp_commFacility_I_0000"
                 }),
             new CP( "afgh_enemyBase_cp",
 
@@ -619,6 +640,9 @@ namespace SOC.QuestComponents
                     "rt_enemyBase_r_0017",
                     "rt_enemyBase_r_0018",
                     "rt_enemyBase_r_0019",
+                },
+                new string[] {
+                    "lz_drp_enemyBase_I0000|rt_drp_enemyBase_I_0000",
                 }),
             new CP( "afgh_bridge_cp",
 
@@ -688,6 +712,9 @@ namespace SOC.QuestComponents
                     "rt_bridge_r_0010",
                     "rt_bridge_r_0011",
                     "rt_bridge_r_0012",
+                },
+                new string[] { 
+
                 }),
             new CP( "afgh_cliffTown_cp",
 
@@ -769,6 +796,9 @@ namespace SOC.QuestComponents
                     "rt_cliffTown_r_0011",
                     "rt_cliffTown_r_0012",
                     "rt_cliffTown_r_0013",
+                },
+                new string[] {
+                    "lz_drp_cliffTown_I0000|rt_drp_cliffTown_I0000",
                 }),
             new CP( "afgh_fort_cp",
 
@@ -837,6 +867,9 @@ namespace SOC.QuestComponents
                     "rt_fort_r_0003",
                     "rt_fort_r_0004",
                     "rt_fort_r_0005",
+                },
+                new string[] {
+                    "lz_drp_fort_I0000|rt_drp_fort_I_0000",
                 }),
             new CP( "afgh_powerPlant_cp",
 
@@ -916,6 +949,9 @@ namespace SOC.QuestComponents
                     "rt_powerPlant_r_0013",
                     "rt_powerPlant_r_0014",
                     "rt_powerPlant_r_0015",
+                },
+                new string[] {
+                    "lz_drp_powerPlant_E0000|rt_drp_powerPlant_E_0000"
                 }),
             new CP( "afgh_sovietBase_cp",
 
@@ -1028,6 +1064,9 @@ namespace SOC.QuestComponents
                     "rt_sovietBase_r_0017",
                     "rt_sovietBase_r_0018",
                     "rt_sovietBase_r_0019",
+                },
+                new string[] {
+                    "lz_drp_sovietBase_E0000|rt_drp_sovietBase_E_0000"
                 }),
             new CP( "afgh_citadel_cp",
 
@@ -1149,6 +1188,9 @@ namespace SOC.QuestComponents
                     "rt_citadel_c_0020",
                     "rt_citadel_c_0008",
                     "rt_citadel_c_0002",
+                },
+                new string[] { 
+
                 }),
             new CP( "afgh_fieldEast_ob",
 
@@ -1185,6 +1227,9 @@ namespace SOC.QuestComponents
                     "rt_fieldEast_r_0005",
                     "rt_fieldEast_r_0006",
                     "rt_fieldEast_r_0007",
+                },
+                new string[] { 
+
                 }),
             new CP( "afgh_remnantsNorth_ob",
 
@@ -1219,6 +1264,9 @@ namespace SOC.QuestComponents
                     "rt_remnantsNorth_r_0005",
                     "rt_remnantsNorth_r_0006",
                     "rt_remnantsNorth_r_0007",
+                },
+                new string[] { 
+
                 }),
             new CP( "afgh_fieldWest_ob",
 
@@ -1253,6 +1301,9 @@ namespace SOC.QuestComponents
                     "rt_fieldWest_r_0005",
                     "rt_fieldWest_r_0006",
                     "rt_fieldWest_r_0007",
+                },
+                new string[] { 
+
                 }),
             new CP( "afgh_tentEast_ob",
 
@@ -1292,6 +1343,9 @@ namespace SOC.QuestComponents
                     "rt_tentEast_r_0003",
                     "rt_tentEast_r_0004",
                     "rt_tentEast_r_0005",
+
+                },
+                new string[] { 
 
                 }),
             new CP( "afgh_tentNorth_ob",
@@ -1334,6 +1388,9 @@ namespace SOC.QuestComponents
                     "rt_tentNorth_r_0005",
                     "rt_tentNorth_r_0006",
                     "rt_tentNorth_r_0007",
+                },
+                new string[] { 
+
                 }),
             new CP( "afgh_commWest_ob",
 
@@ -1368,6 +1425,9 @@ namespace SOC.QuestComponents
                     "rt_commWest_r_0005",
                     "rt_commWest_r_0006",
                     "rt_commWest_r_0007",
+                },
+                new string[] { 
+
                 }),
             new CP( "afgh_ruinsNorth_ob",
 
@@ -1391,6 +1451,9 @@ namespace SOC.QuestComponents
                     "rt_ruinsNorth_s_0000",
                     "rt_ruinsNorth_s_0001",
                     "rt_ruinsNorth_r_0000",
+                },
+                new string[] { 
+
                 }),
             new CP( "afgh_slopedWest_ob",
 
@@ -1422,6 +1485,9 @@ namespace SOC.QuestComponents
                     "rt_slopedWest_s_0001",
                     "rt_slopedWest_r_0000",
                     "rt_slopedWest_r_0001",
+                },
+                new string[] { 
+
                 }),
             new CP( "afgh_villageEast_ob",
 
@@ -1460,6 +1526,9 @@ namespace SOC.QuestComponents
                     "rt_villageEast_s_0001",
                     "rt_villageEast_r_0000",
                     "rt_villageEast_r_0001",
+                },
+                new string[] { 
+
                 }),
             new CP( "afgh_villageNorth_ob",
 
@@ -1492,6 +1561,9 @@ namespace SOC.QuestComponents
                     "rt_villageNorth_s_0001",
                     "rt_villageNorth_r_0000",
                     "rt_villageNorth_r_0001",
+                },
+                new string[] { 
+
                 }),
             new CP( "afgh_villageWest_ob",
 
@@ -1523,6 +1595,9 @@ namespace SOC.QuestComponents
                     "rt_villageWest_s_0001",
                     "rt_villageWest_r_0000",
                     "rt_villageWest_r_0001",
+                },
+                new string[] { 
+
                 }),
             new CP( "afgh_enemyEast_ob",
 
@@ -1560,6 +1635,9 @@ namespace SOC.QuestComponents
                     "rt_enemyEast_r_0003",
                     "rt_enemyEast_r_0004",
                     "rt_enemyEast_r_0005",
+                },
+                new string[] { 
+
                 }),
             new CP( "afgh_bridgeNorth_ob",
 
@@ -1598,6 +1676,9 @@ namespace SOC.QuestComponents
                     "rt_bridgeNorth_r_0005",
                     "rt_bridgeNorth_r_0006",
                     "rt_bridgeNorth_r_0007",
+                },
+                new string[] { 
+
                 }),
             new CP( "afgh_bridgeWest_ob",
 
@@ -1636,6 +1717,9 @@ namespace SOC.QuestComponents
                     "rt_bridgeWest_r_0005",
                     "rt_bridgeWest_r_0006",
                     "rt_bridgeWest_r_0007",
+                },
+                new string[] { 
+
                 }),
             new CP( "afgh_cliffEast_ob",
 
@@ -1674,6 +1758,9 @@ namespace SOC.QuestComponents
                     "rt_cliffEast_r_0005",
                     "rt_cliffEast_r_0006",
                     "rt_cliffEast_r_0007",
+                },
+                new string[] { 
+
                 }),
             new CP( "afgh_cliffSouth_ob",
 
@@ -1708,6 +1795,9 @@ namespace SOC.QuestComponents
                     "rt_cliffSouth_r_0005",
                     "rt_cliffSouth_r_0006",
                     "rt_cliffSouth_r_0007",
+                },
+                new string[] { 
+
                 }),
             new CP( "afgh_cliffWest_ob",
 
@@ -1738,6 +1828,9 @@ namespace SOC.QuestComponents
                     "rt_cliffWest_r_0001",
                     "rt_cliffWest_r_0002",
                     "rt_cliffWest_r_0003",
+                },
+                new string[] { 
+
                 }),
             new CP( "afgh_enemyNorth_ob",
 
@@ -1782,6 +1875,9 @@ namespace SOC.QuestComponents
                     "rt_enemyNorth_r_0005",
                     "rt_enemyNorth_r_0006",
                     "rt_enemyNorth_r_0007",
+                },
+                new string[] { 
+
                 }),
             new CP( "afgh_fortSouth_ob",
 
@@ -1822,6 +1918,9 @@ namespace SOC.QuestComponents
                     "rt_fortSouth_r_0005",
                     "rt_fortSouth_r_0006",
                     "rt_fortSouth_r_0007",
+                },
+                new string[] { 
+
                 }),
             new CP( "afgh_fortWest_ob",
 
@@ -1856,6 +1955,9 @@ namespace SOC.QuestComponents
                     "rt_fortWest_r_0005",
                     "rt_fortWest_r_0006",
                     "rt_fortWest_r_0007",
+                },
+                new string[] { 
+
                 }),
             new CP( "afgh_slopedEast_ob",
 
@@ -1888,6 +1990,9 @@ namespace SOC.QuestComponents
                     "rt_slopeEast_s_0001",
                     "rt_slopedEast_r_0000",
                     "rt_slopedEast_r_0001",
+                },
+                new string[] { 
+
                 }),
             new CP( "afgh_plantSouth_ob",
 
@@ -1908,6 +2013,9 @@ namespace SOC.QuestComponents
                     "rt_plantSouth_c_0003",
                     "rt_plantSouth_s_0000",
                     "rt_plantSouth_s_0001",
+                },
+                new string[] { 
+
                 }),
             new CP( "afgh_plantWest_ob",
 
@@ -1945,6 +2053,9 @@ namespace SOC.QuestComponents
                     "rt_plantWest_r_0005",
                     "rt_plantWest_r_0006",
                     "rt_plantWest_r_0007",
+                },
+                new string[] { 
+
                 }),
             new CP( "afgh_sovietSouth_ob",
 
@@ -1981,6 +2092,9 @@ namespace SOC.QuestComponents
                     "rt_sovietSouth_r_0003",
                     "rt_sovietSouth_r_0004",
                     "rt_sovietSouth_r_0005",
+                },
+                new string[] { 
+
                 }),
             new CP( "afgh_waterwayEast_ob",
 
@@ -2019,6 +2133,9 @@ namespace SOC.QuestComponents
                     "rt_waterwayEast_r_0001",
                     "rt_waterwayEast_r_0002",
                     "rt_waterwayEast_r_0003",
+                },
+                new string[] { 
+
                 }),
             new CP( "afgh_citadelSouth_ob",
 
@@ -2048,13 +2165,16 @@ namespace SOC.QuestComponents
                     "rt_citadelSouth_r_0001",
                     "rt_citadelSouth_r_0002",
                     "rt_citadelSouth_r_0003",
+                },
+                new string[] { 
+
                 }),
         };
 
 
         public static CP[] MafrCPs =
         {
-            new CP("NONE", new string[] { }, new string[] { }),
+            new CP("NONE", new string[] { }, new string[] { }, new string[] { }),
 
             new CP( "mafr_outland_cp",
 
@@ -2139,6 +2259,9 @@ namespace SOC.QuestComponents
                     "rt_outland_r_0017",
                     "rt_outland_r_0018",
                     "rt_outland_r_0019",
+                },
+                new string[] { 
+
                 }),
             new CP( "mafr_flowStation_cp",
 
@@ -2205,6 +2328,9 @@ namespace SOC.QuestComponents
                     "rt_flowStation_s_0001",
                     "rt_flowStation_s_0002",
                     "rt_flowStation_s_0003",
+                },
+                new string[] {
+                    "lz_drp_flowStation_I0000|rt_drp_flowStation_I_0000"
                 }),
             new CP( "mafr_swamp_cp",
 
@@ -2309,6 +2435,9 @@ namespace SOC.QuestComponents
                     "rt_swamp_r_0009",
                     "rt_swamp_r_0010",
                     "rt_swamp_r_0011",
+                },
+                new string[] {
+                    "lz_drp_swamp_I0000|rt_drp_swamp_I_0000",
                 }),
             new CP( "mafr_savannah_cp",
 
@@ -2389,6 +2518,9 @@ namespace SOC.QuestComponents
                     "rt_savannah_r_0009",
                     "rt_savannah_r_0010",
                     "rt_savannah_r_0011",
+                },
+                new string[] {
+                    "lz_drp_savannah_I0000|rt_drp_savannah_I_0000",
                 }),
             new CP( "mafr_pfCamp_cp",
 
@@ -2469,6 +2601,9 @@ namespace SOC.QuestComponents
                     "rt_pfCamp_r_0017",
                     "rt_pfCamp_r_0018",
                     "rt_pfCamp_r_0019",
+                },
+                new string[] {
+                    "lz_drp_pfCamp_I0000|rt_drp_pfCamp_I_0000"
                 }),
             new CP( "mafr_banana_cp",
 
@@ -2554,6 +2689,9 @@ namespace SOC.QuestComponents
                     "rt_banana_r_0017",
                     "rt_banana_r_0018",
                     "rt_banana_r_0019",
+                },
+                new string[] {
+                    "lz_drp_banana_I0000|rt_drp_banana_I_0000"
                 }),
             new CP( "mafr_diamond_cp",
 
@@ -2638,6 +2776,9 @@ namespace SOC.QuestComponents
                     "rt_diamond_r_0017",
                     "rt_diamondSwamp_r_0000",
                     "rt_diamondSwamp_r_0001",
+                },
+                new string[] {
+                    "lz_drp_diamond_I0000|rt_drp_diamond_I_0000"
                 }),
             new CP( "mafr_hill_cp",
 
@@ -2712,13 +2853,13 @@ namespace SOC.QuestComponents
                     "rt_hill_r_0009",
                     "rt_hill_r_0010",
                     "rt_hill_r_0011",
-                }),
-            new CP( "mafr_factory_cp",
-
-                new string[] {
                 },
                 new string[] {
+                    "lz_drp_hill_I0000|rt_drp_hill_I_0000"
                 }),
+
+            new CP( "mafr_factory_cp", new string[] { }, new string[] { }, new string[] { }),
+
             new CP( "mafr_lab_cp",
 
                 new string[] {
@@ -2825,6 +2966,9 @@ namespace SOC.QuestComponents
                     "rt_lab_r_0016",
                     "rt_lab_r_0017",
                     "rt_lab_r_0018",
+                },
+                new string[] { 
+
                 }),
             new CP( "mafr_outlandEast_ob",
 
@@ -2865,6 +3009,9 @@ namespace SOC.QuestComponents
                     "rt_outlandEast_r_0003",
                     "rt_outlandEast_r_0004",
                     "rt_outlandEast_r_0005",
+                },
+                new string[] { 
+
                 }),
             new CP( "mafr_outlandNorth_ob",
 
@@ -2899,6 +3046,9 @@ namespace SOC.QuestComponents
                     "rt_outlandNorth_c_0006",
                     "rt_outlandNorth_s_0000",
                     "rt_outlandNorth_s_0001",
+                },
+                new string[] { 
+
                 }),
             new CP( "mafr_swampEast_ob",
 
@@ -2943,6 +3093,9 @@ namespace SOC.QuestComponents
                     "rt_swampEast_r_0003",
                     "rt_swampEast_r_0004",
                     "rt_swampEast_r_0005",
+                },
+                new string[] { 
+
                 }),
             new CP( "mafr_swampSouth_ob",
 
@@ -2984,6 +3137,9 @@ namespace SOC.QuestComponents
                     "rt_swampSouth_r_0005",
                     "rt_swampSouth_r_0006",
                     "rt_swampSouth_r_0007",
+                },
+                new string[] { 
+
                 }),
             new CP( "mafr_swampWest_ob",
 
@@ -3026,6 +3182,9 @@ namespace SOC.QuestComponents
                     "rt_swampWest_r_0005",
                     "rt_swampWest_r_0006",
                     "rt_swampWest_r_0007",
+                },
+                new string[] { 
+
                 }),
             new CP( "mafr_pfCampNorth_ob",
 
@@ -3066,6 +3225,9 @@ namespace SOC.QuestComponents
                     "rt_pfCampNorth_r_0003",
                     "rt_pfCampNorth_r_0004",
                     "rt_pfCampNorth_r_0005",
+                },
+                new string[] { 
+
                 }),
             new CP( "mafr_pfCampEast_ob",
 
@@ -3106,6 +3268,9 @@ namespace SOC.QuestComponents
                     "rt_pfCampEast_r_0003",
                     "rt_pfCampEast_r_0004",
                     "rt_pfCampEast_r_0005",
+                },
+                new string[] { 
+
                 }),
             new CP( "mafr_savannahEast_ob",
 
@@ -3146,6 +3311,9 @@ namespace SOC.QuestComponents
                     "rt_savannahEast_r_0003",
                     "rt_savannahEast_r_0004",
                     "rt_savannahEast_r_0005",
+                },
+                new string[] { 
+
                 }),
             new CP( "mafr_savannahWest_ob",
 
@@ -3187,6 +3355,9 @@ namespace SOC.QuestComponents
                     "rt_savannahWest_r_0005",
                     "rt_savannahWest_r_0006",
                     "rt_savannahWest_r_0007",
+                },
+                new string[] { 
+
                 }),
             new CP( "mafr_chicoVilWest_ob",
 
@@ -3229,6 +3400,9 @@ namespace SOC.QuestComponents
                     "rt_chicoVilWest_r_0005",
                     "rt_chicoVilWest_r_0006",
                     "rt_chicoVilWest_r_0007",
+                },
+                new string[] { 
+
                 }),
             new CP( "mafr_hillSouth_ob",
 
@@ -3269,6 +3443,9 @@ namespace SOC.QuestComponents
                     "rt_hillSouth_r_0003",
                     "rt_hillSouth_r_0004",
                     "rt_hillSouth_r_0005",
+                },
+                new string[] { 
+
                 }),
             new CP( "mafr_factorySouth_ob",
 
@@ -3309,6 +3486,9 @@ namespace SOC.QuestComponents
                     "rt_factorySouth_r_0003",
                     "rt_factorySouth_r_0004",
                     "rt_factorySouth_r_0005",
+                },
+                new string[] { 
+
                 }),
             new CP( "mafr_hillNorth_ob",
 
@@ -3358,6 +3538,9 @@ namespace SOC.QuestComponents
                     "rt_hillNorth_r_0004",
                     "rt_hillNorth_r_0005",
                     "rt_hillNorth_r_0006",
+                },
+                new string[] { 
+
                 }),
             new CP( "mafr_hillWest_ob",
 
@@ -3398,6 +3581,9 @@ namespace SOC.QuestComponents
                     "rt_hillWest_r_0003",
                     "rt_hillWest_r_0004",
                     "rt_hillWest_r_0005",
+                },
+                new string[] { 
+
                 }),
             new CP( "mafr_hillWestNear_ob",
 
@@ -3438,6 +3624,9 @@ namespace SOC.QuestComponents
                     "rt_hillWestNear_r_0003",
                     "rt_hillWestNear_r_0004",
                     "rt_hillWestNear_r_0005",
+                },
+                new string[] { 
+
                 }),
             new CP( "mafr_diamondSouth_ob",
 
@@ -3478,6 +3667,9 @@ namespace SOC.QuestComponents
                     "rt_diamondSouth_r_0003",
                     "rt_diamondSouth_r_0004",
                     "rt_diamondSouth_r_0005",
+                },
+                new string[] { 
+
                 }),
             new CP( "mafr_diamondNorth_ob",
 
@@ -3518,6 +3710,9 @@ namespace SOC.QuestComponents
                     "rt_diamondNorth_r_0003",
                     "rt_diamondNorth_r_0004",
                     "rt_diamondNorth_r_0005",
+                },
+                new string[] { 
+
                 }),
             new CP( "mafr_diamondWest_ob",
 
@@ -3558,6 +3753,9 @@ namespace SOC.QuestComponents
                     "rt_diamondWest_r_0003",
                     "rt_diamondWest_r_0004",
                     "rt_diamondWest_r_0005",
+                },
+                new string[] { 
+
                 }),
             new CP( "mafr_bananaEast_ob",
 
@@ -3597,6 +3795,9 @@ namespace SOC.QuestComponents
                     "rt_bananaEast_r_0003",
                     "rt_bananaEast_r_0004",
                     "rt_bananaEast_r_0005",
+                },
+                new string[] { 
+
                 }),
             new CP( "mafr_savannahNorth_ob",
 
@@ -3638,6 +3839,9 @@ namespace SOC.QuestComponents
                     "rt_savannahNorth_r_0005",
                     "rt_savannahNorth_r_0006",
                     "rt_savannahNorth_r_0007",
+                },
+                new string[] { 
+
                 }),
             new CP( "mafr_bananaSouth_ob",
 
@@ -3681,6 +3885,9 @@ namespace SOC.QuestComponents
                     "rt_bananaSouth_r_0005",
                     "rt_bananaSouth_r_0006",
                     "rt_bananaSouth_r_0007",
+                },
+                new string[] { 
+
                 }),
             new CP( "mafr_factoryWest_ob",
 
@@ -3723,6 +3930,9 @@ namespace SOC.QuestComponents
                     "rt_factoryWest_r_0003",
                     "rt_factoryWest_r_0004",
                     "rt_factoryWest_r_0005",
+                },
+                new string[] { 
+
                 }),
             new CP( "mafr_labWest_ob",
 
@@ -3764,12 +3974,15 @@ namespace SOC.QuestComponents
                     "rt_labWest_r_0005",
                     "rt_labWest_r_0006",
                     "rt_labWest_r_0007",
+                },
+                new string[] { 
+
                 }),
         };
 
-        public static CP MtbsCP = new CP("mtbs", new string[] { }, new string[] { });
+        public static CP MtbsCP = new CP("mtbs", new string[] { }, new string[] { }, new string[] { });
 
-        public static CP NoneCP = new CP("NONE", new string[] { }, new string[] { });
+        public static CP NoneCP = new CP("NONE", new string[] { }, new string[] { }, new string[] { });
 
         public static CP GetCPIndex(string CPName, int locId)
         {
@@ -3795,13 +4008,17 @@ namespace SOC.QuestComponents
     {
         public string CPname;
         public string[] CPsoldiers;
-        public string[] CProutes;
+        public string[] CPsoldierRoutes;
+        public string[] CPheliRoutes;
 
-        public CP(string name, string[] sol, string[] route)
+        public CP(string name, string[] sol, string[] route, string[] hRoute)
         {
             CPname = name;
             CPsoldiers = sol;
-            CProutes = route;
+            CPsoldierRoutes = route;
+            CPheliRoutes = hRoute;
+            Array.Sort(CPsoldierRoutes);
+            Array.Sort(CPheliRoutes);
         }
 
     }

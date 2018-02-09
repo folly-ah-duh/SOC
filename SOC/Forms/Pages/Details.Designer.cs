@@ -69,6 +69,8 @@ namespace SOC.UI
             this.h_checkBox_intrgt = new System.Windows.Forms.CheckBox();
             this.comboBox_Body = new System.Windows.Forms.ComboBox();
             this.label_Body = new System.Windows.Forms.Label();
+            this.groupHeliDet = new System.Windows.Forms.GroupBox();
+            this.panelHeliDetail = new System.Windows.Forms.Panel();
             this.panelDetails.SuspendLayout();
             this.groupActiveItemDet.SuspendLayout();
             this.groupExistingEneDet.SuspendLayout();
@@ -81,11 +83,13 @@ namespace SOC.UI
             this.groupItemDet.SuspendLayout();
             this.groupHosDet.SuspendLayout();
             this.panelHosDet.SuspendLayout();
+            this.groupHeliDet.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelDetails
             // 
             this.panelDetails.AutoScroll = true;
+            this.panelDetails.Controls.Add(this.groupHeliDet);
             this.panelDetails.Controls.Add(this.originAnchor);
             this.panelDetails.Controls.Add(this.groupActiveItemDet);
             this.panelDetails.Controls.Add(this.groupExistingEneDet);
@@ -98,7 +102,7 @@ namespace SOC.UI
             this.panelDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelDetails.Location = new System.Drawing.Point(0, 0);
             this.panelDetails.Name = "panelDetails";
-            this.panelDetails.Size = new System.Drawing.Size(2169, 452);
+            this.panelDetails.Size = new System.Drawing.Size(2438, 452);
             this.panelDetails.TabIndex = 0;
             // 
             // originAnchor
@@ -114,7 +118,7 @@ namespace SOC.UI
             this.groupActiveItemDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupActiveItemDet.Controls.Add(this.panelAcItDet);
-            this.groupActiveItemDet.Location = new System.Drawing.Point(1621, 3);
+            this.groupActiveItemDet.Location = new System.Drawing.Point(1891, 3);
             this.groupActiveItemDet.Name = "groupActiveItemDet";
             this.groupActiveItemDet.Size = new System.Drawing.Size(264, 449);
             this.groupActiveItemDet.TabIndex = 28;
@@ -282,7 +286,7 @@ namespace SOC.UI
             this.groupAnimalDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupAnimalDet.Controls.Add(this.panelAnimalDet);
-            this.groupAnimalDet.Location = new System.Drawing.Point(1081, 3);
+            this.groupAnimalDet.Location = new System.Drawing.Point(1351, 3);
             this.groupAnimalDet.Name = "groupAnimalDet";
             this.groupAnimalDet.Size = new System.Drawing.Size(264, 449);
             this.groupAnimalDet.TabIndex = 20;
@@ -306,7 +310,7 @@ namespace SOC.UI
             this.groupVehDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupVehDet.Controls.Add(this.panelVehDet);
-            this.groupVehDet.Location = new System.Drawing.Point(812, 3);
+            this.groupVehDet.Location = new System.Drawing.Point(1082, 3);
             this.groupVehDet.Name = "groupVehDet";
             this.groupVehDet.Size = new System.Drawing.Size(264, 449);
             this.groupVehDet.TabIndex = 12;
@@ -330,7 +334,7 @@ namespace SOC.UI
             this.groupStMdDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupStMdDet.Controls.Add(this.panelStMdDet);
-            this.groupStMdDet.Location = new System.Drawing.Point(1888, 3);
+            this.groupStMdDet.Location = new System.Drawing.Point(2158, 3);
             this.groupStMdDet.Name = "groupStMdDet";
             this.groupStMdDet.Size = new System.Drawing.Size(264, 449);
             this.groupStMdDet.TabIndex = 31;
@@ -354,7 +358,7 @@ namespace SOC.UI
             this.groupItemDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupItemDet.Controls.Add(this.panelItemDet);
-            this.groupItemDet.Location = new System.Drawing.Point(1351, 3);
+            this.groupItemDet.Location = new System.Drawing.Point(1621, 3);
             this.groupItemDet.Name = "groupItemDet";
             this.groupItemDet.Size = new System.Drawing.Size(264, 449);
             this.groupItemDet.TabIndex = 29;
@@ -378,7 +382,7 @@ namespace SOC.UI
             this.groupHosDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupHosDet.Controls.Add(this.panelHosDet);
-            this.groupHosDet.Location = new System.Drawing.Point(543, 3);
+            this.groupHosDet.Location = new System.Drawing.Point(813, 3);
             this.groupHosDet.Name = "groupHosDet";
             this.groupHosDet.Size = new System.Drawing.Size(264, 449);
             this.groupHosDet.TabIndex = 1;
@@ -444,12 +448,35 @@ namespace SOC.UI
             this.label_Body.TabIndex = 2;
             this.label_Body.Text = "Body:";
             // 
+            // groupHeliDetail
+            // 
+            this.groupHeliDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupHeliDet.Controls.Add(this.panelHeliDetail);
+            this.groupHeliDet.Location = new System.Drawing.Point(543, 3);
+            this.groupHeliDet.Name = "groupHeliDetail";
+            this.groupHeliDet.Size = new System.Drawing.Size(264, 449);
+            this.groupHeliDet.TabIndex = 35;
+            this.groupHeliDet.TabStop = false;
+            this.groupHeliDet.Text = "Enemy Helicopter";
+            // 
+            // panelHeliDetail
+            // 
+            this.panelHeliDetail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelHeliDetail.AutoScroll = true;
+            this.panelHeliDetail.Location = new System.Drawing.Point(3, 16);
+            this.panelHeliDetail.Name = "panelHeliDetail";
+            this.panelHeliDetail.Size = new System.Drawing.Size(258, 424);
+            this.panelHeliDetail.TabIndex = 0;
+            // 
             // Details
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.panelDetails);
             this.Name = "Details";
-            this.Size = new System.Drawing.Size(2169, 452);
+            this.Size = new System.Drawing.Size(2438, 452);
             this.panelDetails.ResumeLayout(false);
             this.panelDetails.PerformLayout();
             this.groupActiveItemDet.ResumeLayout(false);
@@ -466,6 +493,7 @@ namespace SOC.UI
             this.groupHosDet.ResumeLayout(false);
             this.panelHosDet.ResumeLayout(false);
             this.panelHosDet.PerformLayout();
+            this.groupHeliDet.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -502,5 +530,7 @@ namespace SOC.UI
         private ComboBox comboBox_subtype2;
         private GroupBox groupActiveItemDet;
         private Label originAnchor;
+        public GroupBox groupHeliDet;
+        public Panel panelHeliDetail;
     }
 }

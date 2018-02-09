@@ -41,7 +41,7 @@ namespace SOC.Forms.Pages.QuestBoxes
 
         public override void BuildObject(int width)
         {
-            width -= 15;
+            width -= 6;
             int comboboxWidth = width - 96;
             this.v_groupBox_main = new System.Windows.Forms.GroupBox();
             this.v_textBox_zcoord = new System.Windows.Forms.TextBox();
@@ -62,7 +62,6 @@ namespace SOC.Forms.Pages.QuestBoxes
             // 
             this.v_groupBox_main.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.v_groupBox_main.AutoSize = true;
             this.v_groupBox_main.Controls.Add(this.v_textBox_zcoord);
             this.v_groupBox_main.Controls.Add(this.v_textBox_ycoord);
             this.v_groupBox_main.Controls.Add(this.v_checkBox_target);
@@ -78,7 +77,7 @@ namespace SOC.Forms.Pages.QuestBoxes
             this.v_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
             this.v_groupBox_main.Location = new System.Drawing.Point(3, 4 + (170 * vehicle.number));
             this.v_groupBox_main.Name = "v_groupBox_main";
-            this.v_groupBox_main.Size = new System.Drawing.Size(width, 140);
+            this.v_groupBox_main.Size = new System.Drawing.Size(width, 152);
             this.v_groupBox_main.TabIndex = 1;
             this.v_groupBox_main.TabStop = false;
             this.v_groupBox_main.Text = vehicle.name;

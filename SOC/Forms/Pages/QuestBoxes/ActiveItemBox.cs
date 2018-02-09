@@ -38,8 +38,8 @@ namespace SOC.Forms.Pages.QuestBoxes
 
         public override void BuildObject(int width)
         {
-            width -= 15;
-            int comboboxWidth = width - 100;
+            width -= 6;
+            int comboboxWidth = width - 96;
             this.ai_groupBox_main = new System.Windows.Forms.GroupBox();
             this.ai_label_coord = new System.Windows.Forms.Label();
             this.ai_textBox_xcoord = new System.Windows.Forms.TextBox();
@@ -56,7 +56,6 @@ namespace SOC.Forms.Pages.QuestBoxes
 
             this.ai_groupBox_main.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ai_groupBox_main.AutoSize = true;
             this.ai_groupBox_main.Controls.Add(this.ai_comboBox_activeitem);
             this.ai_groupBox_main.Controls.Add(this.ai_label_activeitem);
             this.ai_groupBox_main.Controls.Add(this.ai_textBox_wrot);
@@ -69,9 +68,9 @@ namespace SOC.Forms.Pages.QuestBoxes
             this.ai_groupBox_main.Controls.Add(this.ai_textBox_xcoord);
             this.ai_groupBox_main.Controls.Add(this.ai_label_coord);
             this.ai_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
-            this.ai_groupBox_main.Location = new System.Drawing.Point(3, 3 + (activeitem.number * 118));
+            this.ai_groupBox_main.Location = new System.Drawing.Point(3, 3 + (activeitem.number * 113));
             this.ai_groupBox_main.Name = "ai_groupBox_main";
-            this.ai_groupBox_main.Size = new System.Drawing.Size(width, 80);
+            this.ai_groupBox_main.Size = new System.Drawing.Size(width, 95);
             this.ai_groupBox_main.TabIndex = 0;
             this.ai_groupBox_main.TabStop = false;
             this.ai_groupBox_main.Text = activeitem.name;

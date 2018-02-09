@@ -12,8 +12,8 @@ namespace SOC.Forms.Pages.QuestBoxes
     public class EnemyBox : QuestBox
     {
         public int enemyNumber = -1;
-        CP enemyCP = new CP();
-        Enemy enemy = new Enemy();
+        CP enemyCP;
+        Enemy enemy;
         int region;
         string[] frtRouteNames;
 
@@ -51,7 +51,7 @@ namespace SOC.Forms.Pages.QuestBoxes
 
         public override void BuildObject(int width)
         {
-            width -= 15;
+            width -= 6;
             int comboboxWidth = width - 110;
             e_checkBox_balaclava = new System.Windows.Forms.CheckBox();
             e_label_balaclava = new System.Windows.Forms.Label();
@@ -247,7 +247,7 @@ namespace SOC.Forms.Pages.QuestBoxes
             this.e_comboBox_cautionroute.TabIndex = 12;
 
             e_comboBox_cautionroute.Items.AddRange(frtRouteNames);
-            e_comboBox_cautionroute.Items.AddRange(enemyCP.CProutes);
+            e_comboBox_cautionroute.Items.AddRange(enemyCP.CPsoldierRoutes);
 
             if (!e_comboBox_cautionroute.Items.Contains(enemy.cRoute))
                 e_comboBox_cautionroute.SelectedIndex = 0;
@@ -277,7 +277,7 @@ namespace SOC.Forms.Pages.QuestBoxes
             this.e_comboBox_sneakroute.TabIndex = 10;
 
             e_comboBox_sneakroute.Items.AddRange(frtRouteNames);
-            e_comboBox_sneakroute.Items.AddRange(enemyCP.CProutes);
+            e_comboBox_sneakroute.Items.AddRange(enemyCP.CPsoldierRoutes);
 
             if (!e_comboBox_sneakroute.Items.Contains(enemy.dRoute))
                 e_comboBox_sneakroute.SelectedIndex = 0;
@@ -362,8 +362,6 @@ namespace SOC.Forms.Pages.QuestBoxes
             this.e_label_zombie.Size = new System.Drawing.Size(43, 13);
             this.e_label_zombie.TabIndex = 0;
             this.e_label_zombie.Text = "Is Zombie:";
-            this.e_groupBox_main.ResumeLayout(false);
-            this.e_groupBox_main.PerformLayout();
             // 
             // e_checkBox_armor
             // 
@@ -405,6 +403,8 @@ namespace SOC.Forms.Pages.QuestBoxes
             this.e_label_spawn.TabIndex = 0;
             this.e_label_spawn.Text = "Spawn:";
 
+            this.e_groupBox_main.ResumeLayout(false);
+            this.e_groupBox_main.PerformLayout();
             UpdateSpawn();
 
         }
@@ -451,7 +451,7 @@ namespace SOC.Forms.Pages.QuestBoxes
                 e_checkBox_zombie.Enabled = true;
                 e_button_removepower.Enabled = true;
 
-                if (e_checkBox_balaclava.Checked) { updateBalaclava(); }
+                if (e_checkBox_balaclava.Checked) { updateBalaclava(); } // bug: spamming spawn checkbox fills fova counts
                 if (e_checkBox_zombie.Checked) { updateZombie(); }
                 if (e_checkBox_armor.Checked) { updateArmor(); }
             }
@@ -594,7 +594,7 @@ namespace SOC.Forms.Pages.QuestBoxes
             e_checkBox_zombie.Checked = enemyDetail.e_checkBox_zombie.Checked;
 
             e_listBox_power.Text = enemyDetail.e_listBox_power.Text;
-
+            /* unnecessary
             string[] cautionArray = new string[enemyDetail.e_comboBox_cautionroute.Items.Count];
             enemyDetail.e_comboBox_cautionroute.Items.CopyTo(cautionArray, 0);
             e_comboBox_cautionroute.Items.AddRange(cautionArray);
@@ -606,7 +606,7 @@ namespace SOC.Forms.Pages.QuestBoxes
             string[] bodyArray = new string[enemyDetail.e_comboBox_body.Items.Count];
             enemyDetail.e_comboBox_body.Items.CopyTo(bodyArray, 0);
             e_comboBox_body.Items.AddRange(bodyArray);
-
+            */
             e_comboBox_cautionroute.Text = enemyDetail.e_comboBox_cautionroute.Text;
             e_comboBox_sneakroute.Text = enemyDetail.e_comboBox_sneakroute.Text;
 

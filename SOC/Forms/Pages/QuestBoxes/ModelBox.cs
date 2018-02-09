@@ -43,7 +43,7 @@ namespace SOC.Forms.Pages.QuestBoxes
         public override void BuildObject(int width)
         {
 
-            width -= 15;
+            width -= 6;
             int comboboxWidth = width - 100;
             this.m_groupBox_main = new System.Windows.Forms.GroupBox();
             this.m_textBox_zcoord = new System.Windows.Forms.TextBox();
@@ -65,7 +65,6 @@ namespace SOC.Forms.Pages.QuestBoxes
             // 
             this.m_groupBox_main.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.m_groupBox_main.AutoSize = true;
             this.m_groupBox_main.Controls.Add(this.m_textBox_zcoord);
             this.m_groupBox_main.Controls.Add(this.m_textBox_ycoord);
             this.m_groupBox_main.Controls.Add(this.m_textBox_xcoord);
@@ -79,7 +78,7 @@ namespace SOC.Forms.Pages.QuestBoxes
             this.m_groupBox_main.Controls.Add(this.m_label_preset);
             this.m_groupBox_main.Controls.Add(this.m_label_GeomNotFound);
             this.m_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
-            this.m_groupBox_main.Location = new System.Drawing.Point(3, 3 + (model.number * 118));
+            this.m_groupBox_main.Location = new System.Drawing.Point(3, 3 + (model.number * 113));
             this.m_groupBox_main.Name = "m_groupBox_main";
             this.m_groupBox_main.Size = new System.Drawing.Size(width, 95);
             this.m_groupBox_main.TabIndex = 1;

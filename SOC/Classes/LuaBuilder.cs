@@ -121,24 +121,24 @@ namespace SOC.Classes
             questLua[GetLineOf("local hostageCount =", questLua)] = string.Format("local hostageCount = {0}", questDetails.hostages.Count);
             questLua[GetLineOf("local CPNAME =", questLua)] = string.Format("local CPNAME = \"{0}\"", definitionDetails.CPName); //add cp combobox to setup
             questLua[GetLineOf("local useInter =", questLua)] = string.Format("local useInter = {0}", questDetails.canInter.ToString().ToLower()); //add interogation checkbox to setup
-            questLua[GetLineOf("local qType =", questLua)] = string.Format("local qType = TppDefine.QUEST_TYPE.{0}", definitionDetails.objectiveType); //add questtype combobox to setup
+            questLua[GetLineOf("local qType =", questLua)] = string.Format("local qType = {0}", definitionDetails.objectiveType); //add questtype combobox to setup
             questLua[GetLineOf("local SUBTYPE =", questLua)] = string.Format("local SUBTYPE = \"{0}\"", questDetails.soldierSubType);
 
             string luaBool;
             if (EnemyInfo.armorCount > 0) luaBool = "true"; else luaBool = "false";
-            questLua[GetLineOf("	isQuestArmor =", questLua)] = string.Format("	isQuestArmor =  {0},", luaBool);
+            questLua[GetLineOf("isQuestArmor =", questLua)] = string.Format("	isQuestArmor =  {0},", luaBool);
             if (EnemyInfo.zombieCount > 0) luaBool = "true"; else luaBool = "false";
-            questLua[GetLineOf("	isQuestZombie =", questLua)] = string.Format("	isQuestZombie = {0},", luaBool);
+            questLua[GetLineOf("isQuestZombie =", questLua)] = string.Format("	isQuestZombie = {0},", luaBool);
             if (EnemyInfo.balaCount > 0) luaBool = "true"; else luaBool = "false";
-            questLua[GetLineOf("	isQuestBalaclava =", questLua)] = string.Format("	isQuestBalaclava = {0},", luaBool);
+            questLua[GetLineOf("isQuestBalaclava =", questLua)] = string.Format("	isQuestBalaclava = {0},", luaBool);
 
-            questLua.InsertRange(GetLineOf("    enemyList = {", questLua) + 1, BuildEnemyList(questDetails));
-            questLua.InsertRange(GetLineOf("    vehicleList = {", questLua) + 1, BuildVehicleList(questDetails));
-            questLua.InsertRange(GetLineOf("    heliList = {", questLua) + 1, BuildHelicopterList(questDetails));
-            questLua.InsertRange(GetLineOf("    hostageList = {", questLua) + 1, BuildHostageList(questDetails));
-            questLua.InsertRange(GetLineOf("    animalList = {", questLua) + 1, BuildAnimalList(questDetails));
-            questLua.InsertRange(GetLineOf("    targetList = {", questLua) + 1, BuildTargetList(questDetails));
-            questLua.InsertRange(GetLineOf("    targetAnimalList = {", questLua) + 1, BuildAnimalTargetList(questDetails));
+            questLua.InsertRange(GetLineOf("enemyList = {", questLua) + 1, BuildEnemyList(questDetails));
+            questLua.InsertRange(GetLineOf("vehicleList = {", questLua) + 1, BuildVehicleList(questDetails));
+            questLua.InsertRange(GetLineOf("heliList = {", questLua) + 1, BuildHelicopterList(questDetails));
+            questLua.InsertRange(GetLineOf("hostageList = {", questLua) + 1, BuildHostageList(questDetails));
+            questLua.InsertRange(GetLineOf("animalList = {", questLua) + 1, BuildAnimalList(questDetails));
+            questLua.InsertRange(GetLineOf("targetList = {", questLua) + 1, BuildTargetList(questDetails));
+            questLua.InsertRange(GetLineOf("targetAnimalList = {", questLua) + 1, BuildAnimalTargetList(questDetails));
             questLua.InsertRange(GetLineOf("Hostage Attributes List", questLua) + 1, BuildHostageAttributes(questDetails));
 
 

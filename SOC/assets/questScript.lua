@@ -1,55 +1,71 @@
 local this = {}
 local quest_step = {}
+
 local StrCode32 = Fox.StrCode32
 local StrCode32Table = Tpp.StrCode32Table
 local GetGameObjectId = GameObject.GetGameObjectId
-local i = 0
+local ELIMINATE = TppDefine.QUEST_TYPE.ELIMINATE
+local RECOVERED = TppDefine.QUEST_TYPE.RECOVERED
+local CLEAR = TppDefine.QUEST_CLEAR_TYPE.CLEAR
+local NONE = TppDefine.QUEST_CLEAR_TYPE.NONE
+local FAILURE = TppDefine.QUEST_CLEAR_TYPE.FAILURE
+local UPDATE = TppDefine.QUEST_CLEAR_TYPE.UPDATE
 
 local hostageCount = 0
 local CPNAME = ""
 local useInter = true
-local qType = TppDefine.QUEST_TYPE.RECOVERED
+local qType = RECOVERED
 local SUBTYPE = ""
+
+local enemyQuestType = RECOVERED
+local vehicleQuestType = RECOVERED
+local hostageQuestType = RECOVERED
+local animalQuestType = RECOVERED
+local walkerQuestType = RECOVERED
 
 this.QUEST_TABLE = {
 
-    questType = qType,
+	questType = qType,
 	soldierSubType = SUBTYPE,
-	isQuestArmor = true,
-	isQuestZombie = true,
-	isQuestBalaclava = true,
+	isQuestArmor =  false,
+	isQuestZombie = false,
+	isQuestBalaclava = false,
 
-    cpList = {
-      nil
-    },
+	cpList = {
+	  nil
+	},
 
-    enemyList = {
+	enemyList = {
+	  
+	},
 
-    },
+	vehicleList = {
+	  
+	},
 
-    vehicleList = {
+	heliList = {
+	  
+	},
 
-    },
+	hostageList = {
+	  
+	},
 
-    heliList = {
+	animalList = {
+	  
+	},
 
-    },
+	walkerList = {
+	  
+	},
 
-    hostageList = {
+	targetList = {
+	  
+	},
 
-    },
-
-    animalList = {
-
-    },
-
-    targetList = {
-
-    },
-
-    targetAnimalList = {
-
-    },
+	targetAnimalList = {
+	
+	},
 }
 
 this.InterCall_hostage_pos01 = function( soldier2GameObjectId, cpID, interName )
@@ -57,62 +73,71 @@ this.InterCall_hostage_pos01 = function( soldier2GameObjectId, cpID, interName )
 
   for i,hostageInfo in ipairs(this.QUEST_TABLE.hostageList)do
 	if hostageInfo.isTarget then
-		TppMarker.EnableQuestTargetMarker(hostageInfo.hostageName)
+	  TppMarker.EnableQuestTargetMarker(hostageInfo.hostageName)
 	else
-		TppMarker.Enable(hostageInfo.hostageName,0,"defend","map_and_world_only_icon",0,false,true)
+	  TppMarker.Enable(hostageInfo.hostageName,0,"defend","map_and_world_only_icon",0,false,true)
 	end
   end
 end
 
 this.questCpInterrogation = {
-
-
-    { name = "enqt1000_271b10", func = this.InterCall_hostage_pos01, },
-
-
+  { name = "enqt1000_271b10", func = this.InterCall_hostage_pos01, },
 }
 
 function this.OnAllocate()
   TppQuest.RegisterQuestStepList{
-    "QStep_Start",
-    "QStep_Main",
-    nil
+	"QStep_Start",
+	"QStep_Main",
+	nil
   }
-  
-  TppEnemy.OnAllocateQuestFova( this.QUEST_TABLE )
 
+  TppEnemy.OnAllocateQuestFova(this.QUEST_TABLE)
   TppQuest.RegisterQuestStepTable( quest_step )
   TppQuest.RegisterQuestSystemCallbacks{
-    OnActivate = function()
-      TppEnemy.OnActivateQuest( this.QUEST_TABLE )
-      TppAnimal.OnActivateQuest(this.QUEST_TABLE)
-    end,
-    OnDeactivate = function()
-      TppEnemy.OnDeactivateQuest( this.QUEST_TABLE )
-      TppAnimal.OnDeactivateQuest(this.QUEST_TABLE)
-    end,
-    OnOutOfAcitveArea = function()
-    end,
-    OnTerminate = function()
-      this.SwitchEnableQuestHighIntTable( false, CPNAME, this.questCpInterrogation )
-      TppEnemy.OnTerminateQuest( this.QUEST_TABLE )
-      TppAnimal.OnTerminateQuest(this.QUEST_TABLE)
-    end,
+	OnActivate = function()
+	  this.OnActivateQuest(this.QUEST_TABLE)
+	end,
+	OnDeactivate = function()
+	  this.OnDeactivateQuest(this.QUEST_TABLE)
+	end,
+	OnOutOfAcitveArea = function()
+	end,
+	OnTerminate = function()
+	  this.OnTerminateQuest(this.QUEST_TABLE)
+	end,
   }
 
-  mvars.fultonInfo = TppDefine.QUEST_CLEAR_TYPE.NONE
+  mvars.fultonInfo = NONE
+end
+
+function this.OnActivateQuest(questTable)
+  TppEnemy.OnActivateQuest(questTable)
+  TppAnimal.OnActivateQuest(questTable)
+end
+
+function this.OnDeactivateQuest(questTable)
+  TppEnemy.OnDeactivateQuest( questTable )
+  TppAnimal.OnDeactivateQuest(questTable)
+
+end
+
+function this.OnTerminateQuest(questTable)
+  this.SwitchEnableQuestHighIntTable( false, CPNAME, this.questCpInterrogation )
+  TppEnemy.OnTerminateQuest(questTable)
+  TppAnimal.OnTerminateQuest(questTable)
+
 end
 
 this.Messages = function()
   return
-    StrCode32Table {
-      Block = {
-        {
-          msg = "StageBlockCurrentSmallBlockIndexUpdated",
-          func = function() end,
-        },
-      },
-    }
+	StrCode32Table {
+	  Block = {
+		{
+		  msg = "StageBlockCurrentSmallBlockIndexUpdated",
+		  func = function() end,
+		},
+	  },
+	}
 end
 
 function this.OnInitialize()
@@ -129,271 +154,296 @@ end
 
 quest_step.QStep_Start = {
   OnEnter = function()
-    InfCore.PCall(this.WarpHostages)
-    InfCore.PCall(this.WarpVehicles)
+	InfCore.PCall(this.WarpHostages)
+	InfCore.PCall(this.WarpVehicles)
+	InfCore.PCall(this.SetupGearsQuest)
 
-    this.SwitchEnableQuestHighIntTable( true, CPNAME, this.questCpInterrogation ) --
-    TppQuest.SetNextQuestStep( "QStep_Main" )
+	this.SwitchEnableQuestHighIntTable( true, CPNAME, this.questCpInterrogation ) --
+	TppQuest.SetNextQuestStep( "QStep_Main" )
 
-    local commandScared =   {id = "SetForceScared",   scared=true, ever=true }
-    local commandUnlocked = {id = "SetHostage2Flag",  flag="unlocked",   on=true,}
-    local commandInjured =  {id = "SetHostage2Flag",  flag="disableFulton",on=true }
-    local commandBrave =    {id = "SetHostage2Flag",  flag="disableScared",on=true }
+	local commandScared =   {id = "SetForceScared",   scared=true, ever=true }
+	local commandUnlocked = {id = "SetHostage2Flag",  flag="unlocked",   on=true,}
+	local commandInjured =  {id = "SetHostage2Flag",  flag="disableFulton",on=true }
+	local commandBrave =	{id = "SetHostage2Flag",  flag="disableScared",on=true }
 
-    --Hostage Attributes List--
-
+	--Hostage Attributes List--
 
   end,
 }
 
+local hostagei = 0
 quest_step.QStep_Main = {
   Messages = function( self )
-    return
-      StrCode32Table {
-        Marker = {
-          {
-            msg = "ChangeToEnable",
-            func = function ( arg0, arg1 )
-              Fox.Log("### Marker ChangeToEnable  ###"..arg0 )
-              if arg0 == StrCode32("Hostage_0") then
-                i = i + 1
-                if i >= hostageCount then
-                  this.SwitchEnableQuestHighIntTable( false, CPNAME, this.questCpInterrogation )
-                end
-              end
-            end
-          },
-        },
-        GameObject = {
-          {
-            msg = "Dead",
-            func = function(gameObjectId,gameObjectId01,animalId)
-              local isClearType = this.CheckQuestAllTarget(this.QUEST_TABLE.questType,"Dead",gameObjectId,animalId)
-              TppQuest.ClearWithSave( isClearType )
-            end
-          },
-          {
-            msg = "FultonInfo",
-            func = function( gameObjectId )
-              if mvars.fultonInfo ~= TppDefine.QUEST_CLEAR_TYPE.NONE then
-                TppQuest.ClearWithSave( mvars.fultonInfo )
-              end
-              mvars.fultonInfo = TppDefine.QUEST_CLEAR_TYPE.NONE
-            end
-          },
-          {
-            msg = "Fulton",
-            func = function(gameObjectId,animalId)
-              local isClearType = this.CheckQuestAllTarget(this.QUEST_TABLE.questType, "Fulton", gameObjectId,animalId)
-              TppQuest.ClearWithSave( isClearType )
-            end
-          },
-          {
-            msg = "FultonFailed",
-            func = function(gameObjectId,locatorName,locatorNameUpper,failureType)
-              if failureType == TppGameObject.FULTON_FAILED_TYPE_ON_FINISHED_RISE then
-                local isClearType = this.CheckQuestAllTarget(this.QUEST_TABLE.questType,"FultonFailed",gameObjectId,locatorName)
-                TppQuest.ClearWithSave( isClearType )
-              end
-            end
-          },
-          {
-            msg = "PlacedIntoVehicle",
-            func = function( gameObjectId, vehicleGameObjectId )
-              if Tpp.IsHelicopter( vehicleGameObjectId ) then
-                local isClearType = this.CheckQuestAllTarget(this.QUEST_TABLE.questType, "InHelicopter", gameObjectId)
-                TppQuest.ClearWithSave( isClearType )
-              end
-            end
-          },
-        },
-      }
+	return
+	  StrCode32Table {
+		Marker = {
+		  {
+			msg = "ChangeToEnable",
+			func = function ( arg0, arg1 )
+			  Fox.Log("### Marker ChangeToEnable  ###"..arg0 )
+			  if arg0 == StrCode32("Hostage_0") then
+				hostagei = hostagei + 1
+				if hostagei >= hostageCount then
+				  this.SwitchEnableQuestHighIntTable( false, CPNAME, this.questCpInterrogation )
+				end
+			  end
+			end
+		  },
+		},
+		GameObject = {
+		  {
+			msg = "Dead",
+			func = function(gameObjectId,gameObjectId01,animalId)
+			  local isClearType = this.CheckQuestAllTargetDynamic("Dead",gameObjectId,animalId)
+			  TppQuest.ClearWithSave( isClearType )
+			end
+		  },
+		  {
+			msg = "FultonInfo",
+			func = function( gameObjectId )
+			  if mvars.fultonInfo ~= NONE then
+				TppQuest.ClearWithSave( mvars.fultonInfo )
+			  end
+			  mvars.fultonInfo = NONE
+			end
+		  },
+		  {
+			msg = "Fulton",
+			func = function(gameObjectId,animalId)
+			  local isClearType = this.CheckQuestAllTargetDynamic("Fulton", gameObjectId,animalId)
+			  TppQuest.ClearWithSave( isClearType )
+			end
+		  },
+		  {
+			msg = "FultonFailed",
+			func = function(gameObjectId,locatorName,locatorNameUpper,failureType)
+			  if failureType == TppGameObject.FULTON_FAILED_TYPE_ON_FINISHED_RISE then
+				local isClearType = this.CheckQuestAllTargetDynamic("FultonFailed",gameObjectId,locatorName)
+				TppQuest.ClearWithSave( isClearType )
+			  end
+			end
+		  },
+		  {
+			msg = "PlacedIntoVehicle",
+			func = function( gameObjectId, vehicleGameObjectId )
+			  if Tpp.IsHelicopter( vehicleGameObjectId ) then
+				local isClearType = this.CheckQuestAllTargetDynamic("InHelicopter", gameObjectId)
+				TppQuest.ClearWithSave( isClearType )
+			  end
+			end
+		  },
+		  {	
+			msg = "VehicleBroken",
+			func = function( gameObjectId, state )
+			  if state == StrCode32("End") then
+				local isClearType = this.CheckQuestAllTargetDynamic("VehicleBroken", gameObjectId )
+				TppQuest.ClearWithSave( isClearType )
+			  end
+			end
+		  },
+		  {	
+			msg = "LostControl",
+			func = function( gameObjectId, state )
+			  if state == StrCode32("End") then
+				local isClearType = TppEnemy.CheckQuestAllTargetDynamic( "LostControl", gameObjectId )
+				TppQuest.ClearWithSave( isClearType )
+			  end
+			end
+		  },
+		},
+	  }
   end,
   OnEnter = function()
-    Fox.Log("QStep_Main OnEnter")
+	Fox.Log("QStep_Main OnEnter")
   end,
   OnLeave = function()
-    Fox.Log("QStep_Main OnLeave")
+	Fox.Log("QStep_Main OnLeave")
   end,
 }
 
 function this.WarpHostages()
   for i,hostageInfo in ipairs(this.QUEST_TABLE.hostageList)do
-    local gameObjectId=GameObject.GetGameObjectId(hostageInfo.hostageName)
-    if gameObjectId~=GameObject.NULL_ID then
-      local position=hostageInfo.position
-      local command={id="Warp",degRotationY=position.rotY,position=Vector3(position.pos[1],position.pos[2],position.pos[3])}
-      GameObject.SendCommand(gameObjectId,command)
-    end
+	local gameObjectId= GetGameObjectId(hostageInfo.hostageName)
+	if gameObjectId~=GameObject.NULL_ID then
+	  local position=hostageInfo.position
+	  local command={id="Warp",degRotationY=position.rotY,position=Vector3(position.pos[1],position.pos[2],position.pos[3])}
+	  GameObject.SendCommand(gameObjectId,command)
+	end
   end
 end
 
 function this.WarpVehicles()
   for i,vehicleInfo in ipairs(this.QUEST_TABLE.vehicleList)do
-    local gameObjectId=GameObject.GetGameObjectId(vehicleInfo.locator)
-    if gameObjectId~=GameObject.NULL_ID then
-      local position=vehicleInfo.position
-      local command={id="SetPosition",rotY=position.rotY,position=Vector3(position.pos[1],position.pos[2],position.pos[3])}
-      GameObject.SendCommand(gameObjectId,command)
-    end
+	local gameObjectId= GetGameObjectId(vehicleInfo.locator)
+	if gameObjectId~=GameObject.NULL_ID then
+	  local position=vehicleInfo.position
+	  local command={id="SetPosition",rotY=position.rotY,position=Vector3(position.pos[1],position.pos[2],position.pos[3])}
+	  GameObject.SendCommand(gameObjectId,command)
+	end
+  end
+end
+
+function this.SetupGearsQuest()
+  for i,walkerInfo in ipairs(this.QUEST_TABLE.walkerList)do
+	local walkerId = GetGameObjectId("TppCommonWalkerGear2",walkerInfo.walkerName)
+	if walkerId ~= GameObject.NULL_ID then
+	--[[ refuses to work
+	  local commandWeapon={ id = "SetMainWeapon", weapon = walkerInfo.weapon}
+	  GameObject.SendCommand(walkerId, commandWeapon)
+	  InfCore.Log("WG Weapon Set")
+	]]
+	  local commandColor = { id = "SetColoringType", type = walkerInfo.colorType }
+	  GameObject.SendCommand(walkerId, commandColor)
+	  InfCore.Log("WG Color Set")
+
+	  local position = walkerInfo.position
+	  local commandPos={ id = "SetPosition", rotY = position.rotY, pos = position.pos}
+	  GameObject.SendCommand(walkerId,command)
+	  InfCore.Log("WG Position Set")
+	end
   end
 end
 
 this.SwitchEnableQuestHighIntTable = function( flag, commandPostName, questCpInterrogation)
-  local commandPostId = GameObject.GetGameObjectId( "TppCommandPost2" , commandPostName )
+  local commandPostId = GetGameObjectId( "TppCommandPost2" , commandPostName )
   if useInter then
-    if flag then
+	if flag then
 
-      TppInterrogation.SetQuestHighIntTable( commandPostId, questCpInterrogation )
-    else
+	  TppInterrogation.SetQuestHighIntTable( commandPostId, questCpInterrogation )
+	else
 
-      TppInterrogation.RemoveQuestHighIntTable( commandPostId, questCpInterrogation )
-    end
+	  TppInterrogation.RemoveQuestHighIntTable( commandPostId, questCpInterrogation )
+	end
   end
 end
 
-function this.CheckQuestAllTarget(questType,messageId,gameId,checkAnimalId)
-  local clearType=TppDefine.QUEST_CLEAR_TYPE.NONE
-  local inTargetList=false
-  local totalTargets=0
-  local fultonedCount=0
-  local failedFultonCount=0
-  local killedOrDestroyedCount=0
-  local vanishedCount=0
-  local inHeliCount=0
-  local countIncreased=true
-  local RENAMEsomeBool=false
-  local currentQuestName=TppQuest.GetCurrentQuestName()
-
-  if TppQuest.IsEnd(currentQuestName)then
-    return clearType
-  end
-
-  -- human targets
-
-  if mvars.ene_questTargetList[gameId]then
-    local targetInfo=mvars.ene_questTargetList[gameId]
-    if targetInfo.messageId~="None"and targetInfo.isTarget==true then
-      RENAMEsomeBool=true
-    elseif targetInfo.isTarget==false then
-      RENAMEsomeBool=true
-    end
-    targetInfo.messageId=messageId or"None"
-    inTargetList=true
-  end
-
-  -- animal targets
+function this.CheckQuestAllTargetDynamic(messageId, gameId, animalId)
   
-  if Tpp.IsAnimal(gameId)then
-    local databaseId=TppAnimal.GetDataBaseIdFromAnimalId(checkAnimalId)
-	
-    for animalId,targetInfo in pairs(mvars.ani_questTargetList)do
-      if targetInfo.idType=="animalId"then
-        if animalId==checkAnimalId then
-          targetInfo.messageId=messageId or"None"
-          inTargetList=true
-        end
-      elseif targetInfo.idType=="databaseId"then
-        if animalId==databaseId then
-          targetInfo.messageId=messageId or"None"
-          inTargetList=true
-        end
-      elseif targetInfo.idType=="targetName"then
-        local animalGameId=GetGameObjectId(animalId)
-        if animalGameId==gameId then
-          targetInfo.messageId=messageId or"None"
-          inTargetList=true
-        end
-		
-      end
-    end
+  local dynamicQuestType = ELIMINATE
+  local intendedTarget = true
+  local objectiveCompleteCount = 0
+  local objectiveFailedCount = 0
+  local totalTargets = 0
+
+  -- step 0: Confirm gameId is the target and set its new messageId
+  local currentQuestName=TppQuest.GetCurrentQuestName()
+  if TppQuest.IsEnd(currentQuestName) then
+	return NONE
   end
-  if inTargetList==false then
-    return clearType
+  
+  local inTargetList = false
+  if mvars.ene_questTargetList[gameId] then
+	local targetInfo = mvars.ene_questTargetList[gameId]
+	if targetInfo.messageId ~= "None" and targetInfo.isTarget == true then
+	  intendedTarget = false
+	elseif targetInfo.isTarget == false then
+	  intendedTarget = false
+	end
+	targetInfo.messageId = messageId or "None"
+	inTargetList = true
   end
 
-  -- human count builder
+  if Tpp.IsAnimal(gameId) then
+	local databaseId = TppAnimal.GetDataBaseIdFromAnimalId(checkAnimalId)
 
-  for targetGameId,targetInfo in pairs(mvars.ene_questTargetList)do 
-    local isTarget=targetInfo.isTarget or false
-
-    if isTarget==true then
-      local targetMessageId=targetInfo.messageId
-      if targetMessageId~="None"then 
-        if targetMessageId=="Fulton"then
-          fultonedCount=fultonedCount+1
-          countIncreased=true
-      elseif targetMessageId=="InHelicopter"then
-        inHeliCount=inHeliCount+1
-        countIncreased=true
-      elseif targetMessageId=="FultonFailed"then
-        failedFultonCount=failedFultonCount+1
-        countIncreased=true
-      elseif targetMessageId=="Dead" or targetMessageId=="VehicleBroken" or targetMessageId=="LostControl" then
-        killedOrDestroyedCount=killedOrDestroyedCount+1
-        countIncreased=true
-      elseif targetMessageId=="Vanished"then
-        vanishedCount=vanishedCount+1
-        countIncreased=true
-      end
-      end
-      totalTargets=totalTargets+1 
-    end
+	for animalId, targetInfo in pairs(mvars.ani_questTargetList) do
+	  if targetInfo.idType == "animalId" then
+		if animalId == checkAnimalId then
+		  targetInfo.messageId = messageId or "None"
+		  inTargetList = true
+		end
+	  elseif targetInfo.idType == "databaseId" then
+		if animalId == databaseId then
+		  targetInfo.messageId = messageId or "None"
+		  inTargetList=true
+		end
+	  elseif targetInfo.idType == "targetName" then
+		local animalGameId = GetGameObjectId(animalId)
+		if animalGameId == gameId then
+		  targetInfo.messageId = messageId or "None"
+		  inTargetList = true
+		end
+	  end
+	end
   end
 
-  -- animal count builder
-
-  for animalId,targetInfo in pairs(mvars.ani_questTargetList)do
-    local targetMessageId = targetInfo.messageId
-    if targetMessageId~="None"then
-      if targetMessageId=="Fulton"then
-        fultonedCount=fultonedCount+1
-        countIncreased=true
-      elseif targetMessageId=="FultonFailed"then
-        failedFultonCount=failedFultonCount+1
-        countIncreased=true
-      elseif targetMessageId == "Dead" then
-        killedOrDestroyedCount=killedOrDestroyedCount+1
-        countIncreased=true
-      end
-    end
-    totalTargets=totalTargets+1
-  end
-  if RENAMEsomeBool==true then
-    countIncreased=false
+  if inTargetList == false then
+	return NONE
   end
 
-  if totalTargets>0 then 
-    if questType==TppDefine.QUEST_TYPE.RECOVERED then
-      if fultonedCount + inHeliCount >= totalTargets then 
-        clearType=TppDefine.QUEST_CLEAR_TYPE.CLEAR
-      elseif failedFultonCount > 0 or killedOrDestroyedCount > 0 then 
-        clearType=TppDefine.QUEST_CLEAR_TYPE.FAILURE
-      elseif fultonedCount+inHeliCount>0 then
-        if countIncreased==true then
-          clearType=TppDefine.QUEST_CLEAR_TYPE.UPDATE
-      end
-      end
+  --Step 1: Determine dynamicObjective
+  for targetGameId, targetInfo in pairs(mvars.ene_questTargetList) do
+	local isTarget = targetInfo.isTarget or false
+	local targetMessageId = targetInfo.messageId
 
-  elseif questType==TppDefine.QUEST_TYPE.ELIMINATE then
-    if fultonedCount + failedFultonCount + killedOrDestroyedCount + inHeliCount >= totalTargets then
-      clearType=TppDefine.QUEST_CLEAR_TYPE.CLEAR
-    elseif fultonedCount + failedFultonCount + killedOrDestroyedCount + inHeliCount > 0 then
-      if countIncreased == true then
-        clearType = TppDefine.QUEST_CLEAR_TYPE.UPDATE 
-      end
-    end
+	if isTarget == true then
+	  if Tpp.IsSoldier(targetGameId) then
+		dynamicQuestType = enemyQuestType
+	  elseif Tpp.IsHostage(targetGameId) then
+		dynamicQuestType = hostageQuestType
+	  elseif Tpp.IsVehicle(targetGameId) then
+		dynamicQuestType = vehicleQuestType
+	  elseif Tpp.IsEnemyWalkerGear(targetGameId) then
+		dynamicQuestType = walkerQuestType
+	  else
+		dynamicQuestType = ELIMINATE
+	  end
+	  
+	  --Step 2: Sort Messages into Complete and Failed counts
+	  if targetMessageId ~= "None" then
+		if dynamicQuestType == RECOVERED then
+		  if (targetMessageId == "Fulton") or (targetMessageId == "InHelicopter") then
+			objectiveCompleteCount = objectiveCompleteCount + 1
+		  elseif (targetMessageId == "FultonFailed") or (targetMessageId == "Dead") or (targetMessageId == "VehicleBroken") or (targetMessageId == "LostControl") then
+			objectiveFailedCount = objectiveFailedCount + 1
+		  end
+		elseif dynamicQuestType == ELIMINATE then -- setting recovery messages to add to objectiveFailedCount can allow for kill-required missions?
+		  if (targetMessageId == "Fulton") or (targetMessageId == "InHelicopter") or (targetMessageId == "FultonFailed") or (targetMessageId == "Dead") or (targetMessageId == "VehicleBroken") or (targetMessageId == "LostControl") then
+			objectiveCompleteCount = objectiveCompleteCount + 1
+		  end
+		end
+	  end
+	  totalTargets = totalTargets + 1
 
-  elseif questType == TppDefine.QUEST_TYPE.MSF_RECOVERED then
-    if fultonedCount >= totalTargets or inHeliCount >= totalTargets then 
-      clearType=TppDefine.QUEST_CLEAR_TYPE.CLEAR
-    elseif failedFultonCount > 0 or killedOrDestroyedCount > 0 or vanishedCount > 0 then 
-      clearType=TppDefine.QUEST_CLEAR_TYPE.FAILURE
-    end
+	end
+
   end
+
+  --Step 1 & 2: For animals
+  dynamicQuestType = animalQuestType
+  for animalId, targetInfo in pairs(mvars.ani_questTargetList) do
+	local targetMessageId = targetInfo.messageId
+
+	if targetMessageId ~= "None" then
+	  if dynamicQuestType == RECOVERED then
+		if (targetMessageId == "Fulton") then
+		  objectiveCompleteCount = objectiveCompleteCount + 1
+		elseif (targetMessageId == "FultonFailed") or (targetMessageId == "Dead") then
+		  objectiveFailedCount = objectiveFailedCount + 1
+		end
+	  elseif dynamicQuestType == ELIMINATE then
+		if (targetMessageId == "Fulton") or (targetMessageId == "FultonFailed") or (targetMessageId == "Dead") then
+		  objectiveCompleteCount = objectiveCompleteCount + 1
+		end
+	  end
+	end
+	totalTargets = totalTargets + 1
+  end
+  
+  --Step 3: Determine Clear Type
+  if totalTargets > 0 then
+	if objectiveCompleteCount >= totalTargets then
+	  return CLEAR
+	elseif objectiveFailedCount > 0 then
+	  return FAILURE
+	elseif objectiveCompleteCount > 0 then
+	  if intendedTarget == true then
+		return UPDATE
+	  end
+	end
   end
 
-  return clearType
+  return NONE
 end
 
 return this

@@ -109,7 +109,7 @@ namespace SOC.Forms.Pages.QuestBoxes
             this.h_groupBox_main.Controls.Add(this.h_label_lang);
 
             this.h_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
-            this.h_groupBox_main.Location = new System.Drawing.Point(3, 55 + (253 * hostage.number));
+            this.h_groupBox_main.Location = new System.Drawing.Point(3, 69 + (253 * hostage.number));
             this.h_groupBox_main.Name = "h_groupBox_main";
             this.h_groupBox_main.Size = new System.Drawing.Size(width, 236);
             this.h_groupBox_main.TabStop = false;

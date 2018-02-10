@@ -14,7 +14,6 @@ local UPDATE = TppDefine.QUEST_CLEAR_TYPE.UPDATE
 local hostageCount = 0
 local CPNAME = ""
 local useInter = true
-local qType = RECOVERED
 local SUBTYPE = ""
 
 local enemyQuestType = RECOVERED
@@ -25,7 +24,7 @@ local walkerQuestType = RECOVERED
 
 this.QUEST_TABLE = {
 
-	questType = qType,
+	questType = ELIMINATE,
 	soldierSubType = SUBTYPE,
 	isQuestArmor =  false,
 	isQuestZombie = false,
@@ -245,7 +244,7 @@ quest_step.QStep_Main = {
 			msg = "LostControl",
 			func = function( gameObjectId, state )
 			  if state == StrCode32("End") then
-				local isClearType = TppEnemy.CheckQuestAllTargetDynamic( "LostControl", gameObjectId )
+				local isClearType = this.CheckQuestAllTargetDynamic( "LostControl", gameObjectId )
 				TppQuest.ClearWithSave( isClearType )
 			  end
 			end
@@ -317,8 +316,7 @@ this.SwitchEnableQuestHighIntTable = function( flag, commandPostName, questCpInt
   end
 end
 
-function this.CheckQuestAllTargetDynamic(messageId, gameId, animalId)
-  
+function this.CheckQuestAllTargetDynamic(messageId, gameId, checkAnimalId)
   local dynamicQuestType = ELIMINATE
   local intendedTarget = true
   local objectiveCompleteCount = 0
@@ -342,8 +340,8 @@ function this.CheckQuestAllTargetDynamic(messageId, gameId, animalId)
 	targetInfo.messageId = messageId or "None"
 	inTargetList = true
   end
-
-  if Tpp.IsAnimal(gameId) then
+  
+  if checkAnimalId ~= nil then
 	local databaseId = TppAnimal.GetDataBaseIdFromAnimalId(checkAnimalId)
 
 	for animalId, targetInfo in pairs(mvars.ani_questTargetList) do
@@ -442,8 +440,8 @@ function this.CheckQuestAllTargetDynamic(messageId, gameId, animalId)
 	  end
 	end
   end
-
   return NONE
+  
 end
 
 return this

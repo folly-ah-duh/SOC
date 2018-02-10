@@ -121,8 +121,12 @@ namespace SOC.Classes
             questLua[GetLineOf("local hostageCount =", questLua)] = string.Format("local hostageCount = {0}", questDetails.hostages.Count);
             questLua[GetLineOf("local CPNAME =", questLua)] = string.Format("local CPNAME = \"{0}\"", definitionDetails.CPName); //add cp combobox to setup
             questLua[GetLineOf("local useInter =", questLua)] = string.Format("local useInter = {0}", questDetails.canInter.ToString().ToLower()); //add interogation checkbox to setup
-            questLua[GetLineOf("local qType =", questLua)] = string.Format("local qType = {0}", definitionDetails.objectiveType); //add questtype combobox to setup
             questLua[GetLineOf("local SUBTYPE =", questLua)] = string.Format("local SUBTYPE = \"{0}\"", questDetails.soldierSubType);
+
+            questLua[GetLineOf("local enemyQuestType =", questLua)] = string.Format("local enemyQuestType = {0}", questDetails.enemyObjectiveType);
+            questLua[GetLineOf("local vehicleQuestType =", questLua)] = string.Format("local vehicleQuestType = {0}", questDetails.vehicleObjectiveType);
+            questLua[GetLineOf("local hostageQuestType =", questLua)] = string.Format("local hostageQuestType = {0}", questDetails.hostageObjectiveType);
+            questLua[GetLineOf("local animalQuestType =", questLua)] = string.Format("local animalQuestType = {0}", questDetails.animalObjectiveType);
 
             string luaBool;
             if (EnemyInfo.armorCount > 0) luaBool = "true"; else luaBool = "false";

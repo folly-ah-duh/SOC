@@ -79,7 +79,7 @@ namespace SOC.UI
         public void LoadEntityLists(CP enemyCP, QuestEntities questDetails, string[] frtRouteNames, int locId)
         {
             ShiftVisibilities(true);
-            SetEnemySubType(questDetails, locId); SetHostageBodies(questDetails, locId);
+            SetObjectiveTypes(questDetails); SetEnemySubType(questDetails, locId); SetHostageBodies(questDetails, locId);
             h_checkBox_intrgt.Checked = questDetails.canInter;
 
             //
@@ -206,6 +206,23 @@ namespace SOC.UI
             ShiftVisibilities(false);
             ShiftGroups(Height, Width);
             panelDetails.AutoScroll = true;
+        }
+
+        public void SetObjectiveTypes(QuestEntities questDetails)
+        {
+            if (string.IsNullOrEmpty(questDetails.enemyObjectiveType))
+            {
+                comboBox_eneObjType1.SelectedIndex = 0;
+                comboBox_hosObjType.SelectedIndex = 0;
+                comboBox_vehObjType.SelectedIndex = 0;
+                comboBox_aniObjType.SelectedIndex = 0;
+            }
+
+            comboBox_eneObjType1.Text = questDetails.enemyObjectiveType;
+            comboBox_hosObjType.Text = questDetails.hostageObjectiveType;
+            comboBox_vehObjType.Text = questDetails.vehicleObjectiveType;
+            comboBox_aniObjType.Text = questDetails.animalObjectiveType;
+            comboBox_heliObjType.Text = "ELIMINATE";
         }
 
         public void SetEnemySubType(QuestEntities questDetails, int locId)
@@ -346,7 +363,7 @@ namespace SOC.UI
             foreach (ModelBox d in modelBoxes)
                 models.Add(new Model(d.m_label_GeomNotFound.Visible, modelBoxes.IndexOf(d), d.m_groupBox_main.Text, d.m_comboBox_preset.Text, new Coordinates(d.m_textBox_xcoord.Text, d.m_textBox_ycoord.Text, d.m_textBox_zcoord.Text), new RotationQuat(d.m_textBox_xrot.Text, d.m_textBox_yrot.Text, d.m_textBox_zrot.Text, d.m_textBox_wrot.Text)));
             
-            return new QuestEntities(qenemies, cpenemies, helicopters, hostages, vehicles, animals, items, activeItems, models, comboBox_Body.SelectedIndex, h_checkBox_intrgt.Checked, comboBox_subtype.Text);
+            return new QuestEntities(qenemies, cpenemies, helicopters, hostages, vehicles, animals, items, activeItems, models, comboBox_Body.SelectedIndex, h_checkBox_intrgt.Checked, comboBox_subtype.Text, comboBox_eneObjType1.Text, comboBox_hosObjType.Text, comboBox_vehObjType.Text, comboBox_aniObjType.Text);
         }
 
         private void comboBox_Body_SelectedIndexChanged(object sender, EventArgs e)
@@ -408,11 +425,18 @@ namespace SOC.UI
         private void comboBox_subtype_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBox_subtype2.SelectedIndex = comboBox_subtype.SelectedIndex;
+            panelQuestEnemyDet.Focus();
         }
 
         private void DetailFocus(object sender, EventArgs e)
         {
             ((Panel)sender).Focus();
+        }
+
+        private void comboBox_eneObjType1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBox_eneObjType2.SelectedIndex = comboBox_eneObjType1.SelectedIndex;
+            panelQuestEnemyDet.Focus();
         }
     }
 

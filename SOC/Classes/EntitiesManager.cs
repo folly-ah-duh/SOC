@@ -20,6 +20,10 @@ namespace SOC.Classes
         private static int hostageBodyIndex = 0;
         private static bool interrogateForHostages = false;
         private static string enemySubType = "SOVIET_A";
+        private static string enemyObjectiveType = "ELIMINATE";
+        private static string hostageObjectiveType = "ELIMINATE";
+        private static string vehicleObjectiveType = "ELIMINATE";
+        private static string animalObjectiveType = "ELIMINATE";
 
         public static void check()
         {
@@ -28,7 +32,7 @@ namespace SOC.Classes
 
         public static QuestEntities GetQuestEntities()
         {
-            return new QuestEntities(questEnemies, cpEnemies, helicopters, hostages, vehicles, animals, items, activeItems, models, hostageBodyIndex, interrogateForHostages, enemySubType); ;
+            return new QuestEntities(questEnemies, cpEnemies, helicopters, hostages, vehicles, animals, items, activeItems, models, hostageBodyIndex, interrogateForHostages, enemySubType, enemyObjectiveType, hostageObjectiveType, vehicleObjectiveType, animalObjectiveType);
         }
 
         public static void setQuestEntities(QuestEntities q)
@@ -36,6 +40,7 @@ namespace SOC.Classes
             questEnemies = q.questEnemies; cpEnemies = q.cpEnemies; helicopters = q.enemyHelicopters;
             hostages = q.hostages; vehicles = q.vehicles; animals = q.animals; items = q.items; activeItems = q.activeItems; models = q.models;
             hostageBodyIndex = q.hostageBodyIndex; interrogateForHostages = q.canInter; enemySubType = q.soldierSubType;
+            enemyObjectiveType = q.enemyObjectiveType; hostageObjectiveType = q.hostageObjectiveType; vehicleObjectiveType = q.vehicleObjectiveType; animalObjectiveType = q.animalObjectiveType;
         }
 
         public static void ClearEntities()
@@ -44,7 +49,11 @@ namespace SOC.Classes
             hostageBodyIndex = 0;
             interrogateForHostages = false;
             enemySubType = "SOVIET_A";
-        }
+            enemyObjectiveType = "ELIMINATE";
+            hostageObjectiveType = "ELIMINATE";
+            vehicleObjectiveType = "ELIMINATE";
+            animalObjectiveType = "ELIMINATE";
+    }
 
         public static void InitializeEntities(CP enemyCP, string routeFile, List<Coordinates> hostageCoords, List<Coordinates> vehicleCoords, List<Coordinates> animalCoords, List<Coordinates> itemCoords, List<Coordinates> activeitemCoords, List<Coordinates> modelCoords)
         {

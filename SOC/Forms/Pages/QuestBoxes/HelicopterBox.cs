@@ -58,7 +58,7 @@ namespace SOC.Forms.Pages.QuestBoxes
             this.He_groupBox_main.Controls.Add(this.He_comboBox_route);
             this.He_groupBox_main.Controls.Add(this.He_checkBox_target);
             this.He_groupBox_main.Controls.Add(this.He_checkBox_spawn);
-            this.He_groupBox_main.Location = new System.Drawing.Point(3, 4);
+            this.He_groupBox_main.Location = new System.Drawing.Point(3, 27);
             this.He_groupBox_main.Name = "He_groupBox_main";
             this.He_groupBox_main.Size = new System.Drawing.Size(width, 137);
             this.He_groupBox_main.TabIndex = 0;

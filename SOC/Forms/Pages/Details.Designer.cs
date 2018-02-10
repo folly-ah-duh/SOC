@@ -40,50 +40,65 @@ namespace SOC.UI
         private void InitializeComponent()
         {
             this.panelDetails = new System.Windows.Forms.Panel();
+            this.groupHeliDet = new System.Windows.Forms.GroupBox();
+            this.panelHeliDetail = new System.Windows.Forms.Panel();
+            this.label_HeliObjType = new System.Windows.Forms.Label();
+            this.comboBox_heliObjType = new System.Windows.Forms.ComboBox();
             this.originAnchor = new System.Windows.Forms.Label();
             this.groupActiveItemDet = new System.Windows.Forms.GroupBox();
             this.panelAcItDet = new System.Windows.Forms.Panel();
             this.groupExistingEneDet = new System.Windows.Forms.GroupBox();
             this.panelCPEnemyDet = new System.Windows.Forms.Panel();
+            this.label_eneObjType2 = new System.Windows.Forms.Label();
+            this.comboBox_eneObjType2 = new System.Windows.Forms.ComboBox();
             this.label_subtype2 = new System.Windows.Forms.Label();
             this.comboBox_subtype2 = new System.Windows.Forms.ComboBox();
             this.label_customizeall = new System.Windows.Forms.Label();
             this.checkBox_customizeall = new System.Windows.Forms.CheckBox();
             this.groupNewEneDet = new System.Windows.Forms.GroupBox();
             this.panelQuestEnemyDet = new System.Windows.Forms.Panel();
+            this.label_eneObjType1 = new System.Windows.Forms.Label();
             this.label_spawnall = new System.Windows.Forms.Label();
             this.checkBox_spawnall = new System.Windows.Forms.CheckBox();
+            this.comboBox_eneObjType1 = new System.Windows.Forms.ComboBox();
             this.label_subtype = new System.Windows.Forms.Label();
             this.comboBox_subtype = new System.Windows.Forms.ComboBox();
             this.groupAnimalDet = new System.Windows.Forms.GroupBox();
             this.panelAnimalDet = new System.Windows.Forms.Panel();
+            this.label_aniObjType = new System.Windows.Forms.Label();
+            this.comboBox_aniObjType = new System.Windows.Forms.ComboBox();
             this.groupVehDet = new System.Windows.Forms.GroupBox();
             this.panelVehDet = new System.Windows.Forms.Panel();
+            this.label_vehObjType = new System.Windows.Forms.Label();
+            this.comboBox_vehObjType = new System.Windows.Forms.ComboBox();
             this.groupStMdDet = new System.Windows.Forms.GroupBox();
             this.panelStMdDet = new System.Windows.Forms.Panel();
             this.groupItemDet = new System.Windows.Forms.GroupBox();
             this.panelItemDet = new System.Windows.Forms.Panel();
             this.groupHosDet = new System.Windows.Forms.GroupBox();
             this.panelHosDet = new System.Windows.Forms.Panel();
+            this.label_hosObjType = new System.Windows.Forms.Label();
+            this.comboBox_hosObjType = new System.Windows.Forms.ComboBox();
             this.h_label_intrgt = new System.Windows.Forms.Label();
             this.h_checkBox_intrgt = new System.Windows.Forms.CheckBox();
             this.comboBox_Body = new System.Windows.Forms.ComboBox();
             this.label_Body = new System.Windows.Forms.Label();
-            this.groupHeliDet = new System.Windows.Forms.GroupBox();
-            this.panelHeliDetail = new System.Windows.Forms.Panel();
             this.panelDetails.SuspendLayout();
+            this.groupHeliDet.SuspendLayout();
+            this.panelHeliDetail.SuspendLayout();
             this.groupActiveItemDet.SuspendLayout();
             this.groupExistingEneDet.SuspendLayout();
             this.panelCPEnemyDet.SuspendLayout();
             this.groupNewEneDet.SuspendLayout();
             this.panelQuestEnemyDet.SuspendLayout();
             this.groupAnimalDet.SuspendLayout();
+            this.panelAnimalDet.SuspendLayout();
             this.groupVehDet.SuspendLayout();
+            this.panelVehDet.SuspendLayout();
             this.groupStMdDet.SuspendLayout();
             this.groupItemDet.SuspendLayout();
             this.groupHosDet.SuspendLayout();
             this.panelHosDet.SuspendLayout();
-            this.groupHeliDet.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelDetails
@@ -104,6 +119,54 @@ namespace SOC.UI
             this.panelDetails.Name = "panelDetails";
             this.panelDetails.Size = new System.Drawing.Size(2438, 452);
             this.panelDetails.TabIndex = 0;
+            // 
+            // groupHeliDet
+            // 
+            this.groupHeliDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupHeliDet.Controls.Add(this.panelHeliDetail);
+            this.groupHeliDet.Location = new System.Drawing.Point(543, 3);
+            this.groupHeliDet.Name = "groupHeliDet";
+            this.groupHeliDet.Size = new System.Drawing.Size(264, 449);
+            this.groupHeliDet.TabIndex = 35;
+            this.groupHeliDet.TabStop = false;
+            this.groupHeliDet.Text = "Enemy Helicopter";
+            // 
+            // panelHeliDetail
+            // 
+            this.panelHeliDetail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelHeliDetail.AutoScroll = true;
+            this.panelHeliDetail.Controls.Add(this.label_HeliObjType);
+            this.panelHeliDetail.Controls.Add(this.comboBox_heliObjType);
+            this.panelHeliDetail.Location = new System.Drawing.Point(3, 16);
+            this.panelHeliDetail.Name = "panelHeliDetail";
+            this.panelHeliDetail.Size = new System.Drawing.Size(258, 424);
+            this.panelHeliDetail.TabIndex = 0;
+            // 
+            // label_HeliObjType
+            // 
+            this.label_HeliObjType.AutoSize = true;
+            this.label_HeliObjType.Location = new System.Drawing.Point(3, 3);
+            this.label_HeliObjType.Name = "label_HeliObjType";
+            this.label_HeliObjType.Size = new System.Drawing.Size(116, 13);
+            this.label_HeliObjType.TabIndex = 13;
+            this.label_HeliObjType.Text = "Target Objective Type:";
+            // 
+            // comboBox_heliObjType
+            // 
+            this.comboBox_heliObjType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox_heliObjType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_heliObjType.Enabled = false;
+            this.comboBox_heliObjType.FormattingEnabled = true;
+            this.comboBox_heliObjType.Items.AddRange(new object[] {
+            "ELIMINATE"});
+            this.comboBox_heliObjType.Location = new System.Drawing.Point(125, 0);
+            this.comboBox_heliObjType.Name = "comboBox_heliObjType";
+            this.comboBox_heliObjType.Size = new System.Drawing.Size(130, 21);
+            this.comboBox_heliObjType.TabIndex = 12;
             // 
             // originAnchor
             // 
@@ -155,6 +218,8 @@ namespace SOC.UI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelCPEnemyDet.AutoScroll = true;
+            this.panelCPEnemyDet.Controls.Add(this.label_eneObjType2);
+            this.panelCPEnemyDet.Controls.Add(this.comboBox_eneObjType2);
             this.panelCPEnemyDet.Controls.Add(this.label_subtype2);
             this.panelCPEnemyDet.Controls.Add(this.comboBox_subtype2);
             this.panelCPEnemyDet.Controls.Add(this.label_customizeall);
@@ -165,10 +230,34 @@ namespace SOC.UI
             this.panelCPEnemyDet.TabIndex = 0;
             this.panelCPEnemyDet.Click += new System.EventHandler(this.DetailFocus);
             // 
+            // label_eneObjType2
+            // 
+            this.label_eneObjType2.AutoSize = true;
+            this.label_eneObjType2.Location = new System.Drawing.Point(3, 3);
+            this.label_eneObjType2.Name = "label_eneObjType2";
+            this.label_eneObjType2.Size = new System.Drawing.Size(116, 13);
+            this.label_eneObjType2.TabIndex = 11;
+            this.label_eneObjType2.Text = "Target Objective Type:";
+            // 
+            // comboBox_eneObjType2
+            // 
+            this.comboBox_eneObjType2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox_eneObjType2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_eneObjType2.Enabled = false;
+            this.comboBox_eneObjType2.FormattingEnabled = true;
+            this.comboBox_eneObjType2.Items.AddRange(new object[] {
+            "ELIMINATE",
+            "RECOVERED"});
+            this.comboBox_eneObjType2.Location = new System.Drawing.Point(125, 0);
+            this.comboBox_eneObjType2.Name = "comboBox_eneObjType2";
+            this.comboBox_eneObjType2.Size = new System.Drawing.Size(130, 21);
+            this.comboBox_eneObjType2.TabIndex = 10;
+            // 
             // label_subtype2
             // 
             this.label_subtype2.AutoSize = true;
-            this.label_subtype2.Location = new System.Drawing.Point(7, 3);
+            this.label_subtype2.Location = new System.Drawing.Point(31, 27);
             this.label_subtype2.Name = "label_subtype2";
             this.label_subtype2.Size = new System.Drawing.Size(88, 13);
             this.label_subtype2.TabIndex = 8;
@@ -181,16 +270,16 @@ namespace SOC.UI
             this.comboBox_subtype2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_subtype2.Enabled = false;
             this.comboBox_subtype2.FormattingEnabled = true;
-            this.comboBox_subtype2.Location = new System.Drawing.Point(101, 0);
+            this.comboBox_subtype2.Location = new System.Drawing.Point(125, 24);
             this.comboBox_subtype2.Name = "comboBox_subtype2";
-            this.comboBox_subtype2.Size = new System.Drawing.Size(147, 21);
+            this.comboBox_subtype2.Size = new System.Drawing.Size(130, 21);
             this.comboBox_subtype2.TabIndex = 9;
             // 
             // label_customizeall
             // 
             this.label_customizeall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_customizeall.AutoSize = true;
-            this.label_customizeall.Location = new System.Drawing.Point(98, 27);
+            this.label_customizeall.Location = new System.Drawing.Point(105, 51);
             this.label_customizeall.Name = "label_customizeall";
             this.label_customizeall.Size = new System.Drawing.Size(129, 13);
             this.label_customizeall.TabIndex = 2;
@@ -202,7 +291,7 @@ namespace SOC.UI
             this.checkBox_customizeall.AutoSize = true;
             this.checkBox_customizeall.Checked = true;
             this.checkBox_customizeall.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_customizeall.Location = new System.Drawing.Point(233, 27);
+            this.checkBox_customizeall.Location = new System.Drawing.Point(240, 51);
             this.checkBox_customizeall.Name = "checkBox_customizeall";
             this.checkBox_customizeall.Size = new System.Drawing.Size(15, 14);
             this.checkBox_customizeall.TabIndex = 3;
@@ -227,8 +316,10 @@ namespace SOC.UI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelQuestEnemyDet.AutoScroll = true;
+            this.panelQuestEnemyDet.Controls.Add(this.label_eneObjType1);
             this.panelQuestEnemyDet.Controls.Add(this.label_spawnall);
             this.panelQuestEnemyDet.Controls.Add(this.checkBox_spawnall);
+            this.panelQuestEnemyDet.Controls.Add(this.comboBox_eneObjType1);
             this.panelQuestEnemyDet.Controls.Add(this.label_subtype);
             this.panelQuestEnemyDet.Controls.Add(this.comboBox_subtype);
             this.panelQuestEnemyDet.Location = new System.Drawing.Point(3, 16);
@@ -237,11 +328,20 @@ namespace SOC.UI
             this.panelQuestEnemyDet.TabIndex = 0;
             this.panelQuestEnemyDet.Click += new System.EventHandler(this.DetailFocus);
             // 
+            // label_eneObjType1
+            // 
+            this.label_eneObjType1.AutoSize = true;
+            this.label_eneObjType1.Location = new System.Drawing.Point(3, 3);
+            this.label_eneObjType1.Name = "label_eneObjType1";
+            this.label_eneObjType1.Size = new System.Drawing.Size(116, 13);
+            this.label_eneObjType1.TabIndex = 2;
+            this.label_eneObjType1.Text = "Target Objective Type:";
+            // 
             // label_spawnall
             // 
             this.label_spawnall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_spawnall.AutoSize = true;
-            this.label_spawnall.Location = new System.Drawing.Point(99, 27);
+            this.label_spawnall.Location = new System.Drawing.Point(106, 51);
             this.label_spawnall.Name = "label_spawnall";
             this.label_spawnall.Size = new System.Drawing.Size(128, 13);
             this.label_spawnall.TabIndex = 1;
@@ -253,17 +353,32 @@ namespace SOC.UI
             this.checkBox_spawnall.AutoSize = true;
             this.checkBox_spawnall.Checked = true;
             this.checkBox_spawnall.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_spawnall.Location = new System.Drawing.Point(233, 27);
+            this.checkBox_spawnall.Location = new System.Drawing.Point(240, 51);
             this.checkBox_spawnall.Name = "checkBox_spawnall";
             this.checkBox_spawnall.Size = new System.Drawing.Size(15, 14);
             this.checkBox_spawnall.TabIndex = 2;
             this.checkBox_spawnall.UseVisualStyleBackColor = true;
             this.checkBox_spawnall.Click += new System.EventHandler(this.checkbox_spawnAll_Click);
             // 
+            // comboBox_eneObjType1
+            // 
+            this.comboBox_eneObjType1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox_eneObjType1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_eneObjType1.FormattingEnabled = true;
+            this.comboBox_eneObjType1.Items.AddRange(new object[] {
+            "ELIMINATE",
+            "RECOVERED"});
+            this.comboBox_eneObjType1.Location = new System.Drawing.Point(125, 0);
+            this.comboBox_eneObjType1.Name = "comboBox_eneObjType1";
+            this.comboBox_eneObjType1.Size = new System.Drawing.Size(130, 21);
+            this.comboBox_eneObjType1.TabIndex = 1;
+            this.comboBox_eneObjType1.SelectedIndexChanged += new System.EventHandler(this.comboBox_eneObjType1_SelectedIndexChanged);
+            // 
             // label_subtype
             // 
             this.label_subtype.AutoSize = true;
-            this.label_subtype.Location = new System.Drawing.Point(7, 3);
+            this.label_subtype.Location = new System.Drawing.Point(31, 27);
             this.label_subtype.Name = "label_subtype";
             this.label_subtype.Size = new System.Drawing.Size(88, 13);
             this.label_subtype.TabIndex = 6;
@@ -275,9 +390,9 @@ namespace SOC.UI
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox_subtype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_subtype.FormattingEnabled = true;
-            this.comboBox_subtype.Location = new System.Drawing.Point(101, 0);
+            this.comboBox_subtype.Location = new System.Drawing.Point(125, 24);
             this.comboBox_subtype.Name = "comboBox_subtype";
-            this.comboBox_subtype.Size = new System.Drawing.Size(147, 21);
+            this.comboBox_subtype.Size = new System.Drawing.Size(130, 21);
             this.comboBox_subtype.TabIndex = 7;
             this.comboBox_subtype.SelectedIndexChanged += new System.EventHandler(this.comboBox_subtype_SelectedIndexChanged);
             // 
@@ -299,11 +414,36 @@ namespace SOC.UI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelAnimalDet.AutoScroll = true;
+            this.panelAnimalDet.Controls.Add(this.label_aniObjType);
+            this.panelAnimalDet.Controls.Add(this.comboBox_aniObjType);
             this.panelAnimalDet.Location = new System.Drawing.Point(3, 16);
             this.panelAnimalDet.Name = "panelAnimalDet";
             this.panelAnimalDet.Size = new System.Drawing.Size(258, 424);
             this.panelAnimalDet.TabIndex = 0;
             this.panelAnimalDet.Click += new System.EventHandler(this.DetailFocus);
+            // 
+            // label_aniObjType
+            // 
+            this.label_aniObjType.AutoSize = true;
+            this.label_aniObjType.Location = new System.Drawing.Point(3, 3);
+            this.label_aniObjType.Name = "label_aniObjType";
+            this.label_aniObjType.Size = new System.Drawing.Size(116, 13);
+            this.label_aniObjType.TabIndex = 17;
+            this.label_aniObjType.Text = "Target Objective Type:";
+            // 
+            // comboBox_aniObjType
+            // 
+            this.comboBox_aniObjType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox_aniObjType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_aniObjType.FormattingEnabled = true;
+            this.comboBox_aniObjType.Items.AddRange(new object[] {
+            "ELIMINATE",
+            "RECOVERED"});
+            this.comboBox_aniObjType.Location = new System.Drawing.Point(125, 0);
+            this.comboBox_aniObjType.Name = "comboBox_aniObjType";
+            this.comboBox_aniObjType.Size = new System.Drawing.Size(130, 21);
+            this.comboBox_aniObjType.TabIndex = 16;
             // 
             // groupVehDet
             // 
@@ -323,11 +463,36 @@ namespace SOC.UI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelVehDet.AutoScroll = true;
+            this.panelVehDet.Controls.Add(this.label_vehObjType);
+            this.panelVehDet.Controls.Add(this.comboBox_vehObjType);
             this.panelVehDet.Location = new System.Drawing.Point(3, 16);
             this.panelVehDet.Name = "panelVehDet";
             this.panelVehDet.Size = new System.Drawing.Size(258, 424);
             this.panelVehDet.TabIndex = 0;
             this.panelVehDet.Click += new System.EventHandler(this.DetailFocus);
+            // 
+            // label_vehObjType
+            // 
+            this.label_vehObjType.AutoSize = true;
+            this.label_vehObjType.Location = new System.Drawing.Point(3, 3);
+            this.label_vehObjType.Name = "label_vehObjType";
+            this.label_vehObjType.Size = new System.Drawing.Size(116, 13);
+            this.label_vehObjType.TabIndex = 15;
+            this.label_vehObjType.Text = "Target Objective Type:";
+            // 
+            // comboBox_vehObjType
+            // 
+            this.comboBox_vehObjType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox_vehObjType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_vehObjType.FormattingEnabled = true;
+            this.comboBox_vehObjType.Items.AddRange(new object[] {
+            "ELIMINATE",
+            "RECOVERED"});
+            this.comboBox_vehObjType.Location = new System.Drawing.Point(125, 0);
+            this.comboBox_vehObjType.Name = "comboBox_vehObjType";
+            this.comboBox_vehObjType.Size = new System.Drawing.Size(130, 21);
+            this.comboBox_vehObjType.TabIndex = 14;
             // 
             // groupStMdDet
             // 
@@ -395,6 +560,8 @@ namespace SOC.UI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelHosDet.AutoScroll = true;
+            this.panelHosDet.Controls.Add(this.label_hosObjType);
+            this.panelHosDet.Controls.Add(this.comboBox_hosObjType);
             this.panelHosDet.Controls.Add(this.h_label_intrgt);
             this.panelHosDet.Controls.Add(this.h_checkBox_intrgt);
             this.panelHosDet.Controls.Add(this.comboBox_Body);
@@ -405,11 +572,34 @@ namespace SOC.UI
             this.panelHosDet.TabIndex = 0;
             this.panelHosDet.Click += new System.EventHandler(this.DetailFocus);
             // 
+            // label_hosObjType
+            // 
+            this.label_hosObjType.AutoSize = true;
+            this.label_hosObjType.Location = new System.Drawing.Point(3, 3);
+            this.label_hosObjType.Name = "label_hosObjType";
+            this.label_hosObjType.Size = new System.Drawing.Size(116, 13);
+            this.label_hosObjType.TabIndex = 13;
+            this.label_hosObjType.Text = "Target Objective Type:";
+            // 
+            // comboBox_hosObjType
+            // 
+            this.comboBox_hosObjType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox_hosObjType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_hosObjType.FormattingEnabled = true;
+            this.comboBox_hosObjType.Items.AddRange(new object[] {
+            "ELIMINATE",
+            "RECOVERED"});
+            this.comboBox_hosObjType.Location = new System.Drawing.Point(125, 0);
+            this.comboBox_hosObjType.Name = "comboBox_hosObjType";
+            this.comboBox_hosObjType.Size = new System.Drawing.Size(130, 21);
+            this.comboBox_hosObjType.TabIndex = 12;
+            // 
             // h_label_intrgt
             // 
             this.h_label_intrgt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.h_label_intrgt.AutoSize = true;
-            this.h_label_intrgt.Location = new System.Drawing.Point(81, 27);
+            this.h_label_intrgt.Location = new System.Drawing.Point(88, 51);
             this.h_label_intrgt.Name = "h_label_intrgt";
             this.h_label_intrgt.Size = new System.Drawing.Size(146, 13);
             this.h_label_intrgt.TabIndex = 0;
@@ -419,7 +609,7 @@ namespace SOC.UI
             // 
             this.h_checkBox_intrgt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.h_checkBox_intrgt.AutoSize = true;
-            this.h_checkBox_intrgt.Location = new System.Drawing.Point(233, 27);
+            this.h_checkBox_intrgt.Location = new System.Drawing.Point(240, 51);
             this.h_checkBox_intrgt.Name = "h_checkBox_intrgt";
             this.h_checkBox_intrgt.Size = new System.Drawing.Size(15, 14);
             this.h_checkBox_intrgt.TabIndex = 0;
@@ -431,9 +621,9 @@ namespace SOC.UI
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox_Body.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Body.FormattingEnabled = true;
-            this.comboBox_Body.Location = new System.Drawing.Point(74, 0);
+            this.comboBox_Body.Location = new System.Drawing.Point(125, 24);
             this.comboBox_Body.Name = "comboBox_Body";
-            this.comboBox_Body.Size = new System.Drawing.Size(174, 21);
+            this.comboBox_Body.Size = new System.Drawing.Size(130, 21);
             this.comboBox_Body.TabIndex = 1;
             this.comboBox_Body.SelectedIndexChanged += new System.EventHandler(this.comboBox_Body_SelectedIndexChanged);
             // 
@@ -442,34 +632,11 @@ namespace SOC.UI
             this.label_Body.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label_Body.AutoSize = true;
-            this.label_Body.Location = new System.Drawing.Point(34, 3);
+            this.label_Body.Location = new System.Drawing.Point(85, 27);
             this.label_Body.Name = "label_Body";
             this.label_Body.Size = new System.Drawing.Size(34, 13);
             this.label_Body.TabIndex = 2;
             this.label_Body.Text = "Body:";
-            // 
-            // groupHeliDetail
-            // 
-            this.groupHeliDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.groupHeliDet.Controls.Add(this.panelHeliDetail);
-            this.groupHeliDet.Location = new System.Drawing.Point(543, 3);
-            this.groupHeliDet.Name = "groupHeliDetail";
-            this.groupHeliDet.Size = new System.Drawing.Size(264, 449);
-            this.groupHeliDet.TabIndex = 35;
-            this.groupHeliDet.TabStop = false;
-            this.groupHeliDet.Text = "Enemy Helicopter";
-            // 
-            // panelHeliDetail
-            // 
-            this.panelHeliDetail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelHeliDetail.AutoScroll = true;
-            this.panelHeliDetail.Location = new System.Drawing.Point(3, 16);
-            this.panelHeliDetail.Name = "panelHeliDetail";
-            this.panelHeliDetail.Size = new System.Drawing.Size(258, 424);
-            this.panelHeliDetail.TabIndex = 0;
             // 
             // Details
             // 
@@ -479,6 +646,9 @@ namespace SOC.UI
             this.Size = new System.Drawing.Size(2438, 452);
             this.panelDetails.ResumeLayout(false);
             this.panelDetails.PerformLayout();
+            this.groupHeliDet.ResumeLayout(false);
+            this.panelHeliDetail.ResumeLayout(false);
+            this.panelHeliDetail.PerformLayout();
             this.groupActiveItemDet.ResumeLayout(false);
             this.groupExistingEneDet.ResumeLayout(false);
             this.panelCPEnemyDet.ResumeLayout(false);
@@ -487,13 +657,16 @@ namespace SOC.UI
             this.panelQuestEnemyDet.ResumeLayout(false);
             this.panelQuestEnemyDet.PerformLayout();
             this.groupAnimalDet.ResumeLayout(false);
+            this.panelAnimalDet.ResumeLayout(false);
+            this.panelAnimalDet.PerformLayout();
             this.groupVehDet.ResumeLayout(false);
+            this.panelVehDet.ResumeLayout(false);
+            this.panelVehDet.PerformLayout();
             this.groupStMdDet.ResumeLayout(false);
             this.groupItemDet.ResumeLayout(false);
             this.groupHosDet.ResumeLayout(false);
             this.panelHosDet.ResumeLayout(false);
             this.panelHosDet.PerformLayout();
-            this.groupHeliDet.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -532,5 +705,17 @@ namespace SOC.UI
         private Label originAnchor;
         public GroupBox groupHeliDet;
         public Panel panelHeliDetail;
+        private ComboBox comboBox_eneObjType1;
+        private Label label_eneObjType1;
+        private Label label_eneObjType2;
+        private ComboBox comboBox_eneObjType2;
+        private Label label_HeliObjType;
+        private ComboBox comboBox_heliObjType;
+        private Label label_hosObjType;
+        private ComboBox comboBox_hosObjType;
+        private Label label_aniObjType;
+        private ComboBox comboBox_aniObjType;
+        private Label label_vehObjType;
+        private ComboBox comboBox_vehObjType;
     }
 }

@@ -34,8 +34,6 @@
             this.label15 = new System.Windows.Forms.Label();
             this.comboBoxCP = new System.Windows.Forms.ComboBox();
             this.label20 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.comboBoxObjective = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.comboBoxCategory = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -105,8 +103,6 @@
             this.groupBoxSetup.Controls.Add(this.label15);
             this.groupBoxSetup.Controls.Add(this.comboBoxCP);
             this.groupBoxSetup.Controls.Add(this.label20);
-            this.groupBoxSetup.Controls.Add(this.label19);
-            this.groupBoxSetup.Controls.Add(this.comboBoxObjective);
             this.groupBoxSetup.Controls.Add(this.label14);
             this.groupBoxSetup.Controls.Add(this.comboBoxCategory);
             this.groupBoxSetup.Controls.Add(this.label11);
@@ -130,7 +126,7 @@
             this.groupBoxSetup.Controls.Add(this.comboBoxLoadArea);
             this.groupBoxSetup.Location = new System.Drawing.Point(3, 3);
             this.groupBoxSetup.Name = "groupBoxSetup";
-            this.groupBoxSetup.Size = new System.Drawing.Size(514, 217);
+            this.groupBoxSetup.Size = new System.Drawing.Size(514, 197);
             this.groupBoxSetup.TabIndex = 0;
             this.groupBoxSetup.TabStop = false;
             this.groupBoxSetup.Text = "Sideop Setup";
@@ -172,27 +168,6 @@
             this.label20.Size = new System.Drawing.Size(55, 13);
             this.label20.TabIndex = 29;
             this.label20.Text = "Quest CP:";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(12, 188);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(82, 13);
-            this.label19.TabIndex = 28;
-            this.label19.Text = "Objective Type:";
-            // 
-            // comboBoxObjective
-            // 
-            this.comboBoxObjective.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxObjective.FormattingEnabled = true;
-            this.comboBoxObjective.Items.AddRange(new object[] {
-            "RECOVERED",
-            "ELIMINATE"});
-            this.comboBoxObjective.Location = new System.Drawing.Point(105, 185);
-            this.comboBoxObjective.Name = "comboBoxObjective";
-            this.comboBoxObjective.Size = new System.Drawing.Size(153, 21);
-            this.comboBoxObjective.TabIndex = 12;
             // 
             // label14
             // 
@@ -621,9 +596,9 @@
             this.groupBoxFlavor.Controls.Add(this.label7);
             this.groupBoxFlavor.Controls.Add(this.textBoxQuestDesc);
             this.groupBoxFlavor.Controls.Add(this.textBoxQuestTitle);
-            this.groupBoxFlavor.Location = new System.Drawing.Point(3, 226);
+            this.groupBoxFlavor.Location = new System.Drawing.Point(3, 206);
             this.groupBoxFlavor.Name = "groupBoxFlavor";
-            this.groupBoxFlavor.Size = new System.Drawing.Size(514, 221);
+            this.groupBoxFlavor.Size = new System.Drawing.Size(514, 241);
             this.groupBoxFlavor.TabIndex = 13;
             this.groupBoxFlavor.TabStop = false;
             this.groupBoxFlavor.Text = "Sideop Flavor Text";
@@ -631,7 +606,7 @@
             // buttonAddNotif
             // 
             this.buttonAddNotif.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonAddNotif.Location = new System.Drawing.Point(419, 186);
+            this.buttonAddNotif.Location = new System.Drawing.Point(419, 206);
             this.buttonAddNotif.Name = "buttonAddNotif";
             this.buttonAddNotif.Size = new System.Drawing.Size(65, 23);
             this.buttonAddNotif.TabIndex = 16;
@@ -643,7 +618,7 @@
             // 
             this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 170);
+            this.label13.Location = new System.Drawing.Point(6, 190);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(107, 13);
             this.label13.TabIndex = 11;
@@ -663,7 +638,7 @@
             this.comboBoxProgressNotifs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.comboBoxProgressNotifs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxProgressNotifs.FormattingEnabled = true;
-            this.comboBoxProgressNotifs.Location = new System.Drawing.Point(6, 186);
+            this.comboBoxProgressNotifs.Location = new System.Drawing.Point(6, 206);
             this.comboBoxProgressNotifs.Name = "comboBoxProgressNotifs";
             this.comboBoxProgressNotifs.Size = new System.Drawing.Size(407, 21);
             this.comboBoxProgressNotifs.TabIndex = 15;
@@ -686,7 +661,7 @@
             this.textBoxQuestDesc.Location = new System.Drawing.Point(6, 84);
             this.textBoxQuestDesc.Multiline = true;
             this.textBoxQuestDesc.Name = "textBoxQuestDesc";
-            this.textBoxQuestDesc.Size = new System.Drawing.Size(502, 74);
+            this.textBoxQuestDesc.Size = new System.Drawing.Size(502, 94);
             this.textBoxQuestDesc.TabIndex = 14;
             // 
             // textBoxQuestTitle
@@ -758,8 +733,6 @@
         public System.Windows.Forms.TextBox textBoxStMdCoords;
         public System.Windows.Forms.TextBox textBoxItemCoords;
         public System.Windows.Forms.TextBox textBoxVehCoords;
-        private System.Windows.Forms.Label label19;
-        public System.Windows.Forms.ComboBox comboBoxObjective;
         public System.Windows.Forms.ComboBox comboBoxCP;
         private System.Windows.Forms.Label label20;
         public System.Windows.Forms.TextBox textBoxAnimalCoords;

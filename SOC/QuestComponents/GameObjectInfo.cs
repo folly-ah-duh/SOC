@@ -981,13 +981,13 @@ namespace SOC.QuestComponents
 
             public DefinitionDetails() { }
 
-            public DefinitionDetails(string fpk, string quest, int locID, string loada, Coordinates c, string rad, string cat, string rew, int prog, string type, string cpnme, string qtitle, string qdesc, string hcoord, string vehcoord, string anicoord, string itcoord, string acitcoord, string mdlcoord, string route)
+            public DefinitionDetails(string fpk, string quest, int locID, string loada, Coordinates c, string rad, string cat, string rew, int prog, string cpnme, string qtitle, string qdesc, string hcoord, string vehcoord, string anicoord, string itcoord, string acitcoord, string mdlcoord, string route)
             {
                 FpkName = fpk; QuestNum = quest; QuestTitle = qtitle; QuestDesc = qdesc;
 
                 locationID = locID; loadArea = loada; coords = c; radius = rad; CPName = cpnme;
 
-                category = cat; progNotif = prog; objectiveType = type; reward = rew;
+                category = cat; progNotif = prog; reward = rew;
                 
                 hostageCoordinates = hcoord; vehicleCoordinates = vehcoord; animalCoordinates = anicoord; itemCoordinates = itcoord; activeItemCoordinates = acitcoord; modelCoordinates = mdlcoord;
 
@@ -1020,9 +1020,6 @@ namespace SOC.QuestComponents
 
             [XmlElement]
             public string category { get; set; }
-
-            [XmlElement]
-            public string objectiveType { get; set; }
 
             [XmlElement]
             public string CPName { get; set; }
@@ -1062,7 +1059,7 @@ namespace SOC.QuestComponents
 
             public QuestEntities() { }
 
-            public QuestEntities(List<Enemy> questenedets, List<Enemy> cpenedets, List<Helicopter> helis, List<Hostage> hosDets, List<Vehicle> vehDets, List<Animal> anidets, List<Item> itDets, List<ActiveItem> acitdets, List<Model> MdDets, int bodyIndex, bool inter, string sst)
+            public QuestEntities(List<Enemy> questenedets, List<Enemy> cpenedets, List<Helicopter> helis, List<Hostage> hosDets, List<Vehicle> vehDets, List<Animal> anidets, List<Item> itDets, List<ActiveItem> acitdets, List<Model> MdDets, int bodyIndex, bool inter, string sst, string eneObjType, string hosObjType, string vehObjType, string aniObjType)
             {
                 questEnemies = questenedets;
                 cpEnemies = cpenedets;
@@ -1076,6 +1073,10 @@ namespace SOC.QuestComponents
                 hostageBodyIndex = bodyIndex;
                 canInter = inter;
                 soldierSubType = sst;
+                enemyObjectiveType = eneObjType;
+                hostageObjectiveType = hosObjType;
+                vehicleObjectiveType = vehObjType;
+                animalObjectiveType = aniObjType;
             }
 
             [XmlArray]
@@ -1113,6 +1114,18 @@ namespace SOC.QuestComponents
 
             [XmlAttribute]
             public string soldierSubType { get; set; } = "SOVIET_A";
+
+            [XmlAttribute]
+            public string enemyObjectiveType { get; set; } = "ELIMINATE";
+
+            [XmlAttribute]
+            public string hostageObjectiveType { get; set; } = "ELIMINATE";
+
+            [XmlAttribute]
+            public string vehicleObjectiveType { get; set; } = "ELIMINATE";
+
+            [XmlAttribute]
+            public string animalObjectiveType { get; set; } = "ELIMINATE";
 
         }
 

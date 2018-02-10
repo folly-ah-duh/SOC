@@ -109,7 +109,7 @@ namespace SOC.Forms.Pages.QuestBoxes
             this.e_groupBox_main.Controls.Add(this.e_label_balaclava);
             this.e_groupBox_main.Controls.Add(this.e_checkBox_balaclava);
             e_groupBox_main.Disposed += new EventHandler(this.e_groupBox_main_Disposed);
-            this.e_groupBox_main.Location = new System.Drawing.Point(3, 55 + (334 * enemyNumber));
+            this.e_groupBox_main.Location = new System.Drawing.Point(3, 69 + (334 * enemyNumber));
             this.e_groupBox_main.Name = "e_groupBox_main";
             this.e_groupBox_main.Size = new System.Drawing.Size(width, 317);
             this.e_groupBox_main.TabIndex = 0;

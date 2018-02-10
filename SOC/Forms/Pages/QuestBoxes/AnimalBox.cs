@@ -81,7 +81,7 @@ namespace SOC.Forms.Pages.QuestBoxes
             this.a_groupBox_main.Controls.Add(this.a_textBox_ycoord);
             this.a_groupBox_main.Controls.Add(this.a_textBox_xcoord);
             this.a_groupBox_main.Controls.Add(this.a_label_coord);
-            this.a_groupBox_main.Location = new System.Drawing.Point(3, 3 + (animal.number * 180));
+            this.a_groupBox_main.Location = new System.Drawing.Point(3, 27 + (animal.number * 180));
             this.a_groupBox_main.Name = "a_groupBox_main";
             this.a_groupBox_main.Size = new System.Drawing.Size(width, 166);
             this.a_groupBox_main.TabIndex = 0;

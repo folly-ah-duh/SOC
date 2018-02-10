@@ -56,7 +56,7 @@ namespace SOC.UI
         {
             return new DefinitionDetails(textBoxFPKName.Text, textBoxQuestNum.Text, locationID, comboBoxLoadArea.Text, 
                 new Coordinates(textBoxXCoord.Text, textBoxYCoord.Text, textBoxZCoord.Text), comboBoxRadius.Text, comboBoxCategory.Text, comboBoxReward.Text, comboBoxProgressNotifs.SelectedIndex, 
-                comboBoxObjective.Text, comboBoxCP.Text, textBoxQuestTitle.Text, textBoxQuestDesc.Text,
+                comboBoxCP.Text, textBoxQuestTitle.Text, textBoxQuestDesc.Text,
                 textBoxHosCoords.Text, textBoxVehCoords.Text, textBoxAnimalCoords.Text, textBoxItemCoords.Text, textBoxActiveItemCoords.Text, textBoxStMdCoords.Text,
                 comboBoxRoute.Text);
         }
@@ -75,7 +75,7 @@ namespace SOC.UI
 
             comboBoxLoadArea.Text = dd.loadArea;
             textBoxXCoord.Text = dd.coords.xCoord; textBoxYCoord.Text = dd.coords.yCoord; textBoxZCoord.Text = dd.coords.zCoord; comboBoxRadius.Text = dd.radius;
-            comboBoxCategory.Text = dd.category; comboBoxReward.Text = dd.reward; comboBoxObjective.Text = dd.objectiveType;
+            comboBoxCategory.Text = dd.category; comboBoxReward.Text = dd.reward;
             comboBoxCP.Text = dd.CPName; textBoxQuestTitle.Text = dd.QuestTitle; textBoxQuestDesc.Text = dd.QuestDesc;
 
             refreshRoutesList();

@@ -75,7 +75,7 @@ namespace SOC.Forms.Pages.QuestBoxes
             this.v_groupBox_main.Controls.Add(this.v_label_class);
             this.v_groupBox_main.Controls.Add(this.v_label_vehicle);
             this.v_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
-            this.v_groupBox_main.Location = new System.Drawing.Point(3, 4 + (170 * vehicle.number));
+            this.v_groupBox_main.Location = new System.Drawing.Point(3, 27 + (170 * vehicle.number));
             this.v_groupBox_main.Name = "v_groupBox_main";
             this.v_groupBox_main.Size = new System.Drawing.Size(width, 152);
             this.v_groupBox_main.TabIndex = 1;

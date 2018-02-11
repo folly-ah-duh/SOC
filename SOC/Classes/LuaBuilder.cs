@@ -12,11 +12,10 @@ namespace SOC.Classes
     static class LuaBuilder
     {
 
-        static string[] questLuaInput = File.ReadAllLines(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "assets//questScript.lua"));
+        static string[] questLuaInput = File.ReadAllLines(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//questScript.lua"));
 
         public static void WriteDefinitionLua(DefinitionDetails definitionDetails, QuestEntities questDetails)
         {
-            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
 
             BodyInfoEntry bodyInfo = new BodyInfoEntry();
             if (questDetails.hostageBodyIndex >= 0)
@@ -114,7 +113,6 @@ namespace SOC.Classes
 
         public static void WriteMainQuestLua(DefinitionDetails definitionDetails, QuestEntities questDetails)
         {
-            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
 
             List<string> questLua = new List<string>(questLuaInput);
 

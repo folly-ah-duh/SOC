@@ -93,6 +93,10 @@
     <Compile Include="Classes\EntitiesManager.cs" />
     <Compile Include="Classes\LangBuilder.cs" />
     <Compile Include="Classes\AssetsBuilder.cs" />
+    <Compile Include="Classes\LangTool\BigEndianBinaryWriter.cs" />
+    <Compile Include="Classes\LangTool\ExtensionMethods.cs" />
+    <Compile Include="Classes\LangTool\LangEntry.cs" />
+    <Compile Include="Classes\LangTool\LangFile.cs" />
     <Compile Include="Classes\RouteManager.cs" />
     <Compile Include="Classes\UpdateNotifsManager.cs" />
     <Compile Include="Classes\XmlCompiler.cs" />

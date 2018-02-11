@@ -146,7 +146,6 @@ namespace SOC.Forms.Pages.QuestBoxes
             this.a_comboBox_count.Name = "a_comboBox_count";
             this.a_comboBox_count.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.a_comboBox_count.TabIndex = 11;
-            a_comboBox_count.Items.AddRange(new string[] { "1", "2", "3", "4", "5", "6" });
             a_comboBox_count.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
             a_comboBox_count.Text = animal.count;
             // 

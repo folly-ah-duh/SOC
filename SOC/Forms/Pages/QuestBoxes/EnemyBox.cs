@@ -451,7 +451,7 @@ namespace SOC.Forms.Pages.QuestBoxes
                 e_checkBox_zombie.Enabled = true;
                 e_button_removepower.Enabled = true;
 
-                if (e_checkBox_balaclava.Checked) { updateBalaclava(); } // bug: spamming spawn checkbox fills fova counts
+                if (e_checkBox_balaclava.Checked) { updateBalaclava(); }
                 if (e_checkBox_zombie.Checked) { updateZombie(); }
                 if (e_checkBox_armor.Checked) { updateArmor(); }
             }
@@ -479,7 +479,12 @@ namespace SOC.Forms.Pages.QuestBoxes
                 e_label_zombie.Enabled = false;
                 e_checkBox_zombie.Enabled = false;
                 e_button_removepower.Enabled = false;
+
+                if (e_checkBox_balaclava.Checked) { QuestComponents.EnemyInfo.balaCount--; }
+                if (e_checkBox_zombie.Checked) { QuestComponents.EnemyInfo.zombieCount--; }
+                if (e_checkBox_armor.Checked) { QuestComponents.EnemyInfo.armorCount--; }
             }
+
         }
 
         private void armor_Checkbox_Clicked(object sender, EventArgs e)
@@ -507,6 +512,11 @@ namespace SOC.Forms.Pages.QuestBoxes
                 {
                     MessageBox.Show("Heavy Armor can only be applied to 8 soldiers maximum.", "Game Limitation Exceeded", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     e_checkBox_armor.Checked = false;
+                    if (e_listBox_power.Items.Contains("QUEST_ARMOR"))
+                    {
+                        e_listBox_power.Items.Remove("QUEST_ARMOR");
+                        e_listBox_power.SelectedIndex = e_listBox_power.Items.Count - 1;
+                    }
                 }
                 else
                 {
@@ -594,19 +604,7 @@ namespace SOC.Forms.Pages.QuestBoxes
             e_checkBox_zombie.Checked = enemyDetail.e_checkBox_zombie.Checked;
 
             e_listBox_power.Text = enemyDetail.e_listBox_power.Text;
-            /* unnecessary
-            string[] cautionArray = new string[enemyDetail.e_comboBox_cautionroute.Items.Count];
-            enemyDetail.e_comboBox_cautionroute.Items.CopyTo(cautionArray, 0);
-            e_comboBox_cautionroute.Items.AddRange(cautionArray);
 
-            string[] sneakArray = new string[enemyDetail.e_comboBox_sneakroute.Items.Count];
-            enemyDetail.e_comboBox_sneakroute.Items.CopyTo(sneakArray, 0);
-            e_comboBox_sneakroute.Items.AddRange(sneakArray);
-
-            string[] bodyArray = new string[enemyDetail.e_comboBox_body.Items.Count];
-            enemyDetail.e_comboBox_body.Items.CopyTo(bodyArray, 0);
-            e_comboBox_body.Items.AddRange(bodyArray);
-            */
             e_comboBox_cautionroute.Text = enemyDetail.e_comboBox_cautionroute.Text;
             e_comboBox_sneakroute.Text = enemyDetail.e_comboBox_sneakroute.Text;
 

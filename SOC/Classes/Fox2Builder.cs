@@ -263,7 +263,6 @@ namespace SOC.Classes
 
         public static void WriteQuestFox2(DefinitionDetails definitionDetails, QuestEntities questDetails)
         {
-            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
 
             List<QuestEntity> entityList = BuildQuestEntityList(questDetails);
             BodyInfoEntry bodyInfo = new BodyInfoEntry();
@@ -844,7 +843,6 @@ namespace SOC.Classes
 
         public static void WriteItemFox2(DefinitionDetails definitionDetails, QuestEntities questDetails)
         {
-            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
 
             if (questDetails.items.Count + questDetails.activeItems.Count == 0)
                 return;

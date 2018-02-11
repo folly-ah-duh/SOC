@@ -10,7 +10,7 @@ namespace SOC.Classes
 {
     static class UpdateNotifsManager
     {
-        public static string NotifsListPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "assets//UpdateNotifsList.txt");
+        public static string NotifsListPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//UpdateNotifsList.txt");
 
         public static string[] defaultLangIds = {
             "quest_extract_elite",

@@ -1,6 +1,7 @@
-﻿using SOC.UI;
-using System.IO;
+﻿using System.IO;
+using SOC.Classes.LangTool;
 using static SOC.QuestComponents.GameObjectInfo;
+using System.Collections.Generic;
 
 namespace SOC.Classes
 {
@@ -14,34 +15,32 @@ namespace SOC.Classes
             string[] DisplayList = UpdateNotifsManager.getDispNotifs();
             int notificationIndex = definitionDetails.progNotif;
 
-            string entryLines = "";
+            List<LangEntry> langList = new List<LangEntry>();
 
-            entryLines += string.Format("\n\t\t<Entry LangId=\"name_q{0}\" Color=\"5\" Value=\"{1}\" />", definitionDetails.QuestNum, definitionDetails.QuestTitle);
-            entryLines += string.Format("\n\t\t<Entry LangId=\"info_q{0}\" Color=\"5\" Value=\"{1}\" />\n", definitionDetails.QuestNum, definitionDetails.QuestDesc);
+            langList.Add(new LangEntry(MakeLangId("name_q", definitionDetails.QuestNum), definitionDetails.QuestTitle, 5));
+            langList.Add(new LangEntry(MakeLangId("info_q", definitionDetails.QuestNum), definitionDetails.QuestDesc, 5));
 
             if (UpdateNotifsManager.isCustomNotification(LangIdList[notificationIndex]))
-            {
-                string progressId = LangIdList[notificationIndex];
-                string progressdesc = DisplayList[notificationIndex] + " [%d/%d]";
+                langList.Add(new LangEntry(LangIdList[notificationIndex], (DisplayList[notificationIndex] + " [%d/%d]"), 5));
 
-                entryLines += string.Format("\t\t<Entry LangId=\"{0}\" Color=\"5\" Value=\"{1}\" />\n", progressId, progressdesc);
-            }
-
-            string entries = string.Format("\n\t<Entries>{0}\t</Entries>\n", entryLines);
-
-            string lngText = (string.Format("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<LangFile xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" Endianess=\"BigEndian\">{0}</LangFile>", entries));
+            LangFile questLng = new LangFile(langList);
 
             foreach (string language in lngLanguages)
             {
                 string lngPath = string.Format("Sideop_Build//Assets//tpp/pack//ui//lang//lang_default_data_{0}_fpk//Assets//tpp//lang//ui", language);
-                string lngFile = Path.Combine(lngPath, string.Format(@"ih_quest_q{0}.{1}.lng2.xml", definitionDetails.QuestNum, language));
-
+                string lngFile = Path.Combine(lngPath, string.Format(@"ih_quest_q{0}.{1}.lng2", definitionDetails.QuestNum, language));
                 Directory.CreateDirectory(lngPath);
-                File.WriteAllText(lngFile, lngText);
-
-                XmlCompiler.CompileFile(lngFile, XmlCompiler.LangToolPath);
-                File.Delete(lngFile);
+                
+                using (FileStream outputStream = new FileStream(lngFile, FileMode.Create))
+                {
+                    questLng.Write(outputStream);
+                }
             }
+        }
+
+        public static string MakeLangId(string prefix, string qNum)
+        {
+            return (prefix + qNum);
         }
     }
 }

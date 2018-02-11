@@ -13,7 +13,7 @@ namespace SOC.Classes
     class RouteManager
     {
 
-        public static string RouteNameDictionaryFile = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "assets\\ToolAssets\\route_name_dictionary.txt");
+        public static string RouteNameDictionaryFile = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets\\ToolAssets\\route_name_dictionary.txt");
         public static Dictionary<uint, string> RouteNameHashDictionary = new Dictionary<uint, string>();
 
 

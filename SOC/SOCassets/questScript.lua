@@ -1,5 +1,6 @@
 local this = {}
 local quest_step = {}
+local questWalkerGearList = {}
 
 local StrCode32 = Fox.StrCode32
 local StrCode32Table = Tpp.StrCode32Table
@@ -15,6 +16,7 @@ local hostageCount = 0
 local CPNAME = ""
 local useInter = true
 local SUBTYPE = ""
+local questTrapName = ""
 
 local enemyQuestType = RECOVERED
 local vehicleQuestType = RECOVERED
@@ -115,16 +117,14 @@ function this.OnActivateQuest(questTable)
 end
 
 function this.OnDeactivateQuest(questTable)
-  TppEnemy.OnDeactivateQuest( questTable )
+  TppEnemy.OnDeactivateQuest(questTable)
   TppAnimal.OnDeactivateQuest(questTable)
-
 end
 
 function this.OnTerminateQuest(questTable)
   this.SwitchEnableQuestHighIntTable( false, CPNAME, this.questCpInterrogation )
   TppEnemy.OnTerminateQuest(questTable)
   TppAnimal.OnTerminateQuest(questTable)
-
 end
 
 this.Messages = function()
@@ -156,8 +156,9 @@ quest_step.QStep_Start = {
 	InfCore.PCall(this.WarpHostages)
 	InfCore.PCall(this.WarpVehicles)
 	InfCore.PCall(this.SetupGearsQuest)
+    this.BuildWalkerGameObjectIdList()
 
-	this.SwitchEnableQuestHighIntTable( true, CPNAME, this.questCpInterrogation ) --
+	this.SwitchEnableQuestHighIntTable( true, CPNAME, this.questCpInterrogation )
 	TppQuest.SetNextQuestStep( "QStep_Main" )
 
 	local commandScared =   {id = "SetForceScared",   scared=true, ever=true }
@@ -170,7 +171,12 @@ quest_step.QStep_Start = {
   end,
 }
 
+local walkerResetPosition
+local walkerGearGameId
+local inMostActiveQuestArea = true
+local exitOnce = true
 local hostagei = 0
+
 quest_step.QStep_Main = {
   Messages = function( self )
 	return
@@ -250,7 +256,48 @@ quest_step.QStep_Main = {
 			end
 		  },
 		},
-	  }
+		Trap = {
+          {
+            msg = "Exit", sender = questTrapName,
+            func = function()
+              inMostActiveQuestArea = false
+              walkerGearGameId = vars.playerVehicleGameObjectId
+              if questWalkerGearList[walkerGearGameId] then
+                walkerResetPosition = {pos= {vars.playerPosX, vars.playerPosY + 1, vars.playerPosZ},rotY= 0,}
+                GkEventTimerManager.Start("OutOfMostActiveArea", 8)
+				exitOnce = this.OneTimeAnnounce("The Walker Gear cannot travel beyond this point.", "Return to the Side Op area.", exitOnce)
+              end
+            end
+          },
+          {
+            msg = "Enter", sender = questTrapName,
+            func = function()
+              inMostActiveQuestArea = true
+              if GkEventTimerManager.IsTimerActive("OutOfMostActiveArea") and walkerGearGameId == vars.playerVehicleGameObjectId then
+                GkEventTimerManager.Stop("OutOfMostActiveArea")
+				GkEventTimerManager.Start("AnnounceOnceCooldown", 5)
+              end
+            end
+          },
+        },
+        Timer={
+          {
+            msg="Finish", sender="OutOfMostActiveArea",
+            func = function()
+              if inMostActiveQuestArea == false then
+                InfCore.DebugPrint("Returning Walker Gear to Side Op area...")
+                this.ReboundWalkerGear(walkerGearGameId)
+              end
+            end
+          },
+		  {
+            msg="Finish", sender="AnnounceOnceCooldown",
+            func = function()
+			  exitOnce = true
+            end
+          },
+        },
+      }
   end,
   OnEnter = function()
 	Fox.Log("QStep_Main OnEnter")
@@ -259,6 +306,24 @@ quest_step.QStep_Main = {
 	Fox.Log("QStep_Main OnLeave")
   end,
 }
+
+function this.OneTimeAnnounce(announceString1, announceString2, isFresh)
+  if isFresh == true then
+    InfCore.DebugPrint(announceString1)
+	InfCore.DebugPrint(announceString2)
+  end
+  
+  return false
+end
+
+function this.BuildWalkerGameObjectIdList()
+  for i,walkerInfo in ipairs(this.QUEST_TABLE.walkerList)do
+    local walkerId = GetGameObjectId("TppCommonWalkerGear2",walkerInfo.walkerName)
+    if walkerId ~= GameObject.NULL_ID then
+      questWalkerGearList[walkerId] = walkerInfo.walkerName
+    end
+  end
+end
 
 function this.WarpHostages()
   for i,hostageInfo in ipairs(this.QUEST_TABLE.hostageList)do
@@ -284,23 +349,28 @@ end
 
 function this.SetupGearsQuest()
   for i,walkerInfo in ipairs(this.QUEST_TABLE.walkerList)do
-	local walkerId = GetGameObjectId("TppCommonWalkerGear2",walkerInfo.walkerName)
-	if walkerId ~= GameObject.NULL_ID then
-	--[[ refuses to work
-	  local commandWeapon={ id = "SetMainWeapon", weapon = walkerInfo.weapon}
-	  GameObject.SendCommand(walkerId, commandWeapon)
-	  InfCore.Log("WG Weapon Set")
-	]]
-	  local commandColor = { id = "SetColoringType", type = walkerInfo.colorType }
-	  GameObject.SendCommand(walkerId, commandColor)
-	  InfCore.Log("WG Color Set")
+    local walkerId = GetGameObjectId("TppCommonWalkerGear2",walkerInfo.walkerName)
+    if walkerId ~= GameObject.NULL_ID then
+      --[[ refuses to work
+      local commandWeapon={ id = "SetMainWeapon", weapon = walkerInfo.weapon}
+      GameObject.SendCommand(walkerId, commandWeapon)
+      InfCore.Log("WG Weapon Set")
+      ]]
+      local commandColor = { id = "SetColoringType", type = walkerInfo.colorType }
+      GameObject.SendCommand(walkerId, commandColor)
+      InfCore.Log("WG Colour Set")
 
-	  local position = walkerInfo.position
-	  local commandPos={ id = "SetPosition", rotY = position.rotY, pos = position.pos}
-	  GameObject.SendCommand(walkerId,command)
-	  InfCore.Log("WG Position Set")
-	end
+      local position = walkerInfo.position
+      local commandPos={ id = "SetPosition", rotY = position.rotY, pos = position.pos}
+      GameObject.SendCommand(walkerId,commandPos)
+      InfCore.Log("WG Position Set")
+    end
   end
+end
+
+function this.ReboundWalkerGear(walkerId)
+  local commandPos={ id = "SetPosition", rotY = walkerResetPosition.rotY, pos = walkerResetPosition.pos}
+  GameObject.SendCommand(walkerId,commandPos)
 end
 
 this.SwitchEnableQuestHighIntTable = function( flag, commandPostName, questCpInterrogation)
@@ -317,6 +387,7 @@ this.SwitchEnableQuestHighIntTable = function( flag, commandPostName, questCpInt
 end
 
 function this.CheckQuestAllTargetDynamic(messageId, gameId, checkAnimalId)
+
   local dynamicQuestType = ELIMINATE
   local intendedTarget = true
   local objectiveCompleteCount = 0
@@ -369,11 +440,11 @@ function this.CheckQuestAllTargetDynamic(messageId, gameId, checkAnimalId)
 	return NONE
   end
 
-  --Step 1: Determine dynamicObjective
   for targetGameId, targetInfo in pairs(mvars.ene_questTargetList) do
 	local isTarget = targetInfo.isTarget or false
 	local targetMessageId = targetInfo.messageId
 
+    --Step 1: Determine dynamicObjective
 	if isTarget == true then
 	  if Tpp.IsSoldier(targetGameId) then
 		dynamicQuestType = enemyQuestType
@@ -440,8 +511,8 @@ function this.CheckQuestAllTargetDynamic(messageId, gameId, checkAnimalId)
 	  end
 	end
   end
-  return NONE
   
+  return NONE
 end
 
 return this

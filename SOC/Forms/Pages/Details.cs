@@ -19,6 +19,7 @@ namespace SOC.UI
         List<QuestBox> activeItemBoxes;
         List<QuestBox> animalBoxes;
         List<QuestBox> heliBoxes;
+        List<QuestBox> walkerBoxes;
         int dynamicPanelWidth = 0;
 
         public Details()
@@ -35,6 +36,7 @@ namespace SOC.UI
             activeItemBoxes = new List<QuestBox>();
             animalBoxes = new List<QuestBox>();
             heliBoxes = new List<QuestBox>();
+            walkerBoxes = new List<QuestBox>();
 
             foreach (BodyInfoEntry infoEntry in BodyInfo.BodyInfoArray)
             {
@@ -61,7 +63,8 @@ namespace SOC.UI
             clearPanel(panelItemDet, itemBoxes);
             clearPanel(panelAcItDet, activeItemBoxes);
             clearPanel(panelStMdDet, modelBoxes);
-            clearPanel(panelHeliDetail, heliBoxes);
+            clearPanel(panelHeliDet, heliBoxes);
+            clearPanel(panelWalkerDet, walkerBoxes);
             questEnemyBoxes = new List<QuestBox>();
             CPEnemyBoxes = new List<QuestBox>();
             hostageBoxes = new List<QuestBox>();
@@ -71,6 +74,7 @@ namespace SOC.UI
             activeItemBoxes = new List<QuestBox>();
             animalBoxes = new List<QuestBox>();
             heliBoxes = new List<QuestBox>();
+            walkerBoxes = new List<QuestBox>();
             EnemyInfo.armorCount = 0;
             EnemyInfo.balaCount = 0;
             EnemyInfo.zombieCount = 0;
@@ -112,7 +116,7 @@ namespace SOC.UI
             //
             // Helicopter
             //
-            currentPanel = panelHeliDetail;
+            currentPanel = panelHeliDet;
             currentPanel.AutoScroll = false;
             foreach (Helicopter heli in questDetails.enemyHelicopters)
             {
@@ -146,6 +150,19 @@ namespace SOC.UI
                 vehiclebox.BuildObject(currentPanel.Width);
                 currentPanel.Controls.Add(vehiclebox.getGroupBoxMain());
                 vehicleBoxes.Add(vehiclebox);
+            }
+            currentPanel.AutoScroll = true;
+            //
+            // Walker Gears
+            //
+            currentPanel = panelWalkerDet;
+            currentPanel.AutoScroll = false;
+            foreach (WalkerGear walker in questDetails.walkerGears)
+            {
+                WalkerGearBox walkerBox = new WalkerGearBox(walker);
+                walkerBox.BuildObject(currentPanel.Width);
+                currentPanel.Controls.Add(walkerBox.getGroupBoxMain());
+                walkerBoxes.Add(walkerBox);
             }
             currentPanel.AutoScroll = true;
             //
@@ -223,6 +240,7 @@ namespace SOC.UI
             comboBox_vehObjType.Text = questDetails.vehicleObjectiveType;
             comboBox_aniObjType.Text = questDetails.animalObjectiveType;
             comboBox_heliObjType.Text = "ELIMINATE";
+            comboBox_WalkerObjType.Text = questDetails.walkerGearObjectiveType;
         }
 
         public void SetEnemySubType(QuestEntities questDetails, int locId)
@@ -273,8 +291,9 @@ namespace SOC.UI
                 new Tuple<List<QuestBox>, GroupBox>(questEnemyBoxes, groupNewEneDet),
                 new Tuple<List<QuestBox>, GroupBox>(CPEnemyBoxes, groupExistingEneDet),
                 new Tuple<List<QuestBox>, GroupBox>(heliBoxes, groupHeliDet),
-                new Tuple<List<QuestBox>, GroupBox>(hostageBoxes, groupHosDet),
+                new Tuple<List<QuestBox>, GroupBox>(walkerBoxes, groupWalkerDet),
                 new Tuple<List<QuestBox>, GroupBox>(vehicleBoxes, groupVehDet),
+                new Tuple<List<QuestBox>, GroupBox>(hostageBoxes, groupHosDet),
                 new Tuple<List<QuestBox>, GroupBox>(animalBoxes, groupAnimalDet),
                 new Tuple<List<QuestBox>, GroupBox>(itemBoxes, groupItemDet),
                 new Tuple<List<QuestBox>, GroupBox>(activeItemBoxes, groupActiveItemDet),
@@ -329,41 +348,39 @@ namespace SOC.UI
             List<ActiveItem> activeItems = new List<ActiveItem>();
             List<Model> models = new List<Model>();
             List<Helicopter> helicopters = new List<Helicopter>();
+            List<WalkerGear> walkers = new List<WalkerGear>();
 
             foreach (EnemyBox d in questEnemyBoxes)
-            {
-                string[] powerlist = new string[d.e_listBox_power.Items.Count];
-                d.e_listBox_power.Items.CopyTo(powerlist, 0);
-                qenemies.Add(new Enemy(d.e_checkBox_spawn.Checked, d.e_checkBox_target.Checked, d.e_checkBox_balaclava.Checked, d.e_checkBox_zombie.Checked, d.e_checkBox_armor.Checked, questEnemyBoxes.IndexOf(d), d.e_groupBox_main.Text, d.e_comboBox_body.Text, d.e_comboBox_cautionroute.Text, d.e_comboBox_sneakroute.Text, d.e_comboBox_skill.Text, d.e_comboBox_staff.Text, powerlist));
-            }
+                qenemies.Add(new Enemy(d, questEnemyBoxes.IndexOf(d)));
+
             foreach (EnemyBox d in CPEnemyBoxes)
-            {
-                string[] powerlist = new string[d.e_listBox_power.Items.Count];
-                d.e_listBox_power.Items.CopyTo(powerlist, 0);
-                cpenemies.Add(new Enemy(d.e_checkBox_spawn.Checked, d.e_checkBox_target.Checked, d.e_checkBox_balaclava.Checked, d.e_checkBox_zombie.Checked, d.e_checkBox_armor.Checked, CPEnemyBoxes.IndexOf(d), d.e_groupBox_main.Text, d.e_comboBox_body.Text, d.e_comboBox_cautionroute.Text, d.e_comboBox_sneakroute.Text, d.e_comboBox_skill.Text, d.e_comboBox_staff.Text, powerlist));
-            }
+                cpenemies.Add(new Enemy(d, CPEnemyBoxes.IndexOf(d)));
+
             foreach (HelicopterBox he in heliBoxes)
-                helicopters.Add(new Helicopter(he.He_checkBox_spawn.Checked, he.He_checkBox_target.Checked, he.He_comboBox_route.Text, he.He_comboBox_class.Text));
+                helicopters.Add(new Helicopter(he));
 
             foreach (HostageBox d in hostageBoxes)
-                hostages.Add(new Hostage(d.h_checkBox_target.Checked, d.h_checkBox_untied.Checked, d.h_checkBox_injured.Checked, hostageBoxes.IndexOf(d), d.h_groupBox_main.Text, d.h_comboBox_skill.Text, d.h_comboBox_staff.Text, d.h_comboBox_scared.Text, d.h_comboBox_lang.Text, new Coordinates(d.h_textBox_xcoord.Text, d.h_textBox_ycoord.Text, d.h_textBox_zcoord.Text, d.h_textBox_rot.Text)));
+                hostages.Add(new Hostage(d, hostageBoxes.IndexOf(d)));
+
+            foreach (WalkerGearBox w in walkerBoxes)
+                walkers.Add(new WalkerGear(w, walkerBoxes.IndexOf(w)));
 
             foreach (VehicleBox d in vehicleBoxes)
-                vehicles.Add(new Vehicle(d.v_checkBox_target.Checked, vehicleBoxes.IndexOf(d), d.v_groupBox_main.Text, d.v_comboBox_vehicle.SelectedIndex, d.v_comboBox_class.Text, new Coordinates(d.v_textBox_xcoord.Text, d.v_textBox_ycoord.Text, d.v_textBox_zcoord.Text, d.v_textBox_rot.Text)));
+                vehicles.Add(new Vehicle(d, vehicleBoxes.IndexOf(d)));
 
             foreach (AnimalBox d in animalBoxes)
-                animals.Add(new Animal(d.a_checkBox_isTarget.Checked, animalBoxes.IndexOf(d), d.a_groupBox_main.Text, d.a_comboBox_count.Text, d.a_comboBox_animal.Text, d.a_comboBox_TypeID.Text, new Coordinates(d.a_textBox_xcoord.Text, d.a_textBox_ycoord.Text, d.a_textBox_zcoord.Text, d.a_textBox_rot.Text)));
+                animals.Add(new Animal(d, animalBoxes.IndexOf(d)));
 
             foreach (ItemBox d in itemBoxes)
-                items.Add(new Item(d.i_checkBox_boxed.Checked, itemBoxes.IndexOf(d), d.i_groupBox_main.Text, d.i_comboBox_count.Text, d.i_comboBox_item.Text, new Coordinates(d.i_textBox_xcoord.Text, d.i_textBox_ycoord.Text, d.i_textBox_zcoord.Text), new RotationQuat(d.i_textBox_xrot.Text, d.i_textBox_yrot.Text, d.i_textBox_zrot.Text, d.i_textBox_wrot.Text)));
+                items.Add(new Item(d, itemBoxes.IndexOf(d)));
 
             foreach (ActiveItemBox d in activeItemBoxes)
-                activeItems.Add(new ActiveItem(activeItemBoxes.IndexOf(d), d.ai_groupBox_main.Text, d.ai_comboBox_activeitem.Text, new Coordinates(d.ai_textBox_xcoord.Text, d.ai_textBox_ycoord.Text, d.ai_textBox_zcoord.Text), new RotationQuat(d.ai_textBox_xrot.Text, d.ai_textBox_yrot.Text, d.ai_textBox_zrot.Text, d.ai_textBox_wrot.Text)));
+                activeItems.Add(new ActiveItem(d, activeItemBoxes.IndexOf(d)));
 
             foreach (ModelBox d in modelBoxes)
-                models.Add(new Model(d.m_label_GeomNotFound.Visible, modelBoxes.IndexOf(d), d.m_groupBox_main.Text, d.m_comboBox_preset.Text, new Coordinates(d.m_textBox_xcoord.Text, d.m_textBox_ycoord.Text, d.m_textBox_zcoord.Text), new RotationQuat(d.m_textBox_xrot.Text, d.m_textBox_yrot.Text, d.m_textBox_zrot.Text, d.m_textBox_wrot.Text)));
+                models.Add(new Model(d, modelBoxes.IndexOf(d)));
             
-            return new QuestEntities(qenemies, cpenemies, helicopters, hostages, vehicles, animals, items, activeItems, models, comboBox_Body.SelectedIndex, h_checkBox_intrgt.Checked, comboBox_subtype.Text, comboBox_eneObjType1.Text, comboBox_hosObjType.Text, comboBox_vehObjType.Text, comboBox_aniObjType.Text);
+            return new QuestEntities(qenemies, cpenemies, helicopters, hostages, walkers, vehicles, animals, items, activeItems, models, comboBox_Body.SelectedIndex, h_checkBox_intrgt.Checked, comboBox_subtype.Text, comboBox_eneObjType1.Text, comboBox_hosObjType.Text, comboBox_vehObjType.Text, comboBox_aniObjType.Text, comboBox_WalkerObjType.Text);
         }
 
         private void comboBox_Body_SelectedIndexChanged(object sender, EventArgs e)

@@ -12,7 +12,7 @@ namespace SOC.Classes
     static class XmlCompiler
     {
         
-        public static string FoxToolPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "assets//ToolAssets//FoxTool.exe");
+        public static string FoxToolPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//ToolAssets//FoxTool.exe");
 
         public static void CompileFile(string toolArg, string ToolPath)
         {

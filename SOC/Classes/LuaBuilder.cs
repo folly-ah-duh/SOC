@@ -33,6 +33,9 @@ namespace SOC.Classes
             else if (definitionDetails.locationID == 20)
                 locName = "MAFR";
 
+            if( questDetails.walkerGears.Count > 0)
+                packFiles += "\n\t\t\"/Assets/tpp/pack/mission2/common/mis_com_walkergear.fpk\",";
+
             if (questDetails.hostages.Count > 0)
             {
                 packFiles += "\n\t\t\"/Assets/tpp/pack/mission2/ih/ih_hostage_base.fpk\", ";
@@ -82,10 +85,8 @@ namespace SOC.Classes
                 }
                     
             string requestEquipIds = string.Format("\trequestEquipIds={{ {0} }},", equipIds);
-
-            string luaBool;
-            if (isAnyHeliSpawned(questDetails.enemyHelicopters)) luaBool = "true"; else luaBool = "false";
-            string hasEnemyHeli = string.Format("\thasEnemyHeli = {0},", luaBool);
+            
+            string hasEnemyHeli = string.Format("\thasEnemyHeli = {0},", isAnyHeliSpawned(questDetails.enemyHelicopters).ToString().ToLower());
             
             string DefinitionLuaPath = "Sideop_Build//GameDir//mod//quests//";
             string DefinitionLuaFile = Path.Combine(DefinitionLuaPath, string.Format("ih_quest_q{0}.lua", definitionDetails.QuestNum));
@@ -117,25 +118,24 @@ namespace SOC.Classes
             List<string> questLua = new List<string>(questLuaInput);
 
             questLua[GetLineOf("local hostageCount =", questLua)] = string.Format("local hostageCount = {0}", questDetails.hostages.Count);
-            questLua[GetLineOf("local CPNAME =", questLua)] = string.Format("local CPNAME = \"{0}\"", definitionDetails.CPName); //add cp combobox to setup
-            questLua[GetLineOf("local useInter =", questLua)] = string.Format("local useInter = {0}", questDetails.canInter.ToString().ToLower()); //add interogation checkbox to setup
+            questLua[GetLineOf("local CPNAME =", questLua)] = string.Format("local CPNAME = \"{0}\"", definitionDetails.CPName);
+            questLua[GetLineOf("local useInter =", questLua)] = string.Format("local useInter = {0}", questDetails.canInter.ToString().ToLower());
             questLua[GetLineOf("local SUBTYPE =", questLua)] = string.Format("local SUBTYPE = \"{0}\"", questDetails.soldierSubType);
+            questLua[GetLineOf("local questTrapName =", questLua)] = string.Format("local questTrapName = \"trap_preDeactiveQuestArea_{0}\"", definitionDetails.loadArea);
 
             questLua[GetLineOf("local enemyQuestType =", questLua)] = string.Format("local enemyQuestType = {0}", questDetails.enemyObjectiveType);
             questLua[GetLineOf("local vehicleQuestType =", questLua)] = string.Format("local vehicleQuestType = {0}", questDetails.vehicleObjectiveType);
             questLua[GetLineOf("local hostageQuestType =", questLua)] = string.Format("local hostageQuestType = {0}", questDetails.hostageObjectiveType);
             questLua[GetLineOf("local animalQuestType =", questLua)] = string.Format("local animalQuestType = {0}", questDetails.animalObjectiveType);
+            questLua[GetLineOf("local walkerQuestType =", questLua)] = string.Format("local walkerQuestType = {0}", questDetails.walkerGearObjectiveType);
 
-            string luaBool;
-            if (EnemyInfo.armorCount > 0) luaBool = "true"; else luaBool = "false";
-            questLua[GetLineOf("isQuestArmor =", questLua)] = string.Format("	isQuestArmor =  {0},", luaBool);
-            if (EnemyInfo.zombieCount > 0) luaBool = "true"; else luaBool = "false";
-            questLua[GetLineOf("isQuestZombie =", questLua)] = string.Format("	isQuestZombie = {0},", luaBool);
-            if (EnemyInfo.balaCount > 0) luaBool = "true"; else luaBool = "false";
-            questLua[GetLineOf("isQuestBalaclava =", questLua)] = string.Format("	isQuestBalaclava = {0},", luaBool);
+            questLua[GetLineOf("isQuestArmor =", questLua)] = string.Format("	isQuestArmor =  {0},", (EnemyInfo.armorCount > 0).ToString().ToLower());
+            questLua[GetLineOf("isQuestZombie =", questLua)] = string.Format("	isQuestZombie = {0},", (EnemyInfo.zombieCount > 0).ToString().ToLower());
+            questLua[GetLineOf("isQuestBalaclava =", questLua)] = string.Format("	isQuestBalaclava = {0},", (EnemyInfo.balaCount > 0).ToString().ToLower());
 
             questLua.InsertRange(GetLineOf("enemyList = {", questLua) + 1, BuildEnemyList(questDetails));
             questLua.InsertRange(GetLineOf("vehicleList = {", questLua) + 1, BuildVehicleList(questDetails));
+            questLua.InsertRange(GetLineOf("walkerList = {", questLua) + 1, BuildWalkerGearList(questDetails.walkerGears));
             questLua.InsertRange(GetLineOf("heliList = {", questLua) + 1, BuildHelicopterList(questDetails));
             questLua.InsertRange(GetLineOf("hostageList = {", questLua) + 1, BuildHostageList(questDetails));
             questLua.InsertRange(GetLineOf("animalList = {", questLua) + 1, BuildAnimalList(questDetails));
@@ -394,6 +394,37 @@ namespace SOC.Classes
             return hostageList;
         }
 
+        public static List<string> BuildWalkerGearList(List<WalkerGear> walkers)
+        {
+            List<string> walkerList = new List<string>();
+
+            if (walkers.Count == 0)
+                walkerList.Add("       nil");
+            else
+                foreach(WalkerGear walker in walkers)
+                {
+                    walkerList.Add("		{");
+                    walkerList.Add(string.Format("			walkerName = \"{0}\",", walker.name));
+
+                    if (!walker.rider.Equals("NONE"))
+                        walkerList.Add(string.Format("			riderName = \"{0}\",", walker.rider));
+
+                    walkerList.Add(string.Format("			colorType = {0},", walker.color));
+
+                    walkerList.Add(string.Format("			primaryWeapon = {0},", walker.weapon));
+
+                    double rotation = 0; Double.TryParse(walker.coordinates.roty, out rotation);
+                    double yOffset = 0.0;
+                    double.TryParse(walker.coordinates.yCoord, out yOffset);
+                    yOffset += 0.783;
+
+                    walkerList.Add(string.Format("			position={{pos={{{0},{1},{2}}},rotY={3},}},", walker.coordinates.xCoord, yOffset, walker.coordinates.zCoord, rotation));
+
+                    walkerList.Add("		},");
+                }
+            return walkerList;
+        }
+
         public static List<string> BuildVehicleList(QuestEntities questDetails)
         {
             List<string> vehicleList = new List<string>();
@@ -467,6 +498,13 @@ namespace SOC.Classes
                 if (heli.isSpawn && heli.isTarget)
                 {
                     targetList.Add("		TppReinforceBlock.REINFORCE_HELI_NAME,");
+                    totalCount++;
+                }
+
+            foreach(WalkerGear walker in questDetails.walkerGears)
+                if (walker.isTarget)
+                {
+                    targetList.Add(string.Format("		\"{0}\",", walker.name));
                     totalCount++;
                 }
 

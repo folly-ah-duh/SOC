@@ -32,8 +32,9 @@ namespace SOC.UI
             SendMessage(textBoxQuestTitle.Handle, 0x1501, 1, "Example Quest Title Text");
 
 
-            LocationBoxes = new Tuple<Label, TextBox>[6] {
+            LocationBoxes = new Tuple<Label, TextBox>[7] {
                 new Tuple<Label, TextBox>(labelHos, textBoxHosCoords),
+                new Tuple<Label, TextBox>(labelwkr, textBoxWalkerCoords),
                 new Tuple<Label, TextBox>(labelVeh, textBoxVehCoords),
                 new Tuple<Label, TextBox>(labelAni, textBoxAnimalCoords),
                 new Tuple<Label, TextBox>(labelItem, textBoxItemCoords),
@@ -57,7 +58,7 @@ namespace SOC.UI
             return new DefinitionDetails(textBoxFPKName.Text, textBoxQuestNum.Text, locationID, comboBoxLoadArea.Text, 
                 new Coordinates(textBoxXCoord.Text, textBoxYCoord.Text, textBoxZCoord.Text), comboBoxRadius.Text, comboBoxCategory.Text, comboBoxReward.Text, comboBoxProgressNotifs.SelectedIndex, 
                 comboBoxCP.Text, textBoxQuestTitle.Text, textBoxQuestDesc.Text,
-                textBoxHosCoords.Text, textBoxVehCoords.Text, textBoxAnimalCoords.Text, textBoxItemCoords.Text, textBoxActiveItemCoords.Text, textBoxStMdCoords.Text,
+                 textBoxHosCoords.Text, textBoxWalkerCoords.Text, textBoxVehCoords.Text, textBoxAnimalCoords.Text, textBoxItemCoords.Text, textBoxActiveItemCoords.Text, textBoxStMdCoords.Text,
                 comboBoxRoute.Text);
         }
 
@@ -91,6 +92,7 @@ namespace SOC.UI
                 comboBoxProgressNotifs.SelectedIndex = dd.progNotif;
 
             textBoxHosCoords.Text = dd.hostageCoordinates.Replace("\n", "\r\n");
+            textBoxWalkerCoords.Text = dd.walkerGearCoordinates.Replace("\n", "\r\n");
             textBoxVehCoords.Text = dd.vehicleCoordinates.Replace("\n", "\r\n");
             textBoxAnimalCoords.Text = dd.animalCoordinates.Replace("\n", "\r\n");
             textBoxItemCoords.Text = dd.itemCoordinates.Replace("\n", "\r\n");
@@ -149,13 +151,13 @@ namespace SOC.UI
 
         internal void refreshCoordinateBoxes(QuestEntities qe)
         {
-            string updatedTest = "";
-            foreach (Hostage entity in qe.hostages)
+            string  updatedTest = "";
+            foreach (WalkerGear entity in qe.walkerGears)
             {
                 Coordinates detailCoords = entity.coordinates;
                 updatedTest += string.Format("{{pos={{{0},{1},{2}}},rotY={3},}}, \r\n", detailCoords.xCoord, detailCoords.yCoord, detailCoords.zCoord, detailCoords.roty);
             }
-            textBoxHosCoords.Text = updatedTest;
+            textBoxWalkerCoords.Text = updatedTest;
 
             updatedTest = "";
             foreach (Vehicle entity in qe.vehicles)
@@ -196,6 +198,16 @@ namespace SOC.UI
                 updatedTest += string.Format("{{pos={{{0},{1},{2}}},rotY={3},}}, \r\n", detailCoords.xCoord, detailCoords.yCoord, detailCoords.zCoord, detailCoords.roty);
             }
             textBoxStMdCoords.Text = updatedTest;
+
+            updatedTest = "";
+            foreach (Hostage entity in qe.hostages)
+            {
+                Coordinates detailCoords = entity.coordinates;
+                updatedTest += string.Format("{{pos={{{0},{1},{2}}},rotY={3},}}, \r\n", detailCoords.xCoord, detailCoords.yCoord, detailCoords.zCoord, detailCoords.roty);
+            }
+            textBoxHosCoords.Text = updatedTest;
+
+
         }
 
         private void comboBoxRegion_SelectedIndexChanged(object sender, EventArgs e)

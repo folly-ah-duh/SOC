@@ -1,4 +1,5 @@
-﻿using SOC.UI;
+﻿using SOC.Forms.Pages.QuestBoxes;
+using SOC.UI;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -981,7 +982,7 @@ namespace SOC.QuestComponents
 
             public DefinitionDetails() { }
 
-            public DefinitionDetails(string fpk, string quest, int locID, string loada, Coordinates c, string rad, string cat, string rew, int prog, string cpnme, string qtitle, string qdesc, string hcoord, string vehcoord, string anicoord, string itcoord, string acitcoord, string mdlcoord, string route)
+            public DefinitionDetails(string fpk, string quest, int locID, string loada, Coordinates c, string rad, string cat, string rew, int prog, string cpnme, string qtitle, string qdesc, string hcoord, string walkercoord, string vehcoord, string anicoord, string itcoord, string acitcoord, string mdlcoord, string route)
             {
                 FpkName = fpk; QuestNum = quest; QuestTitle = qtitle; QuestDesc = qdesc;
 
@@ -989,67 +990,70 @@ namespace SOC.QuestComponents
 
                 category = cat; progNotif = prog; reward = rew;
                 
-                hostageCoordinates = hcoord; vehicleCoordinates = vehcoord; animalCoordinates = anicoord; itemCoordinates = itcoord; activeItemCoordinates = acitcoord; modelCoordinates = mdlcoord;
+                hostageCoordinates = hcoord; vehicleCoordinates = vehcoord; animalCoordinates = anicoord; itemCoordinates = itcoord; activeItemCoordinates = acitcoord; modelCoordinates = mdlcoord; walkerGearCoordinates = walkercoord;
 
                 routeName = route;
             }
 
             [XmlElement]
-            public string QuestTitle { get; set; }
+            public string QuestTitle { get; set; } = "";
 
             [XmlElement]
-            public string QuestDesc { get; set; }
+            public string QuestDesc { get; set; } = "";
 
             [XmlAttribute]
-            public string FpkName { get; set; }
+            public string FpkName { get; set; } = "";
 
             [XmlAttribute]
-            public string QuestNum { get; set; }
+            public string QuestNum { get; set; } = "";
 
             [XmlElement]
-            public int locationID { get; set; }
+            public int locationID { get; set; } = -1;
 
             [XmlElement]
-            public string loadArea { get; set; }
+            public string loadArea { get; set; } = "";
 
             [XmlElement]
-            public Coordinates coords { get; set; }
+            public Coordinates coords { get; set; } = new Coordinates();
 
             [XmlElement]
-            public string radius { get; set; }
+            public string radius { get; set; } = "";
 
             [XmlElement]
-            public string category { get; set; }
+            public string category { get; set; } = "";
 
             [XmlElement]
-            public string CPName { get; set; }
+            public string CPName { get; set; } = "";
 
             [XmlElement]
-            public string reward { get; set; }
+            public string reward { get; set; } = "";
 
             [XmlElement]
-            public int progNotif { get; set; }
+            public int progNotif { get; set; } = -1;
 
             [XmlElement]
-            public string hostageCoordinates { get; set; }
+            public string walkerGearCoordinates { get; set; } = "";
 
             [XmlElement]
-            public string vehicleCoordinates { get; set; }
+            public string hostageCoordinates { get; set; } = "";
 
             [XmlElement]
-            public string animalCoordinates { get; set; }
+            public string vehicleCoordinates { get; set; } = "";
 
             [XmlElement]
-            public string itemCoordinates { get; set; }
+            public string animalCoordinates { get; set; } = "";
 
             [XmlElement]
-            public string activeItemCoordinates { get; set; }
+            public string itemCoordinates { get; set; } = "";
 
             [XmlElement]
-            public string modelCoordinates { get; set; }
+            public string activeItemCoordinates { get; set; } = "";
 
             [XmlElement]
-            public string routeName { get; set; }
+            public string modelCoordinates { get; set; } = "";
+
+            [XmlElement]
+            public string routeName { get; set; } = "";
 
         }
 
@@ -1059,12 +1063,13 @@ namespace SOC.QuestComponents
 
             public QuestEntities() { }
 
-            public QuestEntities(List<Enemy> questenedets, List<Enemy> cpenedets, List<Helicopter> helis, List<Hostage> hosDets, List<Vehicle> vehDets, List<Animal> anidets, List<Item> itDets, List<ActiveItem> acitdets, List<Model> MdDets, int bodyIndex, bool inter, string sst, string eneObjType, string hosObjType, string vehObjType, string aniObjType)
+            public QuestEntities(List<Enemy> questenedets, List<Enemy> cpenedets, List<Helicopter> helis, List<Hostage> hosDets, List<WalkerGear> walkers, List<Vehicle> vehDets, List<Animal> anidets, List<Item> itDets, List<ActiveItem> acitdets, List<Model> MdDets, int bodyIndex, bool inter, string sst, string eneObjType, string hosObjType, string vehObjType, string aniObjType, string walkerObjType)
             {
                 questEnemies = questenedets;
                 cpEnemies = cpenedets;
                 enemyHelicopters = helis;
                 hostages = hosDets;
+                walkerGears = walkers;
                 vehicles = vehDets;
                 items = itDets;
                 models = MdDets;
@@ -1077,6 +1082,7 @@ namespace SOC.QuestComponents
                 hostageObjectiveType = hosObjType;
                 vehicleObjectiveType = vehObjType;
                 animalObjectiveType = aniObjType;
+                walkerGearObjectiveType = walkerObjType;
             }
 
             [XmlArray]
@@ -1090,6 +1096,9 @@ namespace SOC.QuestComponents
 
             [XmlArray]
             public List<Helicopter> enemyHelicopters { get; set; } = new List<Helicopter>();
+
+            [XmlArray]
+            public List<WalkerGear> walkerGears { get; set; } = new List<WalkerGear>();
 
             [XmlArray]
             public List<Vehicle> vehicles { get; set; } = new List<Vehicle>();
@@ -1127,6 +1136,9 @@ namespace SOC.QuestComponents
             [XmlAttribute]
             public string animalObjectiveType { get; set; } = "ELIMINATE";
 
+            [XmlAttribute]
+            public string walkerGearObjectiveType { get; set; } = "ELIMINATE";
+
         }
 
         public class Enemy
@@ -1134,16 +1146,28 @@ namespace SOC.QuestComponents
 
             public Enemy() { }
 
+            public Enemy(EnemyBox d, int num)
+            {
+                isSpawn = d.e_checkBox_spawn.Checked;
+                isTarget = d.e_checkBox_target.Checked;
+                isBalaclava = d.e_checkBox_balaclava.Checked;
+                isZombie = d.e_checkBox_zombie.Checked;
+                isArmored = d.e_checkBox_armor.Checked;
+                number = num;
+                name = d.e_groupBox_main.Text;
+                body = d.e_comboBox_body.Text;
+                cRoute = d.e_comboBox_cautionroute.Text;
+                dRoute = d.e_comboBox_sneakroute.Text;
+                skill = d.e_comboBox_skill.Text;
+                staffType = d.e_comboBox_staff.Text;
+                string[] powerArray = new string[d.e_listBox_power.Items.Count];
+                d.e_listBox_power.Items.CopyTo(powerArray, 0);
+                powers = powerArray;
+            }
+
             public Enemy(int num, string nme)
             {
                 number = num; name = nme;
-            }
-
-            public Enemy(bool spawn, bool target, bool clava, bool zombie, bool armored, int num, string nme, string bod, string caution, string sneak, string skll, string staff, string[] pow)
-            {
-                isSpawn = spawn; isTarget = target; isBalaclava = clava; isZombie = zombie; isArmored = armored;
-                number = num; name = nme;
-                body = bod; cRoute = caution; dRoute = sneak; skill = skll; staffType = staff; powers = pow;
             }
 
             [XmlElement]
@@ -1191,12 +1215,12 @@ namespace SOC.QuestComponents
         {
             public Helicopter() { }
 
-            public Helicopter(bool spwn, bool target, string rt, string clas)
+            public Helicopter(HelicopterBox he)
             {
-                isSpawn = spwn;
-                isTarget = target;
-                heliRoute = rt;
-                heliClass = clas;
+                isSpawn = he.He_checkBox_spawn.Checked;
+                isTarget = he.He_checkBox_target.Checked;
+                heliRoute = he.He_comboBox_route.Text;
+                heliClass = he.He_comboBox_class.Text;
             }
 
             [XmlElement]
@@ -1218,12 +1242,17 @@ namespace SOC.QuestComponents
 
             public Hostage() { }
 
-            public Hostage(bool target, bool untied, bool injured, int num, string nme, string skll, string staff, string scare, string lang, Coordinates coords)
-            {
-                isTarget = target; isUntied = untied; isInjured = injured;
-                number = num; name = nme;
-                skill = skll; staffType = staff; scared = scare; language = lang;
-                coordinates = coords;
+            public Hostage(HostageBox d, int num) {
+                isTarget = d.h_checkBox_target.Checked;
+                isUntied = d.h_checkBox_untied.Checked;
+                isInjured = d.h_checkBox_injured.Checked;
+                number = num;
+                name = d.h_groupBox_main.Text;
+                skill = d.h_comboBox_skill.Text;
+                staffType = d.h_comboBox_staff.Text;
+                scared = d.h_comboBox_scared.Text;
+                language = d.h_comboBox_lang.Text;
+                coordinates = new Coordinates(d.h_textBox_xcoord.Text, d.h_textBox_ycoord.Text, d.h_textBox_zcoord.Text, d.h_textBox_rot.Text);
             }
 
             public Hostage(Coordinates coords, int num, string nme)
@@ -1268,12 +1297,14 @@ namespace SOC.QuestComponents
 
             public Vehicle() { }
 
-            public Vehicle(bool target, int num, string nme, int veh, string clas, Coordinates coords)
+            public Vehicle(VehicleBox d, int num)
             {
-                isTarget = target;
-                number = num; name = nme;
-                vehicleIndex = veh; vehicleClass = clas;
-                coordinates = coords;
+                isTarget = d.v_checkBox_target.Checked;
+                number = num;
+                name = d.v_groupBox_main.Text;
+                vehicleIndex = d.v_comboBox_vehicle.SelectedIndex;
+                vehicleClass = d.v_comboBox_class.Text;
+                coordinates = new Coordinates(d.v_textBox_xcoord.Text, d.v_textBox_ycoord.Text, d.v_textBox_zcoord.Text, d.v_textBox_rot.Text);
             }
 
             public Vehicle(Coordinates coords, int num, string nme)
@@ -1301,17 +1332,64 @@ namespace SOC.QuestComponents
 
         }
 
+        public class WalkerGear
+        {
+
+            public WalkerGear() { }
+
+            public WalkerGear(WalkerGearBox walkerBox, int num)
+            {
+                isTarget = walkerBox.wg_checkBox_target.Checked;
+                number = num;
+                name = walkerBox.wg_groupBox_main.Text;
+                rider = walkerBox.wg_comboBox_rider.Text;
+                color = walkerBox.wg_comboBox_paint.Text;
+                weapon = walkerBox.wg_comboBox_weapon.Text;
+                coordinates = new Coordinates(walkerBox.wg_textBox_xcoord.Text, walkerBox.wg_textBox_ycoord.Text, walkerBox.wg_textBox_zcoord.Text, walkerBox.wg_textBox_rot.Text);
+            }
+            
+            public WalkerGear(Coordinates coords, int num, string nme)
+            {
+                coordinates = coords; number = num; name = nme;
+            }
+
+            [XmlElement]
+            public bool isTarget { get; set; } = false;
+
+            [XmlElement]
+            public int number { get; set; } = 0;
+
+            [XmlAttribute]
+            public string name { get; set; } = "WalkerGear_0";
+
+            [XmlElement]
+            public string rider { get; set; } = "NONE";
+
+            [XmlElement]
+            public string color { get; set; } = "SOVIET";
+
+            [XmlElement]
+            public string weapon { get; set; } = "WG_MACHINEGUN";
+
+            [XmlElement]
+            public Coordinates coordinates { get; set; } = new Coordinates("0", "0", "0", "0");
+
+        }
+
         public class Animal
         {
 
             public Animal() { }
 
-            public Animal(bool target, int num, string nme, string cnt, string ani, string type, Coordinates coords)
+            public Animal(AnimalBox d, int num)
             {
-                isTarget = target;
-                number = num; name = nme;
-                count = cnt; animal = ani; typeID = type;
-                coordinates = coords;
+                isTarget = d.a_checkBox_isTarget.Checked;
+                number = num;
+                name = d.a_groupBox_main.Text;
+                count = d.a_comboBox_count.Text;
+                animal = d.a_comboBox_animal.Text;
+                typeID = d.a_comboBox_TypeID.Text;
+                coordinates = new Coordinates(d.a_textBox_xcoord.Text, d.a_textBox_ycoord.Text, d.a_textBox_zcoord.Text, d.a_textBox_rot.Text);
             }
 
             public Animal(Coordinates coords, int num, string nme)
@@ -1347,13 +1425,15 @@ namespace SOC.QuestComponents
             
             public Item() { }
 
-            public Item(bool box, int num, string nme, string cnt, string it, Coordinates coords, RotationQuat qcoords)
+            public Item(ItemBox d, int num)
             {
-                isBoxed = box;
-                number = num; name = nme;
-                count = cnt; item = it;
-                coordinates = coords; quatCoordinates = qcoords;
-                coordinates.roty = Fox2Info.getDegreeRot(qcoords.yval);
+                number = num; isBoxed = d.i_checkBox_boxed.Checked;
+                name = d.i_groupBox_main.Text;
+                count = d.i_comboBox_count.Text;
+                item = d.i_comboBox_item.Text;
+                coordinates = new Coordinates(d.i_textBox_xcoord.Text, d.i_textBox_ycoord.Text, d.i_textBox_zcoord.Text);
+                quatCoordinates = new RotationQuat(d.i_textBox_xrot.Text, d.i_textBox_yrot.Text, d.i_textBox_zrot.Text, d.i_textBox_wrot.Text);
+                coordinates.roty = Fox2Info.getDegreeRot(quatCoordinates.yval);
             }
 
             public Item(Coordinates coords, int num, string nme)
@@ -1397,12 +1477,14 @@ namespace SOC.QuestComponents
 
             public ActiveItem() { }
 
-            public ActiveItem(int num, string nme, string acit, Coordinates coords, RotationQuat qcoords)
+            public ActiveItem(ActiveItemBox d, int num)
             {
-                number = num; name = nme;
-                activeItem = acit;
-                coordinates = coords; quatCoordinates = qcoords;
-                coordinates.roty = Fox2Info.getDegreeRot(qcoords.yval);
+                number = num;
+                name = d.ai_groupBox_main.Text;
+                activeItem = d.ai_comboBox_activeitem.Text;
+                coordinates = new Coordinates(d.ai_textBox_xcoord.Text, d.ai_textBox_ycoord.Text, d.ai_textBox_zcoord.Text);
+                quatCoordinates = new RotationQuat(d.ai_textBox_xrot.Text, d.ai_textBox_yrot.Text, d.ai_textBox_zrot.Text, d.ai_textBox_wrot.Text);
+                coordinates.roty = Fox2Info.getDegreeRot(quatCoordinates.yval);
             }
 
             public ActiveItem(Coordinates coords, int num, string nme)
@@ -1440,13 +1522,15 @@ namespace SOC.QuestComponents
 
             public Model() { }
 
-            public Model(bool mGeom, int num, string nme, string stmd, Coordinates coords, RotationQuat qcoords)
+            public Model(ModelBox d, int num)
             {
-                missingGeom = mGeom;
-                number = num; name = nme;
-                model = stmd;
-                coordinates = coords; quatCoordinates = qcoords;
-                coordinates.roty = Fox2Info.getDegreeRot(qcoords.yval);
+                missingGeom = d.m_label_GeomNotFound.Visible;
+                number = num;
+                name = d.m_groupBox_main.Text;
+                model = d.m_comboBox_preset.Text;
+                coordinates = new Coordinates(d.m_textBox_xcoord.Text, d.m_textBox_ycoord.Text, d.m_textBox_zcoord.Text);
+                quatCoordinates = new RotationQuat(d.m_textBox_xrot.Text, d.m_textBox_yrot.Text, d.m_textBox_zrot.Text, d.m_textBox_wrot.Text);
+                coordinates.roty = Fox2Info.getDegreeRot(quatCoordinates.yval);
             }
 
             public Model(Coordinates coords, int num, string nme)

@@ -78,6 +78,7 @@ namespace SOC.UI
 
                         EntitiesManager.InitializeEntities(selectedCP, routeName,
                             BuildCoords(definitionDetails.hostageCoordinates), 
+                            BuildCoords(definitionDetails.walkerGearCoordinates),
                             BuildCoords(definitionDetails.vehicleCoordinates), 
                             BuildCoords(definitionDetails.animalCoordinates), 
                             BuildCoords(definitionDetails.itemCoordinates), 

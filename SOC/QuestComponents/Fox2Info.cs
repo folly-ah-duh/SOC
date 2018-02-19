@@ -7,36 +7,7 @@ namespace SOC.QuestComponents
         public const int baseQuestAddress = 0x02D7BCA0;
         public const int baseItemAddress = 0x10000000;
 
-        public static int[] entityClassSizes =
-        {
-            0x0,
-            0x70,
-            0x70,
-            0x70,
-            0x70,
-            0x70,
-            0xE0,
-            0x70,
-            0xE0,
-            0x70,
-            0x70,
-            0x150,
-            0x1,
-            0xE,
-            0x70,
-            0x150,
-            0x0,
-            0x1,
-            0xE,
-            0x70,
-            0x70,
-            0x70,
-            0x70,
-            0x70,
-            0x70,
-            0x70,
-            0x150,
-        };
+        public static int entityClassSize = 0x70;
 
         public static string getQuaternionY(string roty)
         {
@@ -69,19 +40,14 @@ namespace SOC.QuestComponents
         GameObject,
         TppHostage2Parameter,
         GameObjectLocator,
-        TransformEntity_Hostage,
+        TransformEntity,
         TppHostage2LocatorParameter,
         TppVehicle2AttachmentData,
         TppVehicle2LocatorParameter,
         TppVehicle2BodyData,
-        TransformEntity_Vehicle,
-        TransformEntity_Item,
         TppPickableLocatorParameter,
         StaticModel,
-        TransformEntity_StaticModel,
         TexturePackLoadConditioner,
-        GameObjectLocator_Item,
-        TransformEntity_ActiveItem,
         TppPlacedLocatorParameter,
         TppBearParameter,
         TppBearLocatorParameter, 
@@ -89,7 +55,8 @@ namespace SOC.QuestComponents
         TppWolfLocatorParameter, 
         TppAnimalParameter, 
         TppAnimalLocatorParameter,
-        TransformEntity_Animal
+        TppWalkerGear2Parameter,
+        TppWalkerGear2LocatorParameter
 
     }
 

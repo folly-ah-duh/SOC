@@ -78,6 +78,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.textBoxQuestDesc = new System.Windows.Forms.TextBox();
             this.textBoxQuestTitle = new System.Windows.Forms.TextBox();
+            this.textBoxWalkerCoords = new System.Windows.Forms.TextBox();
+            this.labelwkr = new System.Windows.Forms.Label();
             this.panelSetup.SuspendLayout();
             this.groupBoxSetup.SuspendLayout();
             this.groupBoxLocations.SuspendLayout();
@@ -429,6 +431,8 @@
             // panel1
             // 
             this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.textBoxWalkerCoords);
+            this.panel1.Controls.Add(this.labelwkr);
             this.panel1.Controls.Add(this.originAnchor);
             this.panel1.Controls.Add(this.textBoxAnimalCoords);
             this.panel1.Controls.Add(this.labelAni);
@@ -462,7 +466,7 @@
             this.textBoxAnimalCoords.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxAnimalCoords.BackColor = System.Drawing.Color.Silver;
-            this.textBoxAnimalCoords.Location = new System.Drawing.Point(3, 224);
+            this.textBoxAnimalCoords.Location = new System.Drawing.Point(3, 324);
             this.textBoxAnimalCoords.Multiline = true;
             this.textBoxAnimalCoords.Name = "textBoxAnimalCoords";
             this.textBoxAnimalCoords.Size = new System.Drawing.Size(542, 80);
@@ -471,7 +475,7 @@
             // labelAni
             // 
             this.labelAni.AutoSize = true;
-            this.labelAni.Location = new System.Drawing.Point(3, 208);
+            this.labelAni.Location = new System.Drawing.Point(3, 308);
             this.labelAni.Name = "labelAni";
             this.labelAni.Size = new System.Drawing.Size(306, 13);
             this.labelAni.TabIndex = 26;
@@ -483,7 +487,7 @@
             this.textBoxActiveItemCoords.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxActiveItemCoords.BackColor = System.Drawing.Color.Silver;
-            this.textBoxActiveItemCoords.Location = new System.Drawing.Point(3, 426);
+            this.textBoxActiveItemCoords.Location = new System.Drawing.Point(3, 526);
             this.textBoxActiveItemCoords.Multiline = true;
             this.textBoxActiveItemCoords.Name = "textBoxActiveItemCoords";
             this.textBoxActiveItemCoords.Size = new System.Drawing.Size(542, 80);
@@ -493,7 +497,7 @@
             // labelActiveItem
             // 
             this.labelActiveItem.AutoSize = true;
-            this.labelActiveItem.Location = new System.Drawing.Point(3, 410);
+            this.labelActiveItem.Location = new System.Drawing.Point(3, 510);
             this.labelActiveItem.Name = "labelActiveItem";
             this.labelActiveItem.Size = new System.Drawing.Size(293, 13);
             this.labelActiveItem.TabIndex = 24;
@@ -505,7 +509,7 @@
             this.textBoxItemCoords.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxItemCoords.BackColor = System.Drawing.Color.Silver;
-            this.textBoxItemCoords.Location = new System.Drawing.Point(3, 325);
+            this.textBoxItemCoords.Location = new System.Drawing.Point(3, 425);
             this.textBoxItemCoords.Multiline = true;
             this.textBoxItemCoords.Name = "textBoxItemCoords";
             this.textBoxItemCoords.Size = new System.Drawing.Size(542, 80);
@@ -518,7 +522,7 @@
             this.textBoxStMdCoords.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxStMdCoords.BackColor = System.Drawing.Color.Silver;
-            this.textBoxStMdCoords.Location = new System.Drawing.Point(3, 527);
+            this.textBoxStMdCoords.Location = new System.Drawing.Point(3, 627);
             this.textBoxStMdCoords.Multiline = true;
             this.textBoxStMdCoords.Name = "textBoxStMdCoords";
             this.textBoxStMdCoords.Size = new System.Drawing.Size(542, 80);
@@ -530,7 +534,7 @@
             this.textBoxHosCoords.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxHosCoords.BackColor = System.Drawing.Color.Silver;
-            this.textBoxHosCoords.Location = new System.Drawing.Point(3, 22);
+            this.textBoxHosCoords.Location = new System.Drawing.Point(3, 21);
             this.textBoxHosCoords.Multiline = true;
             this.textBoxHosCoords.Name = "textBoxHosCoords";
             this.textBoxHosCoords.Size = new System.Drawing.Size(542, 80);
@@ -539,7 +543,7 @@
             // labelHos
             // 
             this.labelHos.AutoSize = true;
-            this.labelHos.Location = new System.Drawing.Point(3, 6);
+            this.labelHos.Location = new System.Drawing.Point(3, 5);
             this.labelHos.Name = "labelHos";
             this.labelHos.Size = new System.Drawing.Size(278, 13);
             this.labelHos.TabIndex = 16;
@@ -551,7 +555,7 @@
             this.textBoxVehCoords.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxVehCoords.BackColor = System.Drawing.Color.Silver;
-            this.textBoxVehCoords.Location = new System.Drawing.Point(3, 123);
+            this.textBoxVehCoords.Location = new System.Drawing.Point(3, 223);
             this.textBoxVehCoords.Multiline = true;
             this.textBoxVehCoords.Name = "textBoxVehCoords";
             this.textBoxVehCoords.Size = new System.Drawing.Size(542, 80);
@@ -560,7 +564,7 @@
             // labelVeh
             // 
             this.labelVeh.AutoSize = true;
-            this.labelVeh.Location = new System.Drawing.Point(3, 107);
+            this.labelVeh.Location = new System.Drawing.Point(3, 207);
             this.labelVeh.Name = "labelVeh";
             this.labelVeh.Size = new System.Drawing.Size(275, 13);
             this.labelVeh.TabIndex = 18;
@@ -569,7 +573,7 @@
             // labelModel
             // 
             this.labelModel.AutoSize = true;
-            this.labelModel.Location = new System.Drawing.Point(3, 511);
+            this.labelModel.Location = new System.Drawing.Point(3, 611);
             this.labelModel.Name = "labelModel";
             this.labelModel.Size = new System.Drawing.Size(299, 13);
             this.labelModel.TabIndex = 22;
@@ -578,7 +582,7 @@
             // labelItem
             // 
             this.labelItem.AutoSize = true;
-            this.labelItem.Location = new System.Drawing.Point(3, 309);
+            this.labelItem.Location = new System.Drawing.Point(3, 409);
             this.labelItem.Name = "labelItem";
             this.labelItem.Size = new System.Drawing.Size(303, 13);
             this.labelItem.TabIndex = 20;
@@ -674,6 +678,27 @@
             this.textBoxQuestTitle.Size = new System.Drawing.Size(502, 20);
             this.textBoxQuestTitle.TabIndex = 13;
             // 
+            // textBoxWalkerCoords
+            // 
+            this.textBoxWalkerCoords.AcceptsReturn = true;
+            this.textBoxWalkerCoords.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxWalkerCoords.BackColor = System.Drawing.Color.Silver;
+            this.textBoxWalkerCoords.Location = new System.Drawing.Point(3, 122);
+            this.textBoxWalkerCoords.Multiline = true;
+            this.textBoxWalkerCoords.Name = "textBoxWalkerCoords";
+            this.textBoxWalkerCoords.Size = new System.Drawing.Size(542, 80);
+            this.textBoxWalkerCoords.TabIndex = 28;
+            // 
+            // labelwkr
+            // 
+            this.labelwkr.AutoSize = true;
+            this.labelwkr.Location = new System.Drawing.Point(3, 106);
+            this.labelwkr.Name = "labelwkr";
+            this.labelwkr.Size = new System.Drawing.Size(300, 13);
+            this.labelwkr.TabIndex = 29;
+            this.labelwkr.Text = "Walker Gear Locations: {pos={X, Y, Z},rotY=Y-Axis Rotation,},";
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -747,5 +772,7 @@
         private System.Windows.Forms.Label originAnchor;
         public System.Windows.Forms.ComboBox comboBoxRoute;
         private System.Windows.Forms.Label label15;
+        public System.Windows.Forms.TextBox textBoxWalkerCoords;
+        public System.Windows.Forms.Label labelwkr;
     }
 }

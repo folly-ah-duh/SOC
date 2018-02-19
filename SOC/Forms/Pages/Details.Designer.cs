@@ -170,6 +170,7 @@ namespace SOC.UI
             this.comboBox_WalkerObjType.Items.AddRange(new object[] {
             "ELIMINATE",
             "RECOVERED"});
+            this.comboBox_WalkerObjType.SelectedIndex = 0;
             this.comboBox_WalkerObjType.Location = new System.Drawing.Point(125, 0);
             this.comboBox_WalkerObjType.Name = "comboBox_WalkerObjType";
             this.comboBox_WalkerObjType.Size = new System.Drawing.Size(130, 21);
@@ -219,6 +220,7 @@ namespace SOC.UI
             this.comboBox_heliObjType.FormattingEnabled = true;
             this.comboBox_heliObjType.Items.AddRange(new object[] {
             "ELIMINATE"});
+            this.comboBox_heliObjType.SelectedIndex = 0;
             this.comboBox_heliObjType.Location = new System.Drawing.Point(125, 0);
             this.comboBox_heliObjType.Name = "comboBox_heliObjType";
             this.comboBox_heliObjType.Size = new System.Drawing.Size(130, 21);
@@ -306,6 +308,7 @@ namespace SOC.UI
             this.comboBox_eneObjType2.Items.AddRange(new object[] {
             "ELIMINATE",
             "RECOVERED"});
+            this.comboBox_eneObjType2.SelectedIndex = 0;
             this.comboBox_eneObjType2.Location = new System.Drawing.Point(125, 0);
             this.comboBox_eneObjType2.Name = "comboBox_eneObjType2";
             this.comboBox_eneObjType2.Size = new System.Drawing.Size(130, 21);
@@ -427,6 +430,7 @@ namespace SOC.UI
             this.comboBox_eneObjType1.Items.AddRange(new object[] {
             "ELIMINATE",
             "RECOVERED"});
+            this.comboBox_eneObjType1.SelectedIndex = 0;
             this.comboBox_eneObjType1.Location = new System.Drawing.Point(125, 0);
             this.comboBox_eneObjType1.Name = "comboBox_eneObjType1";
             this.comboBox_eneObjType1.Size = new System.Drawing.Size(130, 21);
@@ -498,6 +502,7 @@ namespace SOC.UI
             this.comboBox_aniObjType.Items.AddRange(new object[] {
             "ELIMINATE",
             "RECOVERED"});
+            this.comboBox_aniObjType.SelectedIndex = 0;
             this.comboBox_aniObjType.Location = new System.Drawing.Point(125, 0);
             this.comboBox_aniObjType.Name = "comboBox_aniObjType";
             this.comboBox_aniObjType.Size = new System.Drawing.Size(130, 21);
@@ -547,6 +552,7 @@ namespace SOC.UI
             this.comboBox_vehObjType.Items.AddRange(new object[] {
             "ELIMINATE",
             "RECOVERED"});
+            this.comboBox_vehObjType.SelectedIndex = 0;
             this.comboBox_vehObjType.Location = new System.Drawing.Point(125, 0);
             this.comboBox_vehObjType.Name = "comboBox_vehObjType";
             this.comboBox_vehObjType.Size = new System.Drawing.Size(130, 21);
@@ -648,6 +654,7 @@ namespace SOC.UI
             this.comboBox_hosObjType.Items.AddRange(new object[] {
             "ELIMINATE",
             "RECOVERED"});
+            this.comboBox_hosObjType.SelectedIndex = 0;
             this.comboBox_hosObjType.Location = new System.Drawing.Point(125, 0);
             this.comboBox_hosObjType.Name = "comboBox_hosObjType";
             this.comboBox_hosObjType.Size = new System.Drawing.Size(130, 21);

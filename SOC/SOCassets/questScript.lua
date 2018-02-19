@@ -253,7 +253,7 @@ quest_step.QStep_Main = {
               walkerGearGameId = vars.playerVehicleGameObjectId
               if questWalkerGearList[walkerGearGameId] then
                 playerWGResetPosition = {pos= {vars.playerPosX, vars.playerPosY + 1, vars.playerPosZ},rotY= 0,}
-                GkEventTimerManager.Start("OutOfMostActiveArea", 8)
+                GkEventTimerManager.Start("OutOfMostActiveArea", 7)
                 exitOnce = this.OneTimeAnnounce("The Walker Gear cannot travel beyond this point.", "Return to the Side Op area.", exitOnce)
               end
             end
@@ -264,7 +264,7 @@ quest_step.QStep_Main = {
               inMostActiveQuestArea = true
               if GkEventTimerManager.IsTimerActive("OutOfMostActiveArea") and walkerGearGameId == vars.playerVehicleGameObjectId then
                 GkEventTimerManager.Stop("OutOfMostActiveArea")
-                GkEventTimerManager.Start("AnnounceOnceCooldown", 5)
+                GkEventTimerManager.Start("AnnounceOnceCooldown", 3)
               end
             end
           },

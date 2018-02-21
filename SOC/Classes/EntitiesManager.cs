@@ -26,6 +26,7 @@ namespace SOC.Classes
         private static string vehicleObjectiveType = "ELIMINATE";
         private static string animalObjectiveType = "ELIMINATE";
         private static string walkerObjectiveType = "ELIMINATE";
+        private static string activeItemObjectiveType = "ELIMINATE";
 
         public static void check()
         {
@@ -34,7 +35,7 @@ namespace SOC.Classes
 
         public static QuestEntities GetQuestEntities()
         {
-            return new QuestEntities(questEnemies, cpEnemies, helicopters, hostages, walkerGears, vehicles, animals, items, activeItems, models, hostageBodyIndex, interrogateForHostages, enemySubType, enemyObjectiveType, hostageObjectiveType, vehicleObjectiveType, animalObjectiveType, walkerObjectiveType);
+            return new QuestEntities(questEnemies, cpEnemies, helicopters, hostages, walkerGears, vehicles, animals, items, activeItems, models, hostageBodyIndex, interrogateForHostages, enemySubType, enemyObjectiveType, hostageObjectiveType, vehicleObjectiveType, animalObjectiveType, walkerObjectiveType, activeItemObjectiveType);
         }
 
         public static void setQuestEntities(QuestEntities q)
@@ -42,7 +43,7 @@ namespace SOC.Classes
             questEnemies = q.questEnemies; cpEnemies = q.cpEnemies; helicopters = q.enemyHelicopters;
             hostages = q.hostages; walkerGears = q.walkerGears;  vehicles = q.vehicles; animals = q.animals; items = q.items; activeItems = q.activeItems; models = q.models;
             hostageBodyIndex = q.hostageBodyIndex; interrogateForHostages = q.canInter; enemySubType = q.soldierSubType;
-            enemyObjectiveType = q.enemyObjectiveType; hostageObjectiveType = q.hostageObjectiveType; vehicleObjectiveType = q.vehicleObjectiveType; animalObjectiveType = q.animalObjectiveType; walkerObjectiveType = q.walkerGearObjectiveType;
+            enemyObjectiveType = q.enemyObjectiveType; hostageObjectiveType = q.hostageObjectiveType; vehicleObjectiveType = q.vehicleObjectiveType; animalObjectiveType = q.animalObjectiveType; walkerObjectiveType = q.walkerGearObjectiveType; activeItemObjectiveType = q.activeItemObjectiveType;
         }
 
         public static void ClearEntities()
@@ -56,6 +57,7 @@ namespace SOC.Classes
             vehicleObjectiveType = "ELIMINATE";
             animalObjectiveType = "ELIMINATE";
             walkerObjectiveType = "ELIMINATE";
+            activeItemObjectiveType = "ELIMINATE";
     }
 
         public static void InitializeEntities(CP enemyCP, string routeFile, List<Coordinates> hostageCoords, List<Coordinates> walkerCoords, List<Coordinates> vehicleCoords, List<Coordinates> animalCoords, List<Coordinates> itemCoords, List<Coordinates> activeitemCoords, List<Coordinates> modelCoords)

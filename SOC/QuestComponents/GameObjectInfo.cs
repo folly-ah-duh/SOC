@@ -1063,7 +1063,7 @@ namespace SOC.QuestComponents
 
             public QuestEntities() { }
 
-            public QuestEntities(List<Enemy> questenedets, List<Enemy> cpenedets, List<Helicopter> helis, List<Hostage> hosDets, List<WalkerGear> walkers, List<Vehicle> vehDets, List<Animal> anidets, List<Item> itDets, List<ActiveItem> acitdets, List<Model> MdDets, int bodyIndex, bool inter, string sst, string eneObjType, string hosObjType, string vehObjType, string aniObjType, string walkerObjType)
+            public QuestEntities(List<Enemy> questenedets, List<Enemy> cpenedets, List<Helicopter> helis, List<Hostage> hosDets, List<WalkerGear> walkers, List<Vehicle> vehDets, List<Animal> anidets, List<Item> itDets, List<ActiveItem> acitdets, List<Model> MdDets, int bodyIndex, bool inter, string sst, string eneObjType, string hosObjType, string vehObjType, string aniObjType, string walkerObjType, string acItObjType)
             {
                 questEnemies = questenedets;
                 cpEnemies = cpenedets;
@@ -1083,6 +1083,7 @@ namespace SOC.QuestComponents
                 vehicleObjectiveType = vehObjType;
                 animalObjectiveType = aniObjType;
                 walkerGearObjectiveType = walkerObjType;
+                activeItemObjectiveType = acItObjType;
             }
 
             [XmlArray]
@@ -1138,6 +1139,9 @@ namespace SOC.QuestComponents
 
             [XmlAttribute]
             public string walkerGearObjectiveType { get; set; } = "ELIMINATE";
+
+            [XmlAttribute]
+            public string activeItemObjectiveType { get; set; } = "ELIMINATE";
 
         }
 
@@ -1427,7 +1431,8 @@ namespace SOC.QuestComponents
 
             public Item(ItemBox d, int num)
             {
-                number = num; isBoxed = d.i_checkBox_boxed.Checked;
+                number = num; isTarget = d.i_checkBox_target.Checked;
+                isBoxed = d.i_checkBox_boxed.Checked;
                 name = d.i_groupBox_main.Text;
                 count = d.i_comboBox_count.Text;
                 item = d.i_comboBox_item.Text;
@@ -1451,6 +1456,9 @@ namespace SOC.QuestComponents
 
             [XmlElement]
             public bool isBoxed { get; set; } = false;
+
+            [XmlElement]
+            public bool isTarget { get; set; } = false;
 
             [XmlElement]
             public int number { get; set; } = 0;
@@ -1479,7 +1487,7 @@ namespace SOC.QuestComponents
 
             public ActiveItem(ActiveItemBox d, int num)
             {
-                number = num;
+                number = num; isTarget = d.ai_checkBox_target.Checked;
                 name = d.ai_groupBox_main.Text;
                 activeItem = d.ai_comboBox_activeitem.Text;
                 coordinates = new Coordinates(d.ai_textBox_xcoord.Text, d.ai_textBox_ycoord.Text, d.ai_textBox_zcoord.Text);
@@ -1502,6 +1510,9 @@ namespace SOC.QuestComponents
 
             [XmlElement]
             public int number { get; set; } = 0;
+
+            [XmlElement]
+            public bool isTarget { get; set; } = false;
 
             [XmlAttribute]
             public string name { get; set; } = "Active_Item_0";

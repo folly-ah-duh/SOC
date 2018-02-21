@@ -7,10 +7,10 @@ local StrCode32Table = Tpp.StrCode32Table
 local GetGameObjectId = GameObject.GetGameObjectId
 local ELIMINATE = TppDefine.QUEST_TYPE.ELIMINATE
 local RECOVERED = TppDefine.QUEST_TYPE.RECOVERED
+local KILLREQUIRED = 9
 local CLEAR = TppDefine.QUEST_CLEAR_TYPE.CLEAR
 local NONE = TppDefine.QUEST_CLEAR_TYPE.NONE
 local FAILURE = TppDefine.QUEST_CLEAR_TYPE.FAILURE
-local UPDATE = TppDefine.QUEST_CLEAR_TYPE.UPDATE
 
 local CPNAME = ""
 local SUBTYPE = ""
@@ -63,6 +63,10 @@ this.QUEST_TABLE = {
 	targetList = {
 	  
 	},
+	
+    targetItemList = {
+      
+    },
 
 	targetAnimalList = {
 	
@@ -198,6 +202,35 @@ quest_step.QStep_Main = {
                 if hostagei >= hostageCount then
                   this.SwitchEnableQuestHighIntTable( false, CPNAME, this.questCpInterrogation )
                 end
+              end
+            end
+          },
+        },
+        Player = {
+          {
+            msg = "OnPickUpWeapon",
+            func = function( playerIndex, equipId)
+              local isClearType = this.CheckQuestAllTargetDynamic("PickUp", equipId)
+              TppQuest.ClearWithSave( isClearType )
+            end
+          },
+          { 
+            msg = "OnPickUpPlaced",
+            func = function( playerGameObjectId, equipId, index, isPlayer )
+              if TppPlaced.IsQuestBlock(index) then
+                local isClearType = this.CheckQuestAllTargetDynamic("PickUp", equipId)
+                TppQuest.ClearWithSave(isClearType)
+              end
+            end
+          },
+        },
+        Placed = {
+          { 
+            msg = "OnActivatePlaced",
+            func = function( equipId, index )
+              if TppPlaced.IsQuestBlock(index) then
+                local isClearType = this.CheckQuestAllTargetDynamic("Activate", equipId)
+                TppQuest.ClearWithSave(isClearType)
               end
             end
           },
@@ -386,6 +419,7 @@ local vehicleQuestType = ELIMINATE
 local hostageQuestType = ELIMINATE
 local animalQuestType = ELIMINATE
 local walkerQuestType = ELIMINATE
+local itemQuestType = ELIMINATE
 
 function this.CheckQuestAllTargetDynamic(messageId, gameId, checkAnimalId)
 
@@ -394,6 +428,7 @@ function this.CheckQuestAllTargetDynamic(messageId, gameId, checkAnimalId)
   local objectiveCompleteCount = 0
   local objectiveFailedCount = 0
   local totalTargets = 0
+
 
   -- step 0: Confirm gameId is the target and set its new messageId
   local currentQuestName=TppQuest.GetCurrentQuestName()
@@ -430,12 +465,23 @@ function this.CheckQuestAllTargetDynamic(messageId, gameId, checkAnimalId)
       elseif targetInfo.idType == "targetName" then
         local animalGameId = GetGameObjectId(animalId)
         if animalGameId == gameId then
-          targetInfo.messageId = messageId or "None"
+          targetInfo.messageId = messageId
           inTargetList = true
         end
       end
     end
   end
+
+  if messageId == "PickUp" or messageId == "Activate" then
+    for i, targetInfo in pairs(this.QUEST_TABLE.targetItemList) do
+      if gameId == targetInfo.equipId and targetInfo.messageId == "None" then
+        inTargetList = true
+        targetInfo.messageId = messageId
+    break
+      end
+    end
+  end
+  
 
   if inTargetList == false then
     return NONE
@@ -470,7 +516,13 @@ function this.CheckQuestAllTargetDynamic(messageId, gameId, checkAnimalId)
         elseif dynamicQuestType == ELIMINATE then -- setting recovery messages to add to objectiveFailedCount can allow for kill-required missions?
           if (targetMessageId == "Fulton") or (targetMessageId == "InHelicopter") or (targetMessageId == "FultonFailed") or (targetMessageId == "Dead") or (targetMessageId == "VehicleBroken") or (targetMessageId == "LostControl") then
             objectiveCompleteCount = objectiveCompleteCount + 1
-        end
+		  end
+        elseif dynamicQuestType == KILLREQUIRED then
+		  if (targetMessageId == "FultonFailed") or (targetMessageId == "Dead") or (targetMessageId == "VehicleBroken") or (targetMessageId == "LostControl") then
+            objectiveCompleteCount = objectiveCompleteCount + 1
+          elseif (targetMessageId == "Fulton") or (targetMessageId == "InHelicopter")  then
+            objectiveFailedCount = objectiveFailedCount + 1
+          end
         end
       end
       totalTargets = totalTargets + 1
@@ -495,10 +547,44 @@ function this.CheckQuestAllTargetDynamic(messageId, gameId, checkAnimalId)
         if (targetMessageId == "Fulton") or (targetMessageId == "FultonFailed") or (targetMessageId == "Dead") then
           objectiveCompleteCount = objectiveCompleteCount + 1
         end
+	  elseif dynamicQuestType == KILLREQUIRED then
+	    if (targetMessageId == "FultonFailed") or (targetMessageId == "Dead") then
+          objectiveCompleteCount = objectiveCompleteCount + 1
+        elseif (targetMessageId == "Fulton") then
+          objectiveFailedCount = objectiveFailedCount + 1
+        end
       end
     end
     totalTargets = totalTargets + 1
   end
+  
+  --Step 1 & 2: For items
+  dynamicQuestType = itemQuestType
+  for i, targetInfo in pairs(this.QUEST_TABLE.targetItemList) do
+    local targetMessageId = targetInfo.messageId
+  
+  if targetMessageId ~= "None" then
+    if dynamicQuestType == RECOVERED then
+      if (targetMessageId == "PickUp") then
+        objectiveCompleteCount = objectiveCompleteCount + 1
+      elseif (targetMessageId == "Activate") then
+        objectiveFailedCount = objectiveFailedCount + 1
+      end
+    elseif dynamicQuestType == ELIMINATE then
+      if (targetMessageId == "PickUp") or (targetMessageId == "Activate") then
+        objectiveCompleteCount = objectiveCompleteCount + 1
+      end
+	elseif dynamicQuestType == KILLREQUIRED then
+	  if (targetMessageId == "Activate") then
+        objectiveCompleteCount = objectiveCompleteCount + 1
+      elseif (targetMessageId == "PickUp") then
+        objectiveFailedCount = objectiveFailedCount + 1
+      end
+    end
+  end
+    totalTargets = totalTargets + 1
+  end
+
 
   --Step 3: Determine Clear Type
   if totalTargets > 0 then
@@ -508,7 +594,10 @@ function this.CheckQuestAllTargetDynamic(messageId, gameId, checkAnimalId)
       return FAILURE
     elseif objectiveCompleteCount > 0 then
       if intendedTarget == true then
-        return UPDATE
+        local showAnnounceLogId=TppQuest.questCompleteLangIds[TppQuest.GetCurrentQuestName()]
+		if showAnnounceLogId then
+			TppUI.ShowAnnounceLog(showAnnounceLogId,objectiveCompleteCount,totalTargets)
+		end
       end
     end
   end

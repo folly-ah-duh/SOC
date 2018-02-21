@@ -13,6 +13,8 @@ namespace SOC.Forms.Pages.QuestBoxes
         ActiveItem activeitem;
 
         public GroupBox ai_groupBox_main;
+        public CheckBox ai_checkBox_target;
+        public Label ai_label_target;
         public TextBox ai_textBox_zcoord;
         public TextBox ai_textBox_ycoord;
         public TextBox ai_textBox_xcoord;
@@ -52,6 +54,8 @@ namespace SOC.Forms.Pages.QuestBoxes
             this.ai_textBox_wrot = new System.Windows.Forms.TextBox();
             this.ai_label_activeitem = new System.Windows.Forms.Label();
             this.ai_comboBox_activeitem = new System.Windows.Forms.ComboBox();
+            this.ai_checkBox_target = new CheckBox();
+            this.ai_label_target = new Label();
             this.ai_groupBox_main.SuspendLayout();
 
             this.ai_groupBox_main.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -67,14 +71,29 @@ namespace SOC.Forms.Pages.QuestBoxes
             this.ai_groupBox_main.Controls.Add(this.ai_textBox_ycoord);
             this.ai_groupBox_main.Controls.Add(this.ai_textBox_xcoord);
             this.ai_groupBox_main.Controls.Add(this.ai_label_coord);
+            this.ai_groupBox_main.Controls.Add(this.ai_label_target);
+            this.ai_groupBox_main.Controls.Add(this.ai_checkBox_target);
             this.ai_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
-            this.ai_groupBox_main.Location = new System.Drawing.Point(3, 3 + (activeitem.number * 113));
+            this.ai_groupBox_main.Location = new System.Drawing.Point(3, 27 + (activeitem.number * 113));
             this.ai_groupBox_main.Name = "ai_groupBox_main";
-            this.ai_groupBox_main.Size = new System.Drawing.Size(width, 95);
+            this.ai_groupBox_main.Size = new System.Drawing.Size(width, 119);
             this.ai_groupBox_main.TabIndex = 0;
             this.ai_groupBox_main.TabStop = false;
             this.ai_groupBox_main.Text = activeitem.name;
             this.ai_groupBox_main.Click += new System.EventHandler(FocusGroupBox);
+            // 
+            // i_checkBox_target
+            // 
+            this.ai_checkBox_target.Location = new System.Drawing.Point(84, 66);
+            this.ai_checkBox_target.Name = "i_checkBox_target";
+            this.ai_checkBox_target.Size = new System.Drawing.Size(17, 18);
+            this.ai_checkBox_target.UseVisualStyleBackColor = true;
+            ai_checkBox_target.Checked = activeitem.isTarget;
+            this.ai_label_target.AutoSize = true;
+            this.ai_label_target.Location = new System.Drawing.Point(18, 67);
+            this.ai_label_target.Name = "i_label_target";
+            this.ai_label_target.Size = new System.Drawing.Size(52, 13);
+            this.ai_label_target.Text = "Is Target:";
             // 
             // ai_label_coord
             // 
@@ -153,7 +172,7 @@ namespace SOC.Forms.Pages.QuestBoxes
             // ai_label_activeitem
             // 
             this.ai_label_activeitem.AutoSize = true;
-            this.ai_label_activeitem.Location = new System.Drawing.Point(7, 68);
+            this.ai_label_activeitem.Location = new System.Drawing.Point(7, 92);
             this.ai_label_activeitem.Name = "ai_label_activeitem";
             this.ai_label_activeitem.Size = new System.Drawing.Size(63, 13);
             this.ai_label_activeitem.TabIndex = 9;
@@ -165,7 +184,7 @@ namespace SOC.Forms.Pages.QuestBoxes
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ai_comboBox_activeitem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ai_comboBox_activeitem.FormattingEnabled = true;
-            this.ai_comboBox_activeitem.Location = new System.Drawing.Point(84, 65);
+            this.ai_comboBox_activeitem.Location = new System.Drawing.Point(84, 89);
             this.ai_comboBox_activeitem.Name = "ai_comboBox_activeitem";
             this.ai_comboBox_activeitem.Items.AddRange(activeItems);
             this.ai_comboBox_activeitem.Size = new System.Drawing.Size(comboboxWidth, 21);

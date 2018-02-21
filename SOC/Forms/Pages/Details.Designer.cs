@@ -87,12 +87,17 @@ namespace SOC.UI
             this.h_checkBox_intrgt = new System.Windows.Forms.CheckBox();
             this.comboBox_Body = new System.Windows.Forms.ComboBox();
             this.label_Body = new System.Windows.Forms.Label();
+            this.label_ItObjType = new System.Windows.Forms.Label();
+            this.comboBox_itObjType = new System.Windows.Forms.ComboBox();
+            this.label_acItObjType = new System.Windows.Forms.Label();
+            this.comboBox_acItObjType = new System.Windows.Forms.ComboBox();
             this.panelDetails.SuspendLayout();
             this.groupWalkerDet.SuspendLayout();
             this.panelWalkerDet.SuspendLayout();
             this.groupHeliDet.SuspendLayout();
             this.panelHeliDet.SuspendLayout();
             this.groupActiveItemDet.SuspendLayout();
+            this.panelAcItDet.SuspendLayout();
             this.groupExistingEneDet.SuspendLayout();
             this.panelCPEnemyDet.SuspendLayout();
             this.groupNewEneDet.SuspendLayout();
@@ -103,6 +108,7 @@ namespace SOC.UI
             this.panelVehDet.SuspendLayout();
             this.groupStMdDet.SuspendLayout();
             this.groupItemDet.SuspendLayout();
+            this.panelItemDet.SuspendLayout();
             this.groupHosDet.SuspendLayout();
             this.panelHosDet.SuspendLayout();
             this.SuspendLayout();
@@ -169,12 +175,13 @@ namespace SOC.UI
             this.comboBox_WalkerObjType.FormattingEnabled = true;
             this.comboBox_WalkerObjType.Items.AddRange(new object[] {
             "ELIMINATE",
-            "RECOVERED"});
-            this.comboBox_WalkerObjType.SelectedIndex = 0;
+            "RECOVERED",
+            "KILLREQUIRED"});
             this.comboBox_WalkerObjType.Location = new System.Drawing.Point(125, 0);
             this.comboBox_WalkerObjType.Name = "comboBox_WalkerObjType";
             this.comboBox_WalkerObjType.Size = new System.Drawing.Size(130, 21);
             this.comboBox_WalkerObjType.TabIndex = 12;
+            this.comboBox_WalkerObjType.Text = "ELIMINATE";
             // 
             // groupHeliDet
             // 
@@ -219,12 +226,12 @@ namespace SOC.UI
             this.comboBox_heliObjType.Enabled = false;
             this.comboBox_heliObjType.FormattingEnabled = true;
             this.comboBox_heliObjType.Items.AddRange(new object[] {
-            "ELIMINATE"});
-            this.comboBox_heliObjType.SelectedIndex = 0;
+            "KILLREQUIRED"});
             this.comboBox_heliObjType.Location = new System.Drawing.Point(125, 0);
             this.comboBox_heliObjType.Name = "comboBox_heliObjType";
             this.comboBox_heliObjType.Size = new System.Drawing.Size(130, 21);
             this.comboBox_heliObjType.TabIndex = 12;
+            this.comboBox_heliObjType.Text = "KILLREQUIRED";
             // 
             // originAnchor
             // 
@@ -252,6 +259,8 @@ namespace SOC.UI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelAcItDet.AutoScroll = true;
+            this.panelAcItDet.Controls.Add(this.label_acItObjType);
+            this.panelAcItDet.Controls.Add(this.comboBox_acItObjType);
             this.panelAcItDet.Location = new System.Drawing.Point(3, 16);
             this.panelAcItDet.Name = "panelAcItDet";
             this.panelAcItDet.Size = new System.Drawing.Size(258, 424);
@@ -307,12 +316,13 @@ namespace SOC.UI
             this.comboBox_eneObjType2.FormattingEnabled = true;
             this.comboBox_eneObjType2.Items.AddRange(new object[] {
             "ELIMINATE",
-            "RECOVERED"});
-            this.comboBox_eneObjType2.SelectedIndex = 0;
+            "RECOVERED",
+            "KILLREQUIRED"});
             this.comboBox_eneObjType2.Location = new System.Drawing.Point(125, 0);
             this.comboBox_eneObjType2.Name = "comboBox_eneObjType2";
             this.comboBox_eneObjType2.Size = new System.Drawing.Size(130, 21);
             this.comboBox_eneObjType2.TabIndex = 10;
+            this.comboBox_eneObjType2.Text = "ELIMINATE";
             // 
             // label_subtype2
             // 
@@ -429,13 +439,14 @@ namespace SOC.UI
             this.comboBox_eneObjType1.FormattingEnabled = true;
             this.comboBox_eneObjType1.Items.AddRange(new object[] {
             "ELIMINATE",
-            "RECOVERED"});
-            this.comboBox_eneObjType1.SelectedIndex = 0;
+            "RECOVERED",
+            "KILLREQUIRED"});
             this.comboBox_eneObjType1.Location = new System.Drawing.Point(125, 0);
             this.comboBox_eneObjType1.Name = "comboBox_eneObjType1";
             this.comboBox_eneObjType1.Size = new System.Drawing.Size(130, 21);
             this.comboBox_eneObjType1.TabIndex = 1;
             this.comboBox_eneObjType1.SelectedIndexChanged += new System.EventHandler(this.comboBox_eneObjType1_SelectedIndexChanged);
+            this.comboBox_eneObjType1.Text = "ELIMINATE";
             // 
             // label_subtype
             // 
@@ -501,12 +512,13 @@ namespace SOC.UI
             this.comboBox_aniObjType.FormattingEnabled = true;
             this.comboBox_aniObjType.Items.AddRange(new object[] {
             "ELIMINATE",
-            "RECOVERED"});
-            this.comboBox_aniObjType.SelectedIndex = 0;
+            "RECOVERED",
+            "KILLREQUIRED"});
             this.comboBox_aniObjType.Location = new System.Drawing.Point(125, 0);
             this.comboBox_aniObjType.Name = "comboBox_aniObjType";
             this.comboBox_aniObjType.Size = new System.Drawing.Size(130, 21);
             this.comboBox_aniObjType.TabIndex = 16;
+            this.comboBox_aniObjType.Text = "ELIMINATE";
             // 
             // groupVehDet
             // 
@@ -551,12 +563,13 @@ namespace SOC.UI
             this.comboBox_vehObjType.FormattingEnabled = true;
             this.comboBox_vehObjType.Items.AddRange(new object[] {
             "ELIMINATE",
-            "RECOVERED"});
-            this.comboBox_vehObjType.SelectedIndex = 0;
+            "RECOVERED",
+            "KILLREQUIRED"});
             this.comboBox_vehObjType.Location = new System.Drawing.Point(125, 0);
             this.comboBox_vehObjType.Name = "comboBox_vehObjType";
             this.comboBox_vehObjType.Size = new System.Drawing.Size(130, 21);
             this.comboBox_vehObjType.TabIndex = 14;
+            this.comboBox_vehObjType.Text = "ELIMINATE";
             // 
             // groupStMdDet
             // 
@@ -600,6 +613,8 @@ namespace SOC.UI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelItemDet.AutoScroll = true;
+            this.panelItemDet.Controls.Add(this.label_ItObjType);
+            this.panelItemDet.Controls.Add(this.comboBox_itObjType);
             this.panelItemDet.Location = new System.Drawing.Point(3, 16);
             this.panelItemDet.Name = "panelItemDet";
             this.panelItemDet.Size = new System.Drawing.Size(258, 424);
@@ -653,12 +668,13 @@ namespace SOC.UI
             this.comboBox_hosObjType.FormattingEnabled = true;
             this.comboBox_hosObjType.Items.AddRange(new object[] {
             "ELIMINATE",
-            "RECOVERED"});
-            this.comboBox_hosObjType.SelectedIndex = 0;
+            "RECOVERED",
+            "KILLREQUIRED"});
             this.comboBox_hosObjType.Location = new System.Drawing.Point(125, 0);
             this.comboBox_hosObjType.Name = "comboBox_hosObjType";
             this.comboBox_hosObjType.Size = new System.Drawing.Size(130, 21);
             this.comboBox_hosObjType.TabIndex = 12;
+            this.comboBox_hosObjType.Text = "ELIMINATE";
             // 
             // h_label_intrgt
             // 
@@ -703,6 +719,56 @@ namespace SOC.UI
             this.label_Body.TabIndex = 2;
             this.label_Body.Text = "Body:";
             // 
+            // label_ItObjType
+            // 
+            this.label_ItObjType.AutoSize = true;
+            this.label_ItObjType.Enabled = false;
+            this.label_ItObjType.Location = new System.Drawing.Point(3, 3);
+            this.label_ItObjType.Name = "label_ItObjType";
+            this.label_ItObjType.Size = new System.Drawing.Size(116, 13);
+            this.label_ItObjType.TabIndex = 19;
+            this.label_ItObjType.Text = "Target Objective Type:";
+            // 
+            // comboBox_itObjType
+            // 
+            this.comboBox_itObjType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox_itObjType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_itObjType.FormattingEnabled = true;
+            this.comboBox_itObjType.Enabled = false;
+            this.comboBox_itObjType.Items.AddRange(new object[] {
+            "RECOVERED"});
+            this.comboBox_itObjType.Location = new System.Drawing.Point(125, 0);
+            this.comboBox_itObjType.Name = "comboBox_itObjType";
+            this.comboBox_itObjType.Size = new System.Drawing.Size(130, 21);
+            this.comboBox_itObjType.TabIndex = 18;
+            this.comboBox_itObjType.Text = "RECOVERED";
+            // 
+            // label_acItObjType
+            // 
+            this.label_acItObjType.AutoSize = true;
+            this.label_acItObjType.Location = new System.Drawing.Point(3, 3);
+            this.label_acItObjType.Name = "label_acItObjType";
+            this.label_acItObjType.Size = new System.Drawing.Size(116, 13);
+            this.label_acItObjType.TabIndex = 19;
+            this.label_acItObjType.Text = "Target Objective Type:";
+            // 
+            // comboBox_acItObjType
+            // 
+            this.comboBox_acItObjType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox_acItObjType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_acItObjType.FormattingEnabled = true;
+            this.comboBox_acItObjType.Items.AddRange(new object[] {
+            "ELIMINATE",
+            "RECOVERED",
+            "KILLREQUIRED"});
+            this.comboBox_acItObjType.Location = new System.Drawing.Point(125, 0);
+            this.comboBox_acItObjType.Name = "comboBox_acItObjType";
+            this.comboBox_acItObjType.Size = new System.Drawing.Size(130, 21);
+            this.comboBox_acItObjType.TabIndex = 18;
+            this.comboBox_acItObjType.Text = "ELIMINATE";
+            // 
             // Details
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -718,6 +784,8 @@ namespace SOC.UI
             this.panelHeliDet.ResumeLayout(false);
             this.panelHeliDet.PerformLayout();
             this.groupActiveItemDet.ResumeLayout(false);
+            this.panelAcItDet.ResumeLayout(false);
+            this.panelAcItDet.PerformLayout();
             this.groupExistingEneDet.ResumeLayout(false);
             this.panelCPEnemyDet.ResumeLayout(false);
             this.panelCPEnemyDet.PerformLayout();
@@ -732,6 +800,8 @@ namespace SOC.UI
             this.panelVehDet.PerformLayout();
             this.groupStMdDet.ResumeLayout(false);
             this.groupItemDet.ResumeLayout(false);
+            this.panelItemDet.ResumeLayout(false);
+            this.panelItemDet.PerformLayout();
             this.groupHosDet.ResumeLayout(false);
             this.panelHosDet.ResumeLayout(false);
             this.panelHosDet.PerformLayout();
@@ -789,5 +859,9 @@ namespace SOC.UI
         public Panel panelWalkerDet;
         public Label label_WalkerObjType;
         public ComboBox comboBox_WalkerObjType;
+        private Label label_acItObjType;
+        private ComboBox comboBox_acItObjType;
+        private Label label_ItObjType;
+        private ComboBox comboBox_itObjType;
     }
 }

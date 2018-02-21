@@ -380,7 +380,7 @@ namespace SOC.UI
             foreach (ModelBox d in modelBoxes)
                 models.Add(new Model(d, modelBoxes.IndexOf(d)));
             
-            return new QuestEntities(qenemies, cpenemies, helicopters, hostages, walkers, vehicles, animals, items, activeItems, models, comboBox_Body.SelectedIndex, h_checkBox_intrgt.Checked, comboBox_subtype.Text, comboBox_eneObjType1.Text, comboBox_hosObjType.Text, comboBox_vehObjType.Text, comboBox_aniObjType.Text, comboBox_WalkerObjType.Text);
+            return new QuestEntities(qenemies, cpenemies, helicopters, hostages, walkers, vehicles, animals, items, activeItems, models, comboBox_Body.SelectedIndex, h_checkBox_intrgt.Checked, comboBox_subtype.Text, comboBox_eneObjType1.Text, comboBox_hosObjType.Text, comboBox_vehObjType.Text, comboBox_aniObjType.Text, comboBox_WalkerObjType.Text, comboBox_acItObjType.Text);
         }
 
         private void comboBox_Body_SelectedIndexChanged(object sender, EventArgs e)

@@ -128,6 +128,10 @@ namespace SOC.Classes
             questLua[GetLineOf("local hostageQuestType =", questLua)] = string.Format("local hostageQuestType = {0}", questDetails.hostageObjectiveType);
             questLua[GetLineOf("local animalQuestType =", questLua)] = string.Format("local animalQuestType = {0}", questDetails.animalObjectiveType);
             questLua[GetLineOf("local walkerQuestType =", questLua)] = string.Format("local walkerQuestType = {0}", questDetails.walkerGearObjectiveType);
+            if (questDetails.activeItems.Count > 0)
+                questLua[GetLineOf("local itemQuestType =", questLua)] = string.Format("local itemQuestType = {0}", questDetails.activeItemObjectiveType);
+            else
+                questLua[GetLineOf("local itemQuestType =", questLua)] = "local itemQuestType = RECOVERED";
 
             questLua[GetLineOf("isQuestArmor =", questLua)] = string.Format("	isQuestArmor =  {0},", (EnemyInfo.armorCount > 0).ToString().ToLower());
             questLua[GetLineOf("isQuestZombie =", questLua)] = string.Format("	isQuestZombie = {0},", (EnemyInfo.zombieCount > 0).ToString().ToLower());
@@ -140,6 +144,7 @@ namespace SOC.Classes
             questLua.InsertRange(GetLineOf("hostageList = {", questLua) + 1, BuildHostageList(questDetails));
             questLua.InsertRange(GetLineOf("animalList = {", questLua) + 1, BuildAnimalList(questDetails));
             questLua.InsertRange(GetLineOf("targetList = {", questLua) + 1, BuildTargetList(questDetails));
+            questLua.InsertRange(GetLineOf("targetItemList = {", questLua) + 1, BuildItemTargetList(questDetails));
             questLua.InsertRange(GetLineOf("targetAnimalList = {", questLua) + 1, BuildAnimalTargetList(questDetails));
             questLua.InsertRange(GetLineOf("Hostage Attributes List", questLua) + 1, BuildHostageAttributes(questDetails));
 
@@ -473,6 +478,41 @@ namespace SOC.Classes
                 }
 
             return vehicleList;
+        }
+
+        public static List<string> BuildItemTargetList(QuestEntities questdetails)
+        {
+            int totalCount = 0;
+            List<string> targetItemList = new List<string>();
+            
+            foreach (Item item in questdetails.items)
+            {
+                if (item.isTarget)
+                {
+                    totalCount++;
+                    targetItemList.Add("		{");
+                    targetItemList.Add(string.Format("		   equipId = TppEquip.{0}", item.item));
+                    targetItemList.Add("		  messageId = \"None\",");
+                    targetItemList.Add("		},");
+                }
+            }
+            foreach (ActiveItem item in questdetails.activeItems)
+            {
+                if (item.isTarget)
+                {
+                    totalCount++;
+                    targetItemList.Add("		{");
+                    targetItemList.Add(string.Format("		  equipId = TppEquip.{0},", item.activeItem));
+                    targetItemList.Add("		  messageId = \"None\",");
+                    targetItemList.Add("		},");
+                }
+            }
+
+            if (totalCount == 0)
+                targetItemList.Add("        nil");
+
+            return targetItemList;
+
         }
 
         public static List<string> BuildTargetList(QuestEntities questDetails)

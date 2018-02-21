@@ -24,6 +24,8 @@ namespace SOC.Forms.Pages.QuestBoxes
         public Label i_label_coord;
         public ComboBox i_comboBox_count;
         public CheckBox i_checkBox_boxed;
+        public CheckBox i_checkBox_target;
+        public Label i_label_target;
         public Label i_label_boxed;
         public ComboBox i_comboBox_item;
         public Label i_label_count;
@@ -63,6 +65,8 @@ namespace SOC.Forms.Pages.QuestBoxes
             this.i_comboBox_item = new System.Windows.Forms.ComboBox();
             this.i_label_count = new System.Windows.Forms.Label();
             this.i_label_item = new System.Windows.Forms.Label();
+            i_checkBox_target = new CheckBox();
+            i_label_target = new Label();
             this.i_groupBox_main.SuspendLayout();
             // 
             // i_groupBox_main
@@ -84,9 +88,11 @@ namespace SOC.Forms.Pages.QuestBoxes
             this.i_groupBox_main.Controls.Add(this.i_comboBox_item);
             this.i_groupBox_main.Controls.Add(this.i_label_count);
             this.i_groupBox_main.Controls.Add(this.i_label_item);
+            this.i_groupBox_main.Controls.Add(this.i_checkBox_target);
+            this.i_groupBox_main.Controls.Add(this.i_label_target);
 
             this.i_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
-            this.i_groupBox_main.Location = new System.Drawing.Point(3, 3 + (171 * item.number));
+            this.i_groupBox_main.Location = new System.Drawing.Point(3, 27 + (171 * item.number));
             this.i_groupBox_main.Name = "i_groupBox_main";
             this.i_groupBox_main.Size = new System.Drawing.Size(width, 150);
             this.i_groupBox_main.TabIndex = 1;
@@ -94,10 +100,23 @@ namespace SOC.Forms.Pages.QuestBoxes
             this.i_groupBox_main.Text = "Item_" + item.number;
             this.i_groupBox_main.Click += new System.EventHandler(FocusGroupBox);
             // 
+            // i_checkBox_target
+            // 
+            this.i_checkBox_target.Location = new System.Drawing.Point(78, 66);
+            this.i_checkBox_target.Name = "i_checkBox_target";
+            this.i_checkBox_target.Size = new System.Drawing.Size(17, 18);
+            this.i_checkBox_target.UseVisualStyleBackColor = true;
+            i_checkBox_target.Checked = item.isTarget;
+            this.i_label_target.AutoSize = true;
+            this.i_label_target.Location = new System.Drawing.Point(18, 67);
+            this.i_label_target.Name = "i_label_target";
+            this.i_label_target.Size = new System.Drawing.Size(52, 13);
+            this.i_label_target.Text = "Is Target:";
+            // 
             // i_comboBox_item
             // 
             this.i_label_item.AutoSize = true;
-            this.i_label_item.Location = new System.Drawing.Point(40, 73);
+            this.i_label_item.Location = new System.Drawing.Point(40, 97);
             this.i_label_item.Name = "i_label_item";
             this.i_label_item.Size = new System.Drawing.Size(30, 13);
             this.i_label_item.TabIndex = 6;
@@ -107,7 +126,7 @@ namespace SOC.Forms.Pages.QuestBoxes
             | System.Windows.Forms.AnchorStyles.Right)));
             this.i_comboBox_item.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.i_comboBox_item.FormattingEnabled = true;
-            this.i_comboBox_item.Location = new System.Drawing.Point(78, 68);
+            this.i_comboBox_item.Location = new System.Drawing.Point(78, 92);
             this.i_comboBox_item.Items.AddRange(items);
             this.i_comboBox_item.Name = "i_comboBox_item";
             this.i_comboBox_item.Size = new System.Drawing.Size(comboboxWidth, 21);
@@ -177,7 +196,7 @@ namespace SOC.Forms.Pages.QuestBoxes
             // i_comboBox_count
             // 
             this.i_label_count.AutoSize = true;
-            this.i_label_count.Location = new System.Drawing.Point(32, 97);
+            this.i_label_count.Location = new System.Drawing.Point(32, 121);
             this.i_label_count.Name = "i_label_count";
             this.i_label_count.Size = new System.Drawing.Size(38, 13);
             this.i_label_count.TabIndex = 7;
@@ -186,7 +205,7 @@ namespace SOC.Forms.Pages.QuestBoxes
             this.i_comboBox_count.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.i_comboBox_count.FormattingEnabled = true;
-            this.i_comboBox_count.Location = new System.Drawing.Point(78, 94);
+            this.i_comboBox_count.Location = new System.Drawing.Point(78, 118);
             this.i_comboBox_count.Items.AddRange(new object[] {
                 "1","4","8","12","16"
             });
@@ -199,13 +218,13 @@ namespace SOC.Forms.Pages.QuestBoxes
             // i_checkBox_boxed
             // 
             this.i_label_boxed.AutoSize = true;
-            this.i_label_boxed.Location = new System.Drawing.Point(30, 122);
+            this.i_label_boxed.Location = new System.Drawing.Point(117, 67);
             this.i_label_boxed.Name = "i_label_boxed";
             this.i_label_boxed.Size = new System.Drawing.Size(40, 13);
             this.i_label_boxed.TabIndex = 20;
             this.i_label_boxed.Text = "Boxed:";
 
-            this.i_checkBox_boxed.Location = new System.Drawing.Point(78, 120);
+            this.i_checkBox_boxed.Location = new System.Drawing.Point(165, 66);
             this.i_checkBox_boxed.Name = "i_checkBox_boxed";
             this.i_checkBox_boxed.Size = new System.Drawing.Size(17, 18);
             this.i_checkBox_boxed.UseVisualStyleBackColor = true;
@@ -221,11 +240,17 @@ namespace SOC.Forms.Pages.QuestBoxes
             {
                 this.i_comboBox_count.Text = "0";
                 this.i_comboBox_count.Enabled = false;
+                this.i_checkBox_target.Enabled = true;
+                this.i_label_target.Enabled = true;
+
             }
             else
             {
                 this.i_comboBox_count.Text = "1";
                 this.i_comboBox_count.Enabled = true;
+                this.i_checkBox_target.Checked = false;
+                this.i_checkBox_target.Enabled = false;
+                this.i_label_target.Enabled = false;
             }
         }
 

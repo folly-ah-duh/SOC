@@ -277,6 +277,24 @@ quest_step.QStep_Main = {
               end
             end
           },
+		  {	
+			msg = "VehicleBroken",
+			func = function( gameObjectId, state )
+			  if state == StrCode32("End") then
+				local isClearType = this.CheckQuestAllTargetDynamic("VehicleBroken", gameObjectId )
+				TppQuest.ClearWithSave( isClearType )
+			  end
+			end
+		  },
+		  {	
+			msg = "LostControl",
+			func = function( gameObjectId, state )
+			  if state == StrCode32("End") then
+				local isClearType = this.CheckQuestAllTargetDynamic("LostControl", gameObjectId )
+				TppQuest.ClearWithSave( isClearType )
+			  end
+			end
+		  },
         },
         Trap = {
           {

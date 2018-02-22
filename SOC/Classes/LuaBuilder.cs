@@ -419,11 +419,13 @@ namespace SOC.Classes
                     walkerList.Add(string.Format("			primaryWeapon = {0},", walker.weapon));
 
                     double rotation = 0; Double.TryParse(walker.coordinates.roty, out rotation);
+                    double toRadians = rotation * Math.PI / 180;
+
                     double yOffset = 0.0;
                     double.TryParse(walker.coordinates.yCoord, out yOffset);
                     yOffset += 0.783;
 
-                    walkerList.Add(string.Format("			position={{pos={{{0},{1},{2}}},rotY={3},}},", walker.coordinates.xCoord, yOffset, walker.coordinates.zCoord, rotation));
+                    walkerList.Add(string.Format("			position={{pos={{{0},{1},{2}}},rotY={3},}},", walker.coordinates.xCoord, yOffset, walker.coordinates.zCoord, toRadians));
 
                     walkerList.Add("		},");
                 }

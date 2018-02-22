@@ -42,6 +42,9 @@ namespace SOC.Forms.Pages.QuestBoxes
         public Button e_button_removepower;
         public Label e_label_power;
         public ListBox e_listBox_power;
+        public Button e_button_SneakToCaution;
+        public Button e_button_CautionToSneak;
+        public Button e_button_SwapRoutes;
 
         public EnemyBox(Enemy e, CP cp, string[] frtRoutes, int locId) : base(new Coordinates("", "", ""), e.number)
         {
@@ -78,6 +81,9 @@ namespace SOC.Forms.Pages.QuestBoxes
             this.e_label_armor = new System.Windows.Forms.Label();
             this.e_checkBox_spawn = new System.Windows.Forms.CheckBox();
             this.e_label_spawn = new System.Windows.Forms.Label();
+            e_button_CautionToSneak = new Button();
+            e_button_SneakToCaution = new Button();
+            e_button_SwapRoutes = new Button();
             this.e_groupBox_main.SuspendLayout();
 
             // 
@@ -108,6 +114,9 @@ namespace SOC.Forms.Pages.QuestBoxes
             this.e_groupBox_main.Controls.Add(this.e_checkBox_zombie);
             this.e_groupBox_main.Controls.Add(this.e_label_balaclava);
             this.e_groupBox_main.Controls.Add(this.e_checkBox_balaclava);
+            this.e_groupBox_main.Controls.Add(this.e_button_SneakToCaution);
+            this.e_groupBox_main.Controls.Add(this.e_button_CautionToSneak);
+            this.e_groupBox_main.Controls.Add(this.e_button_SwapRoutes);
             e_groupBox_main.Disposed += new EventHandler(this.e_groupBox_main_Disposed);
             this.e_groupBox_main.Location = new System.Drawing.Point(3, 69 + (334 * enemyNumber));
             this.e_groupBox_main.Name = "e_groupBox_main";
@@ -143,6 +152,42 @@ namespace SOC.Forms.Pages.QuestBoxes
             this.e_button_removepower.Text = "Remove";
             this.e_button_removepower.UseVisualStyleBackColor = true;
             this.e_button_removepower.Click += new EventHandler(this.e_button_removepower_Click);
+            // 
+            // e_button_SneakToCaution
+            // 
+            this.e_button_SneakToCaution.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.e_button_SneakToCaution.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.e_button_SneakToCaution.Location = new System.Drawing.Point(comboboxWidth + 86, 63);
+            this.e_button_SneakToCaution.Name = "e_button_SneakToCaution";
+            this.e_button_SneakToCaution.Size = new System.Drawing.Size(14, 23);
+            this.e_button_SneakToCaution.TabIndex = 21;
+            this.e_button_SneakToCaution.Text = "↓";
+            this.e_button_SneakToCaution.UseVisualStyleBackColor = true;
+            this.e_button_SneakToCaution.Click += new EventHandler(this.SneakToCaution_Button_Clicked);
+            // 
+            // e_button_SneakToCaution
+            // 
+            this.e_button_SwapRoutes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.e_button_SwapRoutes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.e_button_SwapRoutes.Location = new System.Drawing.Point(98, 63);
+            this.e_button_SwapRoutes.Name = "e_button_SwapRoutes";
+            this.e_button_SwapRoutes.Size = new System.Drawing.Size(14, 48);
+            this.e_button_SwapRoutes.TabIndex = 21;
+            this.e_button_SwapRoutes.Text = "↕";
+            this.e_button_SwapRoutes.UseVisualStyleBackColor = true;
+            this.e_button_SwapRoutes.Click += new EventHandler(this.SwapRoute_Button_Clicked);
+            // 
+            // e_button_CautionToSneak
+            // 
+            this.e_button_CautionToSneak.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.e_button_CautionToSneak.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.e_button_CautionToSneak.Location = new System.Drawing.Point(comboboxWidth + 86, 88);
+            this.e_button_CautionToSneak.Name = "e_button_CautionToSneak";
+            this.e_button_CautionToSneak.Size = new System.Drawing.Size(14, 23);
+            this.e_button_CautionToSneak.TabIndex = 21;
+            this.e_button_CautionToSneak.Text = "↑";
+            this.e_button_CautionToSneak.UseVisualStyleBackColor = true;
+            this.e_button_CautionToSneak.Click += new EventHandler(this.CautionToSneak_Button_Clicked);
             // 
             // e_label_power
             // 
@@ -241,9 +286,9 @@ namespace SOC.Forms.Pages.QuestBoxes
             | System.Windows.Forms.AnchorStyles.Right)));
             this.e_comboBox_cautionroute.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.e_comboBox_cautionroute.FormattingEnabled = true;
-            this.e_comboBox_cautionroute.Location = new System.Drawing.Point(99, 89);
+            this.e_comboBox_cautionroute.Location = new System.Drawing.Point(112, 89);
             this.e_comboBox_cautionroute.Name = "e_comboBox_cautionroute";
-            this.e_comboBox_cautionroute.Size = new System.Drawing.Size(comboboxWidth, 21);
+            this.e_comboBox_cautionroute.Size = new System.Drawing.Size(comboboxWidth - 26, 21);
             this.e_comboBox_cautionroute.TabIndex = 12;
 
             e_comboBox_cautionroute.Items.AddRange(frtRouteNames);
@@ -271,9 +316,9 @@ namespace SOC.Forms.Pages.QuestBoxes
             | System.Windows.Forms.AnchorStyles.Right)));
             this.e_comboBox_sneakroute.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.e_comboBox_sneakroute.FormattingEnabled = true;
-            this.e_comboBox_sneakroute.Location = new System.Drawing.Point(99, 64);
+            this.e_comboBox_sneakroute.Location = new System.Drawing.Point(112, 64);
             this.e_comboBox_sneakroute.Name = "e_comboBox_sneakroute";
-            this.e_comboBox_sneakroute.Size = new System.Drawing.Size(comboboxWidth, 21);
+            this.e_comboBox_sneakroute.Size = new System.Drawing.Size(comboboxWidth - 26, 21);
             this.e_comboBox_sneakroute.TabIndex = 10;
 
             e_comboBox_sneakroute.Items.AddRange(frtRouteNames);
@@ -450,6 +495,9 @@ namespace SOC.Forms.Pages.QuestBoxes
                 e_label_zombie.Enabled = true;
                 e_checkBox_zombie.Enabled = true;
                 e_button_removepower.Enabled = true;
+                e_button_SwapRoutes.Enabled = true;
+                e_button_SneakToCaution.Enabled = true;
+                e_button_CautionToSneak.Enabled = true;
 
                 if (e_checkBox_balaclava.Checked) { updateBalaclava(); }
                 if (e_checkBox_zombie.Checked) { updateZombie(); }
@@ -479,12 +527,34 @@ namespace SOC.Forms.Pages.QuestBoxes
                 e_label_zombie.Enabled = false;
                 e_checkBox_zombie.Enabled = false;
                 e_button_removepower.Enabled = false;
+                e_button_SwapRoutes.Enabled = false;
+                e_button_SneakToCaution.Enabled = false;
+                e_button_CautionToSneak.Enabled = false;
 
                 if (e_checkBox_balaclava.Checked) { QuestComponents.EnemyInfo.balaCount--; }
                 if (e_checkBox_zombie.Checked) { QuestComponents.EnemyInfo.zombieCount--; }
                 if (e_checkBox_armor.Checked) { QuestComponents.EnemyInfo.armorCount--; }
             }
 
+        }
+        private void SwapRoute_Button_Clicked(object sender, EventArgs e)
+        {
+            string cRoute = e_comboBox_cautionroute.Text;
+            e_comboBox_cautionroute.Text = e_comboBox_sneakroute.Text;
+            e_comboBox_sneakroute.Text = cRoute;
+            e_groupBox_main.Focus();
+        }
+
+        private void SneakToCaution_Button_Clicked(object sender, EventArgs e)
+        {
+            e_comboBox_cautionroute.Text = e_comboBox_sneakroute.Text;
+            e_groupBox_main.Focus();
+        }
+
+        private void CautionToSneak_Button_Clicked(object sender, EventArgs e)
+        {
+            e_comboBox_sneakroute.Text = e_comboBox_cautionroute.Text;
+            e_groupBox_main.Focus();
         }
 
         private void armor_Checkbox_Clicked(object sender, EventArgs e)

@@ -74,7 +74,7 @@ namespace SOC.Forms.Pages.QuestBoxes
             this.ai_groupBox_main.Controls.Add(this.ai_label_target);
             this.ai_groupBox_main.Controls.Add(this.ai_checkBox_target);
             this.ai_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
-            this.ai_groupBox_main.Location = new System.Drawing.Point(3, 27 + (activeitem.number * 113));
+            this.ai_groupBox_main.Location = new System.Drawing.Point(3, 27 + (activeitem.number * 134));
             this.ai_groupBox_main.Name = "ai_groupBox_main";
             this.ai_groupBox_main.Size = new System.Drawing.Size(width, 119);
             this.ai_groupBox_main.TabIndex = 0;

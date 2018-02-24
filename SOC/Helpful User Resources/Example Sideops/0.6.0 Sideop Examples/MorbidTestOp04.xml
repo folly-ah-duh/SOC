@@ -1,0 +1,469 @@
+<?xml version="1.0"?>
+<Quest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <definitionDetails FpkName="MorbidTestOp04" QuestNum="30204">
+    <QuestTitle>Example SideOp: Kill the Heavy Infantry</QuestTitle>
+    <QuestDesc>Kill all of the Heavy Infantry at Munoko ya Nioka. Extracting any of the Heavy Infantry will result in mission failure.</QuestDesc>
+    <locationID>20</locationID>
+    <loadArea>hill</loadArea>
+    <coords>
+      <xCoord>2188</xCoord>
+      <yCoord>56</yCoord>
+      <zCoord>383</zCoord>
+      <roty>0</roty>
+    </coords>
+    <radius>3</radius>
+    <category>ELIMINATE_HEAVY_INFANTRY</category>
+    <CPName>mafr_hill_cp</CPName>
+    <reward>B</reward>
+    <progNotif>1</progNotif>
+    <walkerGearCoordinates />
+    <hostageCoordinates>{pos={2188.819,56.602,383.642},rotY=34.629,}, 
+{pos={2196.331,56.602,384.346},rotY=-43.143,}, 
+</hostageCoordinates>
+    <vehicleCoordinates />
+    <animalCoordinates />
+    <itemCoordinates>{pos={2168.903,57.251,383.993},rotY=-83.06,}, 
+{pos={2163.381,56.858,412.556},rotY=-171.854,}, 
+{pos={2160.425,57.016,408.049},rotY=-176.786999999999,}, 
+{pos={2075.686,50.978,399.211},rotY=-121.677,}, 
+</itemCoordinates>
+    <activeItemCoordinates />
+    <modelCoordinates />
+    <routeName>HillHeli</routeName>
+  </definitionDetails>
+  <questEntities hostageBodyIndex="11" canInter="false" soldierSubType="PF_B" enemyObjectiveType="KILLREQUIRED" hostageObjectiveType="ELIMINATE" vehicleObjectiveType="ELIMINATE" animalObjectiveType="ELIMINATE" walkerGearObjectiveType="ELIMINATE" activeItemObjectiveType="ELIMINATE">
+    <questEnemies>
+      <Enemy name="sol_quest_0000">
+        <isSpawn>true</isSpawn>
+        <isTarget>true</isTarget>
+        <isBalaclava>false</isBalaclava>
+        <isZombie>false</isZombie>
+        <isArmored>true</isArmored>
+        <number>0</number>
+        <body>DEFAULT</body>
+        <cRoute>rt_quest_c_0000</cRoute>
+        <dRoute>rt_quest_c_0000</dRoute>
+        <skill>NONE</skill>
+        <staffType>NONE</staffType>
+        <powers>
+          <string>QUEST_ARMOR</string>
+          <string>COMBAT_SPECIAL</string>
+        </powers>
+      </Enemy>
+      <Enemy name="sol_quest_0001">
+        <isSpawn>true</isSpawn>
+        <isTarget>true</isTarget>
+        <isBalaclava>false</isBalaclava>
+        <isZombie>false</isZombie>
+        <isArmored>true</isArmored>
+        <number>1</number>
+        <body>DEFAULT</body>
+        <cRoute>rt_quest_c_0001</cRoute>
+        <dRoute>rt_quest_c_0001</dRoute>
+        <skill>NONE</skill>
+        <staffType>NONE</staffType>
+        <powers>
+          <string>QUEST_ARMOR</string>
+          <string>COMBAT_SPECIAL</string>
+        </powers>
+      </Enemy>
+      <Enemy name="sol_quest_0002">
+        <isSpawn>true</isSpawn>
+        <isTarget>true</isTarget>
+        <isBalaclava>false</isBalaclava>
+        <isZombie>false</isZombie>
+        <isArmored>true</isArmored>
+        <number>2</number>
+        <body>DEFAULT</body>
+        <cRoute>rt_quest_c_0002</cRoute>
+        <dRoute>rt_quest_c_0002</dRoute>
+        <skill>NONE</skill>
+        <staffType>NONE</staffType>
+        <powers>
+          <string>QUEST_ARMOR</string>
+          <string>COMBAT_SPECIAL</string>
+        </powers>
+      </Enemy>
+      <Enemy name="sol_quest_0003">
+        <isSpawn>true</isSpawn>
+        <isTarget>true</isTarget>
+        <isBalaclava>false</isBalaclava>
+        <isZombie>false</isZombie>
+        <isArmored>true</isArmored>
+        <number>3</number>
+        <body>DEFAULT</body>
+        <cRoute>rt_quest_c_0003</cRoute>
+        <dRoute>rt_quest_c_0003</dRoute>
+        <skill>NONE</skill>
+        <staffType>NONE</staffType>
+        <powers>
+          <string>QUEST_ARMOR</string>
+          <string>COMBAT_SPECIAL</string>
+        </powers>
+      </Enemy>
+      <Enemy name="sol_quest_0004">
+        <isSpawn>true</isSpawn>
+        <isTarget>true</isTarget>
+        <isBalaclava>false</isBalaclava>
+        <isZombie>false</isZombie>
+        <isArmored>true</isArmored>
+        <number>4</number>
+        <body>DEFAULT</body>
+        <cRoute>rt_quest_d_0000</cRoute>
+        <dRoute>rt_quest_d_0000</dRoute>
+        <skill>NONE</skill>
+        <staffType>NONE</staffType>
+        <powers>
+          <string>QUEST_ARMOR</string>
+          <string>COMBAT_SPECIAL</string>
+        </powers>
+      </Enemy>
+      <Enemy name="sol_quest_0005">
+        <isSpawn>true</isSpawn>
+        <isTarget>true</isTarget>
+        <isBalaclava>false</isBalaclava>
+        <isZombie>false</isZombie>
+        <isArmored>true</isArmored>
+        <number>5</number>
+        <body>DEFAULT</body>
+        <cRoute>rt_quest_d_0001</cRoute>
+        <dRoute>rt_quest_d_0001</dRoute>
+        <skill>NONE</skill>
+        <staffType>NONE</staffType>
+        <powers>
+          <string>QUEST_ARMOR</string>
+          <string>COMBAT_SPECIAL</string>
+        </powers>
+      </Enemy>
+      <Enemy name="sol_quest_0006">
+        <isSpawn>true</isSpawn>
+        <isTarget>true</isTarget>
+        <isBalaclava>false</isBalaclava>
+        <isZombie>false</isZombie>
+        <isArmored>true</isArmored>
+        <number>6</number>
+        <body>DEFAULT</body>
+        <cRoute>rt_quest_d_0002</cRoute>
+        <dRoute>rt_quest_d_0002</dRoute>
+        <skill>NONE</skill>
+        <staffType>NONE</staffType>
+        <powers>
+          <string>QUEST_ARMOR</string>
+          <string>COMBAT_SPECIAL</string>
+        </powers>
+      </Enemy>
+      <Enemy name="sol_quest_0007">
+        <isSpawn>true</isSpawn>
+        <isTarget>true</isTarget>
+        <isBalaclava>false</isBalaclava>
+        <isZombie>false</isZombie>
+        <isArmored>true</isArmored>
+        <number>7</number>
+        <body>DEFAULT</body>
+        <cRoute>rt_quest_d_0003</cRoute>
+        <dRoute>rt_quest_d_0003</dRoute>
+        <skill>NONE</skill>
+        <staffType>NONE</staffType>
+        <powers>
+          <string>QUEST_ARMOR</string>
+          <string>COMBAT_SPECIAL</string>
+        </powers>
+      </Enemy>
+    </questEnemies>
+    <cpEnemies>
+      <Enemy name="sol_hill_0000">
+        <isSpawn>false</isSpawn>
+        <isTarget>false</isTarget>
+        <isBalaclava>false</isBalaclava>
+        <isZombie>false</isZombie>
+        <isArmored>false</isArmored>
+        <number>0</number>
+        <body>DEFAULT</body>
+        <cRoute>1166417787</cRoute>
+        <dRoute>1166417787</dRoute>
+        <skill>NONE</skill>
+        <staffType>NONE</staffType>
+        <powers />
+      </Enemy>
+      <Enemy name="sol_hill_0001">
+        <isSpawn>false</isSpawn>
+        <isTarget>false</isTarget>
+        <isBalaclava>false</isBalaclava>
+        <isZombie>false</isZombie>
+        <isArmored>false</isArmored>
+        <number>1</number>
+        <body>DEFAULT</body>
+        <cRoute>1166417787</cRoute>
+        <dRoute>1166417787</dRoute>
+        <skill>NONE</skill>
+        <staffType>NONE</staffType>
+        <powers />
+      </Enemy>
+      <Enemy name="sol_hill_0002">
+        <isSpawn>false</isSpawn>
+        <isTarget>false</isTarget>
+        <isBalaclava>false</isBalaclava>
+        <isZombie>false</isZombie>
+        <isArmored>false</isArmored>
+        <number>2</number>
+        <body>DEFAULT</body>
+        <cRoute>1166417787</cRoute>
+        <dRoute>1166417787</dRoute>
+        <skill>NONE</skill>
+        <staffType>NONE</staffType>
+        <powers />
+      </Enemy>
+      <Enemy name="sol_hill_0003">
+        <isSpawn>false</isSpawn>
+        <isTarget>false</isTarget>
+        <isBalaclava>false</isBalaclava>
+        <isZombie>false</isZombie>
+        <isArmored>false</isArmored>
+        <number>3</number>
+        <body>DEFAULT</body>
+        <cRoute>1166417787</cRoute>
+        <dRoute>1166417787</dRoute>
+        <skill>NONE</skill>
+        <staffType>NONE</staffType>
+        <powers />
+      </Enemy>
+      <Enemy name="sol_hill_0004">
+        <isSpawn>false</isSpawn>
+        <isTarget>false</isTarget>
+        <isBalaclava>false</isBalaclava>
+        <isZombie>false</isZombie>
+        <isArmored>false</isArmored>
+        <number>4</number>
+        <body>DEFAULT</body>
+        <cRoute>1166417787</cRoute>
+        <dRoute>1166417787</dRoute>
+        <skill>NONE</skill>
+        <staffType>NONE</staffType>
+        <powers />
+      </Enemy>
+      <Enemy name="sol_hill_0005">
+        <isSpawn>false</isSpawn>
+        <isTarget>false</isTarget>
+        <isBalaclava>false</isBalaclava>
+        <isZombie>false</isZombie>
+        <isArmored>false</isArmored>
+        <number>5</number>
+        <body>DEFAULT</body>
+        <cRoute>1166417787</cRoute>
+        <dRoute>1166417787</dRoute>
+        <skill>NONE</skill>
+        <staffType>NONE</staffType>
+        <powers />
+      </Enemy>
+      <Enemy name="sol_hill_0006">
+        <isSpawn>false</isSpawn>
+        <isTarget>false</isTarget>
+        <isBalaclava>false</isBalaclava>
+        <isZombie>false</isZombie>
+        <isArmored>false</isArmored>
+        <number>6</number>
+        <body>DEFAULT</body>
+        <cRoute>1166417787</cRoute>
+        <dRoute>1166417787</dRoute>
+        <skill>NONE</skill>
+        <staffType>NONE</staffType>
+        <powers />
+      </Enemy>
+      <Enemy name="sol_hill_0007">
+        <isSpawn>false</isSpawn>
+        <isTarget>false</isTarget>
+        <isBalaclava>false</isBalaclava>
+        <isZombie>false</isZombie>
+        <isArmored>false</isArmored>
+        <number>7</number>
+        <body>DEFAULT</body>
+        <cRoute>1166417787</cRoute>
+        <dRoute>1166417787</dRoute>
+        <skill>NONE</skill>
+        <staffType>NONE</staffType>
+        <powers />
+      </Enemy>
+      <Enemy name="sol_hill_0008">
+        <isSpawn>false</isSpawn>
+        <isTarget>false</isTarget>
+        <isBalaclava>false</isBalaclava>
+        <isZombie>false</isZombie>
+        <isArmored>false</isArmored>
+        <number>8</number>
+        <body>DEFAULT</body>
+        <cRoute>1166417787</cRoute>
+        <dRoute>1166417787</dRoute>
+        <skill>NONE</skill>
+        <staffType>NONE</staffType>
+        <powers />
+      </Enemy>
+      <Enemy name="sol_hill_0009">
+        <isSpawn>false</isSpawn>
+        <isTarget>false</isTarget>
+        <isBalaclava>false</isBalaclava>
+        <isZombie>false</isZombie>
+        <isArmored>false</isArmored>
+        <number>9</number>
+        <body>DEFAULT</body>
+        <cRoute>1166417787</cRoute>
+        <dRoute>1166417787</dRoute>
+        <skill>NONE</skill>
+        <staffType>NONE</staffType>
+        <powers />
+      </Enemy>
+      <Enemy name="sol_hill_0010">
+        <isSpawn>false</isSpawn>
+        <isTarget>false</isTarget>
+        <isBalaclava>false</isBalaclava>
+        <isZombie>false</isZombie>
+        <isArmored>false</isArmored>
+        <number>10</number>
+        <body>DEFAULT</body>
+        <cRoute>1166417787</cRoute>
+        <dRoute>1166417787</dRoute>
+        <skill>NONE</skill>
+        <staffType>NONE</staffType>
+        <powers />
+      </Enemy>
+      <Enemy name="sol_hill_0011">
+        <isSpawn>false</isSpawn>
+        <isTarget>false</isTarget>
+        <isBalaclava>false</isBalaclava>
+        <isZombie>false</isZombie>
+        <isArmored>false</isArmored>
+        <number>11</number>
+        <body>DEFAULT</body>
+        <cRoute>1166417787</cRoute>
+        <dRoute>1166417787</dRoute>
+        <skill>NONE</skill>
+        <staffType>NONE</staffType>
+        <powers />
+      </Enemy>
+    </cpEnemies>
+    <hostages>
+      <Hostage name="Hostage_0">
+        <isTarget>false</isTarget>
+        <isUntied>false</isUntied>
+        <isInjured>false</isInjured>
+        <number>0</number>
+        <skill>NONE</skill>
+        <staffType>NONE</staffType>
+        <scared>NORMAL</scared>
+        <language>english</language>
+        <coordinates>
+          <xCoord>2188.819</xCoord>
+          <yCoord>56.602</yCoord>
+          <zCoord>383.642</zCoord>
+          <roty>34.629</roty>
+        </coordinates>
+      </Hostage>
+      <Hostage name="Hostage_1">
+        <isTarget>false</isTarget>
+        <isUntied>false</isUntied>
+        <isInjured>false</isInjured>
+        <number>1</number>
+        <skill>NONE</skill>
+        <staffType>NONE</staffType>
+        <scared>NORMAL</scared>
+        <language>english</language>
+        <coordinates>
+          <xCoord>2196.331</xCoord>
+          <yCoord>56.602</yCoord>
+          <zCoord>384.346</zCoord>
+          <roty>-43.143</roty>
+        </coordinates>
+      </Hostage>
+    </hostages>
+    <enemyHelicopters>
+      <Helicopter>
+        <isTarget>false</isTarget>
+        <isSpawn>true</isSpawn>
+        <heliRoute>rt_heli_quest_0000</heliRoute>
+        <heliClass>BLACK</heliClass>
+      </Helicopter>
+    </enemyHelicopters>
+    <walkerGears />
+    <vehicles />
+    <items>
+      <Item name="Item_0">
+        <isBoxed>true</isBoxed>
+        <isTarget>false</isTarget>
+        <number>0</number>
+        <count>4</count>
+        <item>EQP_SWP_Grenade_G08</item>
+        <coordinates>
+          <xCoord>2168.903</xCoord>
+          <yCoord>57.251</yCoord>
+          <zCoord>383.993</zCoord>
+          <roty>-83.06</roty>
+        </coordinates>
+        <quatCoordinates>
+          <xval>0</xval>
+          <yval>-0.663012109665679</yval>
+          <zval>0</zval>
+          <wval>0.748608671093693</wval>
+        </quatCoordinates>
+      </Item>
+      <Item name="Item_1">
+        <isBoxed>true</isBoxed>
+        <isTarget>false</isTarget>
+        <number>1</number>
+        <count>4</count>
+        <item>EQP_SWP_MolotovCocktail_G02</item>
+        <coordinates>
+          <xCoord>2163.381</xCoord>
+          <yCoord>56.858</yCoord>
+          <zCoord>412.556</zCoord>
+          <roty>-171.854</roty>
+        </coordinates>
+        <quatCoordinates>
+          <xval>0</xval>
+          <yval>-0.997474364557687</yval>
+          <zval>0</zval>
+          <wval>0.0710274035160961</wval>
+        </quatCoordinates>
+      </Item>
+      <Item name="Item_2">
+        <isBoxed>true</isBoxed>
+        <isTarget>false</isTarget>
+        <number>2</number>
+        <count>0</count>
+        <item>EQP_WP_Com_sg_011</item>
+        <coordinates>
+          <xCoord>2160.425</xCoord>
+          <yCoord>57.016</yCoord>
+          <zCoord>408.049</zCoord>
+          <roty>-176.786999999999</roty>
+        </coordinates>
+        <quatCoordinates>
+          <xval>0</xval>
+          <yval>-0.999606940998393</yval>
+          <zval>0</zval>
+          <wval>0.0280350407139913</wval>
+        </quatCoordinates>
+      </Item>
+      <Item name="Item_3">
+        <isBoxed>true</isBoxed>
+        <isTarget>false</isTarget>
+        <number>3</number>
+        <count>0</count>
+        <item>EQP_WP_West_ms_020</item>
+        <coordinates>
+          <xCoord>2075.686</xCoord>
+          <yCoord>50.978</yCoord>
+          <zCoord>399.211</zCoord>
+          <roty>-121.677</roty>
+        </coordinates>
+        <quatCoordinates>
+          <xval>0</xval>
+          <yval>-0.873249698332197</yval>
+          <zval>0</zval>
+          <wval>0.487272987515957</wval>
+        </quatCoordinates>
+      </Item>
+    </items>
+    <models />
+    <activeItems />
+    <animals />
+  </questEntities>
+</Quest>

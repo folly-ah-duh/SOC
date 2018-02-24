@@ -124,7 +124,6 @@ namespace SOC.Forms.Pages.QuestBoxes
             this.a_comboBox_TypeID.Size = new System.Drawing.Size(comboboxWidth - 89, 21);
             this.a_comboBox_TypeID.TabIndex = 13;
             a_comboBox_TypeID.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
-            a_comboBox_TypeID.Items.AddRange(new string[] { "TppGoat", "TppNubian" });
             a_comboBox_TypeID.Text = animal.typeID;
             // 
             // a_label_targetcount

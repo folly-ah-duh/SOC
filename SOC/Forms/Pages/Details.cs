@@ -241,6 +241,7 @@ namespace SOC.UI
             comboBox_aniObjType.Text = questDetails.animalObjectiveType;
             comboBox_heliObjType.Text = "ELIMINATE";
             comboBox_WalkerObjType.Text = questDetails.walkerGearObjectiveType;
+            comboBox_acItObjType.Text = questDetails.activeItemObjectiveType;
         }
 
         public void SetEnemySubType(QuestEntities questDetails, int locId)

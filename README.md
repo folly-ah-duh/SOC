@@ -25,11 +25,13 @@ Upon opening SOC.exe, the user is met with the Setup Page. This page prompts the
 * **Map Coordinates: X Y Z**: These are the ingame coordinates for the center of the side-mission circle that appears on the iDroid. The circle is aesthetic, and does not affect the actual gameplay aside from the pop-up UI which notifies the player upon entering the circle.
   * Read '[SOC QuickMenu Guide](https://github.com/Morbidslinky/SOC#soc-quickmenu-guide)' for how to get in-game coordinates.
 * **Radius**: This determines the size of the side-mission circle that appears on the iDroid. The radius of a sideop is likewise aesthetic.
+* **Route File**: As of SOC 0.6.0, the user can now specify a route file (.frt extension) to be utilized for the sideop. Route Files allow the user to assign routes which aren't normally used in freeroam.
+  * The user can add new routes to the Route File list by going to the SOC directory and then navigating to SOCassets\RouteAssets\. Any .frt file placed into the RouteAssets directory will appear on the Route File list.
+  * Creating new, custom route files is possible, albiet difficult and not user-friendly. Until custom route creation is more accessible, the user should search the vanilla game files to find routes which will suit their sideops. Read '[Enemy Routes Guide](https://github.com/Morbidslinky/SOC#enemy-routes-guide)' to learn how to find route files within the game archives.
+  * [Sai/youarebritish](https://github.com/youarebritish) nearly single-handedly reversed the route file format, which deserves a great deal of praise. SOC would not be able to handle route files without his work.
 * **Quest Category**: Categories are only used for selecting which sideops will appear in an Area of Operations. The user can choose whichever category that they feel will fit the sideop best.
   * The sideop does not need to match the category perfectly (ex: using ELIMINATE_HEAVY_INFANTRY for a sideop that involves assassinating a VIP, or using ELIMINATE_PUPPETS for a sideop that involves rescuing zombies).
 * **Quest Rank**: this is essentially the GMP reward for completing the mission. The user can choose any rank between 300,000 GMP (S rank) and 30,000 GMP (I rank), as they please.
-* **Objective Type**: This determines whether the sideop targets need to be rescued (RECOVERED) or eliminated (ELIMINATE) by the player in order to complete the sideop.
-  * Sideops can technically be given fairly complex and unique win-states, but requires the user to manually edit the sideop's LUA script file.
 * **Quest Title**: This is the sideop's name that shows up on the iDroid in-game.
   * The title itself is aesthetic. The flavor text has no affect on the gameplay.
 * **Quest Description**: Like with the Quest Title, the Quest Description will appear on the iDroid menu in-game, when you select the sideop on the side-missions list.
@@ -48,8 +50,12 @@ Once the user has filled out the required Setup information, and input their des
 ## Details Page - Creating Details For The Sideop
 After clicking "Next >>" button on the Setup Page, SOC will display the Details Page. The Details Page reads the CP Name and Locational Data textboxes from the Setup Page and lists it as editable boxes. Boxes can be added and removed by returning to the Setup Page and editing the setup information.
 
+* **Target Objective Types**: If the boxes of a detail column can be used as sideop targets, a combo box will be displayed at the top of the panel, known as the column's Objective Type. This combo box will allow the user to determine how the player must handle targets of that detail column. Unlike the vanilla game, these objective types can vary from column to column, to improve sideop variety (Ex: Rescue the prisoner and assassinate the colonel).
+  * ELIMINATE: The player must either extract or kill the targets (Ex: Eliminate the Heavy Infantry is an elimination-type sideop).
+  * RECOVERED: The player is required to extract the target. If the target dies, the mission is cancelled (Ex: Prisoner Extraction is a recovered-type sideop).
+  * KILLREQUIRED: The target must be killed. If the target is extracted, the mission is cancelled. This is a new Objective Type, not found in the vanilla game.
+  
 There are several different types of detail boxes:
-
 * **New Enemies**: These boxes list new enemies (8 total) which can be spawned into the encampment for a Sideop. These boxes will only appear on the Details Page if you have selected a CP Name on the Setup Page.
   * Soldier SubType: Determines the appearance of the sideop's enemies. 
     * In Afghanistan, the user can choose between SOVIET_A and SOVIET_B. SOVIET_A are Soviet soldiers who wear mostly green and tan uniforms, whereas SOVIET_B wears black and blue uniforms. 
@@ -62,6 +68,7 @@ There are several different types of detail boxes:
   * Caution Route: Determines the route of the soldier when the encampment is on alert.
     * *note* The listed routes have undescriptive names (ex: rt_powerPlant_d_0000). Unfortunately, the user cannot yet preview the routes without checking them in-game. For more information on routes, read '[Enemy Routes Guide](https://github.com/Morbidslinky/SOC#enemy-routes-guide)'.
     * Multiple soldiers can share the same route. They will patrol together during the sideop.
+    * If the user has specified a route file on the Setup Page, the file's route names will appear on the Caution and Sneak route lists. Route names are hashed, and without a route name dictionary, would appear as a string of numbers (Ex: 2036843189). A dictionary is provided within the SOCassets, but not every route name has been unhashed. This means that the route lists may contain a sum of unhashed route names, depending on the selected route file. Nonetheless, soldiers can still be assigned to "number routes" without issues.
   * Gear | Tactics: Determines what equipment the soldier will wear, as well as their combat preparedness (ex: enemies with MG will have machine guns equiped, and enemies with FULTON_SPECIAL will shoot at fulton balloons). 
   * Heavy Armor: Determines whether the soldier is wearing riot gear (limit 8 per sideop).
     * Riot Gear soldiers cannot also wear balaclavas or different Body appearances.
@@ -72,6 +79,28 @@ There are several different types of detail boxes:
 
 * **Existing Enemies**: Enemies that are already patrolling the encampments can be retooled for sideops, in the same ways that New Enemies can be spawned.
   * Customize: Customizing an existing soldier will allow the user to retool the selected soldier for the sideop. The soldier will otherwise follow their normal routes with their default attributes.
+
+* **Enemy Helicopter**: A helicopter can be reserved to a sideop as of SOC 0.6.0. Like enemy soldiers, a helicopter can be assigned a route, which it will follow while the player is within the sideop active area.
+  * Spawn: Determines whether the helicopter will appear during the sideop.
+  * Is Target: Determines whether the helicopter will be a target objective for the sideop.
+    * Due to the nature of enemy helicopters, there is only one target objective type available: KILLREQUIRED.
+  * Class: Determines the color and health of the spawned vehicle.
+  * Route: Determines the route which the helicopter will patrol during the sideop.
+    * Helicopter routes are relatively rare in MGSV:TPP. By default, SOC has a small selection of helicopter routes for large enemy outposts. These routes were originally used as outpost assault routes (Red LZs), but are repurposed for enemy helicopters.
+    * The helicopter panel will not appear if SOC does not contain a route for the selected CP *and* the player has not selected a route file for the sideop.
+    * If a route file is selected on the Setup Page, that file's route names will be available to choose from for the Helicopter route. Note that helicopters can technically use soldier routes, but it is highly recommended that the user chooses helicopter-specific routes (so the helicopter will not tread through the ground during its patrol). For more information on routes, read '[Enemy Routes Guide](https://github.com/Morbidslinky/SOC#enemy-routes-guide)'.
+    
+* **Walker Gears**: As of SOC 0.6.0, customized Walker Gears can be spawned into sideops (with certain limitations).
+  * Coordinates: Determines the X, Y, Z coordinates of the Walker Gear.
+    * When placing a walker gear, the user should be certain that they are well-within the boundaries of the Quest Area. Walker Gears were not originally designed for Sideops, and because of this, Walker Gears could not be auto-fultoned when the player reaches the Quest Area boundary, which causes loading issues. To combat this, Walker Gears are now scripted to teleport back to the Quest Area boundary if the player attempts to ride the Walker out of the sideop.
+    * Note: Quest-specific Walker Gears are not designed to work alongside Infinite Heaven's "Walker Gears in Free Roam" option. It is recommended that players turn off the Infinite Heaven feature before playing a sideop which uses Walker Gears.
+  * Rotation: Determines the direction that the Walker Gear will be facing. The rotation is in degrees.
+  * Is Target: Determines whether the Walker Gear is a target objective.
+  * Enemy Pilot: Assigns one of the 8 New Enemies to ride the Walker Gear.
+    * Note: The assigned pilot must be spawned in order for them to ride the Walker Gear.
+    * Warning: Walker Gears, like helicopters, use rare and specific routes. If the soldier riding the walker gear is assigned to a non-walker-gear route, they will likely dismount from the Walker Gear as soon as they reach their second route node. It is recommended that walker gears are not assigned pilots, unless the user is certain that the route is designed for Walker Gears. For more information on routes, read '[Enemy Routes Guide](https://github.com/Morbidslinky/SOC#enemy-routes-guide)'.
+  * Paint Type: Assigns the Walker Gear a faction-specific paint job. Purely aesthetic.
+  * Weapon: Determines the primary weapon for the Walker Gear. The user can choose between the gattling gun or the homing rocket launcher.
 
 * **Prisoners**: Prisoner boxes are added by inputting coordinate sets into the Prisoner Locations textbox on the Setup Page. A hostage will be placed at every coordinate set in the textbox.
   * Body: Determines the body type and gender for all prisoners.
@@ -106,6 +135,9 @@ There are several different types of detail boxes:
 * **Dormant Items**: Dormant Items are items like guns, ammunition and innactive support weapons which the player can pick up and use during gameplay. The user can spawn dormant items by inputting coordinate sets into the Item Locations textbox on the Setup Page.
   * Coordinates: Determines the X, Y, Z coordinates of the item.
   * Rotation: Determines 3D space rotation of the item. The rotation is in [Quaternion format](http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-17-quaternions/).
+  * Is Target: Determines whether the user must collect this item in order to complete the sideop. 
+    * Note: Only works with weapons. Support weapons can theoretically be picked up automatically if the player already has that support weapon equipped. Due to game limitations, this does not count as a pick up.
+    * Note: Due to the nature of dormant items, there is only one target objective type available: RECOVERED.
   * Item: Determines what item will spawn at the coordinates.
     * Items with \_WP_ in their name are guns, \_SWP_ are support weapons, \_IT_ are items, \_AB_ are ammo boxes.
     * While most of the items on the list should work properly, some items may be bugged due to game limitations.
@@ -114,6 +146,8 @@ There are several different types of detail boxes:
   * Boxed: Determines whether the item is contained in a weapon crate, similar to the Honey Bee mission.
 
 * **Active Items**: Active Items, unlike dormant items, are already placed and armed prior to the player picking them up. Traps such as Directional Mines, Shock Decoys and Sleep Mines are Active Items. The player will earn heroism for disarming an Active Item. The user can spawn active items by inputting coordinate sets into the Active Item Locations textbox on the Setup Page. (Note: Active Items cannot be placed in a sideop if dormant items exist, and vice versa.)
+  * Is Target: Determines whether the user must retrieve or destroy the item in order to complete the sideop.
+    * Note: Active Items have all 3 Target Objective Types to choose from. RECOVERED requires the user to pick up the active item without triggering/destroying it. KILLREQUIRED requires the user to trigger/destroy the active item, and cancels the sideop if the item is picked up. ELIMINATE allows the player to pick up or trigger/destroy the item in order to complete the sideop.
   * Coordinates: Determines the X, Y, Z coordinates of the active item.
   * Rotation: Determines 3D space rotation of the item. The rotation is in [Quaternion format](http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-17-quaternions/).
   * Active Item: Determines what active item will spawn at the coordinates.
@@ -185,17 +219,22 @@ When choosing a sideop's progress notification, the user can choose from 9 defau
   * The In-game Notification is the text that the player see in-game, upon completing a sideop task. The user can write any notification that will fit their sideop the best (ex: Example Sideop Notification, VIP Extracted, Commander Eliminated)
   
 ## Enemy Routes Guide
-Currently, route information is still being researched by [Sai/youarebritish](https://github.com/youarebritish), so (for now) new routes cannot be created and old routes can only be previewed in-game.
+[Sai/youarebritish](https://github.com/youarebritish) has reverse-engineered the route format, which is a great leap forward for modding MGSV:TPP. Creating new route files and previewing existing routes is technically possible, however rather inaccessible for average users. Until route files can be made user friendly, routes will need to be previewed in-game.
 For a given route name (ex: rt_powerPlant_d_0000):
  * Routes with \_d_ in their names are the encampment's **daytime routes**. These routes are typically more patrol-oriented, so the user is more likely to find patrol routes by assigning soldiers to \_d_ routes.
  * Routes with \_n_ in their names are the encampment's **nighttime routes**. Nighttime routes tend to be more stationary than their daytime counterparts, with occasional patrol routes.
- * Routes with \_snp_ in their names are **sniper routes**. Soldiers assigned to sniper routes will stand in place as they sweep the landscape with their gun at the ready. Assigning soldiers with the 'SNIPER' gear is recommended for these routes, but not required.
+ * Routes with \_snp_ in their names are **sniper routes**, and typically rare. Soldiers assigned to sniper routes will stand in place as they sweep the landscape with their gun at the ready. Assigning soldiers with the 'SNIPER' gear is recommended for these routes, but not required.
  * Routes with \_c_ in their name are the encampment's **caution routes**. Soldiers with these routes will walk cautiously with their guns at the ready.
    * \_c_ routes can be used as a soldier's Sneak Route, although the soldier will still patrol as if they are on alert. \_d_ and \_n_ routes can be used as a soldier's Caution Route, but the soldier will still act alert as they patrol.
  * Routes with \_h_ in their name are **hold routes**. Soldiers with hold routes will stand in place, alert as they wait for the player.
  * Routes with \_r_ in their name are **rain routes**. A soldier assigned to a rain route will stand under shelter (ex: a tent or roof). Soldiers with rain routes are almost always completely stationary.
  * Routes with \_s_ in their name are **sleep routes**. Soldiers assigned to a sleep route as their Sneak Route will lay in bed sleeping until disturbed by the player. 
    * If the soldier has a sleep route assigned as their Caution Route, they will stand over their bed and hold their gun at the ready (similar to \_h_ routes).
+* Routes with \_a_ in their names are **alert routes**. These routes are particularly rare, because soldiers use cover-based mechanics by default, without the need of alert-specific routes.
+* Helicopters use specific routes, which patrol through the sky. These routes do not seem to follow a naming scheme like the soldier routes, but the route names will often refer to a 'heli' (Ex: enemyHeli01_Search, rt_heli_quest_0001). Additionally, all player landing zones can be considered helicopter routes. These routes will have the 'lz' prefix. A few missions contain helicopter routes, such as Where Do The Bees Sleep, Hellbound, and The War Economy. A number of sideops also utilize helicopter routes.
+* Walker Gears use specific routes, which can be assigned to their riders, in order to patrol an area on a Walker Gear. These routes are significantly more rare than other route types, and typically have "\_walkerGear" or "\_wkr" in their names. Only specific main missions have walker gear routes, such as Hellbound, The War Economy and Skull Face.
+   
+**As of SOC 0.6.0**, an additional route file can be assigned to a sideop. Until custom routes can be made easily accessible, users should seek out existing .frt files within the game's archives. To unpack the game archives, the user must drag the .dat file onto [GzsTool](https://github.com/Atvaark/GzsTool/releases/download/v0.5.3/GzsTool.v0.5.3.zip).exe. For gathering route files, the user should unpack chunk2.dat (Afghanistan's game files), chunk4.dat (Central Africa's files) and chunk1.dat (contains additional sideop files). Main missions and vanilla sideops are a good source of useable routes; within the unpacked chunk folders, these files can be found in \Assets\tpp\pack\mission2\story and \Assets\tpp\pack\mission2\quest, respectively. The route files are packed into .fpk files, which can also be unpacked with GzsTool. Refer to this [list of mission codes](http://metalgearmodding.wikia.com/wiki/MissionCodes) when searching for a specific route file. For example, if the user wanted to utilize the Smasei Fort routes from the mission "Where Do The Bees Sleep," they would open chunk2_dat (The Afghanistan archive), and then navigate to \Assets\tpp\pack\mission2\story (The files for the main missions). Once there, the user should use the MissionCodes list to determine the specific mission's code. For "Where Do The Bees Sleep, the code is 10040, so the user should open the s10040 folder. For this mission, there is only one fpk: s10040_area.fpk. unpack this fpk file with GzsTool, and then browse the directory, searching for the \*.frt file extension. Copy s10040_area.frt from s10040_area_fpk\Assets\tpp\pack\mission2\story\s10040 to SOC's SOCassets\RouteAssets\ directory. SOC will then list s10040_area as a selectable route file.
  
 A few outpost routes have been roughly documented in Afghanistan_CP_Reference.lua and CentralAfrica_CP_Reference.lua in the Helpful User Resources folder, but the user will need to learn the routes in-game if they wish to have precise patrols for their sideops (although sideops with randomly assigned routes work well enough). These are some tips for gathering route information:
 * Build a sideop with each soldier assigned to a unique route, the QuickMenu [Down] hotkey will notify the user of the soldier's name. The user can then match the route by the name of the soldier, and take note of how they patrol.

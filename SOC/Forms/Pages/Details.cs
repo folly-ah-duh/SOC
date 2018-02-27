@@ -239,9 +239,10 @@ namespace SOC.UI
             comboBox_hosObjType.Text = questDetails.hostageObjectiveType;
             comboBox_vehObjType.Text = questDetails.vehicleObjectiveType;
             comboBox_aniObjType.Text = questDetails.animalObjectiveType;
-            comboBox_heliObjType.Text = "ELIMINATE";
+            comboBox_heliObjType.Text = "KILLREQUIRED";
             comboBox_WalkerObjType.Text = questDetails.walkerGearObjectiveType;
             comboBox_acItObjType.Text = questDetails.activeItemObjectiveType;
+            comboBox_itObjType.Text = "RECOVERED";
         }
 
         public void SetEnemySubType(QuestEntities questDetails, int locId)
@@ -259,7 +260,7 @@ namespace SOC.UI
 
             if (comboBox_subtype.Items.Contains(questDetails.soldierSubType))
                 comboBox_subtype.Text = questDetails.soldierSubType;
-            else
+            else if (comboBox_subtype.Items.Count > 0)
                 comboBox_subtype.SelectedIndex = 0;
         }
 
@@ -387,6 +388,7 @@ namespace SOC.UI
         private void comboBox_Body_SelectedIndexChanged(object sender, EventArgs e)
         {
             RefreshHostageLanguage();
+            comboBox_hosObjType.Focus(); panelHosDet.Focus();
         }
 
         private void RefreshHostageLanguage()
@@ -411,7 +413,6 @@ namespace SOC.UI
                     hostageDetail.h_comboBox_lang.SelectedIndex = languageindex;
                 }
             }
-            comboBox_Body.Focus(); panelHosDet.Focus();
 
         }
 

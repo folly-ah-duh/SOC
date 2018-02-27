@@ -493,7 +493,7 @@ namespace SOC.Classes
                 {
                     totalCount++;
                     targetItemList.Add("		{");
-                    targetItemList.Add(string.Format("		   equipId = TppEquip.{0}", item.item));
+                    targetItemList.Add(string.Format("		   equipId = TppEquip.{0},", item.item));
                     targetItemList.Add("		  messageId = \"None\",");
                     targetItemList.Add("		},");
                 }

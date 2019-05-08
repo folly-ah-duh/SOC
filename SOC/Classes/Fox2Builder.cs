@@ -864,7 +864,7 @@ namespace SOC.Classes
                     boxed = "1";
                 }
 
-                EquipID = EquipIDLookup(item.item);
+                EquipID = EquipIdStr32(item.item);
 
                 entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppPickableLocatorParameter, EquipID, item.count, boxed));
             }
@@ -874,7 +874,7 @@ namespace SOC.Classes
                 entityList.Add(new QuestEntity(activeItem.name, unassignedAddress, entityClass.GameObjectLocator, "TppPlacedSystem"));
                 entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity, activeItem.coordinates, activeItem.quatCoordinates));
 
-                string equipID = EquipIDLookup(activeItem.activeItem);
+                string equipID = EquipIdStr32(activeItem.activeItem);
 
                 entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppPlacedLocatorParameter, equipID));
             }

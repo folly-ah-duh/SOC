@@ -220,6 +220,8 @@ When choosing a sideop's progress notification, the user can choose from 9 defau
   
 ## Enemy Routes Guide
 [Sai/youarebritish](https://github.com/youarebritish) has reverse-engineered the route format, which is a great leap forward for modding MGSV:TPP. Creating new route files and previewing existing routes is technically possible, however rather inaccessible for average users. Until route files can be made user friendly, routes will need to be previewed in-game.
+**NexusMods user laranjinho has made an effort to overlay some route names onto in-game screenshots, found here: https://drive.google.com/drive/folders/1Hrz-aIrqfMX3pn8Uf-1wYXcXbu68Kc0G?usp=sharing**
+These images can be very useful and viewing them is highly recommended.
 For a given route name (ex: rt_powerPlant_d_0000):
  * Routes with \_d_ in their names are the encampment's **daytime routes**. These routes are typically more patrol-oriented, so the user is more likely to find patrol routes by assigning soldiers to \_d_ routes.
  * Routes with \_n_ in their names are the encampment's **nighttime routes**. Nighttime routes tend to be more stationary than their daytime counterparts, with occasional patrol routes.

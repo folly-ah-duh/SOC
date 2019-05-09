@@ -11,10 +11,7 @@ namespace SOC.Classes
 
     public static class Fox2Builder
     {
-
         static string unassignedName = "";
-        static int unassignedAddress = -1;  
-        static object unnassignedObject = "";
 
         public static void SetAddresses(List<QuestEntity> QuestEntities, int baseOffset)
         {
@@ -32,9 +29,9 @@ namespace SOC.Classes
 
             foreach (QuestEntity entity in entityList)
             {
-                if (!entity.entityName.Equals(unassignedName))
+                if (!entity.name.Equals(unassignedName))
                 {
-                    dataList.Add(string.Format("			<value key=\"{0}\">0x{1:X8}</value>", entity.entityName, entity.hexAddress));
+                    dataList.Add(string.Format("			<value key=\"{0}\">0x{1:X8}</value>", entity.name, entity.hexAddress));
                 }
             }
 
@@ -46,97 +43,97 @@ namespace SOC.Classes
             string vehicleHistory = "";
             List<QuestEntity> entityList = new List<QuestEntity>();
 
-            entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.DataSet, unnassignedObject, unnassignedObject));
-            entityList.Add(new QuestEntity("ScriptBlockScript0000", unassignedAddress, entityClass.ScriptBlockScript, unnassignedObject, unnassignedObject));
+            entityList.Add(new QuestEntity(entityClass.DataSet));
+            entityList.Add(new QuestEntity(entityClass.ScriptBlockScript, "ScriptBlockScript0000"));
 
             if (questDetails.hostages.Count > 0)
             {
-                entityList.Add(new QuestEntity("GameObjectTppHostageUnique", unassignedAddress, entityClass.GameObject, "TppHostageUnique2", questDetails.hostages.Count));
-                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppHostage2Parameter, unnassignedObject, unnassignedObject));
+                entityList.Add(new QuestEntity(entityClass.GameObject, "GameObjectTppHostageUnique", "TppHostageUnique2", questDetails.hostages.Count));
+                entityList.Add(new QuestEntity(entityClass.TppHostage2Parameter));
 
                 foreach (Hostage hostage in questDetails.hostages)
                 {
-                    entityList.Add(new QuestEntity(hostage.name, unassignedAddress, entityClass.GameObjectLocator, "TppHostageUnique2", unnassignedObject));
-                    entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity, hostage.coordinates, new RotationQuat("0","0","0","1")));
-                    entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppHostage2LocatorParameter, unnassignedObject, unnassignedObject));
+                    entityList.Add(new QuestEntity(entityClass.GameObjectLocator, hostage.name, "TppHostageUnique2"));
+                    entityList.Add(new QuestEntity(entityClass.TransformEntity, eDetails: new object[] { hostage.coordinates, new RotationQuat("0", "0", "0", "1") }));
+                    entityList.Add(new QuestEntity(entityClass.TppHostage2LocatorParameter));
                 }
             }
 
             if (questDetails.walkerGears.Count > 0)
             {
-                entityList.Add(new QuestEntity("WalkerGearGameObject", unassignedAddress, entityClass.GameObject, "TppCommonWalkerGear2", questDetails.walkerGears.Count));
-                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppWalkerGear2Parameter, unnassignedObject, unnassignedObject));
+                entityList.Add(new QuestEntity(entityClass.GameObject, "WalkerGearGameObject", "TppCommonWalkerGear2", questDetails.walkerGears.Count));
+                entityList.Add(new QuestEntity(entityClass.TppWalkerGear2Parameter));
 
                 foreach (WalkerGear walkergear in questDetails.walkerGears)
                 {
-                    entityList.Add(new QuestEntity(walkergear.name, unassignedAddress, entityClass.GameObjectLocator, "TppCommonWalkerGear2", unnassignedObject));
-                    entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity, walkergear.coordinates, new RotationQuat("0", "0", "0", "1")));
-                    entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppWalkerGear2LocatorParameter, unnassignedObject, unnassignedObject));
+                    entityList.Add(new QuestEntity(entityClass.GameObjectLocator, walkergear.name, "TppCommonWalkerGear2"));
+                    entityList.Add(new QuestEntity(entityClass.TransformEntity, eDetails: new object[] { walkergear.coordinates, new RotationQuat("0", "0", "0", "1") }));
+                    entityList.Add(new QuestEntity(entityClass.TppWalkerGear2LocatorParameter));
                 }
             }
 
             foreach (Vehicle vehicle in questDetails.vehicles)
             {
-                entityList.Add(new QuestEntity(vehicle.name, unassignedAddress, entityClass.GameObjectLocator, "TppVehicle2", unnassignedObject));
-                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity, vehicle.coordinates, new RotationQuat("0", "0", "0", "1")));
-                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppVehicle2LocatorParameter, unnassignedObject, unnassignedObject));
+                entityList.Add(new QuestEntity(entityClass.GameObjectLocator, vehicle.name, "TppVehicle2"));
+                entityList.Add(new QuestEntity(entityClass.TransformEntity, eDetails: new object[] { vehicle.coordinates, new RotationQuat("0", "0", "0", "1") }));
+                entityList.Add(new QuestEntity(entityClass.TppVehicle2LocatorParameter));
 
                 switch (vehicle.vehicleIndex)
                 {
                     case 0:
                         if (!vehicleHistory.Contains("veh_bd_east_tnk"))
                         {
-                            entityList.Add(new QuestEntity("veh_bd_east_tnk", unassignedAddress, entityClass.TppVehicle2BodyData, unnassignedObject, unnassignedObject));
+                            entityList.Add(new QuestEntity(entityClass.TppVehicle2BodyData, "veh_bd_east_tnk"));
                             vehicleHistory += "veh_bd_east_tnk ";
                         }
                         break;
                     case 1:
                         if (!vehicleHistory.Contains("veh_bd_west_tnk"))
                         {
-                            entityList.Add(new QuestEntity("veh_bd_west_tnk", unassignedAddress, entityClass.TppVehicle2BodyData, unnassignedObject, unnassignedObject));
+                            entityList.Add(new QuestEntity(entityClass.TppVehicle2BodyData, "veh_bd_west_tnk"));
                             vehicleHistory += "veh_bd_west_tnk ";
                         }
                         break;
                     case 2:
                         if (!vehicleHistory.Contains("veh_bd_east_wav"))
                         {
-                            entityList.Add(new QuestEntity("veh_bd_east_wav", unassignedAddress, entityClass.TppVehicle2BodyData, unnassignedObject, unnassignedObject));
+                            entityList.Add(new QuestEntity(entityClass.TppVehicle2BodyData, "veh_bd_east_wav"));
                             vehicleHistory += "veh_bd_east_wav ";
                         }
                         break;
                     case 3:
                         if (!vehicleHistory.Contains("veh_bd_east_wav"))
                         {
-                            entityList.Add(new QuestEntity("veh_bd_east_wav", unassignedAddress, entityClass.TppVehicle2BodyData, unnassignedObject, unnassignedObject));
+                            entityList.Add(new QuestEntity(entityClass.TppVehicle2BodyData, "veh_bd_east_wav"));
                             vehicleHistory += "veh_bd_east_wav ";
                         }
                         if (!vehicleHistory.Contains("veh_at_east_wav_rocket"))
                         {
-                            entityList.Add(new QuestEntity("veh_at_east_wav_rocket", unassignedAddress, entityClass.TppVehicle2AttachmentData, unnassignedObject, unnassignedObject));
+                            entityList.Add(new QuestEntity(entityClass.TppVehicle2AttachmentData, "veh_at_east_wav_rocket"));
                             vehicleHistory += "veh_at_east_wav_rocket ";
                         }
                         break;
                     case 4:
                         if (!vehicleHistory.Contains("veh_bd_west_wav"))
                         {
-                            entityList.Add(new QuestEntity("veh_bd_west_wav", unassignedAddress, entityClass.TppVehicle2BodyData, unnassignedObject, unnassignedObject));
+                            entityList.Add(new QuestEntity(entityClass.TppVehicle2BodyData, "veh_bd_west_wav"));
                             vehicleHistory += "veh_bd_west_wav ";
                         }
                         if (!vehicleHistory.Contains("veh_at_west_wav_trt_machinegun"))
                         {
-                            entityList.Add(new QuestEntity("veh_at_west_wav_trt_machinegun", unassignedAddress, entityClass.TppVehicle2AttachmentData, unnassignedObject, unnassignedObject));
+                            entityList.Add(new QuestEntity(entityClass.TppVehicle2AttachmentData, "veh_at_west_wav_trt_machinegun"));
                             vehicleHistory += "veh_at_west_wav_trt_machinegun ";
                         }
                         break;
                     case 5:
                         if (!vehicleHistory.Contains("veh_bd_west_wav"))
                         {
-                            entityList.Add(new QuestEntity("veh_bd_west_wav", unassignedAddress, entityClass.TppVehicle2BodyData, unnassignedObject, unnassignedObject));
+                            entityList.Add(new QuestEntity(entityClass.TppVehicle2BodyData, "veh_bd_west_wav"));
                             vehicleHistory += "veh_bd_west_wav ";
                         }
                         if (!vehicleHistory.Contains("veh_at_west_wav_trt_cannon"))
                         {
-                            entityList.Add(new QuestEntity("veh_at_west_wav_trt_cannon", unassignedAddress, entityClass.TppVehicle2AttachmentData, unnassignedObject, unnassignedObject));
+                            entityList.Add(new QuestEntity(entityClass.TppVehicle2AttachmentData, "veh_at_west_wav_trt_cannon"));
                             vehicleHistory += "veh_at_west_wav_trt_cannon ";
                         }
                         break;
@@ -162,47 +159,47 @@ namespace SOC.Classes
                     }
 
                     string partsPath = "", mogPath = "", mtarPath = "", fv2Path = "";
-                    AnimalInfo.getAnimalPaths(animalName , out partsPath, out mogPath, out mtarPath, out fv2Path);
+                    AnimalInfo.getAnimalPaths(animalName, out partsPath, out mogPath, out mtarPath, out fv2Path);
 
-                    entityList.Add(new QuestEntity(animalName + "GameObject", unassignedAddress, entityClass.GameObject, typeName, totalCount));
+                    entityList.Add(new QuestEntity(entityClass.GameObject, animalName + "GameObject", typeName, totalCount));
                     switch (animalCategory)
                     {
                         case "animal":
-                            entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppAnimalParameter, partsPath, mogPath, mtarPath, fv2Path));
+                            entityList.Add(new QuestEntity(entityClass.TppAnimalParameter, eDetails: new object[] { partsPath, mogPath, mtarPath, fv2Path }));
                             break;
                         case "wolf":
-                            entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppWolfParameter, partsPath, mogPath, mtarPath, fv2Path));
+                            entityList.Add(new QuestEntity(entityClass.TppWolfParameter, eDetails: new object[] { partsPath, mogPath, mtarPath, fv2Path }));
                             break;
                         case "bear":
-                            entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppBearParameter, partsPath, mogPath, mtarPath, fv2Path));
+                            entityList.Add(new QuestEntity(entityClass.TppBearParameter, eDetails: new object[] { partsPath, mogPath, mtarPath, fv2Path }));
                             break;
                     }
                 }
 
-                entityList.Add(new QuestEntity(animal.name, unassignedAddress, entityClass.GameObjectLocator, typeName));
-                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity, animal.coordinates, new RotationQuat("0", "0", "0", "1")));
+                entityList.Add(new QuestEntity(entityClass.GameObjectLocator, animal.name, typeName));
+                entityList.Add(new QuestEntity(entityClass.TransformEntity, eDetails: new object[] { animal.coordinates, new RotationQuat("0", "0", "0", "1") }));
                 switch (animalCategory)
                 {
                     case "animal":
-                        entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppAnimalLocatorParameter, animal.count));
+                        entityList.Add(new QuestEntity(entityClass.TppAnimalLocatorParameter, eDetails: animal.count));
                         break;
                     case "wolf":
-                        entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppWolfLocatorParameter, animal.count));
+                        entityList.Add(new QuestEntity(entityClass.TppWolfLocatorParameter, eDetails: animal.count));
                         break;
                     case "bear":
-                        entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppBearLocatorParameter, animal.count));
+                        entityList.Add(new QuestEntity(entityClass.TppBearLocatorParameter, eDetails: animal.count));
                         break;
                 }
 
             }
-            
+
             foreach (Model model in questDetails.models)
             {
-                entityList.Add(new QuestEntity(model.name, unassignedAddress, entityClass.StaticModel, model.model, model.missingGeom));
-                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity, model.coordinates, model.quatCoordinates));
+                entityList.Add(new QuestEntity(entityClass.StaticModel, model.name, model.model, model.missingGeom));
+                entityList.Add(new QuestEntity(entityClass.TransformEntity, eDetails: new object[] { model.coordinates, model.quatCoordinates }));
             }
 
-            entityList.Add(new QuestEntity("TexturePackLoadConditioner0000", unassignedAddress, entityClass.TexturePackLoadConditioner, unnassignedObject, unnassignedObject));
+            entityList.Add(new QuestEntity(entityClass.TexturePackLoadConditioner, "TexturePackLoadConditioner0000"));
 
             return entityList;
         }
@@ -256,7 +253,8 @@ namespace SOC.Classes
                 {
                     animalcat = AnimalInfo.getAnimalCategory(animal.animal);
 
-                    if (!animalHistory.Contains(animalcat)) {
+                    if (!animalHistory.Contains(animalcat))
+                    {
                         animalHistory += animalcat;
                         switch (animalcat)
                         {
@@ -279,7 +277,7 @@ namespace SOC.Classes
             }
 
             classList.Add("    <class name=\"TexturePackLoadConditioner\" super=\"\" version=\"0\" />");
-            
+
             return classList;
         }
 
@@ -304,7 +302,7 @@ namespace SOC.Classes
                 questFox2.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
                 questFox2.WriteLine("<fox formatVersion=\"2\" fileVersion=\"0\" originalVersion=\"Sun Mar 16 00:00:00 UTC-05:00 1975\">");
                 questFox2.WriteLine("  <classes>");
-                
+
                 foreach (string value in BuildQuestClassList(questDetails))
                 {
                     questFox2.WriteLine(value);
@@ -312,11 +310,11 @@ namespace SOC.Classes
 
                 questFox2.WriteLine("  </classes>");
                 questFox2.WriteLine("  <entities>");
-                for(int i = 0; i < entityList.Count; i++)
+                for (int i = 0; i < entityList.Count; i++)
                 {
                     QuestEntity entity = entityList[i];
 
-                    switch(entity.className)
+                    switch (entity.className)
                     {
                         case entityClass.DataSet:
                             questFox2.WriteLine(string.Format("    <entity class=\"DataSet\" classVersion=\"0\" addr=\"0x{0:X8}\" unknown1=\"232\" unknown2=\"29239\">", entity.hexAddress));
@@ -328,7 +326,7 @@ namespace SOC.Classes
                             questFox2.WriteLine("          <value>0x00000000</value>");
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine(string.Format("        <property name=\"dataList\" type=\"EntityPtr\" container=\"StringMap\" arraySize=\"{0}\">", BuildDataList(entityList).Count));
-                            foreach(string value in BuildDataList(entityList))
+                            foreach (string value in BuildDataList(entityList))
                             {
                                 questFox2.WriteLine(value);
                             }
@@ -342,7 +340,7 @@ namespace SOC.Classes
                             questFox2.WriteLine(string.Format("    <entity class=\"ScriptBlockScript\" classVersion=\"0\" addr=\"0x{0:X8}\" unknown1=\"88\" unknown2=\"29241\">", entity.hexAddress));
                             questFox2.WriteLine("      <staticProperties>");
                             questFox2.WriteLine("        <property name=\"name\" type=\"String\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.entityName));
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.name));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"dataSet\" type=\"EntityHandle\" container=\"StaticArray\" arraySize=\"1\">");
                             questFox2.WriteLine(string.Format("          <value>0x{0:X8}</value>", baseAddress));
@@ -359,22 +357,22 @@ namespace SOC.Classes
                             questFox2.WriteLine(string.Format("    <entity class=\"GameObject\" classVersion=\"2\" addr=\"0x{0:X8}\" unknown1=\"88\" unknown2=\"29243\">", entity.hexAddress));
                             questFox2.WriteLine("      <staticProperties>");
                             questFox2.WriteLine("        <property name=\"name\" type=\"String\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.entityName));
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.name));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"dataSet\" type=\"EntityHandle\" container=\"StaticArray\" arraySize=\"1\">");
                             questFox2.WriteLine(string.Format("          <value>0x{0:X8}</value>", baseAddress));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"typeName\" type=\"String\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info1));
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.details[0]));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"groupId\" type=\"uint32\" container=\"StaticArray\" arraySize=\"1\">");
                             questFox2.WriteLine("          <value>0</value>");
                             questFox2.WriteLine("        </property>");
-                            questFox2.WriteLine("        <property name=\"totalCount\" type=\"uint32\" container=\"StaticArray\" arraySize=\"1\">"); 
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info2));
+                            questFox2.WriteLine("        <property name=\"totalCount\" type=\"uint32\" container=\"StaticArray\" arraySize=\"1\">");
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.details[1]));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"realizedCount\" type=\"uint32\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info2));
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.details[1]));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"parameters\" type=\"EntityPtr\" container=\"StaticArray\" arraySize=\"1\">");
                             questFox2.WriteLine(string.Format("          <value>0x{0:X8}</value>", entityList[i + 1].hexAddress));
@@ -412,7 +410,7 @@ namespace SOC.Classes
                             questFox2.WriteLine(string.Format("    <entity class=\"GameObjectLocator\" classVersion=\"2\" addr=\"0x{0:X8}\" unknown1=\"272\" unknown2=\"29247\">", entity.hexAddress));
                             questFox2.WriteLine("      <staticProperties>");
                             questFox2.WriteLine("        <property name=\"name\" type=\"String\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("         <value>{0}</value>", entity.entityName));
+                            questFox2.WriteLine(string.Format("         <value>{0}</value>", entity.name));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"dataSet\" type=\"EntityHandle\" container=\"StaticArray\" arraySize=\"1\">");
                             questFox2.WriteLine(string.Format("          <value>0x{0:X8}</value>", baseAddress));
@@ -421,7 +419,7 @@ namespace SOC.Classes
                             questFox2.WriteLine("          <value>0x00000000</value>");
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"transform\" type=\"EntityPtr\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>0x{0:X8}</value>", entityList[i+1].hexAddress));
+                            questFox2.WriteLine(string.Format("          <value>0x{0:X8}</value>", entityList[i + 1].hexAddress));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"shearTransform\" type=\"EntityPtr\" container=\"StaticArray\" arraySize=\"1\">");
                             questFox2.WriteLine("          <value>0x00000000</value>");
@@ -434,7 +432,7 @@ namespace SOC.Classes
                             questFox2.WriteLine("          <value>7</value>");
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"typeName\" type=\"String\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info1));
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.details[0]));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"groupId\" type=\"uint32\" container=\"StaticArray\" arraySize=\"1\">");
                             questFox2.WriteLine("          <value>0</value>");
@@ -457,11 +455,11 @@ namespace SOC.Classes
                             questFox2.WriteLine("          <value x=\"1\" y=\"1\" z=\"1\" w=\"0\" />");
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"transform_rotation_quat\" type=\"Quat\" container=\"StaticArray\" arraySize=\"1\">");
-                            RotationQuat entityrot = (RotationQuat)entity.info2;
+                            RotationQuat entityrot = (RotationQuat)entity.details[1];
                             questFox2.WriteLine(string.Format("          <value x=\"{0}\" y=\"{1}\" z=\"{2}\" w=\"{3}\" />", entityrot.xval, entityrot.yval, entityrot.zval, entityrot.wval));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"transform_translation\" type=\"Vector3\" container=\"StaticArray\" arraySize=\"1\">");
-                            Coordinates entityCoords = (Coordinates)entity.info1;
+                            Coordinates entityCoords = (Coordinates)entity.details[0];
                             questFox2.WriteLine(string.Format("          <value x = \"{0}\" y = \"{1}\" z = \"{2}\" w = \"0\" />", entityCoords.xCoord, entityCoords.yCoord, entityCoords.zCoord));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("      </staticProperties>");
@@ -470,7 +468,7 @@ namespace SOC.Classes
                             break;
 
                         case entityClass.TppHostage2LocatorParameter:
-                            questFox2.WriteLine(string.Format("    <entity class=\"TppHostage2LocatorParameter\" classVersion=\"0\" addr=\"0x{0:X8}\" unknown1=\"32\" unknown2=\"29254\">",entity.hexAddress));
+                            questFox2.WriteLine(string.Format("    <entity class=\"TppHostage2LocatorParameter\" classVersion=\"0\" addr=\"0x{0:X8}\" unknown1=\"32\" unknown2=\"29254\">", entity.hexAddress));
                             questFox2.WriteLine("      <staticProperties>");
                             questFox2.WriteLine("        <property name=\"owner\" type=\"EntityHandle\" container=\"StaticArray\" arraySize=\"1\">");
                             questFox2.WriteLine(string.Format("          <value>0x{0:X8}</value>", entityList[i - 2].hexAddress));
@@ -495,11 +493,11 @@ namespace SOC.Classes
                             break;
 
                         case entityClass.TppVehicle2BodyData:
-                            Vehicle2Body bodyData = new Vehicle2Body(entity.entityName);
+                            Vehicle2Body bodyData = new Vehicle2Body(entity.name);
                             questFox2.WriteLine(string.Format("<entity class=\"TppVehicle2BodyData\" classVersion=\"3\" addr=\"0x{0:X8}\" unknown1=\"128\" unknown2=\"547300\">", entity.hexAddress));
                             questFox2.WriteLine("      <staticProperties>");
                             questFox2.WriteLine("        <property name=\"name\" type=\"String\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.entityName));
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.name));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"dataSet\" type=\"EntityHandle\" container=\"StaticArray\" arraySize=\"1\">");
                             questFox2.WriteLine(string.Format("          <value>0x{0:X8}</value>", baseAddress));
@@ -527,11 +525,11 @@ namespace SOC.Classes
                             break;
 
                         case entityClass.TppVehicle2AttachmentData:
-                            Vehicle2Attachment attachData = new Vehicle2Attachment(entity.entityName);
+                            Vehicle2Attachment attachData = new Vehicle2Attachment(entity.name);
                             questFox2.WriteLine(string.Format("<entity class=\"TppVehicle2AttachmentData\" classVersion=\"1\" addr=\"0x{0:X8}\" unknown1=\"120\" unknown2=\"356482\">", entity.hexAddress));
                             questFox2.WriteLine("      <staticProperties>");
                             questFox2.WriteLine("        <property name=\"name\" type=\"String\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.entityName));
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.name));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"dataSet\" type=\"EntityHandle\" container=\"StaticArray\" arraySize=\"1\">");
                             questFox2.WriteLine(string.Format("          <value>0x{0:X8}</value>", baseAddress));
@@ -564,7 +562,7 @@ namespace SOC.Classes
                             questFox2.WriteLine(string.Format(" <entity class=\"StaticModel\" classVersion=\"9\" addr=\"0x{0:X8}\" unknown1=\"352\" unknown2=\"548876795\">", entity.hexAddress));
                             questFox2.WriteLine("      <staticProperties>");
                             questFox2.WriteLine("        <property name=\"name\" type=\"String\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.entityName));
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.name));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"dataSet\" type=\"EntityHandle\" container=\"StaticArray\" arraySize=\"1\">");
                             questFox2.WriteLine(string.Format("          <value>0x{0:X8}</value>", baseAddress));
@@ -586,13 +584,13 @@ namespace SOC.Classes
                             questFox2.WriteLine("          <value>7</value>");
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"modelFile\" type=\"FilePtr\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>/Assets/{0}.fmdl</value>", entity.info1));
+                            questFox2.WriteLine(string.Format("          <value>/Assets/{0}.fmdl</value>", entity.details[0]));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"geomFile\" type=\"FilePtr\" container=\"StaticArray\" arraySize=\"1\">");
-                            if ((bool)entity.info2)
+                            if ((bool)entity.details[1])
                                 questFox2.WriteLine("          <value></value>");
                             else
-                                questFox2.WriteLine(string.Format("          <value>/Assets/{0}.geom</value>", entity.info1));
+                                questFox2.WriteLine(string.Format("          <value>/Assets/{0}.geom</value>", entity.details[0]));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"isVisibleGeom\" type=\"bool\" container=\"StaticArray\" arraySize=\"1\">");
                             questFox2.WriteLine("          <value>false</value>");
@@ -625,7 +623,7 @@ namespace SOC.Classes
                             questFox2.WriteLine("      <dynamicProperties />");
                             questFox2.WriteLine("    </entity>");
                             break;
-                            
+
                         case entityClass.TppAnimalParameter:
                             questFox2.WriteLine(string.Format("	<entity class=\"TppAnimalParameter\" classVersion=\"1\" addr=\"0x{0:X8}\" unknown1=\"168\" unknown2=\"54088\">", entity.hexAddress));
                             questFox2.WriteLine("      <staticProperties>");
@@ -633,18 +631,18 @@ namespace SOC.Classes
                             questFox2.WriteLine(string.Format("          <value>0x{0:X8}</value>", entityList[i - 1].hexAddress));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"partsFile\" type=\"FilePtr\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info1));
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.details[0]));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"motionGraphFile\" type=\"FilePtr\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info2));
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.details[1]));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"mtarFile\" type=\"FilePtr\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info3));
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.details[2]));
                             questFox2.WriteLine("        </property>");
-                            if (!entity.info4.Equals(""))
+                            if (!entity.details[3].Equals(""))
                             {
                                 questFox2.WriteLine("        <property name=\"fovaFiles\" type=\"FilePtr\" container=\"DynamicArray\" arraySize=\"1\">");
-                                questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info4));
+                                questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.details[3]));
                                 questFox2.WriteLine("        </property>");
                             }
                             else
@@ -664,17 +662,18 @@ namespace SOC.Classes
                             questFox2.WriteLine(string.Format("          <value>0x{0:X8}</value>", entityList[i - 1].hexAddress));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"partsFile\" type=\"FilePtr\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info1));
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.details[0]));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"mtarFile\" type=\"FilePtr\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info2));
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.details[1]));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"mogFile\" type=\"FilePtr\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info3));
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.details[2]));
                             questFox2.WriteLine("        </property>");
-                            if (!entity.info4.Equals("")) {
+                            if (!entity.details[3].Equals(""))
+                            {
                                 questFox2.WriteLine("        <property name=\"fovaFiles\" type=\"FilePtr\" container=\"DynamicArray\" arraySize=\"1\">");
-                                questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info4));
+                                questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.details[3]));
                                 questFox2.WriteLine("        </property>");
                             }
                             else
@@ -693,18 +692,18 @@ namespace SOC.Classes
                             questFox2.WriteLine(string.Format("          <value>0x{0:X8}</value>", entityList[i - 1].hexAddress));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"partsFile\" type=\"FilePtr\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info1));
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.details[0]));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"mtarFile\" type=\"FilePtr\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info2));
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.details[1]));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"mogFile\" type=\"FilePtr\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info3));
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.details[2]));
                             questFox2.WriteLine("        </property>");
-                            if (!entity.info4.Equals(""))
+                            if (!entity.details[3].Equals(""))
                             {
                                 questFox2.WriteLine("        <property name=\"fovaFiles\" type=\"FilePtr\" container=\"DynamicArray\" arraySize=\"1\">");
-                                questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info4)); //if
+                                questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.details[3])); //if
                                 questFox2.WriteLine("        </property>");
                             }
                             else
@@ -723,7 +722,7 @@ namespace SOC.Classes
                             questFox2.WriteLine(string.Format("          <value>0x{0:X8}</value>", entityList[i - 2].hexAddress));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"count\" type=\"uint32\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info1));
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.details[0]));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"radius\" type=\"float\" container=\"StaticArray\" arraySize=\"1\">");
                             questFox2.WriteLine("          <value>30</value>");
@@ -740,7 +739,7 @@ namespace SOC.Classes
                             questFox2.WriteLine(string.Format("          <value>0x{0:X8}</value>", entityList[i - 2].hexAddress));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"count\" type=\"uint32\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info1));
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.details[0]));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"radius\" type=\"uint8\" container=\"StaticArray\" arraySize=\"1\">");
                             questFox2.WriteLine("          <value>40</value>");
@@ -757,7 +756,7 @@ namespace SOC.Classes
                             questFox2.WriteLine(string.Format("          <value>0x{0:X8}</value>", entityList[i - 2].hexAddress));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"count\" type=\"uint32\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info1));
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.details[0]));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"radius\" type=\"uint8\" container=\"StaticArray\" arraySize=\"1\">");
                             questFox2.WriteLine("          <value>40</value>");
@@ -821,7 +820,7 @@ namespace SOC.Classes
                             questFox2.WriteLine(string.Format("    <entity class=\"TexturePackLoadConditioner\" classVersion=\"0\" addr=\"0x{0:X8}\" unknown1=\"72\" unknown2=\"0\">", entity.hexAddress));
                             questFox2.WriteLine("      <staticProperties>");
                             questFox2.WriteLine("        <property name=\"name\" type=\"String\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.entityName));
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.name));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"dataSet\" type=\"EntityHandle\" container=\"StaticArray\" arraySize=\"1\">");
                             questFox2.WriteLine(string.Format("          <value>0x{0:X8}</value>", baseAddress));
@@ -834,11 +833,11 @@ namespace SOC.Classes
                             questFox2.WriteLine("    </entity>");
                             break;
                     }
-                    
+
                 }
                 questFox2.WriteLine("  </entities>");
                 questFox2.WriteLine("</fox>");
-                
+
             }
 
             XmlCompiler.CompileFile(fox2QuestFile, XmlCompiler.FoxToolPath);
@@ -850,13 +849,13 @@ namespace SOC.Classes
             List<QuestEntity> entityList = new List<QuestEntity>();
             string boxed = "";
             string EquipID = "";
-            entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.DataSet, unnassignedObject, unnassignedObject));
+            entityList.Add(new QuestEntity(entityClass.DataSet));
 
             foreach (Item item in questDetails.items)
             {
 
-                entityList.Add(new QuestEntity(item.name, unassignedAddress, entityClass.GameObjectLocator, "TppPickableSystem"));
-                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity, item.coordinates, item.quatCoordinates));
+                entityList.Add(new QuestEntity(entityClass.GameObjectLocator, item.name, "TppPickableSystem"));
+                entityList.Add(new QuestEntity(entityClass.TransformEntity, eDetails: new object[] { item.coordinates, item.quatCoordinates }));
 
                 boxed = "0";
                 if (item.isBoxed)
@@ -866,20 +865,20 @@ namespace SOC.Classes
 
                 EquipID = EquipIdStr32(item.item);
 
-                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppPickableLocatorParameter, EquipID, item.count, boxed));
+                entityList.Add(new QuestEntity(entityClass.TppPickableLocatorParameter, eDetails: new object[] { EquipID, item.count, boxed }));
             }
 
             foreach (ActiveItem activeItem in questDetails.activeItems)
             {
-                entityList.Add(new QuestEntity(activeItem.name, unassignedAddress, entityClass.GameObjectLocator, "TppPlacedSystem"));
-                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TransformEntity, activeItem.coordinates, activeItem.quatCoordinates));
+                entityList.Add(new QuestEntity(entityClass.GameObjectLocator, activeItem.name, "TppPlacedSystem"));
+                entityList.Add(new QuestEntity(entityClass.TransformEntity, eDetails: new object[] { activeItem.coordinates, activeItem.quatCoordinates }));
 
                 string equipID = EquipIdStr32(activeItem.activeItem);
 
-                entityList.Add(new QuestEntity(unassignedName, unassignedAddress, entityClass.TppPlacedLocatorParameter, equipID));
+                entityList.Add(new QuestEntity(entityClass.TppPlacedLocatorParameter, eDetails: equipID));
             }
 
-            entityList.Add(new QuestEntity("TexturePackLoadConditioner0000", unassignedAddress, entityClass.TexturePackLoadConditioner, unnassignedObject, unnassignedObject));
+            entityList.Add(new QuestEntity(entityClass.TexturePackLoadConditioner, "TexturePackLoadConditioner0000"));
 
             return entityList;
         }
@@ -967,7 +966,7 @@ namespace SOC.Classes
                             questFox2.WriteLine(string.Format("    <entity class=\"GameObjectLocator\" classVersion=\"2\" addr=\"0x{0:X8}\" unknown1=\"272\" unknown2=\"29247\">", entity.hexAddress));
                             questFox2.WriteLine("      <staticProperties>");
                             questFox2.WriteLine("        <property name=\"name\" type=\"String\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("         <value>{0}</value>", entity.entityName));
+                            questFox2.WriteLine(string.Format("         <value>{0}</value>", entity.name));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"dataSet\" type=\"EntityHandle\" container=\"StaticArray\" arraySize=\"1\">");
                             questFox2.WriteLine(string.Format("          <value>0x{0:X8}</value>", baseAddress));
@@ -989,7 +988,7 @@ namespace SOC.Classes
                             questFox2.WriteLine("          <value>7</value>");
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"typeName\" type=\"String\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info1));
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.details[0]));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"groupId\" type=\"uint32\" container=\"StaticArray\" arraySize=\"1\">");
                             questFox2.WriteLine("          <value>0</value>");
@@ -1012,11 +1011,11 @@ namespace SOC.Classes
                             questFox2.WriteLine("          <value x=\"1\" y=\"1\" z=\"1\" w=\"0\" />");
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"transform_rotation_quat\" type=\"Quat\" container=\"StaticArray\" arraySize=\"1\">");
-                            RotationQuat entityrot = (RotationQuat)entity.info2;
+                            RotationQuat entityrot = (RotationQuat)entity.details[1];
                             questFox2.WriteLine(string.Format("          <value x=\"{0}\" y=\"{1}\" z=\"{2}\" w=\"{3}\" />", entityrot.xval, entityrot.yval, entityrot.zval, entityrot.wval));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"transform_translation\" type=\"Vector3\" container=\"StaticArray\" arraySize=\"1\">");
-                            Coordinates entityCoords = (Coordinates)entity.info1;
+                            Coordinates entityCoords = (Coordinates)entity.details[0];
                             questFox2.WriteLine(string.Format("          <value x = \"{0}\" y = \"{1}\" z = \"{2}\" w = \"0\" />", entityCoords.xCoord, entityCoords.yCoord, entityCoords.zCoord));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("      </staticProperties>");
@@ -1031,16 +1030,16 @@ namespace SOC.Classes
                             questFox2.WriteLine(string.Format("          <value>0x{0:X8}</value>", entityList[i - 2].hexAddress));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"equipIdStrCode32\" type=\"uint32\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info1));
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.details[0]));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"countRaw\" type=\"uint16\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info2));
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.details[1]));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"countSubRaw\" type=\"uint16\" container=\"StaticArray\" arraySize=\"1\">");
                             questFox2.WriteLine("          <value>0</value>");
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"flag\" type=\"uint16\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info3));
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.details[2]));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"reserved\" type=\"uint16\" container=\"StaticArray\" arraySize=\"1\">");
                             questFox2.WriteLine("          <value>0</value>");
@@ -1057,7 +1056,7 @@ namespace SOC.Classes
                             questFox2.WriteLine(string.Format("          <value>0x{0:X8}</value>", entityList[i - 2].hexAddress));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"equipIdStrCode32\" type=\"uint32\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.info1));
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.details[0]));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("      </staticProperties>");
                             questFox2.WriteLine("      <dynamicProperties />");
@@ -1068,7 +1067,7 @@ namespace SOC.Classes
                             questFox2.WriteLine(string.Format("    <entity class=\"TexturePackLoadConditioner\" classVersion=\"0\" addr=\"0x{0:X8}\" unknown1=\"72\" unknown2=\"0\">", entity.hexAddress));
                             questFox2.WriteLine("      <staticProperties>");
                             questFox2.WriteLine("        <property name=\"name\" type=\"String\" container=\"StaticArray\" arraySize=\"1\">");
-                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.entityName));
+                            questFox2.WriteLine(string.Format("          <value>{0}</value>", entity.name));
                             questFox2.WriteLine("        </property>");
                             questFox2.WriteLine("        <property name=\"dataSet\" type=\"EntityHandle\" container=\"StaticArray\" arraySize=\"1\">");
                             questFox2.WriteLine(string.Format("          <value>0x{0:X8}</value>", baseAddress));

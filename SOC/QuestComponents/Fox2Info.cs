@@ -60,65 +60,23 @@ namespace SOC.QuestComponents
 
     }
 
-
     public class QuestEntity
     {
 
-        public string entityName { get; set; }
+        public string name { get; set; }
 
         public int hexAddress { get; set; }
 
         public entityClass className { get; set; }
 
-        public object info1 { get; set; }
+        public object[] details { get; set; }
 
-        public object info2 { get; set; }
-
-        public object info3 { get; set; }
-
-        public object info4 { get; set; }
-
-        public QuestEntity(string ename, int address, entityClass cname)
+        public QuestEntity(entityClass cName = entityClass.UNASSIGNED, string eName = "", params object[] eDetails)
         {
-            entityName = ename;
-            hexAddress = address;
-            className = cname;
-        }
-        public QuestEntity(string ename, int address, entityClass cname, object inf1)
-        {
-            entityName = ename;
-            hexAddress = address;
-            className = cname;
-            info1 = inf1;
-        }
-        public QuestEntity(string ename, int address, entityClass cname, object inf1, object inf2)
-        {
-            entityName = ename;
-            hexAddress = address;
-            className = cname;
-            info1 = inf1;
-            info2 = inf2;
-        }
-
-        public QuestEntity(string ename, int address, entityClass cname, object inf1, object inf2, object inf3)
-        {
-            entityName = ename;
-            hexAddress = address;
-            className = cname;
-            info1 = inf1;
-            info2 = inf2;
-            info3 = inf3;
-        }
-
-        public QuestEntity(string ename, int address, entityClass cname, object inf1, object inf2, object inf3, object inf4)
-        {
-            entityName = ename;
-            hexAddress = address;
-            className = cname;
-            info1 = inf1;
-            info2 = inf2;
-            info3 = inf3;
-            info4 = inf4;
+            name = eName;
+            hexAddress = -1;
+            className = cName;
+            details = eDetails;
         }
     }
 

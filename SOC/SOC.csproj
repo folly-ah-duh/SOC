@@ -90,6 +90,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Common\NPCMtbsInfo.cs" />
+    <Compile Include="Classes\Common\Quaternion.cs" />
+    <Compile Include="Classes\Common\Rotation.cs" />
     <Compile Include="Classes\EntitiesManager.cs" />
     <Compile Include="Classes\GzsTool\Hashing.cs" />
     <Compile Include="Classes\LangBuilder.cs" />
@@ -99,6 +102,7 @@
     <Compile Include="Classes\LangTool\LangEntry.cs" />
     <Compile Include="Classes\LangTool\LangFile.cs" />
     <Compile Include="Classes\RouteManager.cs" />
+    <Compile Include="Classes\Common\Coordinates.cs" />
     <Compile Include="Classes\UpdateNotifsManager.cs" />
     <Compile Include="Classes\XmlCompiler.cs" />
     <Compile Include="Forms\FormMain.cs">
@@ -120,16 +124,15 @@
     <Compile Include="Forms\Pages\Details.Designer.cs">
       <DependentUpon>Details.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Pages\QuestBoxes\ActiveItemBox.cs" />
-    <Compile Include="Forms\Pages\QuestBoxes\AnimalBox.cs" />
-    <Compile Include="Forms\Pages\QuestBoxes\EnemyBox.cs" />
-    <Compile Include="Forms\Pages\QuestBoxes\HelicopterBox.cs" />
-    <Compile Include="Forms\Pages\QuestBoxes\HostageBox.cs" />
-    <Compile Include="Forms\Pages\QuestBoxes\ItemBox.cs" />
-    <Compile Include="Forms\Pages\QuestBoxes\ModelBox.cs" />
-    <Compile Include="Forms\Pages\QuestBoxes\QuestBox.cs" />
-    <Compile Include="Forms\Pages\QuestBoxes\VehicleBox.cs" />
-    <Compile Include="Forms\Pages\QuestBoxes\WalkerGearBox.cs" />
+    <Compile Include="QuestObjects\ActiveItem\Forms\ActiveItemBox.cs" />
+    <Compile Include="QuestObjects\Animal\Forms\AnimalBox.cs" />
+    <Compile Include="QuestObjects\Enemy\Forms\EnemyBox.cs" />
+    <Compile Include="QuestObjects\Helicopter\Forms\HelicopterBox.cs" />
+    <Compile Include="QuestObjects\Item\Forms\ItemBox.cs" />
+    <Compile Include="QuestObjects\Model\Forms\ModelBox.cs" />
+    <Compile Include="Forms\QuestBox.cs" />
+    <Compile Include="QuestObjects\Vehicle\Forms\VehicleBox.cs" />
+    <Compile Include="QuestObjects\WalkerGear\Forms\WalkerGearBox.cs" />
     <Compile Include="Forms\Pages\Setup.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -143,6 +146,7 @@
       <DependentUpon>Waiting.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\PanelScroll.cs" />
+    <Compile Include="Forms\QuestPanel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\LuaBuilder.cs" />
@@ -155,7 +159,22 @@
     <Compile Include="QuestComponents\EnemyInfo.cs" />
     <Compile Include="QuestComponents\Fox2Info.cs" />
     <Compile Include="QuestComponents\GameObjectInfo.cs" />
-    <Compile Include="QuestComponents\BodyInfo.cs" />
+    <Compile Include="Classes\Common\NPCBodyInfo.cs" />
+    <Compile Include="QuestObjects\ActiveItem\Classes\ActiveItem.cs" />
+    <Compile Include="QuestObjects\Animal\Classes\Animal.cs" />
+    <Compile Include="QuestObjects\Enemy\Classes\Enemy.cs" />
+    <Compile Include="QuestObjects\Helicopter\Classes\Helicopter.cs" />
+    <Compile Include="QuestObjects\Hostage\Classes\Hostage.cs" />
+    <Compile Include="QuestObjects\Hostage\Classes\HostageAssets.cs" />
+    <Compile Include="QuestObjects\Hostage\Forms\HostageBox.cs" />
+    <Compile Include="QuestObjects\Hostage\Classes\HostageFox2.cs" />
+    <Compile Include="QuestObjects\Hostage\Classes\HostageLua.cs" />
+    <Compile Include="QuestObjects\Hostage\Forms\HostagePanel.cs" />
+    <Compile Include="QuestObjects\Hostage\HostageManager.cs" />
+    <Compile Include="QuestObjects\Item\Classes\Item.cs" />
+    <Compile Include="QuestObjects\Model\Classes\Model.cs" />
+    <Compile Include="QuestObjects\Vehicle\Classes\Vehicle.cs" />
+    <Compile Include="QuestObjects\WalkerGear\Classes\WalkerGear.cs" />
     <EmbeddedResource Include="Forms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -211,6 +230,7 @@
   <ItemGroup>
     <Content Include="untitled_1_yT3_icon.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

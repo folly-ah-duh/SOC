@@ -7,7 +7,10 @@ using static SOC.QuestComponents.GameObjectInfo;
 namespace SOC.Classes
 {
 
-    static class AssetsBuilder
+    static class AssetsBuilder  // refactor: each questobject will have a manager which will contain a 'task' list for their questobject
+                                // a master manager will read down a master questobject list, asking each manager if they have a build task to perform
+                                // when a module needs a resource like the lua writer, how does it request such a thing? 
+                                // does the master manager hand it out? does the master questobject list specify what components it will need?
     {
         public static string VehAssetsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//VehicleAssets");
         public static string AniAssetsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//AnimalAssets");

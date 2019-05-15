@@ -1,13 +1,13 @@
-﻿using SOC.QuestComponents;
+﻿using SOC.Classes.Common;
+using SOC.Forms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static SOC.QuestComponents.GameObjectInfo;
 
-namespace SOC.Forms.Pages.QuestBoxes
+namespace SOC.QuestObjects.Hostage
 {
     public class HostageBox : QuestBox
     {
@@ -224,7 +224,7 @@ namespace SOC.Forms.Pages.QuestBoxes
             this.h_comboBox_lang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList; //genderDependant
             this.h_comboBox_lang.FormattingEnabled = true;
             this.h_comboBox_lang.Location = new System.Drawing.Point(84, 146);
-            if (BodyInfo.BodyInfoArray[hostageBodyIndex].bodyName.Contains("FEMALE"))
+            if (NPCBodyInfo.BodyInfoArray[hostageBodyIndex].bodyName.Contains("FEMALE"))
                 this.h_comboBox_lang.Items.AddRange(new object[] { "english", });
             else
                 this.h_comboBox_lang.Items.AddRange(new object[] { "english", "russian", "pashto", "kikongo", "afrikaans" });
@@ -246,7 +246,7 @@ namespace SOC.Forms.Pages.QuestBoxes
             this.h_comboBox_staff.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.h_comboBox_staff.FormattingEnabled = true;
             this.h_comboBox_staff.Location = new System.Drawing.Point(84, 171);
-            this.h_comboBox_staff.Items.AddRange(Staff_Type_ID);
+            this.h_comboBox_staff.Items.AddRange(NPCMtbsInfo.Staff_Type_ID);
             this.h_comboBox_staff.Name = "h_comboBox_staff";
             this.h_comboBox_staff.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.h_comboBox_staff.TabIndex = 10;
@@ -265,7 +265,7 @@ namespace SOC.Forms.Pages.QuestBoxes
             this.h_comboBox_skill.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.h_comboBox_skill.FormattingEnabled = true;
             this.h_comboBox_skill.Location = new System.Drawing.Point(84, 196);
-            this.h_comboBox_skill.Items.AddRange(skills);
+            this.h_comboBox_skill.Items.AddRange(NPCMtbsInfo.skills);
             this.h_comboBox_skill.Name = "h_comboBox_skill";
             this.h_comboBox_skill.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.h_comboBox_skill.TabIndex = 11;

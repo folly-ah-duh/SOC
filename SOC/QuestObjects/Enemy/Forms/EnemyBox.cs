@@ -1,4 +1,6 @@
-﻿using SOC.QuestComponents;
+﻿using SOC.Classes.Common;
+using SOC.Forms;
+using SOC.QuestComponents;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static SOC.QuestComponents.GameObjectInfo;
 
-namespace SOC.Forms.Pages.QuestBoxes
+namespace SOC.QuestObjects.Enemy
 {
     public class EnemyBox : QuestBox
     {

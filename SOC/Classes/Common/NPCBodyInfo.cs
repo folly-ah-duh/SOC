@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SOC.QuestComponents
+namespace SOC.Classes.Common
 {
-    public static class BodyInfo
+    public static class NPCBodyInfo
     {
         public static string[] mafrSubTypes =
         {

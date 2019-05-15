@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SOC.Classes.Common;
+using System;
 using System.Windows.Forms;
-using static SOC.QuestComponents.GameObjectInfo;
 
-namespace SOC.Forms.Pages.QuestBoxes
+namespace SOC.Forms
 {
     public abstract class QuestBox
     {

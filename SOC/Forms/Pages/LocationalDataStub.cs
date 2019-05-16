@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace SOC.Forms.Pages
 {
-    public partial class Details : UserControl
+    public partial class LocationalDataStub : UserControl
     {
-        public Details()
+        public LocationalDataStub()
         {
             InitializeComponent();
         }

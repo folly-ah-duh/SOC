@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SOC.Forms.Pages
+namespace SOC.QuestObjects.Animal.Forms
 {
-    public partial class Details : UserControl
+    public partial class AnimalPanel : UserControl
     {
-        public Details()
+        public AnimalPanel()
         {
             InitializeComponent();
         }

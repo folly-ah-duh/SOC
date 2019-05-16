@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace SOC.Classes.Common
 {
     [XmlType("Rotation")]
-    class Rotation
+    public class Rotation
     {
         public Rotation() { }
 

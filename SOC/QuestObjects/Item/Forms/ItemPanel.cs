@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SOC.Forms.Pages
+namespace SOC.QuestObjects.Item.Forms
 {
-    public partial class Details : UserControl
+    public partial class ItemPanel : UserControl
     {
-        public Details()
+        public ItemPanel()
         {
             InitializeComponent();
         }

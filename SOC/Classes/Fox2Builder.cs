@@ -2,7 +2,6 @@
 using SOC.UI;
 using System.Collections.Generic;
 using System.IO;
-using static SOC.QuestComponents.GameObjectInfo;
 using static SOC.QuestComponents.Fox2Info;
 using System.Globalization;
 

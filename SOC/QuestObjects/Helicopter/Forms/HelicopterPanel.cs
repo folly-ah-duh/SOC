@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SOC.Forms.Pages
+namespace SOC.QuestObjects.Helicopter.Forms
 {
-    public partial class Details : UserControl
+    public partial class HelicopterPanel : UserControl
     {
-        public Details()
+        public HelicopterPanel()
         {
             InitializeComponent();
         }

@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace SOC.QuestObjects.Animal
 {
-    public class Animal
+    public class Animal : SOC.Classes.Quest.QuestObject
     {
 
         public Animal() { }
@@ -21,7 +21,8 @@ namespace SOC.QuestObjects.Animal
             count = d.a_comboBox_count.Text;
             animal = d.a_comboBox_animal.Text;
             typeID = d.a_comboBox_TypeID.Text;
-            coordinates = new Coordinates(d.a_textBox_xcoord.Text, d.a_textBox_ycoord.Text, d.a_textBox_zcoord.Text, d.a_textBox_rot.Text);
+            coordinates = new Coordinates(d.a_textBox_xcoord.Text, d.a_textBox_ycoord.Text, d.a_textBox_zcoord.Text);
+            rotation = new Rotation(d.a_textBox_rot.Text);
         }
 
         public Animal(Coordinates coords, int num, string nme)
@@ -48,7 +49,10 @@ namespace SOC.QuestObjects.Animal
         public string typeID { get; set; } = "TppGoat";
 
         [XmlElement]
-        public Coordinates coordinates { get; set; } = new Coordinates("0", "0", "0", "0");
+        public Coordinates coordinates { get; set; } = new Coordinates("0", "0", "0");
+
+        [XmlElement]
+        public Rotation rotation { get; set; } = new Rotation("0");
 
     }
 }

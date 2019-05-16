@@ -20,7 +20,8 @@ namespace SOC.QuestObjects.Vehicle
             name = d.v_groupBox_main.Text;
             vehicleIndex = d.v_comboBox_vehicle.SelectedIndex;
             vehicleClass = d.v_comboBox_class.Text;
-            coordinates = new Coordinates(d.v_textBox_xcoord.Text, d.v_textBox_ycoord.Text, d.v_textBox_zcoord.Text, d.v_textBox_rot.Text);
+            coordinates = new Coordinates(d.v_textBox_xcoord.Text, d.v_textBox_ycoord.Text, d.v_textBox_zcoord.Text);
+            rotation = new Rotation(d.v_textBox_rot.Text);
         }
 
         public Vehicle(Coordinates coords, int num, string nme)
@@ -44,7 +45,9 @@ namespace SOC.QuestObjects.Vehicle
         public string vehicleClass { get; set; } = "DEFAULT";
 
         [XmlElement]
-        public Coordinates coordinates { get; set; } = new Coordinates("0", "0", "0", "0");
-
+        public Coordinates coordinates { get; set; } = new Coordinates("0", "0", "0");
+        
+        [XmlElement]
+        public Rotation rotation { get; set; } = new Rotation("0");
     }
 }

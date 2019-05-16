@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace SOC.Forms
+namespace SOC.QuestObjects.Common
 {
-    public abstract class QuestPanel : UserControl
+    static class ManagerMasterList
     {
-
+        static Manager[] managerList = { };
     }
 }

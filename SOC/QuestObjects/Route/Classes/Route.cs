@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SOC.QuestObjects.Hostage
+namespace SOC.QuestObjects.Route
 {
-    class HostageAssets
+    class Route
     {
     }
 }

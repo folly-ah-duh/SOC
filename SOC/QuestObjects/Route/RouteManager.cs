@@ -1,21 +1,24 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using SOC.Classes.GzsTool;
 using static FoxLib.Tpp.RouteSet;
 
-namespace SOC.Classes
+namespace SOC.QuestObjects.Route
 {
     class RouteManager
     {
 
         public static string RouteNameDictionaryFile = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets\\ToolAssets\\route_name_dictionary.txt");
         public static Dictionary<uint, string> RouteNameHashDictionary = new Dictionary<uint, string>();
-
+        
+        public static string GetRouteFileName(string frtName)
+        {
+            return Path.Combine(RouteAssets.routeAssetsPath, frtName) + ".frt";
+        }
 
         public static string[] GetRouteNames(string frtName)
         {
@@ -23,7 +26,7 @@ namespace SOC.Classes
             uint[] frtUintNames = GetUintNames(frtPath);
 
             if (File.Exists(RouteNameDictionaryFile))
-                RouteNameHashDictionary = MakeHashLookupTableFromFile(RouteNameDictionaryFile);
+                RouteNameHashDictionary = Hashing.MakeHashLookupTableFromFile(RouteNameDictionaryFile);
             else
                 MessageBox.Show("Route Dictionary Not Found. \n\n" + RouteNameDictionaryFile, "Dictionary Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
@@ -68,46 +71,5 @@ namespace SOC.Classes
         {
             reader.BaseStream.Position += numberOfBytes;
         }
-
-        public static string GetRouteFileName(string frtName)
-        {
-            return Path.Combine(AssetsBuilder.routeAssetsPath, frtName) + ".frt";
-        }
-
-        public static uint HashString(string text)
-        {
-            if (text == null) throw new ArgumentNullException("null text!");
-            const ulong seed0 = 0x9ae16a3b2f90404f;
-            ulong seed1 = text.Length > 0 ? (uint)((text[0]) << 16) + (uint)text.Length : 0;
-            return (uint)(CityHash.CityHash.CityHash64WithSeeds(text + "\0", seed0, seed1) & 0xFFFFFFFFFFFF);
-        }
-
-        static Dictionary<uint, string> MakeHashLookupTableFromFile(string path)
-        {
-            ConcurrentDictionary<uint, string> table = new ConcurrentDictionary<uint, string>();
-
-
-            List<string> stringLiterals = new List<string>();
-            using (StreamReader file = new StreamReader(path))
-            {
-
-                string line;
-                while ((line = file.ReadLine()) != null)
-                {
-                    stringLiterals.Add(line);
-                }
-            }
-
-            // Hash entries
-            Parallel.ForEach(stringLiterals, delegate (string entry)
-            {
-                uint hash = HashString(entry);
-                table.TryAdd(hash, entry);
-            });
-
-            // Return lookup table
-            return new Dictionary<uint, string>(table);
-        }
-
     }
 }

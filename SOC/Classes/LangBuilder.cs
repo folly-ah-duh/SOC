@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using SOC.Classes.LangTool;
-using static SOC.QuestComponents.GameObjectInfo;
 using System.Collections.Generic;
 
 namespace SOC.Classes

@@ -90,7 +90,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Quest\QuestObject.cs" />
     <Compile Include="Classes\Common\Tools.cs" />
     <Compile Include="Classes\Quest\LoadAreas.cs" />
     <Compile Include="Classes\Quest\NPCMtbsInfo.cs" />
@@ -103,6 +102,7 @@
     <Compile Include="Classes\LangTool\LangEntry.cs" />
     <Compile Include="Classes\LangTool\LangFile.cs" />
     <Compile Include="Classes\Quest\Quest.cs" />
+    <Compile Include="QuestObjects\Hostage\Classes\HostageGUI.cs" />
     <Compile Include="QuestObjects\Route\RouteManager.cs" />
     <Compile Include="Classes\Common\Coordinates.cs" />
     <Compile Include="Classes\UpdateNotifsManager.cs" />

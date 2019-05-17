@@ -1,4 +1,4 @@
-﻿namespace SOC.QuestObjects.Hostage.Forms
+﻿namespace SOC.QuestObjects.Hostage
 {
     partial class HostagePanel
     {
@@ -123,6 +123,7 @@
             this.comboBox_Body.Name = "comboBox_Body";
             this.comboBox_Body.Size = new System.Drawing.Size(130, 21);
             this.comboBox_Body.TabIndex = 1;
+            this.comboBox_Body.SelectedIndexChanged += new System.EventHandler(this.comboBox_Body_SelectedIndexChanged);
             // 
             // label_Body
             // 

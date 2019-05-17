@@ -34,7 +34,7 @@ namespace SOC.Forms
 
         public abstract void SetObject(QuestBox detail);
 
-        public abstract void BuildObject(int width);
+        public abstract void BuildObject();
 
 
     }

@@ -36,10 +36,9 @@ namespace SOC.QuestObjects.Hostage
         public CheckBox h_checkBox_injured;
         public CheckBox h_checkBox_untied;
 
-        public HostageBox(Hostage h, int bodyindex) : base(h.coordinates, h.number)
+        public HostageBox(Hostage h) : base(h.coordinates, h.hostageId)
         {
             hostage = h;
-            hostageBodyIndex = bodyindex;
         }
 
         public override void SetObject(QuestBox detail)
@@ -54,10 +53,10 @@ namespace SOC.QuestObjects.Hostage
             h_comboBox_staff.Text = hostageDetail.h_comboBox_staff.Text;
         }
 
-        public override void BuildObject(int width)
+        public override void BuildObject()
         {
-            width -= 6;
-            int comboboxWidth = width - 100;
+            //width -= 6;
+            //int comboboxWidth = width - 100;
             this.h_groupBox_main = new System.Windows.Forms.GroupBox();
             this.h_textBox_zcoord = new System.Windows.Forms.TextBox();
             this.h_textBox_ycoord = new System.Windows.Forms.TextBox();
@@ -109,12 +108,12 @@ namespace SOC.QuestObjects.Hostage
             this.h_groupBox_main.Controls.Add(this.h_label_lang);
 
             this.h_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
-            this.h_groupBox_main.Location = new System.Drawing.Point(3, 69 + (253 * hostage.number));
+            this.h_groupBox_main.Location = new System.Drawing.Point(3, 69 + (253 * hostage.hostageId));
             this.h_groupBox_main.Name = "h_groupBox_main";
-            this.h_groupBox_main.Size = new System.Drawing.Size(width, 236);
+            this.h_groupBox_main.Height = 236;
             this.h_groupBox_main.TabStop = false;
             this.h_groupBox_main.TabIndex = 1;
-            this.h_groupBox_main.Text = hostage.name;
+            this.h_groupBox_main.Text = "Hostage_" + hostage.hostageId;
             this.h_groupBox_main.Click += new System.EventHandler(FocusGroupBox);
             // 
             // h_textBox_coord
@@ -162,9 +161,9 @@ namespace SOC.QuestObjects.Hostage
             | System.Windows.Forms.AnchorStyles.Right)));
             this.h_textBox_rot.Location = new System.Drawing.Point(84, 39);
             this.h_textBox_rot.Name = "h_textBox_rot";
-            this.h_textBox_rot.Size = new System.Drawing.Size(comboboxWidth, 21);
+            this.h_textBox_rot.Height = 21;
             this.h_textBox_rot.TabIndex = 5;
-            this.h_textBox_rot.Text = hostage.coordinates.roty;
+            this.h_textBox_rot.Text = hostage.rotation.GetDegreeRotY();
             this.h_label_rot.AutoSize = true;
             this.h_label_rot.Location = new System.Drawing.Point(20, 42);
             this.h_label_rot.Name = "h_label_rot";
@@ -181,7 +180,7 @@ namespace SOC.QuestObjects.Hostage
             this.h_comboBox_scared.Items.AddRange(new object[] {
             "NORMAL", "ALWAYS", "NEVER"});
             this.h_comboBox_scared.Name = "h_comboBox_scared";
-            this.h_comboBox_scared.Size = new System.Drawing.Size(comboboxWidth, 21);
+            this.h_comboBox_scared.Height = 21;
             this.h_comboBox_scared.TabIndex = 7;
             this.h_comboBox_scared.Text = hostage.scared;
             h_comboBox_scared.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
@@ -229,7 +228,7 @@ namespace SOC.QuestObjects.Hostage
             else
                 this.h_comboBox_lang.Items.AddRange(new object[] { "english", "russian", "pashto", "kikongo", "afrikaans" });
             this.h_comboBox_lang.Name = "h_comboBox_lang";
-            this.h_comboBox_lang.Size = new System.Drawing.Size(comboboxWidth, 21);
+            this.h_comboBox_lang.Height = 21;
             this.h_comboBox_lang.TabIndex = 9;
             h_comboBox_lang.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
             h_comboBox_lang.Text = hostage.language;
@@ -248,7 +247,7 @@ namespace SOC.QuestObjects.Hostage
             this.h_comboBox_staff.Location = new System.Drawing.Point(84, 171);
             this.h_comboBox_staff.Items.AddRange(NPCMtbsInfo.Staff_Type_ID);
             this.h_comboBox_staff.Name = "h_comboBox_staff";
-            this.h_comboBox_staff.Size = new System.Drawing.Size(comboboxWidth, 21);
+            this.h_comboBox_staff.Height = 21;
             this.h_comboBox_staff.TabIndex = 10;
             h_comboBox_staff.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
             h_comboBox_staff.Text = hostage.staffType;
@@ -267,7 +266,7 @@ namespace SOC.QuestObjects.Hostage
             this.h_comboBox_skill.Location = new System.Drawing.Point(84, 196);
             this.h_comboBox_skill.Items.AddRange(NPCMtbsInfo.skills);
             this.h_comboBox_skill.Name = "h_comboBox_skill";
-            this.h_comboBox_skill.Size = new System.Drawing.Size(comboboxWidth, 21);
+            this.h_comboBox_skill.Height = 21;
             this.h_comboBox_skill.TabIndex = 11;
             this.h_comboBox_skill.Text = hostage.skill;
             h_comboBox_skill.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);

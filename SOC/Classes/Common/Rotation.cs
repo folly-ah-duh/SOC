@@ -65,6 +65,6 @@ namespace SOC.Classes.Common
         }
 
         [XmlElement]
-        private Quaternion quatRotation;
+        public Quaternion quatRotation;
     }
 }

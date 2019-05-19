@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SOC.QuestObjects.Common;
 
-namespace SOC.QuestObjects.Hostage
+namespace SOC.QuestObjects.Hostage.Classes
 {
-    class HostageManager : Manager
+    class HostageStubGUI
     {
     }
 }

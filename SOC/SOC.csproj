@@ -91,6 +91,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Common\Tools.cs" />
+    <Compile Include="Classes\Fox2\EntityClasses\DataSet.cs" />
+    <Compile Include="Classes\Fox2\EntityClasses\GameObject.cs" />
+    <Compile Include="Classes\Fox2\EntityClasses\GameObjectLocator.cs" />
+    <Compile Include="Classes\Fox2\EntityClasses\TppHostage2LocatorParameter.cs" />
+    <Compile Include="Classes\Fox2\EntityClasses\TppHostage2Parameter.cs" />
+    <Compile Include="Classes\Fox2\EntityClasses\Transform.cs" />
+    <Compile Include="Classes\Fox2\Fox2EntityClass.cs" />
     <Compile Include="Classes\Quest\LoadAreas.cs" />
     <Compile Include="Classes\Quest\NPCMtbsInfo.cs" />
     <Compile Include="Classes\Common\Quaternion.cs" />
@@ -102,7 +109,8 @@
     <Compile Include="Classes\LangTool\LangEntry.cs" />
     <Compile Include="Classes\LangTool\LangFile.cs" />
     <Compile Include="Classes\Quest\Quest.cs" />
-    <Compile Include="QuestObjects\Hostage\Classes\HostageGUI.cs" />
+    <Compile Include="QuestObjects\Hostage\Classes\HostageDetailGUI.cs" />
+    <Compile Include="QuestObjects\Hostage\Classes\HostageStubGUI.cs" />
     <Compile Include="QuestObjects\Route\RouteManager.cs" />
     <Compile Include="Classes\Common\Coordinates.cs" />
     <Compile Include="Classes\UpdateNotifsManager.cs" />

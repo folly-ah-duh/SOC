@@ -64,6 +64,15 @@ namespace SOC.Classes.Common
             return (radian * 2).ToString();
         }
 
+        public string ToFox2String()
+        {
+            return string.Format($@"
+                                  <property name=""transform_rotation_quat"" type=""Quat"" container=""StaticArray"" arraySize=""1"">
+                                    <value x = ""{quatRotation.xval}"" y = ""{quatRotation.yval}"" z = ""{quatRotation.zval}"" w = ""{quatRotation.wval}"" />
+                                  </property>
+                                 ");
+        }
+
         [XmlElement]
         public Quaternion quatRotation;
     }

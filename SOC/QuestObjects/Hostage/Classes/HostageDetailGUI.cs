@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace SOC.QuestObjects.Hostage.Classes
 {
-    class HostageGUI
+    class HostageDetailGUI
     {
         UserControl displayControl;
 
@@ -15,7 +15,7 @@ namespace SOC.QuestObjects.Hostage.Classes
 
         List<HostageBox> hostageBoxes = new List<HostageBox>();
 
-        public HostageGUI(UserControl display)
+        public HostageDetailGUI(UserControl display)
         {
             displayControl = display;
             display.Controls.Add(hostagePanel);

@@ -176,7 +176,7 @@ namespace SOC.QuestObjects.WalkerGear
             this.wg_textBox_rot.Name = "wg_textBox_rot";
             this.wg_textBox_rot.Size = new System.Drawing.Size(comboboxWidth, 20);
             this.wg_textBox_rot.TabIndex = 9;
-            this.wg_textBox_rot.Text = walkerGear.coordinates.roty;
+            this.wg_textBox_rot.Text = walkerGear.rotation.GetDegreeRotY();
             // 
             // wg_checkBox_target
             // 

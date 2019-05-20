@@ -45,9 +45,9 @@ namespace SOC.QuestObjects.Item
 
         }
 
-        public override void BuildObject(int width)
+        public override void BuildObject()
         {
-            width -= 6;
+            int width = 6;
             int comboboxWidth = width - 96;
             this.i_groupBox_main = new System.Windows.Forms.GroupBox();
             this.i_textBox_zcoord = new System.Windows.Forms.TextBox();
@@ -127,7 +127,7 @@ namespace SOC.QuestObjects.Item
             this.i_comboBox_item.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.i_comboBox_item.FormattingEnabled = true;
             this.i_comboBox_item.Location = new System.Drawing.Point(78, 92);
-            this.i_comboBox_item.Items.AddRange(items);
+            this.i_comboBox_item.Items.AddRange(ItemNames.itemNames);
             this.i_comboBox_item.Name = "i_comboBox_item";
             this.i_comboBox_item.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.i_comboBox_item.TabIndex = 8;
@@ -176,22 +176,22 @@ namespace SOC.QuestObjects.Item
             this.i_textBox_xrot.Name = "m_textBox_xrocoord";
             this.i_textBox_xrot.Size = new System.Drawing.Size(31, 20);
             this.i_textBox_xrot.TabIndex = 5;
-            this.i_textBox_xrot.Text = item.quatCoordinates.xval;
+            this.i_textBox_xrot.Text = item.rotation.quatRotation.xval;
             this.i_textBox_yrot.Location = new System.Drawing.Point(117, 39);
             this.i_textBox_yrot.Name = "m_textBox_yrocoord";
             this.i_textBox_yrot.Size = new System.Drawing.Size(31, 20);
             this.i_textBox_yrot.TabIndex = 6;
-            this.i_textBox_yrot.Text = item.quatCoordinates.yval;
+            this.i_textBox_yrot.Text = item.rotation.quatRotation.yval;
             this.i_textBox_zrot.Location = new System.Drawing.Point(157, 39);
             this.i_textBox_zrot.Name = "m_textBox_zrocoord";
             this.i_textBox_zrot.Size = new System.Drawing.Size(31, 20);
             this.i_textBox_zrot.TabIndex = 7;
-            this.i_textBox_zrot.Text = item.quatCoordinates.zval;
+            this.i_textBox_zrot.Text = item.rotation.quatRotation.zval;
             this.i_textBox_wrot.Location = new System.Drawing.Point(197, 39);
             this.i_textBox_wrot.Name = "m_textBox_wrocoord";
             this.i_textBox_wrot.Size = new System.Drawing.Size(31, 20);
             this.i_textBox_wrot.TabIndex = 8;
-            this.i_textBox_wrot.Text = item.quatCoordinates.wval;
+            this.i_textBox_wrot.Text = item.rotation.quatRotation.wval;
             // 
             // i_comboBox_count
             // 

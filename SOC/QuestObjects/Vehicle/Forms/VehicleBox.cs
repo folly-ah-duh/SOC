@@ -35,9 +35,9 @@ namespace SOC.QuestObjects.Vehicle
             v_comboBox_vehicle.Text = vehicleDetail.v_comboBox_vehicle.Text;
         }
 
-        public override void BuildObject(int width)
+        public override void BuildObject()
         {
-            width -= 6;
+            int width = 6;
             int comboboxWidth = width - 96;
             this.v_groupBox_main = new System.Windows.Forms.GroupBox();
             this.v_textBox_zcoord = new System.Windows.Forms.TextBox();
@@ -130,7 +130,7 @@ namespace SOC.QuestObjects.Vehicle
             this.v_textBox_rot.Name = "v_textBox_rot";
             this.v_textBox_rot.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.v_textBox_rot.TabIndex = 5;
-            this.v_textBox_rot.Text = vehicle.coordinates.roty;
+            this.v_textBox_rot.Text = vehicle.rotation.GetDegreeRotY();
 
             this.v_label_rot.AutoSize = true;
             this.v_label_rot.Location = new System.Drawing.Point(20, 42);

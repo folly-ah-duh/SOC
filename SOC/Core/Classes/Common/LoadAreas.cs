@@ -40,5 +40,19 @@ namespace SOC.Classes.Common
             "MtbsBaseDev"
         };
 
+        public static bool isAfgh(int locId)
+        {
+            return locId == 10;
+        }
+
+        public static bool isMafr(int locId)
+        {
+            return locId == 20;
+        }
+
+        public static bool isMtbs(int locId)
+        {
+            return locId == 50;
+        }
     }
 }

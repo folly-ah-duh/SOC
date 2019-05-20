@@ -1,9 +1,4 @@
 ﻿using SOC.Classes.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace SOC.QuestObjects.Item
@@ -21,21 +16,18 @@ namespace SOC.QuestObjects.Item
             count = d.i_comboBox_count.Text;
             item = d.i_comboBox_item.Text;
             coordinates = new Coordinates(d.i_textBox_xcoord.Text, d.i_textBox_ycoord.Text, d.i_textBox_zcoord.Text);
-            quatCoordinates = new Rotation(d.i_textBox_xrot.Text, d.i_textBox_yrot.Text, d.i_textBox_zrot.Text, d.i_textBox_wrot.Text);
-            coordinates.roty = Fox2Info.getDegreeRot(quatCoordinates.yval);
+            rotation = new Rotation(new Quaternion(d.i_textBox_xrot.Text, d.i_textBox_yrot.Text, d.i_textBox_zrot.Text, d.i_textBox_wrot.Text));
         }
 
-        public Item(Coordinates coords, int num, string nme)
+        public Item(Coordinates coords, Rotation rot, int num, string nme)
         {
             coordinates = coords; number = num; name = nme;
-            quatCoordinates.yval = Fox2Info.getQuaternionY(coords.roty);
-            quatCoordinates.wval = Fox2Info.getQuaternionW(coords.roty);
+            rotation = rot;
         }
 
-        public void setRotation(Coordinates coords)
+        public void setRotation(Rotation rot)
         {
-            quatCoordinates.yval = Fox2Info.getQuaternionY(coords.roty);
-            quatCoordinates.wval = Fox2Info.getQuaternionW(coords.roty);
+            rotation = rot;
         }
 
         [XmlElement]
@@ -60,7 +52,7 @@ namespace SOC.QuestObjects.Item
         public Coordinates coordinates { get; set; } = new Coordinates("0", "0", "0");
 
         [XmlElement]
-        public Rotation quatCoordinates { get; set; } = new Rotation("0", "0", "0", "0");
+        public Rotation rotation { get; set; } = new Rotation(new Quaternion("0", "0", "0", "0"));
 
     }
 }

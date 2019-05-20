@@ -31,10 +31,10 @@ namespace SOC.QuestObjects.Helicopter
             Heli = H; enemyCP = cp; frtRouteNames = frtroutes;
         }
 
-        public override void BuildObject(int width)
+        public override void BuildObject()
         {
 
-            width -= 6;
+            int width = 6;
             int comboboxWidth = width - 100;
             this.He_groupBox_main = new System.Windows.Forms.GroupBox();
             this.He_checkBox_spawn = new System.Windows.Forms.CheckBox();

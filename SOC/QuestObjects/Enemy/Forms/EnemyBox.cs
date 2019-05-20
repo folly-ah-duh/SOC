@@ -2,10 +2,6 @@
 using SOC.Forms;
 using SOC.QuestComponents;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SOC.QuestObjects.Enemy
@@ -53,9 +49,9 @@ namespace SOC.QuestObjects.Enemy
             enemyNumber = e.number; frtRouteNames = frtRoutes;
         }
 
-        public override void BuildObject(int width)
+        public override void BuildObject()
         {
-            width -= 6;
+            int width = 6;
             int comboboxWidth = width - 110;
             e_checkBox_balaclava = new System.Windows.Forms.CheckBox();
             e_label_balaclava = new System.Windows.Forms.Label();
@@ -220,7 +216,7 @@ namespace SOC.QuestObjects.Enemy
             this.e_comboBox_skill.FormattingEnabled = true;
             this.e_comboBox_skill.Location = new System.Drawing.Point(99, 290);
             this.e_comboBox_skill.Name = "e_comboBox_skill";
-            this.e_comboBox_skill.Items.AddRange(skills);
+            this.e_comboBox_skill.Items.AddRange(NPCMtbsInfo.skills);
             this.e_comboBox_skill.Text = enemy.skill;
             this.e_comboBox_skill.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.e_comboBox_skill.TabIndex = 17;
@@ -244,7 +240,7 @@ namespace SOC.QuestObjects.Enemy
             this.e_comboBox_staff.Location = new System.Drawing.Point(99, 265);
             this.e_comboBox_staff.Name = "e_comboBox_staff";
             this.e_comboBox_staff.Size = new System.Drawing.Size(comboboxWidth, 21);
-            this.e_comboBox_staff.Items.AddRange(Staff_Type_ID);
+            this.e_comboBox_staff.Items.AddRange(NPCMtbsInfo.Staff_Type_ID);
             this.e_comboBox_staff.Text = enemy.staffType;
             this.e_comboBox_staff.TabIndex = 15;
             e_comboBox_staff.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
@@ -269,10 +265,10 @@ namespace SOC.QuestObjects.Enemy
             this.e_comboBox_body.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.e_comboBox_body.TabIndex = 13;
 
-            if (isAfgh(region))
-                e_comboBox_body.Items.AddRange(BodyInfo.afghBodies);
-            else if (isMafr(region))
-                e_comboBox_body.Items.AddRange(BodyInfo.mafrBodies);
+            if (LoadAreas.isAfgh(region))
+                e_comboBox_body.Items.AddRange(NPCBodyInfo.afghBodies);
+            else if (LoadAreas.isMafr(region))
+                e_comboBox_body.Items.AddRange(NPCBodyInfo.mafrBodies);
 
             if (e_comboBox_body.Items.Contains(enemy.body))
                 this.e_comboBox_body.Text = enemy.body;

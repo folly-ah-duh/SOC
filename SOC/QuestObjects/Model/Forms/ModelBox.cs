@@ -1,10 +1,6 @@
 ﻿using SOC.Forms;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SOC.QuestObjects.Model
@@ -140,22 +136,22 @@ namespace SOC.QuestObjects.Model
             this.m_textBox_xrot.Name = "m_textBox_xrocoord";
             this.m_textBox_xrot.Size = new System.Drawing.Size(31, 20);
             this.m_textBox_xrot.TabIndex = 5;
-            this.m_textBox_xrot.Text = model.rotation.xval;
+            this.m_textBox_xrot.Text = model.rotation.quatRotation.xval;
             this.m_textBox_yrot.Location = new System.Drawing.Point(123, 39);
             this.m_textBox_yrot.Name = "m_textBox_yrocoord";
             this.m_textBox_yrot.Size = new System.Drawing.Size(31, 20);
             this.m_textBox_yrot.TabIndex = 6;
-            this.m_textBox_yrot.Text = model.rotation.yval;
+            this.m_textBox_yrot.Text = model.rotation.quatRotation.yval;
             this.m_textBox_zrot.Location = new System.Drawing.Point(163, 39);
             this.m_textBox_zrot.Name = "m_textBox_zrocoord";
             this.m_textBox_zrot.Size = new System.Drawing.Size(31, 20);
             this.m_textBox_zrot.TabIndex = 7;
-            this.m_textBox_zrot.Text = model.rotation.zval;
+            this.m_textBox_zrot.Text = model.rotation.quatRotation.zval;
             this.m_textBox_wrot.Location = new System.Drawing.Point(203, 39);
             this.m_textBox_wrot.Name = "m_textBox_wrocoord";
             this.m_textBox_wrot.Size = new System.Drawing.Size(31, 20);
             this.m_textBox_wrot.TabIndex = 8;
-            this.m_textBox_wrot.Text = model.rotation.wval;
+            this.m_textBox_wrot.Text = model.rotation.quatRotation.wval;
             // 
             // m_label_coord
             // 

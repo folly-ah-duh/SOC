@@ -42,10 +42,10 @@ namespace SOC.QuestObjects.Animal
             a_comboBox_count.Text = animalDetail.a_comboBox_count.Text;
         }
 
-        public override void BuildObject(int width)
+        public override void BuildObject()
         {
 
-            width -= 6;
+            int width = 6;
             int comboboxWidth = width - 96;
             this.a_groupBox_main = new System.Windows.Forms.GroupBox();
             this.a_comboBox_TypeID = new System.Windows.Forms.ComboBox();
@@ -184,7 +184,7 @@ namespace SOC.QuestObjects.Animal
             this.a_textBox_rot.Name = "a_textBox_rot";
             this.a_textBox_rot.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.a_textBox_rot.TabIndex = 5;
-            this.a_textBox_rot.Text = animal.coordinates.roty;
+            this.a_textBox_rot.Text = animal.rotation.GetDegreeRotY();
 
             // 
             // a_label_rot

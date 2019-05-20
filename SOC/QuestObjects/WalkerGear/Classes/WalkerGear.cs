@@ -20,7 +20,8 @@ namespace SOC.QuestObjects.WalkerGear
             rider = walkerBox.wg_comboBox_rider.Text;
             color = walkerBox.wg_comboBox_paint.Text;
             weapon = walkerBox.wg_comboBox_weapon.Text;
-            coordinates = new Coordinates(walkerBox.wg_textBox_xcoord.Text, walkerBox.wg_textBox_ycoord.Text, walkerBox.wg_textBox_zcoord.Text, walkerBox.wg_textBox_rot.Text);
+            coordinates = new Coordinates(walkerBox.wg_textBox_xcoord.Text, walkerBox.wg_textBox_ycoord.Text, walkerBox.wg_textBox_zcoord.Text);
+            rotation = new Rotation(walkerBox.wg_textBox_rot.Text);
         }
 
         public WalkerGear(Coordinates coords, int num, string nme)
@@ -47,7 +48,9 @@ namespace SOC.QuestObjects.WalkerGear
         public string weapon { get; set; } = "WG_MACHINEGUN";
 
         [XmlElement]
-        public Coordinates coordinates { get; set; } = new Coordinates("0", "0", "0", "0");
+        public Coordinates coordinates { get; set; } = new Coordinates("0", "0", "0");
 
+        [XmlElement]
+        public Rotation rotation { get; set; } = new Rotation("0");
     }
 }

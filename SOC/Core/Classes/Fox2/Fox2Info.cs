@@ -8,16 +8,6 @@ namespace SOC.Classes.Fox2
         public const int baseItemAddress = 0x10000000;
 
         public static int entityClassSize = 0x70;
-
-        private static DataSet GetQuestDataSet(List<Fox2EntityClass> entityList)
-        {
-            foreach (Fox2EntityClass entity in entityList)
-            {
-                if (entity is DataSet)
-                    return (DataSet)entity;
-            }
-            return null;
-        }
     }
 
     public enum entityClass

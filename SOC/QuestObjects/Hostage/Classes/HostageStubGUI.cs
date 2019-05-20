@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SOC.QuestObjects.Hostage.Classes
+namespace SOC.QuestObjects.Hostage
 {
     class HostageStubGUI
     {

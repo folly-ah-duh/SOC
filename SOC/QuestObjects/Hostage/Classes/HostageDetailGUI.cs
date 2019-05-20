@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SOC.QuestObjects.Hostage.Classes
+namespace SOC.QuestObjects.Hostage
 {
     class HostageDetailGUI
     {
@@ -82,6 +82,21 @@ namespace SOC.QuestObjects.Hostage.Classes
                 }
             }
 
+        }
+
+        public List<Hostage> GetHostageList()
+        {
+            List<Hostage> hostages = new List<Hostage>();
+            for (int i = 0; i < hostageBoxes.Count; i++)
+            {
+                hostages.Add(new Hostage(hostageBoxes[i], i));
+            }
+            return hostages;
+        }
+
+        public HostageMetadata GetHostageMetaData()
+        {
+            return new HostageMetadata(hostagePanel);
         }
     }
 }

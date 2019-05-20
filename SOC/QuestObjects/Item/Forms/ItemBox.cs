@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static SOC.QuestComponents.GameObjectInfo;
 
 namespace SOC.QuestObjects.Item
 {

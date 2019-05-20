@@ -1,4 +1,4 @@
-﻿namespace SOC.Forms.Pages
+﻿namespace SOC.UI
 {
     partial class Details
     {

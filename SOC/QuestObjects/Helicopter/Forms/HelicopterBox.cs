@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SOC.QuestComponents;
-using static SOC.QuestComponents.GameObjectInfo;
 using SOC.Forms;
 using SOC.Classes.Common;
 

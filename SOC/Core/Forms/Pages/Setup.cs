@@ -50,7 +50,7 @@ namespace SOC.UI
         }
         public void refreshRoutesList()
         {
-            string routeDir = AssetsBuilder.routeAssetsPath;
+            string routeDir = QuestObjects.Route.RouteAssets.routeAssetsPath;
 
 
             string[] RouteFiles = Directory.GetFiles(routeDir, "*.frt");
@@ -96,6 +96,11 @@ namespace SOC.UI
         {
             comboBoxLoadArea.Enabled = true; comboBoxRadius.Enabled = true; comboBoxCP.Enabled = true;
             textBoxXCoord.Enabled = true; textBoxYCoord.Enabled = true; textBoxZCoord.Enabled = true;
+        }
+
+        private void comboBoxRegion_SelectedIndexChanged(object sender, EventArgs e) // todo figure out why this was missing
+        {
+
         }
 
         private void buttonAddNotif_Click(object sender, EventArgs e)

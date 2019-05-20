@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SOC.QuestObjects.Common
+namespace SOC.Core.Classes.QuestBuild
 {
-    static class ManagerMasterList
+    class QuestBuildManager
     {
-        static QuestObjectManager[] managerList = { };
     }
 }

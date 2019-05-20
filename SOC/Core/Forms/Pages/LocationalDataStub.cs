@@ -13,7 +13,7 @@ namespace SOC.Forms.Pages
 {
     public partial class LocationalDataStub : UserControl
     {
-        public LocationalDataStub(Manager questObjectManager)
+        public LocationalDataStub(QuestObjectManager questObjectManager)
         {
             InitializeComponent();
             // add object nametag to the label

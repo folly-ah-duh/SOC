@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace SOC.QuestObjects.Model.Classes
+namespace SOC.QuestObjects.Model
 {
     static class ModelAssets
     {

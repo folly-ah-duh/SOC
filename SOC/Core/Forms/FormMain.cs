@@ -5,11 +5,12 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using SOC.Classes;
-using static SOC.QuestComponents.GameObjectInfo;
 using SOC.QuestComponents;
 using System.Reflection;
 using System.IO;
 using System.Diagnostics;
+using SOC.Classes.Common;
+using SOC.QuestObjects.Common;
 
 namespace SOC.UI
 {
@@ -19,16 +20,18 @@ namespace SOC.UI
         private Details detailPage = new Details();
         private List<GroupBox> detailPageBoxes = new List<GroupBox>();
         private int panelNum = 0;
-        DefinitionDetails definitionDetails = new DefinitionDetails();
-        QuestEntities questDetails = new QuestEntities();
+
+
+        CoreDetails coreDetails = new CoreDetails();
+        List<QuestObjectDetails> questDetails = new List<QuestObjectDetails>();
 
         public FormMain()
         {
             InitializeComponent();
-            setupPage.ShiftGroups(Height - 100, Width - 42);
-            detailPage.ShiftGroups(Height - 100, Width - 42);
+            //setupPage.ShiftGroups(Height - 100, Width - 42);
+            //detailPage.ShiftGroups(Height - 100, Width - 42);
             GoToPanel();
-            Forms.PanelScroll CoordsScrolling = new Forms.PanelScroll(setupPage.panel1, false);
+            Forms.PanelScroll CoordsScrolling = new Forms.PanelScroll(setupPage.panelLocationalDataStubs, false);
             Application.AddMessageFilter(CoordsScrolling);
             buttonBack.Visible = false;
         }
@@ -62,7 +65,6 @@ namespace SOC.UI
             switch (panelNum)
             {
                 case 0:
-                    EntitiesManager.setQuestEntities(detailPage.GetEntityLists());
                     ShowSetup();
                     break;
 
@@ -70,23 +72,6 @@ namespace SOC.UI
                     if (isFilled())
                     {
                         ShowWait();
-                        definitionDetails = setupPage.getDefinitionDetails();
-
-                        CP selectedCP = EnemyInfo.GetCPIndex(definitionDetails.CPName, definitionDetails.locationID);
-                        string routeName = definitionDetails.routeName;
-                        string[] frtRouteNames = RouteManager.GetRouteNames(routeName);
-
-                        EntitiesManager.InitializeEntities(selectedCP, routeName,
-                            BuildCoords(definitionDetails.hostageCoordinates), 
-                            BuildCoords(definitionDetails.walkerGearCoordinates),
-                            BuildCoords(definitionDetails.vehicleCoordinates), 
-                            BuildCoords(definitionDetails.animalCoordinates), 
-                            BuildCoords(definitionDetails.itemCoordinates), 
-                            BuildCoords(definitionDetails.activeItemCoordinates), 
-                            BuildCoords(definitionDetails.modelCoordinates));
-
-                        detailPage.ResetAllPanels();
-                        detailPage.LoadEntityLists(selectedCP, EntitiesManager.GetQuestEntities(), frtRouteNames, definitionDetails.locationID);
                         Application.DoEvents();
 
                         ShowDetails();
@@ -113,7 +98,7 @@ namespace SOC.UI
             panelMain.Controls.Clear();
             panelMain.Controls.Add(setupPage);
             setupPage.EnableScrolling();
-            setupPage.refreshCoordinateBoxes(EntitiesManager.GetQuestEntities());
+            //setupPage.refreshCoordinateBoxes(EntitiesManager.GetQuestEntities());
             buttonNext.Text = "Next >>";
         }
 
@@ -138,6 +123,7 @@ namespace SOC.UI
 
         private void BuildQuest()
         {
+            /*
             definitionDetails = setupPage.getDefinitionDetails();
             questDetails = detailPage.GetEntityLists();
 
@@ -152,20 +138,22 @@ namespace SOC.UI
             Fox2Builder.WriteQuestFox2(definitionDetails, questDetails);
 
             AssetsBuilder.BuildAssets(definitionDetails, questDetails);
+            */
         }
 
         private void FormMain_SizeChanged(object sender, EventArgs e)
         {
-            setupPage.ShiftGroups(Height - 100, Width - 42);
-            detailPage.ShiftGroups(Height - 100, Width - 42);
+            //setupPage.ShiftGroups(Height - 100, Width - 42);
+            //detailPage.ShiftGroups(Height - 100, Width - 42);
         }
 
         public static List<Coordinates> BuildCoords(string rawString)
         {
             List<Coordinates> coordList = new List<Coordinates>();
-            Coordinates coords;
+            //Coordinates coords;
+            /*
             string coordPattern = @"-?\d+([.]\d+)?";
-
+            
             MatchCollection matches = Regex.Matches(rawString, coordPattern);
             var list = matches.Cast<Match>().Select(match => match.Value).ToList();
             while (list.Count % 4 != 0)
@@ -177,7 +165,7 @@ namespace SOC.UI
                 coords = new Coordinates(list[i], list[i + 1], list[i + 2], list[i + 3]);
                 coordList.Add(coords);
             }
-
+            */
             return coordList;
         }
 
@@ -193,15 +181,18 @@ namespace SOC.UI
 
             DialogResult result = loadFile.ShowDialog();
             if (result != DialogResult.OK) return;
+
             if (panelNum != 0)
             {
                 panelNum = 0; GoToPanel();
             }
+
             Quest quest = new Quest();
+
             if (quest.Load(loadFile.FileName))
             {
-                setupPage.setDefinitionDetails(quest.definitionDetails);
-                EntitiesManager.setQuestEntities(quest.questEntities);
+                //setupPage.setDefinitionDetails(quest.definitionDetails);
+                //EntitiesManager.setQuestEntities(quest.questEntities);
             }
         }
 
@@ -227,15 +218,15 @@ namespace SOC.UI
             {
                 SaveFileDialog saveFile = new SaveFileDialog();
                 saveFile.Filter = "Xml File|*.xml";
-                saveFile.FileName = setupPage.getDefinitionDetails().FpkName;
+                //saveFile.FileName = setupPage.getDefinitionDetails().FpkName;
                 DialogResult saveResult = saveFile.ShowDialog();
                 if (saveResult != DialogResult.OK) return;
                 if (panelNum != 0)
                 {
                     panelNum = 0; GoToPanel();
                 }
-                Quest quest = new Quest(setupPage.getDefinitionDetails(), EntitiesManager.GetQuestEntities());
-                quest.Save(saveFile.FileName);
+                //Quest quest = new Quest(setupPage.getDefinitionDetails(), EntitiesManager.GetQuestEntities());
+                //quest.Save(saveFile.FileName);
             }
         }
 

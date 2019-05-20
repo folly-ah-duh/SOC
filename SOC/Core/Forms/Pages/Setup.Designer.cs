@@ -56,6 +56,7 @@
             this.comboBoxReward = new System.Windows.Forms.ComboBox();
             this.comboBoxLoadArea = new System.Windows.Forms.ComboBox();
             this.groupBoxLocations = new System.Windows.Forms.GroupBox();
+            this.panelLocationalDataStubs = new System.Windows.Forms.Panel();
             this.groupBoxFlavor = new System.Windows.Forms.GroupBox();
             this.buttonAddNotif = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
@@ -64,7 +65,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.textBoxQuestDesc = new System.Windows.Forms.TextBox();
             this.textBoxQuestTitle = new System.Windows.Forms.TextBox();
-            this.panelLocationalDataStubs = new System.Windows.Forms.Panel();
             this.panelSetup.SuspendLayout();
             this.groupBoxSetup.SuspendLayout();
             this.groupBoxLocations.SuspendLayout();
@@ -412,6 +412,13 @@
             this.groupBoxLocations.TabStop = false;
             this.groupBoxLocations.Text = "Locational Data";
             // 
+            // panelLocationalDataStubs
+            // 
+            this.panelLocationalDataStubs.Location = new System.Drawing.Point(6, 19);
+            this.panelLocationalDataStubs.Name = "panelLocationalDataStubs";
+            this.panelLocationalDataStubs.Size = new System.Drawing.Size(542, 419);
+            this.panelLocationalDataStubs.TabIndex = 0;
+            // 
             // groupBoxFlavor
             // 
             this.groupBoxFlavor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -502,13 +509,6 @@
             this.textBoxQuestTitle.Size = new System.Drawing.Size(502, 20);
             this.textBoxQuestTitle.TabIndex = 13;
             // 
-            // panelLocationalDataStubs
-            // 
-            this.panelLocationalDataStubs.Location = new System.Drawing.Point(6, 19);
-            this.panelLocationalDataStubs.Name = "panelLocationalDataStubs";
-            this.panelLocationalDataStubs.Size = new System.Drawing.Size(542, 419);
-            this.panelLocationalDataStubs.TabIndex = 0;
-            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -566,6 +566,6 @@
         private System.Windows.Forms.Label label20;
         public System.Windows.Forms.ComboBox comboBoxRoute;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Panel panelLocationalDataStubs;
+        public System.Windows.Forms.Panel panelLocationalDataStubs;
     }
 }

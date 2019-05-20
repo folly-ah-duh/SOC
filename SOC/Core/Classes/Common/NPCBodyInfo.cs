@@ -329,14 +329,22 @@ namespace SOC.Classes.Common
                 ),
         };
         
-
+        public static BodyInfoEntry GetBodyInfo(string bodyName)
+        {
+            foreach (BodyInfoEntry body in BodyInfoArray)
+            {
+                if (body.Name == bodyName)
+                    return body;
+            }
+            return BodyInfoArray[0];
+        }
     }
 
     public struct BodyInfoEntry
     {
-        public string bodyName { get; set; }
+        public string Name { get; set; }
 
-        public string bodyId { get; set; }
+        public string gameId { get; set; }
 
         public string partsPath { get; set; }
 
@@ -348,8 +356,8 @@ namespace SOC.Classes.Common
 
         public BodyInfoEntry(string name, string id, string parts, string pack, bool female, bool face)
         {
-            bodyName = name;
-            bodyId = id;
+            Name = name;
+            gameId = id;
             partsPath = parts;
             missionPackPath = pack;
             isFemale = female;
@@ -357,4 +365,5 @@ namespace SOC.Classes.Common
 
         }
     }
+
 }

@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static SOC.QuestComponents.GameObjectInfo;
 
 namespace SOC.QuestObjects.ActiveItem
 {
@@ -39,9 +38,9 @@ namespace SOC.QuestObjects.ActiveItem
             ai_comboBox_activeitem.Text = acItDet.ai_comboBox_activeitem.Text;
         }
 
-        public override void BuildObject(int width)
+        public override void BuildObject()
         {
-            width -= 6;
+            int width = 10;
             int comboboxWidth = width - 96;
             this.ai_groupBox_main = new System.Windows.Forms.GroupBox();
             this.ai_label_coord = new System.Windows.Forms.Label();
@@ -144,7 +143,7 @@ namespace SOC.QuestObjects.ActiveItem
             this.ai_textBox_xrot.Name = "ai_textBox_xrot";
             this.ai_textBox_xrot.Size = new System.Drawing.Size(31, 20);
             this.ai_textBox_xrot.TabIndex = 5;
-            this.ai_textBox_xrot.Text = activeitem.quatCoordinates.xval;
+            this.ai_textBox_xrot.Text = activeitem.rotation.quatRotation.xval;
             // 
             // ai_textBox_yrot
             // 
@@ -152,7 +151,7 @@ namespace SOC.QuestObjects.ActiveItem
             this.ai_textBox_yrot.Name = "ai_textBox_yrot";
             this.ai_textBox_yrot.Size = new System.Drawing.Size(31, 20);
             this.ai_textBox_yrot.TabIndex = 6;
-            this.ai_textBox_yrot.Text = activeitem.quatCoordinates.yval;
+            this.ai_textBox_yrot.Text = activeitem.rotation.quatRotation.yval;
             // 
             // ai_textBox_zrot
             // 
@@ -160,7 +159,7 @@ namespace SOC.QuestObjects.ActiveItem
             this.ai_textBox_zrot.Name = "ai_textBox_zrot";
             this.ai_textBox_zrot.Size = new System.Drawing.Size(31, 20);
             this.ai_textBox_zrot.TabIndex = 7;
-            this.ai_textBox_zrot.Text = activeitem.quatCoordinates.zval;
+            this.ai_textBox_zrot.Text = activeitem.rotation.quatRotation.zval;
             // 
             // ai_textBox_wrot
             // 
@@ -168,7 +167,7 @@ namespace SOC.QuestObjects.ActiveItem
             this.ai_textBox_wrot.Name = "ai_textBox_wrot";
             this.ai_textBox_wrot.Size = new System.Drawing.Size(31, 20);
             this.ai_textBox_wrot.TabIndex = 8;
-            this.ai_textBox_wrot.Text = activeitem.quatCoordinates.wval;
+            this.ai_textBox_wrot.Text = activeitem.rotation.quatRotation.wval;
             // 
             // ai_label_activeitem
             // 
@@ -187,7 +186,7 @@ namespace SOC.QuestObjects.ActiveItem
             this.ai_comboBox_activeitem.FormattingEnabled = true;
             this.ai_comboBox_activeitem.Location = new System.Drawing.Point(84, 89);
             this.ai_comboBox_activeitem.Name = "ai_comboBox_activeitem";
-            this.ai_comboBox_activeitem.Items.AddRange(activeItems);
+            this.ai_comboBox_activeitem.Items.AddRange(ActiveItemNames.activeItems);
             this.ai_comboBox_activeitem.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.ai_comboBox_activeitem.TabIndex = 10;
             this.ai_comboBox_activeitem.Text = activeitem.activeItem;
@@ -200,6 +199,5 @@ namespace SOC.QuestObjects.ActiveItem
         {
             return ai_groupBox_main;
         }
-
     }
 }

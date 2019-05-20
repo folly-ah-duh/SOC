@@ -223,7 +223,7 @@ namespace SOC.QuestObjects.Hostage
             this.h_comboBox_lang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList; //genderDependant
             this.h_comboBox_lang.FormattingEnabled = true;
             this.h_comboBox_lang.Location = new System.Drawing.Point(84, 146);
-            if (NPCBodyInfo.BodyInfoArray[hostageBodyIndex].bodyName.Contains("FEMALE"))
+            if (NPCBodyInfo.BodyInfoArray[hostageBodyIndex].Name.Contains("FEMALE"))
                 this.h_comboBox_lang.Items.AddRange(new object[] { "english", });
             else
                 this.h_comboBox_lang.Items.AddRange(new object[] { "english", "russian", "pashto", "kikongo", "afrikaans" });

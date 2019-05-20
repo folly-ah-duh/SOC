@@ -9,12 +9,12 @@ namespace SOC.Classes.Fox2
     class TppHostage2Parameter : Fox2EntityClass
     {
         private Fox2EntityClass owner;
-        private string partsFile;
+        private string partsPath;
 
-        public TppHostage2Parameter(Fox2EntityClass _owner, string _partsFile)
+        public TppHostage2Parameter(Fox2EntityClass _owner, string _partsPath)
         {
             owner = _owner;
-            partsFile = _partsFile;
+            partsPath = _partsPath;
         }
 
         public override string GetFox2Format()
@@ -26,7 +26,7 @@ namespace SOC.Classes.Fox2
                                           <value>{owner.GetHexAddress()}</value>
                                       </property>
                                       <property name=""partsFile"" type=""FilePtr"" container=""StaticArray"" arraySize=""1"">
-                                          <value>{partsFile}</value>
+                                          <value>{partsPath}</value>
                                       </property>
                                       <property name=""motionGraphFile"" type=""FilePtr"" container=""StaticArray"" arraySize=""1"">
                                         <value>/Assets/tpp/motion/motion_graph/hostage2/Hostage2_layers.mog</value>

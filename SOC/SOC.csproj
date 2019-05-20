@@ -90,54 +90,60 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Common\Tools.cs" />
-    <Compile Include="Classes\Fox2\EntityClasses\DataSet.cs" />
-    <Compile Include="Classes\Fox2\EntityClasses\GameObject.cs" />
-    <Compile Include="Classes\Fox2\EntityClasses\GameObjectLocator.cs" />
-    <Compile Include="Classes\Fox2\EntityClasses\TppHostage2LocatorParameter.cs" />
-    <Compile Include="Classes\Fox2\EntityClasses\TppHostage2Parameter.cs" />
-    <Compile Include="Classes\Fox2\EntityClasses\Transform.cs" />
-    <Compile Include="Classes\Fox2\Fox2EntityClass.cs" />
-    <Compile Include="Classes\Quest\LoadAreas.cs" />
-    <Compile Include="Classes\Quest\NPCMtbsInfo.cs" />
-    <Compile Include="Classes\Common\Quaternion.cs" />
-    <Compile Include="Classes\Common\Rotation.cs" />
-    <Compile Include="Classes\GzsTool\Hashing.cs" />
-    <Compile Include="Classes\LangBuilder.cs" />
-    <Compile Include="Classes\LangTool\BigEndianBinaryWriter.cs" />
-    <Compile Include="Classes\LangTool\ExtensionMethods.cs" />
-    <Compile Include="Classes\LangTool\LangEntry.cs" />
-    <Compile Include="Classes\LangTool\LangFile.cs" />
-    <Compile Include="Classes\Quest\Quest.cs" />
+    <Compile Include="Core\Classes\Common\CoreDetails.cs" />
+    <Compile Include="Core\Classes\Common\Tools.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\DataSet.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\GameObject.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\GameObjectLocator.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\ScriptBlockScript.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\TexturePackLoadConditioner.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\TppHostage2LocatorParameter.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\TppHostage2Parameter.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\Transform.cs" />
+    <Compile Include="Core\Classes\Fox2\Fox2EntityClass.cs" />
+    <Compile Include="Core\Classes\QuestBuild\QuestBuildManager.cs" />
+    <Compile Include="Core\Classes\Common\LoadAreas.cs" />
+    <Compile Include="Core\Classes\Common\NPCMtbsInfo.cs" />
+    <Compile Include="Core\Classes\Common\Quaternion.cs" />
+    <Compile Include="Core\Classes\Common\Rotation.cs" />
+    <Compile Include="Core\Classes\GzsTool\Hashing.cs" />
+    <Compile Include="Core\Classes\QuestBuild\Builders\LangBuilder.cs" />
+    <Compile Include="Core\Classes\LangTool\BigEndianBinaryWriter.cs" />
+    <Compile Include="Core\Classes\LangTool\ExtensionMethods.cs" />
+    <Compile Include="Core\Classes\LangTool\LangEntry.cs" />
+    <Compile Include="Core\Classes\LangTool\LangFile.cs" />
+    <Compile Include="Core\Classes\Common\Quest.cs" />
+    <Compile Include="QuestObjects\Common\QuestObjectDetails.cs" />
+    <Compile Include="QuestObjects\Hostage\HostageDetails.cs" />
     <Compile Include="QuestObjects\Hostage\Classes\HostageDetailGUI.cs" />
     <Compile Include="QuestObjects\Hostage\Classes\HostageStubGUI.cs" />
     <Compile Include="QuestObjects\Route\RouteManager.cs" />
-    <Compile Include="Classes\Common\Coordinates.cs" />
-    <Compile Include="Classes\UpdateNotifsManager.cs" />
-    <Compile Include="Classes\XmlCompiler.cs" />
-    <Compile Include="Forms\FormMain.cs">
+    <Compile Include="Core\Classes\Common\Coordinates.cs" />
+    <Compile Include="Core\Classes\QuestBuild\UpdateNotifsManager.cs" />
+    <Compile Include="Core\Classes\Common\XmlCompiler.cs" />
+    <Compile Include="Core\Forms\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormMain.Designer.cs">
+    <Compile Include="Core\Forms\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\formCustomProgressLang.cs">
+    <Compile Include="Core\Forms\formCustomProgressLang.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\formCustomProgressLang.Designer.cs">
+    <Compile Include="Core\Forms\formCustomProgressLang.Designer.cs">
       <DependentUpon>formCustomProgressLang.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Fox2Builder.cs" />
-    <Compile Include="Forms\Pages\Details.cs">
+    <Compile Include="Core\Classes\QuestBuild\Builders\Fox2Builder.cs" />
+    <Compile Include="Core\Forms\Pages\Details.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Pages\Details.Designer.cs">
+    <Compile Include="Core\Forms\Pages\Details.Designer.cs">
       <DependentUpon>Details.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Pages\LocationalDataStub.cs">
+    <Compile Include="Core\Forms\Pages\LocationalDataStub.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Pages\LocationalDataStub.Designer.cs">
+    <Compile Include="Core\Forms\Pages\LocationalDataStub.Designer.cs">
       <DependentUpon>LocationalDataStub.cs</DependentUpon>
     </Compile>
     <Compile Include="QuestObjects\ActiveItem\Classes\ActiveItemNames.cs" />
@@ -157,7 +163,7 @@
       <DependentUpon>AnimalPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="QuestObjects\Common\ManagerMasterList.cs" />
-    <Compile Include="QuestObjects\Common\Manager.cs" />
+    <Compile Include="QuestObjects\Common\QuestObjectManager.cs" />
     <Compile Include="QuestObjects\Enemy\Classes\EnemyAssets.cs" />
     <Compile Include="QuestObjects\Enemy\Forms\EnemyBox.cs" />
     <Compile Include="QuestObjects\Enemy\Forms\ExistingEnemiesPanel.cs">
@@ -195,7 +201,7 @@
     </Compile>
     <Compile Include="QuestObjects\Model\Classes\ModelAssets.cs" />
     <Compile Include="QuestObjects\Model\Forms\ModelBox.cs" />
-    <Compile Include="Forms\QuestBox.cs" />
+    <Compile Include="Core\Forms\QuestBox.cs" />
     <Compile Include="QuestObjects\Model\Forms\ModelPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -214,39 +220,38 @@
       <DependentUpon>VehiclePanel.cs</DependentUpon>
     </Compile>
     <Compile Include="QuestObjects\WalkerGear\Forms\WalkerGearBox.cs" />
-    <Compile Include="Forms\Pages\Setup.cs">
+    <Compile Include="Core\Forms\Pages\Setup.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Pages\Setup.Designer.cs">
+    <Compile Include="Core\Forms\Pages\Setup.Designer.cs">
       <DependentUpon>Setup.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Pages\Waiting.cs">
+    <Compile Include="Core\Forms\Pages\Waiting.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Pages\Waiting.Designer.cs">
+    <Compile Include="Core\Forms\Pages\Waiting.Designer.cs">
       <DependentUpon>Waiting.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\PanelScroll.cs" />
-    <Compile Include="Forms\QuestPanel.cs">
+    <Compile Include="Core\Forms\PanelScroll.cs" />
+    <Compile Include="Core\Forms\QuestPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Classes\LuaBuilder.cs" />
+    <Compile Include="Core\Classes\QuestBuild\Builders\LuaBuilder.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="QuestComponents\AnimalInfo.cs" />
-    <Compile Include="QuestComponents\EnemyInfo.cs" />
-    <Compile Include="QuestComponents\Fox2Info.cs" />
-    <Compile Include="Classes\Quest\NPCBodyInfo.cs" />
+    <Compile Include="QuestObjects\Animal\Classes\AnimalInfo.cs" />
+    <Compile Include="QuestObjects\Enemy\Classes\EnemyInfo.cs" />
+    <Compile Include="Core\Classes\Fox2\Fox2Info.cs" />
+    <Compile Include="Core\Classes\Common\NPCBodyInfo.cs" />
     <Compile Include="QuestObjects\ActiveItem\Classes\ActiveItem.cs" />
     <Compile Include="QuestObjects\Animal\Classes\Animal.cs" />
     <Compile Include="QuestObjects\Enemy\Classes\Enemy.cs" />
     <Compile Include="QuestObjects\Helicopter\Classes\Helicopter.cs" />
-    <Compile Include="QuestObjects\Hostage\Classes\Hostage.cs" />
     <Compile Include="QuestObjects\Hostage\Forms\HostageBox.cs" />
     <Compile Include="QuestObjects\Hostage\Classes\HostageFox2.cs" />
     <Compile Include="QuestObjects\Hostage\Classes\HostageLua.cs" />
@@ -261,24 +266,24 @@
     <Compile Include="QuestObjects\WalkerGear\Forms\WalkerGearPanel.Designer.cs">
       <DependentUpon>WalkerGearPanel.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Forms\FormMain.resx">
+    <EmbeddedResource Include="Core\Forms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\formCustomProgressLang.resx">
+    <EmbeddedResource Include="Core\Forms\formCustomProgressLang.resx">
       <DependentUpon>formCustomProgressLang.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Pages\Details.resx">
+    <EmbeddedResource Include="Core\Forms\Pages\Details.resx">
       <DependentUpon>Details.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Pages\LocationalDataStub.resx">
+    <EmbeddedResource Include="Core\Forms\Pages\LocationalDataStub.resx">
       <DependentUpon>LocationalDataStub.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Pages\Setup.resx">
+    <EmbeddedResource Include="Core\Forms\Pages\Setup.resx">
       <DependentUpon>Setup.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Pages\Waiting.resx">
+    <EmbeddedResource Include="Core\Forms\Pages\Waiting.resx">
       <DependentUpon>Waiting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -316,6 +321,7 @@
     <EmbeddedResource Include="QuestObjects\WalkerGear\Forms\WalkerGearPanel.resx">
       <DependentUpon>WalkerGearPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\app.manifest">
       <SubType>Designer</SubType>
     </None>

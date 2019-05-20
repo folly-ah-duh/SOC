@@ -155,10 +155,10 @@
         public System.Windows.Forms.GroupBox groupHosDet;
         public System.Windows.Forms.Panel panelHosDet;
         private System.Windows.Forms.Label label_hosObjType;
-        private System.Windows.Forms.ComboBox comboBox_hosObjType;
         private System.Windows.Forms.Label h_label_intrgt;
         public System.Windows.Forms.CheckBox h_checkBox_intrgt;
         public System.Windows.Forms.ComboBox comboBox_Body;
         private System.Windows.Forms.Label label_Body;
+        public System.Windows.Forms.ComboBox comboBox_hosObjType;
     }
 }

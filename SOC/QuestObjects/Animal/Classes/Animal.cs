@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace SOC.QuestObjects.Animal
 {
-    public class Animal : SOC.Classes.Quest.QuestObject
+    public class Animal
     {
 
         public Animal() { }

@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SOC.QuestComponents;
-using static SOC.QuestComponents.GameObjectInfo;
 
 namespace SOC.QuestObjects.WalkerGear
 {
@@ -44,9 +43,9 @@ namespace SOC.QuestObjects.WalkerGear
             wg_comboBox_rider.Text = wd.wg_comboBox_rider.Text;
         }
 
-        public override void BuildObject(int width)
+        public override void BuildObject()
         {
-            width -= 6;
+            int width = 6;
             int comboboxWidth = width - 96;
             this.wg_groupBox_main = new System.Windows.Forms.GroupBox();
             this.wg_label_target = new System.Windows.Forms.Label();

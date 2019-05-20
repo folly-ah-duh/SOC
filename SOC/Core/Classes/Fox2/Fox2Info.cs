@@ -1,6 +1,6 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
-namespace SOC.QuestComponents
+namespace SOC.Classes.Fox2
 {
     public static class Fox2Info
     {
@@ -9,26 +9,14 @@ namespace SOC.QuestComponents
 
         public static int entityClassSize = 0x70;
 
-        public static string getQuaternionY(string roty)
+        private static DataSet GetQuestDataSet(List<Fox2EntityClass> entityList)
         {
-            double quatNum = 0;
-            Double.TryParse(roty, out quatNum);
-            quatNum = quatNum * Math.PI / 360;
-            return Math.Sin(quatNum).ToString();
-        } 
-        public static string getQuaternionW(string roty)
-        {
-            double quatNum = 0;
-            Double.TryParse(roty, out quatNum);
-            quatNum = quatNum * Math.PI / 360;
-            return Math.Cos(quatNum).ToString();
-        }
-        public static string getDegreeRot(string QuaternionY)
-        {
-            double degree = 0;
-            Double.TryParse(QuaternionY, out degree);
-            degree = Math.Asin(degree);
-            return (degree / Math.PI * 360).ToString();
+            foreach (Fox2EntityClass entity in entityList)
+            {
+                if (entity is DataSet)
+                    return (DataSet)entity;
+            }
+            return null;
         }
     }
 

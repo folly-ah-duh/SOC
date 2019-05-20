@@ -11,36 +11,38 @@ namespace SOC.QuestObjects.Hostage
 {
     static class HostageFox2 // : (abstract) objectFox2?
     {
-        static void AddQuestEntities(List<Hostage> HostageList, ref List<Fox2EntityClass> entityList)
+        static void AddQuestEntities(HostageDetails hDetails, ref List<Fox2EntityClass> entityList)
         {
-            if (HostageList.Count > 0)
+            List<Hostage> hostages = hDetails.Hostages;
+            HostageMetadata hMetadata = hDetails.hostageMetadata;
+            BodyInfoEntry hostageBodies = NPCBodyInfo.GetBodyInfo(hMetadata.hostageBodyName);
+
+            DataSet dataSet = GetQuestDataSet(entityList);
+
+            if (hostages.Count > 0)
             {
-                DataSet dataSet = GetQuestDataSet(entityList);
-                GameObject gameObjectTppHostageUnique = new GameObject("GameObjectTppHostageUnique", dataSet, "TppHostageUnique2", HostageList.Count, HostageList.Count);
-                TppHostage2Parameter hostageParameter = new TppHostage2Parameter(gameObjectTppHostageUnique, )//parts path. instead of a hostagelist, maybe this class should recieve some sort of hostageData struct?
+                GameObject gameObjectTppHostageUnique = new GameObject("GameObjectTppHostageUnique", dataSet, "TppHostageUnique2", hostages.Count, hostages.Count);
+                TppHostage2Parameter hostageParameter = new TppHostage2Parameter(gameObjectTppHostageUnique, hostageBodies.partsPath);
 
+                gameObjectTppHostageUnique.SetParameter(hostageParameter);
 
-                entityList.Add();
-                entityList.Add(new TppHostage2Parameter("GameObjectTppHostageUnique", "TppHostageUnique2", HostageList.Count));
-                entityList.Add(new QuestEntity(entityClass.TppHostage2Parameter));
+                entityList.Add(gameObjectTppHostageUnique);
+                entityList.Add(hostageParameter);
 
-                foreach (Hostage hostage in HostageList)
+                foreach (Hostage hostage in hostages)
                 {
-                    entityList.Add(new QuestEntity(entityClass.GameObjectLocator, hostage.GetHostageName(), "TppHostageUnique2"));
-                    entityList.Add(new QuestEntity(entityClass.TransformEntity, eDetails: new object[] { hostage.coordinates, hostage.rotation }));
-                    entityList.Add(new QuestEntity(entityClass.TppHostage2LocatorParameter));
+                    GameObjectLocator hostageLocator = new GameObjectLocator(hostage.GetHostageName(), dataSet, "TppHostageUnique2");
+                    Transform hostageTransform = new Transform(hostageLocator, hostage.rotation, hostage.coordinates);
+                    TppHostage2LocatorParameter hostageLocatorParameter = new TppHostage2LocatorParameter(hostageLocator);
+
+                    hostageLocator.SetTransform(hostageTransform);
+                    hostageLocator.SetParameter(hostageLocatorParameter);
+
+                    entityList.Add(hostageLocator);
+                    entityList.Add(hostageTransform);
+                    entityList.Add(hostageLocatorParameter);
                 }
             }
-        }
-
-        private static DataSet GetQuestDataSet(List<Fox2EntityClass> entityList)
-        {
-            foreach (Fox2EntityClass entity in entityList)
-            {
-                if (entity is DataSet)
-                    return (DataSet)entity;
-            }
-            return null;
         }
     }
 }

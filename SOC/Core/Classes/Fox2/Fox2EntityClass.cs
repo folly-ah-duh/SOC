@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SOC.Classes.Fox2
 {
-    abstract class Fox2EntityClass
+    public abstract class Fox2EntityClass
     {
         public Fox2EntityClass() { }
 

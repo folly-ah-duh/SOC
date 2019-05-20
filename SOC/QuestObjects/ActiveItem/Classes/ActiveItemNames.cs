@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SOC.QuestObjects.ActiveItem.Classes
+namespace SOC.QuestObjects.ActiveItem
 {
     static class ActiveItemNames
     {

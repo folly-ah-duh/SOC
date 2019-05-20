@@ -1,11 +1,10 @@
 ﻿using SOC.QuestComponents;
+using SOC.QuestObjects.Common;
 using SOC.UI;
 using System.Collections.Generic;
 using System.IO;
-using static SOC.QuestComponents.Fox2Info;
-using System.Globalization;
 
-namespace SOC.Classes
+namespace SOC.Classes.Fox2
 {
 
     public static class Fox2Builder
@@ -37,6 +36,23 @@ namespace SOC.Classes
             return dataList;
         }
 
+        public static List<Fox2EntityClass> BuildQuestEntityList(string fpkName, List<QuestObjectManager> managers)
+        {
+            List<Fox2EntityClass> entityList = new List<Fox2EntityClass>();
+
+            entityList.Add(new DataSet(entityList));
+            entityList.Add(new ScriptBlockScript());
+
+            foreach (QuestObjectManager manager in managers)
+            {
+                manager.AddFox2Entities(ref entityList);
+            }
+
+            entityList.Add(new TexturePackLoadConditioner());
+
+            return entityList;
+        }
+        /*
         public static List<QuestEntity> BuildQuestEntityList(QuestEntities questDetails)
         {
             string vehicleHistory = "";
@@ -45,7 +61,7 @@ namespace SOC.Classes
             entityList.Add(new QuestEntity(entityClass.DataSet));
             entityList.Add(new QuestEntity(entityClass.ScriptBlockScript, "ScriptBlockScript0000"));
 
-            if (questDetails.hostages.Count > 0)
+            if (questDetails.hostages.Count > 0) //DONE
             {
                 entityList.Add(new QuestEntity(entityClass.GameObject, "GameObjectTppHostageUnique", "TppHostageUnique2", questDetails.hostages.Count));
                 entityList.Add(new QuestEntity(entityClass.TppHostage2Parameter));
@@ -202,84 +218,8 @@ namespace SOC.Classes
 
             return entityList;
         }
-
-        public static List<string> BuildQuestClassList(QuestEntities questDetails)
-        {
-            List<string> classList = new List<string>();
-
-            classList.Add("    <class name=\"Entity\" super=\"\" version=\"2\" />");
-            classList.Add("    <class name=\"Data\" super=\"Entity\" version=\"2\" />");
-            classList.Add("    <class name=\"DataSet\" super=\"\" version=\"0\" />");
-            classList.Add("    <class name=\"ScriptBlockScript\" super=\"\" version=\"0\" />");
-            if (questDetails.hostages.Count + questDetails.vehicles.Count + questDetails.models.Count + questDetails.animals.Count + questDetails.walkerGears.Count > 0)
-            {
-                classList.Add("    <class name=\"TransformEntity\" super=\"\" version=\"0\" />");
-
-                if (questDetails.hostages.Count + questDetails.vehicles.Count + questDetails.animals.Count + questDetails.walkerGears.Count > 0)
-                {
-                    classList.Add("    <class name=\"GameObjectLocator\" super=\"\" version=\"2\" />");
-
-                    if (questDetails.hostages.Count + questDetails.animals.Count + questDetails.walkerGears.Count > 0)
-                    {
-                        classList.Add("    <class name=\"GameObject\" super=\"\" version=\"2\" />");
-                    }
-                }
-            }
-            if (questDetails.hostages.Count > 0)
-            {
-                classList.Add("    <class name=\"TppHostage2Parameter\" super=\"\" version=\"1\" />");
-                classList.Add("    <class name=\"TppHostage2LocatorParameter\" super=\"\" version=\"2\" />");
-            }
-            if (questDetails.walkerGears.Count > 0)
-            {
-                classList.Add("    <class name=\"TppWalkerGear2Parameter\" super=\"\" version=\"0\" />");
-                classList.Add("    <class name=\"TppWalkerGear2LocatorParameter\" super=\"\" version=\"0\" />");
-            }
-            if (questDetails.vehicles.Count > 0)
-            {
-                classList.Add("    <class name=\"TppVehicle2BodyData\" super=\"\" version=\"3\" />");
-                classList.Add("    <class name=\"TppVehicle2LocatorParameter\" super=\"\" version=\"2\" />");
-            }
-            if (questDetails.models.Count > 0)
-            {
-                classList.Add("    <class name=\"StaticModel\" super=\"\" version=\"9\" />");
-            }
-            if (questDetails.animals.Count > 0)
-            {
-                string animalHistory = "";
-                string animalcat = "";
-                foreach (Animal animal in questDetails.animals)
-                {
-                    animalcat = AnimalInfo.getAnimalCategory(animal.animal);
-
-                    if (!animalHistory.Contains(animalcat))
-                    {
-                        animalHistory += animalcat;
-                        switch (animalcat)
-                        {
-                            case "animal":
-                                classList.Add("    <class name=\"TppAnimalLocatorParameter\" super=\"\" version=\"1\" />");
-                                classList.Add("    <class name=\"TppAnimalParameter\" super=\"\" version=\"1\" />");
-                                break;
-                            case "wolf":
-                                classList.Add("    <class name=\"TppWolfLocatorParameter\" super=\"\" version=\"0\" />");
-                                classList.Add("    <class name=\"TppWolfParameter\" super=\"\" version=\"1\" />");
-                                break;
-                            case "bear":
-                                classList.Add("    <class name=\"TppBearLocatorParameter\" super=\"\" version=\"0\" />");
-                                classList.Add("    <class name=\"TppBearParameter\" super=\"\" version=\"1\" />");
-                                break;
-                        }
-                    }
-                }
-
-            }
-
-            classList.Add("    <class name=\"TexturePackLoadConditioner\" super=\"\" version=\"0\" />");
-
-            return classList;
-        }
-
+        */
+        /*
         public static void WriteQuestFox2(DefinitionDetails definitionDetails, QuestEntities questDetails)
         {
 
@@ -300,14 +240,7 @@ namespace SOC.Classes
             {
                 questFox2.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
                 questFox2.WriteLine("<fox formatVersion=\"2\" fileVersion=\"0\" originalVersion=\"Sun Mar 16 00:00:00 UTC-05:00 1975\">");
-                questFox2.WriteLine("  <classes>");
-
-                foreach (string value in BuildQuestClassList(questDetails))
-                {
-                    questFox2.WriteLine(value);
-                }
-
-                questFox2.WriteLine("  </classes>");
+                questFox2.WriteLine("  <classes />");
                 questFox2.WriteLine("  <entities>");
                 for (int i = 0; i < entityList.Count; i++)
                 {
@@ -842,7 +775,8 @@ namespace SOC.Classes
             XmlCompiler.CompileFile(fox2QuestFile, XmlCompiler.FoxToolPath);
             File.Delete(fox2QuestFile);
         }
-
+        */
+        /*
         public static List<QuestEntity> BuildItemEntityList(QuestEntities questDetails)
         {
             List<QuestEntity> entityList = new List<QuestEntity>();
@@ -881,7 +815,8 @@ namespace SOC.Classes
 
             return entityList;
         }
-
+        */
+        /*
         public static List<string> BuildItemClassList(QuestEntities questDetails)
         {
             List<string> classList = new List<string>();
@@ -906,7 +841,8 @@ namespace SOC.Classes
 
             return classList;
         }
-
+        */
+        /*
         public static void WriteItemFox2(DefinitionDetails definitionDetails, QuestEntities questDetails)
         {
 
@@ -1090,5 +1026,6 @@ namespace SOC.Classes
             File.Delete(fox2ItemFile);
 
         }
+        */
     }
 }

@@ -1,11 +1,12 @@
-﻿using SOC.QuestComponents;
+﻿using SOC.Classes.Common;
+using SOC.QuestComponents;
+using SOC.QuestObjects.Common;
 using SOC.UI;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
-using static SOC.QuestComponents.GameObjectInfo;
 
 namespace SOC.Classes
 {
@@ -14,12 +15,12 @@ namespace SOC.Classes
 
         static string[] questLuaInput = File.ReadAllLines(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//questScript.lua"));
 
-        public static void WriteDefinitionLua(DefinitionDetails definitionDetails, QuestEntities questDetails)
+        public static void WriteDefinitionLua(CoreDetails coreDetails, List<QuestObjectDetails> questObjects)
         {
-
+            /*
             BodyInfoEntry bodyInfo = new BodyInfoEntry();
-            if (questDetails.hostageBodyIndex >= 0)
-                bodyInfo = BodyInfo.BodyInfoArray[questDetails.hostageBodyIndex];
+            if (questObjectDetails.hostageBodyIndex >= 0)
+                bodyInfo = BodyInfo.BodyInfoArray[questObjectDetails.hostageBodyIndex];
 
             string packFiles = "";
             string locName = "";
@@ -27,26 +28,26 @@ namespace SOC.Classes
             if (bodyInfo.isFemale)
                 gender = "FEMALE";
 
-            if (definitionDetails.locationID == 10)
+            if (coreDetails.locationID == 10)
                 locName = "AFGH";
 
-            else if (definitionDetails.locationID == 20)
+            else if (coreDetails.locationID == 20)
                 locName = "MAFR";
 
-            if( questDetails.walkerGears.Count > 0)
+            if( questObjectDetails.walkerGears.Count > 0)
                 packFiles += "\n\t\t\"/Assets/tpp/pack/mission2/common/mis_com_walkergear.fpk\",";
 
-            if (questDetails.hostages.Count > 0)
+            if (questObjectDetails.hostages.Count > 0)
             {
                 packFiles += "\n\t\t\"/Assets/tpp/pack/mission2/ih/ih_hostage_base.fpk\", ";
                 packFiles += string.Format("\n\t\t\"{0}\", ", bodyInfo.missionPackPath);
             }
 
-            packFiles += string.Format("\n\t\t\"/Assets/tpp/pack/mission2/quest/ih/{0}.fpk\", ", definitionDetails.FpkName);
+            packFiles += string.Format("\n\t\t\"/Assets/tpp/pack/mission2/quest/ih/{0}.fpk\", ", coreDetails.FpkName);
 
-            if (questDetails.hostages.Count > 0)
+            if (questObjectDetails.hostages.Count > 0)
                 if (!bodyInfo.hasface)
-                    packFiles += string.Format("\n\t\trandomFaceListIH = {{gender = \"{0}\", count = {1}}}, ", gender, questDetails.hostages.Count);
+                    packFiles += string.Format("\n\t\trandomFaceListIH = {{gender = \"{0}\", count = {1}}}, ", gender, questObjectDetails.hostages.Count);
 
             string bodies = "";
             string faces = "";
@@ -57,9 +58,9 @@ namespace SOC.Classes
                 if(EnemyInfo.armorCount > 0) { bodies += string.Format("TppDefine.QUEST_BODY_ID_LIST.{0}_ARMOR, ", locName); }
             }
 
-            foreach (string body in getEnemyBodies(questDetails.cpEnemies))
+            foreach (string body in getEnemyBodies(questObjectDetails.cpEnemies))
                 bodies += string.Format("TppEnemyBodyId.{0}, ", body);
-            foreach (string body in getEnemyBodies(questDetails.questEnemies))
+            foreach (string body in getEnemyBodies(questObjectDetails.questEnemies))
                 bodies += string.Format("TppEnemyBodyId.{0}, ", body);
 
             packFiles += string.Format("\n\t\tfaceIdList={{{0}}}, ", faces);
@@ -67,9 +68,9 @@ namespace SOC.Classes
 
             string questPackList = string.Format("\tquestPackList = {{ {0} \n\t}},", packFiles);
 
-            string locationInfo = string.Format("\tlocationId={0}, areaName=\"{1}\", iconPos=Vector3({2},{3},{4}), radius={5},", definitionDetails.locationID, definitionDetails.loadArea, definitionDetails.coords.xCoord, definitionDetails.coords.yCoord, definitionDetails.coords.zCoord, definitionDetails.radius);
+            string locationInfo = string.Format("\tlocationId={0}, areaName=\"{1}\", iconPos=Vector3({2},{3},{4}), radius={5},", coreDetails.locationID, coreDetails.loadArea, coreDetails.coords.xCoord, coreDetails.coords.yCoord, coreDetails.coords.zCoord, coreDetails.radius);
             
-            string progressLangId = string.Format("\tquestCompleteLangId=\"{0}\",", UpdateNotifsManager.getLangIds()[definitionDetails.progNotif]);
+            string progressLangId = string.Format("\tquestCompleteLangId=\"{0}\",", UpdateNotifsManager.getLangIds()[coreDetails.progNotif]);
 
             string canOpenQuestFunction = "\tcanOpenQuest=InfQuest.AllwaysOpenQuest, --function that decides whether the quest is open or not"; //todo in future update?
 
@@ -77,7 +78,7 @@ namespace SOC.Classes
 
             string equipIds = ""; List<string> requestHistory = new List<string>();
 
-            foreach (Item item in questDetails.items)
+            foreach (Item item in questObjectDetails.items)
                 if (item.item.Contains("EQP_WP_") && !requestHistory.Contains(item.item))
                 {
                     equipIds += string.Format("\"{0}\", ", item.item);
@@ -86,10 +87,10 @@ namespace SOC.Classes
                     
             string requestEquipIds = string.Format("\trequestEquipIds={{ {0} }},", equipIds);
             
-            string hasEnemyHeli = string.Format("\thasEnemyHeli = {0},", isAnyHeliSpawned(questDetails.enemyHelicopters).ToString().ToLower());
+            string hasEnemyHeli = string.Format("\thasEnemyHeli = {0},", isAnyHeliSpawned(questObjectDetails.enemyHelicopters).ToString().ToLower());
             
             string DefinitionLuaPath = "Sideop_Build//GameDir//mod//quests//";
-            string DefinitionLuaFile = Path.Combine(DefinitionLuaPath, string.Format("ih_quest_q{0}.lua", definitionDetails.QuestNum));
+            string DefinitionLuaFile = Path.Combine(DefinitionLuaPath, string.Format("ih_quest_q{0}.lua", coreDetails.QuestNum));
 
             Directory.CreateDirectory(DefinitionLuaPath);
 
@@ -99,37 +100,38 @@ namespace SOC.Classes
                 defFile.WriteLine("local this={");
                 defFile.WriteLine(questPackList);
                 defFile.WriteLine(locationInfo);
-                if (definitionDetails.locationID == 50)
-                    defFile.WriteLine(string.Format("\tclusterName=\"{0}\",", definitionDetails.loadArea.Substring(4)));
-                defFile.WriteLine(string.Format("\tcategory=TppQuest.QUEST_CATEGORIES_ENUM.{0},", definitionDetails.category));
+                if (coreDetails.locationID == 50)
+                    defFile.WriteLine(string.Format("\tclusterName=\"{0}\",", coreDetails.loadArea.Substring(4)));
+                defFile.WriteLine(string.Format("\tcategory=TppQuest.QUEST_CATEGORIES_ENUM.{0},", coreDetails.category));
                 defFile.WriteLine(progressLangId);
                 defFile.WriteLine(canOpenQuestFunction);
-                defFile.WriteLine(string.Format("\tquestRank=TppDefine.QUEST_RANK.{0},", definitionDetails.reward));
+                defFile.WriteLine(string.Format("\tquestRank=TppDefine.QUEST_RANK.{0},", coreDetails.reward));
                 defFile.WriteLine(disableLzs);
                 defFile.WriteLine(requestEquipIds);
                 defFile.WriteLine(hasEnemyHeli);
                 defFile.WriteLine("} return this");
             }
+            */
         }
 
-        public static void WriteMainQuestLua(DefinitionDetails definitionDetails, QuestEntities questDetails)
+        public static void WriteMainQuestLua(CoreDetails coreDetails, List<QuestObjectDetails> questObjects)
         {
-
+            /*
             List<string> questLua = new List<string>(questLuaInput);
 
-            questLua[GetLineOf("local hostageCount =", questLua)] = string.Format("local hostageCount = {0}", questDetails.hostages.Count);
-            questLua[GetLineOf("local CPNAME =", questLua)] = string.Format("local CPNAME = \"{0}\"", definitionDetails.CPName);
-            questLua[GetLineOf("local useInter =", questLua)] = string.Format("local useInter = {0}", questDetails.canInter.ToString().ToLower());
-            questLua[GetLineOf("local SUBTYPE =", questLua)] = string.Format("local SUBTYPE = \"{0}\"", questDetails.soldierSubType);
-            questLua[GetLineOf("local questTrapName =", questLua)] = string.Format("local questTrapName = \"trap_preDeactiveQuestArea_{0}\"", definitionDetails.loadArea);
+            questLua[GetLineOf("local hostageCount =", questLua)] = string.Format("local hostageCount = {0}", questObjects.hostages.Count);
+            questLua[GetLineOf("local CPNAME =", questLua)] = string.Format("local CPNAME = \"{0}\"", coreDetails.CPName);
+            questLua[GetLineOf("local useInter =", questLua)] = string.Format("local useInter = {0}", questObjects.canInter.ToString().ToLower());
+            questLua[GetLineOf("local SUBTYPE =", questLua)] = string.Format("local SUBTYPE = \"{0}\"", questObjects.soldierSubType);
+            questLua[GetLineOf("local questTrapName =", questLua)] = string.Format("local questTrapName = \"trap_preDeactiveQuestArea_{0}\"", coreDetails.loadArea);
 
-            questLua[GetLineOf("local enemyQuestType =", questLua)] = string.Format("local enemyQuestType = {0}", questDetails.enemyObjectiveType);
-            questLua[GetLineOf("local vehicleQuestType =", questLua)] = string.Format("local vehicleQuestType = {0}", questDetails.vehicleObjectiveType);
-            questLua[GetLineOf("local hostageQuestType =", questLua)] = string.Format("local hostageQuestType = {0}", questDetails.hostageObjectiveType);
-            questLua[GetLineOf("local animalQuestType =", questLua)] = string.Format("local animalQuestType = {0}", questDetails.animalObjectiveType);
-            questLua[GetLineOf("local walkerQuestType =", questLua)] = string.Format("local walkerQuestType = {0}", questDetails.walkerGearObjectiveType);
-            if (questDetails.activeItems.Count > 0)
-                questLua[GetLineOf("local itemQuestType =", questLua)] = string.Format("local itemQuestType = {0}", questDetails.activeItemObjectiveType);
+            questLua[GetLineOf("local enemyQuestType =", questLua)] = string.Format("local enemyQuestType = {0}", questObjects.enemyObjectiveType);
+            questLua[GetLineOf("local vehicleQuestType =", questLua)] = string.Format("local vehicleQuestType = {0}", questObjects.vehicleObjectiveType);
+            questLua[GetLineOf("local hostageQuestType =", questLua)] = string.Format("local hostageQuestType = {0}", questObjects.hostageObjectiveType);
+            questLua[GetLineOf("local animalQuestType =", questLua)] = string.Format("local animalQuestType = {0}", questObjects.animalObjectiveType);
+            questLua[GetLineOf("local walkerQuestType =", questLua)] = string.Format("local walkerQuestType = {0}", questObjects.walkerGearObjectiveType);
+            if (questObjects.activeItems.Count > 0)
+                questLua[GetLineOf("local itemQuestType =", questLua)] = string.Format("local itemQuestType = {0}", questObjects.activeItemObjectiveType);
             else
                 questLua[GetLineOf("local itemQuestType =", questLua)] = "local itemQuestType = RECOVERED";
 
@@ -137,23 +139,24 @@ namespace SOC.Classes
             questLua[GetLineOf("isQuestZombie =", questLua)] = string.Format("	isQuestZombie = {0},", (EnemyInfo.zombieCount > 0).ToString().ToLower());
             questLua[GetLineOf("isQuestBalaclava =", questLua)] = string.Format("	isQuestBalaclava = {0},", (EnemyInfo.balaCount > 0).ToString().ToLower());
 
-            questLua.InsertRange(GetLineOf("enemyList = {", questLua) + 1, BuildEnemyList(questDetails));
-            questLua.InsertRange(GetLineOf("vehicleList = {", questLua) + 1, BuildVehicleList(questDetails));
-            questLua.InsertRange(GetLineOf("walkerList = {", questLua) + 1, BuildWalkerGearList(questDetails.walkerGears));
-            questLua.InsertRange(GetLineOf("heliList = {", questLua) + 1, BuildHelicopterList(questDetails));
-            questLua.InsertRange(GetLineOf("hostageList = {", questLua) + 1, BuildHostageList(questDetails));
-            questLua.InsertRange(GetLineOf("animalList = {", questLua) + 1, BuildAnimalList(questDetails));
-            questLua.InsertRange(GetLineOf("targetList = {", questLua) + 1, BuildTargetList(questDetails));
-            questLua.InsertRange(GetLineOf("targetItemList = {", questLua) + 1, BuildItemTargetList(questDetails));
-            questLua.InsertRange(GetLineOf("targetAnimalList = {", questLua) + 1, BuildAnimalTargetList(questDetails));
-            questLua.InsertRange(GetLineOf("Hostage Attributes List", questLua) + 1, BuildHostageAttributes(questDetails));
+            questLua.InsertRange(GetLineOf("enemyList = {", questLua) + 1, BuildEnemyList(questObjects));
+            questLua.InsertRange(GetLineOf("vehicleList = {", questLua) + 1, BuildVehicleList(questObjects));
+            questLua.InsertRange(GetLineOf("walkerList = {", questLua) + 1, BuildWalkerGearList(questObjects.walkerGears));
+            questLua.InsertRange(GetLineOf("heliList = {", questLua) + 1, BuildHelicopterList(questObjects));
+            questLua.InsertRange(GetLineOf("hostageList = {", questLua) + 1, BuildHostageList(questObjects));
+            questLua.InsertRange(GetLineOf("animalList = {", questLua) + 1, BuildAnimalList(questObjects));
+            questLua.InsertRange(GetLineOf("targetList = {", questLua) + 1, BuildTargetList(questObjects));
+            questLua.InsertRange(GetLineOf("targetItemList = {", questLua) + 1, BuildItemTargetList(questObjects));
+            questLua.InsertRange(GetLineOf("targetAnimalList = {", questLua) + 1, BuildAnimalTargetList(questObjects));
+            questLua.InsertRange(GetLineOf("Hostage Attributes List", questLua) + 1, BuildHostageAttributes(questObjects));
 
 
-            string LuaScriptPath = string.Format("Sideop_Build//Assets//tpp//pack//mission2//quest//ih//{0}_fpkd//Assets//tpp//level//mission2//quest//ih", definitionDetails.FpkName);
-            string LuaScriptFile = Path.Combine(LuaScriptPath, definitionDetails.FpkName + ".lua");
+            string LuaScriptPath = string.Format("Sideop_Build//Assets//tpp//pack//mission2//quest//ih//{0}_fpkd//Assets//tpp//level//mission2//quest//ih", coreDetails.FpkName);
+            string LuaScriptFile = Path.Combine(LuaScriptPath, coreDetails.FpkName + ".lua");
 
             Directory.CreateDirectory(LuaScriptPath);
             File.WriteAllLines(LuaScriptFile, questLua);
+            */
         }
 
         public static int GetLineOf(string text, List<string> questLua)
@@ -164,7 +167,7 @@ namespace SOC.Classes
 
             return -1;
         }
-
+        /*
         public static List<string> getEnemyBodies(List<Enemy> enemyDetails)
         {
             List<string> bodyList = new List<string>();
@@ -591,6 +594,6 @@ namespace SOC.Classes
 
             return hosAttributeList;
         }
-
+        */
     }
 }

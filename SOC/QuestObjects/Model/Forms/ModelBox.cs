@@ -6,15 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static SOC.QuestComponents.GameObjectInfo;
 
 namespace SOC.QuestObjects.Model
 {
     public class ModelBox : QuestBox
     {
         Model model;
-
-        public string modelAssetsPath = Classes.AssetsBuilder.modelAssetsPath;
+        
         public GroupBox m_groupBox_main;
         public TextBox m_textBox_zcoord;
         public TextBox m_textBox_ycoord;
@@ -41,10 +39,10 @@ namespace SOC.QuestObjects.Model
 
         }
 
-        public override void BuildObject(int width)
+        public override void BuildObject()
         {
 
-            width -= 6;
+            int width = 6;
             int comboboxWidth = width - 100;
             this.m_groupBox_main = new System.Windows.Forms.GroupBox();
             this.m_textBox_zcoord = new System.Windows.Forms.TextBox();
@@ -142,22 +140,22 @@ namespace SOC.QuestObjects.Model
             this.m_textBox_xrot.Name = "m_textBox_xrocoord";
             this.m_textBox_xrot.Size = new System.Drawing.Size(31, 20);
             this.m_textBox_xrot.TabIndex = 5;
-            this.m_textBox_xrot.Text = model.quatCoordinates.xval;
+            this.m_textBox_xrot.Text = model.rotation.xval;
             this.m_textBox_yrot.Location = new System.Drawing.Point(123, 39);
             this.m_textBox_yrot.Name = "m_textBox_yrocoord";
             this.m_textBox_yrot.Size = new System.Drawing.Size(31, 20);
             this.m_textBox_yrot.TabIndex = 6;
-            this.m_textBox_yrot.Text = model.quatCoordinates.yval;
+            this.m_textBox_yrot.Text = model.rotation.yval;
             this.m_textBox_zrot.Location = new System.Drawing.Point(163, 39);
             this.m_textBox_zrot.Name = "m_textBox_zrocoord";
             this.m_textBox_zrot.Size = new System.Drawing.Size(31, 20);
             this.m_textBox_zrot.TabIndex = 7;
-            this.m_textBox_zrot.Text = model.quatCoordinates.zval;
+            this.m_textBox_zrot.Text = model.rotation.zval;
             this.m_textBox_wrot.Location = new System.Drawing.Point(203, 39);
             this.m_textBox_wrot.Name = "m_textBox_wrocoord";
             this.m_textBox_wrot.Size = new System.Drawing.Size(31, 20);
             this.m_textBox_wrot.TabIndex = 8;
-            this.m_textBox_wrot.Text = model.quatCoordinates.wval;
+            this.m_textBox_wrot.Text = model.rotation.wval;
             // 
             // m_label_coord
             // 
@@ -201,7 +199,7 @@ namespace SOC.QuestObjects.Model
         private string[] getPresetModelList()
         {
 
-            string[] FileNames = Directory.GetFiles(modelAssetsPath, "*.fmdl");
+            string[] FileNames = Directory.GetFiles(ModelAssets.modelAssetsPath, "*.fmdl");
             for (int i = 0; i < FileNames.Length; i++)
             {
                 int filenameLength = FileNames[i].Substring(FileNames[i].LastIndexOf('\\') + 1).Length - 1;
@@ -214,7 +212,7 @@ namespace SOC.QuestObjects.Model
         {
             if (!string.IsNullOrEmpty(m_comboBox_preset.Text))
             {
-                string[] geomNames = Directory.GetFiles(modelAssetsPath, "*.geom");
+                string[] geomNames = Directory.GetFiles(ModelAssets.modelAssetsPath, "*.geom");
                 for (int i = 0; i < geomNames.Length; i++)
                 {
                     if (geomNames[i].Contains(m_comboBox_preset.Text + ".geom"))

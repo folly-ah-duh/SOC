@@ -11,10 +11,20 @@ namespace SOC.Classes.Fox2
         private string name, typeName;
         private Fox2EntityClass dataSet, transform, parameters;
 
-        public GameObjectLocator(string _name, Fox2EntityClass _dataSet, Fox2EntityClass _transform, string _typeName, Fox2EntityClass _parameters)
+        public GameObjectLocator(string _name, Fox2EntityClass _dataSet, string _typeName)
         {
             name = _name; typeName = _typeName;
-            dataSet = _dataSet; transform = _transform; parameters = _parameters;
+            dataSet = _dataSet;
+        }
+
+        public void SetTransform(Fox2EntityClass _transform)
+        {
+            transform = _transform;
+        }
+
+        public void SetParameter(Fox2EntityClass _parameters)
+        {
+            parameters = _parameters;
         }
 
         public override string GetFox2Format()

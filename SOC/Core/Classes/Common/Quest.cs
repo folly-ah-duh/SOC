@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using SOC.Classes.Common;
+using SOC.QuestObjects.Common;
 
-namespace SOC.Classes.Quest
+namespace SOC.Classes.Common
 {
     [XmlType("Quest")]
     public class Quest
@@ -15,10 +15,10 @@ namespace SOC.Classes.Quest
 
         public Quest() { }
 
-        public Quest(DefinitionDetails d, QuestEntities q)
+        public Quest(CoreDetails core, List<QuestObjectDetails> questObject)
         {
-            definitionDetails = d;
-            questEntities = q;
+            coreDetails = core;
+            questObjectDetails = questObject;
         }
 
         public void Save(string fileName)
@@ -46,8 +46,8 @@ namespace SOC.Classes.Quest
                 try
                 {
                     Quest loadedQuest = (Quest)deserializer.Deserialize(stream);
-                    questEntities = loadedQuest.questEntities;
-                    definitionDetails = loadedQuest.definitionDetails;
+                    coreDetails = loadedQuest.coreDetails;
+                    questObjectDetails = loadedQuest.questObjectDetails;
                     return true;
                 }
                 catch (InvalidOperationException e)
@@ -59,10 +59,10 @@ namespace SOC.Classes.Quest
             return false;
         }
 
-        public static void ClearQuestFolders(DefinitionDetails definitionDetails)
+        public void ClearQuestFolders()
         {
-            string fpkdir = string.Format("Sideop_Build//Assets//tpp//pack//mission2//quest//ih//{0}_fpk", definitionDetails.FpkName);
-            string fpkddir = string.Format("Sideop_Build//Assets//tpp//pack//mission2//quest//ih//{0}_fpkd", definitionDetails.FpkName);
+            string fpkdir = string.Format("Sideop_Build//Assets//tpp//pack//mission2//quest//ih//{0}_fpk", coreDetails.FpkName);
+            string fpkddir = string.Format("Sideop_Build//Assets//tpp//pack//mission2//quest//ih//{0}_fpkd", coreDetails.FpkName);
 
             if (Directory.Exists(fpkdir))
                 Tools.DeleteDirectory(fpkdir);
@@ -72,10 +72,10 @@ namespace SOC.Classes.Quest
         }
 
         [XmlElement]
-        public DefinitionDetails definitionDetails { get; set; }
+        public CoreDetails coreDetails { get; set; }
 
-        [XmlElement]
-        public QuestEntities questEntities { get; set; }
+        [XmlArray]
+        public List<QuestObjectDetails> questObjectDetails { get; set; }
 
     }
 }

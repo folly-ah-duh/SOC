@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SOC.Forms
@@ -25,7 +21,7 @@ namespace SOC.Forms
         {
             if (m.Msg == 0x020A)
             {
-                
+
                 if (scrollPanel.RectangleToScreen(scrollPanel.ClientRectangle).Contains(Cursor.Position) || canScrollAnywhere)
                 {
                     SendMessage(scrollPanel.Handle, m.Msg, m.WParam.ToInt32(), m.LParam.ToInt32());

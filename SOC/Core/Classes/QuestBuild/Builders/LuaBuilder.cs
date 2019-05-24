@@ -1,10 +1,6 @@
 ﻿using SOC.Classes.Common;
-using SOC.QuestComponents;
 using SOC.QuestObjects.Common;
-using SOC.UI;
-using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Reflection;
 

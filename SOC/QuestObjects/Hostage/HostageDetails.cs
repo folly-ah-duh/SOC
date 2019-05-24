@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SOC.Classes.Common;
-using System.Xml.Serialization;
+﻿using SOC.Classes.Common;
 using SOC.QuestObjects.Common;
+using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace SOC.QuestObjects.Hostage
 {
@@ -16,7 +12,7 @@ namespace SOC.QuestObjects.Hostage
 
         public HostageDetails(List<Hostage> hostageList, HostageMetadata hostageMeta)
         {
-            Hostages = hostageList;  hostageMetadata = hostageMeta;
+            Hostages = hostageList; hostageMetadata = hostageMeta;
         }
 
         [XmlArray]
@@ -88,7 +84,8 @@ namespace SOC.QuestObjects.Hostage
     }
 
 
-    class HostageMetadata {
+    class HostageMetadata
+    {
 
         public HostageMetadata() { }
 

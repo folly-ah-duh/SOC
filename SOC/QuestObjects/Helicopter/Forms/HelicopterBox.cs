@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using SOC.QuestComponents;
+﻿using SOC.Classes.Common;
 using SOC.Forms;
-using SOC.Classes.Common;
+using SOC.QuestComponents;
+using System;
+using System.Windows.Forms;
 
 namespace SOC.QuestObjects.Helicopter
 {
@@ -14,7 +10,7 @@ namespace SOC.QuestObjects.Helicopter
     {
         Helicopter Heli;
         CP enemyCP;
-        string[] frtRouteNames; 
+        string[] frtRouteNames;
 
         public GroupBox He_groupBox_main;
         public CheckBox He_checkBox_spawn;
@@ -180,7 +176,8 @@ namespace SOC.QuestObjects.Helicopter
                 He_label_class.Enabled = true;
                 He_label_route.Enabled = true;
                 He_label_target.Enabled = true;
-            } else
+            }
+            else
             {
                 He_checkBox_target.Enabled = false;
                 He_comboBox_class.Enabled = false;

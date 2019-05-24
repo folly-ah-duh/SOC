@@ -56,7 +56,7 @@
             this.comboBoxReward = new System.Windows.Forms.ComboBox();
             this.comboBoxLoadArea = new System.Windows.Forms.ComboBox();
             this.groupBoxLocations = new System.Windows.Forms.GroupBox();
-            this.panelLocationalDataStubs = new System.Windows.Forms.Panel();
+            this.flowPanelLocationalStubs = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBoxFlavor = new System.Windows.Forms.GroupBox();
             this.buttonAddNotif = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
@@ -65,9 +65,11 @@
             this.label7 = new System.Windows.Forms.Label();
             this.textBoxQuestDesc = new System.Windows.Forms.TextBox();
             this.textBoxQuestTitle = new System.Windows.Forms.TextBox();
+            this.labelFlowSize = new System.Windows.Forms.Label();
             this.panelSetup.SuspendLayout();
             this.groupBoxSetup.SuspendLayout();
             this.groupBoxLocations.SuspendLayout();
+            this.flowPanelLocationalStubs.SuspendLayout();
             this.groupBoxFlavor.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -404,7 +406,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxLocations.BackColor = System.Drawing.Color.Transparent;
-            this.groupBoxLocations.Controls.Add(this.panelLocationalDataStubs);
+            this.groupBoxLocations.Controls.Add(this.flowPanelLocationalStubs);
             this.groupBoxLocations.Location = new System.Drawing.Point(523, 3);
             this.groupBoxLocations.Name = "groupBoxLocations";
             this.groupBoxLocations.Size = new System.Drawing.Size(554, 444);
@@ -412,12 +414,20 @@
             this.groupBoxLocations.TabStop = false;
             this.groupBoxLocations.Text = "Locational Data";
             // 
-            // panelLocationalDataStubs
+            // flowPanelLocationalStubs
             // 
-            this.panelLocationalDataStubs.Location = new System.Drawing.Point(6, 19);
-            this.panelLocationalDataStubs.Name = "panelLocationalDataStubs";
-            this.panelLocationalDataStubs.Size = new System.Drawing.Size(542, 419);
-            this.panelLocationalDataStubs.TabIndex = 0;
+            this.flowPanelLocationalStubs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowPanelLocationalStubs.AutoScroll = true;
+            this.flowPanelLocationalStubs.Controls.Add(this.labelFlowSize);
+            this.flowPanelLocationalStubs.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowPanelLocationalStubs.Location = new System.Drawing.Point(3, 16);
+            this.flowPanelLocationalStubs.Name = "flowPanelLocationalStubs";
+            this.flowPanelLocationalStubs.Size = new System.Drawing.Size(548, 425);
+            this.flowPanelLocationalStubs.TabIndex = 0;
+            this.flowPanelLocationalStubs.WrapContents = false;
+            this.flowPanelLocationalStubs.Layout += new System.Windows.Forms.LayoutEventHandler(this.flowPanelLocationalStubs_Layout);
             // 
             // groupBoxFlavor
             // 
@@ -443,7 +453,7 @@
             this.buttonAddNotif.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonAddNotif.Location = new System.Drawing.Point(419, 206);
             this.buttonAddNotif.Name = "buttonAddNotif";
-            this.buttonAddNotif.Size = new System.Drawing.Size(65, 23);
+            this.buttonAddNotif.Size = new System.Drawing.Size(65, 21);
             this.buttonAddNotif.TabIndex = 16;
             this.buttonAddNotif.Text = "Custom...";
             this.buttonAddNotif.UseVisualStyleBackColor = true;
@@ -509,12 +519,19 @@
             this.textBoxQuestTitle.Size = new System.Drawing.Size(502, 20);
             this.textBoxQuestTitle.TabIndex = 13;
             // 
+            // labelFlowSize
+            // 
+            this.labelFlowSize.Location = new System.Drawing.Point(0, 0);
+            this.labelFlowSize.Margin = new System.Windows.Forms.Padding(0);
+            this.labelFlowSize.Name = "labelFlowSize";
+            this.labelFlowSize.Size = new System.Drawing.Size(548, 3);
+            this.labelFlowSize.TabIndex = 0;
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.AutoSize = true;
             this.Controls.Add(this.panelSetup);
             this.Name = "Setup";
             this.Size = new System.Drawing.Size(1080, 450);
@@ -522,6 +539,7 @@
             this.groupBoxSetup.ResumeLayout(false);
             this.groupBoxSetup.PerformLayout();
             this.groupBoxLocations.ResumeLayout(false);
+            this.flowPanelLocationalStubs.ResumeLayout(false);
             this.groupBoxFlavor.ResumeLayout(false);
             this.groupBoxFlavor.PerformLayout();
             this.ResumeLayout(false);
@@ -566,6 +584,7 @@
         private System.Windows.Forms.Label label20;
         public System.Windows.Forms.ComboBox comboBoxRoute;
         private System.Windows.Forms.Label label15;
-        public System.Windows.Forms.Panel panelLocationalDataStubs;
+        private System.Windows.Forms.FlowLayoutPanel flowPanelLocationalStubs;
+        private System.Windows.Forms.Label labelFlowSize;
     }
 }

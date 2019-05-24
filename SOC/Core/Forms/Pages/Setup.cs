@@ -1,38 +1,38 @@
 ﻿using SOC.Classes;
+using SOC.QuestObjects.Common;
+using SOC.Core.Classes.Route;
 using System;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using static SOC.QuestComponents.EnemyInfo;
-using System.IO;
+using System.Collections.Generic;
+using SOC.Classes.Common;
 
 namespace SOC.UI
 {
     public partial class Setup : UserControl
     {
-        
-
-        Forms.PanelScroll CoordsScrolling;
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern Int32 SendMessage(IntPtr hWnd, int msg, int wParam, [MarshalAs(UnmanagedType.LPWStr)]string lParam);
         public int locationID = -1;
-        string[] afghCP = new string[AfghCPs.Length];
-        string[] mafrCP = new string[MafrCPs.Length];
-        string[] mtbsCP = new string[1];
-        Tuple<Label, TextBox>[] LocationBoxes;
+        string[] afghCPNames = GetCPNames(AfghCPs);
+        string[] mafrCPNames = GetCPNames(MafrCPs);
+        string[] mtbsCPNames = GetCPNames(MtbsCP);
+        ManagerMaster managerMaster;
+        RouteManager routeManager = new RouteManager();
 
-        public Setup()
+        public Setup(ManagerMaster manMaster)
         {
             InitializeComponent();
+            managerMaster = manMaster;
+            Dock = DockStyle.Fill;
             SendMessage(textBoxQuestNum.Handle, 0x1501, 1, "30103");
             SendMessage(textBoxFPKName.Handle, 0x1501, 1, "Example_Quest_Name");
             SendMessage(textBoxQuestTitle.Handle, 0x1501, 1, "Example Quest Title Text");
 
-            for (int i = 0; i < AfghCPs.Length; i++)
-                afghCP[i] = AfghCPs[i].CPname;
-            for (int i = 0; i < MafrCPs.Length; i++)
-                mafrCP[i] = MafrCPs[i].CPname;
-            mtbsCP[0] = MtbsCP.CPname;
+            flowPanelLocationalStubs.Controls.AddRange(managerMaster.GetLocationalStubs().ToArray());
 
             refreshNotifsList();
             refreshRoutesList();
@@ -40,51 +40,15 @@ namespace SOC.UI
 
         public void refreshNotifsList()
         {
-            string[] notifications = UpdateNotifsManager.getDispNotifs();
-            
-            if (FilesUpdated(notifications, comboBoxProgressNotifs))
-            {
-                comboBoxProgressNotifs.Items.Clear();
-                comboBoxProgressNotifs.Items.AddRange(UpdateNotifsManager.getDispNotifs());
-            }
+            UpdateComboBox(comboBoxProgressNotifs, UpdateNotifsManager.getDispNotifs());
         }
+
         public void refreshRoutesList()
         {
-            string routeDir = QuestObjects.Route.RouteAssets.routeAssetsPath;
+            List<string> routesList = routeManager.GetRouteFileNameList();
+            routesList.Insert(0, "NONE");
 
-
-            string[] RouteFiles = Directory.GetFiles(routeDir, "*.frt");
-            for (int i = 0; i < RouteFiles.Length; i++)
-            {
-                int filenameLength = RouteFiles[i].Substring(RouteFiles[i].LastIndexOf('\\') + 1).Length - 1;
-                RouteFiles[i] = RouteFiles[i].Substring(RouteFiles[i].LastIndexOf('\\') + 1, filenameLength - 3);
-            }
-
-            string[] RouteFilesAndNone = new string[RouteFiles.Length + 1];
-            RouteFilesAndNone[0] = "NONE"; RouteFiles.CopyTo(RouteFilesAndNone, 1);
-            if (FilesUpdated(RouteFilesAndNone, comboBoxRoute))
-            {
-                comboBoxRoute.Items.Clear();
-                comboBoxRoute.Items.AddRange(RouteFilesAndNone);
-                comboBoxRoute.SelectedIndex = 0;
-            }
-        }
-
-        public bool FilesUpdated(string[] newList, ComboBox comboBox)
-        {
-
-            if (newList.Length == comboBox.Items.Count)
-                for (int i = 0; i < newList.Length; i++)
-                {
-                    if (!newList[i].Equals(comboBox.Items[i]))
-                    {
-                        return true;
-                    }
-                }
-            else
-                return true;
-
-            return false;
+            UpdateComboBox(comboBoxRoute, routesList);
         }
 
         private void disableRegionInput()
@@ -92,15 +56,43 @@ namespace SOC.UI
             comboBoxRadius.Enabled = false; comboBoxCP.Enabled = false;
             textBoxXCoord.Enabled = false; textBoxYCoord.Enabled = false; textBoxZCoord.Enabled = false;
         }
+
         private void enableRegionInput()
         {
             comboBoxLoadArea.Enabled = true; comboBoxRadius.Enabled = true; comboBoxCP.Enabled = true;
             textBoxXCoord.Enabled = true; textBoxYCoord.Enabled = true; textBoxZCoord.Enabled = true;
         }
 
-        private void comboBoxRegion_SelectedIndexChanged(object sender, EventArgs e) // todo figure out why this was missing
+        private void comboBoxRegion_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            comboBoxLoadArea.Items.Clear();
+            comboBoxCP.Items.Clear();
+            enableRegionInput();
+            switch (comboBoxRegion.Text)
+            {
+                case "Afghanistan":
+                    locationID = 10;
+                    comboBoxLoadArea.Items.AddRange(LoadAreas.afgh);
+                    comboBoxCP.Items.AddRange(GetCPNames(AfghCPs));
+                    managerMaster.EnableVehicleBox();
+                    break;
+                case "Central Africa":
+                    locationID = 20;
+                    comboBoxLoadArea.Items.AddRange(LoadAreas.mafr);
+                    comboBoxCP.Items.AddRange(GetCPNames(MafrCPs));
+                    managerMaster.EnableVehicleBox();
+                    break;
+                case "Mother Base":
+                    locationID = 50;
+                    comboBoxLoadArea.Items.AddRange(LoadAreas.mtbs);
+                    comboBoxCP.Items.AddRange(GetCPNames(MtbsCP));
+                    managerMaster.DisableVehicleBox();
+                    comboBoxRadius.Text = "1";
+                    disableRegionInput();
+                    break;
+            }
+            comboBoxCP.SelectedIndex = 0;
+            comboBoxLoadArea.SelectedIndex = 0;
         }
 
         private void buttonAddNotif_Click(object sender, EventArgs e)
@@ -108,15 +100,6 @@ namespace SOC.UI
             formCustomProgressLang customLang = new formCustomProgressLang();
             customLang.ShowDialog();
             refreshNotifsList();
-        }
-
-        public void EnableScrolling()
-        {
-            Application.AddMessageFilter(CoordsScrolling);
-        }
-        public void DisableScrolling()
-        {
-            Application.RemoveMessageFilter(CoordsScrolling);
         }
 
         private void textBoxQuestNum_Leave(object sender, EventArgs e)
@@ -140,7 +123,7 @@ namespace SOC.UI
 
         private void textBoxFPKName_Leave(object sender, EventArgs e)
         {
-            string invalidchars = "[\\/\\?\\\\\\|\\*\\:\\\"\\<\\> ]";
+            string invalidchars = @"[\/\?\\\|\*\:\""\<\> ]";
             string replacement = "_";
             Regex fileNameFixer = new Regex(invalidchars);
             textBoxFPKName.Text = fileNameFixer.Replace(textBoxFPKName.Text, replacement);
@@ -149,6 +132,23 @@ namespace SOC.UI
         private void comboBoxRoute_DropDown(object sender, EventArgs e)
         {
             refreshRoutesList();
+        }
+
+        private void flowPanelLocationalStubs_Layout(object sender, LayoutEventArgs e) // necessary jank for flowLayoutPanels: https://docs.microsoft.com/en-us/dotnet/framework/winforms/controls/how-to-anchor-and-dock-child-controls-in-a-flowlayoutpanel-control
+        {
+            labelFlowSize.Width = flowPanelLocationalStubs.Width;
+        }
+        
+        public void UpdateComboBox(ComboBox box, List<string> itemList)
+        {
+            int currentIndex = box.SelectedIndex;
+
+            if (currentIndex >= itemList.Count)
+                currentIndex = 0;
+
+            box.Items.Clear();
+            box.Items.AddRange(itemList.ToArray());
+            box.SelectedIndex = currentIndex;
         }
     }
 }

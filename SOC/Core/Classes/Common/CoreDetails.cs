@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace SOC.Classes.Common
 {
@@ -13,14 +8,14 @@ namespace SOC.Classes.Common
 
         public CoreDetails() { }
 
-        public CoreDetails(string fpk, string quest, int locID, string loada, Coordinates c, string rad, string cat, string rew, int prog, string cpnme, string qtitle, string qdesc, string hcoord, string walkercoord, string vehcoord, string anicoord, string itcoord, string acitcoord, string mdlcoord, string route)
+        public CoreDetails(string fpk, string quest, int locID, string loada, Coordinates c, string rad, string cat, string rew, int prog, string cpnme, string qtitle, string qdesc, string route)
         {
             FpkName = fpk; QuestNum = quest; QuestTitle = qtitle; QuestDesc = qdesc;
 
             locationID = locID; loadArea = loada; coords = c; radius = rad; CPName = cpnme;
 
             category = cat; progNotif = prog; reward = rew;
-            
+
             routeName = route;
         }
 

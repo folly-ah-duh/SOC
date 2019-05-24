@@ -1,28 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using SOC.Core.Classes.InfiniteHeaven;
 using SOC.QuestObjects.Common;
+using System;
+using System.Windows.Forms;
 
 namespace SOC.Forms.Pages
 {
     public partial class LocationalDataStub : UserControl
     {
-        public LocationalDataStub(QuestObjectManager questObjectManager)
+        private static string locationWrittenConvention = "{pos={X, Y, Z},rotY=Y-Axis Rotation,},";
+        private string questObjectTitle;
+
+        public LocationalDataStub(string objectTitle)
         {
             InitializeComponent();
-            // add object nametag to the label
-            // add any existing object locations to the textbox
+            Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            questObjectTitle = objectTitle;
+            labelStub.Text = $"{questObjectTitle}: {locationWrittenConvention}";
         }
 
-        public string GetBoxText() // give textbox text for a method to parse into coordinate/rotation pairs
+        internal void DisableStub(string reason)
         {
-            return "";
+            textBoxCoords.Enabled = false;
+            textBoxCoords.Text = "";
+            textBoxCoords.BackColor = System.Drawing.Color.DarkGray;
+            labelStub.ForeColor = System.Drawing.Color.Goldenrod;
+            labelStub.Text = $"{questObjectTitle}: {locationWrittenConvention} [{reason}]";
+        }
+
+        internal void EnableStub()
+        {
+            textBoxCoords.Enabled = true;
+            textBoxCoords.BackColor = System.Drawing.Color.Silver;
+            labelStub.ForeColor = System.Drawing.Color.Black;
+            labelStub.Text = $"{questObjectTitle}: {locationWrittenConvention}";
+        }
+
+        public IHLogPositions GetStubLocations()
+        {
+            return new IHLogPositions(textBoxCoords.Text);
+        }
+
+        public void SetStubText(IHLogPositions positions)
+        {
+            textBoxCoords.Text = positions.GetPositionsFormatted();
         }
     }
 }

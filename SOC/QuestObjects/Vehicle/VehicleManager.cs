@@ -1,14 +1,17 @@
 ﻿using SOC.Classes.Fox2;
+using SOC.Forms.Pages;
 using SOC.QuestObjects.Common;
 using System;
 using System.Collections.Generic;
-using SOC.Forms.Pages;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace SOC.QuestObjects.Hostage
+namespace SOC.QuestObjects.Vehicle
 {
-    class HostageManager : LocationalQuestObjectManager
+    class VehicleManager : LocationalQuestObjectManager
     {
-        public HostageManager() : base(new LocationalDataStub("Prisoner Locations"))
+        public VehicleManager() : base(new LocationalDataStub("Heavy Vehicle Locations"))
         {
         }
 
@@ -16,5 +19,6 @@ namespace SOC.QuestObjects.Hostage
         {
             throw new NotImplementedException();
         }
+
     }
 }

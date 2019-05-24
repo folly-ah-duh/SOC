@@ -42,7 +42,7 @@
             // 
             // groupExistingEneDet
             // 
-            this.groupExistingEneDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.groupExistingEneDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupExistingEneDet.Controls.Add(this.panelCPEnemyDet);
             this.groupExistingEneDet.Location = new System.Drawing.Point(0, 0);
@@ -54,8 +54,8 @@
             // 
             // panelCPEnemyDet
             // 
-            this.panelCPEnemyDet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.panelCPEnemyDet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelCPEnemyDet.AutoScroll = true;
             this.panelCPEnemyDet.Controls.Add(this.label_eneObjType2);
@@ -81,7 +81,7 @@
             // 
             // comboBox_eneObjType2
             // 
-            this.comboBox_eneObjType2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.comboBox_eneObjType2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox_eneObjType2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_eneObjType2.Enabled = false;
@@ -107,7 +107,7 @@
             // 
             // comboBox_subtype2
             // 
-            this.comboBox_subtype2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.comboBox_subtype2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox_subtype2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_subtype2.Enabled = false;

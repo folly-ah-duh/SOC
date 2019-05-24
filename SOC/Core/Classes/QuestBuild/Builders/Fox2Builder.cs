@@ -1,8 +1,5 @@
-﻿using SOC.QuestComponents;
-using SOC.QuestObjects.Common;
-using SOC.UI;
+﻿using SOC.QuestObjects.Common;
 using System.Collections.Generic;
-using System.IO;
 
 namespace SOC.Classes.Fox2
 {

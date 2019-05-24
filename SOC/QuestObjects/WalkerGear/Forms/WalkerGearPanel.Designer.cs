@@ -38,7 +38,7 @@
             // 
             // groupWalkerDet
             // 
-            this.groupWalkerDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.groupWalkerDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupWalkerDet.Controls.Add(this.panelWalkerDet);
             this.groupWalkerDet.Location = new System.Drawing.Point(0, 0);
@@ -50,8 +50,8 @@
             // 
             // panelWalkerDet
             // 
-            this.panelWalkerDet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.panelWalkerDet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelWalkerDet.AutoScroll = true;
             this.panelWalkerDet.Controls.Add(this.label_WalkerObjType);
@@ -72,7 +72,7 @@
             // 
             // comboBox_WalkerObjType
             // 
-            this.comboBox_WalkerObjType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.comboBox_WalkerObjType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox_WalkerObjType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_WalkerObjType.FormattingEnabled = true;

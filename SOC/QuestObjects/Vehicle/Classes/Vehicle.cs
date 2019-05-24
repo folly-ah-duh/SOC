@@ -1,9 +1,4 @@
 ﻿using SOC.Classes.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace SOC.QuestObjects.Vehicle
@@ -46,7 +41,7 @@ namespace SOC.QuestObjects.Vehicle
 
         [XmlElement]
         public Coordinates coordinates { get; set; } = new Coordinates("0", "0", "0");
-        
+
         [XmlElement]
         public Rotation rotation { get; set; } = new Rotation("0");
     }

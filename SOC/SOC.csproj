@@ -101,6 +101,7 @@
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppHostage2Parameter.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\Transform.cs" />
     <Compile Include="Core\Classes\Fox2\Fox2EntityClass.cs" />
+    <Compile Include="Core\Classes\InfiniteHeaven\Position.cs" />
     <Compile Include="Core\Classes\QuestBuild\QuestBuildManager.cs" />
     <Compile Include="Core\Classes\Common\LoadAreas.cs" />
     <Compile Include="Core\Classes\Common\NPCMtbsInfo.cs" />
@@ -113,11 +114,11 @@
     <Compile Include="Core\Classes\LangTool\LangEntry.cs" />
     <Compile Include="Core\Classes\LangTool\LangFile.cs" />
     <Compile Include="Core\Classes\Common\Quest.cs" />
+    <Compile Include="QuestObjects\Common\LocationalQuestObjectManager.cs" />
     <Compile Include="QuestObjects\Common\QuestObjectDetails.cs" />
     <Compile Include="QuestObjects\Hostage\HostageDetails.cs" />
     <Compile Include="QuestObjects\Hostage\Classes\HostageDetailGUI.cs" />
-    <Compile Include="QuestObjects\Hostage\Classes\HostageStubGUI.cs" />
-    <Compile Include="QuestObjects\Route\RouteManager.cs" />
+    <Compile Include="Core\Classes\Route\RouteManager.cs" />
     <Compile Include="Core\Classes\Common\Coordinates.cs" />
     <Compile Include="Core\Classes\QuestBuild\UpdateNotifsManager.cs" />
     <Compile Include="Core\Classes\Common\XmlCompiler.cs" />
@@ -162,7 +163,7 @@
     <Compile Include="QuestObjects\Animal\Forms\AnimalPanel.Designer.cs">
       <DependentUpon>AnimalPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="QuestObjects\Common\ManagerMasterList.cs" />
+    <Compile Include="QuestObjects\Common\ManagerMaster.cs" />
     <Compile Include="QuestObjects\Common\QuestObjectManager.cs" />
     <Compile Include="QuestObjects\Enemy\Classes\EnemyAssets.cs" />
     <Compile Include="QuestObjects\Enemy\Forms\EnemyBox.cs" />
@@ -208,8 +209,8 @@
     <Compile Include="QuestObjects\Model\Forms\ModelPanel.Designer.cs">
       <DependentUpon>ModelPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="QuestObjects\Route\Classes\Route.cs" />
-    <Compile Include="QuestObjects\Route\Classes\RouteAssets.cs" />
+    <Compile Include="Core\Classes\Route\Route.cs" />
+    <Compile Include="Core\Classes\Route\RouteAssets.cs" />
     <Compile Include="QuestObjects\Vehicle\Classes\VehicleAssets.cs" />
     <Compile Include="QuestObjects\Vehicle\Classes\VehicleNames.cs" />
     <Compile Include="QuestObjects\Vehicle\Forms\VehicleBox.cs" />
@@ -219,6 +220,7 @@
     <Compile Include="QuestObjects\Vehicle\Forms\VehiclePanel.Designer.cs">
       <DependentUpon>VehiclePanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuestObjects\Vehicle\VehicleManager.cs" />
     <Compile Include="QuestObjects\WalkerGear\Forms\WalkerGearBox.cs" />
     <Compile Include="Core\Forms\Pages\Setup.cs">
       <SubType>UserControl</SubType>

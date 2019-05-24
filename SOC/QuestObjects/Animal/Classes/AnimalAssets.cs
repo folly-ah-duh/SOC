@@ -8,7 +8,7 @@ namespace SOC.QuestObjects.Animal.Classes
     static class AnimalAssets
     {
         static string animalAssetsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//AnimalAssets");
-        
+
         public static void BuildAssets(List<Animal> animalList, string FPKPath, string FPKDPath)
         {
 

@@ -1,12 +1,12 @@
 ﻿using System.IO;
 using System.Reflection;
 
-namespace SOC.QuestObjects.Route
+namespace SOC.Core.Classes.Route
 {
     static class RouteAssets
     {
         public static string routeAssetsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//RouteAssets");
-        
+
         public static void BuildRouteAssets(string FPKPath, string routeName)
         {
             string FPKPathAssets = FPKPath + "//Assets";

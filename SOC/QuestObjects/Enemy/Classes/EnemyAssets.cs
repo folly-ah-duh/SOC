@@ -1,5 +1,5 @@
-﻿using System.IO;
-using SOC.Classes.Common;
+﻿using SOC.Classes.Common;
+using System.IO;
 using System.Reflection;
 
 namespace SOC.QuestObjects.Enemy.Classes

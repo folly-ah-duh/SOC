@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SOC.QuestComponents
+﻿namespace SOC.QuestComponents
 {
     public static class AnimalInfo
     {
@@ -34,7 +28,8 @@ namespace SOC.QuestComponents
 
         public static string getAnimalCategory(string animalName)
         {
-            switch(animalName) {
+            switch (animalName)
+            {
                 case "Sheep":
                 case "Cashmere_Goat":
                 case "Boer_Goat":
@@ -53,12 +48,12 @@ namespace SOC.QuestComponents
 
         public static string getAnimalType(string animalName)
         {
-            switch(animalName)
+            switch (animalName)
             {
                 case "Sheep":
                 case "Cashmere_Goat":
                     return "TppGoat";
-                    
+
                 case "Boer_Goat":
                 case "Nubian":
                     return "TppNubian";
@@ -68,14 +63,14 @@ namespace SOC.QuestComponents
                 case "Zebra":
                     return "TppZebra";
 
-                
+
                 case "Wolf":
                     return "TppWolf";
 
                 case "African_Wild_Dog":
                 case "Jackal":
                     return "TppJackal";
-                
+
                 case "Bear":
                     return "TppBear";
             }

@@ -8,7 +8,7 @@ namespace SOC.QuestObjects.Model
     public class ModelBox : QuestBox
     {
         Model model;
-        
+
         public GroupBox m_groupBox_main;
         public TextBox m_textBox_zcoord;
         public TextBox m_textBox_ycoord;

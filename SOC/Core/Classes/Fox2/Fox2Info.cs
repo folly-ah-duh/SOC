@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace SOC.Classes.Fox2
+﻿namespace SOC.Classes.Fox2
 {
     public static class Fox2Info
     {
@@ -28,10 +26,10 @@ namespace SOC.Classes.Fox2
         TexturePackLoadConditioner,
         TppPlacedLocatorParameter,
         TppBearParameter,
-        TppBearLocatorParameter, 
+        TppBearLocatorParameter,
         TppWolfParameter,
-        TppWolfLocatorParameter, 
-        TppAnimalParameter, 
+        TppWolfLocatorParameter,
+        TppAnimalParameter,
         TppAnimalLocatorParameter,
         TppWalkerGear2Parameter,
         TppWalkerGear2LocatorParameter

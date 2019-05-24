@@ -1,26 +1,38 @@
-﻿using System;
+﻿using SOC.Classes.GzsTool;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using SOC.Classes.GzsTool;
 using static FoxLib.Tpp.RouteSet;
 
-namespace SOC.QuestObjects.Route
+namespace SOC.Core.Classes.Route
 {
     class RouteManager
     {
-
         public static string RouteNameDictionaryFile = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets\\ToolAssets\\route_name_dictionary.txt");
+
         public static Dictionary<uint, string> RouteNameHashDictionary = new Dictionary<uint, string>();
-        
-        public static string GetRouteFileName(string frtName)
+
+        public string GetRouteFileName(string frtName)
         {
             return Path.Combine(RouteAssets.routeAssetsPath, frtName) + ".frt";
         }
 
-        public static string[] GetRouteNames(string frtName)
+        public List<string> GetRouteFileNameList()
+        {
+            List<string> routeNameList = new List<string>();
+
+            foreach (string filename in Directory.GetFiles(RouteAssets.routeAssetsPath, "*.frt"))
+            {
+                routeNameList.Add(Path.GetFileNameWithoutExtension(filename));
+            }
+
+            return routeNameList;
+        }
+
+        public string[] GetRouteNames(string frtName)
         {
             string frtPath = GetRouteFileName(frtName);
             uint[] frtUintNames = GetUintNames(frtPath);
@@ -45,7 +57,7 @@ namespace SOC.QuestObjects.Route
             return routeStringNames.ToArray();
         }
 
-        public static uint[] GetUintNames(string frtPath)
+        private static uint[] GetUintNames(string frtPath)
         {
             RouteSet frtRoutes;
             uint[] routeNames = new uint[0];
@@ -60,7 +72,7 @@ namespace SOC.QuestObjects.Route
                 }
 
                 IEnumerable<uint> routes = from route in frtRoutes.Routes
-                                                 select route.Name;
+                                           select route.Name;
 
                 routeNames = routes.ToArray();
             }

@@ -1,7 +1,7 @@
-﻿using System.IO;
+﻿using SOC.Classes.Common;
 using SOC.Classes.LangTool;
 using System.Collections.Generic;
-using SOC.Classes.Common;
+using System.IO;
 
 namespace SOC.Classes
 {
@@ -11,8 +11,8 @@ namespace SOC.Classes
 
         public static void WriteQuestLangs(CoreDetails coreDetails)
         {
-            string[] LangIdList = UpdateNotifsManager.getLangIds();
-            string[] DisplayList = UpdateNotifsManager.getDispNotifs();
+            List<string> LangIdList = UpdateNotifsManager.getLangIds();
+            List<string> DisplayList = UpdateNotifsManager.getDispNotifs();
             int notificationIndex = coreDetails.progNotif;
 
             List<LangEntry> langList = new List<LangEntry>();
@@ -30,7 +30,7 @@ namespace SOC.Classes
                 string lngPath = string.Format("Sideop_Build//Assets//tpp/pack//ui//lang//lang_default_data_{0}_fpk//Assets//tpp//lang//ui", language);
                 string lngFile = Path.Combine(lngPath, string.Format(@"ih_quest_q{0}.{1}.lng2", coreDetails.QuestNum, language));
                 Directory.CreateDirectory(lngPath);
-                
+
                 using (FileStream outputStream = new FileStream(lngFile, FileMode.Create))
                 {
                     questLng.Write(outputStream);

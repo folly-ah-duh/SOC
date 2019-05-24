@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SOC.QuestObjects.Hostage
@@ -34,7 +31,7 @@ namespace SOC.QuestObjects.Hostage
 
         public void AddHostageBoxes(List<Hostage> hostages)
         {
-            foreach(Hostage h in hostages)
+            foreach (Hostage h in hostages)
             {
                 HostageBox hBox = new HostageBox(h);
                 hBox.BuildObject();
@@ -52,7 +49,7 @@ namespace SOC.QuestObjects.Hostage
 
         public void ClearAllHostageBoxes()
         {
-            foreach(HostageBox hbox in hostageBoxes)
+            foreach (HostageBox hbox in hostageBoxes)
             {
                 hostagePanel.Controls.Remove(hbox.getGroupBoxMain());
             }

@@ -42,7 +42,7 @@
             // 
             // groupNewEneDet
             // 
-            this.groupNewEneDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.groupNewEneDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupNewEneDet.Controls.Add(this.panelQuestEnemyDet);
             this.groupNewEneDet.Location = new System.Drawing.Point(0, 0);
@@ -54,8 +54,8 @@
             // 
             // panelQuestEnemyDet
             // 
-            this.panelQuestEnemyDet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.panelQuestEnemyDet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelQuestEnemyDet.AutoScroll = true;
             this.panelQuestEnemyDet.Controls.Add(this.label_eneObjType1);
@@ -102,7 +102,7 @@
             // 
             // comboBox_eneObjType1
             // 
-            this.comboBox_eneObjType1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.comboBox_eneObjType1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox_eneObjType1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_eneObjType1.FormattingEnabled = true;
@@ -126,7 +126,7 @@
             // 
             // comboBox_subtype
             // 
-            this.comboBox_subtype.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.comboBox_subtype.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox_subtype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_subtype.FormattingEnabled = true;

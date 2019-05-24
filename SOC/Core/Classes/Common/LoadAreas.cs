@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SOC.Classes.Common
+﻿namespace SOC.Classes.Common
 {
     static class LoadAreas
     {
-        public static string[] afghLoadAreas = {
+        public static string[] afgh = {
             "tent",
             "field",
             "ruins",
@@ -20,7 +14,7 @@ namespace SOC.Classes.Common
             "citadel"
         };
 
-        public static string[] mafrLoadAreas = {
+        public static string[] mafr = {
             "outland",
             "pfCamp",
             "savannah",
@@ -30,7 +24,7 @@ namespace SOC.Classes.Common
             "lab"
         };
 
-        public static string[] mtbsLoadAreas =  {
+        public static string[] mtbs =  {
             "MtbsCommand",
             "MtbsCombat",
             "MtbsDevelop",

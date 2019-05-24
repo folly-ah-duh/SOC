@@ -35,13 +35,14 @@
             // 
             // labelWaiting
             // 
-            this.labelWaiting.AutoSize = true;
+            this.labelWaiting.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelWaiting.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelWaiting.Location = new System.Drawing.Point(500, 200);
+            this.labelWaiting.Location = new System.Drawing.Point(0, 0);
             this.labelWaiting.Name = "labelWaiting";
-            this.labelWaiting.Size = new System.Drawing.Size(179, 25);
+            this.labelWaiting.Size = new System.Drawing.Size(1160, 450);
             this.labelWaiting.TabIndex = 0;
             this.labelWaiting.Text = "Building Details...";
+            this.labelWaiting.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panelWaiting
             // 
@@ -62,7 +63,6 @@
             this.Name = "Waiting";
             this.Size = new System.Drawing.Size(1160, 450);
             this.panelWaiting.ResumeLayout(false);
-            this.panelWaiting.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -1,9 +1,6 @@
 ﻿using SOC.Classes.Fox2;
-using System;
+using SOC.Forms.Pages;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SOC.QuestObjects.Common
 {

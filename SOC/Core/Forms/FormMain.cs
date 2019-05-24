@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Windows.Forms;
-using System.Text.RegularExpressions;
-using SOC.Classes;
-using SOC.QuestComponents;
-using System.Reflection;
-using System.IO;
-using System.Diagnostics;
-using SOC.Classes.Common;
+﻿using SOC.Classes.Common;
 using SOC.QuestObjects.Common;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace SOC.UI
 {
     public partial class FormMain : Form
     {
-        private Setup setupPage = new Setup();
+        ManagerMaster managerMaster = new ManagerMaster();
+
+        private Setup setupPage;
         private Details detailPage = new Details();
         private List<GroupBox> detailPageBoxes = new List<GroupBox>();
         private int panelNum = 0;
@@ -27,12 +22,10 @@ namespace SOC.UI
 
         public FormMain()
         {
+            setupPage = new Setup(managerMaster);
+
             InitializeComponent();
-            //setupPage.ShiftGroups(Height - 100, Width - 42);
-            //detailPage.ShiftGroups(Height - 100, Width - 42);
             GoToPanel();
-            Forms.PanelScroll CoordsScrolling = new Forms.PanelScroll(setupPage.panelLocationalDataStubs, false);
-            Application.AddMessageFilter(CoordsScrolling);
             buttonBack.Visible = false;
         }
 
@@ -97,16 +90,14 @@ namespace SOC.UI
             buttonBack.Visible = false;
             panelMain.Controls.Clear();
             panelMain.Controls.Add(setupPage);
-            setupPage.EnableScrolling();
             //setupPage.refreshCoordinateBoxes(EntitiesManager.GetQuestEntities());
             buttonNext.Text = "Next >>";
         }
 
         private void ShowWait()
         {
-            setupPage.DisableScrolling();
             panelMain.Controls.Clear();
-            Waiting waitingPage = new Waiting(this.Size);
+            Waiting waitingPage = new Waiting();
             panelMain.Controls.Add(waitingPage);
             buttonNext.Enabled = false;
             Application.DoEvents();
@@ -145,27 +136,13 @@ namespace SOC.UI
         {
             //setupPage.ShiftGroups(Height - 100, Width - 42);
             //detailPage.ShiftGroups(Height - 100, Width - 42);
+            //Console.WriteLine(setupPage.Width + ", " + setupPage.Height);
+            //Console.WriteLine(this.panelMain.Width);
         }
 
         public static List<Coordinates> BuildCoords(string rawString)
         {
             List<Coordinates> coordList = new List<Coordinates>();
-            //Coordinates coords;
-            /*
-            string coordPattern = @"-?\d+([.]\d+)?";
-            
-            MatchCollection matches = Regex.Matches(rawString, coordPattern);
-            var list = matches.Cast<Match>().Select(match => match.Value).ToList();
-            while (list.Count % 4 != 0)
-            {
-                list.Add("0.00");
-            }
-            for (int i = 0; i < list.Count; i += 4)
-            {
-                coords = new Coordinates(list[i], list[i + 1], list[i + 2], list[i + 3]);
-                coordList.Add(coords);
-            }
-            */
             return coordList;
         }
 

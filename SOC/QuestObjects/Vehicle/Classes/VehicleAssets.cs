@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using SOC.Classes.Common;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using SOC.Classes.Common;
 
 namespace SOC.QuestObjects.Vehicle.Classes
 {
     static class VehicleAssets
     {
         public static string VehAssetsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//VehicleAssets");
-        
+
         public static void BuildVehicleAssets(List<Vehicle> vehicleList, string FPKPath, string FPKDPath)
         {
             string VehFPKAssetsPath = Path.Combine(VehAssetsPath, "FPK_Files");

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SOC.Classes
 {
@@ -39,7 +35,7 @@ namespace SOC.Classes
             }
         }
 
-        public static string[] getDispNotifs()
+        public static List<string> getDispNotifs()
         {
             List<string> DisplayList = new List<string>();
             readList();
@@ -48,10 +44,10 @@ namespace SOC.Classes
                 DisplayList.Add(UpdateNotifsList[i]);
             }
 
-            return DisplayList.ToArray();
+            return DisplayList;
         }
 
-        public static string[] getLangIds()
+        public static List<string> getLangIds()
         {
             List<string> LangIdList = new List<string>();
             readList();
@@ -60,7 +56,7 @@ namespace SOC.Classes
                 LangIdList.Add(UpdateNotifsList[i]);
             }
 
-            return LangIdList.ToArray();
+            return LangIdList;
         }
 
         public static void addNotification(string langId, string value)
@@ -71,7 +67,7 @@ namespace SOC.Classes
 
         public static bool isCustomNotification(string LangId)
         {
-            foreach(string defaultLangId in defaultLangIds)
+            foreach (string defaultLangId in defaultLangIds)
             {
                 if (defaultLangId.Equals(LangId))
                 {

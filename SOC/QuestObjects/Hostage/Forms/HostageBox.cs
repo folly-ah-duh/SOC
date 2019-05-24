@@ -1,10 +1,6 @@
 ﻿using SOC.Classes.Common;
 using SOC.Forms;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SOC.QuestObjects.Hostage
@@ -82,8 +78,7 @@ namespace SOC.QuestObjects.Hostage
             // 
             // h_groupBox_main
             // 
-            this.h_groupBox_main.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.h_groupBox_main.Anchor = ((AnchorStyles.Top | AnchorStyles.Left) | AnchorStyles.Right);
             this.h_groupBox_main.Controls.Add(this.h_textBox_zcoord);
             this.h_groupBox_main.Controls.Add(this.h_textBox_ycoord);
             this.h_groupBox_main.Controls.Add(this.h_checkBox_target);

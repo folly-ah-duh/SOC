@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SOC.Classes.Common
+﻿namespace SOC.Classes.Common
 {
     public static class NPCBodyInfo
     {
@@ -136,9 +130,9 @@ namespace SOC.Classes.Common
                 false
                 ),
             new BodyInfoEntry(
-                "DRAB", 
-                "TppEnemyBodyId.dds3_main0_v00", 
-                "/Assets/tpp/parts/chara/dds/dds3_main0_def_v00.parts", 
+                "DRAB",
+                "TppEnemyBodyId.dds3_main0_v00",
+                "/Assets/tpp/parts/chara/dds/dds3_main0_def_v00.parts",
                 "/Assets/tpp/pack/mission2/common/mis_com_dd_soldier_wait.fpk",
                 false,
                 false
@@ -328,7 +322,7 @@ namespace SOC.Classes.Common
                 false
                 ),
         };
-        
+
         public static BodyInfoEntry GetBodyInfo(string bodyName)
         {
             foreach (BodyInfoEntry body in BodyInfoArray)

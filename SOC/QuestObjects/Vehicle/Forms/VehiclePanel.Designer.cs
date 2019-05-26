@@ -38,7 +38,7 @@
             // 
             // groupVehDet
             // 
-            this.groupVehDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.groupVehDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupVehDet.Controls.Add(this.panelVehDet);
             this.groupVehDet.Location = new System.Drawing.Point(0, 0);
@@ -50,8 +50,8 @@
             // 
             // panelVehDet
             // 
-            this.panelVehDet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.panelVehDet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelVehDet.AutoScroll = true;
             this.panelVehDet.Controls.Add(this.label_vehObjType);
@@ -72,7 +72,7 @@
             // 
             // comboBox_vehObjType
             // 
-            this.comboBox_vehObjType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.comboBox_vehObjType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox_vehObjType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_vehObjType.FormattingEnabled = true;
@@ -100,10 +100,9 @@
         }
 
         #endregion
-
-        public System.Windows.Forms.GroupBox groupVehDet;
         public System.Windows.Forms.Panel panelVehDet;
         private System.Windows.Forms.Label label_vehObjType;
-        private System.Windows.Forms.ComboBox comboBox_vehObjType;
+        protected System.Windows.Forms.GroupBox groupVehDet;
+        public System.Windows.Forms.ComboBox comboBox_vehObjType;
     }
 }

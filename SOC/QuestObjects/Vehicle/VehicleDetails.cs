@@ -1,8 +1,37 @@
 ﻿using SOC.Classes.Common;
+using SOC.QuestObjects.Common;
+using SOC.QuestObjects.Vehicle.Forms;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace SOC.QuestObjects.Vehicle
 {
+    [XmlType("VehicleDetails")]
+    public class VehicleDetails : QuestObjectDetails
+    {
+        public VehicleDetails() { }
+
+        public VehicleDetails(List<Vehicle> vehicleList, VehicleMetadata vehicleMeta)
+        {
+            Vehicles = vehicleList; vehicleMetadata = vehicleMeta;
+        }
+
+        [XmlArray]
+        public List<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
+
+        [XmlElement]
+        public VehicleMetadata vehicleMetadata { get; set; } = new VehicleMetadata();
+
+        public override QuestObjectManager GetNewManager()
+        {
+            return new VehicleManager(this);
+        }
+    }
+
     public class Vehicle
     {
 
@@ -44,5 +73,19 @@ namespace SOC.QuestObjects.Vehicle
 
         [XmlElement]
         public Rotation rotation { get; set; } = new Rotation("0");
+    }
+
+    public class VehicleMetadata
+    {
+
+        public VehicleMetadata() { }
+
+        public VehicleMetadata(VehiclePanel vehiclePanel)
+        {
+            vehicleObjectiveType = vehiclePanel.comboBox_vehObjType.Text;
+        }
+
+        [XmlAttribute]
+        public string vehicleObjectiveType { get; set; } = "ELIMINATE";
     }
 }

@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using static SOC.QuestComponents.EnemyInfo;
 using System.Collections.Generic;
 using SOC.Classes.Common;
+using System.Globalization;
 
 namespace SOC.UI
 {
@@ -17,16 +18,13 @@ namespace SOC.UI
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern Int32 SendMessage(IntPtr hWnd, int msg, int wParam, [MarshalAs(UnmanagedType.LPWStr)]string lParam);
         public int locationID = -1;
-        string[] afghCPNames = GetCPNames(AfghCPs);
-        string[] mafrCPNames = GetCPNames(MafrCPs);
-        string[] mtbsCPNames = GetCPNames(MtbsCP);
         ManagerMaster managerMaster;
         RouteManager routeManager = new RouteManager();
 
         public Setup(ManagerMaster manMaster)
         {
             InitializeComponent();
-            managerMaster = manMaster;
+            SetManagerMaster(manMaster);
             Dock = DockStyle.Fill;
             SendMessage(textBoxQuestNum.Handle, 0x1501, 1, "30103");
             SendMessage(textBoxFPKName.Handle, 0x1501, 1, "Example_Quest_Name");
@@ -36,6 +34,75 @@ namespace SOC.UI
 
             refreshNotifsList();
             refreshRoutesList();
+        }
+
+        public void SetManagerMaster(ManagerMaster manMaster)
+        {
+            managerMaster = manMaster;
+        }
+
+        public void SetCoreDetails(CoreDetails core)
+        {
+            textBoxQuestTitle.Text = core.QuestTitle; textBoxQuestDesc.Text = core.QuestDesc;
+
+            textBoxFPKName.Text = core.FpkName; textBoxQuestNum.Text = core.QuestNum;
+
+            locationID = core.locationID;
+
+            switch(locationID)
+            {
+                case 10:
+                    comboBoxRegion.Text = "Afghanistan";
+                    break;
+                case 20:
+                    comboBoxRegion.Text = "Central Africa";
+                    break;
+                case 50:
+                    comboBoxRegion.Text = "Mother Base";
+                    break;
+            }
+
+            comboBoxLoadArea.Text = core.loadArea;
+
+            textBoxXCoord.Text = core.coords.xCoord; textBoxYCoord.Text = core.coords.yCoord; textBoxZCoord.Text = core.coords.zCoord;
+
+            comboBoxRadius.Text = core.radius; comboBoxCategory.Text = core.category; comboBoxReward.Text = core.reward;
+
+            core.CPName = comboBoxCP.Text;
+
+            refreshNotifsList();
+            if (comboBoxProgressNotifs.Items.Count > core.progNotif)
+                comboBoxProgressNotifs.SelectedIndex = core.progNotif;
+            else
+                comboBoxProgressNotifs.SelectedIndex = 0;
+
+            refreshRoutesList();
+            if (!string.IsNullOrEmpty(core.routeName) && comboBoxRoute.Items.Contains(core.routeName))
+                comboBoxRoute.SelectedItem = core.routeName;
+            else
+                comboBoxRoute.SelectedItem = "NONE";
+
+        }
+
+        public CoreDetails GetCoreDetails()
+        {
+            CoreDetails core = new CoreDetails();
+
+            core.QuestTitle = textBoxQuestTitle.Text; core.QuestDesc = textBoxQuestDesc.Text;
+
+            core.FpkName = textBoxFPKName.Text; core.QuestNum = textBoxQuestNum.Text;
+
+            core.locationID = locationID; core.loadArea = comboBoxLoadArea.Text;
+
+            core.coords = new Coordinates(textBoxXCoord.Text, textBoxYCoord.Text, textBoxZCoord.Text); core.radius = comboBoxRadius.Text;
+
+            core.category = comboBoxCategory.Text; core.progNotif = comboBoxProgressNotifs.SelectedIndex;
+
+            core.reward = comboBoxReward.Text;
+
+            core.CPName = comboBoxCP.Text; core.routeName = comboBoxRoute.Text;
+
+            return core;
         }
 
         public void refreshNotifsList()
@@ -65,34 +132,37 @@ namespace SOC.UI
 
         private void comboBoxRegion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            comboBoxLoadArea.Items.Clear();
-            comboBoxCP.Items.Clear();
+            string[] loadArea = new string[0];
+            string[] cpNames = new string[0];
             enableRegionInput();
+            managerMaster.EnableVehicleBox();
+
             switch (comboBoxRegion.Text)
             {
                 case "Afghanistan":
                     locationID = 10;
-                    comboBoxLoadArea.Items.AddRange(LoadAreas.afgh);
-                    comboBoxCP.Items.AddRange(GetCPNames(AfghCPs));
-                    managerMaster.EnableVehicleBox();
+                    loadArea = LoadAreas.afgh;
+                    cpNames = GetCPNames(AfghCPs);
                     break;
+
                 case "Central Africa":
                     locationID = 20;
-                    comboBoxLoadArea.Items.AddRange(LoadAreas.mafr);
-                    comboBoxCP.Items.AddRange(GetCPNames(MafrCPs));
-                    managerMaster.EnableVehicleBox();
+                    loadArea = LoadAreas.mafr;
+                    cpNames = GetCPNames(MafrCPs);
                     break;
+
                 case "Mother Base":
                     locationID = 50;
-                    comboBoxLoadArea.Items.AddRange(LoadAreas.mtbs);
-                    comboBoxCP.Items.AddRange(GetCPNames(MtbsCP));
+                    loadArea = LoadAreas.mtbs;
+                    cpNames = GetCPNames(MtbsCP);
+                    disableRegionInput();
                     managerMaster.DisableVehicleBox();
                     comboBoxRadius.Text = "1";
-                    disableRegionInput();
                     break;
             }
-            comboBoxCP.SelectedIndex = 0;
-            comboBoxLoadArea.SelectedIndex = 0;
+
+            UpdateComboBox(comboBoxLoadArea, loadArea);
+            UpdateComboBox(comboBoxCP, cpNames);
         }
 
         private void buttonAddNotif_Click(object sender, EventArgs e)
@@ -111,7 +181,7 @@ namespace SOC.UI
             {
                 if (qNumInt >= 30103 && qNumInt <= 39009)
                 {
-                    textBoxQuestNum.Text = qNumInt.ToString();
+                    textBoxQuestNum.Text = qNumInt.ToString("F0", CultureInfo.InvariantCulture);
                     isvalid = true;
                 }
             }
@@ -136,7 +206,7 @@ namespace SOC.UI
 
         private void flowPanelLocationalStubs_Layout(object sender, LayoutEventArgs e) // necessary jank for flowLayoutPanels: https://docs.microsoft.com/en-us/dotnet/framework/winforms/controls/how-to-anchor-and-dock-child-controls-in-a-flowlayoutpanel-control
         {
-            labelFlowSize.Width = flowPanelLocationalStubs.Width;
+            labelFlowWidth.Width = flowPanelLocationalStubs.Width;
         }
         
         public void UpdateComboBox(ComboBox box, List<string> itemList)
@@ -148,6 +218,18 @@ namespace SOC.UI
 
             box.Items.Clear();
             box.Items.AddRange(itemList.ToArray());
+            box.SelectedIndex = currentIndex;
+        }
+
+        public void UpdateComboBox(ComboBox box, string[] itemList)
+        {
+            int currentIndex = box.SelectedIndex;
+
+            if (currentIndex >= itemList.Length)
+                currentIndex = 0;
+
+            box.Items.Clear();
+            box.Items.AddRange(itemList);
             box.SelectedIndex = currentIndex;
         }
     }

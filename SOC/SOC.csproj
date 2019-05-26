@@ -115,6 +115,7 @@
     <Compile Include="Core\Classes\LangTool\LangFile.cs" />
     <Compile Include="Core\Classes\Common\Quest.cs" />
     <Compile Include="QuestObjects\Common\LocationalQuestObjectManager.cs" />
+    <Compile Include="QuestObjects\Common\ManagerArray.cs" />
     <Compile Include="QuestObjects\Common\QuestObjectDetails.cs" />
     <Compile Include="QuestObjects\Hostage\HostageDetails.cs" />
     <Compile Include="QuestObjects\Hostage\Classes\HostageDetailGUI.cs" />
@@ -220,6 +221,7 @@
     <Compile Include="QuestObjects\Vehicle\Forms\VehiclePanel.Designer.cs">
       <DependentUpon>VehiclePanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuestObjects\Vehicle\VehicleDetails.cs" />
     <Compile Include="QuestObjects\Vehicle\VehicleManager.cs" />
     <Compile Include="QuestObjects\WalkerGear\Forms\WalkerGearBox.cs" />
     <Compile Include="Core\Forms\Pages\Setup.cs">
@@ -260,7 +262,6 @@
     <Compile Include="QuestObjects\Hostage\HostageManager.cs" />
     <Compile Include="QuestObjects\Item\Classes\Item.cs" />
     <Compile Include="QuestObjects\Model\Classes\Model.cs" />
-    <Compile Include="QuestObjects\Vehicle\Classes\Vehicle.cs" />
     <Compile Include="QuestObjects\WalkerGear\Classes\WalkerGear.cs" />
     <Compile Include="QuestObjects\WalkerGear\Forms\WalkerGearPanel.cs">
       <SubType>UserControl</SubType>

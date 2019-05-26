@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace SOC.QuestObjects.Common
 {
-    abstract class LocationalQuestObjectManager : QuestObjectManager
+    public abstract class LocationalQuestObjectManager : QuestObjectManager
     {
         private LocationalDataStub locationStub;
 
-        public LocationalQuestObjectManager(LocationalDataStub stub)
+        public LocationalQuestObjectManager(LocationalDataStub stub, QuestObjectDetails details) : base(details)
         {
             locationStub = stub;
         }
@@ -20,6 +20,8 @@ namespace SOC.QuestObjects.Common
         {
             return locationStub;
         }
+
+        public abstract void RefreshStubText();
 
     }
 }

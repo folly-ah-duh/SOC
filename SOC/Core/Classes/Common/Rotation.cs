@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Xml.Serialization;
 
 namespace SOC.Classes.Common
@@ -33,7 +34,7 @@ namespace SOC.Classes.Common
             double quatNum = 0;
             double.TryParse(roty, out quatNum);
             quatNum = quatNum * Math.PI / 360;
-            return Math.Sin(quatNum).ToString();
+            return Math.Sin(quatNum).ToString("F5", CultureInfo.InvariantCulture);
         }
 
         private string GetQuaternionW(string roty)
@@ -41,7 +42,7 @@ namespace SOC.Classes.Common
             double quatNum = 0;
             double.TryParse(roty, out quatNum);
             quatNum = quatNum * Math.PI / 360;
-            return Math.Cos(quatNum).ToString();
+            return Math.Cos(quatNum).ToString("F5", CultureInfo.InvariantCulture);
         }
 
         public string GetDegreeRotY()
@@ -49,7 +50,7 @@ namespace SOC.Classes.Common
             double degree = 0;
             double.TryParse(quatRotation.yval, out degree);
             degree = Math.Asin(degree);
-            return (degree / Math.PI * 360).ToString();
+            return (degree / Math.PI * 360).ToString("F2", CultureInfo.InvariantCulture);
         }
 
         public string GetRadianRotY()
@@ -57,7 +58,7 @@ namespace SOC.Classes.Common
             double radian = 0;
             double.TryParse(quatRotation.yval, out radian);
             radian = Math.Asin(radian);
-            return (radian * 2).ToString();
+            return (radian * 2).ToString("F3", CultureInfo.InvariantCulture);
         }
 
         public string ToFox2String()

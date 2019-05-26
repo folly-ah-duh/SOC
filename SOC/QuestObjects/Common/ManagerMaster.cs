@@ -8,27 +8,53 @@ namespace SOC.QuestObjects.Common
 {
     public class ManagerMaster
     {
+        private ManagerArray managerArray = new ManagerArray();
 
-        private QuestObjectManager[] managerList = { new Hostage.HostageManager(), new Vehicle.VehicleManager() };
+        public ManagerMaster(ManagerArray managers)
+        {
+            managerArray = managers;
+        }
+
+        public void SetManagerArray(ManagerArray array)
+        {
+            managerArray = array;
+        }
+
+        public List<QuestObjectDetails> GetQuestObjectDetails()
+        {
+            List<QuestObjectDetails> qodList = new List<QuestObjectDetails>();
+
+            foreach(QuestObjectManager manager in managerArray.GetManagers())
+            {
+                qodList.Add(manager.questDetail);
+            }
+
+            return qodList;
+        }
 
         public List<LocationalDataStub> GetLocationalStubs()
         {
             List<LocationalDataStub> stubList = new List<LocationalDataStub>();
 
-            foreach(QuestObjectManager manager in managerList)
+            foreach(LocationalQuestObjectManager locationalManager in managerArray.GetLocationalManagers())
             {
-                if (manager is LocationalQuestObjectManager)
-                {
-                    LocationalQuestObjectManager locationalManager = (LocationalQuestObjectManager)manager;
-                    stubList.Add(locationalManager.GetStub());
-                }
+                stubList.Add(locationalManager.GetStub());
             }
+
             return stubList;
+        }
+
+        public void RefreshAllStubTexts()
+        {
+            foreach (LocationalQuestObjectManager locationalManager in managerArray.GetLocationalManagers())
+            {
+                locationalManager.RefreshStubText();
+            }
         }
 
         internal void DisableVehicleBox()
         {
-            foreach(QuestObjectManager manager in managerList)
+            foreach(QuestObjectManager manager in managerArray.GetManagers())
             {
                 if (manager is Vehicle.VehicleManager)
                 {
@@ -40,7 +66,7 @@ namespace SOC.QuestObjects.Common
 
         internal void EnableVehicleBox()
         {
-            foreach (QuestObjectManager manager in managerList)
+            foreach (QuestObjectManager manager in managerArray.GetManagers())
             {
                 if (manager is Vehicle.VehicleManager)
                 {

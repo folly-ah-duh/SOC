@@ -2,11 +2,12 @@
 using SOC.QuestObjects.Common;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using System;
 
 namespace SOC.QuestObjects.Hostage
 {
     [XmlType("HostageDetails")]
-    class HostageDetails : QuestObjectDetails
+    public class HostageDetails : QuestObjectDetails
     {
         public HostageDetails() { }
 
@@ -18,8 +19,13 @@ namespace SOC.QuestObjects.Hostage
         [XmlArray]
         public List<Hostage> Hostages { get; set; } = new List<Hostage>();
 
-        [XmlAttribute]
+        [XmlElement]
         public HostageMetadata hostageMetadata { get; set; } = new HostageMetadata();
+
+        public override QuestObjectManager GetNewManager()
+        {
+            return new HostageManager(this);
+        }
     }
 
 
@@ -84,7 +90,7 @@ namespace SOC.QuestObjects.Hostage
     }
 
 
-    class HostageMetadata
+    public class HostageMetadata
     {
 
         public HostageMetadata() { }

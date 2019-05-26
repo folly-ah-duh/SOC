@@ -1,6 +1,7 @@
 ﻿namespace SOC.QuestObjects.Common
 {
-    public interface QuestObjectDetails
+    public abstract class QuestObjectDetails
     {
+        public abstract QuestObjectManager GetNewManager();
     }
 }

@@ -9,35 +9,31 @@ namespace SOC.UI
 {
     public partial class FormMain : Form
     {
-        ManagerMaster managerMaster = new ManagerMaster();
+        ManagerMaster managerMaster = new ManagerMaster(new ManagerArray());
 
         private Setup setupPage;
-        private Details detailPage = new Details();
-        private List<GroupBox> detailPageBoxes = new List<GroupBox>();
-        private int panelNum = 0;
-
-
-        CoreDetails coreDetails = new CoreDetails();
-        List<QuestObjectDetails> questDetails = new List<QuestObjectDetails>();
+        private Details detailPage;
+        private int pageNum = 0;
 
         public FormMain()
         {
             setupPage = new Setup(managerMaster);
-
+            detailPage = new Details(managerMaster);
             InitializeComponent();
+
             GoToPanel();
             buttonBack.Visible = false;
         }
 
         private void buttonNext_Click(object sender, EventArgs e)
         {
-            panelNum++;
+            pageNum++;
             this.GoToPanel();
         }
 
         private void buttonBack_Click(object sender, EventArgs e)
         {
-            panelNum--;
+            pageNum--;
             this.GoToPanel();
         }
         private bool isFilled()
@@ -55,7 +51,7 @@ namespace SOC.UI
         }
         private void GoToPanel()
         {
-            switch (panelNum)
+            switch (pageNum)
             {
                 case 0:
                     ShowSetup();
@@ -72,7 +68,7 @@ namespace SOC.UI
                     else
                     {
                         MessageBox.Show("Please fill in the remaining Setup and Flavor Text fields.", "Missing Details", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        panelNum--;
+                        pageNum--;
                         return;
                     }
                     break;
@@ -80,7 +76,7 @@ namespace SOC.UI
                 case 2:
                     BuildQuest();
                     MessageBox.Show("Build Complete", "Sideop Companion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    panelNum--;
+                    pageNum--;
                     break;
             }
         }
@@ -90,7 +86,7 @@ namespace SOC.UI
             buttonBack.Visible = false;
             panelMain.Controls.Clear();
             panelMain.Controls.Add(setupPage);
-            //setupPage.refreshCoordinateBoxes(EntitiesManager.GetQuestEntities());
+            managerMaster.RefreshAllStubTexts();
             buttonNext.Text = "Next >>";
         }
 
@@ -140,12 +136,6 @@ namespace SOC.UI
             //Console.WriteLine(this.panelMain.Width);
         }
 
-        public static List<Coordinates> BuildCoords(string rawString)
-        {
-            List<Coordinates> coordList = new List<Coordinates>();
-            return coordList;
-        }
-
         private void FormMain_Activated(object sender, EventArgs e)
         {
             setupPage.refreshNotifsList();
@@ -159,17 +149,17 @@ namespace SOC.UI
             DialogResult result = loadFile.ShowDialog();
             if (result != DialogResult.OK) return;
 
-            if (panelNum != 0)
+            if (pageNum != 0)
             {
-                panelNum = 0; GoToPanel();
+                pageNum = 0; GoToPanel();
             }
 
             Quest quest = new Quest();
 
             if (quest.Load(loadFile.FileName))
             {
-                //setupPage.setDefinitionDetails(quest.definitionDetails);
-                //EntitiesManager.setQuestEntities(quest.questEntities);
+                managerMaster.SetManagerArray(new ManagerArray(quest.questObjectDetails));
+                setupPage.SetCoreDetails(quest.coreDetails);
             }
         }
 
@@ -192,19 +182,18 @@ namespace SOC.UI
 
         private void Save()
         {
+            CoreDetails core = setupPage.GetCoreDetails();
+            SaveFileDialog saveFile = new SaveFileDialog();
+            saveFile.Filter = "Xml File|*.xml";
+            saveFile.FileName = core.FpkName;
+            DialogResult saveResult = saveFile.ShowDialog();
+            if (saveResult != DialogResult.OK) return;
+            if (pageNum != 0)
             {
-                SaveFileDialog saveFile = new SaveFileDialog();
-                saveFile.Filter = "Xml File|*.xml";
-                //saveFile.FileName = setupPage.getDefinitionDetails().FpkName;
-                DialogResult saveResult = saveFile.ShowDialog();
-                if (saveResult != DialogResult.OK) return;
-                if (panelNum != 0)
-                {
-                    panelNum = 0; GoToPanel();
-                }
-                //Quest quest = new Quest(setupPage.getDefinitionDetails(), EntitiesManager.GetQuestEntities());
-                //quest.Save(saveFile.FileName);
+                pageNum = 0; GoToPanel();
             }
+            Quest quest = new Quest(core, managerMaster.GetQuestObjectDetails());
+            quest.Save(saveFile.FileName);
         }
 
         private void buttonOpenFolder_Click(object sender, EventArgs e)

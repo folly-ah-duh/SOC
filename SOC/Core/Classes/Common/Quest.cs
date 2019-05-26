@@ -23,7 +23,7 @@ namespace SOC.Classes.Common
 
             using (FileStream stream = new FileStream(fileName, FileMode.Create))
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(Quest));
+                XmlSerializer serializer = new XmlSerializer(typeof(Quest),  ManagerArray.GetDetailsTypes());
                 serializer.Serialize(stream, this);
             }
 
@@ -39,7 +39,7 @@ namespace SOC.Classes.Common
 
             using (FileStream stream = new FileStream(fileName, FileMode.Open))
             {
-                XmlSerializer deserializer = new XmlSerializer(typeof(Quest));
+                XmlSerializer deserializer = new XmlSerializer(typeof(Quest), ManagerArray.GetDetailsTypes());
                 try
                 {
                     Quest loadedQuest = (Quest)deserializer.Deserialize(stream);

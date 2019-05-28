@@ -10,13 +10,17 @@ using System.Threading.Tasks;
 
 namespace SOC.QuestObjects.Vehicle
 {
-    class VehicleManager : LocationalQuestObjectManager
+    class VehicleManager : DetailManager
     {
         static LocationalDataStub vehicleStub = new LocationalDataStub("Heavy Vehicle Locations");
 
+        static VehiclePanel vehiclePanel = new VehiclePanel();
+
+        static VehicleVisualizer vehicleVisualizer = new VehicleVisualizer(vehicleStub, vehiclePanel);
+
         private VehicleDetails vehicleDetails;
 
-        public VehicleManager(VehicleDetails vehicleDets) : base(vehicleStub, vehicleDets)
+        public VehicleManager(VehicleDetails vehicleDets) : base(vehicleDets, vehicleVisualizer)
         {
             vehicleDetails = vehicleDets;
         }
@@ -24,19 +28,6 @@ namespace SOC.QuestObjects.Vehicle
         public override void AddFox2Entities(ref List<Fox2EntityClass> entityList)
         {
             throw new NotImplementedException();
-        }
-
-        public override void RefreshStubText()
-        {
-            List<Position> vehPosList = new List<Position>();
-
-            foreach (Vehicle veh in vehicleDetails.Vehicles)
-            {
-                vehPosList.Add(new Position(veh.coordinates, veh.rotation));
-            }
-            vehPosList.Add(new Position(new SOC.Classes.Common.Coordinates("1", "2", "3"), new SOC.Classes.Common.Rotation("50")));
-
-            vehicleStub.SetStubText(new IHLogPositions(vehPosList));
         }
     }
 }

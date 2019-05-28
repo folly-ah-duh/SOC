@@ -18,10 +18,10 @@ namespace SOC.UI
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern Int32 SendMessage(IntPtr hWnd, int msg, int wParam, [MarshalAs(UnmanagedType.LPWStr)]string lParam);
         public int locationID = -1;
-        ManagerMaster managerMaster;
+        MasterManager managerMaster;
         RouteManager routeManager = new RouteManager();
 
-        public Setup(ManagerMaster manMaster)
+        public Setup(MasterManager manMaster)
         {
             InitializeComponent();
             SetManagerMaster(manMaster);
@@ -36,7 +36,7 @@ namespace SOC.UI
             refreshRoutesList();
         }
 
-        public void SetManagerMaster(ManagerMaster manMaster)
+        public void SetManagerMaster(MasterManager manMaster)
         {
             managerMaster = manMaster;
         }

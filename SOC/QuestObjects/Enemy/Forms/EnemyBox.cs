@@ -6,6 +6,7 @@ using System.Windows.Forms;
 
 namespace SOC.QuestObjects.Enemy
 {
+    /*
     public class EnemyBox : QuestBox
     {
         public int enemyNumber = -1;
@@ -705,4 +706,5 @@ namespace SOC.QuestObjects.Enemy
             }
         }
     }
+*/
 }

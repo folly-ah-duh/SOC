@@ -114,11 +114,10 @@
     <Compile Include="Core\Classes\LangTool\LangEntry.cs" />
     <Compile Include="Core\Classes\LangTool\LangFile.cs" />
     <Compile Include="Core\Classes\Common\Quest.cs" />
-    <Compile Include="QuestObjects\Common\LocationalQuestObjectManager.cs" />
     <Compile Include="QuestObjects\Common\ManagerArray.cs" />
-    <Compile Include="QuestObjects\Common\QuestObjectDetails.cs" />
+    <Compile Include="QuestObjects\Common\Detail.cs" />
     <Compile Include="QuestObjects\Hostage\HostageDetails.cs" />
-    <Compile Include="QuestObjects\Hostage\Classes\HostageDetailGUI.cs" />
+    <Compile Include="QuestObjects\Hostage\Classes\HostageVisualizer.cs" />
     <Compile Include="Core\Classes\Route\RouteManager.cs" />
     <Compile Include="Core\Classes\Common\Coordinates.cs" />
     <Compile Include="Core\Classes\QuestBuild\UpdateNotifsManager.cs" />
@@ -164,8 +163,8 @@
     <Compile Include="QuestObjects\Animal\Forms\AnimalPanel.Designer.cs">
       <DependentUpon>AnimalPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="QuestObjects\Common\ManagerMaster.cs" />
-    <Compile Include="QuestObjects\Common\QuestObjectManager.cs" />
+    <Compile Include="QuestObjects\Common\MasterManager.cs" />
+    <Compile Include="QuestObjects\Common\DetailManager.cs" />
     <Compile Include="QuestObjects\Enemy\Classes\EnemyAssets.cs" />
     <Compile Include="QuestObjects\Enemy\Forms\EnemyBox.cs" />
     <Compile Include="QuestObjects\Enemy\Forms\ExistingEnemiesPanel.cs">
@@ -213,6 +212,7 @@
     <Compile Include="Core\Classes\Route\Route.cs" />
     <Compile Include="Core\Classes\Route\RouteAssets.cs" />
     <Compile Include="QuestObjects\Vehicle\Classes\VehicleAssets.cs" />
+    <Compile Include="QuestObjects\Vehicle\Classes\VehicleVisualizer.cs" />
     <Compile Include="QuestObjects\Vehicle\Classes\VehicleNames.cs" />
     <Compile Include="QuestObjects\Vehicle\Forms\VehicleBox.cs" />
     <Compile Include="QuestObjects\Vehicle\Forms\VehiclePanel.cs">

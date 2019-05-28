@@ -3,6 +3,7 @@ using System.Xml.Serialization;
 
 namespace SOC.QuestObjects.Animal
 {
+    /*
     public class Animal
     {
 
@@ -50,4 +51,5 @@ namespace SOC.QuestObjects.Animal
         public Rotation rotation { get; set; } = new Rotation("0");
 
     }
+    */
 }

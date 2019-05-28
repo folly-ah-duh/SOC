@@ -6,6 +6,7 @@ using System.Windows.Forms;
 
 namespace SOC.QuestObjects.Helicopter
 {
+    /*
     public class HelicopterBox : QuestBox
     {
         Helicopter Heli;
@@ -204,4 +205,5 @@ namespace SOC.QuestObjects.Helicopter
             He_comboBox_route.Text = HeliDetail.He_comboBox_route.Text;
         }
     }
+    */
 }

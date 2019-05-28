@@ -4,6 +4,7 @@ using System.Reflection;
 
 namespace SOC.QuestObjects.Model
 {
+    /*
     static class ModelAssets
     {
         public static string modelAssetsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//ModelAssets");
@@ -27,4 +28,5 @@ namespace SOC.QuestObjects.Model
             }
         }
     }
+    */
 }

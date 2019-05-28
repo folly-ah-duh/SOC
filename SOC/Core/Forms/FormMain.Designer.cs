@@ -121,7 +121,6 @@
             this.Text = "Sideop Companion";
             this.Activated += new System.EventHandler(this.FormMain_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
-            this.Resize += new System.EventHandler(this.FormMain_SizeChanged);
             this.ResumeLayout(false);
 
         }

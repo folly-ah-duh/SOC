@@ -5,6 +5,7 @@ using System.Windows.Forms;
 
 namespace SOC.QuestObjects.Model
 {
+    /*
     public class ModelBox : QuestBox
     {
         Model model;
@@ -235,4 +236,5 @@ namespace SOC.QuestObjects.Model
             return m_groupBox_main;
         }
     }
+    */
 }

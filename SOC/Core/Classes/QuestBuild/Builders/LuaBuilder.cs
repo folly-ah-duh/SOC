@@ -11,7 +11,7 @@ namespace SOC.Classes
 
         static string[] questLuaInput = File.ReadAllLines(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//questScript.lua"));
 
-        public static void WriteDefinitionLua(CoreDetails coreDetails, List<QuestObjectDetails> questObjects)
+        public static void WriteDefinitionLua(CoreDetails coreDetails, List<Detail> questObjects)
         {
             /*
             BodyInfoEntry bodyInfo = new BodyInfoEntry();
@@ -110,7 +110,7 @@ namespace SOC.Classes
             */
         }
 
-        public static void WriteMainQuestLua(CoreDetails coreDetails, List<QuestObjectDetails> questObjects)
+        public static void WriteMainQuestLua(CoreDetails coreDetails, List<Detail> questObjects)
         {
             /*
             List<string> questLua = new List<string>(questLuaInput);

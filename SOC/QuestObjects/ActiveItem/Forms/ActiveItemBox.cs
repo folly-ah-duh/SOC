@@ -4,6 +4,7 @@ using System.Windows.Forms;
 
 namespace SOC.QuestObjects.ActiveItem
 {
+    /*
     public class ActiveItemBox : QuestBox
     {
         ActiveItem activeitem;
@@ -23,7 +24,7 @@ namespace SOC.QuestObjects.ActiveItem
         public TextBox ai_textBox_yrot;
         public TextBox ai_textBox_xrot;
 
-        public ActiveItemBox(ActiveItem ai) : base(ai.coordinates, ai.number)
+        public ActiveItemBox(ActiveItem ai) : base(ai)
         {
             activeitem = ai;
         }
@@ -70,7 +71,7 @@ namespace SOC.QuestObjects.ActiveItem
             this.ai_groupBox_main.Controls.Add(this.ai_label_target);
             this.ai_groupBox_main.Controls.Add(this.ai_checkBox_target);
             this.ai_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
-            this.ai_groupBox_main.Location = new System.Drawing.Point(3, 27 + (activeitem.number * 134));
+            this.ai_groupBox_main.Location = new System.Drawing.Point(3, 27 + (activeitem.ID * 134));
             this.ai_groupBox_main.Name = "ai_groupBox_main";
             this.ai_groupBox_main.Size = new System.Drawing.Size(width, 119);
             this.ai_groupBox_main.TabIndex = 0;
@@ -196,4 +197,5 @@ namespace SOC.QuestObjects.ActiveItem
             return ai_groupBox_main;
         }
     }
+    */
 }

@@ -5,6 +5,7 @@ using System.Reflection;
 
 namespace SOC.QuestObjects.Animal.Classes
 {
+    /*
     static class AnimalAssets
     {
         static string animalAssetsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//AnimalAssets");
@@ -29,4 +30,5 @@ namespace SOC.QuestObjects.Animal.Classes
             }
         }
     }
+    */
 }

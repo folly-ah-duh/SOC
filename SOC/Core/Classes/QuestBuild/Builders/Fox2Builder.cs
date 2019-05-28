@@ -33,14 +33,14 @@ namespace SOC.Classes.Fox2
             return dataList;
         }
 
-        public static List<Fox2EntityClass> BuildQuestEntityList(string fpkName, List<QuestObjectManager> managers)
+        public static List<Fox2EntityClass> BuildQuestEntityList(string fpkName, List<DetailManager> managers)
         {
             List<Fox2EntityClass> entityList = new List<Fox2EntityClass>();
 
             entityList.Add(new DataSet(entityList));
             entityList.Add(new ScriptBlockScript());
 
-            foreach (QuestObjectManager manager in managers)
+            foreach (DetailManager manager in managers)
             {
                 manager.AddFox2Entities(ref entityList);
             }

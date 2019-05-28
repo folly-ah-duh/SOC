@@ -1,6 +1,6 @@
 ﻿using SOC.Classes.Common;
+using SOC.Core.Classes.InfiniteHeaven;
 using SOC.QuestObjects.Common;
-using SOC.QuestObjects.Vehicle.Forms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +11,11 @@ using System.Xml.Serialization;
 namespace SOC.QuestObjects.Vehicle
 {
     [XmlType("VehicleDetails")]
-    public class VehicleDetails : QuestObjectDetails
+    public class VehicleDetails : Detail
     {
-        public VehicleDetails() { }
+        public VehicleDetails() : base (new List<Vehicle>(), new VehicleMetadata()) { }
 
-        public VehicleDetails(List<Vehicle> vehicleList, VehicleMetadata vehicleMeta)
+        public VehicleDetails(List<Vehicle> vehicleList, VehicleMetadata vehicleMeta) : base (vehicleList, vehicleMeta)
         {
             Vehicles = vehicleList; vehicleMetadata = vehicleMeta;
         }
@@ -26,41 +26,41 @@ namespace SOC.QuestObjects.Vehicle
         [XmlElement]
         public VehicleMetadata vehicleMetadata { get; set; } = new VehicleMetadata();
 
-        public override QuestObjectManager GetNewManager()
+        public override DetailManager GetNewManager()
         {
             return new VehicleManager(this);
         }
     }
 
-    public class Vehicle
+    public class Vehicle : QuestObject
     {
 
-        public Vehicle() { }
+        public Vehicle() : base(new Position(new Coordinates(), new Rotation()), 0) { }
 
-        public Vehicle(VehicleBox d, int num)
+        public Vehicle(VehicleBox vBox, int index) : base(new Position(new Coordinates(vBox.v_textBox_xcoord.Text, vBox.v_textBox_ycoord.Text, vBox.v_textBox_zcoord.Text), new Rotation(vBox.v_textBox_rot.Text)), index)
         {
-            isTarget = d.v_checkBox_target.Checked;
-            number = num;
-            name = d.v_groupBox_main.Text;
-            vehicleIndex = d.v_comboBox_vehicle.SelectedIndex;
-            vehicleClass = d.v_comboBox_class.Text;
-            coordinates = new Coordinates(d.v_textBox_xcoord.Text, d.v_textBox_ycoord.Text, d.v_textBox_zcoord.Text);
-            rotation = new Rotation(d.v_textBox_rot.Text);
+            isTarget = vBox.v_checkBox_target.Checked;
+            ID = base.ID;
+            vehicleIndex = vBox.v_comboBox_vehicle.SelectedIndex;
+            vehicleClass = vBox.v_comboBox_class.Text;
+            position = base.position;
         }
 
-        public Vehicle(Coordinates coords, int num, string nme)
+        public Vehicle(Position pos, int index) : base (pos, index)
         {
-            coordinates = coords; number = num; name = nme;
+            position = pos; ID = index;
+        }
+
+        public override string GetObjectName()
+        {
+            return "Vehicle_" + ID;
         }
 
         [XmlElement]
         public bool isTarget { get; set; } = false;
 
         [XmlElement]
-        public int number { get; set; } = 0;
-
-        [XmlAttribute]
-        public string name { get; set; } = "Vehicle_0";
+        public int ID { get; set; } = 0;
 
         [XmlElement]
         public int vehicleIndex { get; set; } = 0;
@@ -69,13 +69,10 @@ namespace SOC.QuestObjects.Vehicle
         public string vehicleClass { get; set; } = "DEFAULT";
 
         [XmlElement]
-        public Coordinates coordinates { get; set; } = new Coordinates("0", "0", "0");
-
-        [XmlElement]
-        public Rotation rotation { get; set; } = new Rotation("0");
+        public Position position = new Position(new Coordinates(), new Rotation());
     }
 
-    public class VehicleMetadata
+    public class VehicleMetadata : Metadata
     {
 
         public VehicleMetadata() { }

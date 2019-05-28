@@ -1,4 +1,6 @@
 ﻿using SOC.Classes.Common;
+using SOC.Core.Classes.InfiniteHeaven;
+using SOC.QuestObjects.Common;
 using System;
 using System.Windows.Forms;
 
@@ -6,23 +8,21 @@ namespace SOC.Forms
 {
     public abstract class QuestBox
     {
-        Coordinates objectCoordinates;
-        int objectNumber;
+        QuestObject questObject;
 
-        public QuestBox(Coordinates coord, int num)
+        public QuestBox(QuestObject qObject)
         {
-            objectCoordinates = coord;
-            objectNumber = num;
+            questObject = qObject;
         }
 
         public int getIndex()
         {
-            return objectNumber;
+            return questObject.ID;
         }
 
-        public Coordinates getCoords()
+        public Position GetPosition()
         {
-            return objectCoordinates;
+            return questObject.position;
         }
 
         public void FocusGroupBox(object sender, EventArgs e)
@@ -36,6 +36,10 @@ namespace SOC.Forms
 
         public abstract void BuildObject();
 
-
+        public QuestObject getQuestObject()
+        {
+            return questObject;
+        }
+            
     }
 }

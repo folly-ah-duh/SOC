@@ -1,8 +1,11 @@
 ﻿using SOC.Forms;
 using System.Windows.Forms;
+using SOC.QuestObjects.Common;
+using System;
 
 namespace SOC.QuestObjects.WalkerGear
 {
+    /*
     public class WalkerGearBox : QuestBox
     {
         WalkerGear walkerGear;
@@ -23,7 +26,7 @@ namespace SOC.QuestObjects.WalkerGear
         public ComboBox wg_comboBox_paint;
         public ComboBox wg_comboBox_rider;
 
-        public WalkerGearBox(WalkerGear w) : base(w.coordinates, w.number)
+        public WalkerGearBox(WalkerGear w) : base(w)
         {
             walkerGear = w;
         }
@@ -238,5 +241,11 @@ namespace SOC.QuestObjects.WalkerGear
         {
             return wg_groupBox_main;
         }
+
+        internal override QuestObject getQuestObject()
+        {
+            throw new NotImplementedException();
+        }
     }
+    */
 }

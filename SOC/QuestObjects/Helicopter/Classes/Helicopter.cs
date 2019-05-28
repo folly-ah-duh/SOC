@@ -2,6 +2,7 @@
 
 namespace SOC.QuestObjects.Helicopter
 {
+    /*
     public class Helicopter
     {
         public Helicopter() { }
@@ -27,4 +28,5 @@ namespace SOC.QuestObjects.Helicopter
         public string heliClass { get; set; } = "DEFAULT";
 
     }
+    */
 }

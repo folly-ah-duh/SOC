@@ -9,7 +9,7 @@ namespace SOC.UI
 {
     public partial class FormMain : Form
     {
-        ManagerMaster managerMaster = new ManagerMaster(new ManagerArray());
+        MasterManager managerMaster = new MasterManager(new ManagerArray());
 
         private Setup setupPage;
         private Details detailPage;
@@ -38,7 +38,7 @@ namespace SOC.UI
         }
         private bool isFilled()
         {
-            //return true; // FOR DEBUG
+            return true; // FOR DEBUG
             if (string.IsNullOrEmpty(setupPage.textBoxFPKName.Text) || string.IsNullOrEmpty(setupPage.textBoxQuestNum.Text) || string.IsNullOrEmpty(setupPage.textBoxQuestTitle.Text) || string.IsNullOrEmpty(setupPage.textBoxQuestDesc.Text))
                 return false;
             if (setupPage.comboBoxCategory.SelectedIndex == -1 || setupPage.comboBoxReward.SelectedIndex == -1 || setupPage.comboBoxProgressNotifs.SelectedIndex == -1 || setupPage.comboBoxRegion.SelectedIndex == -1)
@@ -62,7 +62,6 @@ namespace SOC.UI
                     {
                         ShowWait();
                         Application.DoEvents();
-
                         ShowDetails();
                     }
                     else
@@ -105,6 +104,7 @@ namespace SOC.UI
             buttonBack.Visible = true;
             buttonNext.Text = "Build";
             panelMain.Controls.Add(detailPage);
+            detailPage.RefreshObjectPanels(setupPage.GetCoreDetails());
             buttonNext.Enabled = true;
         }
 
@@ -126,14 +126,6 @@ namespace SOC.UI
 
             AssetsBuilder.BuildAssets(definitionDetails, questDetails);
             */
-        }
-
-        private void FormMain_SizeChanged(object sender, EventArgs e)
-        {
-            //setupPage.ShiftGroups(Height - 100, Width - 42);
-            //detailPage.ShiftGroups(Height - 100, Width - 42);
-            //Console.WriteLine(setupPage.Width + ", " + setupPage.Height);
-            //Console.WriteLine(this.panelMain.Width);
         }
 
         private void FormMain_Activated(object sender, EventArgs e)

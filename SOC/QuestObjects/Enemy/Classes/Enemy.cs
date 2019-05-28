@@ -2,6 +2,7 @@
 
 namespace SOC.QuestObjects.Enemy
 {
+    /*
     public class Enemy
     {
 
@@ -71,4 +72,5 @@ namespace SOC.QuestObjects.Enemy
         public string[] powers { get; set; } = new string[0];
 
     }
+    */
 }

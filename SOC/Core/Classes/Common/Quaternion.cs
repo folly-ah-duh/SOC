@@ -18,16 +18,16 @@ namespace SOC.Classes.Common
         }
 
         [XmlElement]
-        public string xval;
+        public string xval = "0";
 
         [XmlElement]
-        public string yval;
+        public string yval = "0";
 
         [XmlElement]
-        public string zval;
+        public string zval = "0";
 
         [XmlElement]
-        public string wval;
+        public string wval = "0";
 
     }
 }

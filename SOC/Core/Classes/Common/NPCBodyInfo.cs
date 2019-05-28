@@ -1,4 +1,6 @@
-﻿namespace SOC.Classes.Common
+﻿using System.Linq;
+
+namespace SOC.Classes.Common
 {
     public static class NPCBodyInfo
     {
@@ -322,6 +324,11 @@
                 false
                 ),
         };
+
+        public static string[] GetBodyNames()
+        {
+            return BodyInfoArray.Select(entry => entry.Name).ToArray();
+        }
 
         public static BodyInfoEntry GetBodyInfo(string bodyName)
         {

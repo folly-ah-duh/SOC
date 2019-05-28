@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace SOC.QuestObjects.Hostage
 {
-    static class HostageFox2 // : (abstract) objectFox2?
+    static class HostageFox2
     {
         static void AddQuestEntities(HostageDetails hDetails, DataSet dataSet, ref List<Fox2EntityClass> entityList)
         {
@@ -24,8 +24,8 @@ namespace SOC.QuestObjects.Hostage
 
                 foreach (Hostage hostage in hostages)
                 {
-                    GameObjectLocator hostageLocator = new GameObjectLocator(hostage.GetHostageName(), dataSet, "TppHostageUnique2");
-                    Transform hostageTransform = new Transform(hostageLocator, hostage.rotation, hostage.coordinates);
+                    GameObjectLocator hostageLocator = new GameObjectLocator(hostage.GetObjectName(), dataSet, "TppHostageUnique2");
+                    Transform hostageTransform = new Transform(hostageLocator, hostage.position);
                     TppHostage2LocatorParameter hostageLocatorParameter = new TppHostage2LocatorParameter(hostageLocator);
 
                     hostageLocator.SetTransform(hostageTransform);

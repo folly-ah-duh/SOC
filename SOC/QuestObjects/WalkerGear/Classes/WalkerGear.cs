@@ -1,9 +1,12 @@
 ﻿using SOC.Classes.Common;
+using SOC.QuestObjects.Common;
 using System.Xml.Serialization;
+using System;
 
 namespace SOC.QuestObjects.WalkerGear
 {
-    public class WalkerGear
+    /*
+    public class WalkerGear : QuestObject
     {
         public WalkerGear() { }
 
@@ -47,5 +50,11 @@ namespace SOC.QuestObjects.WalkerGear
 
         [XmlElement]
         public Rotation rotation { get; set; } = new Rotation("0");
+
+        public override string GetObjectName()
+        {
+            throw new NotImplementedException();
+        }
     }
+    */
 }

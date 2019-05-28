@@ -6,11 +6,11 @@ using System.Windows.Forms;
 
 namespace SOC.QuestObjects.Common
 {
-    public class ManagerMaster
+    public class MasterManager
     {
         private ManagerArray managerArray = new ManagerArray();
 
-        public ManagerMaster(ManagerArray managers)
+        public MasterManager(ManagerArray managers)
         {
             managerArray = managers;
         }
@@ -20,11 +20,16 @@ namespace SOC.QuestObjects.Common
             managerArray = array;
         }
 
-        public List<QuestObjectDetails> GetQuestObjectDetails()
+        internal UserControl[] GetModulePanels()
         {
-            List<QuestObjectDetails> qodList = new List<QuestObjectDetails>();
+            return managerArray.GetManagers().Select(manager => manager.visualizer.detailPanel).ToArray();
+        }
 
-            foreach(QuestObjectManager manager in managerArray.GetManagers())
+        public List<Detail> GetQuestObjectDetails()
+        {
+            List<Detail> qodList = new List<Detail>();
+
+            foreach(DetailManager manager in managerArray.GetManagers())
             {
                 qodList.Add(manager.questDetail);
             }
@@ -34,44 +39,37 @@ namespace SOC.QuestObjects.Common
 
         public List<LocationalDataStub> GetLocationalStubs()
         {
-            List<LocationalDataStub> stubList = new List<LocationalDataStub>();
-
-            foreach(LocationalQuestObjectManager locationalManager in managerArray.GetLocationalManagers())
-            {
-                stubList.Add(locationalManager.GetStub());
-            }
-
-            return stubList;
+            return managerArray.GetManagers().Select(manager => manager.visualizer.detailStub).ToList();
         }
 
         public void RefreshAllStubTexts()
         {
-            foreach (LocationalQuestObjectManager locationalManager in managerArray.GetLocationalManagers())
-            {
-                locationalManager.RefreshStubText();
-            }
+        }
+
+        public void RefreshAllPanels()
+        {
         }
 
         internal void DisableVehicleBox()
         {
-            foreach(QuestObjectManager manager in managerArray.GetManagers())
+            foreach(DetailManager manager in managerArray.GetManagers())
             {
                 if (manager is Vehicle.VehicleManager)
                 {
                     Vehicle.VehicleManager vehicleManager = (Vehicle.VehicleManager)manager;
-                    vehicleManager.GetStub().DisableStub("Disabled On Mother Base");
+                    vehicleManager.visualizer.detailStub.DisableStub("Disabled On Mother Base");
                 }
             }
         }
 
         internal void EnableVehicleBox()
         {
-            foreach (QuestObjectManager manager in managerArray.GetManagers())
+            foreach (DetailManager manager in managerArray.GetManagers())
             {
                 if (manager is Vehicle.VehicleManager)
                 {
                     Vehicle.VehicleManager vehicleManager = (Vehicle.VehicleManager)manager;
-                    vehicleManager.GetStub().EnableStub();
+                    vehicleManager.visualizer.detailStub.EnableStub();
                 }
             }
         }

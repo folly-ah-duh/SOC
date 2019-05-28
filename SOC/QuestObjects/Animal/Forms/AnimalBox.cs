@@ -4,6 +4,7 @@ using System.Windows.Forms;
 
 namespace SOC.QuestObjects.Animal
 {
+    /*
     public class AnimalBox : QuestBox
     {
         Animal animal;
@@ -280,4 +281,5 @@ namespace SOC.QuestObjects.Animal
             return a_groupBox_main;
         }
     }
+    */
 }

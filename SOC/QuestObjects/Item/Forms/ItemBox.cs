@@ -4,6 +4,7 @@ using System.Windows.Forms;
 
 namespace SOC.QuestObjects.Item
 {
+    /*
     public class ItemBox : QuestBox
     {
         Item item;
@@ -255,4 +256,5 @@ namespace SOC.QuestObjects.Item
             return i_groupBox_main;
         }
     }
+    */
 }

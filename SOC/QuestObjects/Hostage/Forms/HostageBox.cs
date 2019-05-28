@@ -1,4 +1,5 @@
 ﻿using SOC.Classes.Common;
+using SOC.Core.Classes.InfiniteHeaven;
 using SOC.Forms;
 using System;
 using System.Windows.Forms;
@@ -32,7 +33,7 @@ namespace SOC.QuestObjects.Hostage
         public CheckBox h_checkBox_injured;
         public CheckBox h_checkBox_untied;
 
-        public HostageBox(Hostage h) : base(h.coordinates, h.hostageId)
+        public HostageBox(Hostage h) : base(h)
         {
             hostage = h;
         }
@@ -103,12 +104,12 @@ namespace SOC.QuestObjects.Hostage
             this.h_groupBox_main.Controls.Add(this.h_label_lang);
 
             this.h_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
-            this.h_groupBox_main.Location = new System.Drawing.Point(3, 69 + (253 * hostage.hostageId));
+            this.h_groupBox_main.Location = new System.Drawing.Point(3, 69 + (253 * hostage.ID));
             this.h_groupBox_main.Name = "h_groupBox_main";
             this.h_groupBox_main.Height = 236;
             this.h_groupBox_main.TabStop = false;
             this.h_groupBox_main.TabIndex = 1;
-            this.h_groupBox_main.Text = "Hostage_" + hostage.hostageId;
+            this.h_groupBox_main.Text = "Hostage_" + hostage.ID;
             this.h_groupBox_main.Click += new System.EventHandler(FocusGroupBox);
             // 
             // h_textBox_coord
@@ -117,19 +118,19 @@ namespace SOC.QuestObjects.Hostage
             this.h_textBox_xcoord.Name = "h_textBox_xcoord";
             this.h_textBox_xcoord.Size = new System.Drawing.Size(41, 20);
             this.h_textBox_xcoord.TabIndex = 2;
-            this.h_textBox_xcoord.Text = hostage.coordinates.xCoord;
+            this.h_textBox_xcoord.Text = hostage.position.coords.xCoord;
 
             this.h_textBox_ycoord.Location = new System.Drawing.Point(139, 14);
             this.h_textBox_ycoord.Name = "h_textBox_ycoord";
             this.h_textBox_ycoord.Size = new System.Drawing.Size(41, 20);
             this.h_textBox_ycoord.TabIndex = 3;
-            this.h_textBox_ycoord.Text = hostage.coordinates.yCoord;
+            this.h_textBox_ycoord.Text = hostage.position.coords.yCoord;
 
             this.h_textBox_zcoord.Location = new System.Drawing.Point(193, 14);
             this.h_textBox_zcoord.Name = "h_textBox_zcoord";
             this.h_textBox_zcoord.Size = new System.Drawing.Size(41, 20);
             this.h_textBox_zcoord.TabIndex = 4;
-            this.h_textBox_zcoord.Text = hostage.coordinates.zCoord;
+            this.h_textBox_zcoord.Text = hostage.position.coords.zCoord;
 
             this.h_label_coord.AutoSize = true;
             this.h_label_coord.Location = new System.Drawing.Point(4, 17);
@@ -158,7 +159,7 @@ namespace SOC.QuestObjects.Hostage
             this.h_textBox_rot.Name = "h_textBox_rot";
             this.h_textBox_rot.Height = 21;
             this.h_textBox_rot.TabIndex = 5;
-            this.h_textBox_rot.Text = hostage.rotation.GetDegreeRotY();
+            this.h_textBox_rot.Text = hostage.position.rotation.GetDegreeRotY();
             this.h_label_rot.AutoSize = true;
             this.h_label_rot.Location = new System.Drawing.Point(20, 42);
             this.h_label_rot.Name = "h_label_rot";
@@ -281,5 +282,17 @@ namespace SOC.QuestObjects.Hostage
             return h_groupBox_main;
         }
 
+        public void SetPosition(Position pos)
+        {
+            h_textBox_xcoord.Text = pos.coords.xCoord;
+            h_textBox_ycoord.Text = pos.coords.yCoord;
+            h_textBox_zcoord.Text = pos.coords.zCoord;
+            h_textBox_rot.Text = pos.rotation.GetDegreeRotY();
+        }
+
+        public Hostage GetHostage()
+        {
+            return new Hostage(this, base.getIndex());
+        }
     }
 }

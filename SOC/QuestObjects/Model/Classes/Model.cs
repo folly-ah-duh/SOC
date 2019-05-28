@@ -3,6 +3,7 @@ using System.Xml.Serialization;
 
 namespace SOC.QuestObjects.Model
 {
+    /*
     public class Model
     {
 
@@ -48,4 +49,5 @@ namespace SOC.QuestObjects.Model
         public Rotation rotation { get; set; } = new Rotation(new Quaternion("0", "0", "0", "0"));
 
     }
+    */
 }

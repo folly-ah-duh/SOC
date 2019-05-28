@@ -1,4 +1,4 @@
-﻿namespace SOC.QuestObjects.Vehicle.Forms
+﻿namespace SOC.QuestObjects.Vehicle
 {
     partial class VehiclePanel
     {

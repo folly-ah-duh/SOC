@@ -3,15 +3,16 @@ using SOC.QuestObjects.Common;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using System;
+using SOC.Core.Classes.InfiniteHeaven;
 
 namespace SOC.QuestObjects.Hostage
 {
     [XmlType("HostageDetails")]
-    public class HostageDetails : QuestObjectDetails
+    public class HostageDetails : Detail
     {
-        public HostageDetails() { }
+        public HostageDetails() : base (new List<Hostage>(), new HostageMetadata()) { }
 
-        public HostageDetails(List<Hostage> hostageList, HostageMetadata hostageMeta)
+        public HostageDetails(List<Hostage> hostageList, HostageMetadata hostageMeta) : base (hostageList, hostageMeta)
         {
             Hostages = hostageList; hostageMetadata = hostageMeta;
         }
@@ -22,25 +23,25 @@ namespace SOC.QuestObjects.Hostage
         [XmlElement]
         public HostageMetadata hostageMetadata { get; set; } = new HostageMetadata();
 
-        public override QuestObjectManager GetNewManager()
+        public override DetailManager GetNewManager()
         {
             return new HostageManager(this);
         }
     }
 
 
-    public class Hostage
+    public class Hostage : QuestObject
     {
-        public Hostage() { }
+        public Hostage() : base(new Position(new Coordinates(), new Rotation()), 0) { }
 
-        public Hostage(Coordinates coords, int numId)
+        public Hostage(Position pos, int numId) : base (pos, numId)
         {
-            coordinates = coords; hostageId = numId;
+            position = pos; ID = numId;
         }
 
-        public Hostage(HostageBox hBox, int index)
+        public Hostage(HostageBox hBox, int index) : base (new Position(new Coordinates(hBox.h_textBox_xcoord.Text, hBox.h_textBox_ycoord.Text, hBox.h_textBox_zcoord.Text), new Rotation(hBox.h_textBox_rot.Text)), index)
         {
-            hostageId = index;
+            ID = base.ID;
 
             isTarget = hBox.h_checkBox_target.Checked;
             isUntied = hBox.h_checkBox_untied.Checked;
@@ -49,13 +50,12 @@ namespace SOC.QuestObjects.Hostage
             staffType = hBox.h_comboBox_staff.Text;
             scared = hBox.h_comboBox_scared.Text;
             language = hBox.h_comboBox_lang.Text;
-            coordinates = new Coordinates(hBox.h_textBox_xcoord.Text, hBox.h_textBox_ycoord.Text, hBox.h_textBox_zcoord.Text);
-            rotation = new Rotation(hBox.h_textBox_rot.Text);
+            position = base.position;
         }
 
-        public string GetHostageName()
+        public override string GetObjectName()
         {
-            return "Hostage_" + hostageId;
+            return "Hostage_" + ID;
         }
 
         [XmlElement]
@@ -68,7 +68,7 @@ namespace SOC.QuestObjects.Hostage
         public bool isInjured { get; set; } = false;
 
         [XmlElement]
-        public int hostageId { get; set; } = 0;
+        public int ID { get; set; } = 0;
 
         [XmlElement]
         public string skill { get; set; } = "NONE";
@@ -83,14 +83,11 @@ namespace SOC.QuestObjects.Hostage
         public string language { get; set; } = "english";
 
         [XmlElement]
-        public Coordinates coordinates { get; set; } = new Coordinates("0", "0", "0");
-
-        [XmlElement]
-        public Rotation rotation { get; set; } = new Rotation("0");
+        public Position position { get; set; } = new Position(new Coordinates(), new Rotation());
     }
 
 
-    public class HostageMetadata
+    public class HostageMetadata : Metadata
     {
 
         public HostageMetadata() { }
@@ -110,5 +107,6 @@ namespace SOC.QuestObjects.Hostage
 
         [XmlAttribute]
         public string hostageObjectiveType { get; set; } = "ELIMINATE";
+        
     }
 }

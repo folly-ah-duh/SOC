@@ -71,6 +71,6 @@ namespace SOC.Classes.Common
         }
 
         [XmlElement]
-        public Quaternion quatRotation;
+        public Quaternion quatRotation = new Quaternion();
     }
 }

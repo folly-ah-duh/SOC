@@ -7,13 +7,17 @@ using SOC.Core.Classes.InfiniteHeaven;
 
 namespace SOC.QuestObjects.Hostage
 {
-    class HostageManager : LocationalQuestObjectManager
+    class HostageManager : DetailManager
     {
         static LocationalDataStub hostageStub = new LocationalDataStub("Prisoner Locations");
 
+        static HostagePanel hostagePanel = new HostagePanel();
+
+        static HostageVisualizer hostageVisualizer = new HostageVisualizer(hostageStub, hostagePanel);
+
         private HostageDetails hostageDetails;
 
-        public HostageManager(HostageDetails hdetails) : base(hostageStub, hdetails)
+        public HostageManager(HostageDetails hdetails) : base(hdetails, hostageVisualizer)
         {
             hostageDetails = hdetails;
         }
@@ -22,17 +26,6 @@ namespace SOC.QuestObjects.Hostage
         {
             throw new NotImplementedException();
         }
-
-        public override void RefreshStubText()
-        {
-            List<Position> prsPosList = new List<Position>();
-            
-            foreach(Hostage hostage in hostageDetails.Hostages)
-            {
-                prsPosList.Add(new Position(hostage.coordinates, hostage.rotation));
-            }
-
-            hostageStub.SetStubText(new IHLogPositions(prsPosList));
-        }
+        
     }
 }

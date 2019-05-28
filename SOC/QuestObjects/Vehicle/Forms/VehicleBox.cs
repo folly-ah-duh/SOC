@@ -1,6 +1,7 @@
 ﻿using SOC.Forms;
 using System;
 using System.Windows.Forms;
+using SOC.QuestObjects.Common;
 
 namespace SOC.QuestObjects.Vehicle
 {
@@ -22,7 +23,7 @@ namespace SOC.QuestObjects.Vehicle
         public Label v_label_class;
         public Label v_label_vehicle;
 
-        public VehicleBox(Vehicle v) : base(v.coordinates, v.number)
+        public VehicleBox(Vehicle v) : base(v)
         {
             vehicle = v;
         }
@@ -71,12 +72,12 @@ namespace SOC.QuestObjects.Vehicle
             this.v_groupBox_main.Controls.Add(this.v_label_class);
             this.v_groupBox_main.Controls.Add(this.v_label_vehicle);
             this.v_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
-            this.v_groupBox_main.Location = new System.Drawing.Point(3, 27 + (170 * vehicle.number));
+            this.v_groupBox_main.Location = new System.Drawing.Point(3, 27 + (170 * vehicle.ID));
             this.v_groupBox_main.Name = "v_groupBox_main";
             this.v_groupBox_main.Size = new System.Drawing.Size(width, 152);
             this.v_groupBox_main.TabIndex = 1;
             this.v_groupBox_main.TabStop = false;
-            this.v_groupBox_main.Text = vehicle.name;
+            this.v_groupBox_main.Text = vehicle.GetObjectName();
             this.v_groupBox_main.Click += new System.EventHandler(FocusGroupBox);
 
             // 
@@ -93,19 +94,19 @@ namespace SOC.QuestObjects.Vehicle
             this.v_textBox_xcoord.Name = "v_textBox_xcoord";
             this.v_textBox_xcoord.Size = new System.Drawing.Size(41, 20);
             this.v_textBox_xcoord.TabIndex = 2;
-            this.v_textBox_xcoord.Text = vehicle.coordinates.xCoord;
+            this.v_textBox_xcoord.Text = vehicle.position.coords.xCoord;
 
             this.v_textBox_ycoord.Location = new System.Drawing.Point(133, 14);
             this.v_textBox_ycoord.Name = "v_textBox_ycoord";
             this.v_textBox_ycoord.Size = new System.Drawing.Size(41, 20);
             this.v_textBox_ycoord.TabIndex = 3;
-            this.v_textBox_ycoord.Text = vehicle.coordinates.yCoord;
+            this.v_textBox_ycoord.Text = vehicle.position.coords.yCoord;
 
             this.v_textBox_zcoord.Location = new System.Drawing.Point(187, 14);
             this.v_textBox_zcoord.Name = "v_textBox_zcoord";
             this.v_textBox_zcoord.Size = new System.Drawing.Size(41, 20);
             this.v_textBox_zcoord.TabIndex = 4;
-            this.v_textBox_zcoord.Text = vehicle.coordinates.zCoord;
+            this.v_textBox_zcoord.Text = vehicle.position.coords.zCoord;
             // 
             // v_checkBox_target
             // 
@@ -130,7 +131,7 @@ namespace SOC.QuestObjects.Vehicle
             this.v_textBox_rot.Name = "v_textBox_rot";
             this.v_textBox_rot.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.v_textBox_rot.TabIndex = 5;
-            this.v_textBox_rot.Text = vehicle.rotation.GetDegreeRotY();
+            this.v_textBox_rot.Text = vehicle.position.rotation.GetDegreeRotY();
 
             this.v_label_rot.AutoSize = true;
             this.v_label_rot.Location = new System.Drawing.Point(20, 42);

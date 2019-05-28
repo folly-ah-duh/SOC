@@ -3,6 +3,7 @@ using System.Xml.Serialization;
 
 namespace SOC.QuestObjects.Item
 {
+    /*
     public class Item
     {
 
@@ -55,4 +56,5 @@ namespace SOC.QuestObjects.Item
         public Rotation rotation { get; set; } = new Rotation(new Quaternion("0", "0", "0", "0"));
 
     }
+    */
 }

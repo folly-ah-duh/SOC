@@ -25,13 +25,13 @@ namespace SOC.Classes.Common
         }
 
         [XmlElement]
-        public string xCoord;
+        public string xCoord = "0";
 
         [XmlElement]
-        public string yCoord;
+        public string yCoord = "0";
 
         [XmlElement]
-        public string zCoord;
+        public string zCoord = "0";
 
     }
 

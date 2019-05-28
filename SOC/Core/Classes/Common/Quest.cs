@@ -12,7 +12,7 @@ namespace SOC.Classes.Common
 
         public Quest() { }
 
-        public Quest(CoreDetails core, List<QuestObjectDetails> questObject)
+        public Quest(CoreDetails core, List<Detail> questObject)
         {
             coreDetails = core;
             questObjectDetails = questObject;
@@ -72,7 +72,7 @@ namespace SOC.Classes.Common
         public CoreDetails coreDetails { get; set; }
 
         [XmlArray]
-        public List<QuestObjectDetails> questObjectDetails { get; set; }
+        public List<Detail> questObjectDetails { get; set; }
 
     }
 }

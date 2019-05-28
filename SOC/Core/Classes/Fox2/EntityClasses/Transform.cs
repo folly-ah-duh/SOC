@@ -1,4 +1,5 @@
 ﻿using SOC.Classes.Common;
+using SOC.Core.Classes.InfiniteHeaven;
 
 namespace SOC.Classes.Fox2
 {
@@ -8,11 +9,11 @@ namespace SOC.Classes.Fox2
         Rotation transform_rotation;
         Coordinates transform_translation;
 
-        public Transform(Fox2EntityClass _owner, Rotation _rot, Coordinates _coord)
+        public Transform(Fox2EntityClass _owner, Position position)
         {
             owner = _owner;
-            transform_rotation = _rot;
-            transform_translation = _coord;
+            transform_rotation = position.rotation;
+            transform_translation = position.coords;
         }
 
         public override string GetFox2Format()

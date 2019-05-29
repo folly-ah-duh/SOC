@@ -14,7 +14,7 @@ namespace SOC.QuestObjects.Vehicle
     {
         static LocationalDataStub vehicleStub = new LocationalDataStub("Heavy Vehicle Locations");
 
-        static VehiclePanel vehiclePanel = new VehiclePanel();
+        static VehicleControl vehiclePanel = new VehicleControl();
 
         static VehicleVisualizer vehicleVisualizer = new VehicleVisualizer(vehicleStub, vehiclePanel);
 

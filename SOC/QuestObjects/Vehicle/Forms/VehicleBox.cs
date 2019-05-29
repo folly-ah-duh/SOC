@@ -2,11 +2,13 @@
 using System;
 using System.Windows.Forms;
 using SOC.QuestObjects.Common;
+using SOC.UI;
 
 namespace SOC.QuestObjects.Vehicle
 {
     public class VehicleBox : QuestBox
     {
+
         Vehicle vehicle;
 
         public GroupBox v_groupBox_main;
@@ -23,12 +25,12 @@ namespace SOC.QuestObjects.Vehicle
         public Label v_label_class;
         public Label v_label_vehicle;
 
-        public VehicleBox(Vehicle v) : base(v)
+        public VehicleBox(Vehicle v)
         {
             vehicle = v;
         }
 
-        public override void SetObject(QuestBox detail)
+        public void SetObject(QuestBox detail)
         {
             VehicleBox vehicleDetail = (VehicleBox)detail;
             v_checkBox_target.Checked = vehicleDetail.v_checkBox_target.Checked;
@@ -36,7 +38,7 @@ namespace SOC.QuestObjects.Vehicle
             v_comboBox_vehicle.Text = vehicleDetail.v_comboBox_vehicle.Text;
         }
 
-        public override void BuildObject()
+        public void BuildObject()
         {
             int width = 6;
             int comboboxWidth = width - 96;
@@ -78,7 +80,7 @@ namespace SOC.QuestObjects.Vehicle
             this.v_groupBox_main.TabIndex = 1;
             this.v_groupBox_main.TabStop = false;
             this.v_groupBox_main.Text = vehicle.GetObjectName();
-            this.v_groupBox_main.Click += new System.EventHandler(FocusGroupBox);
+            //this.v_groupBox_main.Click += new System.EventHandler(FocusGroupBox);
 
             // 
             // v_textBox_zcoord
@@ -147,7 +149,7 @@ namespace SOC.QuestObjects.Vehicle
             this.v_comboBox_class.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.v_comboBox_class.FormattingEnabled = true;
             this.v_comboBox_class.Location = new System.Drawing.Point(78, 116);
-            v_comboBox_class.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
+            //v_comboBox_class.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
             this.v_comboBox_class.Items.AddRange(new object[] {
                 "DEFAULT","DARK_GRAY","OXIDE_RED"
             });
@@ -174,7 +176,7 @@ namespace SOC.QuestObjects.Vehicle
             this.v_comboBox_vehicle.Name = "v_comboBox_vehicle";
             this.v_comboBox_vehicle.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.v_comboBox_vehicle.TabIndex = 7;
-            v_comboBox_vehicle.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
+            //v_comboBox_vehicle.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
             this.v_comboBox_vehicle.SelectedIndex = vehicle.vehicleIndex;
             this.v_label_vehicle.AutoSize = true;
             this.v_label_vehicle.Location = new System.Drawing.Point(25, 94);
@@ -188,9 +190,14 @@ namespace SOC.QuestObjects.Vehicle
             this.v_groupBox_main.PerformLayout();
         }
 
-        public override GroupBox getGroupBoxMain()
+        public GroupBox getGroupBoxMain()
         {
             return v_groupBox_main;
+        }
+
+        public override QuestObject getQuestObject()
+        {
+            throw new NotImplementedException();
         }
     }
 }

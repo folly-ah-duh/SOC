@@ -1,6 +1,7 @@
 ﻿using SOC.Classes.Common;
 using SOC.Classes.Fox2;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SOC.QuestObjects.Hostage
 {
@@ -8,13 +9,13 @@ namespace SOC.QuestObjects.Hostage
     {
         static void AddQuestEntities(HostageDetails hDetails, DataSet dataSet, ref List<Fox2EntityClass> entityList)
         {
-            List<Hostage> hostages = hDetails.Hostages;
+            IEnumerable<Hostage> hostages = hDetails.Hostages;
             HostageMetadata hMetadata = hDetails.hostageMetadata;
             BodyInfoEntry hostageBodies = NPCBodyInfo.GetBodyInfo(hMetadata.hostageBodyName);
 
-            if (hostages.Count > 0)
+            if (hostages.Count() > 0)
             {
-                GameObject gameObjectTppHostageUnique = new GameObject("GameObjectTppHostageUnique", dataSet, "TppHostageUnique2", hostages.Count, hostages.Count);
+                GameObject gameObjectTppHostageUnique = new GameObject("GameObjectTppHostageUnique", dataSet, "TppHostageUnique2", hostages.Count(), hostages.Count());
                 TppHostage2Parameter hostageParameter = new TppHostage2Parameter(gameObjectTppHostageUnique, hostageBodies.partsPath);
 
                 gameObjectTppHostageUnique.SetParameter(hostageParameter);

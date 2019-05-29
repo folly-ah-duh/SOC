@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using System.Windows.Forms;
 
 namespace SOC.QuestObjects.Vehicle
 {
@@ -77,12 +78,17 @@ namespace SOC.QuestObjects.Vehicle
 
         public VehicleMetadata() { }
 
-        public VehicleMetadata(VehiclePanel vehiclePanel)
+        public VehicleMetadata(VehicleControl vehiclePanel)
         {
             vehicleObjectiveType = vehiclePanel.comboBox_vehObjType.Text;
         }
 
         [XmlAttribute]
         public string vehicleObjectiveType { get; set; } = "ELIMINATE";
+
+        public override void DrawMetadata(UserControl control)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

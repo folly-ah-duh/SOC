@@ -6,43 +6,47 @@ using System.Windows.Forms;
 using System.Linq;
 using SOC.Forms.Pages;
 using SOC.Forms;
+using SOC.UI;
 
 namespace SOC.QuestObjects.Hostage
 {
     class HostageVisualizer : DetailVisualizer
     {
-        public HostageVisualizer(LocationalDataStub hostageStub, HostagePanel hostagePanel) : base(hostageStub, hostagePanel)
+        public HostageVisualizer(LocationalDataStub hostageStub, HostageControl hostageControl) : base(hostageStub, hostageControl, hostageControl.panelHosDet)
         {
-            hostagePanel.comboBox_Body.SelectedIndexChanged += OnBodyIndexChanged;
+            hostageControl.comboBox_Body.SelectedIndexChanged += OnBodyIndexChanged;
         }
 
         public override void DrawMetadata(Metadata meta)
         {
-            HostagePanel hostagePanel = (HostagePanel)detailPanel;
             HostageMetadata hostageMeta = (HostageMetadata)meta;
-            hostagePanel.comboBox_hosObjType.Text = hostageMeta.hostageObjectiveType;
-            hostagePanel.comboBox_Body.Text = hostageMeta.hostageBodyName;
-            hostagePanel.h_checkBox_intrgt.Checked = hostageMeta.canInterrogate;
+            hostageMeta.DrawMetadata(detailControl);
         }
 
         public override QuestBox NewBox(QuestObject qObject)
         {
-            throw new NotImplementedException();
+            //Console.WriteLine("[Hostage NewBox] " + qObject.GetObjectName() + ": " + qObject.position.coords.xCoord + ", " + qObject.position.coords.yCoord + ", " + qObject.position.coords.zCoord + " || ");
+            
+            HostageBox hBox = new HostageBox((Hostage)qObject, (HostageMetadata)GetMetadataFromControl());
+            //Console.WriteLine("Hostage NewBox2: " + hBox.getQuestObject().position.coords.xCoord);
+            return hBox;
         }
 
-        public override Detail NewDetail(List<QuestObject> qObjects, Metadata meta)
+        public override Detail NewDetail(Metadata meta, IEnumerable<QuestObject> qObjects)
         {
-            throw new NotImplementedException();
+            return new HostageDetails(qObjects.Cast<Hostage>().ToList(), (HostageMetadata)meta);
         }
 
-        public override Metadata NewMetadata(UserControl detailPanel)
+        public override Metadata GetMetadataFromControl()
         {
-            throw new NotImplementedException();
+            return new HostageMetadata((HostageControl)detailControl);
         }
 
         public override QuestObject NewObject(Position objectPosition, int objectID)
         {
-            throw new NotImplementedException();
+            Hostage h = new Hostage(objectPosition, objectID);
+            //Console.WriteLine("[New Object] " + h.GetObjectName());
+            return h;
         }
 
         private void OnBodyIndexChanged(object sender, EventArgs e)
@@ -52,28 +56,12 @@ namespace SOC.QuestObjects.Hostage
 
         private void RefreshHostageLanguage()
         {
-            HostagePanel hostagePanel = (HostagePanel)detailPanel;
-            if (hostagePanel.comboBox_Body.Text.ToUpper().Contains("FEMALE"))
+            HostageMetadata meta = (HostageMetadata)GetMetadataFromControl();
+            foreach (HostageBox hBox in flowPanel.Controls.OfType<HostageBox>())
             {
-
-                foreach (HostageBox hBox in objectBoxes)
-                {
-                    hBox.h_comboBox_lang.Items.Clear();
-                    hBox.h_comboBox_lang.Items.Add("english");
-                    hBox.h_comboBox_lang.SelectedIndex = 0;
-                }
+                //Console.WriteLine("Refreshing language");
+                hBox.RefreshLanguage(meta.hostageBodyName);
             }
-            else
-            {
-                foreach (HostageBox hostageDetail in objectBoxes)
-                {
-                    int languageindex = hostageDetail.h_comboBox_lang.SelectedIndex;
-                    hostageDetail.h_comboBox_lang.Items.Clear();
-                    hostageDetail.h_comboBox_lang.Items.AddRange(new string[] { "english", "russian", "pashto", "kikongo", "afrikaans" });
-                    hostageDetail.h_comboBox_lang.SelectedIndex = languageindex;
-                }
-            }
-
         }
     }
 }

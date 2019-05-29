@@ -11,7 +11,7 @@ namespace SOC.QuestObjects.Hostage
     {
         static LocationalDataStub hostageStub = new LocationalDataStub("Prisoner Locations");
 
-        static HostagePanel hostagePanel = new HostagePanel();
+        static HostageControl hostagePanel = new HostageControl();
 
         static HostageVisualizer hostageVisualizer = new HostageVisualizer(hostageStub, hostagePanel);
 

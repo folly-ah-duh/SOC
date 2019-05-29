@@ -1,6 +1,6 @@
 ﻿namespace SOC.QuestObjects.Vehicle
 {
-    partial class VehiclePanel
+    partial class VehicleControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,11 +29,10 @@
         private void InitializeComponent()
         {
             this.groupVehDet = new System.Windows.Forms.GroupBox();
-            this.panelVehDet = new System.Windows.Forms.Panel();
             this.label_vehObjType = new System.Windows.Forms.Label();
             this.comboBox_vehObjType = new System.Windows.Forms.ComboBox();
+            this.panelVehDet = new System.Windows.Forms.FlowLayoutPanel();
             this.groupVehDet.SuspendLayout();
-            this.panelVehDet.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupVehDet
@@ -41,6 +40,8 @@
             this.groupVehDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupVehDet.Controls.Add(this.panelVehDet);
+            this.groupVehDet.Controls.Add(this.label_vehObjType);
+            this.groupVehDet.Controls.Add(this.comboBox_vehObjType);
             this.groupVehDet.Location = new System.Drawing.Point(0, 0);
             this.groupVehDet.Name = "groupVehDet";
             this.groupVehDet.Size = new System.Drawing.Size(264, 449);
@@ -48,23 +49,10 @@
             this.groupVehDet.TabStop = false;
             this.groupVehDet.Text = "Heavy Vehicles";
             // 
-            // panelVehDet
-            // 
-            this.panelVehDet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelVehDet.AutoScroll = true;
-            this.panelVehDet.Controls.Add(this.label_vehObjType);
-            this.panelVehDet.Controls.Add(this.comboBox_vehObjType);
-            this.panelVehDet.Location = new System.Drawing.Point(3, 16);
-            this.panelVehDet.Name = "panelVehDet";
-            this.panelVehDet.Size = new System.Drawing.Size(258, 424);
-            this.panelVehDet.TabIndex = 0;
-            // 
             // label_vehObjType
             // 
             this.label_vehObjType.AutoSize = true;
-            this.label_vehObjType.Location = new System.Drawing.Point(3, 3);
+            this.label_vehObjType.Location = new System.Drawing.Point(6, 16);
             this.label_vehObjType.Name = "label_vehObjType";
             this.label_vehObjType.Size = new System.Drawing.Size(116, 13);
             this.label_vehObjType.TabIndex = 15;
@@ -80,29 +68,38 @@
             "ELIMINATE",
             "RECOVERED",
             "KILLREQUIRED"});
-            this.comboBox_vehObjType.Location = new System.Drawing.Point(125, 0);
+            this.comboBox_vehObjType.Location = new System.Drawing.Point(128, 13);
             this.comboBox_vehObjType.Name = "comboBox_vehObjType";
             this.comboBox_vehObjType.Size = new System.Drawing.Size(130, 21);
             this.comboBox_vehObjType.TabIndex = 14;
             // 
-            // VehiclePanel
+            // panelVehDet
+            // 
+            this.panelVehDet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelVehDet.Location = new System.Drawing.Point(0, 40);
+            this.panelVehDet.Name = "panelVehDet";
+            this.panelVehDet.Size = new System.Drawing.Size(264, 409);
+            this.panelVehDet.TabIndex = 16;
+            // 
+            // VehicleControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupVehDet);
-            this.Name = "VehiclePanel";
+            this.Name = "VehicleControl";
             this.Size = new System.Drawing.Size(264, 449);
             this.groupVehDet.ResumeLayout(false);
-            this.panelVehDet.ResumeLayout(false);
-            this.panelVehDet.PerformLayout();
+            this.groupVehDet.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        public System.Windows.Forms.Panel panelVehDet;
         private System.Windows.Forms.Label label_vehObjType;
         protected System.Windows.Forms.GroupBox groupVehDet;
         public System.Windows.Forms.ComboBox comboBox_vehObjType;
+        public System.Windows.Forms.FlowLayoutPanel panelVehDet;
     }
 }

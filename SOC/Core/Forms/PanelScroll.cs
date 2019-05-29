@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace SOC.Forms
+namespace SOC.UI
 {
     class PanelScroll : IMessageFilter
     {

@@ -2,9 +2,9 @@
 
 namespace SOC.QuestObjects.Vehicle
 {
-    public partial class VehiclePanel : UserControl
+    public partial class VehicleControl : UserControl
     {
-        public VehiclePanel()
+        public VehicleControl()
         {
             InitializeComponent();
             Anchor = AnchorStyles.Top | AnchorStyles.Bottom;

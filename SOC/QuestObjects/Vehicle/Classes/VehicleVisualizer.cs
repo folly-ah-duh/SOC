@@ -8,20 +8,26 @@ using System.Windows.Forms;
 using SOC.Core.Classes.InfiniteHeaven;
 using SOC.Forms;
 using SOC.Forms.Pages;
+using SOC.UI;
 
 namespace SOC.QuestObjects.Vehicle
 {
     class VehicleVisualizer : DetailVisualizer
     {
-        public VehicleVisualizer(LocationalDataStub vehicleStub, VehiclePanel vehiclePanel) : base(vehicleStub, vehiclePanel)
+        public VehicleVisualizer(LocationalDataStub vehicleStub, VehicleControl vehicleControl) : base(vehicleStub, vehicleControl, vehicleControl.panelVehDet)
         {
         }
 
         public override void DrawMetadata(Metadata meta)
         {
             VehicleMetadata vehicleMeta = (VehicleMetadata)meta;
-            VehiclePanel vehiclePanel = (VehiclePanel)detailPanel;
+            VehicleControl vehiclePanel = (VehicleControl)detailControl;
             vehiclePanel.comboBox_vehObjType.Text = vehicleMeta.vehicleObjectiveType;
+        }
+
+        public override Metadata GetMetadataFromControl()
+        {
+            throw new NotImplementedException();
         }
 
         public override QuestBox NewBox(QuestObject qObject)
@@ -29,12 +35,7 @@ namespace SOC.QuestObjects.Vehicle
             throw new NotImplementedException();
         }
 
-        public override Detail NewDetail(List<QuestObject> qObjects, Metadata meta)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Metadata NewMetadata(UserControl detailPanel)
+        public override Detail NewDetail(Metadata meta, IEnumerable<QuestObject> qObjects)
         {
             throw new NotImplementedException();
         }

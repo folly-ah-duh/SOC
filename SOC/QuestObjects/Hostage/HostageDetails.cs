@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using System;
 using SOC.Core.Classes.InfiniteHeaven;
+using System.Windows.Forms;
 
 namespace SOC.QuestObjects.Hostage
 {
@@ -39,7 +40,7 @@ namespace SOC.QuestObjects.Hostage
             position = pos; ID = numId;
         }
 
-        public Hostage(HostageBox hBox, int index) : base (new Position(new Coordinates(hBox.h_textBox_xcoord.Text, hBox.h_textBox_ycoord.Text, hBox.h_textBox_zcoord.Text), new Rotation(hBox.h_textBox_rot.Text)), index)
+        public Hostage(HostageBox hBox) : base (new Position(new Coordinates(hBox.h_textBox_xcoord.Text, hBox.h_textBox_ycoord.Text, hBox.h_textBox_zcoord.Text), new Rotation(hBox.h_textBox_rot.Text)), hBox.hostageID)
         {
             ID = base.ID;
 
@@ -92,11 +93,19 @@ namespace SOC.QuestObjects.Hostage
 
         public HostageMetadata() { }
 
-        public HostageMetadata(HostagePanel hostagePanel)
+        public HostageMetadata(HostageControl hostageControl)
         {
-            hostageBodyName = hostagePanel.comboBox_Body.SelectedText;
-            canInterrogate = hostagePanel.h_checkBox_intrgt.Checked;
-            hostageObjectiveType = hostagePanel.comboBox_hosObjType.SelectedText;
+            hostageBodyName = hostageControl.comboBox_Body.Text;
+            canInterrogate = hostageControl.h_checkBox_intrgt.Checked;
+            hostageObjectiveType = hostageControl.comboBox_hosObjType.Text;
+        }
+
+        public override void DrawMetadata(UserControl control)
+        {
+            HostageControl hostageControl = (HostageControl)control;
+            hostageControl.comboBox_Body.Text = hostageBodyName;
+            hostageControl.comboBox_hosObjType.Text = hostageObjectiveType;
+            hostageControl.h_checkBox_intrgt.Checked = canInterrogate;
         }
 
         [XmlAttribute]
@@ -107,6 +116,5 @@ namespace SOC.QuestObjects.Hostage
 
         [XmlAttribute]
         public string hostageObjectiveType { get; set; } = "ELIMINATE";
-        
     }
 }

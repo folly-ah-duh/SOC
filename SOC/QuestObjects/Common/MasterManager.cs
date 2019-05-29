@@ -22,7 +22,7 @@ namespace SOC.QuestObjects.Common
 
         internal UserControl[] GetModulePanels()
         {
-            return managerArray.GetManagers().Select(manager => manager.visualizer.detailPanel).ToArray();
+            return managerArray.GetManagers().Select(manager => manager.GetVisualizer().detailControl).ToArray();
         }
 
         public List<Detail> GetQuestObjectDetails()
@@ -39,15 +39,23 @@ namespace SOC.QuestObjects.Common
 
         public List<LocationalDataStub> GetLocationalStubs()
         {
-            return managerArray.GetManagers().Select(manager => manager.visualizer.detailStub).ToList();
+            return managerArray.GetManagers().Select(manager => manager.GetVisualizer().detailStub).ToList();
         }
 
         public void RefreshAllStubTexts()
         {
+            foreach (DetailManager manager in managerArray.GetManagers())
+            {
+                manager.RefreshStub();
+            }
         }
 
         public void RefreshAllPanels()
         {
+            foreach (DetailManager manager in managerArray.GetManagers())
+            {
+                manager.RefreshPanel();
+            }
         }
 
         internal void DisableVehicleBox()
@@ -57,7 +65,7 @@ namespace SOC.QuestObjects.Common
                 if (manager is Vehicle.VehicleManager)
                 {
                     Vehicle.VehicleManager vehicleManager = (Vehicle.VehicleManager)manager;
-                    vehicleManager.visualizer.detailStub.DisableStub("Disabled On Mother Base");
+                    vehicleManager.GetVisualizer().detailStub.DisableStub("Disabled On Mother Base");
                 }
             }
         }
@@ -69,7 +77,7 @@ namespace SOC.QuestObjects.Common
                 if (manager is Vehicle.VehicleManager)
                 {
                     Vehicle.VehicleManager vehicleManager = (Vehicle.VehicleManager)manager;
-                    vehicleManager.visualizer.detailStub.EnableStub();
+                    vehicleManager.GetVisualizer().detailStub.EnableStub();
                 }
             }
         }

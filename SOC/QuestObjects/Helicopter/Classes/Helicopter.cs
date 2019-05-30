@@ -15,7 +15,8 @@ namespace SOC.QuestObjects.Helicopter
             heliClass = he.He_comboBox_class.Text;
         }
 
-        [XmlElement]
+        [
+        ]
         public bool isTarget { get; set; } = false;
 
         [XmlElement]

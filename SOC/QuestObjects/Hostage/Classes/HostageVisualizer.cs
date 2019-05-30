@@ -26,7 +26,6 @@ namespace SOC.QuestObjects.Hostage
         public override QuestBox NewBox(QuestObject qObject)
         {
             //Console.WriteLine("[Hostage NewBox] " + qObject.GetObjectName() + ": " + qObject.position.coords.xCoord + ", " + qObject.position.coords.yCoord + ", " + qObject.position.coords.zCoord + " || ");
-            
             HostageBox hBox = new HostageBox((Hostage)qObject, (HostageMetadata)GetMetadataFromControl());
             //Console.WriteLine("Hostage NewBox2: " + hBox.getQuestObject().position.coords.xCoord);
             return hBox;
@@ -34,7 +33,7 @@ namespace SOC.QuestObjects.Hostage
 
         public override Detail NewDetail(Metadata meta, IEnumerable<QuestObject> qObjects)
         {
-            return new HostageDetails(qObjects.Cast<Hostage>().ToList(), (HostageMetadata)meta);
+            return new HostageDetail(qObjects.Cast<Hostage>().ToList(), (HostageMetadata)meta);
         }
 
         public override Metadata GetMetadataFromControl()

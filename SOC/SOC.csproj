@@ -125,7 +125,7 @@
     <Compile Include="QuestObjects\Hostage\Forms\HostageBox.Designer.cs">
       <DependentUpon>HostageBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="QuestObjects\Hostage\HostageDetails.cs" />
+    <Compile Include="QuestObjects\Hostage\HostageDetail.cs" />
     <Compile Include="QuestObjects\Hostage\Classes\HostageVisualizer.cs" />
     <Compile Include="Core\Classes\Route\RouteManager.cs" />
     <Compile Include="Core\Classes\Common\Coordinates.cs" />
@@ -231,7 +231,7 @@
     <Compile Include="QuestObjects\Vehicle\Forms\VehiclePanel.Designer.cs">
       <DependentUpon>VehiclePanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="QuestObjects\Vehicle\VehicleDetails.cs" />
+    <Compile Include="QuestObjects\Vehicle\VehicleDetail.cs" />
     <Compile Include="QuestObjects\Vehicle\VehicleManager.cs" />
     <Compile Include="QuestObjects\WalkerGear\Forms\WalkerGearBox.cs" />
     <Compile Include="Core\Forms\Pages\Setup.cs">

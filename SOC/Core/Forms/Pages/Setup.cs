@@ -41,11 +41,12 @@ namespace SOC.UI
             managerMaster = manMaster;
         }
 
-        public void SetCoreDetails(CoreDetails core)
+        public void SetForm(CoreDetails core)
         {
-            textBoxQuestTitle.Text = core.QuestTitle; textBoxQuestDesc.Text = core.QuestDesc;
-
-            textBoxFPKName.Text = core.FpkName; textBoxQuestNum.Text = core.QuestNum;
+            textBoxQuestTitle.Text = core.QuestTitle;
+            textBoxQuestDesc.Text = core.QuestDesc;
+            textBoxFPKName.Text = core.FpkName;
+            textBoxQuestNum.Text = core.QuestNum;
 
             locationID = core.locationID;
 
@@ -64,11 +65,15 @@ namespace SOC.UI
 
             comboBoxLoadArea.Text = core.loadArea;
 
-            textBoxXCoord.Text = core.coords.xCoord; textBoxYCoord.Text = core.coords.yCoord; textBoxZCoord.Text = core.coords.zCoord;
+            textBoxXCoord.Text = core.coords.xCoord;
+            textBoxYCoord.Text = core.coords.yCoord;
+            textBoxZCoord.Text = core.coords.zCoord;
 
-            comboBoxRadius.Text = core.radius; comboBoxCategory.Text = core.category; comboBoxReward.Text = core.reward;
-
-            core.CPName = comboBoxCP.Text;
+            comboBoxRadius.Text = core.radius;
+            comboBoxCategory.Text = core.category;
+            comboBoxReward.Text = core.reward;
+            
+            comboBoxCP.Text = core.CPName;
 
             refreshNotifsList();
             if (comboBoxProgressNotifs.Items.Count > core.progNotif)
@@ -81,28 +86,14 @@ namespace SOC.UI
                 comboBoxRoute.SelectedItem = core.routeName;
             else
                 comboBoxRoute.SelectedItem = "NONE";
-
+            
+            //flowPanelLocationalStubs.Controls.AddRange(managerMaster.GetLocationalStubs().ToArray());
+            Console.WriteLine("");
         }
 
         public CoreDetails GetCoreDetails()
         {
-            CoreDetails core = new CoreDetails();
-
-            core.QuestTitle = textBoxQuestTitle.Text; core.QuestDesc = textBoxQuestDesc.Text;
-
-            core.FpkName = textBoxFPKName.Text; core.QuestNum = textBoxQuestNum.Text;
-
-            core.locationID = locationID; core.loadArea = comboBoxLoadArea.Text;
-
-            core.coords = new Coordinates(textBoxXCoord.Text, textBoxYCoord.Text, textBoxZCoord.Text); core.radius = comboBoxRadius.Text;
-
-            core.category = comboBoxCategory.Text; core.progNotif = comboBoxProgressNotifs.SelectedIndex;
-
-            core.reward = comboBoxReward.Text;
-
-            core.CPName = comboBoxCP.Text; core.routeName = comboBoxRoute.Text;
-
-            return core;
+            return new CoreDetails(this);
         }
 
         public void refreshNotifsList()

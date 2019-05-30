@@ -151,7 +151,8 @@ namespace SOC.UI
             if (quest.Load(loadFile.FileName))
             {
                 managerMaster.SetManagerArray(new ManagerArray(quest.questObjectDetails));
-                setupPage.SetCoreDetails(quest.coreDetails);
+                setupPage.SetForm(quest.coreDetails);
+                managerMaster.LoadAllStubTexts();
             }
         }
 

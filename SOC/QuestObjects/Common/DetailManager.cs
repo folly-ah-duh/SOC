@@ -24,21 +24,28 @@ namespace SOC.QuestObjects.Common
             return visualizer;
         }
 
+        public void LoadStub()
+        {
+            visualizer.DrawStubText(questDetail);
+        }
+
         public void RefreshStub()
         {
             questDetail = visualizer.GetDetailFromControl();
-            visualizer.RefreshStubText(questDetail);
+            visualizer.DrawStubText(questDetail);
         }
 
         public void RefreshPanel()
         {
             visualizer.GetDetailsFromStub(ref questDetail);
+            /*
             string refreshPanel = "[RefreshPanel] questDetail contains: ";
             foreach(QuestObject qob in questDetail.questObjects)
             {
-                refreshPanel += qob.GetObjectName() + ": " + qob.position.coords.xCoord + ", " + qob.position.coords.yCoord + ", " + qob.position.coords.zCoord + " || ";
+                refreshPanel += qob.GetObjectName() + ": " + qob.GetPosition().coords.xCoord + ", " + qob.GetPosition().coords.yCoord + ", " + qob.GetPosition().coords.zCoord + " || ";
             }
             Console.WriteLine(refreshPanel);
+            */
             visualizer.VisualizeDetail(questDetail);
         }
         

@@ -23,7 +23,7 @@ namespace SOC.Classes.Common
 
             using (FileStream stream = new FileStream(fileName, FileMode.Create))
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(Quest),  ManagerArray.GetDetailsTypes());
+                XmlSerializer serializer = new XmlSerializer(typeof(Quest),  ManagerArray.GetAllDetailTypes());
                 serializer.Serialize(stream, this);
             }
 
@@ -39,18 +39,18 @@ namespace SOC.Classes.Common
 
             using (FileStream stream = new FileStream(fileName, FileMode.Open))
             {
-                XmlSerializer deserializer = new XmlSerializer(typeof(Quest), ManagerArray.GetDetailsTypes());
-                try
-                {
+                XmlSerializer deserializer = new XmlSerializer(typeof(Quest), ManagerArray.GetAllDetailTypes());
+                //try
+                //{
                     Quest loadedQuest = (Quest)deserializer.Deserialize(stream);
                     coreDetails = loadedQuest.coreDetails;
                     questObjectDetails = loadedQuest.questObjectDetails;
                     return true;
-                }
-                catch (InvalidOperationException e)
-                {
-                    System.Windows.Forms.MessageBox.Show(string.Format("An Exception has occurred and the selected xml file could not be loaded. \n\nInnerException message: \n{0}", e.InnerException), "SOC", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
-                }
+                //}
+                //catch (InvalidOperationException e)
+                //{
+                 //   System.Windows.Forms.MessageBox.Show(string.Format("An Exception has occurred and the selected xml file could not be loaded. \n\nInnerException message: \n{0}", e.InnerException), "SOC", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                //}
             }
 
             return false;

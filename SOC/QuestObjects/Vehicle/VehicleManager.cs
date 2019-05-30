@@ -18,9 +18,9 @@ namespace SOC.QuestObjects.Vehicle
 
         static VehicleVisualizer vehicleVisualizer = new VehicleVisualizer(vehicleStub, vehiclePanel);
 
-        private VehicleDetails vehicleDetails;
+        private VehicleDetail vehicleDetails;
 
-        public VehicleManager(VehicleDetails vehicleDets) : base(vehicleDets, vehicleVisualizer)
+        public VehicleManager(VehicleDetail vehicleDets) : base(vehicleDets, vehicleVisualizer)
         {
             vehicleDetails = vehicleDets;
         }

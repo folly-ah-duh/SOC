@@ -7,9 +7,9 @@ namespace SOC.QuestObjects.Hostage
 {
     static class HostageFox2
     {
-        static void AddQuestEntities(HostageDetails hDetails, DataSet dataSet, ref List<Fox2EntityClass> entityList)
+        static void AddQuestEntities(HostageDetail hDetails, DataSet dataSet, ref List<Fox2EntityClass> entityList)
         {
-            IEnumerable<Hostage> hostages = hDetails.Hostages;
+            IEnumerable<Hostage> hostages = hDetails.hostages;
             HostageMetadata hMetadata = hDetails.hostageMetadata;
             BodyInfoEntry hostageBodies = NPCBodyInfo.GetBodyInfo(hMetadata.hostageBodyName);
 

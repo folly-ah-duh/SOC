@@ -6,33 +6,28 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace SOC.QuestObjects.Common
 {
     public abstract class Detail
     {
-        public IEnumerable<QuestObject> questObjects;
+        public abstract List<QuestObject> GetQuestObjects();
 
-        public Metadata metaData;
+        public abstract void SetQuestObjects(List<QuestObject> qObjects);
 
-        public Detail(IEnumerable<QuestObject> qObjects, Metadata meta)
-        {
-            questObjects = qObjects; metaData = meta;
-        }
+        public abstract Metadata GetMetadata();
 
         public abstract DetailManager GetNewManager();
     }
 
     public abstract class QuestObject
     {
-        public Position position;
+        public abstract Position GetPosition();
 
-        public int ID;
+        public abstract void SetPosition(Position pos);
 
-        public QuestObject(Position pos, int i)
-        {
-            position = pos; ID = i;
-        }
+        public abstract int GetID();
 
         public abstract string GetObjectName();
     }
@@ -66,10 +61,10 @@ namespace SOC.QuestObjects.Common
             Console.WriteLine(refreshPanel);
             */
 
-            DrawMetadata(detail.metaData);
+            DrawMetadata(detail.GetMetadata());
             //Console.WriteLine("object count in details: " + detail.questObjects.Count());
             //Console.WriteLine("object count in flowpanel: " + flowPanel.Controls.Count);
-            DrawBoxes(detail.questObjects);
+            DrawBoxes(detail.GetQuestObjects());
         }
         public abstract void DrawMetadata(Metadata meta);
 
@@ -132,13 +127,13 @@ namespace SOC.QuestObjects.Common
 
         public abstract Metadata GetMetadataFromControl();
 
-        public void RefreshStubText(Detail detail)
+        public void DrawStubText(Detail detail)
         {
             List<Position> posList = new List<Position>();
 
-            foreach (QuestObject qObject in detail.questObjects)
+            foreach (QuestObject qObject in detail.GetQuestObjects())
             {
-                posList.Add(qObject.position);
+                posList.Add(qObject.GetPosition());
                 //Console.WriteLine("Added Position to Stub: " + qObject.GetObjectName() + " | " + qObject.position.coords.xCoord + ", " + qObject.position.coords.yCoord + ", " + qObject.position.coords.zCoord);
             }
             detailStub.SetStubText(new IHLogPositions(posList));
@@ -147,7 +142,7 @@ namespace SOC.QuestObjects.Common
         public void GetDetailsFromStub(ref Detail detail)
         {
             List<Position> stubPositions = detailStub.GetStubLocations().GetPositions();
-            List<QuestObject> qObjects = detail.questObjects.ToList();
+            List<QuestObject> qObjects = detail.GetQuestObjects().ToList();
             int positionCount = stubPositions.Count;
             int objectCount = qObjects.Count;
 
@@ -160,7 +155,7 @@ namespace SOC.QuestObjects.Common
                 }
                 else // modify
                 {
-                    qObjects[i].position = stubPositions[i];
+                    qObjects[i].SetPosition(stubPositions[i]);
                     //Console.WriteLine(qObjects[i].position.coords.xCoord + " : " + qObjects[i].position.coords.yCoord + " : " + qObjects[i].position.coords.zCoord);
                     //Console.WriteLine("MODIFY");
                 }
@@ -172,7 +167,7 @@ namespace SOC.QuestObjects.Common
                 //Console.WriteLine("REMOVE");
             }
 
-            detail.questObjects = qObjects;
+            detail.SetQuestObjects(qObjects);
             /*
             string detailContains = "Detail Contains: ";
             foreach(QuestObject qObject in detail.questObjects)

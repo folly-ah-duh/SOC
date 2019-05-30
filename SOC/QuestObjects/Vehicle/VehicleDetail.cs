@@ -12,17 +12,17 @@ using System.Windows.Forms;
 namespace SOC.QuestObjects.Vehicle
 {
     [XmlType("VehicleDetails")]
-    public class VehicleDetails : Detail
+    public class VehicleDetail : Detail
     {
-        public VehicleDetails() : base (new List<Vehicle>(), new VehicleMetadata()) { }
+        public VehicleDetail() { }
 
-        public VehicleDetails(List<Vehicle> vehicleList, VehicleMetadata vehicleMeta) : base (vehicleList, vehicleMeta)
+        public VehicleDetail(List<Vehicle> vehicleList, VehicleMetadata vehicleMeta)
         {
-            Vehicles = vehicleList; vehicleMetadata = vehicleMeta;
+            vehicles = vehicleList; vehicleMetadata = vehicleMeta;
         }
 
         [XmlArray]
-        public List<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
+        public List<Vehicle> vehicles { get; set; } = new List<Vehicle>();
 
         [XmlElement]
         public VehicleMetadata vehicleMetadata { get; set; } = new VehicleMetadata();
@@ -31,23 +31,38 @@ namespace SOC.QuestObjects.Vehicle
         {
             return new VehicleManager(this);
         }
+
+        public override List<QuestObject> GetQuestObjects()
+        {
+            return vehicles.Cast<QuestObject>().ToList();
+        }
+
+        public override void SetQuestObjects(List<QuestObject> qObjects)
+        {
+            vehicles = qObjects.Cast<Vehicle>().ToList();
+        }
+
+        public override Metadata GetMetadata()
+        {
+            return vehicleMetadata;
+        }
     }
 
     public class Vehicle : QuestObject
     {
 
-        public Vehicle() : base(new Position(new Coordinates(), new Rotation()), 0) { }
+        public Vehicle() { }
 
-        public Vehicle(VehicleBox vBox, int index) : base(new Position(new Coordinates(vBox.v_textBox_xcoord.Text, vBox.v_textBox_ycoord.Text, vBox.v_textBox_zcoord.Text), new Rotation(vBox.v_textBox_rot.Text)), index)
+        public Vehicle(VehicleBox vBox, int index)
         {
             isTarget = vBox.v_checkBox_target.Checked;
-            ID = base.ID;
+            ID = index;
             vehicleIndex = vBox.v_comboBox_vehicle.SelectedIndex;
             vehicleClass = vBox.v_comboBox_class.Text;
-            position = base.position;
+            position = new Position(new Coordinates(vBox.v_textBox_xcoord.Text, vBox.v_textBox_ycoord.Text, vBox.v_textBox_zcoord.Text), new Rotation(vBox.v_textBox_rot.Text));
         }
 
-        public Vehicle(Position pos, int index) : base (pos, index)
+        public Vehicle(Position pos, int index)
         {
             position = pos; ID = index;
         }
@@ -57,10 +72,25 @@ namespace SOC.QuestObjects.Vehicle
             return "Vehicle_" + ID;
         }
 
+        public override Position GetPosition()
+        {
+            return position;
+        }
+
+        public override void SetPosition(Position pos)
+        {
+            position = pos;
+        }
+
+        public override int GetID()
+        {
+            return ID;
+        }
+
         [XmlElement]
         public bool isTarget { get; set; } = false;
 
-        [XmlElement]
+        [XmlAttribute]
         public int ID { get; set; } = 0;
 
         [XmlElement]

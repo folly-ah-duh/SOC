@@ -15,9 +15,9 @@ namespace SOC.QuestObjects.Hostage
 
         static HostageVisualizer hostageVisualizer = new HostageVisualizer(hostageStub, hostagePanel);
 
-        private HostageDetails hostageDetails;
+        private HostageDetail hostageDetails;
 
-        public HostageManager(HostageDetails hdetails) : base(hdetails, hostageVisualizer)
+        public HostageManager(HostageDetail hdetails) : base(hdetails, hostageVisualizer)
         {
             hostageDetails = hdetails;
         }

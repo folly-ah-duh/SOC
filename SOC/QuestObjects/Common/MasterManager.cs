@@ -50,6 +50,14 @@ namespace SOC.QuestObjects.Common
             }
         }
 
+        public void LoadAllStubTexts()
+        {
+            foreach (DetailManager manager in managerArray.GetManagers())
+            {
+                manager.LoadStub();
+            }
+        }
+
         public void RefreshAllPanels()
         {
             foreach (DetailManager manager in managerArray.GetManagers())

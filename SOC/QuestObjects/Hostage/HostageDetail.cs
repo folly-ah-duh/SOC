@@ -5,44 +5,60 @@ using System.Xml.Serialization;
 using System;
 using SOC.Core.Classes.InfiniteHeaven;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace SOC.QuestObjects.Hostage
 {
-    [XmlType("HostageDetails")]
-    public class HostageDetails : Detail
+    [XmlType(TypeName = "HostageDetail")]
+    public class HostageDetail : Detail
     {
-        public HostageDetails() : base (new List<Hostage>(), new HostageMetadata()) { }
+        public HostageDetail() { }
 
-        public HostageDetails(List<Hostage> hostageList, HostageMetadata hostageMeta) : base (hostageList, hostageMeta)
+        public HostageDetail(List<Hostage> hostageList, HostageMetadata hostageMeta)
         {
-            Hostages = hostageList; hostageMetadata = hostageMeta;
+            hostages = hostageList; hostageMetadata = hostageMeta;
         }
-
-        [XmlArray]
-        public List<Hostage> Hostages { get; set; } = new List<Hostage>();
 
         [XmlElement]
         public HostageMetadata hostageMetadata { get; set; } = new HostageMetadata();
 
+        [XmlArray]
+        public List<Hostage> hostages { get; set; } = new List<Hostage>();
+
+        public override Metadata GetMetadata()
+        {
+            return hostageMetadata;
+        }
+
         public override DetailManager GetNewManager()
         {
             return new HostageManager(this);
+        }
+
+        public override List<QuestObject> GetQuestObjects()
+        {
+            return hostages.Cast<QuestObject>().ToList();
+        }
+
+        public override void SetQuestObjects(List<QuestObject> qObjects)
+        {
+            hostages = qObjects.Cast<Hostage>().ToList();
         }
     }
 
 
     public class Hostage : QuestObject
     {
-        public Hostage() : base(new Position(new Coordinates(), new Rotation()), 0) { }
+        public Hostage() { }
 
-        public Hostage(Position pos, int numId) : base (pos, numId)
+        public Hostage(Position pos, int numId)
         {
             position = pos; ID = numId;
         }
 
-        public Hostage(HostageBox hBox) : base (new Position(new Coordinates(hBox.h_textBox_xcoord.Text, hBox.h_textBox_ycoord.Text, hBox.h_textBox_zcoord.Text), new Rotation(hBox.h_textBox_rot.Text)), hBox.hostageID)
+        public Hostage(HostageBox hBox)
         {
-            ID = base.ID;
+            ID = hBox.hostageID;
 
             isTarget = hBox.h_checkBox_target.Checked;
             isUntied = hBox.h_checkBox_untied.Checked;
@@ -51,12 +67,27 @@ namespace SOC.QuestObjects.Hostage
             staffType = hBox.h_comboBox_staff.Text;
             scared = hBox.h_comboBox_scared.Text;
             language = hBox.h_comboBox_lang.Text;
-            position = base.position;
+            position = new Position(new Coordinates(hBox.h_textBox_xcoord.Text, hBox.h_textBox_ycoord.Text, hBox.h_textBox_zcoord.Text), new Rotation(hBox.h_textBox_rot.Text));
         }
 
         public override string GetObjectName()
         {
             return "Hostage_" + ID;
+        }
+
+        public override Position GetPosition()
+        {
+            return position;
+        }
+
+        public override void SetPosition(Position pos)
+        {
+            position = pos;
+        }
+
+        public override int GetID()
+        {
+            return ID;
         }
 
         [XmlElement]
@@ -86,11 +117,10 @@ namespace SOC.QuestObjects.Hostage
         [XmlElement]
         public Position position { get; set; } = new Position(new Coordinates(), new Rotation());
     }
-
-
+    
+    [XmlType(TypeName = "HostageMetadata")]
     public class HostageMetadata : Metadata
     {
-
         public HostageMetadata() { }
 
         public HostageMetadata(HostageControl hostageControl)

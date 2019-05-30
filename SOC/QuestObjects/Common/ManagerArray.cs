@@ -8,26 +8,35 @@ namespace SOC.QuestObjects.Common
 {
     public class ManagerArray
     {
-        private static Hostage.HostageManager hostageManager = new Hostage.HostageManager(new Hostage.HostageDetails());
-        //private static Vehicle.VehicleManager vehicleManager = new Vehicle.VehicleManager(new Vehicle.VehicleDetails());
-
-        private static DetailManager[] managerArray = { hostageManager };//, vehicleManager};
-
-        public ManagerArray() { }
-
-        public ManagerArray(List<Detail> questObjects)
+        public static Type[] GetAllDetailTypes() // Note: attach modules here
         {
-            managerArray = questObjects.Select(entry => entry.GetNewManager()).ToArray();
+            Type[] AllDetailTypes = {
+                typeof(Hostage.HostageDetail)
+            }; 
+            return AllDetailTypes;
+        }
+
+        private DetailManager[] managerArray;
+
+        public ManagerArray()
+        {
+            List<DetailManager> detailManagers = new List<DetailManager>();
+            foreach (Type type in GetAllDetailTypes())
+            {
+                Detail questDetail = (Detail)Activator.CreateInstance(type);
+                detailManagers.Add(questDetail.GetNewManager());
+            }
+            managerArray = detailManagers.ToArray();
+        }
+
+        public ManagerArray(List<Detail> questDetails)
+        {
+            managerArray = questDetails.Select(detail => detail.GetNewManager()).ToArray();
         }
 
         public DetailManager[] GetManagers()
         {
             return managerArray;
-        }
-
-        public static Type[] GetDetailsTypes()
-        {
-            return managerArray.Select(entry => entry.questDetail.GetType()).ToArray();
         }
     }
 }

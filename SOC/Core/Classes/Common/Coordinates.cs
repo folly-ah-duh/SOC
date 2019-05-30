@@ -24,13 +24,13 @@ namespace SOC.Classes.Common
                                   </property>");
         }
 
-        [XmlElement]
+        [XmlAttribute]
         public string xCoord = "0";
 
-        [XmlElement]
+        [XmlAttribute]
         public string yCoord = "0";
 
-        [XmlElement]
+        [XmlAttribute]
         public string zCoord = "0";
 
     }

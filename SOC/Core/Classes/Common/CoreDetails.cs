@@ -1,4 +1,5 @@
-﻿using System.Xml.Serialization;
+﻿using SOC.UI;
+using System.Xml.Serialization;
 
 namespace SOC.Classes.Common
 {
@@ -10,13 +11,42 @@ namespace SOC.Classes.Common
 
         public CoreDetails(string fpk, string quest, int locID, string loada, Coordinates c, string rad, string cat, string rew, int prog, string cpnme, string qtitle, string qdesc, string route)
         {
-            FpkName = fpk; QuestNum = quest; QuestTitle = qtitle; QuestDesc = qdesc;
+            FpkName = fpk;
+            QuestNum = quest;
+            QuestTitle = qtitle;
+            QuestDesc = qdesc;
 
-            locationID = locID; loadArea = loada; coords = c; radius = rad; CPName = cpnme;
+            locationID = locID;
+            loadArea = loada;
+            coords = c;
+            radius = rad;
+            CPName = cpnme;
 
-            category = cat; progNotif = prog; reward = rew;
+            category = cat;
+            progNotif = prog;
+            reward = rew;
 
             routeName = route;
+        }
+
+        public CoreDetails(Setup setupPage)
+        {
+            QuestTitle = setupPage.textBoxQuestTitle.Text;
+            QuestDesc = setupPage.textBoxQuestDesc.Text;
+            FpkName = setupPage.textBoxFPKName.Text;
+            QuestNum = setupPage.textBoxQuestNum.Text;
+
+            locationID = setupPage.locationID;
+            loadArea = setupPage.comboBoxLoadArea.Text;
+            coords = new Coordinates(setupPage.textBoxXCoord.Text, setupPage.textBoxYCoord.Text, setupPage.textBoxZCoord.Text);
+            radius = setupPage.comboBoxRadius.Text;
+            CPName = setupPage.comboBoxCP.Text;
+
+            category = setupPage.comboBoxCategory.Text;
+            progNotif = setupPage.comboBoxProgressNotifs.SelectedIndex;
+            reward = setupPage.comboBoxReward.Text;
+
+            routeName = setupPage.comboBoxRoute.Text;
         }
 
         [XmlElement]

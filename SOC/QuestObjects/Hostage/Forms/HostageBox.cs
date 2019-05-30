@@ -15,7 +15,7 @@ using SOC.UI;
 
 namespace SOC.QuestObjects.Hostage
 {
-    public partial class HostageBox : QuestBox // inherit from UserControl to show box in designer
+    public partial class HostageBox : QuestBox // note: inherit from UserControl to show box in designer
     {
         public int hostageID;
 
@@ -38,7 +38,7 @@ namespace SOC.QuestObjects.Hostage
             "NORMAL", "ALWAYS", "NEVER"});
             h_comboBox_scared.Text = h.scared;
 
-            h_comboBox_lang.Text = h.language; // important to note: h_combobox_lang has the male languages prelisted in the designer
+            h_comboBox_lang.Text = h.language; // note: h_combobox_lang has the male languages prelisted in the designer
             RefreshLanguage(meta.hostageBodyName);
 
             h_comboBox_staff.Items.AddRange(NPCMtbsInfo.Staff_Type_ID);

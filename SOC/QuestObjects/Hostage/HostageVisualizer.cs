@@ -19,16 +19,13 @@ namespace SOC.QuestObjects.Hostage
 
         public override void DrawMetadata(Metadata meta)
         {
-            HostageMetadata hostageMeta = (HostageMetadata)meta;
-            hostageMeta.DrawMetadata(detailControl);
+            HostageControl hostageControl = (HostageControl)detailControl;
+            hostageControl.SetMetadata((HostageMetadata)meta);
         }
 
         public override QuestBox NewBox(QuestObject qObject)
         {
-            //Console.WriteLine("[Hostage NewBox] " + qObject.GetObjectName() + ": " + qObject.position.coords.xCoord + ", " + qObject.position.coords.yCoord + ", " + qObject.position.coords.zCoord + " || ");
-            HostageBox hBox = new HostageBox((Hostage)qObject, (HostageMetadata)GetMetadataFromControl());
-            //Console.WriteLine("Hostage NewBox2: " + hBox.getQuestObject().position.coords.xCoord);
-            return hBox;
+            return new HostageBox((Hostage)qObject, (HostageMetadata)GetMetadataFromControl()); ;
         }
 
         public override Detail NewDetail(Metadata meta, IEnumerable<QuestObject> qObjects)
@@ -43,9 +40,7 @@ namespace SOC.QuestObjects.Hostage
 
         public override QuestObject NewObject(Position objectPosition, int objectID)
         {
-            Hostage h = new Hostage(objectPosition, objectID);
-            //Console.WriteLine("[New Object] " + h.GetObjectName());
-            return h;
+            return new Hostage(objectPosition, objectID);
         }
 
         private void OnBodyIndexChanged(object sender, EventArgs e)
@@ -58,7 +53,6 @@ namespace SOC.QuestObjects.Hostage
             HostageMetadata meta = (HostageMetadata)GetMetadataFromControl();
             foreach (HostageBox hBox in flowPanel.Controls.OfType<HostageBox>())
             {
-                //Console.WriteLine("Refreshing language");
                 hBox.RefreshLanguage(meta.hostageBodyName);
             }
         }

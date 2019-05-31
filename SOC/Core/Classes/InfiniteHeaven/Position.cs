@@ -66,7 +66,7 @@ namespace SOC.Core.Classes.InfiniteHeaven
 
         public string GetPositionsFormatted()
         {
-            StringBuilder formattedPositions = new StringBuilder();
+            StringBuilder formattedPositions = new StringBuilder("");
             foreach(Position pos in positions)
             {
                 formattedPositions.AppendLine($"{{pos={{{pos.coords.xCoord},{pos.coords.yCoord},{pos.coords.zCoord}}},rotY={pos.rotation.GetDegreeRotY()},}},");

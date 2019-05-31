@@ -16,6 +16,13 @@ namespace SOC.QuestObjects.Hostage
             Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
         }
 
+        public void SetMetadata(HostageMetadata meta)
+        {
+            comboBox_Body.Text = meta.hostageBodyName;
+            comboBox_hosObjType.Text = meta.hostageObjectiveType;
+            h_checkBox_intrgt.Checked = meta.canInterrogate;
+        }
+
         private void panelHosDet_Layout(object sender, LayoutEventArgs e)
         {
             //labelPanelWidth.Width = panelHosDet.Width; // muddies the gui especially when the vertical scroll appears

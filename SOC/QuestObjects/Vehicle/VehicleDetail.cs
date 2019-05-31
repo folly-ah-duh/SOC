@@ -53,6 +53,11 @@ namespace SOC.QuestObjects.Vehicle
 
         public Vehicle() { }
 
+        public Vehicle(Position pos, int index)
+        {
+            position = pos; ID = index;
+        }
+
         public Vehicle(VehicleBox vBox, int index)
         {
             isTarget = vBox.v_checkBox_target.Checked;
@@ -60,11 +65,6 @@ namespace SOC.QuestObjects.Vehicle
             vehicleIndex = vBox.v_comboBox_vehicle.SelectedIndex;
             vehicleClass = vBox.v_comboBox_class.Text;
             position = new Position(new Coordinates(vBox.v_textBox_xcoord.Text, vBox.v_textBox_ycoord.Text, vBox.v_textBox_zcoord.Text), new Rotation(vBox.v_textBox_rot.Text));
-        }
-
-        public Vehicle(Position pos, int index)
-        {
-            position = pos; ID = index;
         }
 
         public override string GetObjectName()
@@ -115,10 +115,5 @@ namespace SOC.QuestObjects.Vehicle
 
         [XmlAttribute]
         public string vehicleObjectiveType { get; set; } = "ELIMINATE";
-
-        public override void DrawMetadata(UserControl control)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

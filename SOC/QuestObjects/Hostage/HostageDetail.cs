@@ -99,7 +99,7 @@ namespace SOC.QuestObjects.Hostage
         [XmlElement]
         public bool isInjured { get; set; } = false;
 
-        [XmlElement]
+        [XmlAttribute]
         public int ID { get; set; } = 0;
 
         [XmlElement]
@@ -128,14 +128,6 @@ namespace SOC.QuestObjects.Hostage
             hostageBodyName = hostageControl.comboBox_Body.Text;
             canInterrogate = hostageControl.h_checkBox_intrgt.Checked;
             hostageObjectiveType = hostageControl.comboBox_hosObjType.Text;
-        }
-
-        public override void DrawMetadata(UserControl control)
-        {
-            HostageControl hostageControl = (HostageControl)control;
-            hostageControl.comboBox_Body.Text = hostageBodyName;
-            hostageControl.comboBox_hosObjType.Text = hostageObjectiveType;
-            hostageControl.h_checkBox_intrgt.Checked = canInterrogate;
         }
 
         [XmlAttribute]

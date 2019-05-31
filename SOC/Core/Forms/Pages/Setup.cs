@@ -18,7 +18,7 @@ namespace SOC.UI
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern Int32 SendMessage(IntPtr hWnd, int msg, int wParam, [MarshalAs(UnmanagedType.LPWStr)]string lParam);
         public int locationID = -1;
-        MasterManager managerMaster;
+        public MasterManager managerMaster;
         RouteManager routeManager = new RouteManager();
 
         public Setup(MasterManager manMaster)
@@ -86,9 +86,6 @@ namespace SOC.UI
                 comboBoxRoute.SelectedItem = core.routeName;
             else
                 comboBoxRoute.SelectedItem = "NONE";
-            
-            //flowPanelLocationalStubs.Controls.AddRange(managerMaster.GetLocationalStubs().ToArray());
-            Console.WriteLine("");
         }
 
         public CoreDetails GetCoreDetails()

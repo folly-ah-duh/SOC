@@ -126,7 +126,7 @@
       <DependentUpon>HostageBox.cs</DependentUpon>
     </Compile>
     <Compile Include="QuestObjects\Hostage\HostageDetail.cs" />
-    <Compile Include="QuestObjects\Hostage\Classes\HostageVisualizer.cs" />
+    <Compile Include="QuestObjects\Hostage\HostageVisualizer.cs" />
     <Compile Include="Core\Classes\Route\RouteManager.cs" />
     <Compile Include="Core\Classes\Common\Coordinates.cs" />
     <Compile Include="Core\Classes\QuestBuild\UpdateNotifsManager.cs" />
@@ -220,7 +220,7 @@
     <Compile Include="Core\Classes\Route\Route.cs" />
     <Compile Include="Core\Classes\Route\RouteAssets.cs" />
     <Compile Include="QuestObjects\Vehicle\Classes\VehicleAssets.cs" />
-    <Compile Include="QuestObjects\Vehicle\Classes\VehicleVisualizer.cs" />
+    <Compile Include="QuestObjects\Vehicle\VehicleVisualizer.cs" />
     <Compile Include="QuestObjects\Vehicle\Classes\VehicleNames.cs" />
     <Compile Include="QuestObjects\Vehicle\Forms\VehicleBox.cs">
       <SubType>UserControl</SubType>

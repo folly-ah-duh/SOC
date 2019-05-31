@@ -5,13 +5,11 @@ using System.Collections.Generic;
 
 namespace SOC.QuestObjects.Common
 {
-    // a Manager is in charge of interactions between the base program and the manager's QuestObject module.
     public abstract class DetailManager
     {
         public Detail questDetail;
-
         private DetailVisualizer visualizer;
-        
+
         public DetailManager(Detail detail, DetailVisualizer visual)
         {
             questDetail = detail; visualizer = visual;
@@ -37,15 +35,17 @@ namespace SOC.QuestObjects.Common
 
         public void RefreshPanel()
         {
-            visualizer.GetDetailsFromStub(ref questDetail);
-            /*
-            string refreshPanel = "[RefreshPanel] questDetail contains: ";
-            foreach(QuestObject qob in questDetail.questObjects)
+            visualizer.GetDetailsFromStub(questDetail);
+
+            if (questDetail.GetQuestObjects().Count > 0)
             {
-                refreshPanel += qob.GetObjectName() + ": " + qob.GetPosition().coords.xCoord + ", " + qob.GetPosition().coords.yCoord + ", " + qob.GetPosition().coords.zCoord + " || ";
+                visualizer.ShowDetail();
             }
-            Console.WriteLine(refreshPanel);
-            */
+            else
+            {
+                visualizer.HideDetail();
+            }
+
             visualizer.VisualizeDetail(questDetail);
         }
         

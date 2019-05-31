@@ -32,10 +32,7 @@ namespace SOC.QuestObjects.Common
         public abstract string GetObjectName();
     }
 
-    public abstract class Metadata
-    {
-        public abstract void DrawMetadata(UserControl control);
-    }
+    public abstract class Metadata { }
 
     public abstract class DetailVisualizer
     {
@@ -52,45 +49,29 @@ namespace SOC.QuestObjects.Common
 
         public void VisualizeDetail(Detail detail)
         {
-            /*
-            string refreshPanel = "[VisualizeDetail] detail contains: ";
-            foreach (QuestObject qob in detail.questObjects)
-            {
-                refreshPanel += qob.GetObjectName() + ": " + qob.position.coords.xCoord + ", " + qob.position.coords.yCoord + ", " + qob.position.coords.zCoord + " || ";
-            }
-            Console.WriteLine(refreshPanel);
-            */
-
             DrawMetadata(detail.GetMetadata());
-            //Console.WriteLine("object count in details: " + detail.questObjects.Count());
-            //Console.WriteLine("object count in flowpanel: " + flowPanel.Controls.Count);
             DrawBoxes(detail.GetQuestObjects());
         }
+
+        public void ShowDetail()
+        {
+            detailControl.Visible = true;
+        }
+
+        public void HideDetail()
+        {
+            detailControl.Visible = false;
+        }
+
         public abstract void DrawMetadata(Metadata meta);
 
         public void DrawBoxes(IEnumerable<QuestObject> questObjects)
         {
-            /*
-            string refreshPanel = "[DrawBoxes] questObjects: ";
-            foreach (QuestObject qob in questObjects)
-            {
-                refreshPanel += qob.GetObjectName() + ": " + qob.position.coords.xCoord + ", " + qob.position.coords.yCoord + ", " + qob.position.coords.zCoord + " || ";
-            }
-            Console.WriteLine(refreshPanel);
-            */
-
             int FailedToFindAllBoxesCount = 0;
-            while(flowPanel.Controls.Count != 1) { // No idea what's going on here. There should only be one control remaining (the width label).
-                /*
-                if (FailedToFindAllBoxesCount > 0) // This really screams "There's a reason I don't have a job", doesn't it?
-                {
-                    Console.WriteLine($"For some reason, this hasn't found all the boxes (Fail count: {FailedToFindAllBoxesCount}). Running again...");
-                }
-                */
+            while(flowPanel.Controls.Count != 1) {
                 foreach (QuestBox qBox in flowPanel.Controls.OfType<QuestBox>())
                 {
                     flowPanel.Controls.Remove(qBox);
-                    //Console.WriteLine("removing old box from flowpanel..");
                 }
                 FailedToFindAllBoxesCount++;
             }
@@ -98,14 +79,7 @@ namespace SOC.QuestObjects.Common
             foreach (QuestObject qObject in questObjects)
             {
                 flowPanel.Controls.Add(NewBox(qObject));
-                //Console.WriteLine("adding new box to flowpanel. ID: " + qObject.ID);
             }
-            /*
-            foreach (QuestBox qBox in flowPanel.Controls.OfType<QuestBox>())
-            {
-                Console.WriteLine("flowPanel box: " + qBox.getQuestObject().position.coords.xCoord);
-            }
-            */
         }
 
         public Detail GetDetailFromControl()
@@ -115,13 +89,6 @@ namespace SOC.QuestObjects.Common
 
         public IEnumerable<QuestObject> GetQuestObjectsFromControl()
         {
-            /*
-            foreach(QuestBox qbox in flowPanel.Controls.OfType<QuestBox>())
-            {
-                Console.WriteLine("[GetQuestObjectsFromControl]");
-                Console.WriteLine(qbox.getQuestObject().ID);
-            }
-            */
             return flowPanel.Controls.OfType<QuestBox>().Select(box => box.getQuestObject());
         }
 
@@ -134,12 +101,11 @@ namespace SOC.QuestObjects.Common
             foreach (QuestObject qObject in detail.GetQuestObjects())
             {
                 posList.Add(qObject.GetPosition());
-                //Console.WriteLine("Added Position to Stub: " + qObject.GetObjectName() + " | " + qObject.position.coords.xCoord + ", " + qObject.position.coords.yCoord + ", " + qObject.position.coords.zCoord);
             }
             detailStub.SetStubText(new IHLogPositions(posList));
         }
 
-        public void GetDetailsFromStub(ref Detail detail)
+        public void GetDetailsFromStub(Detail detail)
         {
             List<Position> stubPositions = detailStub.GetStubLocations().GetPositions();
             List<QuestObject> qObjects = detail.GetQuestObjects().ToList();
@@ -151,31 +117,19 @@ namespace SOC.QuestObjects.Common
                 if (i >= objectCount) // add
                 {
                     qObjects.Add(NewObject(stubPositions[i], i));
-                    //Console.WriteLine("ADD");
                 }
                 else // modify
                 {
                     qObjects[i].SetPosition(stubPositions[i]);
-                    //Console.WriteLine(qObjects[i].position.coords.xCoord + " : " + qObjects[i].position.coords.yCoord + " : " + qObjects[i].position.coords.zCoord);
-                    //Console.WriteLine("MODIFY");
                 }
             }
 
             for (int i = objectCount - 1; i >= positionCount; i--) //remove
             {
                 qObjects.RemoveAt(i);
-                //Console.WriteLine("REMOVE");
             }
 
             detail.SetQuestObjects(qObjects);
-            /*
-            string detailContains = "Detail Contains: ";
-            foreach(QuestObject qObject in detail.questObjects)
-            {
-                detailContains += qObject.GetObjectName() + ", ";
-            }
-            Console.WriteLine(detailContains);
-            */
         }
 
         public abstract QuestObject NewObject(Position pos, int index);

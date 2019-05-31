@@ -11,7 +11,8 @@ namespace SOC.QuestObjects.Common
         public static Type[] GetAllDetailTypes() // Note: attach modules here
         {
             Type[] AllDetailTypes = {
-                typeof(Hostage.HostageDetail)
+                typeof(Hostage.HostageDetail)//,
+                //typeof(Vehicle.VehicleDetail)
             }; 
             return AllDetailTypes;
         }

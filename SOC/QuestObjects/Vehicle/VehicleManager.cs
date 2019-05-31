@@ -18,12 +18,7 @@ namespace SOC.QuestObjects.Vehicle
 
         static VehicleVisualizer vehicleVisualizer = new VehicleVisualizer(vehicleStub, vehiclePanel);
 
-        private VehicleDetail vehicleDetails;
-
-        public VehicleManager(VehicleDetail vehicleDets) : base(vehicleDets, vehicleVisualizer)
-        {
-            vehicleDetails = vehicleDets;
-        }
+        public VehicleManager(VehicleDetail vehicleDetail) : base(vehicleDetail, vehicleVisualizer) { }
 
         public override void AddFox2Entities(ref List<Fox2EntityClass> entityList)
         {

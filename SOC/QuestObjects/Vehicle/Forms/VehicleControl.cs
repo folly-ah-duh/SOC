@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace SOC.QuestObjects.Vehicle
 {
@@ -7,7 +8,13 @@ namespace SOC.QuestObjects.Vehicle
         public VehicleControl()
         {
             InitializeComponent();
+            comboBox_vehObjType.SelectedIndex = 0;
             Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+        }
+
+        internal void SetMetadata(VehicleMetadata meta)
+        {
+             comboBox_vehObjType.Text = meta.vehicleObjectiveType;
         }
     }
 }

@@ -67,15 +67,17 @@ namespace SOC.QuestObjects.Common
 
         public void DrawBoxes(IEnumerable<QuestObject> questObjects)
         {
+            /*
             int FailedToFindAllBoxesCount = 0;
-            while(flowPanel.Controls.Count != 1) {
+            while(flowPanel.Controls.Count != 0) {
                 foreach (QuestBox qBox in flowPanel.Controls.OfType<QuestBox>())
                 {
                     flowPanel.Controls.Remove(qBox);
                 }
                 FailedToFindAllBoxesCount++;
             }
-
+            */
+            flowPanel.Controls.Clear();
             foreach (QuestObject qObject in questObjects)
             {
                 flowPanel.Controls.Add(NewBox(qObject));

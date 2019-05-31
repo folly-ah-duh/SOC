@@ -177,7 +177,6 @@ namespace SOC.QuestObjects.Vehicle
             this.v_comboBox_vehicle.Size = new System.Drawing.Size(comboboxWidth, 21);
             this.v_comboBox_vehicle.TabIndex = 7;
             //v_comboBox_vehicle.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
-            this.v_comboBox_vehicle.SelectedIndex = vehicle.vehicleIndex;
             this.v_label_vehicle.AutoSize = true;
             this.v_label_vehicle.Location = new System.Drawing.Point(25, 94);
             this.v_label_vehicle.Name = "v_label_vehicle";

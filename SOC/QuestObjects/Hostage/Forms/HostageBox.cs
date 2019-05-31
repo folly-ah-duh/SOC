@@ -15,13 +15,12 @@ using SOC.UI;
 
 namespace SOC.QuestObjects.Hostage
 {
-    public partial class HostageBox : QuestBox // note: inherit from UserControl to show box in designer
+    public partial class HostageBox : QuestBox // Note: inherit from UserControl to show box in designer
     {
         public int hostageID;
 
         public HostageBox(Hostage h, HostageMetadata meta)
         {
-            Anchor = AnchorStyles.Left | AnchorStyles.Right;
             InitializeComponent();
             hostageID = h.ID;
 
@@ -34,11 +33,12 @@ namespace SOC.QuestObjects.Hostage
             h_checkBox_untied.Checked = h.isUntied;
             h_checkBox_injured.Checked = h.isInjured;
 
-            h_comboBox_scared.Items.AddRange(new object[] {
-            "NORMAL", "ALWAYS", "NEVER"});
+            h_comboBox_scared.Items.AddRange(new string[] {
+                "NORMAL", "ALWAYS", "NEVER"
+            });
             h_comboBox_scared.Text = h.scared;
 
-            h_comboBox_lang.Text = h.language; // note: h_combobox_lang has the male languages prelisted in the designer
+            h_comboBox_lang.Text = h.language; // Note: h_combobox_lang has the male languages prelisted in the designer
             RefreshLanguage(meta.hostageBodyName);
 
             h_comboBox_staff.Items.AddRange(NPCMtbsInfo.Staff_Type_ID);
@@ -57,14 +57,12 @@ namespace SOC.QuestObjects.Hostage
         {
             if (body.ToUpper().Contains("FEMALE"))
             {
-                //Console.WriteLine("fem detected: " + body);
                 h_comboBox_lang.Items.Clear();
                 h_comboBox_lang.Items.Add("english");
                 h_comboBox_lang.SelectedIndex = 0;
             }
             else
             {
-                //Console.WriteLine("man detected: " + body);
                 int languageindex = h_comboBox_lang.SelectedIndex; 
                 h_comboBox_lang.Items.Clear();
                 h_comboBox_lang.Items.AddRange(new string[] { "english", "russian", "pashto", "kikongo", "afrikaans" });

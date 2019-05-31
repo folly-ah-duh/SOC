@@ -30,14 +30,12 @@
         {
             this.groupHosDet = new System.Windows.Forms.GroupBox();
             this.panelHosDet = new System.Windows.Forms.FlowLayoutPanel();
-            this.labelPanelWidth = new System.Windows.Forms.Label();
             this.label_hosObjType = new System.Windows.Forms.Label();
             this.comboBox_hosObjType = new System.Windows.Forms.ComboBox();
+            this.h_checkBox_intrgt = new System.Windows.Forms.CheckBox();
             this.label_Body = new System.Windows.Forms.Label();
             this.comboBox_Body = new System.Windows.Forms.ComboBox();
-            this.h_checkBox_intrgt = new System.Windows.Forms.CheckBox();
             this.groupHosDet.SuspendLayout();
-            this.panelHosDet.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupHosDet
@@ -62,24 +60,13 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelHosDet.AutoScroll = true;
-            this.panelHosDet.Controls.Add(this.labelPanelWidth);
             this.panelHosDet.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.panelHosDet.Location = new System.Drawing.Point(3, 122);
+            this.panelHosDet.Location = new System.Drawing.Point(3, 119);
             this.panelHosDet.Margin = new System.Windows.Forms.Padding(0);
             this.panelHosDet.Name = "panelHosDet";
-            this.panelHosDet.Size = new System.Drawing.Size(294, 324);
+            this.panelHosDet.Size = new System.Drawing.Size(294, 327);
             this.panelHosDet.TabIndex = 3;
             this.panelHosDet.WrapContents = false;
-            this.panelHosDet.Layout += new System.Windows.Forms.LayoutEventHandler(this.panelHosDet_Layout);
-            // 
-            // labelPanelWidth
-            // 
-            this.labelPanelWidth.Location = new System.Drawing.Point(0, 0);
-            this.labelPanelWidth.Margin = new System.Windows.Forms.Padding(0);
-            this.labelPanelWidth.Name = "labelPanelWidth";
-            this.labelPanelWidth.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.labelPanelWidth.Size = new System.Drawing.Size(240, 0);
-            this.labelPanelWidth.TabIndex = 14;
             // 
             // label_hosObjType
             // 
@@ -107,6 +94,18 @@
             this.comboBox_hosObjType.Size = new System.Drawing.Size(288, 21);
             this.comboBox_hosObjType.TabIndex = 12;
             // 
+            // h_checkBox_intrgt
+            // 
+            this.h_checkBox_intrgt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.h_checkBox_intrgt.AutoSize = true;
+            this.h_checkBox_intrgt.Location = new System.Drawing.Point(6, 99);
+            this.h_checkBox_intrgt.Name = "h_checkBox_intrgt";
+            this.h_checkBox_intrgt.Size = new System.Drawing.Size(162, 17);
+            this.h_checkBox_intrgt.TabIndex = 0;
+            this.h_checkBox_intrgt.Text = "Interrogate For Whereabouts";
+            this.h_checkBox_intrgt.UseVisualStyleBackColor = true;
+            // 
             // label_Body
             // 
             this.label_Body.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -129,18 +128,6 @@
             this.comboBox_Body.Size = new System.Drawing.Size(288, 21);
             this.comboBox_Body.TabIndex = 1;
             // 
-            // h_checkBox_intrgt
-            // 
-            this.h_checkBox_intrgt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.h_checkBox_intrgt.AutoSize = true;
-            this.h_checkBox_intrgt.Location = new System.Drawing.Point(6, 99);
-            this.h_checkBox_intrgt.Name = "h_checkBox_intrgt";
-            this.h_checkBox_intrgt.Size = new System.Drawing.Size(162, 17);
-            this.h_checkBox_intrgt.TabIndex = 0;
-            this.h_checkBox_intrgt.Text = "Interrogate For Whereabouts";
-            this.h_checkBox_intrgt.UseVisualStyleBackColor = true;
-            // 
             // HostageControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -150,7 +137,6 @@
             this.Size = new System.Drawing.Size(300, 449);
             this.groupHosDet.ResumeLayout(false);
             this.groupHosDet.PerformLayout();
-            this.panelHosDet.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -163,7 +149,6 @@
         public System.Windows.Forms.ComboBox comboBox_Body;
         private System.Windows.Forms.Label label_Body;
         public System.Windows.Forms.ComboBox comboBox_hosObjType;
-        private System.Windows.Forms.Label labelPanelWidth;
         public System.Windows.Forms.FlowLayoutPanel panelHosDet;
     }
 }

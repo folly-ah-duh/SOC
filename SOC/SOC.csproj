@@ -220,16 +220,22 @@
     <Compile Include="Core\Classes\Route\Route.cs" />
     <Compile Include="Core\Classes\Route\RouteAssets.cs" />
     <Compile Include="QuestObjects\Vehicle\Classes\VehicleAssets.cs" />
+    <Compile Include="QuestObjects\Vehicle\Forms\VehicleBoxF.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuestObjects\Vehicle\Forms\VehicleBoxF.Designer.cs">
+      <DependentUpon>VehicleBoxF.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestObjects\Vehicle\VehicleVisualizer.cs" />
     <Compile Include="QuestObjects\Vehicle\Classes\VehicleNames.cs" />
     <Compile Include="QuestObjects\Vehicle\Forms\VehicleBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="QuestObjects\Vehicle\Forms\VehiclePanel.cs">
+    <Compile Include="QuestObjects\Vehicle\Forms\VehicleControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="QuestObjects\Vehicle\Forms\VehiclePanel.Designer.cs">
-      <DependentUpon>VehiclePanel.cs</DependentUpon>
+    <Compile Include="QuestObjects\Vehicle\Forms\VehicleControl.Designer.cs">
+      <DependentUpon>VehicleControl.cs</DependentUpon>
     </Compile>
     <Compile Include="QuestObjects\Vehicle\VehicleDetail.cs" />
     <Compile Include="QuestObjects\Vehicle\VehicleManager.cs" />
@@ -330,8 +336,11 @@
     <EmbeddedResource Include="QuestObjects\Model\Forms\ModelPanel.resx">
       <DependentUpon>ModelPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuestObjects\Vehicle\Forms\VehiclePanel.resx">
-      <DependentUpon>VehiclePanel.cs</DependentUpon>
+    <EmbeddedResource Include="QuestObjects\Vehicle\Forms\VehicleBoxF.resx">
+      <DependentUpon>VehicleBoxF.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuestObjects\Vehicle\Forms\VehicleControl.resx">
+      <DependentUpon>VehicleControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuestObjects\WalkerGear\Forms\WalkerGearPanel.resx">
       <DependentUpon>WalkerGearPanel.cs</DependentUpon>

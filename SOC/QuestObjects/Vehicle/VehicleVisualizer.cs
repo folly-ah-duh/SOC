@@ -14,35 +14,32 @@ namespace SOC.QuestObjects.Vehicle
 {
     class VehicleVisualizer : DetailVisualizer
     {
-        public VehicleVisualizer(LocationalDataStub vehicleStub, VehicleControl vehicleControl) : base(vehicleStub, vehicleControl, vehicleControl.panelVehDet)
-        {
-        }
+        public VehicleVisualizer(LocationalDataStub vehicleStub, VehicleControl vehicleControl) : base(vehicleStub, vehicleControl, vehicleControl.panelVehDet) { }
 
         public override void DrawMetadata(Metadata meta)
         {
-            VehicleMetadata vehicleMeta = (VehicleMetadata)meta;
-            VehicleControl vehiclePanel = (VehicleControl)detailControl;
-            vehiclePanel.comboBox_vehObjType.Text = vehicleMeta.vehicleObjectiveType;
+            VehicleControl vehicleControl = (VehicleControl)detailControl;
+            vehicleControl.SetMetadata((VehicleMetadata)meta);
         }
 
         public override Metadata GetMetadataFromControl()
         {
-            throw new NotImplementedException();
+            return new VehicleMetadata((VehicleControl)detailControl);
         }
 
         public override QuestBox NewBox(QuestObject qObject)
         {
-            throw new NotImplementedException();
+            return new VehicleBoxF((Vehicle)qObject, (VehicleMetadata)GetMetadataFromControl());
         }
 
         public override Detail NewDetail(Metadata meta, IEnumerable<QuestObject> qObjects)
         {
-            throw new NotImplementedException();
+            return new VehicleDetail(qObjects.Cast<Vehicle>().ToList(), (VehicleMetadata)meta);
         }
 
         public override QuestObject NewObject(Position objectPosition, int objectID)
         {
-            throw new NotImplementedException();
+            return new Vehicle(objectPosition, objectID);
         }
     }
 }

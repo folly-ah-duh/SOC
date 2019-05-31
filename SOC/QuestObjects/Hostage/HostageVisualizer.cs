@@ -23,6 +23,11 @@ namespace SOC.QuestObjects.Hostage
             hostageControl.SetMetadata((HostageMetadata)meta);
         }
 
+        public override Metadata GetMetadataFromControl()
+        {
+            return new HostageMetadata((HostageControl)detailControl);
+        }
+
         public override QuestBox NewBox(QuestObject qObject)
         {
             return new HostageBox((Hostage)qObject, (HostageMetadata)GetMetadataFromControl()); ;
@@ -31,11 +36,6 @@ namespace SOC.QuestObjects.Hostage
         public override Detail NewDetail(Metadata meta, IEnumerable<QuestObject> qObjects)
         {
             return new HostageDetail(qObjects.Cast<Hostage>().ToList(), (HostageMetadata)meta);
-        }
-
-        public override Metadata GetMetadataFromControl()
-        {
-            return new HostageMetadata((HostageControl)detailControl);
         }
 
         public override QuestObject NewObject(Position objectPosition, int objectID)

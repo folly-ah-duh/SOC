@@ -53,16 +53,17 @@ namespace SOC.QuestObjects.Vehicle
 
         public Vehicle() { }
 
-        public Vehicle(Position pos, int index)
+        public Vehicle(Position pos, int id)
         {
-            position = pos; ID = index;
+            position = pos; ID = id;
         }
 
-        public Vehicle(VehicleBox vBox, int index)
+        public Vehicle(VehicleBoxF vBox)
         {
+            ID = vBox.vehicleID;
+
             isTarget = vBox.v_checkBox_target.Checked;
-            ID = index;
-            vehicleIndex = vBox.v_comboBox_vehicle.SelectedIndex;
+            vehicle = vBox.v_comboBox_vehicle.Text;
             vehicleClass = vBox.v_comboBox_class.Text;
             position = new Position(new Coordinates(vBox.v_textBox_xcoord.Text, vBox.v_textBox_ycoord.Text, vBox.v_textBox_zcoord.Text), new Rotation(vBox.v_textBox_rot.Text));
         }
@@ -94,7 +95,7 @@ namespace SOC.QuestObjects.Vehicle
         public int ID { get; set; } = 0;
 
         [XmlElement]
-        public int vehicleIndex { get; set; } = 0;
+        public string vehicle { get; set; } = "TT77 NOSOROG";
 
         [XmlElement]
         public string vehicleClass { get; set; } = "DEFAULT";

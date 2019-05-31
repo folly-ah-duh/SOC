@@ -237,13 +237,13 @@
             this.h_textBox_xcoord.Size = new System.Drawing.Size(54, 20);
             this.h_textBox_xcoord.TabIndex = 0;
             // 
-            // HostageBoxF
+            // HostageBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.h_groupBox_main);
             this.MinimumSize = new System.Drawing.Size(268, 237);
-            this.Name = "HostageBoxF";
+            this.Name = "HostageBox";
             this.Size = new System.Drawing.Size(268, 237);
             this.h_groupBox_main.ResumeLayout(false);
             this.h_groupBox_main.PerformLayout();

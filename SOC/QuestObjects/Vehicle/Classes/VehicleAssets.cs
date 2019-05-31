@@ -14,7 +14,9 @@ namespace SOC.QuestObjects.Vehicle.Classes
             string VehFPKAssetsPath = Path.Combine(VehAssetsPath, "FPK_Files");
             foreach (Vehicle vehicle in vehicleList)
             {
-                string vehicleName = VehicleNames.vehicleNames[vehicle.vehicleIndex];
+                string vehicleName;
+                VehicleNames.vehicleName.TryGetValue(vehicle.vehicle, out vehicleName);
+
                 string sourceDirPath = Path.Combine(VehFPKAssetsPath, string.Format("{0}_fpk", vehicleName));
 
                 Tools.CopyDirectory(sourceDirPath, FPKPath);
@@ -23,7 +25,10 @@ namespace SOC.QuestObjects.Vehicle.Classes
             string VehFPKDAssetsPath = Path.Combine(VehAssetsPath, "FPKD_Files");
             foreach (Vehicle vehicle in vehicleList)
             {
-                string vehicleName = VehicleNames.vehicleNames[vehicle.vehicleIndex];
+
+                string vehicleName;
+                VehicleNames.vehicleName.TryGetValue(vehicle.vehicle, out vehicleName);
+
                 string sourceDirPath = Path.Combine(VehFPKDAssetsPath, string.Format("{0}_fpkd", vehicleName));
 
                 Tools.CopyDirectory(sourceDirPath, FPKDPath);

@@ -15,7 +15,7 @@ namespace SOC.QuestObjects.Hostage
 
         static HostageVisualizer hostageVisualizer = new HostageVisualizer(hostageStub, hostagePanel);
 
-        public HostageManager(HostageDetail hdetails) : base(hdetails, hostageVisualizer) { }
+        public HostageManager(HostageDetail hostageDetail) : base(hostageDetail, hostageVisualizer) { }
 
         public override void AddFox2Entities(ref List<Fox2EntityClass> entityList)
         {

@@ -3,7 +3,7 @@ using SOC.Classes.LangTool;
 using System.Collections.Generic;
 using System.IO;
 
-namespace SOC.Classes
+namespace SOC.Classes.QuestBuild.Lang
 {
     static class LangBuilder
     {

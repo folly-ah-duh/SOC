@@ -58,7 +58,7 @@ namespace SOC.QuestObjects.Vehicle
             position = pos; ID = id;
         }
 
-        public Vehicle(VehicleBoxF vBox)
+        public Vehicle(VehicleBox vBox)
         {
             ID = vBox.vehicleID;
 

@@ -2,10 +2,10 @@
 {
     public static class Fox2Info
     {
-        public const int baseQuestAddress = 0x02D7BCA0;
-        public const int baseItemAddress = 0x10000000;
+        public const uint baseQuestAddress = 0x02D7BCA0;
+        public const uint baseItemAddress = 0x10000000;
 
-        public static int entityClassSize = 0x70;
+        public const uint entityClassSize = 0x70;
     }
 
     public enum entityClass

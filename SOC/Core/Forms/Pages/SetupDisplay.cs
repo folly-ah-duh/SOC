@@ -10,10 +10,11 @@ using static SOC.QuestComponents.EnemyInfo;
 using System.Collections.Generic;
 using SOC.Classes.Common;
 using System.Globalization;
+using SOC.Classes.QuestBuild;
 
 namespace SOC.UI
 {
-    public partial class Setup : UserControl
+    public partial class SetupDisplay : UserControl
     {
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern Int32 SendMessage(IntPtr hWnd, int msg, int wParam, [MarshalAs(UnmanagedType.LPWStr)]string lParam);
@@ -21,7 +22,7 @@ namespace SOC.UI
         public MasterManager managerMaster;
         RouteManager routeManager = new RouteManager();
 
-        public Setup(MasterManager manMaster)
+        public SetupDisplay(MasterManager manMaster)
         {
             InitializeComponent();
             SetManagerMaster(manMaster);

@@ -21,18 +21,30 @@ namespace SOC.QuestObjects.Common
 
         public ManagerArray()
         {
-            List<DetailManager> detailManagers = new List<DetailManager>();
+            List<DetailManager> managers = new List<DetailManager>();
+
             foreach (Type type in GetAllDetailTypes())
             {
                 Detail questDetail = (Detail)Activator.CreateInstance(type);
-                detailManagers.Add(questDetail.GetNewManager());
+                managers.Add(questDetail.GetNewManager());
             }
-            managerArray = detailManagers.ToArray();
+            managerArray = managers.ToArray();
         }
 
         public ManagerArray(List<Detail> questDetails)
         {
-            managerArray = questDetails.Select(detail => detail.GetNewManager()).ToArray();
+            List<DetailManager> managers = questDetails.Select(detail => detail.GetNewManager()).ToList();
+            Type[] questDetailTypes = questDetails.Select(detail => detail.GetType()).ToArray();
+
+            foreach (Type type in GetAllDetailTypes())
+            {
+                if (!questDetailTypes.Contains(type))
+                {
+                    Detail questDetail = (Detail)Activator.CreateInstance(type);
+                    managers.Add(questDetail.GetNewManager());
+                }
+            }
+            managerArray = managers.ToArray();
         }
 
         public DetailManager[] GetManagers()

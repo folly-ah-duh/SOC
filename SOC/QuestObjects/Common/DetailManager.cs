@@ -15,7 +15,7 @@ namespace SOC.QuestObjects.Common
             questDetail = detail; visualizer = visual;
         }
 
-        public abstract void AddFox2Entities(ref List<Fox2EntityClass> entityList);
+        public abstract void AddFox2Entities(DataSet dataSet, ref List<Fox2EntityClass> entityList);
 
         public DetailVisualizer GetVisualizer()
         {
@@ -27,16 +27,23 @@ namespace SOC.QuestObjects.Common
             visualizer.DrawStubText(questDetail);
         }
 
-        public void RefreshStub()
+        public void UpdateDetailFromControl()
         {
             questDetail = visualizer.GetDetailFromControl();
+        }
+
+        public void RefreshStub()
+        {
             visualizer.DrawStubText(questDetail);
+        }
+
+        public void UpdateDetailFromStub()
+        {
+            visualizer.GetDetailsFromStub(questDetail);
         }
 
         public void RefreshPanel()
         {
-            visualizer.GetDetailsFromStub(questDetail);
-
             if (questDetail.GetQuestObjects().Count > 0)
             {
                 visualizer.ShowDetail();

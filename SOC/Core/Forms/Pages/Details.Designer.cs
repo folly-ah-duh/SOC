@@ -1,6 +1,6 @@
 ﻿namespace SOC.UI
 {
-    partial class Details
+    partial class DetailDisplay
     {
         /// <summary> 
         /// Required designer variable.

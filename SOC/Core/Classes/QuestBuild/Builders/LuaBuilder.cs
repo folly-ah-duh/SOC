@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
-namespace SOC.Classes
+namespace SOC.Classes.QuestBuild.Lua
 {
     static class LuaBuilder
     {
 
         static string[] questLuaInput = File.ReadAllLines(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//questScript.lua"));
 
-        public static void WriteDefinitionLua(CoreDetails coreDetails, List<Detail> questObjects)
+        public static void WriteDefinitionLua(CoreDetails coreDetails, MasterManager masterManager)
         {
             /*
             BodyInfoEntry bodyInfo = new BodyInfoEntry();
@@ -110,7 +110,7 @@ namespace SOC.Classes
             */
         }
 
-        public static void WriteMainQuestLua(CoreDetails coreDetails, List<Detail> questObjects)
+        public static void WriteMainQuestLua(CoreDetails coreDetails, MasterManager masterManager)
         {
             /*
             List<string> questLua = new List<string>(questLuaInput);

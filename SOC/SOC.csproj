@@ -102,7 +102,8 @@
     <Compile Include="Core\Classes\Fox2\EntityClasses\Transform.cs" />
     <Compile Include="Core\Classes\Fox2\Fox2EntityClass.cs" />
     <Compile Include="Core\Classes\InfiniteHeaven\Position.cs" />
-    <Compile Include="Core\Classes\QuestBuild\QuestBuildManager.cs" />
+    <Compile Include="Core\Classes\QuestBuild\Builders\AssetsBuilder.cs" />
+    <Compile Include="Core\Classes\QuestBuild\BuildManager.cs" />
     <Compile Include="Core\Classes\Common\LoadAreas.cs" />
     <Compile Include="Core\Classes\Common\NPCMtbsInfo.cs" />
     <Compile Include="Core\Classes\Common\Quaternion.cs" />
@@ -130,7 +131,6 @@
     <Compile Include="Core\Classes\Route\RouteManager.cs" />
     <Compile Include="Core\Classes\Common\Coordinates.cs" />
     <Compile Include="Core\Classes\QuestBuild\UpdateNotifsManager.cs" />
-    <Compile Include="Core\Classes\Common\XmlCompiler.cs" />
     <Compile Include="Core\Forms\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,11 +144,11 @@
       <DependentUpon>formCustomProgressLang.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\Classes\QuestBuild\Builders\Fox2Builder.cs" />
-    <Compile Include="Core\Forms\Pages\Details.cs">
+    <Compile Include="Core\Forms\Pages\DetailDisplay.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Core\Forms\Pages\Details.Designer.cs">
-      <DependentUpon>Details.cs</DependentUpon>
+      <DependentUpon>DetailDisplay.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\Forms\Pages\LocationalDataStub.cs">
       <SubType>UserControl</SubType>
@@ -220,17 +220,14 @@
     <Compile Include="Core\Classes\Route\Route.cs" />
     <Compile Include="Core\Classes\Route\RouteAssets.cs" />
     <Compile Include="QuestObjects\Vehicle\Classes\VehicleAssets.cs" />
-    <Compile Include="QuestObjects\Vehicle\Forms\VehicleBoxF.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="QuestObjects\Vehicle\Forms\VehicleBoxF.Designer.cs">
-      <DependentUpon>VehicleBoxF.cs</DependentUpon>
-    </Compile>
-    <Compile Include="QuestObjects\Vehicle\VehicleVisualizer.cs" />
-    <Compile Include="QuestObjects\Vehicle\Classes\VehicleNames.cs" />
     <Compile Include="QuestObjects\Vehicle\Forms\VehicleBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="QuestObjects\Vehicle\Forms\VehicleBox.Designer.cs">
+      <DependentUpon>VehicleBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuestObjects\Vehicle\VehicleVisualizer.cs" />
+    <Compile Include="QuestObjects\Vehicle\Classes\VehicleNames.cs" />
     <Compile Include="QuestObjects\Vehicle\Forms\VehicleControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -240,11 +237,11 @@
     <Compile Include="QuestObjects\Vehicle\VehicleDetail.cs" />
     <Compile Include="QuestObjects\Vehicle\VehicleManager.cs" />
     <Compile Include="QuestObjects\WalkerGear\Forms\WalkerGearBox.cs" />
-    <Compile Include="Core\Forms\Pages\Setup.cs">
+    <Compile Include="Core\Forms\Pages\SetupDisplay.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Core\Forms\Pages\Setup.Designer.cs">
-      <DependentUpon>Setup.cs</DependentUpon>
+      <DependentUpon>SetupDisplay.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\Forms\Pages\Waiting.cs">
       <SubType>UserControl</SubType>
@@ -252,7 +249,6 @@
     <Compile Include="Core\Forms\Pages\Waiting.Designer.cs">
       <DependentUpon>Waiting.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\Forms\PanelScroll.cs" />
     <Compile Include="Core\Forms\QuestPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -293,13 +289,13 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Core\Forms\Pages\Details.resx">
-      <DependentUpon>Details.cs</DependentUpon>
+      <DependentUpon>DetailDisplay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Core\Forms\Pages\LocationalDataStub.resx">
       <DependentUpon>LocationalDataStub.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Core\Forms\Pages\Setup.resx">
-      <DependentUpon>Setup.cs</DependentUpon>
+      <DependentUpon>SetupDisplay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Core\Forms\Pages\Waiting.resx">
       <DependentUpon>Waiting.cs</DependentUpon>
@@ -335,9 +331,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="QuestObjects\Model\Forms\ModelPanel.resx">
       <DependentUpon>ModelPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="QuestObjects\Vehicle\Forms\VehicleBoxF.resx">
-      <DependentUpon>VehicleBoxF.cs</DependentUpon>
+      <DependentUpon>VehicleBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuestObjects\Vehicle\Forms\VehicleControl.resx">
       <DependentUpon>VehicleControl.cs</DependentUpon>

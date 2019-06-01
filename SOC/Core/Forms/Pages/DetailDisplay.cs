@@ -4,11 +4,11 @@ using System.Windows.Forms;
 
 namespace SOC.UI
 {
-    public partial class Details : UserControl
+    public partial class DetailDisplay : UserControl
     {
         MasterManager managerMaster;
 
-        public Details(MasterManager manMaster)
+        public DetailDisplay(MasterManager manMaster)
         {
             InitializeComponent();
             Dock = DockStyle.Fill;

@@ -29,7 +29,7 @@ namespace SOC.Classes.Common
             routeName = route;
         }
 
-        public CoreDetails(Setup setupPage)
+        public CoreDetails(SetupDisplay setupPage)
         {
             QuestTitle = setupPage.textBoxQuestTitle.Text;
             QuestDesc = setupPage.textBoxQuestDesc.Text;

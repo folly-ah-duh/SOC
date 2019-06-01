@@ -1,23 +1,27 @@
-﻿using SOC.QuestObjects.Common;
+﻿using SOC.Classes.Common;
+using SOC.Classes.Fox2;
+using SOC.QuestObjects.Common;
 using System.Collections.Generic;
+using System.IO;
 
-namespace SOC.Classes.Fox2
+namespace SOC.Classes.QuestBuild.Fox2
 {
 
     public static class Fox2Builder
     {
         static string unassignedName = "";
 
-        public static void SetAddresses(List<QuestEntity> QuestEntities, int baseOffset)
+        public static void SetAddresses(List<Fox2EntityClass> entities, uint baseOffset)
         {
+            uint address = baseOffset;
 
-            for (int i = 0; i < QuestEntities.Count; i++)
+            for (int i = 0; i < entities.Count; i++)
             {
-                QuestEntities[i].hexAddress = baseOffset;
-                baseOffset += 0x70;
+                entities[i].SetAddress(address);
+                address += Fox2Info.entityClassSize;
             }
         }
-
+        /*
         public static List<string> BuildDataList(List<QuestEntity> entityList)
         {
             List<string> dataList = new List<string>();
@@ -32,190 +36,55 @@ namespace SOC.Classes.Fox2
 
             return dataList;
         }
+        */
 
-        public static List<Fox2EntityClass> BuildQuestEntityList(string fpkName, List<DetailManager> managers)
+        public static List<Fox2EntityClass> BuildQuestEntityList(string fpkName, DetailManager[] managers)
         {
             List<Fox2EntityClass> entityList = new List<Fox2EntityClass>();
+            DataSet entityDataSet = new DataSet(entityList);
 
-            entityList.Add(new DataSet(entityList));
-            entityList.Add(new ScriptBlockScript());
+            entityList.Add(entityDataSet);
+            entityList.Add(new ScriptBlockScript("ScriptBlockScript0000", entityDataSet, fpkName));
 
             foreach (DetailManager manager in managers)
             {
-                manager.AddFox2Entities(ref entityList);
+                manager.AddFox2Entities(entityDataSet, ref entityList);
             }
 
-            entityList.Add(new TexturePackLoadConditioner());
+            entityList.Add(new TexturePackLoadConditioner("TexturePackLoadConditioner0000", entityDataSet));
 
             return entityList;
         }
-        /*
-        public static List<QuestEntity> BuildQuestEntityList(QuestEntities questDetails)
+
+        public static void WriteQuestFox2(string fpkName, MasterManager masterManager)
         {
-            string vehicleHistory = "";
-            List<QuestEntity> entityList = new List<QuestEntity>();
+            List<Fox2EntityClass> entityList = BuildQuestEntityList(fpkName, masterManager.GetManagers());
+            SetAddresses(entityList, Fox2Info.baseQuestAddress);
 
-            entityList.Add(new QuestEntity(entityClass.DataSet));
-            entityList.Add(new QuestEntity(entityClass.ScriptBlockScript, "ScriptBlockScript0000"));
+            string fox2Path = $@"Sideop_Build/Assets/tpp/pack/mission2/quest/ih/{fpkName}_fpkd/Assets/tpp/level/mission2/quest/ih";
+            string fox2QuestFile = Path.Combine(fox2Path, string.Format("{0}.fox2.xml", fpkName));
 
-            if (questDetails.hostages.Count > 0) //DONE
+            Directory.CreateDirectory(fox2Path);
+            using (System.IO.StreamWriter questFox2 = new System.IO.StreamWriter(fox2QuestFile))
             {
-                entityList.Add(new QuestEntity(entityClass.GameObject, "GameObjectTppHostageUnique", "TppHostageUnique2", questDetails.hostages.Count));
-                entityList.Add(new QuestEntity(entityClass.TppHostage2Parameter));
-
-                foreach (Hostage hostage in questDetails.hostages)
+                questFox2.WriteLine(@"<?xml version=""1.0"" encoding=""utf-8""?>");
+                questFox2.WriteLine(@"<fox formatVersion=""2"" fileVersion=""0"" originalVersion=""Sun Mar 16 00:00:00 UTC-05:00 1975"">");
+                questFox2.WriteLine("  <classes />");
+                questFox2.WriteLine("  <entities>");
+                foreach (Fox2EntityClass entity in entityList)
                 {
-                    entityList.Add(new QuestEntity(entityClass.GameObjectLocator, hostage.name, "TppHostageUnique2"));
-                    entityList.Add(new QuestEntity(entityClass.TransformEntity, eDetails: new object[] { hostage.coordinates, new RotationQuat("0", "0", "0", "1") }));
-                    entityList.Add(new QuestEntity(entityClass.TppHostage2LocatorParameter));
+                    questFox2.WriteLine(entity.GetFox2Format());
                 }
-            }
-
-            if (questDetails.walkerGears.Count > 0)
-            {
-                entityList.Add(new QuestEntity(entityClass.GameObject, "WalkerGearGameObject", "TppCommonWalkerGear2", questDetails.walkerGears.Count));
-                entityList.Add(new QuestEntity(entityClass.TppWalkerGear2Parameter));
-
-                foreach (WalkerGear walkergear in questDetails.walkerGears)
-                {
-                    entityList.Add(new QuestEntity(entityClass.GameObjectLocator, walkergear.name, "TppCommonWalkerGear2"));
-                    entityList.Add(new QuestEntity(entityClass.TransformEntity, eDetails: new object[] { walkergear.coordinates, new RotationQuat("0", "0", "0", "1") }));
-                    entityList.Add(new QuestEntity(entityClass.TppWalkerGear2LocatorParameter));
-                }
-            }
-
-            foreach (Vehicle vehicle in questDetails.vehicles)
-            {
-                entityList.Add(new QuestEntity(entityClass.GameObjectLocator, vehicle.name, "TppVehicle2"));
-                entityList.Add(new QuestEntity(entityClass.TransformEntity, eDetails: new object[] { vehicle.coordinates, new RotationQuat("0", "0", "0", "1") }));
-                entityList.Add(new QuestEntity(entityClass.TppVehicle2LocatorParameter));
-
-                switch (vehicle.vehicleIndex)
-                {
-                    case 0:
-                        if (!vehicleHistory.Contains("veh_bd_east_tnk"))
-                        {
-                            entityList.Add(new QuestEntity(entityClass.TppVehicle2BodyData, "veh_bd_east_tnk"));
-                            vehicleHistory += "veh_bd_east_tnk ";
-                        }
-                        break;
-                    case 1:
-                        if (!vehicleHistory.Contains("veh_bd_west_tnk"))
-                        {
-                            entityList.Add(new QuestEntity(entityClass.TppVehicle2BodyData, "veh_bd_west_tnk"));
-                            vehicleHistory += "veh_bd_west_tnk ";
-                        }
-                        break;
-                    case 2:
-                        if (!vehicleHistory.Contains("veh_bd_east_wav"))
-                        {
-                            entityList.Add(new QuestEntity(entityClass.TppVehicle2BodyData, "veh_bd_east_wav"));
-                            vehicleHistory += "veh_bd_east_wav ";
-                        }
-                        break;
-                    case 3:
-                        if (!vehicleHistory.Contains("veh_bd_east_wav"))
-                        {
-                            entityList.Add(new QuestEntity(entityClass.TppVehicle2BodyData, "veh_bd_east_wav"));
-                            vehicleHistory += "veh_bd_east_wav ";
-                        }
-                        if (!vehicleHistory.Contains("veh_at_east_wav_rocket"))
-                        {
-                            entityList.Add(new QuestEntity(entityClass.TppVehicle2AttachmentData, "veh_at_east_wav_rocket"));
-                            vehicleHistory += "veh_at_east_wav_rocket ";
-                        }
-                        break;
-                    case 4:
-                        if (!vehicleHistory.Contains("veh_bd_west_wav"))
-                        {
-                            entityList.Add(new QuestEntity(entityClass.TppVehicle2BodyData, "veh_bd_west_wav"));
-                            vehicleHistory += "veh_bd_west_wav ";
-                        }
-                        if (!vehicleHistory.Contains("veh_at_west_wav_trt_machinegun"))
-                        {
-                            entityList.Add(new QuestEntity(entityClass.TppVehicle2AttachmentData, "veh_at_west_wav_trt_machinegun"));
-                            vehicleHistory += "veh_at_west_wav_trt_machinegun ";
-                        }
-                        break;
-                    case 5:
-                        if (!vehicleHistory.Contains("veh_bd_west_wav"))
-                        {
-                            entityList.Add(new QuestEntity(entityClass.TppVehicle2BodyData, "veh_bd_west_wav"));
-                            vehicleHistory += "veh_bd_west_wav ";
-                        }
-                        if (!vehicleHistory.Contains("veh_at_west_wav_trt_cannon"))
-                        {
-                            entityList.Add(new QuestEntity(entityClass.TppVehicle2AttachmentData, "veh_at_west_wav_trt_cannon"));
-                            vehicleHistory += "veh_at_west_wav_trt_cannon ";
-                        }
-                        break;
-                }
-            }
-
-            string animalhistory = "";
-            foreach (Animal animal in questDetails.animals)
-            {
-                string animalName = animal.animal, typeName = animal.typeID, animalCategory = AnimalInfo.getAnimalCategory(animalName);
-
-                if (!animalhistory.Contains(animalName))
-                {
-                    animalhistory += animalName;
-                    int totalCount = 0;
-
-                    foreach (Animal animalScan in questDetails.animals)
-                    {
-                        if (animalScan.animal.Equals(animalName))
-                        {
-                            totalCount += (int.Parse(animal.count));
-                        }
-                    }
-
-                    string partsPath = "", mogPath = "", mtarPath = "", fv2Path = "";
-                    AnimalInfo.getAnimalPaths(animalName, out partsPath, out mogPath, out mtarPath, out fv2Path);
-
-                    entityList.Add(new QuestEntity(entityClass.GameObject, animalName + "GameObject", typeName, totalCount));
-                    switch (animalCategory)
-                    {
-                        case "animal":
-                            entityList.Add(new QuestEntity(entityClass.TppAnimalParameter, eDetails: new object[] { partsPath, mogPath, mtarPath, fv2Path }));
-                            break;
-                        case "wolf":
-                            entityList.Add(new QuestEntity(entityClass.TppWolfParameter, eDetails: new object[] { partsPath, mogPath, mtarPath, fv2Path }));
-                            break;
-                        case "bear":
-                            entityList.Add(new QuestEntity(entityClass.TppBearParameter, eDetails: new object[] { partsPath, mogPath, mtarPath, fv2Path }));
-                            break;
-                    }
-                }
-
-                entityList.Add(new QuestEntity(entityClass.GameObjectLocator, animal.name, typeName));
-                entityList.Add(new QuestEntity(entityClass.TransformEntity, eDetails: new object[] { animal.coordinates, new RotationQuat("0", "0", "0", "1") }));
-                switch (animalCategory)
-                {
-                    case "animal":
-                        entityList.Add(new QuestEntity(entityClass.TppAnimalLocatorParameter, eDetails: animal.count));
-                        break;
-                    case "wolf":
-                        entityList.Add(new QuestEntity(entityClass.TppWolfLocatorParameter, eDetails: animal.count));
-                        break;
-                    case "bear":
-                        entityList.Add(new QuestEntity(entityClass.TppBearLocatorParameter, eDetails: animal.count));
-                        break;
-                }
+                questFox2.WriteLine("  </entities>");
+                questFox2.WriteLine("</fox>");
 
             }
 
-            foreach (Model model in questDetails.models)
-            {
-                entityList.Add(new QuestEntity(entityClass.StaticModel, model.name, model.model, model.missingGeom));
-                entityList.Add(new QuestEntity(entityClass.TransformEntity, eDetails: new object[] { model.coordinates, model.quatCoordinates }));
-            }
+            //XmlCompiler.CompileFile(fox2QuestFile, XmlCompiler.FoxToolPath);
+            //File.Delete(fox2QuestFile);
 
-            entityList.Add(new QuestEntity(entityClass.TexturePackLoadConditioner, "TexturePackLoadConditioner0000"));
-
-            return entityList;
         }
-        */
+
         /*
         public static void WriteQuestFox2(DefinitionDetails definitionDetails, QuestEntities questDetails)
         {
@@ -773,6 +642,177 @@ namespace SOC.Classes.Fox2
             File.Delete(fox2QuestFile);
         }
         */
+
+
+
+        /*
+        public static List<QuestEntity> BuildQuestEntityList(QuestEntities questDetails)
+        {
+            string vehicleHistory = "";
+            List<QuestEntity> entityList = new List<QuestEntity>();
+
+            entityList.Add(new QuestEntity(entityClass.DataSet));
+            entityList.Add(new QuestEntity(entityClass.ScriptBlockScript, "ScriptBlockScript0000"));
+
+            if (questDetails.hostages.Count > 0) //DONE
+            {
+                entityList.Add(new QuestEntity(entityClass.GameObject, "GameObjectTppHostageUnique", "TppHostageUnique2", questDetails.hostages.Count));
+                entityList.Add(new QuestEntity(entityClass.TppHostage2Parameter));
+
+                foreach (Hostage hostage in questDetails.hostages)
+                {
+                    entityList.Add(new QuestEntity(entityClass.GameObjectLocator, hostage.name, "TppHostageUnique2"));
+                    entityList.Add(new QuestEntity(entityClass.TransformEntity, eDetails: new object[] { hostage.coordinates, new RotationQuat("0", "0", "0", "1") }));
+                    entityList.Add(new QuestEntity(entityClass.TppHostage2LocatorParameter));
+                }
+            }
+
+            if (questDetails.walkerGears.Count > 0)
+            {
+                entityList.Add(new QuestEntity(entityClass.GameObject, "WalkerGearGameObject", "TppCommonWalkerGear2", questDetails.walkerGears.Count));
+                entityList.Add(new QuestEntity(entityClass.TppWalkerGear2Parameter));
+
+                foreach (WalkerGear walkergear in questDetails.walkerGears)
+                {
+                    entityList.Add(new QuestEntity(entityClass.GameObjectLocator, walkergear.name, "TppCommonWalkerGear2"));
+                    entityList.Add(new QuestEntity(entityClass.TransformEntity, eDetails: new object[] { walkergear.coordinates, new RotationQuat("0", "0", "0", "1") }));
+                    entityList.Add(new QuestEntity(entityClass.TppWalkerGear2LocatorParameter));
+                }
+            }
+
+            foreach (Vehicle vehicle in questDetails.vehicles)
+            {
+                entityList.Add(new QuestEntity(entityClass.GameObjectLocator, vehicle.name, "TppVehicle2"));
+                entityList.Add(new QuestEntity(entityClass.TransformEntity, eDetails: new object[] { vehicle.coordinates, new RotationQuat("0", "0", "0", "1") }));
+                entityList.Add(new QuestEntity(entityClass.TppVehicle2LocatorParameter));
+
+                switch (vehicle.vehicleIndex)
+                {
+                    case 0:
+                        if (!vehicleHistory.Contains("veh_bd_east_tnk"))
+                        {
+                            entityList.Add(new QuestEntity(entityClass.TppVehicle2BodyData, "veh_bd_east_tnk"));
+                            vehicleHistory += "veh_bd_east_tnk ";
+                        }
+                        break;
+                    case 1:
+                        if (!vehicleHistory.Contains("veh_bd_west_tnk"))
+                        {
+                            entityList.Add(new QuestEntity(entityClass.TppVehicle2BodyData, "veh_bd_west_tnk"));
+                            vehicleHistory += "veh_bd_west_tnk ";
+                        }
+                        break;
+                    case 2:
+                        if (!vehicleHistory.Contains("veh_bd_east_wav"))
+                        {
+                            entityList.Add(new QuestEntity(entityClass.TppVehicle2BodyData, "veh_bd_east_wav"));
+                            vehicleHistory += "veh_bd_east_wav ";
+                        }
+                        break;
+                    case 3:
+                        if (!vehicleHistory.Contains("veh_bd_east_wav"))
+                        {
+                            entityList.Add(new QuestEntity(entityClass.TppVehicle2BodyData, "veh_bd_east_wav"));
+                            vehicleHistory += "veh_bd_east_wav ";
+                        }
+                        if (!vehicleHistory.Contains("veh_at_east_wav_rocket"))
+                        {
+                            entityList.Add(new QuestEntity(entityClass.TppVehicle2AttachmentData, "veh_at_east_wav_rocket"));
+                            vehicleHistory += "veh_at_east_wav_rocket ";
+                        }
+                        break;
+                    case 4:
+                        if (!vehicleHistory.Contains("veh_bd_west_wav"))
+                        {
+                            entityList.Add(new QuestEntity(entityClass.TppVehicle2BodyData, "veh_bd_west_wav"));
+                            vehicleHistory += "veh_bd_west_wav ";
+                        }
+                        if (!vehicleHistory.Contains("veh_at_west_wav_trt_machinegun"))
+                        {
+                            entityList.Add(new QuestEntity(entityClass.TppVehicle2AttachmentData, "veh_at_west_wav_trt_machinegun"));
+                            vehicleHistory += "veh_at_west_wav_trt_machinegun ";
+                        }
+                        break;
+                    case 5:
+                        if (!vehicleHistory.Contains("veh_bd_west_wav"))
+                        {
+                            entityList.Add(new QuestEntity(entityClass.TppVehicle2BodyData, "veh_bd_west_wav"));
+                            vehicleHistory += "veh_bd_west_wav ";
+                        }
+                        if (!vehicleHistory.Contains("veh_at_west_wav_trt_cannon"))
+                        {
+                            entityList.Add(new QuestEntity(entityClass.TppVehicle2AttachmentData, "veh_at_west_wav_trt_cannon"));
+                            vehicleHistory += "veh_at_west_wav_trt_cannon ";
+                        }
+                        break;
+                }
+            }
+
+            string animalhistory = "";
+            foreach (Animal animal in questDetails.animals)
+            {
+                string animalName = animal.animal, typeName = animal.typeID, animalCategory = AnimalInfo.getAnimalCategory(animalName);
+
+                if (!animalhistory.Contains(animalName))
+                {
+                    animalhistory += animalName;
+                    int totalCount = 0;
+
+                    foreach (Animal animalScan in questDetails.animals)
+                    {
+                        if (animalScan.animal.Equals(animalName))
+                        {
+                            totalCount += (int.Parse(animal.count));
+                        }
+                    }
+
+                    string partsPath = "", mogPath = "", mtarPath = "", fv2Path = "";
+                    AnimalInfo.getAnimalPaths(animalName, out partsPath, out mogPath, out mtarPath, out fv2Path);
+
+                    entityList.Add(new QuestEntity(entityClass.GameObject, animalName + "GameObject", typeName, totalCount));
+                    switch (animalCategory)
+                    {
+                        case "animal":
+                            entityList.Add(new QuestEntity(entityClass.TppAnimalParameter, eDetails: new object[] { partsPath, mogPath, mtarPath, fv2Path }));
+                            break;
+                        case "wolf":
+                            entityList.Add(new QuestEntity(entityClass.TppWolfParameter, eDetails: new object[] { partsPath, mogPath, mtarPath, fv2Path }));
+                            break;
+                        case "bear":
+                            entityList.Add(new QuestEntity(entityClass.TppBearParameter, eDetails: new object[] { partsPath, mogPath, mtarPath, fv2Path }));
+                            break;
+                    }
+                }
+
+                entityList.Add(new QuestEntity(entityClass.GameObjectLocator, animal.name, typeName));
+                entityList.Add(new QuestEntity(entityClass.TransformEntity, eDetails: new object[] { animal.coordinates, new RotationQuat("0", "0", "0", "1") }));
+                switch (animalCategory)
+                {
+                    case "animal":
+                        entityList.Add(new QuestEntity(entityClass.TppAnimalLocatorParameter, eDetails: animal.count));
+                        break;
+                    case "wolf":
+                        entityList.Add(new QuestEntity(entityClass.TppWolfLocatorParameter, eDetails: animal.count));
+                        break;
+                    case "bear":
+                        entityList.Add(new QuestEntity(entityClass.TppBearLocatorParameter, eDetails: animal.count));
+                        break;
+                }
+
+            }
+
+            foreach (Model model in questDetails.models)
+            {
+                entityList.Add(new QuestEntity(entityClass.StaticModel, model.name, model.model, model.missingGeom));
+                entityList.Add(new QuestEntity(entityClass.TransformEntity, eDetails: new object[] { model.coordinates, model.quatCoordinates }));
+            }
+
+            entityList.Add(new QuestEntity(entityClass.TexturePackLoadConditioner, "TexturePackLoadConditioner0000"));
+
+            return entityList;
+        }
+        */
+
         /*
         public static List<QuestEntity> BuildItemEntityList(QuestEntities questDetails)
         {

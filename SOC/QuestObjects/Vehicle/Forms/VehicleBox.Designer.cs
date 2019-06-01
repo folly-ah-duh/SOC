@@ -1,6 +1,6 @@
 ﻿namespace SOC.QuestObjects.Vehicle
 {
-    partial class VehicleBoxF
+    partial class VehicleBox
     {
         /// <summary> 
         /// Required designer variable.

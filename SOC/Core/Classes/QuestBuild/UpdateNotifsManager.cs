@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace SOC.Classes
+namespace SOC.Classes.QuestBuild
 {
     static class UpdateNotifsManager
     {

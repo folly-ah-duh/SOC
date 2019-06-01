@@ -12,10 +12,10 @@ namespace SOC.Classes.Common
 
         public Quest() { }
 
-        public Quest(CoreDetails core, List<Detail> questObject)
+        public Quest(CoreDetails core, List<Detail> details)
         {
             coreDetails = core;
-            questObjectDetails = questObject;
+            questObjectDetails = details;
         }
 
         public void Save(string fileName)
@@ -40,32 +40,20 @@ namespace SOC.Classes.Common
             using (FileStream stream = new FileStream(fileName, FileMode.Open))
             {
                 XmlSerializer deserializer = new XmlSerializer(typeof(Quest), ManagerArray.GetAllDetailTypes());
-                //try
-                //{
+                try
+                {
                     Quest loadedQuest = (Quest)deserializer.Deserialize(stream);
                     coreDetails = loadedQuest.coreDetails;
                     questObjectDetails = loadedQuest.questObjectDetails;
                     return true;
-                //}
-                //catch (InvalidOperationException e)
-                //{
-                 //   System.Windows.Forms.MessageBox.Show(string.Format("An Exception has occurred and the selected xml file could not be loaded. \n\nInnerException message: \n{0}", e.InnerException), "SOC", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
-                //}
+                }
+                catch (InvalidOperationException e)
+                {
+                    System.Windows.Forms.MessageBox.Show(string.Format("An Exception has occurred and the selected xml file could not be loaded. \n\nInnerException message: \n{0}", e.InnerException), "SOC", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                }
             }
 
             return false;
-        }
-
-        public void ClearQuestFolders()
-        {
-            string fpkdir = string.Format("Sideop_Build//Assets//tpp//pack//mission2//quest//ih//{0}_fpk", coreDetails.FpkName);
-            string fpkddir = string.Format("Sideop_Build//Assets//tpp//pack//mission2//quest//ih//{0}_fpkd", coreDetails.FpkName);
-
-            if (Directory.Exists(fpkdir))
-                Tools.DeleteDirectory(fpkdir);
-
-            if (Directory.Exists(fpkddir))
-                Tools.DeleteDirectory(fpkddir);
         }
 
         [XmlElement]

@@ -17,9 +17,9 @@ namespace SOC.QuestObjects.Hostage
 
         public HostageManager(HostageDetail hostageDetail) : base(hostageDetail, hostageVisualizer) { }
 
-        public override void AddFox2Entities(ref List<Fox2EntityClass> entityList)
+        public override void AddFox2Entities(DataSet dataSet, ref List<Fox2EntityClass> entityList)
         {
-            throw new NotImplementedException();
+            HostageFox2.AddQuestEntities((HostageDetail)base.questDetail, dataSet, ref entityList);
         }
 
     }

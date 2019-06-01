@@ -1,4 +1,5 @@
 ﻿using SOC.Classes.Common;
+using SOC.Classes.QuestBuild;
 using SOC.QuestObjects.Common;
 using System;
 using System.Collections.Generic;
@@ -11,14 +12,14 @@ namespace SOC.UI
     {
         MasterManager managerMaster = new MasterManager(new ManagerArray());
 
-        private Setup setupPage;
-        private Details detailPage;
+        private SetupDisplay setupPage;
+        private DetailDisplay detailPage;
         private int pageNum = 0;
 
         public FormMain()
         {
-            setupPage = new Setup(managerMaster);
-            detailPage = new Details(managerMaster);
+            setupPage = new SetupDisplay(managerMaster);
+            detailPage = new DetailDisplay(managerMaster);
             InitializeComponent();
 
             GoToPanel();
@@ -74,7 +75,6 @@ namespace SOC.UI
 
                 case 2:
                     BuildQuest();
-                    MessageBox.Show("Build Complete", "Sideop Companion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     pageNum--;
                     break;
             }
@@ -110,22 +110,17 @@ namespace SOC.UI
 
         private void BuildQuest()
         {
-            /*
-            definitionDetails = setupPage.getDefinitionDetails();
-            questDetails = detailPage.GetEntityLists();
+            managerMaster.UpdateAllDetailsFromControl();
+            BuildManager buildManager = new BuildManager(setupPage.GetCoreDetails(), managerMaster);
 
-            AssetsBuilder.ClearQuestFolders(definitionDetails);
-
-            LangBuilder.WriteQuestLangs(definitionDetails);
-
-            LuaBuilder.WriteDefinitionLua(definitionDetails, questDetails);
-            LuaBuilder.WriteMainQuestLua(definitionDetails, questDetails);
-
-            Fox2Builder.WriteItemFox2(definitionDetails, questDetails);
-            Fox2Builder.WriteQuestFox2(definitionDetails, questDetails);
-
-            AssetsBuilder.BuildAssets(definitionDetails, questDetails);
-            */
+            if (buildManager.Build())
+            {
+                MessageBox.Show("Build Complete", "Sideop Companion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Build Failed", "Sideop Companion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void FormMain_Activated(object sender, EventArgs e)

@@ -20,6 +20,11 @@ namespace SOC.QuestObjects.Common
             managerArray = array;
         }
 
+        public DetailManager[] GetManagers()
+        {
+            return managerArray.GetManagers();
+        }
+
         internal UserControl[] GetModulePanels()
         {
             return managerArray.GetManagers().Select(manager => manager.GetVisualizer().detailControl).ToArray();
@@ -42,10 +47,19 @@ namespace SOC.QuestObjects.Common
             return managerArray.GetManagers().Select(manager => manager.GetVisualizer().detailStub).ToList();
         }
 
+        public void UpdateAllDetailsFromControl()
+        {
+            foreach (DetailManager manager in managerArray.GetManagers())
+            {
+                manager.UpdateDetailFromControl();
+            }
+        }
+
         public void RefreshAllStubTexts()
         {
             foreach (DetailManager manager in managerArray.GetManagers())
             {
+                manager.UpdateDetailFromControl();
                 manager.RefreshStub();
             }
         }
@@ -62,6 +76,7 @@ namespace SOC.QuestObjects.Common
         {
             foreach (DetailManager manager in managerArray.GetManagers())
             {
+                manager.UpdateDetailFromStub();
                 manager.RefreshPanel();
             }
         }

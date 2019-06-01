@@ -2,7 +2,7 @@
 
 namespace SOC.Classes.Fox2
 {
-    class DataSet : Fox2EntityClass
+    public class DataSet : Fox2EntityClass
     {
         List<Fox2EntityClass> fox2List;
 
@@ -39,7 +39,7 @@ namespace SOC.Classes.Fox2
                 if (entity.GetOwner() != null && entity.GetOwner() == this)
                 {
                     dataList += string.Format($@"
-                                                <value key=""{entity.GetName()}""{entity.GetHexAddress()}</value>
+                                                <value key=""{entity.GetName()}"">{entity.GetHexAddress()}</value>
                                               ");
                 }
             }

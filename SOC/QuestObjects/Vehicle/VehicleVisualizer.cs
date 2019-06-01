@@ -29,7 +29,7 @@ namespace SOC.QuestObjects.Vehicle
 
         public override QuestBox NewBox(QuestObject qObject)
         {
-            return new VehicleBoxF((Vehicle)qObject, (VehicleMetadata)GetMetadataFromControl());
+            return new VehicleBox((Vehicle)qObject, (VehicleMetadata)GetMetadataFromControl());
         }
 
         public override Detail NewDetail(Metadata meta, IEnumerable<QuestObject> qObjects)

@@ -1,6 +1,9 @@
 ﻿namespace SOC.QuestObjects.Hostage
 {
-    class HostageLua
+    static class HostageLua
     {
+        public static string GetPackList(HostageDetail hostageDetail) { return ""; }
+
+        public static string GetMain(HostageDetail hostageDetail) { return ""; }
     }
 }

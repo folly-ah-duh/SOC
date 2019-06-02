@@ -3,16 +3,37 @@ using SOC.QuestObjects.Common;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System;
+using System.Text;
 
 namespace SOC.Classes.QuestBuild.Lua
 {
     static class LuaBuilder
     {
 
-        static string[] questLuaInput = File.ReadAllLines(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//questScript.lua"));
+        static string[] questLuaTemplate = File.ReadAllLines(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//questScript.lua"));
 
         public static void WriteDefinitionLua(CoreDetails coreDetails, MasterManager masterManager)
         {
+            // local this = {
+            // write quest pack list { }
+            // write individual definition components,
+            // } return this
+            DetailManager[] managers = masterManager.GetManagers();
+
+            string DefinitionLuaPath = "Sideop_Build//GameDir//mod//quests//";
+            string DefinitionLuaFile = Path.Combine(DefinitionLuaPath, string.Format("ih_quest_q{0}.lua", coreDetails.QuestNum));
+
+            Directory.CreateDirectory(DefinitionLuaPath);
+
+            using (StreamWriter defFile = new StreamWriter(DefinitionLuaFile)) // instead of asking the manager twice (once for the pack list, another for the rest of the definition) maybe each manager should just have a "lua info" class 
+            {
+                defFile.WriteLine("local this = {");
+                defFile.WriteLine(BuildPackList(coreDetails, managers));
+                defFile.WriteLine(BuildDefinition(coreDetails, managers));
+                defFile.WriteLine("} return this");
+            }
+
             /*
             BodyInfoEntry bodyInfo = new BodyInfoEntry();
             if (questObjectDetails.hostageBodyIndex >= 0)
@@ -110,11 +131,59 @@ namespace SOC.Classes.QuestBuild.Lua
             */
         }
 
+        private static string BuildPackList(CoreDetails coreDetails, DetailManager[] managers)
+        {
+            StringBuilder packBuilder = new StringBuilder("questPackList = {");
+            packBuilder.Append($@"""/Assets/tpp/pack/mission2/quest/ih/{coreDetails.FpkName}.fpk"",");
+            foreach(DetailManager manager in managers)
+            {
+                packBuilder.Append(manager.AddToPackListLua());
+            }
+            packBuilder.Append("},");
+            return packBuilder.ToString();
+        }
+
+        private static string BuildDefinition(CoreDetails coreDetails, DetailManager[] managers)
+        {
+            StringBuilder definitionBuilder = new StringBuilder();
+            string questCompleteLangId = UpdateNotifsManager.getLangIds()[coreDetails.progNotif];
+
+            definitionBuilder.Append($@"
+                locationId = {coreDetails.locationID},
+                areaName = ""{coreDetails.loadArea}"",
+                iconPos = Vector3({coreDetails.coords.xCoord},{coreDetails.coords.yCoord},{coreDetails.coords.zCoord}),
+                radius = {coreDetails.radius},
+                category = TppQuest.QUEST_CATEGORIES_ENUM.{coreDetails.category},
+                questCompleteLangId = ""{questCompleteLangId}"",
+                canOpenQuest=InfQuest.AllwaysOpenQuest,
+                questRank = TppDefine.QUEST_RANK.{coreDetails.reward},
+                disableLzs = {{}},
+            ");
+
+            foreach (DetailManager manager in managers)
+            {
+                definitionBuilder.Append(manager.AddToDefinitionLua());
+            }
+            definitionBuilder.Append("},");
+            return definitionBuilder.ToString();
+        }
+
         public static void WriteMainQuestLua(CoreDetails coreDetails, MasterManager masterManager)
         {
-            /*
-            List<string> questLua = new List<string>(questLuaInput);
+            
+            List<string> questLua = new List<string>(questLuaTemplate);
 
+            foreach(DetailManager manager in masterManager.GetManagers())
+            {
+                manager.AddToMainLua(questLua);
+            }
+
+            string LuaScriptPath = string.Format("Sideop_Build//Assets//tpp//pack//mission2//quest//ih//{0}_fpkd//Assets//tpp//level//mission2//quest//ih", coreDetails.FpkName);
+            string LuaScriptFile = Path.Combine(LuaScriptPath, coreDetails.FpkName + ".lua");
+
+            Directory.CreateDirectory(LuaScriptPath);
+            File.WriteAllLines(LuaScriptFile, questLua);
+            /*
             questLua[GetLineOf("local hostageCount =", questLua)] = string.Format("local hostageCount = {0}", questObjects.hostages.Count);
             questLua[GetLineOf("local CPNAME =", questLua)] = string.Format("local CPNAME = \"{0}\"", coreDetails.CPName);
             questLua[GetLineOf("local useInter =", questLua)] = string.Format("local useInter = {0}", questObjects.canInter.ToString().ToLower());

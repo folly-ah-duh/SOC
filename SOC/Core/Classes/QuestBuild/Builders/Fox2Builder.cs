@@ -48,7 +48,7 @@ namespace SOC.Classes.QuestBuild.Fox2
 
             foreach (DetailManager manager in managers)
             {
-                manager.AddFox2Entities(entityDataSet, ref entityList);
+                manager.AddToFox2Entities(entityDataSet, entityList);
             }
 
             entityList.Add(new TexturePackLoadConditioner("TexturePackLoadConditioner0000", entityDataSet));

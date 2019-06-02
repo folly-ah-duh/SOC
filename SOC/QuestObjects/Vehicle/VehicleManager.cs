@@ -20,7 +20,7 @@ namespace SOC.QuestObjects.Vehicle
 
         public VehicleManager(VehicleDetail vehicleDetail) : base(vehicleDetail, vehicleVisualizer) { }
 
-        public override void AddFox2Entities(DataSet dataSet, ref List<Fox2EntityClass> entityList)
+        public override void AddToFox2Entities(DataSet dataSet, List<Fox2EntityClass> entityList)
         {
             //todo
         }

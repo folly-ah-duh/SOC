@@ -19,25 +19,25 @@ namespace SOC.Classes.Fox2
         public override string GetFox2Format()
         {
             return string.Format($@"
-                                  <entity class=""TransformEntity"" classVersion=""0"" addr=""{GetHexAddress()}"" unknown1=""80"" unknown2=""29250"">
-                                    <staticProperties>
-                                      <property name=""owner"" type=""EntityHandle"" container=""StaticArray"" arraySize=""1"">
-                                          <value>{owner.GetHexAddress()}</value>
-                                      </property>
-                                      <property name=""transform_scale"" type=""Vector3"" container=""StaticArray"" arraySize=""1"">
-                                        <value x=""1"" y=""1"" z=""1"" w=""0"" />
-                                      </property>
-                                      {transform_translation.ToFox2String()}
-                                      {transform_rotation.ToFox2String()}
-                                    </staticProperties>
-                                    <dynamicProperties />
-                                  </entity>
+        <entity class=""TransformEntity"" classVersion=""0"" addr=""{GetHexAddress()}"" unknown1=""80"" unknown2=""29250"">
+          <staticProperties>
+            <property name=""owner"" type=""EntityHandle"" container=""StaticArray"" arraySize=""1"">
+                <value>{owner.GetHexAddress()}</value>
+            </property>
+            <property name=""transform_scale"" type=""Vector3"" container=""StaticArray"" arraySize=""1"">
+                <value x=""1"" y=""1"" z=""1"" w=""0"" />
+            </property>
+            {transform_translation.ToFox2String()}
+            {transform_rotation.ToFox2String()}
+          </staticProperties>
+          <dynamicProperties />
+        </entity>
                                  ");
         }
 
         public override string GetName()
         {
-            return null;
+            return "";
         }
 
         public override Fox2EntityClass GetOwner()

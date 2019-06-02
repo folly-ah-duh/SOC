@@ -15,7 +15,13 @@ namespace SOC.QuestObjects.Common
             questDetail = detail; visualizer = visual;
         }
 
-        public abstract void AddFox2Entities(DataSet dataSet, ref List<Fox2EntityClass> entityList);
+        public abstract void AddToFox2Entities(DataSet dataSet, List<Fox2EntityClass> entityList);
+
+        public abstract string AddToDefinitionLua();
+
+        public abstract string AddToPackListLua();
+
+        public abstract string AddToMainLua(List<string> luaTemplate);
 
         public DetailVisualizer GetVisualizer()
         {

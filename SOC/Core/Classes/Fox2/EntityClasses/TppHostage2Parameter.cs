@@ -14,33 +14,33 @@
         public override string GetFox2Format()
         {
             return string.Format($@"
-                                  <entity class=""TppHostage2Parameter"" classVersion=""1"" addr=""{GetHexAddress()}"" unknown1=""176"" unknown2=""29245"">
-                                    <staticProperties>
-                                      <property name=""owner"" type=""EntityHandle"" container=""StaticArray"" arraySize=""1"">
-                                          <value>{owner.GetHexAddress()}</value>
-                                      </property>
-                                      <property name=""partsFile"" type=""FilePtr"" container=""StaticArray"" arraySize=""1"">
-                                          <value>{partsPath}</value>
-                                      </property>
-                                      <property name=""motionGraphFile"" type=""FilePtr"" container=""StaticArray"" arraySize=""1"">
-                                        <value>/Assets/tpp/motion/motion_graph/hostage2/Hostage2_layers.mog</value>
-                                      </property>
-                                      <property name=""mtarFile"" type=""FilePtr"" container=""StaticArray"" arraySize=""1"">
-                                        <value>/Assets/tpp/motion/mtar/hostage2/Hostage2_layers.mtar</value>
-                                      </property>
-                                      <property name=""extensionMtarFile"" type=""FilePtr"" container=""StaticArray"" arraySize=""1"">
-                                        <value></value>
-                                      </property>
-                                      <property name=""vfxFiles"" type=""FilePtr"" container=""StringMap"" />
-                                    </staticProperties>
-                                    <dynamicProperties />
-                                  </entity>
+        <entity class=""TppHostage2Parameter"" classVersion=""1"" addr=""{GetHexAddress()}"" unknown1=""176"" unknown2=""29245"">
+          <staticProperties>
+            <property name=""owner"" type=""EntityHandle"" container=""StaticArray"" arraySize=""1"">
+                <value>{owner.GetHexAddress()}</value>
+            </property>
+            <property name=""partsFile"" type=""FilePtr"" container=""StaticArray"" arraySize=""1"">
+                <value>{partsPath}</value>
+            </property>
+            <property name=""motionGraphFile"" type=""FilePtr"" container=""StaticArray"" arraySize=""1"">
+                <value>/Assets/tpp/motion/motion_graph/hostage2/Hostage2_layers.mog</value>
+            </property>
+            <property name=""mtarFile"" type=""FilePtr"" container=""StaticArray"" arraySize=""1"">
+                <value>/Assets/tpp/motion/mtar/hostage2/Hostage2_layers.mtar</value>
+            </property>
+            <property name=""extensionMtarFile"" type=""FilePtr"" container=""StaticArray"" arraySize=""1"">
+                <value></value>
+            </property>
+            <property name=""vfxFiles"" type=""FilePtr"" container=""StringMap"" />
+          </staticProperties>
+          <dynamicProperties />
+        </entity>
                                 ");
         }
 
         public override string GetName()
         {
-            return null;
+            return "";
         }
 
         public override Fox2EntityClass GetOwner()

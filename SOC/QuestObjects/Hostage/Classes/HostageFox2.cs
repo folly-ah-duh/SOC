@@ -7,7 +7,7 @@ namespace SOC.QuestObjects.Hostage
 {
     static class HostageFox2
     {
-        public static void AddQuestEntities(HostageDetail hDetails, DataSet dataSet, ref List<Fox2EntityClass> entityList)
+        public static void AddQuestEntities(HostageDetail hDetails, DataSet dataSet, List<Fox2EntityClass> entityList)
         {
             IEnumerable<Hostage> hostages = hDetails.hostages;
             HostageMetadata hMetadata = hDetails.hostageMetadata;

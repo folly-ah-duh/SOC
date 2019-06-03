@@ -27,8 +27,8 @@ namespace SOC.Classes.Fox2
             <property name=""transform_scale"" type=""Vector3"" container=""StaticArray"" arraySize=""1"">
                 <value x=""1"" y=""1"" z=""1"" w=""0"" />
             </property>
-            {transform_translation.ToFox2String()}
             {transform_rotation.ToFox2String()}
+            {transform_translation.ToFox2String()}
           </staticProperties>
           <dynamicProperties />
         </entity>

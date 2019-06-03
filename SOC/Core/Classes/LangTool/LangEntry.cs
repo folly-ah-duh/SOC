@@ -11,7 +11,7 @@ namespace SOC.Classes.LangTool
         }
 
         [XmlAttribute]
-        public ulong Key { get; set; }
+        public uint Key { get; set; }
 
         [XmlAttribute]
         public string LangId { get; set; }
@@ -34,7 +34,7 @@ namespace SOC.Classes.LangTool
         {
             if (!string.IsNullOrEmpty(LangId))
             {
-                Key = GzsTool.Hashing.ToStr64(LangId);
+                Key = (uint)GzsTool.Hashing.ToStr64(LangId);
             }
         }
     }

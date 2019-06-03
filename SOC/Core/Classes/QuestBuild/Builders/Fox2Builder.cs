@@ -80,8 +80,8 @@ namespace SOC.Classes.QuestBuild.Fox2
 
             }
 
-            //XmlCompiler.CompileFile(fox2QuestFile, XmlCompiler.FoxToolPath);
-            //File.Delete(fox2QuestFile);
+            Tools.CompileFile(fox2QuestFile, Tools.FoxToolPath);
+            File.Delete(fox2QuestFile);
 
         }
 

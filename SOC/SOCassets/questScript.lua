@@ -32,45 +32,27 @@ this.QUEST_TABLE = {
 	isQuestZombie = false,
 	isQuestBalaclava = false,
 
-	cpList = {
-	  nil
-	},
+	cpList = { nil },
 
-	enemyList = {
-	  
-	},
+	enemyList = { },
 
-	vehicleList = {
-	  
-	},
+	vehicleList = { },
 
-	heliList = {
-	  
-	},
+	heliList = { },
 
-	hostageList = {
-	  
-	},
+	hostageList = { },
 
-	animalList = {
-	  
-	},
+	animalList = { },
 
-	walkerList = {
-	  
-	},
+	walkerList = { },
 
-	targetList = {
-	  
-	},
-	
-    targetItemList = {
-      
-    },
-
-	targetAnimalList = {
+	targetList = { 
 	
 	},
+
+    targetItemList = { },
+
+	targetAnimalList = { },
 }
 
 this.InterCall_hostage_pos01 = function( soldier2GameObjectId, cpID, interName )
@@ -152,6 +134,7 @@ end
 function this.OnInitialize()
   TppQuest.QuestBlockOnInitialize( this )
 end
+
 local setupOnce = true
 function this.OnUpdate()
   TppQuest.QuestBlockOnUpdate( this )
@@ -167,16 +150,10 @@ quest_step.QStep_Start = {
     InfCore.PCall(this.WarpHostages)
     InfCore.PCall(this.WarpVehicles)
     this.BuildWalkerGameObjectIdList()
+	this.SetHostageAttributes()
 
     this.SwitchEnableQuestHighIntTable( true, CPNAME, this.questCpInterrogation ) --
     TppQuest.SetNextQuestStep( "QStep_Main" )
-
-    local commandScared =   {id = "SetForceScared",   scared=true, ever=true }
-    local commandUnlocked = {id = "SetHostage2Flag",  flag="unlocked",   on=true,}
-    local commandInjured =  {id = "SetHostage2Flag",  flag="disableFulton",on=true }
-    local commandBrave =    {id = "SetHostage2Flag",  flag="disableScared",on=true }
-
-    --Hostage Attributes List--
   end,
 }
 
@@ -416,6 +393,19 @@ function this.BuildWalkerGameObjectIdList()
     local walkerId = GetGameObjectId("TppCommonWalkerGear2",walkerInfo.walkerName)
     if walkerId ~= GameObject.NULL_ID then
       questWalkerGearList[walkerId] = walkerInfo.walkerName
+    end
+  end
+end
+
+function this.SetHostageAttributes()
+  for i,hostageInfo in ipairs(this.QUEST_TABLE.hostageList)do
+    local gameObjectId= GetGameObjectId(hostageInfo.hostageName)
+    if gameObjectId~=GameObject.NULL_ID then
+	  if hostageInfo.commands then
+        for j,hostageCommand in ipairs(hostageInfo.commands)do
+	      GameObject.SendCommand(gameObjectId, hostageCommand)
+	    end
+	  end
     end
   end
 end

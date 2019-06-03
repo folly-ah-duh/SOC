@@ -32,9 +32,9 @@ namespace SOC.QuestObjects.Hostage
             return HostageLua.GetPackList((HostageDetail)base.questDetail);
         }
 
-        public override string AddToMainLua()
+        public override void AddToMainLua(List<string> luaLines)
         {
-            return HostageLua.GetMain((HostageDetail)base.questDetail);
+            HostageLua.GetMain((HostageDetail)base.questDetail, luaLines);
         }
     }
 }

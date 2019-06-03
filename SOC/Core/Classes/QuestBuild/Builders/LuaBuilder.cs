@@ -15,10 +15,6 @@ namespace SOC.Classes.QuestBuild.Lua
 
         public static void WriteDefinitionLua(CoreDetails coreDetails, MasterManager masterManager)
         {
-            // local this = {
-            // write quest pack list { }
-            // write individual definition components,
-            // } return this
             DetailManager[] managers = masterManager.GetManagers();
 
             string DefinitionLuaPath = "Sideop_Build//GameDir//mod//quests//";
@@ -26,7 +22,7 @@ namespace SOC.Classes.QuestBuild.Lua
 
             Directory.CreateDirectory(DefinitionLuaPath);
 
-            using (StreamWriter defFile = new StreamWriter(DefinitionLuaFile)) // instead of asking the manager twice (once for the pack list, another for the rest of the definition) maybe each manager should just have a "lua info" class 
+            using (StreamWriter defFile = new StreamWriter(DefinitionLuaFile))
             {
                 defFile.WriteLine("local this = {");
                 defFile.WriteLine(BuildPackList(coreDetails, managers));
@@ -133,13 +129,16 @@ namespace SOC.Classes.QuestBuild.Lua
 
         private static string BuildPackList(CoreDetails coreDetails, DetailManager[] managers)
         {
-            StringBuilder packBuilder = new StringBuilder("questPackList = {");
-            packBuilder.Append($@"""/Assets/tpp/pack/mission2/quest/ih/{coreDetails.FpkName}.fpk"",");
+            StringBuilder packBuilder = new StringBuilder(@"
+    questPackList = {");
+            packBuilder.Append($@"
+        ""/Assets/tpp/pack/mission2/quest/ih/{coreDetails.FpkName}.fpk"",");
             foreach(DetailManager manager in managers)
             {
                 packBuilder.Append(manager.AddToPackListLua());
             }
-            packBuilder.Append("},");
+            packBuilder.Append(@"
+    },");
             return packBuilder.ToString();
         }
 
@@ -149,22 +148,21 @@ namespace SOC.Classes.QuestBuild.Lua
             string questCompleteLangId = UpdateNotifsManager.getLangIds()[coreDetails.progNotif];
 
             definitionBuilder.Append($@"
-                locationId = {coreDetails.locationID},
-                areaName = ""{coreDetails.loadArea}"",
-                iconPos = Vector3({coreDetails.coords.xCoord},{coreDetails.coords.yCoord},{coreDetails.coords.zCoord}),
-                radius = {coreDetails.radius},
-                category = TppQuest.QUEST_CATEGORIES_ENUM.{coreDetails.category},
-                questCompleteLangId = ""{questCompleteLangId}"",
-                canOpenQuest=InfQuest.AllwaysOpenQuest,
-                questRank = TppDefine.QUEST_RANK.{coreDetails.reward},
-                disableLzs = {{}},
+    locationId = {coreDetails.locationID},
+    areaName = ""{coreDetails.loadArea}"",
+    iconPos = Vector3({coreDetails.coords.xCoord},{coreDetails.coords.yCoord},{coreDetails.coords.zCoord}),
+    radius = {coreDetails.radius},
+    category = TppQuest.QUEST_CATEGORIES_ENUM.{coreDetails.category},
+    questCompleteLangId = ""{questCompleteLangId}"",
+    canOpenQuest=InfQuest.AllwaysOpenQuest,
+    questRank = TppDefine.QUEST_RANK.{coreDetails.reward},
+    disableLzs = {{}},
             ");
 
             foreach (DetailManager manager in managers)
             {
                 definitionBuilder.Append(manager.AddToDefinitionLua());
             }
-            definitionBuilder.Append("},");
             return definitionBuilder.ToString();
         }
 

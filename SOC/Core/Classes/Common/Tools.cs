@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 
@@ -38,6 +39,15 @@ namespace SOC.Classes.Common
             {
                 Directory.Delete(dir, true);
             }
+        }
+
+        public static int GetLineContaining(string text, List<string> questLua)
+        {
+            for (int i = 0; i < questLua.Count; i++)
+                if (questLua[i].Contains(text))
+                    return i;
+
+            return -1;
         }
 
         public static string FoxToolPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//ToolAssets//FoxTool.exe");

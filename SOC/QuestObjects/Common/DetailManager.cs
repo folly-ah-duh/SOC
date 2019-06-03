@@ -21,7 +21,7 @@ namespace SOC.QuestObjects.Common
 
         public abstract string AddToPackListLua();
 
-        public abstract string AddToMainLua(List<string> luaTemplate);
+        public abstract void AddToMainLua(List<string> luaTemplate);
 
         public DetailVisualizer GetVisualizer()
         {

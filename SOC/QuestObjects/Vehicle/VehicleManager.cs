@@ -24,5 +24,19 @@ namespace SOC.QuestObjects.Vehicle
         {
             //todo
         }
+
+        public override string AddToDefinitionLua()
+        {
+            return "";
+        }
+
+        public override string AddToPackListLua()
+        {
+            return "";
+        }
+
+        public override void AddToMainLua(List<string> luaTemplate)
+        {
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using SOC.Classes.Fox2;
+using SOC.Classes.Lua;
 using SOC.Forms.Pages;
 using System;
 using System.Collections.Generic;
@@ -17,11 +18,9 @@ namespace SOC.QuestObjects.Common
 
         public abstract void AddToFox2Entities(DataSet dataSet, List<Fox2EntityClass> entityList);
 
-        public abstract string AddToDefinitionLua();
+        public abstract void AddToDefinitionLua(DefinitionLua definitionLua);
 
-        public abstract string AddToPackListLua();
-
-        public abstract void AddToMainLua(List<string> luaTemplate);
+        public abstract void AddToMainLua(MainLua mainLua);
 
         public DetailVisualizer GetVisualizer()
         {

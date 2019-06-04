@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SOC.Classes.Lua;
 
 namespace SOC.QuestObjects.Vehicle
 {
@@ -22,20 +23,13 @@ namespace SOC.QuestObjects.Vehicle
 
         public override void AddToFox2Entities(DataSet dataSet, List<Fox2EntityClass> entityList)
         {
-            //todo
         }
 
-        public override string AddToDefinitionLua()
+        public override void AddToDefinitionLua(DefinitionLua definitionLua)
         {
-            return "";
         }
 
-        public override string AddToPackListLua()
-        {
-            return "";
-        }
-
-        public override void AddToMainLua(List<string> luaTemplate)
+        public override void AddToMainLua(MainLua mainLua)
         {
         }
     }

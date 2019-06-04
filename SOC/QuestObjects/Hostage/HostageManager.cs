@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using SOC.Forms.Pages;
 using SOC.Core.Classes.InfiniteHeaven;
+using SOC.Classes.Lua;
 
 namespace SOC.QuestObjects.Hostage
 {
@@ -22,19 +23,14 @@ namespace SOC.QuestObjects.Hostage
             HostageFox2.AddQuestEntities((HostageDetail)base.questDetail, dataSet, entityList);
         }
 
-        public override string AddToDefinitionLua()
+        public override void AddToMainLua(MainLua mainLua)
         {
-            return "";
+            HostageLua.GetMain((HostageDetail)base.questDetail, mainLua);
         }
 
-        public override string AddToPackListLua()
+        public override void AddToDefinitionLua(DefinitionLua definitionLua)
         {
-            return HostageLua.GetPackList((HostageDetail)base.questDetail);
-        }
-
-        public override void AddToMainLua(List<string> luaLines)
-        {
-            HostageLua.GetMain((HostageDetail)base.questDetail, luaLines);
+            HostageLua.GetDefinition((HostageDetail)base.questDetail, definitionLua);
         }
     }
 }

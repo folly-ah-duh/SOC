@@ -41,15 +41,6 @@ namespace SOC.Classes.Common
             }
         }
 
-        public static int GetLineContaining(string text, List<string> questLua)
-        {
-            for (int i = 0; i < questLua.Count; i++)
-                if (questLua[i].Contains(text))
-                    return i;
-
-            return -1;
-        }
-
         public static string FoxToolPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//ToolAssets//FoxTool.exe");
 
         public static void CompileFile(string toolArg, string ToolPath)

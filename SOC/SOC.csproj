@@ -102,6 +102,8 @@
     <Compile Include="Core\Classes\Fox2\EntityClasses\Transform.cs" />
     <Compile Include="Core\Classes\Fox2\Fox2EntityClass.cs" />
     <Compile Include="Core\Classes\InfiniteHeaven\Position.cs" />
+    <Compile Include="Core\Classes\Lua\DefinitionLua.cs" />
+    <Compile Include="Core\Classes\Lua\MainLua.cs" />
     <Compile Include="Core\Classes\QuestBuild\Builders\AssetsBuilder.cs" />
     <Compile Include="Core\Classes\QuestBuild\BuildManager.cs" />
     <Compile Include="Core\Classes\Common\LoadAreas.cs" />

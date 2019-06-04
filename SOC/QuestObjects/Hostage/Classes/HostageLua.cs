@@ -1,4 +1,5 @@
 ﻿using SOC.Classes.Common;
+using SOC.Classes.Lua;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,40 +9,35 @@ namespace SOC.QuestObjects.Hostage
 {
     static class HostageLua
     {
-        public static string GetPackList(HostageDetail hostageDetail)
+        public static void GetDefinition(HostageDetail hostageDetail, DefinitionLua definitionLua)
         {
             int hostageCount = hostageDetail.hostages.Count;
-            StringBuilder hostagePackList = new StringBuilder("");
-
             BodyInfoEntry hostageBody = NPCBodyInfo.GetBodyInfo(hostageDetail.hostageMetadata.hostageBodyName);
 
             if (hostageCount > 0)
             {
-                hostagePackList.Append(@"
-        ""/Assets/tpp/pack/mission2/ih/ih_hostage_base.fpk"",");
-                hostagePackList.Append($@"
-        ""{hostageBody.missionPackPath}"", ");
-                hostagePackList.Append($@"
-        randomFaceListIH = {{ gender = ""{(hostageBody.isFemale ? "FEMALE" : "MALE")}"", count = {hostageCount}}}, ");
-            }
+                definitionLua.AddPackPath("/Assets/tpp/pack/mission2/ih/ih_hostage_base.fpk");
+                definitionLua.AddPackPath(hostageBody.missionPackPath);
 
-            return hostagePackList.ToString();
+                definitionLua.AddPackInfo($@"randomFaceListIH = {{ gender = ""{(hostageBody.isFemale ? "FEMALE" : "MALE")}"", count = {hostageCount}}}");
+            }
         }
 
-        public static void GetMain(HostageDetail hostageDetail, List<string> luaList)
+        public static void GetMain(HostageDetail hostageDetail, MainLua mainLua)
         {
             List<Hostage> hostages = hostageDetail.hostages;
             HostageMetadata meta = hostageDetail.hostageMetadata;
-            luaList[GetLineContaining("local hostageCount =", luaList)] = string.Format("local hostageCount = {0}", hostageDetail.hostages.Count);
-            luaList[GetLineContaining("local useInter =", luaList)] = string.Format("local useInter = {0}", meta.canInterrogate.ToString().ToLower());
-            luaList[GetLineContaining("local hostageQuestType =", luaList)] = string.Format("local hostageQuestType = {0}", meta.hostageObjectiveType);
 
-            luaList[GetLineContaining("hostageList = {", luaList)] = BuildHostageList(hostageDetail);
+            mainLua.AddToLocalVariables("local hostageCount =", "local hostageCount = " + hostages.Count);
+            mainLua.AddToLocalVariables("local useInter =", "local useInter = " + meta.canInterrogate.ToString().ToLower());
+            mainLua.AddToLocalVariables("local hostageQuestType =", "local hostageQuestType = " + meta.hostageObjectiveType);
+
+            mainLua.AddToQuestTable(BuildHostageList(hostageDetail));
 
             foreach (Hostage hostage in hostageDetail.hostages)
             {
                 if (hostage.isTarget)
-                    luaList.Insert(GetLineContaining("targetList = {", luaList) + 1, $@"    ""{hostage.GetObjectName()}"", ");
+                    mainLua.AddToTargetList(hostage.GetObjectName());
             }
         }
 
@@ -77,7 +73,7 @@ namespace SOC.QuestObjects.Hostage
         },");
                 }
             hostageListBuilder.Append(@"
-    },");
+    }");
             return hostageListBuilder.ToString();
         }
     }

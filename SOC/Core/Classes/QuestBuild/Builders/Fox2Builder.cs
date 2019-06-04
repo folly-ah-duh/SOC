@@ -9,8 +9,6 @@ namespace SOC.Classes.QuestBuild.Fox2
 
     public static class Fox2Builder
     {
-        static string unassignedName = "";
-
         public static void SetAddresses(List<Fox2EntityClass> entities, uint baseOffset)
         {
             uint address = baseOffset;
@@ -21,22 +19,6 @@ namespace SOC.Classes.QuestBuild.Fox2
                 address += Fox2Info.entityClassSize;
             }
         }
-        /*
-        public static List<string> BuildDataList(List<QuestEntity> entityList)
-        {
-            List<string> dataList = new List<string>();
-
-            foreach (QuestEntity entity in entityList)
-            {
-                if (!entity.name.Equals(unassignedName))
-                {
-                    dataList.Add(string.Format("			<value key=\"{0}\">0x{1:X8}</value>", entity.name, entity.hexAddress));
-                }
-            }
-
-            return dataList;
-        }
-        */
 
         public static List<Fox2EntityClass> BuildQuestEntityList(string fpkName, DetailManager[] managers)
         {
@@ -80,13 +62,13 @@ namespace SOC.Classes.QuestBuild.Fox2
 
             }
 
-            Tools.CompileFile(fox2QuestFile, Tools.FoxToolPath);
+            Fox2Info.CompileFile(fox2QuestFile, Fox2Info.FoxToolPath);
             File.Delete(fox2QuestFile);
 
         }
 
         /*
-        public static void WriteQuestFox2(DefinitionDetails definitionDetails, QuestEntities questDetails)
+        public static void WriteQuestFox2(DefinitionDetails definitionDetails, QuestEntities questDetails) still need to port the rest of these to Fox2.EntityClasses
         {
 
             List<QuestEntity> entityList = BuildQuestEntityList(questDetails);

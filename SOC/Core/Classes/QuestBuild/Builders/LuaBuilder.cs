@@ -14,7 +14,7 @@ namespace SOC.Classes.QuestBuild.Lua
 
         static string[] questLuaTemplate = File.ReadAllLines(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//questScript.lua"));
 
-        static DefinitionLua definitionLua = new DefinitionLua();
+        static DefinitionLua definitionLua = new DefinitionLua(); // issue - building more than once will add to existing stuff
 
         static MainLua mainLua = new MainLua();
 
@@ -36,17 +36,16 @@ namespace SOC.Classes.QuestBuild.Lua
         private static string BuildDefinition(CoreDetails coreDetails, DetailManager[] managers) //rewrite
         {
             string questCompleteLangId = UpdateNotifsManager.getLangIds()[coreDetails.progNotif];
-
-            definitionLua.AddDefinition($@"
-    locationId = {coreDetails.locationID},
-    areaName = ""{coreDetails.loadArea}"",
-    iconPos = Vector3({coreDetails.coords.xCoord},{coreDetails.coords.yCoord},{coreDetails.coords.zCoord}),
-    radius = {coreDetails.radius},
-    category = TppQuest.QUEST_CATEGORIES_ENUM.{coreDetails.category},
-    questCompleteLangId = ""{questCompleteLangId}"",
-    canOpenQuest=InfQuest.AllwaysOpenQuest,
-    questRank = TppDefine.QUEST_RANK.{coreDetails.reward},
-    disableLzs = {{}}");
+            
+            definitionLua.AddDefinition($"locationId = {coreDetails.locationID}");
+            definitionLua.AddDefinition($@"areaName = ""{coreDetails.loadArea}""");
+            definitionLua.AddDefinition($"iconPos = Vector3({coreDetails.coords.xCoord},{coreDetails.coords.yCoord},{coreDetails.coords.zCoord})");
+            definitionLua.AddDefinition($"radius = {coreDetails.radius}");
+            definitionLua.AddDefinition($"category = TppQuest.QUEST_CATEGORIES_ENUM.{coreDetails.category}");
+            definitionLua.AddDefinition($@"questCompleteLangId = ""{questCompleteLangId}""");
+            definitionLua.AddDefinition("canOpenQuest=InfQuest.AllwaysOpenQuest");
+            definitionLua.AddDefinition($"questRank = TppDefine.QUEST_RANK.{coreDetails.reward}");
+            definitionLua.AddDefinition("disableLzs = {}");
 
             foreach (DetailManager manager in managers)
             {
@@ -70,7 +69,7 @@ namespace SOC.Classes.QuestBuild.Lua
             File.WriteAllLines(LuaScriptFile, BuildMain(questLua, coreDetails, managers));
         }
 
-        private static List<string> BuildMain(List<string> questLua, CoreDetails coreDetails, DetailManager[] managers) // rewrite
+        private static List<string> BuildMain(List<string> questLua, CoreDetails coreDetails, DetailManager[] managers)
         {
             mainLua.AddToLocalVariables("local CPNAME =", $@"local CPNAME = ""{coreDetails.CPName}""");
             mainLua.AddToLocalVariables("local questTrapName =", $@"local questTrapName = ""trap_preDeactiveQuestArea_{coreDetails.loadArea}""");

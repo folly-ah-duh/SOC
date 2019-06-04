@@ -29,19 +29,25 @@ namespace SOC.Classes.Lua
 
         public string GetDefinitionLuaFormatted()
         {
-            StringBuilder definitionLua = new StringBuilder("local this = { questPackList = {");
+            StringBuilder definitionLua = new StringBuilder(@"local this = {
+    questPackList = {");
             foreach (string path in packPaths)
-                definitionLua.Append($@"""{path}"", ");
+                definitionLua.Append($@"
+        ""{path}"", ");
 
             foreach (string info in packInfos)
-                definitionLua.Append(info + ", ");
+                definitionLua.Append($@"
+        {info},");
 
-            definitionLua.Append("},");
+            definitionLua.Append(@"
+    },");
 
             foreach (string definition in definitions)
-                definitionLua.Append(definition + ", ");
+                definitionLua.Append($@"
+    {definition},");
 
-            definitionLua.Append("} return this");
+            definitionLua.Append(@"
+} return this");
 
             return definitionLua.ToString();
         }

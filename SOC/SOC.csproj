@@ -90,8 +90,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Classes\Assets\FileAssets.cs" />
     <Compile Include="Core\Classes\Common\CoreDetails.cs" />
-    <Compile Include="Core\Classes\Common\Tools.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\DataSet.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\GameObject.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\GameObjectLocator.cs" />

@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SOC.Classes.Lua;
+using SOC.Classes.Assets;
+using SOC.Classes.Common;
 
 namespace SOC.QuestObjects.Vehicle
 {
@@ -31,6 +33,11 @@ namespace SOC.QuestObjects.Vehicle
 
         public override void AddToMainLua(MainLua mainLua)
         {
+        }
+
+        public override void AddToAssets(FileAssets fileAssets)
+        {
+            VehicleAssets.GetVehicleAssets((VehicleDetail)base.questDetail, fileAssets);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using SOC.Classes.Fox2;
+﻿using SOC.Classes.Assets;
+using SOC.Classes.Common;
+using SOC.Classes.Fox2;
 using SOC.Classes.Lua;
 using SOC.Forms.Pages;
 using System;
@@ -21,6 +23,8 @@ namespace SOC.QuestObjects.Common
         public abstract void AddToDefinitionLua(DefinitionLua definitionLua);
 
         public abstract void AddToMainLua(MainLua mainLua);
+
+        public abstract void AddToAssets(FileAssets fileAssets);
 
         public DetailVisualizer GetVisualizer()
         {

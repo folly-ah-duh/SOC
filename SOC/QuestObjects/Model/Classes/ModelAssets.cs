@@ -1,32 +1,30 @@
-﻿using System.Collections.Generic;
+﻿using SOC.Classes.Assets;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
 namespace SOC.QuestObjects.Model
 {
-    /*
     static class ModelAssets
     {
         public static string modelAssetsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//ModelAssets");
 
-        public static void BuildModelAssets(string FPKPath, List<Model> modelList)
+        /*
+        
+        internal static void GetModelAssets(ModelDetail questDetail, FileAssets fileAssets)
         {
-            string FPKPathAssets = FPKPath + "//Assets";
-            if (!Directory.Exists(FPKPathAssets))
-                Directory.CreateDirectory(FPKPathAssets);
-            foreach (Model model in modelList)
+            foreach (Model model in questDetail.models)
             {
-
                 string SourcemodelFileName = Path.Combine(modelAssetsPath, model.model);
-                string DestModelFileName = Path.Combine(FPKPathAssets, model.model);
+                string destinationFpkPath = Path.Combine(fileAssets.questFPKPath, "Assets", model.model);
 
-                File.Copy(SourcemodelFileName + ".fmdl", DestModelFileName + ".fmdl", true);
+                fileAssets.AddIndividualFile(SourcemodelFileName + ".fmdl", destinationFpkPath + ".fmdl");
                 if (!model.missingGeom)
                 {
-                    File.Copy(SourcemodelFileName + ".geom", DestModelFileName + ".geom", true);
+                    fileAssets.AddIndividualFile(SourcemodelFileName + ".geom", destinationFpkPath + ".geom");
                 }
             }
         }
+        */
     }
-    */
 }

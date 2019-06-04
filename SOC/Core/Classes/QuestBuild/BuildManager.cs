@@ -2,6 +2,7 @@
 using SOC.Classes.Common;
 using SOC.QuestObjects.Common;
 using System.IO;
+using SOC.Classes.Assets;
 
 namespace SOC.Classes.QuestBuild
 {
@@ -47,10 +48,10 @@ namespace SOC.Classes.QuestBuild
             string fpkddir = string.Format("Sideop_Build//Assets//tpp//pack//mission2//quest//ih//{0}_fpkd", fpkName);
 
             if (Directory.Exists(fpkdir))
-                Tools.DeleteDirectory(fpkdir);
+                FileAssets.DeleteDirectory(fpkdir);
 
             if (Directory.Exists(fpkddir))
-                Tools.DeleteDirectory(fpkddir);
+                FileAssets.DeleteDirectory(fpkddir);
         }
     }
 }

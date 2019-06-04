@@ -2,36 +2,27 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using SOC.Classes.Assets;
+using System;
 
-namespace SOC.QuestObjects.Vehicle.Classes
+namespace SOC.QuestObjects.Vehicle
 {
     static class VehicleAssets
     {
         public static string VehAssetsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//VehicleAssets");
 
-        public static void BuildVehicleAssets(List<Vehicle> vehicleList, string FPKPath, string FPKDPath)
+        internal static void GetVehicleAssets(VehicleDetail questDetail, FileAssets fileAssets)
         {
             string VehFPKAssetsPath = Path.Combine(VehAssetsPath, "FPK_Files");
-            foreach (Vehicle vehicle in vehicleList)
-            {
-                string vehicleName;
-                VehicleNames.vehicleName.TryGetValue(vehicle.vehicle, out vehicleName);
-
-                string sourceDirPath = Path.Combine(VehFPKAssetsPath, string.Format("{0}_fpk", vehicleName));
-
-                Tools.CopyDirectory(sourceDirPath, FPKPath);
-            }
-
             string VehFPKDAssetsPath = Path.Combine(VehAssetsPath, "FPKD_Files");
-            foreach (Vehicle vehicle in vehicleList)
-            {
 
+            foreach(Vehicle vehicle in questDetail.vehicles)
+            {
                 string vehicleName;
                 VehicleNames.vehicleName.TryGetValue(vehicle.vehicle, out vehicleName);
 
-                string sourceDirPath = Path.Combine(VehFPKDAssetsPath, string.Format("{0}_fpkd", vehicleName));
-
-                Tools.CopyDirectory(sourceDirPath, FPKDPath);
+                fileAssets.AddFPKFolder(Path.Combine(VehFPKAssetsPath, $"{vehicleName}_fpk"));
+                fileAssets.AddFPKDFolder(Path.Combine(VehFPKDAssetsPath, $"{vehicleName}_fpkd"));
             }
         }
     }

@@ -1,4 +1,8 @@
-﻿namespace SOC.Classes.Fox2
+﻿using System.Diagnostics;
+using System.IO;
+using System.Reflection;
+
+namespace SOC.Classes.Fox2
 {
     public static class Fox2Info
     {
@@ -6,6 +10,20 @@
         public const uint baseItemAddress = 0x10000000;
 
         public const uint entityClassSize = 0x70;
+
+        public static string FoxToolPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//ToolAssets//FoxTool.exe");
+
+        public static void CompileFile(string toolArg, string ToolPath)
+        {
+            Process compileProcess = new Process();
+            compileProcess.StartInfo.FileName = ToolPath;
+            compileProcess.StartInfo.Arguments = toolArg;
+            compileProcess.StartInfo.UseShellExecute = false;
+            compileProcess.StartInfo.CreateNoWindow = true;
+            compileProcess.Start();
+            compileProcess.WaitForExit();
+        }
+
     }
 
     public enum entityClass

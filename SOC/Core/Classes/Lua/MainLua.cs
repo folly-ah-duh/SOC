@@ -38,15 +38,18 @@ namespace SOC.Classes.Lua
     {tableItem},");
             }
 
-            questTableBuilder.Append("targetList = {");
+            questTableBuilder.Append(@"
+    targetList = {");
             foreach(string targetName in targetList)
             {
                 questTableBuilder.Append($@"
-    ""{targetName}"", ");
+        ""{targetName}"", ");
             }
-            questTableBuilder.Append("},");
+            questTableBuilder.Append(@"
+    },");
 
-            questTableBuilder.Append("}");
+            questTableBuilder.Append(@"
+}");
 
             ReplaceLuaLine(luaList, "this.QUEST_TABLE = {}", questTableBuilder.ToString());
             foreach(KeyValuePair<string, string> localVariable in localVariables)

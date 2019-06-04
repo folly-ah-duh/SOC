@@ -3,8 +3,9 @@ using SOC.QuestObjects.Common;
 using System;
 using System.Collections.Generic;
 using SOC.Forms.Pages;
-using SOC.Core.Classes.InfiniteHeaven;
 using SOC.Classes.Lua;
+using SOC.Classes.Assets;
+using SOC.Classes.Common;
 
 namespace SOC.QuestObjects.Hostage
 {
@@ -31,6 +32,11 @@ namespace SOC.QuestObjects.Hostage
         public override void AddToDefinitionLua(DefinitionLua definitionLua)
         {
             HostageLua.GetDefinition((HostageDetail)base.questDetail, definitionLua);
+        }
+
+        public override void AddToAssets(FileAssets fileAssets)
+        {
+            return;
         }
     }
 }

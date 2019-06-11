@@ -12,7 +12,8 @@ namespace SOC.QuestObjects.Common
         {
             Type[] AllDetailTypes = {
                 typeof(Hostage.HostageDetail),
-                typeof(Vehicle.VehicleDetail)
+                typeof(Vehicle.VehicleDetail),
+                typeof(WalkerGear.WalkerDetail)
             }; 
             return AllDetailTypes;
         }

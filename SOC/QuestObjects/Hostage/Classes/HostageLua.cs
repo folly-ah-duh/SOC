@@ -3,7 +3,6 @@ using SOC.Classes.Lua;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using static SOC.Classes.Common.Tools;
 
 namespace SOC.QuestObjects.Hostage
 {
@@ -34,7 +33,7 @@ namespace SOC.QuestObjects.Hostage
 
             mainLua.AddToQuestTable(BuildHostageList(hostageDetail));
 
-            foreach (Hostage hostage in hostageDetail.hostages)
+            foreach (Hostage hostage in hostages)
             {
                 if (hostage.isTarget)
                     mainLua.AddToTargetList(hostage.GetObjectName());

@@ -59,6 +59,10 @@ namespace SOC.Classes.Assets
             {
                 if (File.Exists(asset.Key))
                 {
+                    string destinationDir = Path.GetDirectoryName(asset.Value);
+                    if (!Directory.Exists(destinationDir))
+                        Directory.CreateDirectory(destinationDir);
+
                     File.Copy(asset.Key, asset.Value, true);
                 }
             }

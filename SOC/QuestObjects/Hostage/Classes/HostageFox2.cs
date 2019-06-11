@@ -9,7 +9,7 @@ namespace SOC.QuestObjects.Hostage
     {
         public static void AddQuestEntities(HostageDetail hDetails, DataSet dataSet, List<Fox2EntityClass> entityList)
         {
-            IEnumerable<Hostage> hostages = hDetails.hostages;
+            List<Hostage> hostages = hDetails.hostages;
             HostageMetadata hMetadata = hDetails.hostageMetadata;
             BodyInfoEntry hostageBodies = NPCBodyInfo.GetBodyInfo(hMetadata.hostageBodyName);
 

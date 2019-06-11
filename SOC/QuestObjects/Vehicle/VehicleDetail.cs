@@ -109,9 +109,9 @@ namespace SOC.QuestObjects.Vehicle
 
         public VehicleMetadata() { }
 
-        public VehicleMetadata(VehicleControl vehiclePanel)
+        public VehicleMetadata(VehicleControl vehicleControl)
         {
-            vehicleObjectiveType = vehiclePanel.comboBox_vehObjType.Text;
+            vehicleObjectiveType = vehicleControl.comboBox_vehObjType.Text;
         }
 
         [XmlAttribute]

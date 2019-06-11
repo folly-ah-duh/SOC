@@ -99,6 +99,8 @@
     <Compile Include="Core\Classes\Fox2\EntityClasses\TexturePackLoadConditioner.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppHostage2LocatorParameter.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppHostage2Parameter.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\TppWalkerGear2LocatorParameter.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\TppWalkerGear2Parameter.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\Transform.cs" />
     <Compile Include="Core\Classes\Fox2\Fox2EntityClass.cs" />
     <Compile Include="Core\Classes\InfiniteHeaven\Position.cs" />
@@ -238,7 +240,14 @@
     </Compile>
     <Compile Include="QuestObjects\Vehicle\VehicleDetail.cs" />
     <Compile Include="QuestObjects\Vehicle\VehicleManager.cs" />
-    <Compile Include="QuestObjects\WalkerGear\Forms\WalkerGearBox.cs" />
+    <Compile Include="QuestObjects\WalkerGear\Classes\WalkerFox2.cs" />
+    <Compile Include="QuestObjects\WalkerGear\Classes\WalkerLua.cs" />
+    <Compile Include="QuestObjects\WalkerGear\Forms\WalkerBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuestObjects\WalkerGear\Forms\WalkerBox.Designer.cs">
+      <DependentUpon>WalkerBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Core\Forms\Pages\SetupDisplay.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -275,13 +284,15 @@
     <Compile Include="QuestObjects\Hostage\HostageManager.cs" />
     <Compile Include="QuestObjects\Item\Classes\Item.cs" />
     <Compile Include="QuestObjects\Model\Classes\Model.cs" />
-    <Compile Include="QuestObjects\WalkerGear\Classes\WalkerGear.cs" />
-    <Compile Include="QuestObjects\WalkerGear\Forms\WalkerGearPanel.cs">
+    <Compile Include="QuestObjects\WalkerGear\WalkerDetail.cs" />
+    <Compile Include="QuestObjects\WalkerGear\Forms\WalkerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="QuestObjects\WalkerGear\Forms\WalkerGearPanel.Designer.cs">
-      <DependentUpon>WalkerGearPanel.cs</DependentUpon>
+    <Compile Include="QuestObjects\WalkerGear\Forms\WalkerControl.Designer.cs">
+      <DependentUpon>WalkerControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuestObjects\WalkerGear\WalkerManager.cs" />
+    <Compile Include="QuestObjects\WalkerGear\WalkerVisualizer.cs" />
     <EmbeddedResource Include="Core\Forms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -341,8 +352,11 @@
     <EmbeddedResource Include="QuestObjects\Vehicle\Forms\VehicleControl.resx">
       <DependentUpon>VehicleControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuestObjects\WalkerGear\Forms\WalkerGearPanel.resx">
-      <DependentUpon>WalkerGearPanel.cs</DependentUpon>
+    <EmbeddedResource Include="QuestObjects\WalkerGear\Forms\WalkerBox.resx">
+      <DependentUpon>WalkerBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuestObjects\WalkerGear\Forms\WalkerControl.resx">
+      <DependentUpon>WalkerControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
     <None Include="Properties\app.manifest">

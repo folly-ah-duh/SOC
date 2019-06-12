@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SOC.Forms.Pages;
 using SOC.UI;
+using SOC.Classes.Common;
 
 namespace SOC.QuestObjects.WalkerGear
 {
@@ -23,9 +24,9 @@ namespace SOC.QuestObjects.WalkerGear
             return new WalkerMetadata((WalkerControl)detailControl);
         }
 
-        public override QuestBox NewBox(QuestObject qObject)
+        public override QuestBox NewBox(QuestObject qObject, CoreDetails core)
         {
-            return new WalkerBox((WalkerGear)qObject, (WalkerMetadata)GetMetadataFromControl()); ;
+            return new WalkerBox((WalkerGear)qObject);
         }
 
         public override Detail NewDetail(Metadata meta, IEnumerable<QuestObject> qObjects)

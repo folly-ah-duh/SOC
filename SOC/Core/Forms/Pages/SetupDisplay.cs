@@ -6,11 +6,11 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using static SOC.QuestComponents.EnemyInfo;
 using System.Collections.Generic;
 using SOC.Classes.Common;
 using System.Globalization;
 using SOC.Classes.QuestBuild;
+using static SOC.Classes.Common.EnemyInfo;
 
 namespace SOC.UI
 {
@@ -195,7 +195,7 @@ namespace SOC.UI
 
         private void flowPanelLocationalStubs_Layout(object sender, LayoutEventArgs e) // necessary jank for flowLayoutPanels: https://docs.microsoft.com/en-us/dotnet/framework/winforms/controls/how-to-anchor-and-dock-child-controls-in-a-flowlayoutpanel-control
         {
-            labelFlowWidth.Width = flowPanelLocationalStubs.Width;
+            labelFlowWidth.Width = flowPanelLocationalStubs.Width - 18;
         }
         
         public void UpdateComboBox(ComboBox box, List<string> itemList)
@@ -210,7 +210,7 @@ namespace SOC.UI
             box.SelectedIndex = currentIndex;
         }
 
-        public void UpdateComboBox(ComboBox box, string[] itemList)
+        public static void UpdateComboBox(ComboBox box, string[] itemList)
         {
             int currentIndex = box.SelectedIndex;
 

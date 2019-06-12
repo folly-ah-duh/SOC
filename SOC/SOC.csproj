@@ -96,6 +96,7 @@
     <Compile Include="Core\Classes\Fox2\EntityClasses\GameObject.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\GameObjectLocator.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\ScriptBlockScript.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\StaticModel.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TexturePackLoadConditioner.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppHostage2LocatorParameter.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppHostage2Parameter.cs" />
@@ -124,6 +125,15 @@
     </Compile>
     <Compile Include="QuestObjects\Common\ManagerArray.cs" />
     <Compile Include="QuestObjects\Common\Detail.cs" />
+    <Compile Include="QuestObjects\Helicopter\Classes\HelicopterLua.cs" />
+    <Compile Include="QuestObjects\Helicopter\Forms\HelicopterBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuestObjects\Helicopter\Forms\HelicopterBox.Designer.cs">
+      <DependentUpon>HelicopterBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuestObjects\Helicopter\HelicopterManager.cs" />
+    <Compile Include="QuestObjects\Helicopter\HelicopterVisualizer.cs" />
     <Compile Include="QuestObjects\Hostage\Forms\HostageBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -192,12 +202,11 @@
     <Compile Include="QuestObjects\Enemy\Forms\NewEnemiesPanel.Designer.cs">
       <DependentUpon>NewEnemiesPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="QuestObjects\Helicopter\Forms\HelicopterBox.cs" />
-    <Compile Include="QuestObjects\Helicopter\Forms\HelicopterPanel.cs">
+    <Compile Include="QuestObjects\Helicopter\Forms\HelicopterControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="QuestObjects\Helicopter\Forms\HelicopterPanel.Designer.cs">
-      <DependentUpon>HelicopterPanel.cs</DependentUpon>
+    <Compile Include="QuestObjects\Helicopter\Forms\HelicopterControl.Designer.cs">
+      <DependentUpon>HelicopterControl.cs</DependentUpon>
     </Compile>
     <Compile Include="QuestObjects\Hostage\Forms\HostageControl.cs">
       <SubType>UserControl</SubType>
@@ -214,15 +223,23 @@
       <DependentUpon>ItemPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="QuestObjects\Model\Classes\ModelAssets.cs" />
-    <Compile Include="QuestObjects\Model\Forms\ModelBox.cs" />
-    <Compile Include="QuestObjects\Model\Forms\ModelPanel.cs">
+    <Compile Include="QuestObjects\Model\Classes\ModelFox2.cs" />
+    <Compile Include="QuestObjects\Model\Forms\ModelBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="QuestObjects\Model\Forms\ModelPanel.Designer.cs">
-      <DependentUpon>ModelPanel.cs</DependentUpon>
+    <Compile Include="QuestObjects\Model\Forms\ModelBox.Designer.cs">
+      <DependentUpon>ModelBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuestObjects\Model\Forms\ModelControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuestObjects\Model\Forms\ModelControl.Designer.cs">
+      <DependentUpon>ModelControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\Classes\Route\Route.cs" />
     <Compile Include="Core\Classes\Route\RouteAssets.cs" />
+    <Compile Include="QuestObjects\Model\ModelManager.cs" />
+    <Compile Include="QuestObjects\Model\ModelVisualizer.cs" />
     <Compile Include="QuestObjects\Vehicle\Classes\VehicleAssets.cs" />
     <Compile Include="QuestObjects\Vehicle\Forms\VehicleBox.cs">
       <SubType>UserControl</SubType>
@@ -272,18 +289,18 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="QuestObjects\Animal\Classes\AnimalInfo.cs" />
-    <Compile Include="QuestObjects\Enemy\Classes\EnemyInfo.cs" />
+    <Compile Include="Core\Classes\Common\EnemyInfo.cs" />
     <Compile Include="Core\Classes\Fox2\Fox2Info.cs" />
     <Compile Include="Core\Classes\Common\NPCBodyInfo.cs" />
     <Compile Include="QuestObjects\ActiveItem\Classes\ActiveItem.cs" />
     <Compile Include="QuestObjects\Animal\Classes\Animal.cs" />
     <Compile Include="QuestObjects\Enemy\Classes\Enemy.cs" />
-    <Compile Include="QuestObjects\Helicopter\Classes\Helicopter.cs" />
+    <Compile Include="QuestObjects\Helicopter\HelicopterDetail.cs" />
     <Compile Include="QuestObjects\Hostage\Classes\HostageFox2.cs" />
     <Compile Include="QuestObjects\Hostage\Classes\HostageLua.cs" />
     <Compile Include="QuestObjects\Hostage\HostageManager.cs" />
     <Compile Include="QuestObjects\Item\Classes\Item.cs" />
-    <Compile Include="QuestObjects\Model\Classes\Model.cs" />
+    <Compile Include="QuestObjects\Model\ModelDetail.cs" />
     <Compile Include="QuestObjects\WalkerGear\WalkerDetail.cs" />
     <Compile Include="QuestObjects\WalkerGear\Forms\WalkerControl.cs">
       <SubType>UserControl</SubType>
@@ -330,8 +347,11 @@
     <EmbeddedResource Include="QuestObjects\Enemy\Forms\NewEnemiesPanel.resx">
       <DependentUpon>NewEnemiesPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuestObjects\Helicopter\Forms\HelicopterPanel.resx">
-      <DependentUpon>HelicopterPanel.cs</DependentUpon>
+    <EmbeddedResource Include="QuestObjects\Helicopter\Forms\HelicopterBox.resx">
+      <DependentUpon>HelicopterBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuestObjects\Helicopter\Forms\HelicopterControl.resx">
+      <DependentUpon>HelicopterControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuestObjects\Hostage\Forms\HostageBox.resx">
       <DependentUpon>HostageBox.cs</DependentUpon>
@@ -342,8 +362,11 @@
     <EmbeddedResource Include="QuestObjects\Item\Forms\ItemPanel.resx">
       <DependentUpon>ItemPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuestObjects\Model\Forms\ModelPanel.resx">
-      <DependentUpon>ModelPanel.cs</DependentUpon>
+    <EmbeddedResource Include="QuestObjects\Model\Forms\ModelBox.resx">
+      <DependentUpon>ModelBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuestObjects\Model\Forms\ModelControl.resx">
+      <DependentUpon>ModelControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="QuestObjects\Vehicle\Forms\VehicleBoxF.resx">

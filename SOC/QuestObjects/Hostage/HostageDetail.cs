@@ -118,7 +118,6 @@ namespace SOC.QuestObjects.Hostage
         public Position position { get; set; } = new Position(new Coordinates(), new Rotation());
     }
     
-    [XmlType(TypeName = "HostageMetadata")]
     public class HostageMetadata : Metadata
     {
         public HostageMetadata() { }

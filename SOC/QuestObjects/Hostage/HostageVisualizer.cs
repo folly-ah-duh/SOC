@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SOC.Forms.Pages;
 using SOC.UI;
+using SOC.Classes.Common;
 
 namespace SOC.QuestObjects.Hostage
 {
@@ -26,9 +27,9 @@ namespace SOC.QuestObjects.Hostage
             return new HostageMetadata((HostageControl)detailControl);
         }
 
-        public override QuestBox NewBox(QuestObject qObject)
+        public override QuestBox NewBox(QuestObject qObject, CoreDetails core)
         {
-            return new HostageBox((Hostage)qObject, (HostageMetadata)GetMetadataFromControl()); ;
+            return new HostageBox((Hostage)qObject, (HostageMetadata)GetMetadataFromControl());
         }
 
         public override Detail NewDetail(Metadata meta, IEnumerable<QuestObject> qObjects)

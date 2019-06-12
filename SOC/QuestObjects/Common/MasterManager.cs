@@ -1,4 +1,5 @@
-﻿using SOC.Forms.Pages;
+﻿using SOC.Classes.Common;
+using SOC.Forms.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace SOC.QuestObjects.Common
 {
     public class MasterManager
     {
-        private ManagerArray managerArray = new ManagerArray();
+        private ManagerArray managerArray;
 
         public MasterManager(ManagerArray managers)
         {
@@ -72,12 +73,12 @@ namespace SOC.QuestObjects.Common
             }
         }
 
-        public void RefreshAllPanels()
+        public void RefreshAllPanels(CoreDetails core)
         {
             foreach (DetailManager manager in managerArray.GetManagers())
             {
-                manager.UpdateDetailFromStub();
-                manager.RefreshPanel();
+                manager.UpdateDetailFromSetup();
+                manager.RefreshPanel(core);
             }
         }
 

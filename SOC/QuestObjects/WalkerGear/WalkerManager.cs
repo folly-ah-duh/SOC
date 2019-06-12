@@ -33,10 +33,5 @@ namespace SOC.QuestObjects.WalkerGear
         {
             WalkerLua.GetDefinition((WalkerDetail)base.questDetail, definitionLua);
         }
-
-        public override void AddToAssets(FileAssets fileAssets)
-        {
-            return;
-        }
     }
 }

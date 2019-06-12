@@ -13,9 +13,9 @@ namespace SOC.QuestObjects.Hostage
     {
         static LocationalDataStub hostageStub = new LocationalDataStub("Prisoner Locations");
 
-        static HostageControl hostagePanel = new HostageControl();
+        static HostageControl hostageControl = new HostageControl();
 
-        static HostageVisualizer hostageVisualizer = new HostageVisualizer(hostageStub, hostagePanel);
+        static HostageVisualizer hostageVisualizer = new HostageVisualizer(hostageStub, hostageControl);
 
         public HostageManager(HostageDetail hostageDetail) : base(hostageDetail, hostageVisualizer) { }
 
@@ -32,11 +32,6 @@ namespace SOC.QuestObjects.Hostage
         public override void AddToDefinitionLua(DefinitionLua definitionLua)
         {
             HostageLua.GetDefinition((HostageDetail)base.questDetail, definitionLua);
-        }
-
-        public override void AddToAssets(FileAssets fileAssets)
-        {
-            return;
         }
     }
 }

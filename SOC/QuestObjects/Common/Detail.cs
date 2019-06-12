@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using SOC.Classes.Common;
 
 namespace SOC.QuestObjects.Common
 {
@@ -47,10 +48,10 @@ namespace SOC.QuestObjects.Common
             detailControl = control; detailStub = stub; flowPanel = panel;
         }
 
-        public void VisualizeDetail(Detail detail)
+        public void VisualizeDetail(Detail detail, CoreDetails core)
         {
             DrawMetadata(detail.GetMetadata());
-            DrawBoxes(detail.GetQuestObjects());
+            DrawBoxes(detail.GetQuestObjects(), core);
         }
 
         public void ShowDetail()
@@ -65,22 +66,12 @@ namespace SOC.QuestObjects.Common
 
         public abstract void DrawMetadata(Metadata meta);
 
-        public void DrawBoxes(IEnumerable<QuestObject> questObjects)
+        public void DrawBoxes(IEnumerable<QuestObject> questObjects, CoreDetails core)
         {
-            /*
-            int FailedToFindAllBoxesCount = 0;
-            while(flowPanel.Controls.Count != 0) {
-                foreach (QuestBox qBox in flowPanel.Controls.OfType<QuestBox>())
-                {
-                    flowPanel.Controls.Remove(qBox);
-                }
-                FailedToFindAllBoxesCount++;
-            }
-            */
             flowPanel.Controls.Clear();
             foreach (QuestObject qObject in questObjects)
             {
-                flowPanel.Controls.Add(NewBox(qObject));
+                flowPanel.Controls.Add(NewBox(qObject, core));
             }
         }
 
@@ -107,7 +98,7 @@ namespace SOC.QuestObjects.Common
             detailStub.SetStubText(new IHLogPositions(posList));
         }
 
-        public void GetDetailsFromStub(Detail detail)
+        public void SetDetailsFromStub(Detail detail)
         {
             List<Position> stubPositions = detailStub.GetStubLocations().GetPositions();
             List<QuestObject> qObjects = detail.GetQuestObjects().ToList();
@@ -135,7 +126,7 @@ namespace SOC.QuestObjects.Common
         }
 
         public abstract QuestObject NewObject(Position pos, int index);
-        public abstract QuestBox NewBox(QuestObject qObject);
+        public abstract QuestBox NewBox(QuestObject qObject, CoreDetails core);
         public abstract Detail NewDetail(Metadata meta, IEnumerable<QuestObject> qObjects);
     }
 }

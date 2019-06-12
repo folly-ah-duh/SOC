@@ -35,7 +35,8 @@ namespace SOC.Classes.Lua
             foreach (string tableItem in questTable)
             {
                 questTableBuilder.Append($@"
-    {tableItem},");
+    {tableItem},
+");
             }
 
             questTableBuilder.Append(@"

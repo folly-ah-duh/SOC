@@ -18,7 +18,7 @@ namespace SOC.UI
 
         public void RefreshObjectPanels(CoreDetails core) // enemy will need routes and region info
         {
-            managerMaster.RefreshAllPanels();
+            managerMaster.RefreshAllPanels(core);
         }
 
         private void flowPanelDetails_Layout(object sender, LayoutEventArgs e)

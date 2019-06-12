@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace SOC.QuestObjects.Vehicle
 {
-    [XmlType("VehicleDetails")]
+    [XmlType("VehicleDetail")]
     public class VehicleDetail : Detail
     {
         public VehicleDetail() { }

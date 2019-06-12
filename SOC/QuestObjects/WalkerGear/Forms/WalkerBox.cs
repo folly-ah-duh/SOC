@@ -16,7 +16,7 @@ namespace SOC.QuestObjects.WalkerGear
     {
         public int walkerID;
 
-        public WalkerBox(WalkerGear w, WalkerMetadata meta)
+        public WalkerBox(WalkerGear w)
         {
             InitializeComponent();
             walkerID = w.ID;

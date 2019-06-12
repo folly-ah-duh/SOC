@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace SOC.QuestObjects.WalkerGear
 {
-    [XmlType("WalkerDetails")]
+    [XmlType("WalkerDetail")]
     public class WalkerDetail : Detail
     {
         public WalkerDetail() { }

@@ -9,6 +9,7 @@ using SOC.Core.Classes.InfiniteHeaven;
 using SOC.Forms;
 using SOC.Forms.Pages;
 using SOC.UI;
+using SOC.Classes.Common;
 
 namespace SOC.QuestObjects.Vehicle
 {
@@ -27,7 +28,7 @@ namespace SOC.QuestObjects.Vehicle
             return new VehicleMetadata((VehicleControl)detailControl);
         }
 
-        public override QuestBox NewBox(QuestObject qObject)
+        public override QuestBox NewBox(QuestObject qObject, CoreDetails core)
         {
             return new VehicleBox((Vehicle)qObject, (VehicleMetadata)GetMetadataFromControl());
         }

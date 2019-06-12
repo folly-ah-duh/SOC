@@ -18,13 +18,13 @@ namespace SOC.QuestObjects.Common
             questDetail = detail; visualizer = visual;
         }
 
-        public abstract void AddToFox2Entities(DataSet dataSet, List<Fox2EntityClass> entityList);
+        public virtual void AddToFox2Entities(DataSet dataSet, List<Fox2EntityClass> entityList) { return; }
 
-        public abstract void AddToDefinitionLua(DefinitionLua definitionLua);
+        public virtual void AddToDefinitionLua(DefinitionLua definitionLua) { return; }
 
-        public abstract void AddToMainLua(MainLua mainLua);
+        public virtual void AddToMainLua(MainLua mainLua) { return; }
 
-        public abstract void AddToAssets(FileAssets fileAssets);
+        public virtual void AddToAssets(FileAssets fileAssets) { return; }
 
         public DetailVisualizer GetVisualizer()
         {
@@ -46,12 +46,12 @@ namespace SOC.QuestObjects.Common
             visualizer.DrawStubText(questDetail);
         }
 
-        public void UpdateDetailFromStub()
+        public void UpdateDetailFromSetup()
         {
-            visualizer.GetDetailsFromStub(questDetail);
+            visualizer.SetDetailsFromStub(questDetail);
         }
 
-        public void RefreshPanel()
+        public void RefreshPanel(CoreDetails core)
         {
             if (questDetail.GetQuestObjects().Count > 0)
             {
@@ -62,8 +62,7 @@ namespace SOC.QuestObjects.Common
                 visualizer.HideDetail();
             }
 
-            visualizer.VisualizeDetail(questDetail);
+            visualizer.VisualizeDetail(questDetail, core);
         }
-        
     }
 }

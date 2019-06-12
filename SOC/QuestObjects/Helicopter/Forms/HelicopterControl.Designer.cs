@@ -1,6 +1,6 @@
-﻿namespace SOC.QuestObjects.Helicopter.Forms
+﻿namespace SOC.QuestObjects.Helicopter
 {
-    partial class HelicopterPanel
+    partial class HelicopterControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,72 +29,70 @@
         private void InitializeComponent()
         {
             this.groupHeliDet = new System.Windows.Forms.GroupBox();
-            this.panelHeliDet = new System.Windows.Forms.Panel();
             this.label_HeliObjType = new System.Windows.Forms.Label();
             this.comboBox_heliObjType = new System.Windows.Forms.ComboBox();
+            this.panelHeliDet = new System.Windows.Forms.FlowLayoutPanel();
             this.groupHeliDet.SuspendLayout();
-            this.panelHeliDet.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupHeliDet
             // 
-            this.groupHeliDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupHeliDet.Controls.Add(this.label_HeliObjType);
+            this.groupHeliDet.Controls.Add(this.comboBox_heliObjType);
             this.groupHeliDet.Controls.Add(this.panelHeliDet);
+            this.groupHeliDet.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupHeliDet.Location = new System.Drawing.Point(0, 0);
             this.groupHeliDet.Name = "groupHeliDet";
-            this.groupHeliDet.Size = new System.Drawing.Size(264, 449);
+            this.groupHeliDet.Size = new System.Drawing.Size(300, 449);
             this.groupHeliDet.TabIndex = 36;
             this.groupHeliDet.TabStop = false;
             this.groupHeliDet.Text = "Enemy Helicopter";
             // 
-            // panelHeliDet
-            // 
-            this.panelHeliDet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelHeliDet.AutoScroll = true;
-            this.panelHeliDet.Controls.Add(this.label_HeliObjType);
-            this.panelHeliDet.Controls.Add(this.comboBox_heliObjType);
-            this.panelHeliDet.Location = new System.Drawing.Point(3, 16);
-            this.panelHeliDet.Name = "panelHeliDet";
-            this.panelHeliDet.Size = new System.Drawing.Size(258, 424);
-            this.panelHeliDet.TabIndex = 0;
-            // 
             // label_HeliObjType
             // 
             this.label_HeliObjType.AutoSize = true;
-            this.label_HeliObjType.Enabled = false;
-            this.label_HeliObjType.Location = new System.Drawing.Point(3, 3);
+            this.label_HeliObjType.Location = new System.Drawing.Point(6, 16);
             this.label_HeliObjType.Name = "label_HeliObjType";
-            this.label_HeliObjType.Size = new System.Drawing.Size(116, 13);
-            this.label_HeliObjType.TabIndex = 13;
-            this.label_HeliObjType.Text = "Target Objective Type:";
+            this.label_HeliObjType.Size = new System.Drawing.Size(113, 13);
+            this.label_HeliObjType.TabIndex = 16;
+            this.label_HeliObjType.Text = "Target Objective Type";
             // 
             // comboBox_heliObjType
             // 
-            this.comboBox_heliObjType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.comboBox_heliObjType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox_heliObjType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_heliObjType.Enabled = false;
             this.comboBox_heliObjType.FormattingEnabled = true;
             this.comboBox_heliObjType.Items.AddRange(new object[] {
             "KILLREQUIRED"});
-            this.comboBox_heliObjType.Location = new System.Drawing.Point(125, 0);
+            this.comboBox_heliObjType.Location = new System.Drawing.Point(6, 32);
             this.comboBox_heliObjType.Name = "comboBox_heliObjType";
-            this.comboBox_heliObjType.Size = new System.Drawing.Size(130, 21);
-            this.comboBox_heliObjType.TabIndex = 12;
+            this.comboBox_heliObjType.Size = new System.Drawing.Size(288, 21);
+            this.comboBox_heliObjType.TabIndex = 15;
             // 
-            // HelicopterPanel
+            // panelHeliDet
+            // 
+            this.panelHeliDet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelHeliDet.AutoScroll = true;
+            this.panelHeliDet.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.panelHeliDet.Location = new System.Drawing.Point(3, 56);
+            this.panelHeliDet.Margin = new System.Windows.Forms.Padding(0);
+            this.panelHeliDet.Name = "panelHeliDet";
+            this.panelHeliDet.Size = new System.Drawing.Size(294, 390);
+            this.panelHeliDet.TabIndex = 17;
+            this.panelHeliDet.WrapContents = false;
+            // 
+            // HelicopterControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupHeliDet);
-            this.Name = "HelicopterPanel";
-            this.Size = new System.Drawing.Size(264, 449);
+            this.Name = "HelicopterControl";
+            this.Size = new System.Drawing.Size(300, 449);
             this.groupHeliDet.ResumeLayout(false);
-            this.panelHeliDet.ResumeLayout(false);
-            this.panelHeliDet.PerformLayout();
+            this.groupHeliDet.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -102,8 +100,8 @@
         #endregion
 
         public System.Windows.Forms.GroupBox groupHeliDet;
-        public System.Windows.Forms.Panel panelHeliDet;
-        private System.Windows.Forms.Label label_HeliObjType;
-        private System.Windows.Forms.ComboBox comboBox_heliObjType;
+        public System.Windows.Forms.Label label_HeliObjType;
+        public System.Windows.Forms.ComboBox comboBox_heliObjType;
+        public System.Windows.Forms.FlowLayoutPanel panelHeliDet;
     }
 }

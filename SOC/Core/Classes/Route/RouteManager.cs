@@ -32,7 +32,7 @@ namespace SOC.Core.Classes.Route
             return routeNameList;
         }
 
-        public string[] GetRouteNames(string frtName)
+        public List<string> GetRouteNames(string frtName)
         {
             string frtPath = GetRouteFileName(frtName);
             uint[] frtUintNames = GetUintNames(frtPath);
@@ -54,7 +54,7 @@ namespace SOC.Core.Classes.Route
             }
 
             routeStringNames.Sort();
-            return routeStringNames.ToArray();
+            return routeStringNames;
         }
 
         private static uint[] GetUintNames(string frtPath)

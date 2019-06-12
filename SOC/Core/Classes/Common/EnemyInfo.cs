@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace SOC.QuestComponents
+namespace SOC.Classes.Common
 {
     public struct CP // each CP contains a CP name, The CP soldiers, the CP routes
     {
@@ -55,6 +55,25 @@ namespace SOC.QuestComponents
                 if (cp.CPname.Equals(CPName))
                     return cp;
             }
+
+            return NoneCP;
+        }
+
+        public static CP GetCP(string CPName)
+        {
+            foreach(CP cp in MafrCPs)
+            {
+                if (CPName == cp.CPname)
+                    return cp;
+            }
+            foreach(CP cp in AfghCPs)
+            {
+                if (CPName == cp.CPname)
+                    return cp;
+            }
+
+            if (CPName == MtbsCP.CPname)
+                return MtbsCP;
 
             return NoneCP;
         }

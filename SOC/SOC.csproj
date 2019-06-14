@@ -98,6 +98,7 @@
     <Compile Include="Core\Classes\Fox2\EntityClasses\ScriptBlockScript.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\StaticModel.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TexturePackLoadConditioner.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\TppHeli2LocatorParameter.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppHostage2LocatorParameter.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppHostage2Parameter.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppWalkerGear2LocatorParameter.cs" />
@@ -123,8 +124,33 @@
     <Compile Include="Core\Forms\QuestBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="QuestObjects\ActiveItem\ActiveItemManager.cs" />
+    <Compile Include="QuestObjects\ActiveItem\ActiveItemVisualizer.cs" />
+    <Compile Include="QuestObjects\ActiveItem\Forms\ActiveItemBoxF.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuestObjects\ActiveItem\Forms\ActiveItemBoxF.Designer.cs">
+      <DependentUpon>ActiveItemBoxF.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuestObjects\Animal\AnimalManager.cs" />
+    <Compile Include="QuestObjects\Animal\AnimalVisualizer.cs" />
+    <Compile Include="QuestObjects\Animal\Forms\AnimalBoxF.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuestObjects\Animal\Forms\AnimalBoxF.Designer.cs">
+      <DependentUpon>AnimalBoxF.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestObjects\Common\ManagerArray.cs" />
     <Compile Include="QuestObjects\Common\Detail.cs" />
+    <Compile Include="QuestObjects\Enemy\EnemyManager.cs" />
+    <Compile Include="QuestObjects\Enemy\EnemyVisualizer.cs" />
+    <Compile Include="QuestObjects\Enemy\Forms\EnemyBoxF.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuestObjects\Enemy\Forms\EnemyBoxF.Designer.cs">
+      <DependentUpon>EnemyBoxF.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuestObjects\Helicopter\Classes\HelicopterFox2.cs" />
     <Compile Include="QuestObjects\Helicopter\Classes\HelicopterLua.cs" />
     <Compile Include="QuestObjects\Helicopter\Forms\HelicopterBox.cs">
       <SubType>UserControl</SubType>
@@ -215,13 +241,14 @@
       <DependentUpon>HostageControl.cs</DependentUpon>
     </Compile>
     <Compile Include="QuestObjects\Item\Classes\ItemNames.cs" />
-    <Compile Include="QuestObjects\Item\Forms\ItemBox.cs" />
-    <Compile Include="QuestObjects\Item\Forms\ItemPanel.cs">
+    <Compile Include="QuestObjects\Item\Forms\ItemControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="QuestObjects\Item\Forms\ItemPanel.Designer.cs">
-      <DependentUpon>ItemPanel.cs</DependentUpon>
+    <Compile Include="QuestObjects\Item\Forms\ItemControl.Designer.cs">
+      <DependentUpon>ItemControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuestObjects\Item\ItemManager.cs" />
+    <Compile Include="QuestObjects\Item\ItemVisualizer.cs" />
     <Compile Include="QuestObjects\Model\Classes\ModelAssets.cs" />
     <Compile Include="QuestObjects\Model\Classes\ModelFox2.cs" />
     <Compile Include="QuestObjects\Model\Forms\ModelBox.cs">
@@ -246,6 +273,12 @@
     </Compile>
     <Compile Include="QuestObjects\Vehicle\Forms\VehicleBox.Designer.cs">
       <DependentUpon>VehicleBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuestObjects\Item\Forms\ItemBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuestObjects\Item\Forms\ItemBox.Designer.cs">
+      <DependentUpon>ItemBox.cs</DependentUpon>
     </Compile>
     <Compile Include="QuestObjects\Vehicle\VehicleVisualizer.cs" />
     <Compile Include="QuestObjects\Vehicle\Classes\VehicleNames.cs" />
@@ -292,14 +325,14 @@
     <Compile Include="Core\Classes\Common\EnemyInfo.cs" />
     <Compile Include="Core\Classes\Fox2\Fox2Info.cs" />
     <Compile Include="Core\Classes\Common\NPCBodyInfo.cs" />
-    <Compile Include="QuestObjects\ActiveItem\Classes\ActiveItem.cs" />
-    <Compile Include="QuestObjects\Animal\Classes\Animal.cs" />
-    <Compile Include="QuestObjects\Enemy\Classes\Enemy.cs" />
+    <Compile Include="QuestObjects\ActiveItem\ActiveItemDetail.cs" />
+    <Compile Include="QuestObjects\Animal\AnimalDetail.cs" />
+    <Compile Include="QuestObjects\Enemy\EnemyDetail.cs" />
     <Compile Include="QuestObjects\Helicopter\HelicopterDetail.cs" />
     <Compile Include="QuestObjects\Hostage\Classes\HostageFox2.cs" />
     <Compile Include="QuestObjects\Hostage\Classes\HostageLua.cs" />
     <Compile Include="QuestObjects\Hostage\HostageManager.cs" />
-    <Compile Include="QuestObjects\Item\Classes\Item.cs" />
+    <Compile Include="QuestObjects\Item\ItemDetail.cs" />
     <Compile Include="QuestObjects\Model\ModelDetail.cs" />
     <Compile Include="QuestObjects\WalkerGear\WalkerDetail.cs" />
     <Compile Include="QuestObjects\WalkerGear\Forms\WalkerControl.cs">
@@ -359,8 +392,8 @@
     <EmbeddedResource Include="QuestObjects\Hostage\Forms\HostageControl.resx">
       <DependentUpon>HostageControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuestObjects\Item\Forms\ItemPanel.resx">
-      <DependentUpon>ItemPanel.cs</DependentUpon>
+    <EmbeddedResource Include="QuestObjects\Item\Forms\ItemControl.resx">
+      <DependentUpon>ItemControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuestObjects\Model\Forms\ModelBox.resx">
       <DependentUpon>ModelBox.cs</DependentUpon>

@@ -9,7 +9,6 @@ using System.Linq;
 
 namespace SOC.QuestObjects.Hostage
 {
-    [XmlType(TypeName = "HostageDetail")]
     public class HostageDetail : Detail
     {
         public HostageDetail() { }
@@ -56,18 +55,18 @@ namespace SOC.QuestObjects.Hostage
             position = pos; ID = numId;
         }
 
-        public Hostage(HostageBox hBox)
+        public Hostage(HostageBox box)
         {
-            ID = hBox.hostageID;
+            ID = box.ID;
 
-            isTarget = hBox.h_checkBox_target.Checked;
-            isUntied = hBox.h_checkBox_untied.Checked;
-            isInjured = hBox.h_checkBox_injured.Checked;
-            skill = hBox.h_comboBox_skill.Text;
-            staffType = hBox.h_comboBox_staff.Text;
-            scared = hBox.h_comboBox_scared.Text;
-            language = hBox.h_comboBox_lang.Text;
-            position = new Position(new Coordinates(hBox.h_textBox_xcoord.Text, hBox.h_textBox_ycoord.Text, hBox.h_textBox_zcoord.Text), new Rotation(hBox.h_textBox_rot.Text));
+            isTarget = box.checkBox_target.Checked;
+            isUntied = box.checkBox_untied.Checked;
+            isInjured = box.checkBox_injured.Checked;
+            skill = box.comboBox_skill.Text;
+            staffType = box.comboBox_staff.Text;
+            scared = box.comboBox_scared.Text;
+            language = box.comboBox_lang.Text;
+            position = new Position(new Coordinates(box.textBox_xcoord.Text, box.textBox_ycoord.Text, box.textBox_zcoord.Text), new Rotation(box.textBox_rot.Text));
         }
 
         public override string GetObjectName()
@@ -122,11 +121,11 @@ namespace SOC.QuestObjects.Hostage
     {
         public HostageMetadata() { }
 
-        public HostageMetadata(HostageControl hostageControl)
+        public HostageMetadata(HostageControl control)
         {
-            hostageBodyName = hostageControl.comboBox_Body.Text;
-            canInterrogate = hostageControl.h_checkBox_intrgt.Checked;
-            hostageObjectiveType = hostageControl.comboBox_hosObjType.Text;
+            hostageBodyName = control.comboBox_Body.Text;
+            canInterrogate = control.checkBox_intrgt.Checked;
+            hostageObjectiveType = control.comboBox_hosObjType.Text;
         }
 
         [XmlAttribute]

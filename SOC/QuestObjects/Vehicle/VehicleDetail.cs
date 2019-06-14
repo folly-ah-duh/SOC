@@ -11,7 +11,6 @@ using System.Windows.Forms;
 
 namespace SOC.QuestObjects.Vehicle
 {
-    [XmlType("VehicleDetail")]
     public class VehicleDetail : Detail
     {
         public VehicleDetail() { }
@@ -58,14 +57,14 @@ namespace SOC.QuestObjects.Vehicle
             position = pos; ID = id;
         }
 
-        public Vehicle(VehicleBox vBox)
+        public Vehicle(VehicleBox box)
         {
-            ID = vBox.vehicleID;
+            ID = box.ID;
 
-            isTarget = vBox.v_checkBox_target.Checked;
-            vehicle = vBox.v_comboBox_vehicle.Text;
-            vehicleClass = vBox.v_comboBox_class.Text;
-            position = new Position(new Coordinates(vBox.v_textBox_xcoord.Text, vBox.v_textBox_ycoord.Text, vBox.v_textBox_zcoord.Text), new Rotation(vBox.v_textBox_rot.Text));
+            isTarget = box.checkBox_target.Checked;
+            vehicle = box.comboBox_vehicle.Text;
+            vehicleClass = box.comboBox_class.Text;
+            position = new Position(new Coordinates(box.textBox_xcoord.Text, box.textBox_ycoord.Text, box.textBox_zcoord.Text), new Rotation(box.textBox_rot.Text));
         }
 
         public override string GetObjectName()
@@ -109,9 +108,9 @@ namespace SOC.QuestObjects.Vehicle
 
         public VehicleMetadata() { }
 
-        public VehicleMetadata(VehicleControl vehicleControl)
+        public VehicleMetadata(VehicleControl control)
         {
-            vehicleObjectiveType = vehicleControl.comboBox_vehObjType.Text;
+            vehicleObjectiveType = control.comboBox_vehObjType.Text;
         }
 
         [XmlAttribute]

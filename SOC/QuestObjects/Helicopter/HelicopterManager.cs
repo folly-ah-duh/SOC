@@ -17,28 +17,21 @@ namespace SOC.QuestObjects.Helicopter
 
         static HelicopterVisualizer helicopterVisualizer = new HelicopterVisualizer(helicopterStub, helicopterControl);
 
-        public HelicopterManager(HelicopterDetail detail) : base(detail, helicopterVisualizer)
-        {
-        }
-
-        public override void AddToAssets(FileAssets fileAssets)
-        {
-            throw new NotImplementedException();
-        }
+        public HelicopterManager(HelicopterDetail detail) : base(detail, helicopterVisualizer) { }
 
         public override void AddToDefinitionLua(DefinitionLua definitionLua)
         {
-            throw new NotImplementedException();
+            HelicopterLua.GetDefinition((HelicopterDetail)base.questDetail, definitionLua);
         }
 
         public override void AddToFox2Entities(DataSet dataSet, List<Fox2EntityClass> entityList)
         {
-            throw new NotImplementedException();
+            HelicopterFox2.AddQuestEntities((HelicopterDetail)base.questDetail, dataSet, entityList);
         }
 
         public override void AddToMainLua(MainLua mainLua)
         {
-            throw new NotImplementedException();
+            HelicopterLua.GetMain((HelicopterDetail)base.questDetail, mainLua);
         }
     }
 }

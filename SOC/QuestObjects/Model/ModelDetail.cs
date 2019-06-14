@@ -8,7 +8,6 @@ using System.Linq;
 
 namespace SOC.QuestObjects.Model
 {
-    [XmlType("ModelDetail")]
     public class ModelDetail : Detail
     {
         public ModelDetail() { }
@@ -50,13 +49,13 @@ namespace SOC.QuestObjects.Model
 
         public Model() { }
 
-        public Model(ModelBox mBox)
+        public Model(ModelBox box)
         {
-            ID = mBox.modelID;
+            ID = box.ID;
 
-            collision = mBox.m_checkBox_collision.Checked;
-            model = mBox.m_comboBox_model.Text;
-            position = new Position(new Coordinates(mBox.m_textBox_xcoord.Text, mBox.m_textBox_ycoord.Text, mBox.m_textBox_zcoord.Text), new Rotation(new Quaternion(mBox.m_textBox_xrot.Text, mBox.m_textBox_yrot.Text, mBox.m_textBox_zrot.Text, mBox.m_textBox_wrot.Text)));
+            collision = box.checkBox_collision.Checked;
+            model = box.comboBox_model.Text;
+            position = new Position(new Coordinates(box.textBox_xcoord.Text, box.textBox_ycoord.Text, box.textBox_zcoord.Text), new Rotation(new Quaternion(box.textBox_xrot.Text, box.textBox_yrot.Text, box.textBox_zrot.Text, box.textBox_wrot.Text)));
         }
 
         public Model(Position pos, int index)

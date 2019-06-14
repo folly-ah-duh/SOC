@@ -8,7 +8,6 @@ using System.Linq;
 
 namespace SOC.QuestObjects.WalkerGear
 {
-    [XmlType("WalkerDetail")]
     public class WalkerDetail : Detail
     {
         public WalkerDetail() { }
@@ -54,15 +53,15 @@ namespace SOC.QuestObjects.WalkerGear
             position = pos; ID = id;
         }
 
-        public WalkerGear(WalkerBox walkerBox)
+        public WalkerGear(WalkerBox box)
         {
-            ID = walkerBox.walkerID;
+            ID = box.ID;
 
-            isTarget = walkerBox.w_checkBox_target.Checked;
-            pilot = walkerBox.w_comboBox_pilot.Text;
-            paint = walkerBox.w_comboBox_paint.Text;
-            weapon = walkerBox.w_comboBox_weapon.Text;
-            position = new Position(new Coordinates(walkerBox.w_textBox_xcoord.Text, walkerBox.w_textBox_ycoord.Text, walkerBox.w_textBox_zcoord.Text), new Rotation(walkerBox.w_textBox_rot.Text));
+            isTarget = box.checkBox_target.Checked;
+            pilot = box.comboBox_pilot.Text;
+            paint = box.comboBox_paint.Text;
+            weapon = box.comboBox_weapon.Text;
+            position = new Position(new Coordinates(box.textBox_xcoord.Text, box.textBox_ycoord.Text, box.textBox_zcoord.Text), new Rotation(box.textBox_rot.Text));
         }
 
         [XmlElement]
@@ -108,9 +107,9 @@ namespace SOC.QuestObjects.WalkerGear
     {
         public WalkerMetadata() { }
 
-        public WalkerMetadata(WalkerControl walkerControl)
+        public WalkerMetadata(WalkerControl control)
         {
-            walkerObjectiveType = walkerControl.comboBox_WalkerObjType.Text;
+            walkerObjectiveType = control.comboBox_WalkerObjType.Text;
         }
 
         [XmlAttribute]

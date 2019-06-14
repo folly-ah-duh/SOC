@@ -19,7 +19,7 @@ namespace SOC.QuestObjects.Hostage
         {
             comboBox_Body.Text = meta.hostageBodyName;
             comboBox_hosObjType.Text = meta.hostageObjectiveType;
-            h_checkBox_intrgt.Checked = meta.canInterrogate;
+            checkBox_intrgt.Checked = meta.canInterrogate;
         }
     }
 }

@@ -14,21 +14,21 @@ namespace SOC.QuestObjects.WalkerGear
 {
     public partial class WalkerBox : QuestBox
     {
-        public int walkerID;
+        public int ID;
 
         public WalkerBox(WalkerGear w)
         {
             InitializeComponent();
-            walkerID = w.ID;
+            ID = w.ID;
 
-            w_textBox_xcoord.Text = w.position.coords.xCoord;
-            w_textBox_ycoord.Text = w.position.coords.yCoord;
-            w_textBox_zcoord.Text = w.position.coords.zCoord;
-            w_textBox_rot.Text = w.position.rotation.GetDegreeRotY();
+            textBox_xcoord.Text = w.position.coords.xCoord;
+            textBox_ycoord.Text = w.position.coords.yCoord;
+            textBox_zcoord.Text = w.position.coords.zCoord;
+            textBox_rot.Text = w.position.rotation.GetDegreeRotY();
 
-            w_checkBox_target.Checked = w.isTarget;
+            checkBox_target.Checked = w.isTarget;
 
-            w_comboBox_pilot.Items.AddRange(new object[] {
+            comboBox_pilot.Items.AddRange(new object[] {
                 "NONE",
                 "sol_quest_0000",
                 "sol_quest_0001",
@@ -39,22 +39,22 @@ namespace SOC.QuestObjects.WalkerGear
                 "sol_quest_0006",
                 "sol_quest_0007"
             });
-            w_comboBox_pilot.Text = w.pilot;
+            comboBox_pilot.Text = w.pilot;
 
-            w_comboBox_paint.Items.AddRange(new object[] {
+            comboBox_paint.Items.AddRange(new object[] {
                 "SOVIET",
                 "ROGUE_COYOTE",
                 "CFA",
                 "ZRS",
                 "DDOGS"
             });
-            w_comboBox_paint.Text = w.paint;
+            comboBox_paint.Text = w.paint;
 
-            w_comboBox_weapon.Items.AddRange(new object[] {
+            comboBox_weapon.Items.AddRange(new object[] {
                 "WG_MACHINEGUN",
                 "WG_MISSILE"
             });
-            w_comboBox_weapon.Text = w.weapon;
+            comboBox_weapon.Text = w.weapon;
         }
 
         public override QuestObject getQuestObject()

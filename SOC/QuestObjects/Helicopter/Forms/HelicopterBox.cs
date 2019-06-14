@@ -14,31 +14,31 @@ namespace SOC.QuestObjects.Helicopter
 {
     public partial class HelicopterBox : QuestBox
     {
-        public int helicopterID;
+        public int ID;
 
         public HelicopterBox(Helicopter h, List<string> routes)
         {
             InitializeComponent();
-            helicopterID = h.ID;
+            ID = h.ID;
 
-            h_textBox_xcoord.Text = h.position.coords.xCoord;
-            h_textBox_ycoord.Text = h.position.coords.yCoord;
-            h_textBox_zcoord.Text = h.position.coords.zCoord;
-            h_textBox_rot.Text = h.position.rotation.GetDegreeRotY();
+            textBox_xcoord.Text = h.position.coords.xCoord;
+            textBox_ycoord.Text = h.position.coords.yCoord;
+            textBox_zcoord.Text = h.position.coords.zCoord;
+            textBox_rot.Text = h.position.rotation.GetDegreeRotY();
 
-            h_checkBox_target.Checked = h.isTarget;
+            checkBox_target.Checked = h.isTarget;
             
-            h_comboBox_class.Text = h.heliClass;
+            comboBox_class.Text = h.heliClass;
 
-            h_comboBox_route.Items.Add("NONE");
-            h_comboBox_route.Items.AddRange(routes.ToArray());
-            if (h_comboBox_route.Items.Contains(h.heliRoute))
+            comboBox_route.Items.Add("NONE");
+            comboBox_route.Items.AddRange(routes.ToArray());
+            if (comboBox_route.Items.Contains(h.heliRoute))
             {
-                h_comboBox_route.Text = h.heliRoute;
+                comboBox_route.Text = h.heliRoute;
             }
             else
             {
-                h_comboBox_route.Text = "NONE";
+                comboBox_route.Text = "NONE";
             }
         }
 

@@ -34,18 +34,18 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.h_comboBox_skill = new System.Windows.Forms.ComboBox();
-            this.h_comboBox_staff = new System.Windows.Forms.ComboBox();
-            this.h_comboBox_lang = new System.Windows.Forms.ComboBox();
-            this.h_comboBox_scared = new System.Windows.Forms.ComboBox();
-            this.h_checkBox_injured = new System.Windows.Forms.CheckBox();
-            this.h_checkBox_untied = new System.Windows.Forms.CheckBox();
-            this.h_checkBox_target = new System.Windows.Forms.CheckBox();
-            this.h_textBox_rot = new System.Windows.Forms.TextBox();
+            this.comboBox_skill = new System.Windows.Forms.ComboBox();
+            this.comboBox_staff = new System.Windows.Forms.ComboBox();
+            this.comboBox_lang = new System.Windows.Forms.ComboBox();
+            this.comboBox_scared = new System.Windows.Forms.ComboBox();
+            this.checkBox_injured = new System.Windows.Forms.CheckBox();
+            this.checkBox_untied = new System.Windows.Forms.CheckBox();
+            this.checkBox_target = new System.Windows.Forms.CheckBox();
+            this.textBox_rot = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.h_textBox_zcoord = new System.Windows.Forms.TextBox();
-            this.h_textBox_ycoord = new System.Windows.Forms.TextBox();
-            this.h_textBox_xcoord = new System.Windows.Forms.TextBox();
+            this.textBox_zcoord = new System.Windows.Forms.TextBox();
+            this.textBox_ycoord = new System.Windows.Forms.TextBox();
+            this.textBox_xcoord = new System.Windows.Forms.TextBox();
             this.h_groupBox_main.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,18 +57,18 @@
             this.h_groupBox_main.Controls.Add(this.label4);
             this.h_groupBox_main.Controls.Add(this.label3);
             this.h_groupBox_main.Controls.Add(this.label2);
-            this.h_groupBox_main.Controls.Add(this.h_comboBox_skill);
-            this.h_groupBox_main.Controls.Add(this.h_comboBox_staff);
-            this.h_groupBox_main.Controls.Add(this.h_comboBox_lang);
-            this.h_groupBox_main.Controls.Add(this.h_comboBox_scared);
-            this.h_groupBox_main.Controls.Add(this.h_checkBox_injured);
-            this.h_groupBox_main.Controls.Add(this.h_checkBox_untied);
-            this.h_groupBox_main.Controls.Add(this.h_checkBox_target);
-            this.h_groupBox_main.Controls.Add(this.h_textBox_rot);
+            this.h_groupBox_main.Controls.Add(this.comboBox_skill);
+            this.h_groupBox_main.Controls.Add(this.comboBox_staff);
+            this.h_groupBox_main.Controls.Add(this.comboBox_lang);
+            this.h_groupBox_main.Controls.Add(this.comboBox_scared);
+            this.h_groupBox_main.Controls.Add(this.checkBox_injured);
+            this.h_groupBox_main.Controls.Add(this.checkBox_untied);
+            this.h_groupBox_main.Controls.Add(this.checkBox_target);
+            this.h_groupBox_main.Controls.Add(this.textBox_rot);
             this.h_groupBox_main.Controls.Add(this.label1);
-            this.h_groupBox_main.Controls.Add(this.h_textBox_zcoord);
-            this.h_groupBox_main.Controls.Add(this.h_textBox_ycoord);
-            this.h_groupBox_main.Controls.Add(this.h_textBox_xcoord);
+            this.h_groupBox_main.Controls.Add(this.textBox_zcoord);
+            this.h_groupBox_main.Controls.Add(this.textBox_ycoord);
+            this.h_groupBox_main.Controls.Add(this.textBox_xcoord);
             this.h_groupBox_main.Dock = System.Windows.Forms.DockStyle.Fill;
             this.h_groupBox_main.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.h_groupBox_main.Location = new System.Drawing.Point(0, 0);
@@ -125,87 +125,87 @@
             // 
             // h_comboBox_skill
             // 
-            this.h_comboBox_skill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.h_comboBox_skill.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.h_comboBox_skill.FormattingEnabled = true;
-            this.h_comboBox_skill.Location = new System.Drawing.Point(85, 210);
-            this.h_comboBox_skill.Name = "h_comboBox_skill";
-            this.h_comboBox_skill.Size = new System.Drawing.Size(174, 21);
-            this.h_comboBox_skill.TabIndex = 11;
+            this.comboBox_skill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox_skill.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_skill.FormattingEnabled = true;
+            this.comboBox_skill.Location = new System.Drawing.Point(85, 210);
+            this.comboBox_skill.Name = "h_comboBox_skill";
+            this.comboBox_skill.Size = new System.Drawing.Size(174, 21);
+            this.comboBox_skill.TabIndex = 11;
             // 
             // h_comboBox_staff
             // 
-            this.h_comboBox_staff.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.h_comboBox_staff.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.h_comboBox_staff.FormattingEnabled = true;
-            this.h_comboBox_staff.Location = new System.Drawing.Point(85, 183);
-            this.h_comboBox_staff.Name = "h_comboBox_staff";
-            this.h_comboBox_staff.Size = new System.Drawing.Size(174, 21);
-            this.h_comboBox_staff.TabIndex = 10;
+            this.comboBox_staff.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox_staff.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_staff.FormattingEnabled = true;
+            this.comboBox_staff.Location = new System.Drawing.Point(85, 183);
+            this.comboBox_staff.Name = "h_comboBox_staff";
+            this.comboBox_staff.Size = new System.Drawing.Size(174, 21);
+            this.comboBox_staff.TabIndex = 10;
             // 
             // h_comboBox_lang
             // 
-            this.h_comboBox_lang.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.h_comboBox_lang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.h_comboBox_lang.FormattingEnabled = true;
-            this.h_comboBox_lang.Items.AddRange(new object[] {
+            this.comboBox_lang.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox_lang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_lang.FormattingEnabled = true;
+            this.comboBox_lang.Items.AddRange(new object[] {
             "english",
             "russian",
             "pashto",
             "kikongo",
             "afrikaans"});
-            this.h_comboBox_lang.Location = new System.Drawing.Point(85, 156);
-            this.h_comboBox_lang.Name = "h_comboBox_lang";
-            this.h_comboBox_lang.Size = new System.Drawing.Size(174, 21);
-            this.h_comboBox_lang.TabIndex = 9;
+            this.comboBox_lang.Location = new System.Drawing.Point(85, 156);
+            this.comboBox_lang.Name = "h_comboBox_lang";
+            this.comboBox_lang.Size = new System.Drawing.Size(174, 21);
+            this.comboBox_lang.TabIndex = 9;
             // 
             // h_comboBox_scared
             // 
-            this.h_comboBox_scared.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.h_comboBox_scared.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.h_comboBox_scared.FormattingEnabled = true;
-            this.h_comboBox_scared.Location = new System.Drawing.Point(85, 129);
-            this.h_comboBox_scared.Name = "h_comboBox_scared";
-            this.h_comboBox_scared.Size = new System.Drawing.Size(174, 21);
-            this.h_comboBox_scared.TabIndex = 8;
+            this.comboBox_scared.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox_scared.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_scared.FormattingEnabled = true;
+            this.comboBox_scared.Location = new System.Drawing.Point(85, 129);
+            this.comboBox_scared.Name = "h_comboBox_scared";
+            this.comboBox_scared.Size = new System.Drawing.Size(174, 21);
+            this.comboBox_scared.TabIndex = 8;
             // 
             // h_checkBox_injured
             // 
-            this.h_checkBox_injured.AutoSize = true;
-            this.h_checkBox_injured.Location = new System.Drawing.Point(171, 102);
-            this.h_checkBox_injured.Name = "h_checkBox_injured";
-            this.h_checkBox_injured.Size = new System.Drawing.Size(58, 17);
-            this.h_checkBox_injured.TabIndex = 7;
-            this.h_checkBox_injured.Text = "Injured";
-            this.h_checkBox_injured.UseVisualStyleBackColor = true;
+            this.checkBox_injured.AutoSize = true;
+            this.checkBox_injured.Location = new System.Drawing.Point(171, 102);
+            this.checkBox_injured.Name = "h_checkBox_injured";
+            this.checkBox_injured.Size = new System.Drawing.Size(58, 17);
+            this.checkBox_injured.TabIndex = 7;
+            this.checkBox_injured.Text = "Injured";
+            this.checkBox_injured.UseVisualStyleBackColor = true;
             // 
             // h_checkBox_untied
             // 
-            this.h_checkBox_untied.AutoSize = true;
-            this.h_checkBox_untied.Location = new System.Drawing.Point(85, 102);
-            this.h_checkBox_untied.Name = "h_checkBox_untied";
-            this.h_checkBox_untied.Size = new System.Drawing.Size(57, 17);
-            this.h_checkBox_untied.TabIndex = 6;
-            this.h_checkBox_untied.Text = "Untied";
-            this.h_checkBox_untied.UseVisualStyleBackColor = true;
+            this.checkBox_untied.AutoSize = true;
+            this.checkBox_untied.Location = new System.Drawing.Point(85, 102);
+            this.checkBox_untied.Name = "h_checkBox_untied";
+            this.checkBox_untied.Size = new System.Drawing.Size(57, 17);
+            this.checkBox_untied.TabIndex = 6;
+            this.checkBox_untied.Text = "Untied";
+            this.checkBox_untied.UseVisualStyleBackColor = true;
             // 
             // h_checkBox_target
             // 
-            this.h_checkBox_target.AutoSize = true;
-            this.h_checkBox_target.Location = new System.Drawing.Point(85, 75);
-            this.h_checkBox_target.Name = "h_checkBox_target";
-            this.h_checkBox_target.Size = new System.Drawing.Size(68, 17);
-            this.h_checkBox_target.TabIndex = 5;
-            this.h_checkBox_target.Text = "Is Target";
-            this.h_checkBox_target.UseVisualStyleBackColor = true;
+            this.checkBox_target.AutoSize = true;
+            this.checkBox_target.Location = new System.Drawing.Point(85, 75);
+            this.checkBox_target.Name = "h_checkBox_target";
+            this.checkBox_target.Size = new System.Drawing.Size(68, 17);
+            this.checkBox_target.TabIndex = 5;
+            this.checkBox_target.Text = "Is Target";
+            this.checkBox_target.UseVisualStyleBackColor = true;
             // 
             // h_textBox_rot
             // 
-            this.h_textBox_rot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.h_textBox_rot.Location = new System.Drawing.Point(85, 45);
-            this.h_textBox_rot.Name = "h_textBox_rot";
-            this.h_textBox_rot.Size = new System.Drawing.Size(174, 20);
-            this.h_textBox_rot.TabIndex = 4;
+            this.textBox_rot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_rot.Location = new System.Drawing.Point(85, 45);
+            this.textBox_rot.Name = "h_textBox_rot";
+            this.textBox_rot.Size = new System.Drawing.Size(174, 20);
+            this.textBox_rot.TabIndex = 4;
             // 
             // label1
             // 
@@ -218,24 +218,24 @@
             // 
             // h_textBox_zcoord
             // 
-            this.h_textBox_zcoord.Location = new System.Drawing.Point(205, 19);
-            this.h_textBox_zcoord.Name = "h_textBox_zcoord";
-            this.h_textBox_zcoord.Size = new System.Drawing.Size(54, 20);
-            this.h_textBox_zcoord.TabIndex = 2;
+            this.textBox_zcoord.Location = new System.Drawing.Point(205, 19);
+            this.textBox_zcoord.Name = "h_textBox_zcoord";
+            this.textBox_zcoord.Size = new System.Drawing.Size(54, 20);
+            this.textBox_zcoord.TabIndex = 2;
             // 
             // h_textBox_ycoord
             // 
-            this.h_textBox_ycoord.Location = new System.Drawing.Point(145, 19);
-            this.h_textBox_ycoord.Name = "h_textBox_ycoord";
-            this.h_textBox_ycoord.Size = new System.Drawing.Size(54, 20);
-            this.h_textBox_ycoord.TabIndex = 1;
+            this.textBox_ycoord.Location = new System.Drawing.Point(145, 19);
+            this.textBox_ycoord.Name = "h_textBox_ycoord";
+            this.textBox_ycoord.Size = new System.Drawing.Size(54, 20);
+            this.textBox_ycoord.TabIndex = 1;
             // 
             // h_textBox_xcoord
             // 
-            this.h_textBox_xcoord.Location = new System.Drawing.Point(85, 19);
-            this.h_textBox_xcoord.Name = "h_textBox_xcoord";
-            this.h_textBox_xcoord.Size = new System.Drawing.Size(54, 20);
-            this.h_textBox_xcoord.TabIndex = 0;
+            this.textBox_xcoord.Location = new System.Drawing.Point(85, 19);
+            this.textBox_xcoord.Name = "h_textBox_xcoord";
+            this.textBox_xcoord.Size = new System.Drawing.Size(54, 20);
+            this.textBox_xcoord.TabIndex = 0;
             // 
             // HostageBox
             // 
@@ -259,17 +259,17 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        public System.Windows.Forms.ComboBox h_comboBox_skill;
-        public System.Windows.Forms.ComboBox h_comboBox_staff;
-        public System.Windows.Forms.ComboBox h_comboBox_lang;
-        public System.Windows.Forms.ComboBox h_comboBox_scared;
-        public System.Windows.Forms.CheckBox h_checkBox_injured;
-        public System.Windows.Forms.CheckBox h_checkBox_untied;
-        public System.Windows.Forms.CheckBox h_checkBox_target;
-        public System.Windows.Forms.TextBox h_textBox_rot;
+        public System.Windows.Forms.ComboBox comboBox_skill;
+        public System.Windows.Forms.ComboBox comboBox_staff;
+        public System.Windows.Forms.ComboBox comboBox_lang;
+        public System.Windows.Forms.ComboBox comboBox_scared;
+        public System.Windows.Forms.CheckBox checkBox_injured;
+        public System.Windows.Forms.CheckBox checkBox_untied;
+        public System.Windows.Forms.CheckBox checkBox_target;
+        public System.Windows.Forms.TextBox textBox_rot;
         private System.Windows.Forms.Label label1;
-        public System.Windows.Forms.TextBox h_textBox_zcoord;
-        public System.Windows.Forms.TextBox h_textBox_ycoord;
-        public System.Windows.Forms.TextBox h_textBox_xcoord;
+        public System.Windows.Forms.TextBox textBox_zcoord;
+        public System.Windows.Forms.TextBox textBox_ycoord;
+        public System.Windows.Forms.TextBox textBox_xcoord;
     }
 }

@@ -14,31 +14,31 @@ namespace SOC.QuestObjects.Vehicle
 {
     public partial class VehicleBox : QuestBox
     {
-        public int vehicleID;
+        public int ID;
 
         public VehicleBox(Vehicle v, VehicleMetadata meta)
         {
             InitializeComponent();
-            vehicleID = v.ID;
+            ID = v.ID;
 
-            v_textBox_xcoord.Text = v.position.coords.xCoord;
-            v_textBox_ycoord.Text = v.position.coords.yCoord;
-            v_textBox_zcoord.Text = v.position.coords.zCoord;
-            v_textBox_rot.Text = v.position.rotation.GetDegreeRotY();
+            textBox_xcoord.Text = v.position.coords.xCoord;
+            textBox_ycoord.Text = v.position.coords.yCoord;
+            textBox_zcoord.Text = v.position.coords.zCoord;
+            textBox_rot.Text = v.position.rotation.GetDegreeRotY();
 
-            v_checkBox_target.Checked = v.isTarget;
+            checkBox_target.Checked = v.isTarget;
 
-            v_comboBox_vehicle.Items.AddRange(new string[] 
+            comboBox_vehicle.Items.AddRange(new string[] 
             {
                 "TT77 NOSOROG","M84A MAGLOADER", "ZHUK BR-3", "ZHUK RS-ZO","STOUT IFV-SC","STOUT IFV-FS"
             });
-            v_comboBox_vehicle.Text = v.vehicle;
+            comboBox_vehicle.Text = v.vehicle;
 
-            v_comboBox_class.Items.AddRange(new string[] 
+            comboBox_class.Items.AddRange(new string[] 
             {
                 "DEFAULT", "DARK_GRAY", "OXIDE_RED"
             });
-            v_comboBox_class.Text = v.vehicleClass;
+            comboBox_class.Text = v.vehicleClass;
         }
 
         public override QuestObject getQuestObject()

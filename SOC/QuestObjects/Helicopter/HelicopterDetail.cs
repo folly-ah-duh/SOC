@@ -54,14 +54,14 @@ namespace SOC.QuestObjects.Helicopter
             position = pos; ID = index;
         }
 
-        public Helicopter(HelicopterBox h)
+        public Helicopter(HelicopterBox box)
         {
-            ID = h.helicopterID;
+            ID = box.ID;
             
-            isTarget = h.h_checkBox_target.Checked;
-            heliRoute = h.h_comboBox_route.Text;
-            heliClass = h.h_comboBox_class.Text;
-            position = new Position(new Coordinates(h.h_textBox_xcoord.Text, h.h_textBox_ycoord.Text, h.h_textBox_zcoord.Text), new Rotation(h.h_textBox_rot.Text));
+            isTarget = box.checkBox_target.Checked;
+            heliRoute = box.comboBox_route.Text;
+            heliClass = box.comboBox_class.Text;
+            position = new Position(new Coordinates(box.textBox_xcoord.Text, box.textBox_ycoord.Text, box.textBox_zcoord.Text), new Rotation(box.textBox_rot.Text));
         }
 
         [XmlElement]
@@ -110,9 +110,9 @@ namespace SOC.QuestObjects.Helicopter
     {
         public HelicopterMetadata() { }
 
-        public HelicopterMetadata(HelicopterControl heliControl)
+        public HelicopterMetadata(HelicopterControl control)
         {
-            helicopterObjectiveType = heliControl.comboBox_heliObjType.Text;
+            helicopterObjectiveType = control.comboBox_heliObjType.Text;
         }
 
         [XmlAttribute]

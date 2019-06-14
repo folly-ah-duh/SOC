@@ -15,7 +15,8 @@ namespace SOC.QuestObjects.Common
                 typeof(Vehicle.VehicleDetail),
                 typeof(WalkerGear.WalkerDetail),
                 typeof(Model.ModelDetail),
-                typeof(Helicopter.HelicopterDetail)
+                typeof(Helicopter.HelicopterDetail),
+                typeof(Item.ItemDetail)
             }; 
             return AllDetailTypes;
         }

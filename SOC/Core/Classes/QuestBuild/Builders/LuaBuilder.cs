@@ -11,13 +11,8 @@ namespace SOC.Classes.QuestBuild.Lua
 {
     static class LuaBuilder
     {
-
         static string[] questLuaTemplate = File.ReadAllLines(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//questScript.lua"));
-
-        static DefinitionLua definitionLua = new DefinitionLua(); // issue - building more than once will add to existing stuff
-
-        static MainLua mainLua = new MainLua();
-
+        
         public static void WriteDefinitionLua(CoreDetails coreDetails, MasterManager masterManager)
         {
             DetailManager[] managers = masterManager.GetManagers();
@@ -35,6 +30,7 @@ namespace SOC.Classes.QuestBuild.Lua
 
         private static string BuildDefinition(CoreDetails coreDetails, DetailManager[] managers) //rewrite
         {
+            DefinitionLua definitionLua = new DefinitionLua();
             string questCompleteLangId = UpdateNotifsManager.getLangIds()[coreDetails.progNotif];
             
             definitionLua.AddDefinition($"locationId = {coreDetails.locationID}");
@@ -71,6 +67,7 @@ namespace SOC.Classes.QuestBuild.Lua
 
         private static List<string> BuildMain(List<string> questLua, CoreDetails coreDetails, DetailManager[] managers)
         {
+            MainLua mainLua = new MainLua();
             mainLua.AddToLocalVariables("local CPNAME =", $@"local CPNAME = ""{coreDetails.CPName}""");
             mainLua.AddToLocalVariables("local questTrapName =", $@"local questTrapName = ""trap_preDeactiveQuestArea_{coreDetails.loadArea}""");
 

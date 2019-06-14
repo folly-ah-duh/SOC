@@ -15,31 +15,31 @@ namespace SOC.QuestObjects.Model
 {
     public partial class ModelBox : QuestBox
     {
-        public int modelID;
+        public int ID;
 
         public ModelBox(Model m)
         {
             InitializeComponent();
-            modelID = m.ID;
+            ID = m.ID;
 
-            m_textBox_xcoord.Text = m.position.coords.xCoord;
-            m_textBox_ycoord.Text = m.position.coords.yCoord;
-            m_textBox_zcoord.Text = m.position.coords.zCoord;
+            textBox_xcoord.Text = m.position.coords.xCoord;
+            textBox_ycoord.Text = m.position.coords.yCoord;
+            textBox_zcoord.Text = m.position.coords.zCoord;
 
-            m_textBox_xrot.Text = m.position.rotation.quatRotation.xval;
-            m_textBox_yrot.Text = m.position.rotation.quatRotation.yval;
-            m_textBox_zrot.Text = m.position.rotation.quatRotation.zval;
-            m_textBox_wrot.Text = m.position.rotation.quatRotation.wval;
+            textBox_xrot.Text = m.position.rotation.quatRotation.xval;
+            textBox_yrot.Text = m.position.rotation.quatRotation.yval;
+            textBox_zrot.Text = m.position.rotation.quatRotation.zval;
+            textBox_wrot.Text = m.position.rotation.quatRotation.wval;
 
-            m_comboBox_model.Items.AddRange(getModelList());
+            comboBox_model.Items.AddRange(getModelList());
 
-            if (m_comboBox_model.Items.Contains(m.model))
-                m_comboBox_model.Text = m.model;
-            else if (m_comboBox_model.Items.Count > 0)
-                m_comboBox_model.SelectedIndex = 0;
+            if (comboBox_model.Items.Contains(m.model))
+                comboBox_model.Text = m.model;
+            else if (comboBox_model.Items.Count > 0)
+                comboBox_model.SelectedIndex = 0;
 
-            if (m_checkBox_collision.Enabled)
-                m_checkBox_collision.Checked = m.collision;
+            if (checkBox_collision.Enabled)
+                checkBox_collision.Checked = m.collision;
         }
 
         private string[] getModelList()
@@ -55,12 +55,12 @@ namespace SOC.QuestObjects.Model
 
         private bool hasGeom()
         {
-            if (!string.IsNullOrEmpty(m_comboBox_model.Text))
+            if (!string.IsNullOrEmpty(comboBox_model.Text))
             {
                 string[] geomNames = Directory.GetFiles(ModelAssets.modelAssetsPath, "*.geom");
                 for (int i = 0; i < geomNames.Length; i++)
                 {
-                    if (geomNames[i].Contains(m_comboBox_model.Text + ".geom"))
+                    if (geomNames[i].Contains(comboBox_model.Text + ".geom"))
                         return true;
                 }
             }
@@ -69,7 +69,7 @@ namespace SOC.QuestObjects.Model
 
         private void m_comboBox_model_selectedIndexChanged(object sender, EventArgs e)
         {
-            if (!hasGeom() && !string.IsNullOrEmpty(m_comboBox_model.Text))
+            if (!hasGeom() && !string.IsNullOrEmpty(comboBox_model.Text))
             {
                 DisableCollisionCheckBox("Missing .Geom");
             }
@@ -82,15 +82,15 @@ namespace SOC.QuestObjects.Model
 
         private void EnableCollisionCheckBox()
         {
-            m_checkBox_collision.Enabled = true;
-            m_checkBox_collision.Text = "Enable Collision";
+            checkBox_collision.Enabled = true;
+            checkBox_collision.Text = "Enable Collision";
         }
 
         private void DisableCollisionCheckBox(string reason)
         {
-            m_checkBox_collision.Text = $"Enable Collision ({reason})";
-            m_checkBox_collision.Checked = false;
-            m_checkBox_collision.Enabled = false;
+            checkBox_collision.Text = $"Enable Collision ({reason})";
+            checkBox_collision.Checked = false;
+            checkBox_collision.Enabled = false;
         }
 
         public override QuestObject getQuestObject()

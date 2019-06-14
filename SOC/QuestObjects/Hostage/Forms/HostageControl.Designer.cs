@@ -32,7 +32,7 @@
             this.panelHosDet = new System.Windows.Forms.FlowLayoutPanel();
             this.label_hosObjType = new System.Windows.Forms.Label();
             this.comboBox_hosObjType = new System.Windows.Forms.ComboBox();
-            this.h_checkBox_intrgt = new System.Windows.Forms.CheckBox();
+            this.checkBox_intrgt = new System.Windows.Forms.CheckBox();
             this.label_Body = new System.Windows.Forms.Label();
             this.comboBox_Body = new System.Windows.Forms.ComboBox();
             this.groupHosDet.SuspendLayout();
@@ -43,7 +43,7 @@
             this.groupHosDet.Controls.Add(this.panelHosDet);
             this.groupHosDet.Controls.Add(this.label_hosObjType);
             this.groupHosDet.Controls.Add(this.comboBox_hosObjType);
-            this.groupHosDet.Controls.Add(this.h_checkBox_intrgt);
+            this.groupHosDet.Controls.Add(this.checkBox_intrgt);
             this.groupHosDet.Controls.Add(this.label_Body);
             this.groupHosDet.Controls.Add(this.comboBox_Body);
             this.groupHosDet.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -96,15 +96,15 @@
             // 
             // h_checkBox_intrgt
             // 
-            this.h_checkBox_intrgt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.checkBox_intrgt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.h_checkBox_intrgt.AutoSize = true;
-            this.h_checkBox_intrgt.Location = new System.Drawing.Point(6, 99);
-            this.h_checkBox_intrgt.Name = "h_checkBox_intrgt";
-            this.h_checkBox_intrgt.Size = new System.Drawing.Size(162, 17);
-            this.h_checkBox_intrgt.TabIndex = 0;
-            this.h_checkBox_intrgt.Text = "Interrogate For Whereabouts";
-            this.h_checkBox_intrgt.UseVisualStyleBackColor = true;
+            this.checkBox_intrgt.AutoSize = true;
+            this.checkBox_intrgt.Location = new System.Drawing.Point(6, 99);
+            this.checkBox_intrgt.Name = "h_checkBox_intrgt";
+            this.checkBox_intrgt.Size = new System.Drawing.Size(162, 17);
+            this.checkBox_intrgt.TabIndex = 0;
+            this.checkBox_intrgt.Text = "Interrogate For Whereabouts";
+            this.checkBox_intrgt.UseVisualStyleBackColor = true;
             // 
             // label_Body
             // 
@@ -145,7 +145,7 @@
 
         public System.Windows.Forms.GroupBox groupHosDet;
         private System.Windows.Forms.Label label_hosObjType;
-        public System.Windows.Forms.CheckBox h_checkBox_intrgt;
+        public System.Windows.Forms.CheckBox checkBox_intrgt;
         public System.Windows.Forms.ComboBox comboBox_Body;
         private System.Windows.Forms.Label label_Body;
         public System.Windows.Forms.ComboBox comboBox_hosObjType;

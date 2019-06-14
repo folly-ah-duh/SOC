@@ -11,14 +11,14 @@ namespace SOC.QuestObjects.Hostage
             InitializeComponent();
             comboBox_Body.Items.AddRange(NPCBodyInfo.GetBodyNames());
             comboBox_Body.SelectedIndex = 0;
-            comboBox_hosObjType.SelectedIndex = 0;
+            comboBox_ObjType.SelectedIndex = 0;
             Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
         }
 
         public void SetMetadata(HostageMetadata meta)
         {
             comboBox_Body.Text = meta.hostageBodyName;
-            comboBox_hosObjType.Text = meta.hostageObjectiveType;
+            comboBox_ObjType.Text = meta.objectiveType;
             checkBox_intrgt.Checked = meta.canInterrogate;
         }
     }

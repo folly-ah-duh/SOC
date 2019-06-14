@@ -20,12 +20,12 @@ namespace SOC.QuestObjects.Vehicle
             vehicles = vehicleList; vehicleMetadata = vehicleMeta;
         }
 
-        [XmlArray]
-        public List<Vehicle> vehicles { get; set; } = new List<Vehicle>();
-
         [XmlElement]
         public VehicleMetadata vehicleMetadata { get; set; } = new VehicleMetadata();
 
+        [XmlArray]
+        public List<Vehicle> vehicles { get; set; } = new List<Vehicle>();
+        
         public override DetailManager GetNewManager()
         {
             return new VehicleManager(this);
@@ -110,10 +110,10 @@ namespace SOC.QuestObjects.Vehicle
 
         public VehicleMetadata(VehicleControl control)
         {
-            vehicleObjectiveType = control.comboBox_vehObjType.Text;
+            ObjectiveType = control.comboBox_ObjType.Text;
         }
 
         [XmlAttribute]
-        public string vehicleObjectiveType { get; set; } = "ELIMINATE";
+        public string ObjectiveType { get; set; } = "ELIMINATE";
     }
 }

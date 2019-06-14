@@ -29,7 +29,7 @@ namespace SOC.QuestObjects.Hostage
 
             mainLua.AddToLocalVariables("local hostageCount =", "local hostageCount = " + hostages.Count);
             mainLua.AddToLocalVariables("local useInter =", "local useInter = " + meta.canInterrogate.ToString().ToLower());
-            mainLua.AddToLocalVariables("local hostageQuestType =", "local hostageQuestType = " + meta.hostageObjectiveType);
+            mainLua.AddToLocalVariables("local hostageQuestType =", "local hostageQuestType = " + meta.objectiveType);
 
             mainLua.AddToQuestTable(BuildHostageList(hostageDetail));
 

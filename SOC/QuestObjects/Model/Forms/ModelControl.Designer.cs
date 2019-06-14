@@ -28,51 +28,51 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupStMdDet = new System.Windows.Forms.GroupBox();
-            this.panelStMdDet = new System.Windows.Forms.FlowLayoutPanel();
-            this.groupStMdDet.SuspendLayout();
+            this.groupboxDetail = new System.Windows.Forms.GroupBox();
+            this.panelQuestBoxes = new System.Windows.Forms.FlowLayoutPanel();
+            this.groupboxDetail.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupStMdDet
+            // groupboxDetail
             // 
-            this.groupStMdDet.Controls.Add(this.panelStMdDet);
-            this.groupStMdDet.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupStMdDet.Location = new System.Drawing.Point(0, 0);
-            this.groupStMdDet.Name = "groupStMdDet";
-            this.groupStMdDet.Size = new System.Drawing.Size(300, 449);
-            this.groupStMdDet.TabIndex = 32;
-            this.groupStMdDet.TabStop = false;
-            this.groupStMdDet.Text = "Static Models";
+            this.groupboxDetail.Controls.Add(this.panelQuestBoxes);
+            this.groupboxDetail.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupboxDetail.Location = new System.Drawing.Point(0, 0);
+            this.groupboxDetail.Name = "groupboxDetail";
+            this.groupboxDetail.Size = new System.Drawing.Size(300, 449);
+            this.groupboxDetail.TabIndex = 32;
+            this.groupboxDetail.TabStop = false;
+            this.groupboxDetail.Text = "Static Models";
             // 
-            // panelStMdDet
+            // panelQuestBoxes
             // 
-            this.panelStMdDet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.panelQuestBoxes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelStMdDet.AutoScroll = true;
-            this.panelStMdDet.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.panelStMdDet.Location = new System.Drawing.Point(3, 16);
-            this.panelStMdDet.Margin = new System.Windows.Forms.Padding(0);
-            this.panelStMdDet.Name = "panelStMdDet";
-            this.panelStMdDet.Size = new System.Drawing.Size(294, 430);
-            this.panelStMdDet.TabIndex = 4;
-            this.panelStMdDet.WrapContents = false;
+            this.panelQuestBoxes.AutoScroll = true;
+            this.panelQuestBoxes.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.panelQuestBoxes.Location = new System.Drawing.Point(3, 16);
+            this.panelQuestBoxes.Margin = new System.Windows.Forms.Padding(0);
+            this.panelQuestBoxes.Name = "panelQuestBoxes";
+            this.panelQuestBoxes.Size = new System.Drawing.Size(294, 430);
+            this.panelQuestBoxes.TabIndex = 4;
+            this.panelQuestBoxes.WrapContents = false;
             // 
             // ModelControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupStMdDet);
+            this.Controls.Add(this.groupboxDetail);
             this.Name = "ModelControl";
             this.Size = new System.Drawing.Size(300, 449);
-            this.groupStMdDet.ResumeLayout(false);
+            this.groupboxDetail.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        public System.Windows.Forms.GroupBox groupStMdDet;
-        public System.Windows.Forms.FlowLayoutPanel panelStMdDet;
+        public System.Windows.Forms.GroupBox groupboxDetail;
+        public System.Windows.Forms.FlowLayoutPanel panelQuestBoxes;
     }
 }

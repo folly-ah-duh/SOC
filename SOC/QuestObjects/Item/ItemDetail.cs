@@ -15,16 +15,16 @@ namespace SOC.QuestObjects.Item
     {
         public ItemDetail() { }
 
-        public ItemDetail(List<Item> itemList, ItemMetada meta)
+        public ItemDetail(List<Item> itemList, ItemMetadata meta)
         {
             items = itemList; itemMetadata = meta;
         }
-        
-        [XmlArray]
-        public List<Item> items { get; set; } = new List<Item>();
 
         [XmlElement]
-        public ItemMetada itemMetadata { get; set; } = new ItemMetada();
+        public ItemMetadata itemMetadata { get; set; } = new ItemMetadata();
+
+        [XmlArray]
+        public List<Item> items { get; set; } = new List<Item>();
         
         public override Metadata GetMetadata()
         {
@@ -107,16 +107,16 @@ namespace SOC.QuestObjects.Item
         public Position position = new Position(new Coordinates(), new Rotation());
     }
 
-    public class ItemMetada : Metadata
+    public class ItemMetadata : Metadata
     {
-        public ItemMetada() { }
+        public ItemMetadata() { }
 
-        public ItemMetada(ItemControl itemControl)
+        public ItemMetadata(ItemControl itemControl)
         {
-            itemObjectiveType = itemControl.comboBox_itemObjType.Text;
+            objectiveType = itemControl.comboBox_ObjType.Text;
         }
 
         [XmlAttribute]
-        public string itemObjectiveType { get; set; } = "ELIMINATE";
+        public string objectiveType { get; set; } = "ELIMINATE";
     }
 }

@@ -7,13 +7,13 @@ namespace SOC.QuestObjects.Helicopter
         public HelicopterControl()
         {
             InitializeComponent();
-            comboBox_heliObjType.SelectedIndex = 0;
+            comboBox_ObjType.SelectedIndex = 0;
             Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
         }
 
         public void SetMetadata(HelicopterMetadata meta)
         {
-            comboBox_heliObjType.Text = meta.helicopterObjectiveType;
+            comboBox_ObjType.Text = meta.objectiveType;
         }
     }
 }

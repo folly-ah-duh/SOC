@@ -15,7 +15,7 @@ namespace SOC.QuestObjects.Helicopter
 {
     class HelicopterVisualizer : DetailVisualizer
     {
-        public HelicopterVisualizer(LocationalDataStub stub, HelicopterControl control) : base(stub, control, control.panelHeliDet)
+        public HelicopterVisualizer(LocationalDataStub stub, HelicopterControl control) : base(stub, control, control.panelQuestBoxes)
         {
         }
 

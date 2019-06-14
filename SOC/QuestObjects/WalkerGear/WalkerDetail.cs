@@ -16,12 +16,12 @@ namespace SOC.QuestObjects.WalkerGear
         {
             walkers = walkerList; walkerMetadata = meta;
         }
-        
-        [XmlArray]
-        public List<WalkerGear> walkers { get; set; } = new List<WalkerGear>();
 
         [XmlElement]
         public WalkerMetadata walkerMetadata { get; set; } = new WalkerMetadata();
+        
+        [XmlArray]
+        public List<WalkerGear> walkers { get; set; } = new List<WalkerGear>();
 
         public override Metadata GetMetadata()
         {
@@ -109,10 +109,10 @@ namespace SOC.QuestObjects.WalkerGear
 
         public WalkerMetadata(WalkerControl control)
         {
-            walkerObjectiveType = control.comboBox_WalkerObjType.Text;
+            objectiveType = control.comboBox_ObjType.Text;
         }
 
         [XmlAttribute]
-        public string walkerObjectiveType { get; set; } = "ELIMINATE";
+        public string objectiveType { get; set; } = "ELIMINATE";
     }
 }

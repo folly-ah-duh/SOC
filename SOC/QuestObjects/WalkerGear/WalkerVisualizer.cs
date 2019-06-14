@@ -11,7 +11,7 @@ namespace SOC.QuestObjects.WalkerGear
 {
     class WalkerVisualizer : DetailVisualizer
     {
-        public WalkerVisualizer(LocationalDataStub walkerStub, WalkerControl walkerControl) : base(walkerStub, walkerControl, walkerControl.panelWalkerDet) { }
+        public WalkerVisualizer(LocationalDataStub walkerStub, WalkerControl walkerControl) : base(walkerStub, walkerControl, walkerControl.panelQuestBoxes) { }
         
         public override void DrawMetadata(Metadata meta)
         {

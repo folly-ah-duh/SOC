@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.m_groupBox_main = new System.Windows.Forms.GroupBox();
+            this.groupBox_main = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox_count = new System.Windows.Forms.ComboBox();
             this.checkBox_boxed = new System.Windows.Forms.CheckBox();
@@ -44,35 +44,35 @@
             this.textBox_zcoord = new System.Windows.Forms.TextBox();
             this.textBox_ycoord = new System.Windows.Forms.TextBox();
             this.textBox_xcoord = new System.Windows.Forms.TextBox();
-            this.m_groupBox_main.SuspendLayout();
+            this.groupBox_main.SuspendLayout();
             this.SuspendLayout();
             // 
             // m_groupBox_main
             // 
-            this.m_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
-            this.m_groupBox_main.Controls.Add(this.label3);
-            this.m_groupBox_main.Controls.Add(this.comboBox_count);
-            this.m_groupBox_main.Controls.Add(this.checkBox_boxed);
-            this.m_groupBox_main.Controls.Add(this.checkBox_target);
-            this.m_groupBox_main.Controls.Add(this.textBox_wrot);
-            this.m_groupBox_main.Controls.Add(this.textBox_zrot);
-            this.m_groupBox_main.Controls.Add(this.textBox_yrot);
-            this.m_groupBox_main.Controls.Add(this.label5);
-            this.m_groupBox_main.Controls.Add(this.label2);
-            this.m_groupBox_main.Controls.Add(this.comboBox_item);
-            this.m_groupBox_main.Controls.Add(this.textBox_xrot);
-            this.m_groupBox_main.Controls.Add(this.label1);
-            this.m_groupBox_main.Controls.Add(this.textBox_zcoord);
-            this.m_groupBox_main.Controls.Add(this.textBox_ycoord);
-            this.m_groupBox_main.Controls.Add(this.textBox_xcoord);
-            this.m_groupBox_main.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.m_groupBox_main.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.m_groupBox_main.Location = new System.Drawing.Point(0, 0);
-            this.m_groupBox_main.Name = "m_groupBox_main";
-            this.m_groupBox_main.Size = new System.Drawing.Size(268, 154);
-            this.m_groupBox_main.TabIndex = 3;
-            this.m_groupBox_main.TabStop = false;
-            this.m_groupBox_main.Text = "ItemBox";
+            this.groupBox_main.BackColor = System.Drawing.Color.DarkGray;
+            this.groupBox_main.Controls.Add(this.label3);
+            this.groupBox_main.Controls.Add(this.comboBox_count);
+            this.groupBox_main.Controls.Add(this.checkBox_boxed);
+            this.groupBox_main.Controls.Add(this.checkBox_target);
+            this.groupBox_main.Controls.Add(this.textBox_wrot);
+            this.groupBox_main.Controls.Add(this.textBox_zrot);
+            this.groupBox_main.Controls.Add(this.textBox_yrot);
+            this.groupBox_main.Controls.Add(this.label5);
+            this.groupBox_main.Controls.Add(this.label2);
+            this.groupBox_main.Controls.Add(this.comboBox_item);
+            this.groupBox_main.Controls.Add(this.textBox_xrot);
+            this.groupBox_main.Controls.Add(this.label1);
+            this.groupBox_main.Controls.Add(this.textBox_zcoord);
+            this.groupBox_main.Controls.Add(this.textBox_ycoord);
+            this.groupBox_main.Controls.Add(this.textBox_xcoord);
+            this.groupBox_main.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox_main.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.groupBox_main.Location = new System.Drawing.Point(0, 0);
+            this.groupBox_main.Name = "m_groupBox_main";
+            this.groupBox_main.Size = new System.Drawing.Size(268, 154);
+            this.groupBox_main.TabIndex = 3;
+            this.groupBox_main.TabStop = false;
+            this.groupBox_main.Text = "ItemBox";
             // 
             // label3
             // 
@@ -213,18 +213,18 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.m_groupBox_main);
+            this.Controls.Add(this.groupBox_main);
             this.Name = "ItemBoxF";
             this.Size = new System.Drawing.Size(268, 154);
-            this.m_groupBox_main.ResumeLayout(false);
-            this.m_groupBox_main.PerformLayout();
+            this.groupBox_main.ResumeLayout(false);
+            this.groupBox_main.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox m_groupBox_main;
+        private System.Windows.Forms.GroupBox groupBox_main;
         public System.Windows.Forms.TextBox textBox_wrot;
         public System.Windows.Forms.TextBox textBox_zrot;
         public System.Windows.Forms.TextBox textBox_yrot;

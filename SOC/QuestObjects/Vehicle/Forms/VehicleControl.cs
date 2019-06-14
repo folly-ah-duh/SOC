@@ -8,13 +8,13 @@ namespace SOC.QuestObjects.Vehicle
         public VehicleControl()
         {
             InitializeComponent();
-            comboBox_vehObjType.SelectedIndex = 0;
+            comboBox_ObjType.SelectedIndex = 0;
             Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
         }
 
         internal void SetMetadata(VehicleMetadata meta)
         {
-             comboBox_vehObjType.Text = meta.vehicleObjectiveType;
+             comboBox_ObjType.Text = meta.ObjectiveType;
         }
     }
 }

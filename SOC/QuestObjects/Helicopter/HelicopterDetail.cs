@@ -112,10 +112,10 @@ namespace SOC.QuestObjects.Helicopter
 
         public HelicopterMetadata(HelicopterControl control)
         {
-            helicopterObjectiveType = control.comboBox_heliObjType.Text;
+            objectiveType = control.comboBox_ObjType.Text;
         }
 
         [XmlAttribute]
-        public string helicopterObjectiveType { get; set; } = "KILLREQUIRED";
+        public string objectiveType { get; set; } = "KILLREQUIRED";
     }
 }

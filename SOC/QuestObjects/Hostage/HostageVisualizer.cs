@@ -11,7 +11,7 @@ namespace SOC.QuestObjects.Hostage
 {
     class HostageVisualizer : DetailVisualizer
     {
-        public HostageVisualizer(LocationalDataStub hostageStub, HostageControl hostageControl) : base(hostageStub, hostageControl, hostageControl.panelHosDet)
+        public HostageVisualizer(LocationalDataStub hostageStub, HostageControl hostageControl) : base(hostageStub, hostageControl, hostageControl.panelQuestBoxes)
         {
             hostageControl.comboBox_Body.SelectedIndexChanged += OnBodyIndexChanged;
         }

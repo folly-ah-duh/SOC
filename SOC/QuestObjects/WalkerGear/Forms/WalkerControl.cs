@@ -7,13 +7,13 @@ namespace SOC.QuestObjects.WalkerGear
         public WalkerControl()
         {
             InitializeComponent();
-            comboBox_WalkerObjType.SelectedIndex = 0;
+            comboBox_ObjType.SelectedIndex = 0;
             Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
         }
 
         public void SetMetadata(WalkerMetadata meta)
         {
-            comboBox_WalkerObjType.Text = meta.walkerObjectiveType;
+            comboBox_ObjType.Text = meta.objectiveType;
         }
     }
 }

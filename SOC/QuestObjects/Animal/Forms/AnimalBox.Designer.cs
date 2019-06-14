@@ -1,6 +1,6 @@
-﻿namespace SOC.QuestObjects.WalkerGear
+﻿namespace SOC.QuestObjects.Animal
 {
-    partial class WalkerBox
+    partial class AnimalBox
     {
         /// <summary> 
         /// Required designer variable.
@@ -33,9 +33,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox_weapon = new System.Windows.Forms.ComboBox();
-            this.comboBox_paint = new System.Windows.Forms.ComboBox();
-            this.comboBox_pilot = new System.Windows.Forms.ComboBox();
+            this.comboBox_count = new System.Windows.Forms.ComboBox();
+            this.comboBox_typeID = new System.Windows.Forms.ComboBox();
+            this.comboBox_animal = new System.Windows.Forms.ComboBox();
             this.checkBox_target = new System.Windows.Forms.CheckBox();
             this.textBox_rot = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -52,9 +52,9 @@
             this.groupBox_main.Controls.Add(this.label4);
             this.groupBox_main.Controls.Add(this.label3);
             this.groupBox_main.Controls.Add(this.label2);
-            this.groupBox_main.Controls.Add(this.comboBox_weapon);
-            this.groupBox_main.Controls.Add(this.comboBox_paint);
-            this.groupBox_main.Controls.Add(this.comboBox_pilot);
+            this.groupBox_main.Controls.Add(this.comboBox_count);
+            this.groupBox_main.Controls.Add(this.comboBox_typeID);
+            this.groupBox_main.Controls.Add(this.comboBox_animal);
             this.groupBox_main.Controls.Add(this.checkBox_target);
             this.groupBox_main.Controls.Add(this.textBox_rot);
             this.groupBox_main.Controls.Add(this.label1);
@@ -66,9 +66,9 @@
             this.groupBox_main.Location = new System.Drawing.Point(0, 0);
             this.groupBox_main.Name = "groupBox_main";
             this.groupBox_main.Size = new System.Drawing.Size(268, 183);
-            this.groupBox_main.TabIndex = 1;
+            this.groupBox_main.TabIndex = 2;
             this.groupBox_main.TabStop = false;
-            this.groupBox_main.Text = "WalkerBox";
+            this.groupBox_main.Text = "AnimalBox";
             // 
             // label5
             // 
@@ -76,7 +76,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(76, 21);
             this.label5.TabIndex = 15;
-            this.label5.Text = "Weapon:";
+            this.label5.Text = "Herd Count:";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label4
@@ -85,7 +85,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(76, 21);
             this.label4.TabIndex = 14;
-            this.label4.Text = "Paint Type:";
+            this.label4.Text = "Type ID:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label3
@@ -94,7 +94,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(76, 21);
             this.label3.TabIndex = 13;
-            this.label3.Text = "Enemy Pilot:";
+            this.label3.Text = "Animal:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label2
@@ -106,38 +106,39 @@
             this.label2.Text = "Rotation:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // comboBox_weapon
+            // comboBox_count
             // 
-            this.comboBox_weapon.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.comboBox_count.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox_weapon.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_weapon.FormattingEnabled = true;
-            this.comboBox_weapon.Location = new System.Drawing.Point(85, 156);
-            this.comboBox_weapon.Name = "comboBox_weapon";
-            this.comboBox_weapon.Size = new System.Drawing.Size(174, 21);
-            this.comboBox_weapon.TabIndex = 10;
+            this.comboBox_count.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_count.FormattingEnabled = true;
+            this.comboBox_count.Location = new System.Drawing.Point(85, 156);
+            this.comboBox_count.Name = "comboBox_count";
+            this.comboBox_count.Size = new System.Drawing.Size(174, 21);
+            this.comboBox_count.TabIndex = 10;
             // 
-            // comboBox_paint
+            // comboBox_typeID
             // 
-            this.comboBox_paint.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.comboBox_typeID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox_paint.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_paint.FormattingEnabled = true;
-            this.comboBox_paint.Location = new System.Drawing.Point(85, 129);
-            this.comboBox_paint.Name = "comboBox_paint";
-            this.comboBox_paint.Size = new System.Drawing.Size(174, 21);
-            this.comboBox_paint.TabIndex = 9;
+            this.comboBox_typeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_typeID.FormattingEnabled = true;
+            this.comboBox_typeID.Location = new System.Drawing.Point(85, 129);
+            this.comboBox_typeID.Name = "comboBox_typeID";
+            this.comboBox_typeID.Size = new System.Drawing.Size(174, 21);
+            this.comboBox_typeID.TabIndex = 9;
             // 
-            // comboBox_pilot
+            // comboBox_animal
             // 
-            this.comboBox_pilot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.comboBox_animal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox_pilot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_pilot.FormattingEnabled = true;
-            this.comboBox_pilot.Location = new System.Drawing.Point(85, 102);
-            this.comboBox_pilot.Name = "comboBox_pilot";
-            this.comboBox_pilot.Size = new System.Drawing.Size(174, 21);
-            this.comboBox_pilot.TabIndex = 8;
+            this.comboBox_animal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_animal.FormattingEnabled = true;
+            this.comboBox_animal.Location = new System.Drawing.Point(85, 102);
+            this.comboBox_animal.Name = "comboBox_animal";
+            this.comboBox_animal.Size = new System.Drawing.Size(174, 21);
+            this.comboBox_animal.TabIndex = 8;
+            this.comboBox_animal.SelectedIndexChanged += new System.EventHandler(this.comboBox_animal_selectedIndexChanged);
             // 
             // checkBox_target
             // 
@@ -188,12 +189,12 @@
             this.textBox_xcoord.Size = new System.Drawing.Size(54, 20);
             this.textBox_xcoord.TabIndex = 0;
             // 
-            // WalkerBox
+            // AnimalBoxF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox_main);
-            this.Name = "WalkerBox";
+            this.Name = "AnimalBoxF";
             this.Size = new System.Drawing.Size(268, 183);
             this.groupBox_main.ResumeLayout(false);
             this.groupBox_main.PerformLayout();
@@ -208,9 +209,9 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        public System.Windows.Forms.ComboBox comboBox_weapon;
-        public System.Windows.Forms.ComboBox comboBox_paint;
-        public System.Windows.Forms.ComboBox comboBox_pilot;
+        public System.Windows.Forms.ComboBox comboBox_count;
+        public System.Windows.Forms.ComboBox comboBox_typeID;
+        public System.Windows.Forms.ComboBox comboBox_animal;
         public System.Windows.Forms.CheckBox checkBox_target;
         public System.Windows.Forms.TextBox textBox_rot;
         private System.Windows.Forms.Label label1;

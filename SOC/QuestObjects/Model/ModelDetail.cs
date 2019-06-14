@@ -17,11 +17,11 @@ namespace SOC.QuestObjects.Model
             models = modelList; modelMetadata = meta;
         }
 
-        [XmlArray]
-        public List<Model> models { get; set; } = new List<Model>();
-
         [XmlElement]
         public ModelMetadata modelMetadata { get; set; } = new ModelMetadata();
+        
+        [XmlArray]
+        public List<Model> models { get; set; } = new List<Model>();
 
         public override Metadata GetMetadata()
         {

@@ -24,7 +24,7 @@ namespace SOC.QuestObjects.WalkerGear
             List<WalkerGear> walkers = walkerDetail.walkers;
             WalkerMetadata meta = walkerDetail.walkerMetadata;
 
-            mainLua.AddToLocalVariables("local walkerQuestType =", "local walkerQuestType = " + meta.walkerObjectiveType);
+            mainLua.AddToLocalVariables("local walkerQuestType =", "local walkerQuestType = " + meta.objectiveType);
 
             mainLua.AddToQuestTable(BuildWalkerList(walkerDetail));
 

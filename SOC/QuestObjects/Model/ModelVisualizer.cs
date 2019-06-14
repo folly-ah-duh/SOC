@@ -15,7 +15,7 @@ namespace SOC.QuestObjects.Model
 {
     class ModelVisualizer : DetailVisualizer
     {
-        public ModelVisualizer(LocationalDataStub stub, ModelControl control) : base(stub, control, control.panelStMdDet) { }
+        public ModelVisualizer(LocationalDataStub stub, ModelControl control) : base(stub, control, control.panelQuestBoxes) { }
 
         public override void DrawMetadata(Metadata meta)
         {

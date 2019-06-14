@@ -12,17 +12,17 @@ namespace SOC.QuestObjects.Item
 {
     class ItemVisualizer : DetailVisualizer
     {
-        public ItemVisualizer(LocationalDataStub stub, ItemControl control) : base(stub, control, control.panelItemDet) { }
+        public ItemVisualizer(LocationalDataStub stub, ItemControl control) : base(stub, control, control.panelQuestBoxes) { }
 
         public override void DrawMetadata(Metadata meta)
         {
             ItemControl iControl = (ItemControl)detailControl;
-            iControl.SetMetadata((ItemMetada)meta);
+            iControl.SetMetadata((ItemMetadata)meta);
         }
 
         public override Metadata GetMetadataFromControl()
         {
-            return new ItemMetada((ItemControl)detailControl);
+            return new ItemMetadata((ItemControl)detailControl);
         }
 
         public override QuestBox NewBox(QuestObject qObject, CoreDetails core)
@@ -32,7 +32,7 @@ namespace SOC.QuestObjects.Item
 
         public override Detail NewDetail(Metadata meta, IEnumerable<QuestObject> qObjects)
         {
-            return new ItemDetail(qObjects.Cast<Item>().ToList(), (ItemMetada)meta);
+            return new ItemDetail(qObjects.Cast<Item>().ToList(), (ItemMetadata)meta);
         }
 
         public override QuestObject NewObject(Position pos, int index)

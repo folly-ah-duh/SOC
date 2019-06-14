@@ -28,79 +28,79 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupHosDet = new System.Windows.Forms.GroupBox();
-            this.panelHosDet = new System.Windows.Forms.FlowLayoutPanel();
-            this.label_hosObjType = new System.Windows.Forms.Label();
-            this.comboBox_hosObjType = new System.Windows.Forms.ComboBox();
+            this.groupboxDetail = new System.Windows.Forms.GroupBox();
+            this.panelQuestBoxes = new System.Windows.Forms.FlowLayoutPanel();
+            this.label_ObjType = new System.Windows.Forms.Label();
+            this.comboBox_ObjType = new System.Windows.Forms.ComboBox();
             this.checkBox_intrgt = new System.Windows.Forms.CheckBox();
             this.label_Body = new System.Windows.Forms.Label();
             this.comboBox_Body = new System.Windows.Forms.ComboBox();
-            this.groupHosDet.SuspendLayout();
+            this.groupboxDetail.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupHosDet
+            // groupboxDetail
             // 
-            this.groupHosDet.Controls.Add(this.panelHosDet);
-            this.groupHosDet.Controls.Add(this.label_hosObjType);
-            this.groupHosDet.Controls.Add(this.comboBox_hosObjType);
-            this.groupHosDet.Controls.Add(this.checkBox_intrgt);
-            this.groupHosDet.Controls.Add(this.label_Body);
-            this.groupHosDet.Controls.Add(this.comboBox_Body);
-            this.groupHosDet.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupHosDet.Location = new System.Drawing.Point(0, 0);
-            this.groupHosDet.Name = "groupHosDet";
-            this.groupHosDet.Size = new System.Drawing.Size(300, 449);
-            this.groupHosDet.TabIndex = 2;
-            this.groupHosDet.TabStop = false;
-            this.groupHosDet.Text = "Prisoners";
+            this.groupboxDetail.Controls.Add(this.panelQuestBoxes);
+            this.groupboxDetail.Controls.Add(this.label_ObjType);
+            this.groupboxDetail.Controls.Add(this.comboBox_ObjType);
+            this.groupboxDetail.Controls.Add(this.checkBox_intrgt);
+            this.groupboxDetail.Controls.Add(this.label_Body);
+            this.groupboxDetail.Controls.Add(this.comboBox_Body);
+            this.groupboxDetail.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupboxDetail.Location = new System.Drawing.Point(0, 0);
+            this.groupboxDetail.Name = "groupboxDetail";
+            this.groupboxDetail.Size = new System.Drawing.Size(300, 449);
+            this.groupboxDetail.TabIndex = 2;
+            this.groupboxDetail.TabStop = false;
+            this.groupboxDetail.Text = "Prisoners";
             // 
-            // panelHosDet
+            // panelQuestBoxes
             // 
-            this.panelHosDet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.panelQuestBoxes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelHosDet.AutoScroll = true;
-            this.panelHosDet.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.panelHosDet.Location = new System.Drawing.Point(3, 119);
-            this.panelHosDet.Margin = new System.Windows.Forms.Padding(0);
-            this.panelHosDet.Name = "panelHosDet";
-            this.panelHosDet.Size = new System.Drawing.Size(294, 327);
-            this.panelHosDet.TabIndex = 3;
-            this.panelHosDet.WrapContents = false;
+            this.panelQuestBoxes.AutoScroll = true;
+            this.panelQuestBoxes.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.panelQuestBoxes.Location = new System.Drawing.Point(3, 119);
+            this.panelQuestBoxes.Margin = new System.Windows.Forms.Padding(0);
+            this.panelQuestBoxes.Name = "panelQuestBoxes";
+            this.panelQuestBoxes.Size = new System.Drawing.Size(294, 327);
+            this.panelQuestBoxes.TabIndex = 3;
+            this.panelQuestBoxes.WrapContents = false;
             // 
-            // label_hosObjType
+            // label_ObjType
             // 
-            this.label_hosObjType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.label_ObjType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label_hosObjType.AutoSize = true;
-            this.label_hosObjType.Location = new System.Drawing.Point(6, 16);
-            this.label_hosObjType.Name = "label_hosObjType";
-            this.label_hosObjType.Size = new System.Drawing.Size(113, 13);
-            this.label_hosObjType.TabIndex = 13;
-            this.label_hosObjType.Text = "Target Objective Type";
+            this.label_ObjType.AutoSize = true;
+            this.label_ObjType.Location = new System.Drawing.Point(6, 16);
+            this.label_ObjType.Name = "label_ObjType";
+            this.label_ObjType.Size = new System.Drawing.Size(113, 13);
+            this.label_ObjType.TabIndex = 13;
+            this.label_ObjType.Text = "Target Objective Type";
             // 
-            // comboBox_hosObjType
+            // comboBox_ObjType
             // 
-            this.comboBox_hosObjType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.comboBox_ObjType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox_hosObjType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_hosObjType.FormattingEnabled = true;
-            this.comboBox_hosObjType.Items.AddRange(new object[] {
+            this.comboBox_ObjType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_ObjType.FormattingEnabled = true;
+            this.comboBox_ObjType.Items.AddRange(new object[] {
             "ELIMINATE",
             "RECOVERED",
             "KILLREQUIRED"});
-            this.comboBox_hosObjType.Location = new System.Drawing.Point(6, 32);
-            this.comboBox_hosObjType.Name = "comboBox_hosObjType";
-            this.comboBox_hosObjType.Size = new System.Drawing.Size(288, 21);
-            this.comboBox_hosObjType.TabIndex = 12;
+            this.comboBox_ObjType.Location = new System.Drawing.Point(6, 32);
+            this.comboBox_ObjType.Name = "comboBox_ObjType";
+            this.comboBox_ObjType.Size = new System.Drawing.Size(288, 21);
+            this.comboBox_ObjType.TabIndex = 12;
             // 
-            // h_checkBox_intrgt
+            // checkBox_intrgt
             // 
             this.checkBox_intrgt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox_intrgt.AutoSize = true;
             this.checkBox_intrgt.Location = new System.Drawing.Point(6, 99);
-            this.checkBox_intrgt.Name = "h_checkBox_intrgt";
+            this.checkBox_intrgt.Name = "checkBox_intrgt";
             this.checkBox_intrgt.Size = new System.Drawing.Size(162, 17);
             this.checkBox_intrgt.TabIndex = 0;
             this.checkBox_intrgt.Text = "Interrogate For Whereabouts";
@@ -132,23 +132,23 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupHosDet);
+            this.Controls.Add(this.groupboxDetail);
             this.Name = "HostageControl";
             this.Size = new System.Drawing.Size(300, 449);
-            this.groupHosDet.ResumeLayout(false);
-            this.groupHosDet.PerformLayout();
+            this.groupboxDetail.ResumeLayout(false);
+            this.groupboxDetail.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        public System.Windows.Forms.GroupBox groupHosDet;
-        private System.Windows.Forms.Label label_hosObjType;
+        public System.Windows.Forms.GroupBox groupboxDetail;
+        private System.Windows.Forms.Label label_ObjType;
         public System.Windows.Forms.CheckBox checkBox_intrgt;
         public System.Windows.Forms.ComboBox comboBox_Body;
         private System.Windows.Forms.Label label_Body;
-        public System.Windows.Forms.ComboBox comboBox_hosObjType;
-        public System.Windows.Forms.FlowLayoutPanel panelHosDet;
+        public System.Windows.Forms.ComboBox comboBox_ObjType;
+        public System.Windows.Forms.FlowLayoutPanel panelQuestBoxes;
     }
 }

@@ -1,6 +1,6 @@
-﻿namespace SOC.QuestObjects.Item
+﻿namespace SOC.QuestObjects.ActiveItem.Forms
 {
-    partial class ItemControl
+    partial class ActiveItemControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,25 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupboxDetail = new System.Windows.Forms.GroupBox();
+            this.groupActiveItemDet = new System.Windows.Forms.GroupBox();
             this.label_ObjType = new System.Windows.Forms.Label();
             this.panelQuestBoxes = new System.Windows.Forms.FlowLayoutPanel();
             this.comboBox_ObjType = new System.Windows.Forms.ComboBox();
-            this.groupboxDetail.SuspendLayout();
+            this.groupActiveItemDet.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupboxDetail
+            // groupActiveItemDet
             // 
-            this.groupboxDetail.Controls.Add(this.label_ObjType);
-            this.groupboxDetail.Controls.Add(this.panelQuestBoxes);
-            this.groupboxDetail.Controls.Add(this.comboBox_ObjType);
-            this.groupboxDetail.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupboxDetail.Location = new System.Drawing.Point(0, 0);
-            this.groupboxDetail.Name = "groupboxDetail";
-            this.groupboxDetail.Size = new System.Drawing.Size(300, 449);
-            this.groupboxDetail.TabIndex = 30;
-            this.groupboxDetail.TabStop = false;
-            this.groupboxDetail.Text = "Dormant Items";
+            this.groupActiveItemDet.Controls.Add(this.label_ObjType);
+            this.groupActiveItemDet.Controls.Add(this.panelQuestBoxes);
+            this.groupActiveItemDet.Controls.Add(this.comboBox_ObjType);
+            this.groupActiveItemDet.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupActiveItemDet.Location = new System.Drawing.Point(0, 0);
+            this.groupActiveItemDet.Name = "groupActiveItemDet";
+            this.groupActiveItemDet.Size = new System.Drawing.Size(300, 449);
+            this.groupActiveItemDet.TabIndex = 29;
+            this.groupActiveItemDet.TabStop = false;
+            this.groupActiveItemDet.Text = "Active Items";
             // 
             // label_ObjType
             // 
@@ -56,7 +56,7 @@
             this.label_ObjType.Location = new System.Drawing.Point(6, 16);
             this.label_ObjType.Name = "label_ObjType";
             this.label_ObjType.Size = new System.Drawing.Size(116, 13);
-            this.label_ObjType.TabIndex = 32;
+            this.label_ObjType.TabIndex = 35;
             this.label_ObjType.Text = "Target Objective Type:";
             // 
             // panelQuestBoxes
@@ -69,7 +69,7 @@
             this.panelQuestBoxes.Location = new System.Drawing.Point(3, 59);
             this.panelQuestBoxes.Name = "panelQuestBoxes";
             this.panelQuestBoxes.Size = new System.Drawing.Size(294, 387);
-            this.panelQuestBoxes.TabIndex = 33;
+            this.panelQuestBoxes.TabIndex = 36;
             this.panelQuestBoxes.WrapContents = false;
             // 
             // comboBox_ObjType
@@ -79,28 +79,30 @@
             this.comboBox_ObjType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_ObjType.FormattingEnabled = true;
             this.comboBox_ObjType.Items.AddRange(new object[] {
-            "RECOVERED"});
+            "ELIMINATE",
+            "RECOVERED",
+            "KILLREQUIRED"});
             this.comboBox_ObjType.Location = new System.Drawing.Point(6, 32);
             this.comboBox_ObjType.Name = "comboBox_ObjType";
             this.comboBox_ObjType.Size = new System.Drawing.Size(288, 21);
-            this.comboBox_ObjType.TabIndex = 31;
+            this.comboBox_ObjType.TabIndex = 34;
             // 
-            // ItemControl
+            // ActiveItemControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupboxDetail);
-            this.Name = "ItemControl";
+            this.Controls.Add(this.groupActiveItemDet);
+            this.Name = "ActiveItemControl";
             this.Size = new System.Drawing.Size(300, 449);
-            this.groupboxDetail.ResumeLayout(false);
-            this.groupboxDetail.PerformLayout();
+            this.groupActiveItemDet.ResumeLayout(false);
+            this.groupActiveItemDet.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        public System.Windows.Forms.GroupBox groupboxDetail;
+        private System.Windows.Forms.GroupBox groupActiveItemDet;
         private System.Windows.Forms.Label label_ObjType;
         public System.Windows.Forms.FlowLayoutPanel panelQuestBoxes;
         public System.Windows.Forms.ComboBox comboBox_ObjType;

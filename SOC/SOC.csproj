@@ -134,11 +134,11 @@
     </Compile>
     <Compile Include="QuestObjects\Animal\AnimalManager.cs" />
     <Compile Include="QuestObjects\Animal\AnimalVisualizer.cs" />
-    <Compile Include="QuestObjects\Animal\Forms\AnimalBoxF.cs">
+    <Compile Include="QuestObjects\Animal\Forms\AnimalBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="QuestObjects\Animal\Forms\AnimalBoxF.Designer.cs">
-      <DependentUpon>AnimalBoxF.cs</DependentUpon>
+    <Compile Include="QuestObjects\Animal\Forms\AnimalBox.Designer.cs">
+      <DependentUpon>AnimalBox.cs</DependentUpon>
     </Compile>
     <Compile Include="QuestObjects\Common\ManagerArray.cs" />
     <Compile Include="QuestObjects\Common\Detail.cs" />
@@ -198,19 +198,18 @@
     </Compile>
     <Compile Include="QuestObjects\ActiveItem\Classes\ActiveItemNames.cs" />
     <Compile Include="QuestObjects\ActiveItem\Forms\ActiveItemBox.cs" />
-    <Compile Include="QuestObjects\ActiveItem\Forms\ActiveItemPanel.cs">
+    <Compile Include="QuestObjects\ActiveItem\Forms\ActiveItemControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="QuestObjects\ActiveItem\Forms\ActiveItemPanel.Designer.cs">
-      <DependentUpon>ActiveItemPanel.cs</DependentUpon>
+    <Compile Include="QuestObjects\ActiveItem\Forms\ActiveItemControl.Designer.cs">
+      <DependentUpon>ActiveItemControl.cs</DependentUpon>
     </Compile>
     <Compile Include="QuestObjects\Animal\Classes\AnimalAssets.cs" />
-    <Compile Include="QuestObjects\Animal\Forms\AnimalBox.cs" />
-    <Compile Include="QuestObjects\Animal\Forms\AnimalPanel.cs">
+    <Compile Include="QuestObjects\Animal\Forms\AnimalControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="QuestObjects\Animal\Forms\AnimalPanel.Designer.cs">
-      <DependentUpon>AnimalPanel.cs</DependentUpon>
+    <Compile Include="QuestObjects\Animal\Forms\AnimalControl.Designer.cs">
+      <DependentUpon>AnimalControl.cs</DependentUpon>
     </Compile>
     <Compile Include="QuestObjects\Common\MasterManager.cs" />
     <Compile Include="QuestObjects\Common\DetailManager.cs" />
@@ -368,11 +367,20 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuestObjects\ActiveItem\Forms\ActiveItemPanel.resx">
-      <DependentUpon>ActiveItemPanel.cs</DependentUpon>
+    <EmbeddedResource Include="QuestObjects\ActiveItem\Forms\ActiveItemBoxF.resx">
+      <DependentUpon>ActiveItemBoxF.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuestObjects\Animal\Forms\AnimalPanel.resx">
-      <DependentUpon>AnimalPanel.cs</DependentUpon>
+    <EmbeddedResource Include="QuestObjects\ActiveItem\Forms\ActiveItemControl.resx">
+      <DependentUpon>ActiveItemControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuestObjects\Animal\Forms\AnimalBox.resx">
+      <DependentUpon>AnimalBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuestObjects\Animal\Forms\AnimalControl.resx">
+      <DependentUpon>AnimalControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuestObjects\Enemy\Forms\EnemyBoxF.resx">
+      <DependentUpon>EnemyBoxF.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuestObjects\Enemy\Forms\ExistingEnemiesPanel.resx">
       <DependentUpon>ExistingEnemiesPanel.cs</DependentUpon>

@@ -7,13 +7,13 @@ namespace SOC.QuestObjects.Item
         public ItemControl()
         {
             InitializeComponent();
-            comboBox_itemObjType.SelectedIndex = 0;
+            comboBox_ObjType.SelectedIndex = 0;
             Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
         }
 
-        internal void SetMetadata(ItemMetada meta)
+        internal void SetMetadata(ItemMetadata meta)
         {
-            comboBox_itemObjType.Text = meta.itemObjectiveType;
+            comboBox_ObjType.Text = meta.objectiveType;
         }
     }
 }

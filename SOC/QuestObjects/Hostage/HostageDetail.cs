@@ -125,7 +125,7 @@ namespace SOC.QuestObjects.Hostage
         {
             hostageBodyName = control.comboBox_Body.Text;
             canInterrogate = control.checkBox_intrgt.Checked;
-            hostageObjectiveType = control.comboBox_hosObjType.Text;
+            objectiveType = control.comboBox_ObjType.Text;
         }
 
         [XmlAttribute]
@@ -135,6 +135,6 @@ namespace SOC.QuestObjects.Hostage
         public bool canInterrogate { get; set; } = false;
 
         [XmlAttribute]
-        public string hostageObjectiveType { get; set; } = "ELIMINATE";
+        public string objectiveType { get; set; } = "ELIMINATE";
     }
 }

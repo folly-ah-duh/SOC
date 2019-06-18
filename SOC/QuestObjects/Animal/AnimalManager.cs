@@ -9,7 +9,26 @@ using SOC.Classes.Common;
 
 namespace SOC.QuestObjects.Animal
 {
-    class AnimalManager
+    class AnimalManager : LocationalManager
     {
+        static LocationalDataStub stub = new LocationalDataStub("Animal Herd Locations");
+
+        static AnimalControl control = new AnimalControl();
+
+        static AnimalVisualizer visualizer = new AnimalVisualizer(stub, control);
+
+        public AnimalManager(AnimalDetail detail) : base(detail, visualizer) { }
+
+        public override void AddToDefinitionLua(DefinitionLua definitionLua)
+        {
+        }
+
+        public override void AddToFox2Entities(DataSet dataSet, List<Fox2EntityClass> entityList)
+        {
+        }
+
+        public override void AddToMainLua(MainLua mainLua)
+        {
+        }
     }
 }

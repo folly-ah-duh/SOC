@@ -1,710 +1,286 @@
-﻿using SOC.Classes.Common;
-using SOC.Forms;
-using SOC.QuestComponents;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using SOC.UI;
+using SOC.QuestObjects.Common;
+using SOC.Classes.Common;
 
 namespace SOC.QuestObjects.Enemy
 {
-    /*
-    public class EnemyBox : QuestBox
+    public partial class EnemyBox : QuestBox
     {
-        public int enemyNumber = -1;
-        CP enemyCP;
-        Enemy enemy;
-        int region;
-        string[] frtRouteNames;
+        public string enemyName;
 
-        public GroupBox e_groupBox_main;
-        public CheckBox e_checkBox_target;
-        public Label e_label_target;
-        public CheckBox e_checkBox_spawn;
-        public Label e_label_spawn;
-        public CheckBox e_checkBox_balaclava;
-        public Label e_label_balaclava;
-        public CheckBox e_checkBox_zombie;
-        public Label e_label_zombie;
-        public CheckBox e_checkBox_armor;
-        public Label e_label_armor;
-        public Label e_label_body;
-        public ComboBox e_comboBox_body;
-        public ComboBox e_comboBox_cautionroute;
-        public Label e_label_cautionroute;
-        public ComboBox e_comboBox_sneakroute;
-        public Label e_label_sneakroute;
-        public ComboBox e_comboBox_skill;
-        public Label e_label_skill;
-        public ComboBox e_comboBox_staff;
-        public Label e_label_staff;
-        public ComboBox e_comboBox_power;
-        public Button e_button_removepower;
-        public Label e_label_power;
-        public ListBox e_listBox_power;
-        public Button e_button_SneakToCaution;
-        public Button e_button_CautionToSneak;
-        public Button e_button_SwapRoutes;
-
-        public EnemyBox(Enemy e, CP cp, string[] frtRoutes, int locId) : base(new Coordinates("", "", ""), e.number)
+        public EnemyBox(Enemy qObject, CoreDetails core)
         {
-            enemy = e; enemyCP = cp; region = locId;
-            enemyNumber = e.number; frtRouteNames = frtRoutes;
+            InitializeComponent();
         }
 
-        public override void BuildObject()
+        public override QuestObject getQuestObject()
         {
-            int width = 6;
-            int comboboxWidth = width - 110;
-            e_checkBox_balaclava = new System.Windows.Forms.CheckBox();
-            e_label_balaclava = new System.Windows.Forms.Label();
-            e_checkBox_zombie = new System.Windows.Forms.CheckBox();
-            e_label_zombie = new System.Windows.Forms.Label();
-            this.e_groupBox_main = new System.Windows.Forms.GroupBox();
-            this.e_comboBox_power = new System.Windows.Forms.ComboBox();
-            this.e_button_removepower = new System.Windows.Forms.Button();
-            this.e_label_power = new System.Windows.Forms.Label();
-            this.e_listBox_power = new System.Windows.Forms.ListBox();
-            this.e_comboBox_skill = new System.Windows.Forms.ComboBox();
-            this.e_label_skill = new System.Windows.Forms.Label();
-            this.e_comboBox_staff = new System.Windows.Forms.ComboBox();
-            this.e_label_staff = new System.Windows.Forms.Label();
-            this.e_comboBox_body = new System.Windows.Forms.ComboBox();
-            this.e_comboBox_cautionroute = new System.Windows.Forms.ComboBox();
-            this.e_label_cautionroute = new System.Windows.Forms.Label();
-            this.e_comboBox_sneakroute = new System.Windows.Forms.ComboBox();
-            this.e_label_sneakroute = new System.Windows.Forms.Label();
-            this.e_label_body = new System.Windows.Forms.Label();
-            this.e_checkBox_target = new System.Windows.Forms.CheckBox();
-            this.e_label_target = new System.Windows.Forms.Label();
-            this.e_checkBox_armor = new System.Windows.Forms.CheckBox();
-            this.e_label_armor = new System.Windows.Forms.Label();
-            this.e_checkBox_spawn = new System.Windows.Forms.CheckBox();
-            this.e_label_spawn = new System.Windows.Forms.Label();
-            e_button_CautionToSneak = new Button();
-            e_button_SneakToCaution = new Button();
-            e_button_SwapRoutes = new Button();
-            this.e_groupBox_main.SuspendLayout();
-
-            // 
-            // e_groupBox_main
-            // 
-            this.e_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
-            this.e_groupBox_main.Controls.Add(this.e_comboBox_power);
-            this.e_groupBox_main.Controls.Add(this.e_button_removepower);
-            this.e_groupBox_main.Controls.Add(this.e_label_power);
-            this.e_groupBox_main.Controls.Add(this.e_comboBox_skill);
-            this.e_groupBox_main.Controls.Add(this.e_listBox_power);
-            this.e_groupBox_main.Controls.Add(this.e_label_skill);
-            this.e_groupBox_main.Controls.Add(this.e_comboBox_staff);
-            this.e_groupBox_main.Controls.Add(this.e_label_staff);
-            this.e_groupBox_main.Controls.Add(this.e_comboBox_body);
-            this.e_groupBox_main.Controls.Add(this.e_comboBox_cautionroute);
-            this.e_groupBox_main.Controls.Add(this.e_label_cautionroute);
-            this.e_groupBox_main.Controls.Add(this.e_comboBox_sneakroute);
-            this.e_groupBox_main.Controls.Add(this.e_label_sneakroute);
-            this.e_groupBox_main.Controls.Add(this.e_label_body);
-            this.e_groupBox_main.Controls.Add(this.e_checkBox_target);
-            this.e_groupBox_main.Controls.Add(this.e_checkBox_armor);
-            this.e_groupBox_main.Controls.Add(this.e_label_armor);
-            this.e_groupBox_main.Controls.Add(this.e_checkBox_spawn);
-            this.e_groupBox_main.Controls.Add(this.e_label_spawn);
-            this.e_groupBox_main.Controls.Add(this.e_label_target);
-            this.e_groupBox_main.Controls.Add(this.e_label_zombie);
-            this.e_groupBox_main.Controls.Add(this.e_checkBox_zombie);
-            this.e_groupBox_main.Controls.Add(this.e_label_balaclava);
-            this.e_groupBox_main.Controls.Add(this.e_checkBox_balaclava);
-            this.e_groupBox_main.Controls.Add(this.e_button_SneakToCaution);
-            this.e_groupBox_main.Controls.Add(this.e_button_CautionToSneak);
-            this.e_groupBox_main.Controls.Add(this.e_button_SwapRoutes);
-            e_groupBox_main.Disposed += new EventHandler(this.e_groupBox_main_Disposed);
-            this.e_groupBox_main.Location = new System.Drawing.Point(3, 69 + (334 * enemyNumber));
-            this.e_groupBox_main.Name = "e_groupBox_main";
-            this.e_groupBox_main.Size = new System.Drawing.Size(width, 317);
-            this.e_groupBox_main.TabIndex = 0;
-            this.e_groupBox_main.TabStop = false;
-            this.e_groupBox_main.Text = enemy.name;
-            this.e_groupBox_main.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.e_groupBox_main.Click += new System.EventHandler(FocusGroupBox);
-            // 
-            // e_comboBox_power
-            // 
-            this.e_comboBox_power.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.e_comboBox_power.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.e_comboBox_power.FormattingEnabled = true;
-            this.e_comboBox_power.Location = new System.Drawing.Point(99, 125);
-            this.e_comboBox_power.Name = "e_comboBox_power";
-            this.e_comboBox_power.Items.AddRange(QuestComponents.EnemyInfo.powerSetting);
-            this.e_comboBox_power.Text = "SOFT_ARMOR";
-            this.e_comboBox_power.Size = new System.Drawing.Size(comboboxWidth, 21);
-            this.e_comboBox_power.TabIndex = 22;
-            this.e_comboBox_power.SelectedIndexChanged += new EventHandler(this.powerChanged);
-            // 
-            // e_button_removepower
-            // 
-            this.e_button_removepower.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.e_button_removepower.Location = new System.Drawing.Point(comboboxWidth + 46, 205);
-            this.e_button_removepower.Name = "e_button_removepower";
-            this.e_button_removepower.Size = new System.Drawing.Size(55, 23);
-            this.e_button_removepower.TabIndex = 21;
-            this.e_button_removepower.Text = "Remove";
-            this.e_button_removepower.UseVisualStyleBackColor = true;
-            this.e_button_removepower.Click += new EventHandler(this.e_button_removepower_Click);
-            // 
-            // e_button_SneakToCaution
-            // 
-            this.e_button_SneakToCaution.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.e_button_SneakToCaution.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.e_button_SneakToCaution.Location = new System.Drawing.Point(comboboxWidth + 86, 63);
-            this.e_button_SneakToCaution.Name = "e_button_SneakToCaution";
-            this.e_button_SneakToCaution.Size = new System.Drawing.Size(14, 23);
-            this.e_button_SneakToCaution.TabIndex = 21;
-            this.e_button_SneakToCaution.Text = "↓";
-            this.e_button_SneakToCaution.UseVisualStyleBackColor = true;
-            this.e_button_SneakToCaution.Click += new EventHandler(this.SneakToCaution_Button_Clicked);
-            // 
-            // e_button_SneakToCaution
-            // 
-            this.e_button_SwapRoutes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.e_button_SwapRoutes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.e_button_SwapRoutes.Location = new System.Drawing.Point(98, 63);
-            this.e_button_SwapRoutes.Name = "e_button_SwapRoutes";
-            this.e_button_SwapRoutes.Size = new System.Drawing.Size(14, 48);
-            this.e_button_SwapRoutes.TabIndex = 21;
-            this.e_button_SwapRoutes.Text = "↕";
-            this.e_button_SwapRoutes.UseVisualStyleBackColor = true;
-            this.e_button_SwapRoutes.Click += new EventHandler(this.SwapRoute_Button_Clicked);
-            // 
-            // e_button_CautionToSneak
-            // 
-            this.e_button_CautionToSneak.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.e_button_CautionToSneak.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.e_button_CautionToSneak.Location = new System.Drawing.Point(comboboxWidth + 86, 88);
-            this.e_button_CautionToSneak.Name = "e_button_CautionToSneak";
-            this.e_button_CautionToSneak.Size = new System.Drawing.Size(14, 23);
-            this.e_button_CautionToSneak.TabIndex = 21;
-            this.e_button_CautionToSneak.Text = "↑";
-            this.e_button_CautionToSneak.UseVisualStyleBackColor = true;
-            this.e_button_CautionToSneak.Click += new EventHandler(this.CautionToSneak_Button_Clicked);
-            // 
-            // e_label_power
-            // 
-            this.e_label_power.AutoSize = true;
-            this.e_label_power.Location = new System.Drawing.Point(9, 129);
-            this.e_label_power.Name = "e_label_power";
-            this.e_label_power.Size = new System.Drawing.Size(76, 13);
-            this.e_label_power.TabIndex = 19;
-            this.e_label_power.Text = "Gear | Tactics:";
-            // 
-            // e_listBox_power
-            // 
-            this.e_listBox_power.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.e_listBox_power.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.e_listBox_power.FormattingEnabled = true;
-            this.e_listBox_power.Location = new System.Drawing.Point(99, 150);
-            this.e_listBox_power.Name = "e_listBox_power";
-            this.e_listBox_power.Size = new System.Drawing.Size(comboboxWidth, 54);
-            this.e_listBox_power.TabIndex = 18;
-            e_listBox_power.Items.AddRange(enemy.powers);
-            this.e_listBox_power.SelectedIndexChanged += new EventHandler(this.e_listBox_power_selectedIndexChanged);
-            // 
-            // e_comboBox_skill
-            // 
-            this.e_comboBox_skill.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.e_comboBox_skill.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.e_comboBox_skill.FormattingEnabled = true;
-            this.e_comboBox_skill.Location = new System.Drawing.Point(99, 290);
-            this.e_comboBox_skill.Name = "e_comboBox_skill";
-            this.e_comboBox_skill.Items.AddRange(NPCMtbsInfo.skills);
-            this.e_comboBox_skill.Text = enemy.skill;
-            this.e_comboBox_skill.Size = new System.Drawing.Size(comboboxWidth, 21);
-            this.e_comboBox_skill.TabIndex = 17;
-            e_comboBox_skill.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
-            // 
-            // e_label_skill
-            // 
-            this.e_label_skill.AutoSize = true;
-            this.e_label_skill.Location = new System.Drawing.Point(56, 293);
-            this.e_label_skill.Name = "e_label_skill";
-            this.e_label_skill.Size = new System.Drawing.Size(29, 13);
-            this.e_label_skill.TabIndex = 16;
-            this.e_label_skill.Text = "Skill:";
-            // 
-            // e_comboBox_staff
-            // 
-            this.e_comboBox_staff.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.e_comboBox_staff.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.e_comboBox_staff.FormattingEnabled = true;
-            this.e_comboBox_staff.Location = new System.Drawing.Point(99, 265);
-            this.e_comboBox_staff.Name = "e_comboBox_staff";
-            this.e_comboBox_staff.Size = new System.Drawing.Size(comboboxWidth, 21);
-            this.e_comboBox_staff.Items.AddRange(NPCMtbsInfo.Staff_Type_ID);
-            this.e_comboBox_staff.Text = enemy.staffType;
-            this.e_comboBox_staff.TabIndex = 15;
-            e_comboBox_staff.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
-            // 
-            // e_label_staff
-            // 
-            this.e_label_staff.AutoSize = true;
-            this.e_label_staff.Location = new System.Drawing.Point(26, 268);
-            this.e_label_staff.Name = "e_label_staff";
-            this.e_label_staff.Size = new System.Drawing.Size(59, 13);
-            this.e_label_staff.TabIndex = 14;
-            this.e_label_staff.Text = "Staff Type:";
-            // 
-            // e_comboBox_body
-            // 
-            this.e_comboBox_body.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.e_comboBox_body.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.e_comboBox_body.FormattingEnabled = true;
-            this.e_comboBox_body.Location = new System.Drawing.Point(99, 240);
-            this.e_comboBox_body.Name = "e_comboBox_body";
-            this.e_comboBox_body.Size = new System.Drawing.Size(comboboxWidth, 21);
-            this.e_comboBox_body.TabIndex = 13;
-
-            if (LoadAreas.isAfgh(region))
-                e_comboBox_body.Items.AddRange(NPCBodyInfo.afghBodies);
-            else if (LoadAreas.isMafr(region))
-                e_comboBox_body.Items.AddRange(NPCBodyInfo.mafrBodies);
-
-            if (e_comboBox_body.Items.Contains(enemy.body))
-                this.e_comboBox_body.Text = enemy.body;
-            else if (e_comboBox_body.Items.Count > 0)
-                e_comboBox_body.SelectedIndex = 0;
-
-            e_comboBox_body.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
-            // 
-            // e_comboBox_cautionroute
-            // 
-            this.e_comboBox_cautionroute.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.e_comboBox_cautionroute.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.e_comboBox_cautionroute.FormattingEnabled = true;
-            this.e_comboBox_cautionroute.Location = new System.Drawing.Point(112, 89);
-            this.e_comboBox_cautionroute.Name = "e_comboBox_cautionroute";
-            this.e_comboBox_cautionroute.Size = new System.Drawing.Size(comboboxWidth - 26, 21);
-            this.e_comboBox_cautionroute.TabIndex = 12;
-
-            e_comboBox_cautionroute.Items.AddRange(frtRouteNames);
-            e_comboBox_cautionroute.Items.AddRange(enemyCP.CPsoldierRoutes);
-
-            if (!e_comboBox_cautionroute.Items.Contains(enemy.cRoute))
-                e_comboBox_cautionroute.SelectedIndex = 0;
-            else
-                e_comboBox_cautionroute.Text = enemy.cRoute;
-
-            e_comboBox_cautionroute.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
-            // 
-            // e_label_cautionroute
-            // 
-            this.e_label_cautionroute.AutoSize = true;
-            this.e_label_cautionroute.Location = new System.Drawing.Point(7, 92);
-            this.e_label_cautionroute.Name = "e_label_cautionroute";
-            this.e_label_cautionroute.Size = new System.Drawing.Size(78, 13);
-            this.e_label_cautionroute.TabIndex = 11;
-            this.e_label_cautionroute.Text = "Caution Route:";
-            // 
-            // e_comboBox_sneakroute
-            // 
-            this.e_comboBox_sneakroute.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.e_comboBox_sneakroute.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.e_comboBox_sneakroute.FormattingEnabled = true;
-            this.e_comboBox_sneakroute.Location = new System.Drawing.Point(112, 64);
-            this.e_comboBox_sneakroute.Name = "e_comboBox_sneakroute";
-            this.e_comboBox_sneakroute.Size = new System.Drawing.Size(comboboxWidth - 26, 21);
-            this.e_comboBox_sneakroute.TabIndex = 10;
-
-            e_comboBox_sneakroute.Items.AddRange(frtRouteNames);
-            e_comboBox_sneakroute.Items.AddRange(enemyCP.CPsoldierRoutes);
-
-            if (!e_comboBox_sneakroute.Items.Contains(enemy.dRoute))
-                e_comboBox_sneakroute.SelectedIndex = 0;
-            else
-                e_comboBox_sneakroute.Text = enemy.dRoute;
-
-            e_comboBox_sneakroute.SelectedIndexChanged += new EventHandler(this.FocusGroupBox);
-            // 
-            // e_label_sneakroute
-            // 
-            this.e_label_sneakroute.AutoSize = true;
-            this.e_label_sneakroute.Location = new System.Drawing.Point(12, 68);
-            this.e_label_sneakroute.Name = "e_label_sneakroute";
-            this.e_label_sneakroute.Size = new System.Drawing.Size(73, 13);
-            this.e_label_sneakroute.TabIndex = 9;
-            this.e_label_sneakroute.Text = "Sneak Route:";
-            // 
-            // e_label_body
-            // 
-            this.e_label_body.AutoSize = true;
-            this.e_label_body.Location = new System.Drawing.Point(51, 243);
-            this.e_label_body.Name = "e_label_body";
-            this.e_label_body.Size = new System.Drawing.Size(34, 13);
-            this.e_label_body.TabIndex = 8;
-            this.e_label_body.Text = "Body:";
-            // 
-            // e_checkBox_target
-            // 
-            this.e_checkBox_target.AutoSize = true;
-            this.e_checkBox_target.Location = new System.Drawing.Point(205, 21);
-            this.e_checkBox_target.Name = "e_checkBox_target";
-            this.e_checkBox_target.Size = new System.Drawing.Size(15, 14);
-            this.e_checkBox_target.TabIndex = 5;
-            this.e_checkBox_target.UseVisualStyleBackColor = true;
-            e_checkBox_target.Checked = enemy.isTarget;
-            // 
-            // e_label_target
-            // 
-            this.e_label_target.AutoSize = true;
-            this.e_label_target.Location = new System.Drawing.Point(139, 21);
-            this.e_label_target.Name = "e_label_target";
-            this.e_label_target.Size = new System.Drawing.Size(52, 13);
-            this.e_label_target.TabIndex = 4;
-            this.e_label_target.Text = "Is Target:";
-            // 
-            // e_checkBox_Balaclava
-            // 
-            this.e_checkBox_balaclava.AutoSize = true;
-            this.e_checkBox_balaclava.Location = new System.Drawing.Point(99, 41);
-            this.e_checkBox_balaclava.Name = "e_checkBox_balaclava";
-            this.e_checkBox_balaclava.Size = new System.Drawing.Size(15, 14);
-            this.e_checkBox_balaclava.TabIndex = 5;
-            this.e_checkBox_balaclava.UseVisualStyleBackColor = true;
-            e_checkBox_balaclava.Checked = enemy.isBalaclava;
-            e_checkBox_balaclava.CheckedChanged += new EventHandler(this.balaclava_checkbox_clicked);
-            // 
-            // e_label_Balaclava
-            // 
-            this.e_label_balaclava.AutoSize = true;
-            this.e_label_balaclava.Location = new System.Drawing.Point(28, 41);
-            this.e_label_balaclava.Name = "e_label_balaclava";
-            this.e_label_balaclava.Size = new System.Drawing.Size(52, 13);
-            this.e_label_balaclava.TabIndex = 4;
-            this.e_label_balaclava.Text = "Balaclava:";
-            // 
-            // e_checkBox_zombie
-            // 
-            this.e_checkBox_zombie.AutoSize = true;
-            this.e_checkBox_zombie.Location = new System.Drawing.Point(205, 41);
-            this.e_checkBox_zombie.Name = "e_checkBox_zombie";
-            this.e_checkBox_zombie.Size = new System.Drawing.Size(15, 14);
-            this.e_checkBox_zombie.TabIndex = 1;
-            this.e_checkBox_zombie.UseVisualStyleBackColor = true;
-            e_checkBox_zombie.Checked = enemy.isZombie;
-            e_checkBox_zombie.CheckedChanged += new EventHandler(this.zombie_checkbox_clicked);
-            // 
-            // e_label_zombie
-            // 
-            this.e_label_zombie.AutoSize = true;
-            this.e_label_zombie.Location = new System.Drawing.Point(136, 41);
-            this.e_label_zombie.Name = "e_label_zombie";
-            this.e_label_zombie.Size = new System.Drawing.Size(43, 13);
-            this.e_label_zombie.TabIndex = 0;
-            this.e_label_zombie.Text = "Is Zombie:";
-            // 
-            // e_checkBox_armor
-            // 
-            this.e_checkBox_armor.AutoSize = true;
-            this.e_checkBox_armor.Location = new System.Drawing.Point(99, 210);
-            this.e_checkBox_armor.Name = "e_checkBox_armor";
-            this.e_checkBox_armor.Size = new System.Drawing.Size(15, 14);
-            this.e_checkBox_armor.TabIndex = 3;
-            this.e_checkBox_armor.UseVisualStyleBackColor = true;
-            e_checkBox_armor.Checked = enemy.isArmored;
-            this.e_checkBox_armor.Click += new EventHandler(this.armor_Checkbox_Clicked);
-            // 
-            // e_label_armor
-            // 
-            this.e_label_armor.AutoSize = true;
-            this.e_label_armor.Location = new System.Drawing.Point(14, 210);
-            this.e_label_armor.Name = "e_label_armor";
-            this.e_label_armor.Size = new System.Drawing.Size(71, 13);
-            this.e_label_armor.TabIndex = 2;
-            this.e_label_armor.Text = "Heavy Armor:";
-            // 
-            // e_checkBox_spawn
-            // 
-            this.e_checkBox_spawn.AutoSize = true;
-            this.e_checkBox_spawn.Location = new System.Drawing.Point(99, 21);
-            this.e_checkBox_spawn.Name = "e_checkBox_spawn";
-            this.e_checkBox_spawn.Size = new System.Drawing.Size(15, 14);
-            this.e_checkBox_spawn.TabIndex = 1;
-            this.e_checkBox_spawn.UseVisualStyleBackColor = true;
-            e_checkBox_spawn.Checked = enemy.isSpawn;
-            e_checkBox_spawn.CheckedChanged += new EventHandler(this.e_checkBox_spawn_CheckedChanged);
-            // 
-            // e_label_spawn
-            // 
-            this.e_label_spawn.AutoSize = true;
-            this.e_label_spawn.Location = new System.Drawing.Point(42, 21);
-            this.e_label_spawn.Name = "e_label_spawn";
-            this.e_label_spawn.Size = new System.Drawing.Size(43, 13);
-            this.e_label_spawn.TabIndex = 0;
-            this.e_label_spawn.Text = "Spawn:";
-
-            this.e_groupBox_main.ResumeLayout(false);
-            this.e_groupBox_main.PerformLayout();
-            UpdateSpawn();
-
+            return new Enemy(this);
         }
 
-        private void e_groupBox_main_Disposed(object sender, EventArgs e)
+        /*
+        private void groupBox_main_Disposed(object sender, EventArgs e)
         {
-            if (e_checkBox_armor.Checked)
+            if (checkBox_armor.Checked)
                 QuestComponents.EnemyInfo.armorCount--;
-            if (e_checkBox_armor.Checked)
+            if (checkBox_armor.Checked)
                 QuestComponents.EnemyInfo.zombieCount--;
-            if (e_checkBox_balaclava.Checked)
+            if (checkBox_balaclava.Checked)
                 QuestComponents.EnemyInfo.balaCount--;
         }
 
-        private void e_checkBox_spawn_CheckedChanged(object sender, EventArgs e)
+        private void checkBox_spawn_CheckedChanged(object sender, EventArgs e)
         {
             UpdateSpawn();
         }
 
         private void UpdateSpawn()
         {
-            if (e_checkBox_spawn.Checked)
+            if (checkBox_spawn.Checked)
             {
-                e_label_skill.Enabled = true;
-                e_label_sneakroute.Enabled = true;
-                e_label_staff.Enabled = true;
-                e_label_target.Enabled = true;
-                e_listBox_power.Enabled = true;
-                e_checkBox_armor.Enabled = true;
-                e_checkBox_target.Enabled = true;
-                e_comboBox_body.Enabled = true;
-                e_comboBox_cautionroute.Enabled = true;
-                e_comboBox_power.Enabled = true;
-                e_comboBox_skill.Enabled = true;
-                e_comboBox_sneakroute.Enabled = true;
-                e_comboBox_staff.Enabled = true;
-                e_label_armor.Enabled = true;
-                e_label_body.Enabled = true;
-                e_label_cautionroute.Enabled = true;
-                e_label_power.Enabled = true;
-                e_label_balaclava.Enabled = true;
-                e_checkBox_balaclava.Enabled = true;
-                e_label_zombie.Enabled = true;
-                e_checkBox_zombie.Enabled = true;
-                e_button_removepower.Enabled = true;
-                e_button_SwapRoutes.Enabled = true;
-                e_button_SneakToCaution.Enabled = true;
-                e_button_CautionToSneak.Enabled = true;
+                label_skill.Enabled = true;
+                label_sneakroute.Enabled = true;
+                label_staff.Enabled = true;
+                label_target.Enabled = true;
+                listBox_power.Enabled = true;
+                checkBox_armor.Enabled = true;
+                checkBox_target.Enabled = true;
+                comboBox_body.Enabled = true;
+                comboBox_cautionroute.Enabled = true;
+                comboBox_power.Enabled = true;
+                comboBox_skill.Enabled = true;
+                comboBox_sneakroute.Enabled = true;
+                comboBox_staff.Enabled = true;
+                label_armor.Enabled = true;
+                label_body.Enabled = true;
+                label_cautionroute.Enabled = true;
+                label_power.Enabled = true;
+                label_balaclava.Enabled = true;
+                checkBox_balaclava.Enabled = true;
+                label_zombie.Enabled = true;
+                checkBox_zombie.Enabled = true;
+                button_removepower.Enabled = true;
+                button_SwapRoutes.Enabled = true;
+                button_SneakToCaution.Enabled = true;
+                button_CautionToSneak.Enabled = true;
 
-                if (e_checkBox_balaclava.Checked) { updateBalaclava(); }
-                if (e_checkBox_zombie.Checked) { updateZombie(); }
-                if (e_checkBox_armor.Checked) { updateArmor(); }
+                if (checkBox_balaclava.Checked) { updateBalaclava(); }
+                if (checkBox_zombie.Checked) { updateZombie(); }
+                if (checkBox_armor.Checked) { updateArmor(); }
             }
             else
             {
-                e_label_skill.Enabled = false;
-                e_label_sneakroute.Enabled = false;
-                e_label_staff.Enabled = false;
-                e_label_target.Enabled = false;
-                e_listBox_power.Enabled = false;
-                e_checkBox_armor.Enabled = false;
-                e_checkBox_target.Enabled = false;
-                e_comboBox_body.Enabled = false;
-                e_comboBox_cautionroute.Enabled = false;
-                e_comboBox_power.Enabled = false;
-                e_comboBox_skill.Enabled = false;
-                e_comboBox_sneakroute.Enabled = false;
-                e_comboBox_staff.Enabled = false;
-                e_label_armor.Enabled = false;
-                e_label_body.Enabled = false;
-                e_label_cautionroute.Enabled = false;
-                e_label_power.Enabled = false;
-                e_label_balaclava.Enabled = false;
-                e_checkBox_balaclava.Enabled = false;
-                e_label_zombie.Enabled = false;
-                e_checkBox_zombie.Enabled = false;
-                e_button_removepower.Enabled = false;
-                e_button_SwapRoutes.Enabled = false;
-                e_button_SneakToCaution.Enabled = false;
-                e_button_CautionToSneak.Enabled = false;
+                label_skill.Enabled = false;
+                label_sneakroute.Enabled = false;
+                label_staff.Enabled = false;
+                label_target.Enabled = false;
+                listBox_power.Enabled = false;
+                checkBox_armor.Enabled = false;
+                checkBox_target.Enabled = false;
+                comboBox_body.Enabled = false;
+                comboBox_cautionroute.Enabled = false;
+                comboBox_power.Enabled = false;
+                comboBox_skill.Enabled = false;
+                comboBox_sneakroute.Enabled = false;
+                comboBox_staff.Enabled = false;
+                label_armor.Enabled = false;
+                label_body.Enabled = false;
+                label_cautionroute.Enabled = false;
+                label_power.Enabled = false;
+                label_balaclava.Enabled = false;
+                checkBox_balaclava.Enabled = false;
+                label_zombie.Enabled = false;
+                checkBox_zombie.Enabled = false;
+                button_removepower.Enabled = false;
+                button_SwapRoutes.Enabled = false;
+                button_SneakToCaution.Enabled = false;
+                button_CautionToSneak.Enabled = false;
 
-                if (e_checkBox_balaclava.Checked) { QuestComponents.EnemyInfo.balaCount--; }
-                if (e_checkBox_zombie.Checked) { QuestComponents.EnemyInfo.zombieCount--; }
-                if (e_checkBox_armor.Checked) { QuestComponents.EnemyInfo.armorCount--; }
+                if (checkBox_balaclava.Checked) { QuestComponents.EnemyInfo.balaCount--; }
+                if (checkBox_zombie.Checked) { QuestComponents.EnemyInfo.zombieCount--; }
+                if (checkBox_armor.Checked) { QuestComponents.EnemyInfo.armorCount--; }
             }
 
         }
         private void SwapRoute_Button_Clicked(object sender, EventArgs e)
         {
-            string cRoute = e_comboBox_cautionroute.Text;
-            e_comboBox_cautionroute.Text = e_comboBox_sneakroute.Text;
-            e_comboBox_sneakroute.Text = cRoute;
-            e_groupBox_main.Focus();
+            string cRoute = comboBox_cautionroute.Text;
+            comboBox_cautionroute.Text = comboBox_sneakroute.Text;
+            comboBox_sneakroute.Text = cRoute;
+            groupBox_main.Focus();
         }
 
         private void SneakToCaution_Button_Clicked(object sender, EventArgs e)
         {
-            e_comboBox_cautionroute.Text = e_comboBox_sneakroute.Text;
-            e_groupBox_main.Focus();
+            comboBox_cautionroute.Text = comboBox_sneakroute.Text;
+            groupBox_main.Focus();
         }
 
         private void CautionToSneak_Button_Clicked(object sender, EventArgs e)
         {
-            e_comboBox_sneakroute.Text = e_comboBox_cautionroute.Text;
-            e_groupBox_main.Focus();
+            comboBox_sneakroute.Text = comboBox_cautionroute.Text;
+            groupBox_main.Focus();
         }
 
         private void armor_Checkbox_Clicked(object sender, EventArgs e)
         {
             updateArmor();
-            e_groupBox_main.Focus();
+            groupBox_main.Focus();
         }
         private void balaclava_checkbox_clicked(object sender, EventArgs e)
         {
             updateBalaclava();
-            e_groupBox_main.Focus();
+            groupBox_main.Focus();
 
         }
         private void zombie_checkbox_clicked(object sender, EventArgs e)
         {
             updateZombie();
-            e_groupBox_main.Focus();
+            groupBox_main.Focus();
         }
 
         private void updateArmor()
         {
-            if (e_checkBox_armor.Checked)
+            if (checkBox_armor.Checked)
             {
                 if (QuestComponents.EnemyInfo.armorCount >= QuestComponents.EnemyInfo.MAXQUESTFOVA)
                 {
                     MessageBox.Show("Heavy Armor can only be applied to 8 soldiers maximum.", "Game Limitation Exceeded", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    e_checkBox_armor.Checked = false;
-                    if (e_listBox_power.Items.Contains("QUEST_ARMOR"))
+                    checkBox_armor.Checked = false;
+                    if (listBox_power.Items.Contains("QUEST_ARMOR"))
                     {
-                        e_listBox_power.Items.Remove("QUEST_ARMOR");
-                        e_listBox_power.SelectedIndex = e_listBox_power.Items.Count - 1;
+                        listBox_power.Items.Remove("QUEST_ARMOR");
+                        listBox_power.SelectedIndex = listBox_power.Items.Count - 1;
                     }
                 }
                 else
                 {
                     QuestComponents.EnemyInfo.armorCount++;
-                    if (!e_listBox_power.Items.Contains("QUEST_ARMOR"))
+                    if (!listBox_power.Items.Contains("QUEST_ARMOR"))
                     {
-                        e_listBox_power.Items.Add("QUEST_ARMOR");
-                        e_listBox_power.SelectedIndex = e_listBox_power.Items.Count - 1;
+                        listBox_power.Items.Add("QUEST_ARMOR");
+                        listBox_power.SelectedIndex = listBox_power.Items.Count - 1;
                     }
-                    e_comboBox_body.Enabled = false;
-                    e_checkBox_balaclava.Enabled = false;
-                    e_label_body.Enabled = false;
-                    e_label_balaclava.Enabled = false;
+                    comboBox_body.Enabled = false;
+                    checkBox_balaclava.Enabled = false;
+                    label_body.Enabled = false;
+                    label_balaclava.Enabled = false;
                 }
             }
             else
             {
                 QuestComponents.EnemyInfo.armorCount--;
-                e_comboBox_body.Enabled = true;
-                e_checkBox_balaclava.Enabled = true;
-                e_label_body.Enabled = true;
-                e_label_balaclava.Enabled = true;
-                e_listBox_power.Items.Remove("QUEST_ARMOR");
-                e_listBox_power.SelectedIndex = e_listBox_power.Items.Count - 1;
+                comboBox_body.Enabled = true;
+                checkBox_balaclava.Enabled = true;
+                label_body.Enabled = true;
+                label_balaclava.Enabled = true;
+                listBox_power.Items.Remove("QUEST_ARMOR");
+                listBox_power.SelectedIndex = listBox_power.Items.Count - 1;
             }
 
-            e_groupBox_main.Focus();
+            groupBox_main.Focus();
         }
 
         private void updateZombie()
         {
-            if (e_checkBox_zombie.Checked)
+            if (checkBox_zombie.Checked)
                 QuestComponents.EnemyInfo.zombieCount++;
             else
                 QuestComponents.EnemyInfo.zombieCount--;
-            e_groupBox_main.Focus();
+            groupBox_main.Focus();
         }
 
         private void updateBalaclava()
         {
-            if (e_checkBox_balaclava.Checked)
+            if (checkBox_balaclava.Checked)
             {
                 if (QuestComponents.EnemyInfo.balaCount >= QuestComponents.EnemyInfo.MAXQUESTFOVA)
                 {
                     MessageBox.Show("Balaclavas can only be applied to 8 soldiers maximum.", "Game Limitation Exceeded", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    e_checkBox_balaclava.Checked = false;
+                    checkBox_balaclava.Checked = false;
                 }
                 else
                 {
                     QuestComponents.EnemyInfo.balaCount++;
-                    e_checkBox_armor.Enabled = false;
-                    e_label_armor.Enabled = false;
+                    checkBox_armor.Enabled = false;
+                    label_armor.Enabled = false;
                 }
             }
             else
             {
                 QuestComponents.EnemyInfo.balaCount--;
-                e_checkBox_armor.Enabled = true;
-                e_label_armor.Enabled = true;
+                checkBox_armor.Enabled = true;
+                label_armor.Enabled = true;
             }
         }
 
-        private void e_listBox_power_selectedIndexChanged(object sender, EventArgs e)
+        private void listBox_power_selectedIndexChanged(object sender, EventArgs e)
         {
-            if (e_listBox_power.SelectedIndex > -1)
-                e_button_removepower.Enabled = true;
+            if (listBox_power.SelectedIndex > -1)
+                button_removepower.Enabled = true;
             else
-                e_button_removepower.Enabled = false;
-            e_groupBox_main.Focus();
+                button_removepower.Enabled = false;
+            groupBox_main.Focus();
         }
 
         public override GroupBox getGroupBoxMain()
         {
-            return e_groupBox_main;
+            return groupBox_main;
         }
 
         public override void SetObject(QuestBox detail)
         {
             EnemyBox enemyDetail = (EnemyBox)detail;
 
-            e_checkBox_armor.Checked = enemyDetail.e_checkBox_armor.Checked;
-            e_checkBox_spawn.Checked = enemyDetail.e_checkBox_spawn.Checked;
-            e_checkBox_target.Checked = enemyDetail.e_checkBox_target.Checked;
-            e_checkBox_balaclava.Checked = enemyDetail.e_checkBox_balaclava.Checked;
-            e_checkBox_zombie.Checked = enemyDetail.e_checkBox_zombie.Checked;
+            checkBox_armor.Checked = enemyDetail.checkBox_armor.Checked;
+            checkBox_spawn.Checked = enemyDetail.checkBox_spawn.Checked;
+            checkBox_target.Checked = enemyDetail.checkBox_target.Checked;
+            checkBox_balaclava.Checked = enemyDetail.checkBox_balaclava.Checked;
+            checkBox_zombie.Checked = enemyDetail.checkBox_zombie.Checked;
 
-            e_listBox_power.Text = enemyDetail.e_listBox_power.Text;
+            listBox_power.Text = enemyDetail.listBox_power.Text;
 
-            e_comboBox_cautionroute.Text = enemyDetail.e_comboBox_cautionroute.Text;
-            e_comboBox_sneakroute.Text = enemyDetail.e_comboBox_sneakroute.Text;
+            comboBox_cautionroute.Text = enemyDetail.comboBox_cautionroute.Text;
+            comboBox_sneakroute.Text = enemyDetail.comboBox_sneakroute.Text;
 
-            e_comboBox_body.Text = enemyDetail.e_comboBox_body.Text;
-            e_comboBox_skill.Text = enemyDetail.e_comboBox_skill.Text;
-            e_comboBox_staff.Text = enemyDetail.e_comboBox_staff.Text;
+            comboBox_body.Text = enemyDetail.comboBox_body.Text;
+            comboBox_skill.Text = enemyDetail.comboBox_skill.Text;
+            comboBox_staff.Text = enemyDetail.comboBox_staff.Text;
         }
 
         private void powerChanged(object sender, EventArgs e)
         {
-            if (!e_listBox_power.Items.Contains(e_comboBox_power.Text))
+            if (!listBox_power.Items.Contains(comboBox_power.Text))
             {
-                e_listBox_power.Items.Add(e_comboBox_power.Text);
-                e_listBox_power.SelectedIndex = e_listBox_power.Items.Count - 1;
-                e_groupBox_main.Focus();
+                listBox_power.Items.Add(comboBox_power.Text);
+                listBox_power.SelectedIndex = listBox_power.Items.Count - 1;
+                groupBox_main.Focus();
             }
         }
-        private void e_button_removepower_Click(object sender, EventArgs e)
+        private void button_removepower_Click(object sender, EventArgs e)
         {
 
-            if (e_listBox_power.Text.Equals("QUEST_ARMOR"))
+            if (listBox_power.Text.Equals("QUEST_ARMOR"))
             {
-                e_checkBox_armor.Checked = false;
+                checkBox_armor.Checked = false;
                 updateArmor();
             }
-            else if (e_listBox_power.SelectedIndex != -1)
+            else if (listBox_power.SelectedIndex != -1)
             {
-                e_listBox_power.Items.RemoveAt(e_listBox_power.SelectedIndex);
-                e_listBox_power.SelectedIndex = e_listBox_power.Items.Count - 1;
-                e_groupBox_main.Focus();
+                listBox_power.Items.RemoveAt(listBox_power.SelectedIndex);
+                listBox_power.SelectedIndex = listBox_power.Items.Count - 1;
+                groupBox_main.Focus();
             }
         }
+        */
     }
-*/
 }

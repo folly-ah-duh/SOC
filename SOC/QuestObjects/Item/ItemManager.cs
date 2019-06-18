@@ -9,9 +9,9 @@ using SOC.Classes.Common;
 
 namespace SOC.QuestObjects.Item
 {
-    class ItemManager : DetailManager
+    class ItemManager : LocationalManager
     {
-        public ItemManager(Detail detail) : base(detail, visualizer) { }
+        public ItemManager(ItemDetail detail) : base(detail, visualizer) { }
 
         static LocationalDataStub stub = new LocationalDataStub("Dormant Item Locations");
 

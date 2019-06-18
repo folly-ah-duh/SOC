@@ -1,4 +1,4 @@
-﻿namespace SOC.QuestObjects.Animal.Forms
+﻿namespace SOC.QuestObjects.Animal
 {
     partial class AnimalControl
     {
@@ -87,12 +87,12 @@
             this.comboBox_ObjType.Size = new System.Drawing.Size(288, 21);
             this.comboBox_ObjType.TabIndex = 37;
             // 
-            // AnimalPanel
+            // AnimalControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupboxDetail);
-            this.Name = "AnimalPanel";
+            this.Name = "AnimalControl";
             this.Size = new System.Drawing.Size(300, 449);
             this.groupboxDetail.ResumeLayout(false);
             this.groupboxDetail.PerformLayout();

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace SOC.QuestObjects.Animal.Forms
+namespace SOC.QuestObjects.Animal
 {
     public partial class AnimalControl : UserControl
     {
@@ -13,7 +13,7 @@ namespace SOC.QuestObjects.Animal.Forms
 
         internal void SetMetadata(AnimalMetadata meta)
         {
-            comboBox_ObjType.Text = meta.ObjectiveType;
+            comboBox_ObjType.Text = meta.objectiveType;
         }
     }
 }

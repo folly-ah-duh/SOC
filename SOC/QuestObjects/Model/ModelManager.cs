@@ -9,7 +9,7 @@ using SOC.Classes.Common;
 
 namespace SOC.QuestObjects.Model
 {
-    class ModelManager : DetailManager
+    class ModelManager : LocationalManager
     {
         static LocationalDataStub modelStub = new LocationalDataStub("Static Model Locations");
 

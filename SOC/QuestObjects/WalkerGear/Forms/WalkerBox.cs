@@ -16,17 +16,17 @@ namespace SOC.QuestObjects.WalkerGear
     {
         public int ID;
 
-        public WalkerBox(WalkerGear w)
+        public WalkerBox(WalkerGear qObject)
         {
             InitializeComponent();
-            ID = w.ID;
+            ID = qObject.ID;
 
-            textBox_xcoord.Text = w.position.coords.xCoord;
-            textBox_ycoord.Text = w.position.coords.yCoord;
-            textBox_zcoord.Text = w.position.coords.zCoord;
-            textBox_rot.Text = w.position.rotation.GetDegreeRotY();
+            textBox_xcoord.Text = qObject.position.coords.xCoord;
+            textBox_ycoord.Text = qObject.position.coords.yCoord;
+            textBox_zcoord.Text = qObject.position.coords.zCoord;
+            textBox_rot.Text = qObject.position.rotation.GetDegreeRotY();
 
-            checkBox_target.Checked = w.isTarget;
+            checkBox_target.Checked = qObject.isTarget;
 
             comboBox_pilot.Items.AddRange(new object[] {
                 "NONE",
@@ -39,7 +39,7 @@ namespace SOC.QuestObjects.WalkerGear
                 "sol_quest_0006",
                 "sol_quest_0007"
             });
-            comboBox_pilot.Text = w.pilot;
+            comboBox_pilot.Text = qObject.pilot;
 
             comboBox_paint.Items.AddRange(new object[] {
                 "SOVIET",
@@ -48,13 +48,13 @@ namespace SOC.QuestObjects.WalkerGear
                 "ZRS",
                 "DDOGS"
             });
-            comboBox_paint.Text = w.paint;
+            comboBox_paint.Text = qObject.paint;
 
             comboBox_weapon.Items.AddRange(new object[] {
                 "WG_MACHINEGUN",
                 "WG_MISSILE"
             });
-            comboBox_weapon.Text = w.weapon;
+            comboBox_weapon.Text = qObject.weapon;
         }
 
         public override QuestObject getQuestObject()

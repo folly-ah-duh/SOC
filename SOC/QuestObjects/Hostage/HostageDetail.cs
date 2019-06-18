@@ -129,12 +129,12 @@ namespace SOC.QuestObjects.Hostage
         }
 
         [XmlAttribute]
+        public string objectiveType { get; set; } = "ELIMINATE";
+
+        [XmlAttribute]
         public string hostageBodyName { get; set; } = "AFGH_HOSTAGE";
 
         [XmlAttribute]
         public bool canInterrogate { get; set; } = false;
-
-        [XmlAttribute]
-        public string objectiveType { get; set; } = "ELIMINATE";
     }
 }

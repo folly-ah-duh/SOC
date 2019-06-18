@@ -8,37 +8,87 @@ using System.Linq;
 
 namespace SOC.QuestObjects.Animal
 {
-    /*
-    public class Animal
+    public class AnimalDetail : Detail
     {
+        public AnimalDetail() { }
 
+        public AnimalDetail(List<Animal> animalList, AnimalMetadata meta)
+        {
+            animals = animalList; animalMetadata = meta;
+        }
+
+        [XmlElement]
+        public AnimalMetadata animalMetadata { get; set; } = new AnimalMetadata();
+
+        [XmlArray]
+        public List<Animal> animals { get; set; } = new List<Animal>();
+
+        public override Metadata GetMetadata()
+        {
+            return animalMetadata;
+        }
+
+        public override DetailManager GetNewManager()
+        {
+            return new AnimalManager(this);
+        }
+
+        public override List<QuestObject> GetQuestObjects()
+        {
+            return animals.Cast<QuestObject>().ToList();
+        }
+
+        public override void SetQuestObjects(List<QuestObject> qObjects)
+        {
+            animals = qObjects.Cast<Animal>().ToList();
+        }
+    }
+
+    public class Animal : QuestObject
+    {
         public Animal() { }
 
-        public Animal(AnimalBox d, int num)
+        public Animal(AnimalBox box)
         {
-            isTarget = d.a_checkBox_isTarget.Checked;
-            number = num;
-            name = d.a_groupBox_main.Text;
-            count = d.a_comboBox_count.Text;
-            animal = d.a_comboBox_animal.Text;
-            typeID = d.a_comboBox_TypeID.Text;
-            coordinates = new Coordinates(d.a_textBox_xcoord.Text, d.a_textBox_ycoord.Text, d.a_textBox_zcoord.Text);
-            rotation = new Rotation(d.a_textBox_rot.Text);
+            ID = box.ID;
+
+            target = box.checkBox_target.Checked;
+            count = box.comboBox_count.Text;
+            animal = box.comboBox_animal.Text;
+            typeID = box.comboBox_typeID.Text;
+            position = new Position(new Coordinates(box.textBox_xcoord.Text, box.textBox_ycoord.Text, box.textBox_zcoord.Text), new Rotation(box.textBox_rot.Text));
         }
 
-        public Animal(Coordinates coords, int num, string nme)
+        public Animal(Position pos, int num)
         {
-            coordinates = coords; number = num; name = nme;
+            position = pos; ID = num;
+        }
+
+        public override Position GetPosition()
+        {
+            return position;
+        }
+
+        public override void SetPosition(Position pos)
+        {
+            position = pos;
+        }
+
+        public override int GetID()
+        {
+            return ID;
+        }
+
+        public override string GetObjectName()
+        {
+            return "Animal_Cluster_" + ID;
         }
 
         [XmlElement]
-        public bool isTarget { get; set; } = false;
+        public bool target { get; set; } = false;
 
         [XmlElement]
-        public int number { get; set; } = 0;
-
-        [XmlAttribute]
-        public string name { get; set; } = "Animal_Cluster_0";
+        public int ID { get; set; } = 0;
 
         [XmlElement]
         public string count { get; set; } = "1";
@@ -50,11 +100,20 @@ namespace SOC.QuestObjects.Animal
         public string typeID { get; set; } = "TppGoat";
 
         [XmlElement]
-        public Coordinates coordinates { get; set; } = new Coordinates("0", "0", "0");
+        public Position position { get; set; } = new Position(new Coordinates(), new Rotation());
+    }
 
-        [XmlElement]
-        public Rotation rotation { get; set; } = new Rotation("0");
+    public class AnimalMetadata : Metadata
+    {
+        public AnimalMetadata() { }
+
+        public AnimalMetadata(AnimalControl control)
+        {
+            objectiveType = control.comboBox_ObjType.Text;
+        }
+
+        [XmlAttribute]
+        public string objectiveType { get; set; } = "ELIMINATE";
 
     }
-    */
 }

@@ -9,15 +9,15 @@ using SOC.Classes.Common;
 
 namespace SOC.QuestObjects.Helicopter
 {
-    class HelicopterManager : DetailManager
+    class HelicopterManager : LocationalManager
     {
-        static LocationalDataStub helicopterStub = new LocationalDataStub("Helicopter Spawn Locations");
+        static LocationalDataStub stub = new LocationalDataStub("Helicopter Spawn Locations");
 
-        static HelicopterControl helicopterControl = new HelicopterControl();
+        static HelicopterControl control = new HelicopterControl();
 
-        static HelicopterVisualizer helicopterVisualizer = new HelicopterVisualizer(helicopterStub, helicopterControl);
+        static HelicopterVisualizer visualizer = new HelicopterVisualizer(stub, control);
 
-        public HelicopterManager(HelicopterDetail detail) : base(detail, helicopterVisualizer) { }
+        public HelicopterManager(HelicopterDetail detail) : base(detail, visualizer) { }
 
         public override void AddToDefinitionLua(DefinitionLua definitionLua)
         {

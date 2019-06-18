@@ -77,7 +77,7 @@ namespace SOC.QuestObjects.Common
         {
             foreach (DetailManager manager in managerArray.GetManagers())
             {
-                manager.UpdateDetailFromSetup();
+                manager.UpdateDetailFromSetup(core);
                 manager.RefreshPanel(core);
             }
         }

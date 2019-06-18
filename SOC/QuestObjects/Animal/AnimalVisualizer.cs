@@ -13,7 +13,34 @@ using SOC.Core.Classes.Route;
 
 namespace SOC.QuestObjects.Animal
 {
-    class AnimalVisualizer
+    class AnimalVisualizer : DetailVisualizer
     {
+        public AnimalVisualizer(LocationalDataStub stub, AnimalControl control) : base(stub, control, control.panelQuestBoxes) { }
+
+        public override void DrawMetadata(Metadata meta)
+        {
+            AnimalControl control = (AnimalControl)detailControl;
+            control.SetMetadata((AnimalMetadata)meta);
+        }
+
+        public override Metadata GetMetadataFromControl()
+        {
+            return new AnimalMetadata((AnimalControl)detailControl);
+        }
+
+        public override QuestBox NewBox(QuestObject qObject, CoreDetails core)
+        {
+            return new AnimalBox((Animal)qObject);
+        }
+
+        public override Detail NewDetail(Metadata meta, IEnumerable<QuestObject> qObjects)
+        {
+            return new AnimalDetail(qObjects.Cast<Animal>().ToList(), (AnimalMetadata)meta);
+        }
+
+        public override QuestObject NewObject(Position pos, int index)
+        {
+            return new Animal(pos, index);
+        }
     }
 }

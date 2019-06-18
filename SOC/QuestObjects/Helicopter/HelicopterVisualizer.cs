@@ -15,9 +15,7 @@ namespace SOC.QuestObjects.Helicopter
 {
     class HelicopterVisualizer : DetailVisualizer
     {
-        public HelicopterVisualizer(LocationalDataStub stub, HelicopterControl control) : base(stub, control, control.panelQuestBoxes)
-        {
-        }
+        public HelicopterVisualizer(LocationalDataStub stub, HelicopterControl control) : base(stub, control, control.panelQuestBoxes) { }
 
         public override void DrawMetadata(Metadata meta)
         {

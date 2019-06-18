@@ -13,7 +13,7 @@ using SOC.Classes.Common;
 
 namespace SOC.QuestObjects.Vehicle
 {
-    class VehicleManager : DetailManager
+    class VehicleManager : LocationalManager
     {
         static LocationalDataStub vehicleStub = new LocationalDataStub("Heavy Vehicle Locations");
 

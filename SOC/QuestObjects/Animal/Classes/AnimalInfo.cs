@@ -1,4 +1,4 @@
-﻿namespace SOC.QuestComponents
+﻿namespace SOC.QuestObjects.Animal
 {
     public static class AnimalInfo
     {

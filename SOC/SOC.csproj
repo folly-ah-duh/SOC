@@ -126,11 +126,11 @@
     </Compile>
     <Compile Include="QuestObjects\ActiveItem\ActiveItemManager.cs" />
     <Compile Include="QuestObjects\ActiveItem\ActiveItemVisualizer.cs" />
-    <Compile Include="QuestObjects\ActiveItem\Forms\ActiveItemBoxF.cs">
+    <Compile Include="QuestObjects\ActiveItem\Forms\ActiveItemBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="QuestObjects\ActiveItem\Forms\ActiveItemBoxF.Designer.cs">
-      <DependentUpon>ActiveItemBoxF.cs</DependentUpon>
+    <Compile Include="QuestObjects\ActiveItem\Forms\ActiveItemBox.Designer.cs">
+      <DependentUpon>ActiveItemBox.cs</DependentUpon>
     </Compile>
     <Compile Include="QuestObjects\Animal\AnimalManager.cs" />
     <Compile Include="QuestObjects\Animal\AnimalVisualizer.cs" />
@@ -140,15 +140,17 @@
     <Compile Include="QuestObjects\Animal\Forms\AnimalBox.Designer.cs">
       <DependentUpon>AnimalBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuestObjects\Common\DetailVisualizer.cs" />
     <Compile Include="QuestObjects\Common\ManagerArray.cs" />
     <Compile Include="QuestObjects\Common\Detail.cs" />
+    <Compile Include="QuestObjects\Enemy\Classes\EnemyLua.cs" />
     <Compile Include="QuestObjects\Enemy\EnemyManager.cs" />
     <Compile Include="QuestObjects\Enemy\EnemyVisualizer.cs" />
-    <Compile Include="QuestObjects\Enemy\Forms\EnemyBoxF.cs">
+    <Compile Include="QuestObjects\Enemy\Forms\EnemyBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="QuestObjects\Enemy\Forms\EnemyBoxF.Designer.cs">
-      <DependentUpon>EnemyBoxF.cs</DependentUpon>
+    <Compile Include="QuestObjects\Enemy\Forms\EnemyBox.Designer.cs">
+      <DependentUpon>EnemyBox.cs</DependentUpon>
     </Compile>
     <Compile Include="QuestObjects\Helicopter\Classes\HelicopterFox2.cs" />
     <Compile Include="QuestObjects\Helicopter\Classes\HelicopterLua.cs" />
@@ -197,7 +199,6 @@
       <DependentUpon>LocationalDataStub.cs</DependentUpon>
     </Compile>
     <Compile Include="QuestObjects\ActiveItem\Classes\ActiveItemNames.cs" />
-    <Compile Include="QuestObjects\ActiveItem\Forms\ActiveItemBox.cs" />
     <Compile Include="QuestObjects\ActiveItem\Forms\ActiveItemControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -214,18 +215,11 @@
     <Compile Include="QuestObjects\Common\MasterManager.cs" />
     <Compile Include="QuestObjects\Common\DetailManager.cs" />
     <Compile Include="QuestObjects\Enemy\Classes\EnemyAssets.cs" />
-    <Compile Include="QuestObjects\Enemy\Forms\EnemyBox.cs" />
-    <Compile Include="QuestObjects\Enemy\Forms\ExistingEnemiesPanel.cs">
+    <Compile Include="QuestObjects\Enemy\Forms\EnemyControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="QuestObjects\Enemy\Forms\ExistingEnemiesPanel.Designer.cs">
-      <DependentUpon>ExistingEnemiesPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="QuestObjects\Enemy\Forms\NewEnemiesPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="QuestObjects\Enemy\Forms\NewEnemiesPanel.Designer.cs">
-      <DependentUpon>NewEnemiesPanel.cs</DependentUpon>
+    <Compile Include="QuestObjects\Enemy\Forms\EnemyControl.Designer.cs">
+      <DependentUpon>EnemyControl.cs</DependentUpon>
     </Compile>
     <Compile Include="QuestObjects\Helicopter\Forms\HelicopterControl.cs">
       <SubType>UserControl</SubType>
@@ -367,8 +361,8 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuestObjects\ActiveItem\Forms\ActiveItemBoxF.resx">
-      <DependentUpon>ActiveItemBoxF.cs</DependentUpon>
+    <EmbeddedResource Include="QuestObjects\ActiveItem\Forms\ActiveItemBox.resx">
+      <DependentUpon>ActiveItemBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuestObjects\ActiveItem\Forms\ActiveItemControl.resx">
       <DependentUpon>ActiveItemControl.cs</DependentUpon>
@@ -379,14 +373,11 @@
     <EmbeddedResource Include="QuestObjects\Animal\Forms\AnimalControl.resx">
       <DependentUpon>AnimalControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuestObjects\Enemy\Forms\EnemyBoxF.resx">
-      <DependentUpon>EnemyBoxF.cs</DependentUpon>
+    <EmbeddedResource Include="QuestObjects\Enemy\Forms\EnemyBox.resx">
+      <DependentUpon>EnemyBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuestObjects\Enemy\Forms\ExistingEnemiesPanel.resx">
-      <DependentUpon>ExistingEnemiesPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="QuestObjects\Enemy\Forms\NewEnemiesPanel.resx">
-      <DependentUpon>NewEnemiesPanel.cs</DependentUpon>
+    <EmbeddedResource Include="QuestObjects\Enemy\Forms\EnemyControl.resx">
+      <DependentUpon>EnemyControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuestObjects\Helicopter\Forms\HelicopterBox.resx">
       <DependentUpon>HelicopterBox.cs</DependentUpon>

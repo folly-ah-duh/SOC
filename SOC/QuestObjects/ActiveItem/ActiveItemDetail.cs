@@ -8,35 +8,58 @@ using System.Linq;
 
 namespace SOC.QuestObjects.ActiveItem
 {
-    /*
-    public class ActiveItem : QuestObject
+    public class ActiveItemDetail : Detail
     {
+        public ActiveItemDetail() { }
 
-        public ActiveItem() : base(new Position(new Coordinates(), new Rotation()), 0) { }
-
-        public ActiveItem(ActiveItemBox aiBox, int index) : base(new Position(new Coordinates(aiBox.ai_textBox_xcoord.Text, aiBox.ai_textBox_ycoord.Text, aiBox.ai_textBox_xcoord.Text), new Rotation(new Quaternion(aiBox.ai_textBox_xrot.Text, aiBox.ai_textBox_yrot.Text, aiBox.ai_textBox_zrot.Text, aiBox.ai_textBox_wrot.Text))), index)
+        public ActiveItemDetail(List<ActiveItem> activeList, ActiveItemMetadata meta)
         {
-            isTarget = aiBox.ai_checkBox_target.Checked;
-            name = aiBox.ai_groupBox_main.Text;
-            activeItem = aiBox.ai_comboBox_activeitem.Text;
-            position = base.position;
-            ID = base.ID;
+            activeItems = activeList; activeItemMetadata = meta;
         }
 
-        public ActiveItem(Position pos, int index) : base(pos, index)
+        [XmlElement]
+        public ActiveItemMetadata activeItemMetadata { get; set; } = new ActiveItemMetadata();
+
+        [XmlArray]
+        public List<ActiveItem> activeItems { get; set; } = new List<ActiveItem>();
+
+        public override Metadata GetMetadata()
+        {
+            return activeItemMetadata;
+        }
+
+        public override DetailManager GetNewManager()
+        {
+            return new ActiveItemManager(this);
+        }
+
+        public override List<QuestObject> GetQuestObjects()
+        {
+            return activeItems.Cast<QuestObject>().ToList();
+        }
+
+        public override void SetQuestObjects(List<QuestObject> qObjects)
+        {
+            activeItems = qObjects.Cast<ActiveItem>().ToList();
+        }
+    }
+
+    public class ActiveItem : QuestObject
+    {
+        public ActiveItem() { }
+
+        public ActiveItem(Position pos, int index)
         {
             position = pos; ID = index;
         }
 
-        public void setRotation(Rotation rot)
+        public ActiveItem(ActiveItemBox box)
         {
-            base.position.rotation = rot;
-            position = base.position;
-        }
+            ID = box.ID;
 
-        public override string GetObjectName()
-        {
-            return "Active_Item_" + ID;
+            isTarget = box.checkBox_target.Checked;
+            activeItem = box.comboBox_activeItem.Text;
+            position = new Position(new Coordinates(box.textBox_xcoord.Text, box.textBox_ycoord.Text, box.textBox_zcoord.Text), new Rotation(new Quaternion(box.textBox_xrot.Text, box.textBox_yrot.Text, box.textBox_zrot.Text, box.textBox_wrot.Text)));
         }
 
         [XmlElement]
@@ -54,6 +77,37 @@ namespace SOC.QuestObjects.ActiveItem
         [XmlElement]
         public Position position { get; set; } = new Position(new Coordinates(), new Rotation());
 
+        public override int GetID()
+        {
+            return ID;
+        }
+
+        public override string GetObjectName()
+        {
+                return "ActiveItem_" + ID;
+        }
+
+        public override Position GetPosition()
+        {
+            return position;
+        }
+
+        public override void SetPosition(Position pos)
+        {
+            position = pos;
+        }
     }
-    */
+
+    public class ActiveItemMetadata : Metadata
+    {
+        public ActiveItemMetadata() { }
+
+        public ActiveItemMetadata(ActiveItemControl control)
+        {
+            objectiveType = control.comboBox_ObjType.Text;
+        }
+
+        [XmlAttribute]
+        public string objectiveType { get; set; } = "ELIMINATE";
+    }
 }

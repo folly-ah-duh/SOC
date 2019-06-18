@@ -6,6 +6,7 @@ namespace SOC.Classes.Common
     public struct CP // each CP contains a CP name, The CP soldiers, the CP routes
     {
         public string CPname;
+        //public string CPArea;
         public string[] CPsoldiers;
         public string[] CPsoldierRoutes;
         public string[] CPheliRoutes;
@@ -13,6 +14,13 @@ namespace SOC.Classes.Common
         public CP(string name, string[] sol, string[] route, string[] hRoute)
         {
             CPname = name;
+            /*
+            string[] CPSplit = CPname.Split('_');
+            if (CPSplit.Length > 1)
+                CPArea = CPSplit[1];
+            else
+                CPArea = "NONE";
+            */
             CPsoldiers = sol;
             CPsoldierRoutes = route;
             CPheliRoutes = hRoute;

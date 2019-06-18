@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace SOC.QuestObjects.ActiveItem.Forms
+namespace SOC.QuestObjects.ActiveItem
 {
     public partial class ActiveItemControl : UserControl
     {
@@ -13,7 +13,7 @@ namespace SOC.QuestObjects.ActiveItem.Forms
 
         internal void SetMetadata(ActiveItemMetadata meta)
         {
-            comboBox_ObjType.Text = meta.itemObjectiveType;
+            comboBox_ObjType.Text = meta.objectiveType;
         }
     }
 }

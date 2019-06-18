@@ -9,7 +9,7 @@ using SOC.Classes.Common;
 
 namespace SOC.QuestObjects.Hostage
 {
-    class HostageManager : DetailManager
+    class HostageManager : LocationalManager
     {
         static LocationalDataStub hostageStub = new LocationalDataStub("Prisoner Locations");
 

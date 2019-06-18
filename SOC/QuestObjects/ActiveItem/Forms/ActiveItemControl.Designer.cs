@@ -1,4 +1,4 @@
-﻿namespace SOC.QuestObjects.ActiveItem.Forms
+﻿namespace SOC.QuestObjects.ActiveItem
 {
     partial class ActiveItemControl
     {

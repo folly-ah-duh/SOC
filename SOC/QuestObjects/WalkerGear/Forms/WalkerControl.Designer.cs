@@ -79,10 +79,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelQuestBoxes.AutoScroll = true;
             this.panelQuestBoxes.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.panelQuestBoxes.Location = new System.Drawing.Point(3, 56);
+            this.panelQuestBoxes.Location = new System.Drawing.Point(3, 59);
             this.panelQuestBoxes.Margin = new System.Windows.Forms.Padding(0);
             this.panelQuestBoxes.Name = "panelQuestBoxes";
-            this.panelQuestBoxes.Size = new System.Drawing.Size(294, 390);
+            this.panelQuestBoxes.Size = new System.Drawing.Size(294, 387);
             this.panelQuestBoxes.TabIndex = 14;
             this.panelQuestBoxes.WrapContents = false;
             // 

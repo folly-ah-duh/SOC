@@ -9,7 +9,29 @@ using SOC.Classes.Common;
 
 namespace SOC.QuestObjects.ActiveItem
 {
-    class ActiveItemManager
+    class ActiveItemManager : LocationalManager
     {
+        public ActiveItemManager(ActiveItemDetail detail) : base(detail, visualizer) { }
+
+        static LocationalDataStub stub = new LocationalDataStub("Active Item Locations");
+
+        static ActiveItemControl control = new ActiveItemControl();
+
+        static ActiveItemVisualizer visualizer = new ActiveItemVisualizer(stub, control);
+
+        public override void AddToFox2Entities(DataSet dataSet, List<Fox2EntityClass> entityList)
+        {
+
+        }
+
+        public override void AddToMainLua(MainLua mainLua)
+        {
+
+        }
+
+        public override void AddToDefinitionLua(DefinitionLua definitionLua)
+        {
+
+        }
     }
 }

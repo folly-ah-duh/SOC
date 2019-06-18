@@ -1,6 +1,6 @@
 ﻿namespace SOC.QuestObjects.Enemy
 {
-    partial class EnemyBoxF
+    partial class EnemyBox
     {
         /// <summary> 
         /// Required designer variable.

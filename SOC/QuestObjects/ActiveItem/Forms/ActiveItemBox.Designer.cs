@@ -1,6 +1,6 @@
 ﻿namespace SOC.QuestObjects.ActiveItem
 {
-    partial class ActiveItemBoxF
+    partial class ActiveItemBox
     {
         /// <summary> 
         /// Required designer variable.

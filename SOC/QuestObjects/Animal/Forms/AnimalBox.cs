@@ -12,11 +12,27 @@ using SOC.QuestObjects.Common;
 
 namespace SOC.QuestObjects.Animal
 {
-    public partial class AnimalBox : UserControl
+    public partial class AnimalBox : QuestBox
     {
-        public AnimalBox()
+        public int ID;
+
+        public AnimalBox(Animal qObject)
         {
             InitializeComponent();
+            ID = qObject.ID;
+
+            textBox_xcoord.Text = qObject.position.coords.xCoord;
+            textBox_ycoord.Text = qObject.position.coords.yCoord;
+            textBox_zcoord.Text = qObject.position.coords.zCoord;
+            textBox_rot.Text = qObject.position.rotation.GetDegreeRotY();
+
+            checkBox_target.Checked = qObject.target;
+
+            comboBox_animal.Items.AddRange(AnimalInfo.animals);
+            comboBox_animal.Text = qObject.animal;
+
+            comboBox_typeID.Text = qObject.typeID;
+            comboBox_count.Text = qObject.count;
         }
 
         private void comboBox_animal_selectedIndexChanged(object sender, EventArgs e)
@@ -60,9 +76,13 @@ namespace SOC.QuestObjects.Animal
                     comboBox_typeID.Items.AddRange(new string[] { "TppBear" });
                     break;
             }
-            comboBox_typeID.Text = QuestComponents.AnimalInfo.getAnimalType(comboBox_animal.Text);
+            comboBox_typeID.Text = AnimalInfo.getAnimalType(comboBox_animal.Text);
             comboBox_count.Text = "1";
         }
 
+        public override QuestObject getQuestObject()
+        {
+            return new Animal(this);
+        }
     }
 }

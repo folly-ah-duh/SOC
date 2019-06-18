@@ -9,7 +9,7 @@ using SOC.Classes.Common;
 
 namespace SOC.QuestObjects.WalkerGear
 {
-    class WalkerManager : DetailManager
+    class WalkerManager : LocationalManager
     {
         static LocationalDataStub walkerStub = new LocationalDataStub("Walker Gear Locations");
 

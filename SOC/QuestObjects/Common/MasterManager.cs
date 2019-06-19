@@ -37,7 +37,7 @@ namespace SOC.QuestObjects.Common
 
             foreach(DetailManager manager in managerArray.GetManagers())
             {
-                qodList.Add(manager.questDetail);
+                qodList.Add(manager.detail);
             }
 
             return qodList;

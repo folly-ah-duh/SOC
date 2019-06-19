@@ -28,7 +28,7 @@ namespace SOC.QuestObjects.Vehicle
             return new VehicleMetadata((VehicleControl)detailControl);
         }
 
-        public override QuestBox NewBox(QuestObject qObject, CoreDetails core)
+        public override QuestBox NewBox(QuestObject qObject)
         {
             return new VehicleBox((Vehicle)qObject, (VehicleMetadata)GetMetadataFromControl());
         }

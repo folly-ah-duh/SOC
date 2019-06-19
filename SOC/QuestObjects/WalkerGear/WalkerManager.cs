@@ -21,17 +21,17 @@ namespace SOC.QuestObjects.WalkerGear
 
         public override void AddToFox2Entities(DataSet dataSet, List<Fox2EntityClass> entityList)
         {
-            WalkerFox2.AddQuestEntities((WalkerDetail)base.questDetail, dataSet, entityList);
+            WalkerFox2.AddQuestEntities((WalkerDetail)base.detail, dataSet, entityList);
         }
 
         public override void AddToMainLua(MainLua mainLua)
         {
-            WalkerLua.GetMain((WalkerDetail)base.questDetail, mainLua);
+            WalkerLua.GetMain((WalkerDetail)base.detail, mainLua);
         }
 
         public override void AddToDefinitionLua(DefinitionLua definitionLua)
         {
-            WalkerLua.GetDefinition((WalkerDetail)base.questDetail, definitionLua);
+            WalkerLua.GetDefinition((WalkerDetail)base.detail, definitionLua);
         }
     }
 }

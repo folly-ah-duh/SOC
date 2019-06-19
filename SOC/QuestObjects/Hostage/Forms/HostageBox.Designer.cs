@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.h_groupBox_main = new System.Windows.Forms.GroupBox();
+            this.groupBox_main = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -46,37 +46,37 @@
             this.textBox_zcoord = new System.Windows.Forms.TextBox();
             this.textBox_ycoord = new System.Windows.Forms.TextBox();
             this.textBox_xcoord = new System.Windows.Forms.TextBox();
-            this.h_groupBox_main.SuspendLayout();
+            this.groupBox_main.SuspendLayout();
             this.SuspendLayout();
             // 
             // h_groupBox_main
             // 
-            this.h_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
-            this.h_groupBox_main.Controls.Add(this.label6);
-            this.h_groupBox_main.Controls.Add(this.label5);
-            this.h_groupBox_main.Controls.Add(this.label4);
-            this.h_groupBox_main.Controls.Add(this.label3);
-            this.h_groupBox_main.Controls.Add(this.label2);
-            this.h_groupBox_main.Controls.Add(this.comboBox_skill);
-            this.h_groupBox_main.Controls.Add(this.comboBox_staff);
-            this.h_groupBox_main.Controls.Add(this.comboBox_lang);
-            this.h_groupBox_main.Controls.Add(this.comboBox_scared);
-            this.h_groupBox_main.Controls.Add(this.checkBox_injured);
-            this.h_groupBox_main.Controls.Add(this.checkBox_untied);
-            this.h_groupBox_main.Controls.Add(this.checkBox_target);
-            this.h_groupBox_main.Controls.Add(this.textBox_rot);
-            this.h_groupBox_main.Controls.Add(this.label1);
-            this.h_groupBox_main.Controls.Add(this.textBox_zcoord);
-            this.h_groupBox_main.Controls.Add(this.textBox_ycoord);
-            this.h_groupBox_main.Controls.Add(this.textBox_xcoord);
-            this.h_groupBox_main.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.h_groupBox_main.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.h_groupBox_main.Location = new System.Drawing.Point(0, 0);
-            this.h_groupBox_main.Name = "h_groupBox_main";
-            this.h_groupBox_main.Size = new System.Drawing.Size(268, 237);
-            this.h_groupBox_main.TabIndex = 0;
-            this.h_groupBox_main.TabStop = false;
-            this.h_groupBox_main.Text = "HostageBox";
+            this.groupBox_main.BackColor = System.Drawing.Color.DarkGray;
+            this.groupBox_main.Controls.Add(this.label6);
+            this.groupBox_main.Controls.Add(this.label5);
+            this.groupBox_main.Controls.Add(this.label4);
+            this.groupBox_main.Controls.Add(this.label3);
+            this.groupBox_main.Controls.Add(this.label2);
+            this.groupBox_main.Controls.Add(this.comboBox_skill);
+            this.groupBox_main.Controls.Add(this.comboBox_staff);
+            this.groupBox_main.Controls.Add(this.comboBox_lang);
+            this.groupBox_main.Controls.Add(this.comboBox_scared);
+            this.groupBox_main.Controls.Add(this.checkBox_injured);
+            this.groupBox_main.Controls.Add(this.checkBox_untied);
+            this.groupBox_main.Controls.Add(this.checkBox_target);
+            this.groupBox_main.Controls.Add(this.textBox_rot);
+            this.groupBox_main.Controls.Add(this.label1);
+            this.groupBox_main.Controls.Add(this.textBox_zcoord);
+            this.groupBox_main.Controls.Add(this.textBox_ycoord);
+            this.groupBox_main.Controls.Add(this.textBox_xcoord);
+            this.groupBox_main.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox_main.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.groupBox_main.Location = new System.Drawing.Point(0, 0);
+            this.groupBox_main.Name = "h_groupBox_main";
+            this.groupBox_main.Size = new System.Drawing.Size(268, 237);
+            this.groupBox_main.TabIndex = 0;
+            this.groupBox_main.TabStop = false;
+            this.groupBox_main.Text = "HostageBox";
             // 
             // label6
             // 
@@ -241,19 +241,19 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.h_groupBox_main);
+            this.Controls.Add(this.groupBox_main);
             this.MinimumSize = new System.Drawing.Size(268, 237);
             this.Name = "HostageBox";
             this.Size = new System.Drawing.Size(268, 237);
-            this.h_groupBox_main.ResumeLayout(false);
-            this.h_groupBox_main.PerformLayout();
+            this.groupBox_main.ResumeLayout(false);
+            this.groupBox_main.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox h_groupBox_main;
+        private System.Windows.Forms.GroupBox groupBox_main;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;

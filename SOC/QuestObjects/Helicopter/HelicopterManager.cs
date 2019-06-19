@@ -21,17 +21,17 @@ namespace SOC.QuestObjects.Helicopter
 
         public override void AddToDefinitionLua(DefinitionLua definitionLua)
         {
-            HelicopterLua.GetDefinition((HelicopterDetail)base.questDetail, definitionLua);
+            HelicopterLua.GetDefinition((HelicopterDetail)base.detail, definitionLua);
         }
 
         public override void AddToFox2Entities(DataSet dataSet, List<Fox2EntityClass> entityList)
         {
-            HelicopterFox2.AddQuestEntities((HelicopterDetail)base.questDetail, dataSet, entityList);
+            HelicopterFox2.AddQuestEntities((HelicopterDetail)base.detail, dataSet, entityList);
         }
 
         public override void AddToMainLua(MainLua mainLua)
         {
-            HelicopterLua.GetMain((HelicopterDetail)base.questDetail, mainLua);
+            HelicopterLua.GetMain((HelicopterDetail)base.detail, mainLua);
         }
     }
 }

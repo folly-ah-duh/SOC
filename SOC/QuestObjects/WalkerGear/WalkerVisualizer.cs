@@ -24,7 +24,7 @@ namespace SOC.QuestObjects.WalkerGear
             return new WalkerMetadata((WalkerControl)detailControl);
         }
 
-        public override QuestBox NewBox(QuestObject qObject, CoreDetails core)
+        public override QuestBox NewBox(QuestObject qObject)
         {
             return new WalkerBox((WalkerGear)qObject);
         }

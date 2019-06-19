@@ -22,10 +22,10 @@ namespace SOC.QuestObjects.Common
             detailControl = control; flowPanel = panel;
         }
 
-        public void VisualizeDetail(Detail detail, CoreDetails core)
+        public void VisualizeDetail(Detail detail)
         {
             DrawMetadata(detail.GetMetadata());
-            DrawBoxes(detail.GetQuestObjects(), core);
+            DrawBoxes(detail.GetQuestObjects());
         }
 
         public void ShowDetail()
@@ -40,12 +40,12 @@ namespace SOC.QuestObjects.Common
 
         public abstract void DrawMetadata(Metadata meta);
 
-        public void DrawBoxes(IEnumerable<QuestObject> questObjects, CoreDetails core)
+        public void DrawBoxes(IEnumerable<QuestObject> questObjects)
         {
             flowPanel.Controls.Clear();
             foreach (QuestObject qObject in questObjects)
             {
-                flowPanel.Controls.Add(NewBox(qObject, core));
+                flowPanel.Controls.Add(NewBox(qObject));
             }
         }
 
@@ -60,7 +60,8 @@ namespace SOC.QuestObjects.Common
         }
 
         public abstract Metadata GetMetadataFromControl();
-        public abstract QuestBox NewBox(QuestObject qObject, CoreDetails core);
+        public abstract void SetDetailsFromSetup(Detail detail, CoreDetails core);
+        public abstract QuestBox NewBox(QuestObject qObject);
         public abstract Detail NewDetail(Metadata meta, IEnumerable<QuestObject> qObjects);
     }
 
@@ -84,7 +85,7 @@ namespace SOC.QuestObjects.Common
             detailStub.SetStubText(new IHLogPositions(posList));
         }
 
-        public void SetDetailsFromStub(Detail detail)
+        public override void SetDetailsFromSetup(Detail detail, CoreDetails core)
         {
             List<Position> stubPositions = detailStub.GetStubLocations().GetPositions();
             List<QuestObject> qObjects = detail.GetQuestObjects().ToList();
@@ -118,7 +119,5 @@ namespace SOC.QuestObjects.Common
     public abstract class NonLocationalVisualizer : DetailVisualizer
     {
         public NonLocationalVisualizer(UserControl control, FlowLayoutPanel panel) : base(control, panel) { }
-
-        public abstract void SetDetailsFromCore(Detail detail, CoreDetails core);
     }
 }

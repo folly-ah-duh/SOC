@@ -17,6 +17,8 @@ namespace SOC.QuestObjects.Enemy
     {
         public EnemyVisualizer(EnemyControl control) : base(control, control.panelQuestBoxes) { }
 
+        List<string> routes = new List<string>();
+
         public override void DrawMetadata(Metadata meta)
         {
             EnemyControl control = (EnemyControl)detailControl;
@@ -28,9 +30,9 @@ namespace SOC.QuestObjects.Enemy
             return new EnemyMetadata((EnemyControl)detailControl);
         }
 
-        public override QuestBox NewBox(QuestObject qObject, CoreDetails core)
+        public override QuestBox NewBox(QuestObject qObject)
         {
-            return new EnemyBox((Enemy)qObject, core); // core for each box? better off with a list of route names instead
+            return new EnemyBox((Enemy)qObject, routes); // also: regional body fovas
         }
 
         public override Detail NewDetail(Metadata meta, IEnumerable<QuestObject> qObjects)
@@ -38,8 +40,13 @@ namespace SOC.QuestObjects.Enemy
             return new EnemyDetail(qObjects.Cast<Enemy>().ToList(), (EnemyMetadata)meta);
         }
 
-        public override void SetDetailsFromCore(Detail detail, CoreDetails core)
+        public override void SetDetailsFromSetup(Detail detail, CoreDetails core)
         {
+            RouteManager router = new RouteManager();
+            List<string> eneRoutes = router.GetRouteNames(core.routeName);
+            eneRoutes.AddRange(EnemyInfo.GetCP(core.CPName).CPsoldierRoutes);
+            routes = eneRoutes;
+
             string[] soldiers = EnemyInfo.GetCP(core.CPName).CPsoldiers;
             List<Enemy> qObjects = detail.GetQuestObjects().Cast<Enemy>().ToList();
             int soldierCount = soldiers.Length;

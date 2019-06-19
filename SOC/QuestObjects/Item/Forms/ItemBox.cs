@@ -23,6 +23,7 @@ namespace SOC.QuestObjects.Item
         {
             InitializeComponent();
             ID = qObject.ID;
+            groupBox_main.Text = qObject.GetObjectName();
 
             textBox_xcoord.Text = qObject.position.coords.xCoord;
             textBox_ycoord.Text = qObject.position.coords.yCoord;

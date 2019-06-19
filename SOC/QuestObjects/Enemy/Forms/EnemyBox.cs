@@ -17,9 +17,42 @@ namespace SOC.QuestObjects.Enemy
     {
         public string enemyName;
 
-        public EnemyBox(Enemy qObject, CoreDetails core)
+        public EnemyBox(Enemy qObject, List<string> routes) // separate into questenemy, exisitingenemy via conditional
         {
             InitializeComponent();
+            groupBox_main.Text = qObject.GetObjectName();
+
+            checkBox_spawn.Checked = qObject.spawn;
+            checkBox_target.Checked = qObject.isTarget;
+            checkBox_balaclava.Checked = qObject.balaclava;
+            checkBox_zombie.Checked = qObject.zombie;
+
+            comboBox_sneakroute.Items.Add("NONE"); // questenemy should not have none option
+            comboBox_sneakroute.Items.AddRange(routes.ToArray());
+            if (comboBox_sneakroute.Items.Contains(qObject.dRoute))
+            {
+                comboBox_sneakroute.Text = qObject.dRoute;
+            }
+            else
+            {
+                comboBox_sneakroute.Text = "NONE";
+            }
+
+            comboBox_cautionroute.Items.Add("NONE");
+            comboBox_cautionroute.Items.AddRange(routes.ToArray());
+            if (comboBox_cautionroute.Items.Contains(qObject.cRoute))
+            {
+                comboBox_cautionroute.Text = qObject.cRoute;
+            }
+            else
+            {
+                comboBox_cautionroute.Text = "NONE";
+            }
+            
+            listBox_power.Items.AddRange(qObject.powers);
+
+            checkBox_armor.Checked = qObject.armored;
+            
         }
 
         public override QuestObject getQuestObject()

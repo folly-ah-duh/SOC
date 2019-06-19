@@ -16,25 +16,26 @@ namespace SOC.QuestObjects.Helicopter
     {
         public int ID;
 
-        public HelicopterBox(Helicopter h, List<string> routes)
+        public HelicopterBox(Helicopter qObject, List<string> routes)
         {
             InitializeComponent();
-            ID = h.ID;
+            ID = qObject.ID;
+            groupBox_main.Text = qObject.GetObjectName();
 
-            textBox_xcoord.Text = h.position.coords.xCoord;
-            textBox_ycoord.Text = h.position.coords.yCoord;
-            textBox_zcoord.Text = h.position.coords.zCoord;
-            textBox_rot.Text = h.position.rotation.GetDegreeRotY();
+            textBox_xcoord.Text = qObject.position.coords.xCoord;
+            textBox_ycoord.Text = qObject.position.coords.yCoord;
+            textBox_zcoord.Text = qObject.position.coords.zCoord;
+            textBox_rot.Text = qObject.position.rotation.GetDegreeRotY();
 
-            checkBox_target.Checked = h.isTarget;
+            checkBox_target.Checked = qObject.isTarget;
             
-            comboBox_class.Text = h.heliClass;
+            comboBox_class.Text = qObject.heliClass;
 
             comboBox_route.Items.Add("NONE");
             comboBox_route.Items.AddRange(routes.ToArray());
-            if (comboBox_route.Items.Contains(h.heliRoute))
+            if (comboBox_route.Items.Contains(qObject.heliRoute))
             {
-                comboBox_route.Text = h.heliRoute;
+                comboBox_route.Text = qObject.heliRoute;
             }
             else
             {

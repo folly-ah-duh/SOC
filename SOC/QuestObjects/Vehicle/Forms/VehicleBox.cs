@@ -16,29 +16,30 @@ namespace SOC.QuestObjects.Vehicle
     {
         public int ID;
 
-        public VehicleBox(Vehicle v, VehicleMetadata meta)
+        public VehicleBox(Vehicle qObject, VehicleMetadata meta)
         {
             InitializeComponent();
-            ID = v.ID;
+            ID = qObject.ID;
+            groupBox_main.Text = qObject.GetObjectName();
 
-            textBox_xcoord.Text = v.position.coords.xCoord;
-            textBox_ycoord.Text = v.position.coords.yCoord;
-            textBox_zcoord.Text = v.position.coords.zCoord;
-            textBox_rot.Text = v.position.rotation.GetDegreeRotY();
+            textBox_xcoord.Text = qObject.position.coords.xCoord;
+            textBox_ycoord.Text = qObject.position.coords.yCoord;
+            textBox_zcoord.Text = qObject.position.coords.zCoord;
+            textBox_rot.Text = qObject.position.rotation.GetDegreeRotY();
 
-            checkBox_target.Checked = v.isTarget;
+            checkBox_target.Checked = qObject.isTarget;
 
             comboBox_vehicle.Items.AddRange(new string[] 
             {
                 "TT77 NOSOROG","M84A MAGLOADER", "ZHUK BR-3", "ZHUK RS-ZO","STOUT IFV-SC","STOUT IFV-FS"
             });
-            comboBox_vehicle.Text = v.vehicle;
+            comboBox_vehicle.Text = qObject.vehicle;
 
             comboBox_class.Items.AddRange(new string[] 
             {
                 "DEFAULT", "DARK_GRAY", "OXIDE_RED"
             });
-            comboBox_class.Text = v.vehicleClass;
+            comboBox_class.Text = qObject.vehicleClass;
         }
 
         public override QuestObject getQuestObject()

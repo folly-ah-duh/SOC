@@ -17,29 +17,30 @@ namespace SOC.QuestObjects.Model
     {
         public int ID;
 
-        public ModelBox(Model m)
+        public ModelBox(Model qObject)
         {
             InitializeComponent();
-            ID = m.ID;
+            ID = qObject.ID;
+            groupBox_main.Text = qObject.GetObjectName();
 
-            textBox_xcoord.Text = m.position.coords.xCoord;
-            textBox_ycoord.Text = m.position.coords.yCoord;
-            textBox_zcoord.Text = m.position.coords.zCoord;
+            textBox_xcoord.Text = qObject.position.coords.xCoord;
+            textBox_ycoord.Text = qObject.position.coords.yCoord;
+            textBox_zcoord.Text = qObject.position.coords.zCoord;
 
-            textBox_xrot.Text = m.position.rotation.quatRotation.xval;
-            textBox_yrot.Text = m.position.rotation.quatRotation.yval;
-            textBox_zrot.Text = m.position.rotation.quatRotation.zval;
-            textBox_wrot.Text = m.position.rotation.quatRotation.wval;
+            textBox_xrot.Text = qObject.position.rotation.quatRotation.xval;
+            textBox_yrot.Text = qObject.position.rotation.quatRotation.yval;
+            textBox_zrot.Text = qObject.position.rotation.quatRotation.zval;
+            textBox_wrot.Text = qObject.position.rotation.quatRotation.wval;
 
             comboBox_model.Items.AddRange(getModelList());
 
-            if (comboBox_model.Items.Contains(m.model))
-                comboBox_model.Text = m.model;
+            if (comboBox_model.Items.Contains(qObject.model))
+                comboBox_model.Text = qObject.model;
             else if (comboBox_model.Items.Count > 0)
                 comboBox_model.SelectedIndex = 0;
 
             if (checkBox_collision.Enabled)
-                checkBox_collision.Checked = m.collision;
+                checkBox_collision.Checked = qObject.collision;
         }
 
         private string[] getModelList()

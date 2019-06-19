@@ -25,7 +25,7 @@ namespace SOC.QuestObjects.Item
             return new ItemMetadata((ItemControl)detailControl);
         }
 
-        public override QuestBox NewBox(QuestObject qObject, CoreDetails core)
+        public override QuestBox NewBox(QuestObject qObject)
         {
             return new ItemBox((Item)qObject);
         }

@@ -21,12 +21,12 @@ namespace SOC.QuestObjects.Model
 
         public override void AddToAssets(FileAssets fileAssets)
         {
-            ModelAssets.AddAssets((ModelDetail)base.questDetail, fileAssets);
+            ModelAssets.AddAssets((ModelDetail)base.detail, fileAssets);
         }
 
         public override void AddToFox2Entities(DataSet dataSet, List<Fox2EntityClass> entityList)
         {
-            ModelFox2.AddQuestEntities((ModelDetail)base.questDetail, dataSet, entityList);
+            ModelFox2.AddQuestEntities((ModelDetail)base.detail, dataSet, entityList);
         }
     }
 }

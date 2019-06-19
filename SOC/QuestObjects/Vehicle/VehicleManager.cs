@@ -37,7 +37,7 @@ namespace SOC.QuestObjects.Vehicle
 
         public override void AddToAssets(FileAssets fileAssets)
         {
-            VehicleAssets.GetVehicleAssets((VehicleDetail)base.questDetail, fileAssets);
+            VehicleAssets.GetVehicleAssets((VehicleDetail)base.detail, fileAssets);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace SOC.QuestObjects.Animal
             return new AnimalMetadata((AnimalControl)detailControl);
         }
 
-        public override QuestBox NewBox(QuestObject qObject, CoreDetails core)
+        public override QuestBox NewBox(QuestObject qObject)
         {
             return new AnimalBox((Animal)qObject);
         }

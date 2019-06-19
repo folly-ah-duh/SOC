@@ -27,7 +27,7 @@ namespace SOC.QuestObjects.Hostage
             return new HostageMetadata((HostageControl)detailControl);
         }
 
-        public override QuestBox NewBox(QuestObject qObject, CoreDetails core)
+        public override QuestBox NewBox(QuestObject qObject)
         {
             return new HostageBox((Hostage)qObject, (HostageMetadata)GetMetadataFromControl());
         }

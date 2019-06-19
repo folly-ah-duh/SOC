@@ -21,17 +21,17 @@ namespace SOC.QuestObjects.Hostage
 
         public override void AddToFox2Entities(DataSet dataSet, List<Fox2EntityClass> entityList)
         {
-            HostageFox2.AddQuestEntities((HostageDetail)base.questDetail, dataSet, entityList);
+            HostageFox2.AddQuestEntities((HostageDetail)base.detail, dataSet, entityList);
         }
 
         public override void AddToMainLua(MainLua mainLua)
         {
-            HostageLua.GetMain((HostageDetail)base.questDetail, mainLua);
+            HostageLua.GetMain((HostageDetail)base.detail, mainLua);
         }
 
         public override void AddToDefinitionLua(DefinitionLua definitionLua)
         {
-            HostageLua.GetDefinition((HostageDetail)base.questDetail, definitionLua);
+            HostageLua.GetDefinition((HostageDetail)base.detail, definitionLua);
         }
     }
 }

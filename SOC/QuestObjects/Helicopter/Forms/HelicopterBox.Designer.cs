@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.h_groupBox_main = new System.Windows.Forms.GroupBox();
+            this.groupBox_main = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox_route = new System.Windows.Forms.ComboBox();
@@ -40,31 +40,31 @@
             this.textBox_zcoord = new System.Windows.Forms.TextBox();
             this.textBox_ycoord = new System.Windows.Forms.TextBox();
             this.textBox_xcoord = new System.Windows.Forms.TextBox();
-            this.h_groupBox_main.SuspendLayout();
+            this.groupBox_main.SuspendLayout();
             this.SuspendLayout();
             // 
             // h_groupBox_main
             // 
-            this.h_groupBox_main.BackColor = System.Drawing.Color.DarkGray;
-            this.h_groupBox_main.Controls.Add(this.label2);
-            this.h_groupBox_main.Controls.Add(this.textBox_rot);
-            this.h_groupBox_main.Controls.Add(this.label1);
-            this.h_groupBox_main.Controls.Add(this.textBox_zcoord);
-            this.h_groupBox_main.Controls.Add(this.textBox_ycoord);
-            this.h_groupBox_main.Controls.Add(this.textBox_xcoord);
-            this.h_groupBox_main.Controls.Add(this.label4);
-            this.h_groupBox_main.Controls.Add(this.label3);
-            this.h_groupBox_main.Controls.Add(this.comboBox_route);
-            this.h_groupBox_main.Controls.Add(this.comboBox_class);
-            this.h_groupBox_main.Controls.Add(this.checkBox_target);
-            this.h_groupBox_main.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.h_groupBox_main.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.h_groupBox_main.Location = new System.Drawing.Point(0, 0);
-            this.h_groupBox_main.Name = "h_groupBox_main";
-            this.h_groupBox_main.Size = new System.Drawing.Size(268, 156);
-            this.h_groupBox_main.TabIndex = 2;
-            this.h_groupBox_main.TabStop = false;
-            this.h_groupBox_main.Text = "HelicopterBox";
+            this.groupBox_main.BackColor = System.Drawing.Color.DarkGray;
+            this.groupBox_main.Controls.Add(this.label2);
+            this.groupBox_main.Controls.Add(this.textBox_rot);
+            this.groupBox_main.Controls.Add(this.label1);
+            this.groupBox_main.Controls.Add(this.textBox_zcoord);
+            this.groupBox_main.Controls.Add(this.textBox_ycoord);
+            this.groupBox_main.Controls.Add(this.textBox_xcoord);
+            this.groupBox_main.Controls.Add(this.label4);
+            this.groupBox_main.Controls.Add(this.label3);
+            this.groupBox_main.Controls.Add(this.comboBox_route);
+            this.groupBox_main.Controls.Add(this.comboBox_class);
+            this.groupBox_main.Controls.Add(this.checkBox_target);
+            this.groupBox_main.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox_main.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.groupBox_main.Location = new System.Drawing.Point(0, 0);
+            this.groupBox_main.Name = "h_groupBox_main";
+            this.groupBox_main.Size = new System.Drawing.Size(268, 156);
+            this.groupBox_main.TabIndex = 2;
+            this.groupBox_main.TabStop = false;
+            this.groupBox_main.Text = "HelicopterBox";
             // 
             // label4
             // 
@@ -172,18 +172,18 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.h_groupBox_main);
+            this.Controls.Add(this.groupBox_main);
             this.Name = "HelicopterBoxF";
             this.Size = new System.Drawing.Size(268, 156);
-            this.h_groupBox_main.ResumeLayout(false);
-            this.h_groupBox_main.PerformLayout();
+            this.groupBox_main.ResumeLayout(false);
+            this.groupBox_main.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox h_groupBox_main;
+        private System.Windows.Forms.GroupBox groupBox_main;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         public System.Windows.Forms.ComboBox comboBox_route;

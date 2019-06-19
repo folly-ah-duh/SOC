@@ -17,6 +17,8 @@ namespace SOC.QuestObjects.Helicopter
     {
         public HelicopterVisualizer(LocationalDataStub stub, HelicopterControl control) : base(stub, control, control.panelQuestBoxes) { }
 
+        private List<string> routes = new List<string>();
+
         public override void DrawMetadata(Metadata meta)
         {
             HelicopterControl heliControl = (HelicopterControl)detailControl;
@@ -28,12 +30,8 @@ namespace SOC.QuestObjects.Helicopter
             return new HelicopterMetadata((HelicopterControl)detailControl);
         }
 
-        public override QuestBox NewBox(QuestObject qObject, CoreDetails core)
+        public override QuestBox NewBox(QuestObject qObject)
         {
-            RouteManager router = new RouteManager();
-            List<string> routes = router.GetRouteNames(core.routeName);
-            routes.AddRange(EnemyInfo.GetCP(core.CPName).CPheliRoutes);
-
             return new HelicopterBox((Helicopter)qObject, routes);
         }
 
@@ -45,6 +43,17 @@ namespace SOC.QuestObjects.Helicopter
         public override QuestObject NewObject(Position pos, int index)
         {
             return new Helicopter(pos, index);
+        }
+
+        public override void SetDetailsFromSetup(Detail detail, CoreDetails core)
+        {
+            RouteManager heliRouter = new RouteManager();
+            List<string> heliRoutes = heliRouter.GetRouteNames(core.routeName);
+            heliRoutes.AddRange(EnemyInfo.GetCP(core.CPName).CPheliRoutes);
+
+            routes = heliRoutes;
+            base.SetDetailsFromSetup(detail, core);
+
         }
     }
 }

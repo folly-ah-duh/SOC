@@ -139,6 +139,7 @@ namespace SOC.QuestObjects.Enemy
             objectiveType = control.comboBox_ObjType.Text;
             subtype = control.comboBox_Subtype.Text;
         }
+
         [XmlAttribute]
         public string objectiveType { get; set; } = "ELIMINATE";
 

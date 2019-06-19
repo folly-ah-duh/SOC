@@ -10,11 +10,14 @@ namespace SOC.QuestObjects.Common
 {
     public abstract class DetailManager
     {
-        public Detail questDetail;
+        public Detail detail;
+
+        public DetailVisualizer detailVisualizer;
         
-        public DetailManager(Detail detail)
+        public DetailManager(Detail detail, DetailVisualizer visual)
         {
-            questDetail = detail;
+            this.detail = detail;
+            detailVisualizer = visual;
         }
 
         public abstract DetailVisualizer GetVisualizer();
@@ -23,7 +26,19 @@ namespace SOC.QuestObjects.Common
 
         public abstract void UpdateDetailFromSetup(CoreDetails core);
 
-        public abstract void RefreshPanel(CoreDetails core);
+        public void RefreshPanel(CoreDetails core)
+        {
+            if (detail.GetQuestObjects().Count > 0)
+            {
+                detailVisualizer.ShowDetail();
+            }
+            else
+            {
+                detailVisualizer.HideDetail();
+            }
+
+            detailVisualizer.VisualizeDetail(detail);
+        }
 
         public virtual void AddToFox2Entities(DataSet dataSet, List<Fox2EntityClass> entityList) { return; }
 
@@ -36,94 +51,67 @@ namespace SOC.QuestObjects.Common
 
     public abstract class LocationalManager : DetailManager
     {
-        private LocationalVisualizer visualizer;
-
-        public LocationalManager(Detail detail, LocationalVisualizer visual) : base(detail)
+        public LocationalManager(Detail detail, LocationalVisualizer visual) : base(detail, visual)
         {
-            visualizer = visual;
+            detailVisualizer = visual;
         }
 
         public override DetailVisualizer GetVisualizer()
         {
-            return visualizer;
+            return detailVisualizer;
         }
 
         public override void UpdateDetailFromControl()
         {
-            questDetail = visualizer.GetDetailFromControl();
+            detail = detailVisualizer.GetDetailFromControl();
         }
 
         public LocationalDataStub GetStub()
         {
-            return visualizer.detailStub;
+            LocationalVisualizer locVisualizer = (LocationalVisualizer)detailVisualizer;
+            return locVisualizer.detailStub;
         }
 
         public void LoadStub()
         {
-            visualizer.DrawStubText(questDetail);
+            LocationalVisualizer locVisualizer = (LocationalVisualizer)detailVisualizer;
+            locVisualizer.DrawStubText(detail);
         }
 
         public void RefreshStub()
         {
-            visualizer.DrawStubText(questDetail);
+            LocationalVisualizer locVisualizer = (LocationalVisualizer)detailVisualizer;
+            locVisualizer.DrawStubText(detail);
         }
 
         public override void UpdateDetailFromSetup(CoreDetails core)
         {
-            visualizer.SetDetailsFromStub(questDetail);
+            detailVisualizer.SetDetailsFromSetup(detail, core);
         }
 
-        public override void RefreshPanel(CoreDetails core)
-        {
-            if (questDetail.GetQuestObjects().Count > 0)
-            {
-                visualizer.ShowDetail();
-            }
-            else
-            {
-                visualizer.HideDetail();
-            }
-
-            visualizer.VisualizeDetail(questDetail, core);
-        }
+        
     }
 
     public abstract class NonLocationalManager : DetailManager
     {
-        private NonLocationalVisualizer visualizer;
-
-        public NonLocationalManager(Detail detail, NonLocationalVisualizer visual) : base(detail)
+        public NonLocationalManager(Detail detail, NonLocationalVisualizer visual) : base(detail, visual)
         {
-            visualizer = visual;
+            detailVisualizer = visual;
         }
 
         public override DetailVisualizer GetVisualizer()
         {
-            return visualizer;
+            return detailVisualizer;
         }
 
         public override void UpdateDetailFromControl()
         {
-            questDetail = visualizer.GetDetailFromControl();
+            detail = detailVisualizer.GetDetailFromControl();
         }
 
         public override void UpdateDetailFromSetup(CoreDetails core)
         {
-            visualizer.SetDetailsFromCore(questDetail, core);
-        }
-
-        public override void RefreshPanel(CoreDetails core)
-        {
-            if (questDetail.GetQuestObjects().Count > 0)
-            {
-                visualizer.ShowDetail();
-            }
-            else
-            {
-                visualizer.HideDetail();
-            }
-
-            visualizer.VisualizeDetail(questDetail, core);
+            detailVisualizer.SetDetailsFromSetup(detail, core);
         }
     }
 }

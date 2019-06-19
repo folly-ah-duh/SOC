@@ -19,33 +19,34 @@ namespace SOC.QuestObjects.Hostage
     {
         public int ID;
 
-        public HostageBox(Hostage h, HostageMetadata meta)
+        public HostageBox(Hostage qObject, HostageMetadata meta)
         {
             InitializeComponent();
-            ID = h.ID;
+            ID = qObject.ID;
+            groupBox_main.Text = qObject.GetObjectName();
 
-            textBox_xcoord.Text = h.position.coords.xCoord;
-            textBox_ycoord.Text = h.position.coords.yCoord;
-            textBox_zcoord.Text = h.position.coords.zCoord;
-            textBox_rot.Text = h.position.rotation.GetDegreeRotY();
+            textBox_xcoord.Text = qObject.position.coords.xCoord;
+            textBox_ycoord.Text = qObject.position.coords.yCoord;
+            textBox_zcoord.Text = qObject.position.coords.zCoord;
+            textBox_rot.Text = qObject.position.rotation.GetDegreeRotY();
 
-            checkBox_target.Checked = h.isTarget;
-            checkBox_untied.Checked = h.isUntied;
-            checkBox_injured.Checked = h.isInjured;
+            checkBox_target.Checked = qObject.isTarget;
+            checkBox_untied.Checked = qObject.isUntied;
+            checkBox_injured.Checked = qObject.isInjured;
 
             comboBox_scared.Items.AddRange(new string[] {
                 "NORMAL", "ALWAYS", "NEVER"
             });
-            comboBox_scared.Text = h.scared;
+            comboBox_scared.Text = qObject.scared;
 
-            comboBox_lang.Text = h.language; // Note: h_combobox_lang has the male languages prelisted in the designer
+            comboBox_lang.Text = qObject.language; // Note: h_combobox_lang has the male languages prelisted in the designer
             RefreshLanguage(meta.hostageBodyName);
 
             comboBox_staff.Items.AddRange(NPCMtbsInfo.Staff_Type_ID);
-            comboBox_staff.Text = h.staffType;
+            comboBox_staff.Text = qObject.staffType;
 
             comboBox_skill.Items.AddRange(NPCMtbsInfo.skills);
-            comboBox_skill.Text = h.skill;
+            comboBox_skill.Text = qObject.skill;
         }
 
         public override QuestObject getQuestObject()

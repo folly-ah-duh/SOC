@@ -13,10 +13,9 @@ using SOC.Core.Classes.Route;
 
 namespace SOC.QuestObjects.Enemy
 {
-    class EnemyVisualizer
+    class EnemyVisualizer : NonLocationalVisualizer
     {
-        /*
-        public EnemyVisualizer(LocationalDataStub stub, EnemyControl control) : base(stub, control, control.panelQuestBoxes) { }
+        public EnemyVisualizer(EnemyControl control) : base(control, control.panelQuestBoxes) { }
 
         public override void DrawMetadata(Metadata meta)
         {
@@ -31,7 +30,7 @@ namespace SOC.QuestObjects.Enemy
 
         public override QuestBox NewBox(QuestObject qObject, CoreDetails core)
         {
-            return new EnemyBox((Enemy)qObject, core);
+            return new EnemyBox((Enemy)qObject, core); // core for each box? better off with a list of route names instead
         }
 
         public override Detail NewDetail(Metadata meta, IEnumerable<QuestObject> qObjects)
@@ -39,10 +38,32 @@ namespace SOC.QuestObjects.Enemy
             return new EnemyDetail(qObjects.Cast<Enemy>().ToList(), (EnemyMetadata)meta);
         }
 
-        public override QuestObject NewObject(Position pos, int index)
+        public override void SetDetailsFromCore(Detail detail, CoreDetails core)
         {
-            return new Enemy(index);
+            string[] soldiers = EnemyInfo.GetCP(core.CPName).CPsoldiers;
+            List<Enemy> qObjects = detail.GetQuestObjects().Cast<Enemy>().ToList();
+            int soldierCount = soldiers.Length;
+            int objectCount = qObjects.Count;
+
+            for (int i = 0; i < soldierCount; i++)
+            {
+                if (i >= objectCount) // add
+                {
+                    qObjects.Add(new Enemy(soldiers[i]));
+                    Console.WriteLine(soldiers[i]);
+                }
+                else // modify
+                {
+                    qObjects[i].name = soldiers[i];
+                }
+            }
+
+            for (int i = objectCount - 1; i >= soldierCount; i--) //remove
+            {
+                qObjects.RemoveAt(i);
+            }
+
+            detail.SetQuestObjects(qObjects.Cast<QuestObject>().ToList());
         }
-        */
     }
 }

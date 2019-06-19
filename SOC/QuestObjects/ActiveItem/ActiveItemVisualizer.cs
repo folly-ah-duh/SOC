@@ -13,7 +13,7 @@ using SOC.Core.Classes.Route;
 
 namespace SOC.QuestObjects.ActiveItem
 {
-    class ActiveItemVisualizer : DetailVisualizer
+    class ActiveItemVisualizer : LocationalVisualizer
     {
         public ActiveItemVisualizer(LocationalDataStub stub, ActiveItemControl control) : base(stub, control, control.panelQuestBoxes) { }
 

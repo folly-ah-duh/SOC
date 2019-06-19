@@ -15,7 +15,7 @@ namespace SOC.QuestObjects.Enemy
 
         static EnemyVisualizer visualizer = new EnemyVisualizer(control);
 
-        public EnemyManager(EnemyDetail detail) : base(detail) { }
+        public EnemyManager(EnemyDetail detail) : base(detail, visualizer) { }
 
         public override void AddToDefinitionLua(DefinitionLua definitionLua)
         {

@@ -13,7 +13,7 @@ using SOC.Classes.Common;
 
 namespace SOC.QuestObjects.Vehicle
 {
-    class VehicleVisualizer : DetailVisualizer
+    class VehicleVisualizer : LocationalVisualizer
     {
         public VehicleVisualizer(LocationalDataStub vehicleStub, VehicleControl vehicleControl) : base(vehicleStub, vehicleControl, vehicleControl.panelQuestBoxes) { }
 

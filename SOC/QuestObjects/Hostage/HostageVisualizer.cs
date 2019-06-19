@@ -9,7 +9,7 @@ using SOC.Classes.Common;
 
 namespace SOC.QuestObjects.Hostage
 {
-    class HostageVisualizer : DetailVisualizer
+    class HostageVisualizer : LocationalVisualizer
     {
         public HostageVisualizer(LocationalDataStub hostageStub, HostageControl hostageControl) : base(hostageStub, hostageControl, hostageControl.panelQuestBoxes)
         {

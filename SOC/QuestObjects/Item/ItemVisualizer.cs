@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace SOC.QuestObjects.Item
 {
-    class ItemVisualizer : DetailVisualizer
+    class ItemVisualizer : LocationalVisualizer
     {
         public ItemVisualizer(LocationalDataStub stub, ItemControl control) : base(stub, control, control.panelQuestBoxes) { }
 

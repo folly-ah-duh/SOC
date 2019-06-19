@@ -53,6 +53,11 @@ namespace SOC.QuestObjects.Common
             questDetail = visualizer.GetDetailFromControl();
         }
 
+        public LocationalDataStub GetStub()
+        {
+            return visualizer.detailStub;
+        }
+
         public void LoadStub()
         {
             visualizer.DrawStubText(questDetail);
@@ -87,7 +92,10 @@ namespace SOC.QuestObjects.Common
     {
         private NonLocationalVisualizer visualizer;
 
-        public NonLocationalManager(Detail detail) : base(detail) { }
+        public NonLocationalManager(Detail detail, NonLocationalVisualizer visual) : base(detail)
+        {
+            visualizer = visual;
+        }
 
         public override DetailVisualizer GetVisualizer()
         {
@@ -101,7 +109,7 @@ namespace SOC.QuestObjects.Common
 
         public override void UpdateDetailFromSetup(CoreDetails core)
         {
-            visualizer.SetDetailsFromCore(core);
+            visualizer.SetDetailsFromCore(questDetail, core);
         }
 
         public override void RefreshPanel(CoreDetails core)

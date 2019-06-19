@@ -60,7 +60,6 @@ namespace SOC.QuestObjects.Common
         }
 
         public abstract Metadata GetMetadataFromControl();
-        public abstract QuestObject NewObject(Position pos, int index);
         public abstract QuestBox NewBox(QuestObject qObject, CoreDetails core);
         public abstract Detail NewDetail(Metadata meta, IEnumerable<QuestObject> qObjects);
     }
@@ -112,12 +111,14 @@ namespace SOC.QuestObjects.Common
             detail.SetQuestObjects(qObjects);
         }
 
+        public abstract QuestObject NewObject(Position pos, int index);
+
     }
 
     public abstract class NonLocationalVisualizer : DetailVisualizer
     {
         public NonLocationalVisualizer(UserControl control, FlowLayoutPanel panel) : base(control, panel) { }
 
-        public abstract void SetDetailsFromCore(CoreDetails core);
+        public abstract void SetDetailsFromCore(Detail detail, CoreDetails core);
     }
 }

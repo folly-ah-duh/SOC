@@ -13,7 +13,7 @@ using SOC.Core.Classes.Route;
 
 namespace SOC.QuestObjects.Helicopter
 {
-    class HelicopterVisualizer : DetailVisualizer
+    class HelicopterVisualizer : LocationalVisualizer
     {
         public HelicopterVisualizer(LocationalDataStub stub, HelicopterControl control) : base(stub, control, control.panelQuestBoxes) { }
 

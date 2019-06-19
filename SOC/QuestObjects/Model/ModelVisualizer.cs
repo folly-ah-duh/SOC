@@ -13,7 +13,7 @@ using SOC.Classes.Common;
 
 namespace SOC.QuestObjects.Model
 {
-    class ModelVisualizer : DetailVisualizer
+    class ModelVisualizer : LocationalVisualizer
     {
         public ModelVisualizer(LocationalDataStub stub, ModelControl control) : base(stub, control, control.panelQuestBoxes) { }
 

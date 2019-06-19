@@ -9,7 +9,7 @@ using SOC.Classes.Common;
 
 namespace SOC.QuestObjects.WalkerGear
 {
-    class WalkerVisualizer : DetailVisualizer
+    class WalkerVisualizer : LocationalVisualizer
     {
         public WalkerVisualizer(LocationalDataStub walkerStub, WalkerControl walkerControl) : base(walkerStub, walkerControl, walkerControl.panelQuestBoxes) { }
         

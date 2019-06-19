@@ -45,7 +45,7 @@ namespace SOC.QuestObjects.Common
 
         public List<LocationalDataStub> GetLocationalStubs()
         {
-            return managerArray.GetManagers().Select(manager => manager.GetVisualizer().detailStub).ToList();
+            return managerArray.GetManagers().OfType<LocationalManager>().Select(manager => manager.GetStub()).ToList();
         }
 
         public void UpdateAllDetailsFromControl()
@@ -61,7 +61,11 @@ namespace SOC.QuestObjects.Common
             foreach (DetailManager manager in managerArray.GetManagers())
             {
                 manager.UpdateDetailFromControl();
-                manager.RefreshStub();
+                if(manager.GetType() == typeof(LocationalManager))
+                {
+                    LocationalManager locManager = (LocationalManager)manager;
+                    locManager.RefreshStub();
+                }
             }
         }
 
@@ -69,7 +73,11 @@ namespace SOC.QuestObjects.Common
         {
             foreach (DetailManager manager in managerArray.GetManagers())
             {
-                manager.LoadStub();
+                if (manager.GetType() == typeof(LocationalManager))
+                {
+                    LocationalManager locManager = (LocationalManager)manager;
+                    locManager.LoadStub();
+                }
             }
         }
 
@@ -89,7 +97,7 @@ namespace SOC.QuestObjects.Common
                 if (manager is Vehicle.VehicleManager)
                 {
                     Vehicle.VehicleManager vehicleManager = (Vehicle.VehicleManager)manager;
-                    vehicleManager.GetVisualizer().detailStub.DisableStub("Disabled On Mother Base");
+                    vehicleManager.GetStub().DisableStub("Disabled On Mother Base");
                 }
             }
         }
@@ -101,7 +109,7 @@ namespace SOC.QuestObjects.Common
                 if (manager is Vehicle.VehicleManager)
                 {
                     Vehicle.VehicleManager vehicleManager = (Vehicle.VehicleManager)manager;
-                    vehicleManager.GetVisualizer().detailStub.EnableStub();
+                    vehicleManager.GetStub().EnableStub();
                 }
             }
         }

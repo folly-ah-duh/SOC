@@ -19,6 +19,7 @@ namespace SOC.QuestObjects.Common
                 typeof(Item.ItemDetail),
                 typeof(ActiveItem.ActiveItemDetail),
                 typeof(Model.ModelDetail),
+                typeof(Enemy.EnemyDetail)
             }; 
             return AllDetailTypes;
         }

@@ -13,7 +13,7 @@ using SOC.Core.Classes.Route;
 
 namespace SOC.QuestObjects.Animal
 {
-    class AnimalVisualizer : DetailVisualizer
+    class AnimalVisualizer : LocationalVisualizer
     {
         public AnimalVisualizer(LocationalDataStub stub, AnimalControl control) : base(stub, control, control.panelQuestBoxes) { }
 

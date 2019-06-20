@@ -85,6 +85,7 @@ namespace SOC.UI
             buttonBack.Visible = false;
             panelMain.Controls.Clear();
             panelMain.Controls.Add(setupPage);
+            managerMaster.UpdateAllDetailsFromControl();
             managerMaster.RefreshAllStubTexts();
             buttonNext.Text = "Next >>";
         }
@@ -148,7 +149,7 @@ namespace SOC.UI
                 managerMaster.SetManagerArray(new ManagerArray(quest.questObjectDetails));
                 setupPage.managerMaster.ToString();
                 setupPage.SetForm(quest.coreDetails);
-                managerMaster.LoadAllStubTexts();
+                managerMaster.RefreshAllStubTexts();
             }
         }
 

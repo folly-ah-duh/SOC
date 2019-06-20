@@ -72,12 +72,6 @@ namespace SOC.QuestObjects.Common
             return locVisualizer.detailStub;
         }
 
-        public void LoadStub()
-        {
-            LocationalVisualizer locVisualizer = (LocationalVisualizer)detailVisualizer;
-            locVisualizer.DrawStubText(detail);
-        }
-
         public void RefreshStub()
         {
             LocationalVisualizer locVisualizer = (LocationalVisualizer)detailVisualizer;

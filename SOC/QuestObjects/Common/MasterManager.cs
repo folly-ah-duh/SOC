@@ -60,23 +60,10 @@ namespace SOC.QuestObjects.Common
         {
             foreach (DetailManager manager in managerArray.GetManagers())
             {
-                manager.UpdateDetailFromControl();
-                if(manager.GetType() == typeof(LocationalManager))
+                if(manager is LocationalManager)
                 {
                     LocationalManager locManager = (LocationalManager)manager;
                     locManager.RefreshStub();
-                }
-            }
-        }
-
-        public void LoadAllStubTexts()
-        {
-            foreach (DetailManager manager in managerArray.GetManagers())
-            {
-                if (manager.GetType() == typeof(LocationalManager))
-                {
-                    LocationalManager locManager = (LocationalManager)manager;
-                    locManager.LoadStub();
                 }
             }
         }

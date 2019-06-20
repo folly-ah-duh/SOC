@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace SOC.QuestObjects.Enemy
 {
@@ -8,14 +9,17 @@ namespace SOC.QuestObjects.Enemy
         {
             InitializeComponent();
             comboBox_ObjType.SelectedIndex = 0;
-            //comboBox_Subtype.SelectedIndex = 0;
             Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
         }
 
-        internal void SetMetadata(EnemyMetadata meta)
+        internal void SetMetadata(EnemyMetadata meta, List<string> subtypes)
         {
             comboBox_ObjType.Text = meta.objectiveType;
-            //comboBox_Subtype.Text = meta.subtype;
+            comboBox_Subtype.Items.AddRange(subtypes.ToArray());
+            if (comboBox_Subtype.Items.Contains(meta.subtype))
+                comboBox_Subtype.Text = meta.subtype;
+            else if (comboBox_Subtype.Items.Count > 0)
+                comboBox_Subtype.SelectedIndex = 0;
         }
     }
 }

@@ -18,11 +18,13 @@ namespace SOC.QuestObjects.Enemy
         public EnemyVisualizer(EnemyControl control) : base(control, control.panelQuestBoxes) { }
 
         List<string> routes = new List<string>();
+        List<string> bodies = new List<string>();
+        List<string> subtypes = new List<string>();
 
         public override void DrawMetadata(Metadata meta)
         {
             EnemyControl control = (EnemyControl)detailControl;
-            control.SetMetadata((EnemyMetadata)meta);
+            control.SetMetadata((EnemyMetadata)meta, subtypes);
         }
 
         public override Metadata GetMetadataFromControl()
@@ -32,7 +34,7 @@ namespace SOC.QuestObjects.Enemy
 
         public override QuestBox NewBox(QuestObject qObject)
         {
-            return new EnemyBox((Enemy)qObject, routes); // also: regional body fovas
+            return new EnemyBox((Enemy)qObject, routes, bodies);
         }
 
         public override Detail NewDetail(Metadata meta, IEnumerable<QuestObject> qObjects)
@@ -42,22 +44,34 @@ namespace SOC.QuestObjects.Enemy
 
         public override void SetDetailsFromSetup(Detail detail, CoreDetails core)
         {
+            // Routes
             RouteManager router = new RouteManager();
             List<string> eneRoutes = router.GetRouteNames(core.routeName);
             eneRoutes.AddRange(EnemyInfo.GetCP(core.CPName).CPsoldierRoutes);
             routes = eneRoutes;
 
-            string[] soldiers = EnemyInfo.GetCP(core.CPName).CPsoldiers;
+            // Bodies
+            List<string> eneBodies = NPCBodyInfo.GetRegionBodies(core.locationID).ToList();
+            bodies = eneBodies;
+
+            // SubTypes
+            List<string> eneSubTypes = NPCBodyInfo.GetRegionSubTypes(core.locationID).ToList();
+            subtypes = eneSubTypes;
+
+            // Add/remove/modify detail soldiers
+            string[] soldiers = new string[0];
+            if (core.CPName != "NONE" || core.routeName != "NONE")
+                soldiers = EnemyInfo.GetQuestSoldierNames(core.CPName, core.locationID);
+
             List<Enemy> qObjects = detail.GetQuestObjects().Cast<Enemy>().ToList();
             int soldierCount = soldiers.Length;
             int objectCount = qObjects.Count;
-
+            
             for (int i = 0; i < soldierCount; i++)
             {
                 if (i >= objectCount) // add
                 {
                     qObjects.Add(new Enemy(soldiers[i]));
-                    Console.WriteLine(soldiers[i]);
                 }
                 else // modify
                 {
@@ -71,6 +85,7 @@ namespace SOC.QuestObjects.Enemy
             }
 
             detail.SetQuestObjects(qObjects.Cast<QuestObject>().ToList());
+            EnemyBox.ResetFovaCounts();
         }
     }
 }

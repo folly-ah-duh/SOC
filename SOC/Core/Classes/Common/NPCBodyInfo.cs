@@ -4,17 +4,35 @@ namespace SOC.Classes.Common
 {
     public static class NPCBodyInfo
     {
+        // SubTypes
         public static string[] mafrSubTypes =
         {
             "PF_A",
             "PF_B",
             "PF_C",
         };
+
         public static string[] afghSubTypes =
         {
             "SOVIET_A",
             "SOVIET_B",
         };
+
+        public static string[] mtbsSubTypes = {
+
+        };
+
+        public static string[] GetRegionSubTypes(int locId)
+        {
+            if (LoadAreas.isAfgh(locId))
+                return afghSubTypes;
+            else if (LoadAreas.isMafr(locId))
+                return mafrSubTypes;
+            else
+                return mtbsSubTypes;
+        }
+
+        // Region Bodies
         public static string[] mafrBodies =
         {
             "DEFAULT",
@@ -47,6 +65,7 @@ namespace SOC.Classes.Common
             "pfs0_unq_v155",
             "svs0_dds0_v00",
         };
+
         public static string[] afghBodies =
         {
             "DEFAULT",
@@ -82,6 +101,22 @@ namespace SOC.Classes.Common
             "pfs0_dds0_v00",
         };
 
+        public static string[] mtbsBodies = {
+
+        };
+
+        public static string[] GetRegionBodies(int locId)
+        {
+            if (LoadAreas.isAfgh(locId))
+                return afghBodies;
+            else if (LoadAreas.isMafr(locId))
+                return mafrBodies;
+            else
+                return mtbsBodies;
+        }
+
+
+        // IH hostage fv2's
         public static BodyInfoEntry[] BodyInfoArray = {
              new BodyInfoEntry(
                 "AFGH_HOSTAGE",

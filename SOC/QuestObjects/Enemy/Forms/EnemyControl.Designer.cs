@@ -32,7 +32,6 @@
             this.panelQuestBoxes = new System.Windows.Forms.FlowLayoutPanel();
             this.label_ObjType = new System.Windows.Forms.Label();
             this.comboBox_ObjType = new System.Windows.Forms.ComboBox();
-            this.checkBox_AllSoldiers = new System.Windows.Forms.CheckBox();
             this.label_Subtype = new System.Windows.Forms.Label();
             this.comboBox_Subtype = new System.Windows.Forms.ComboBox();
             this.groupboxDetail.SuspendLayout();
@@ -43,7 +42,6 @@
             this.groupboxDetail.Controls.Add(this.panelQuestBoxes);
             this.groupboxDetail.Controls.Add(this.label_ObjType);
             this.groupboxDetail.Controls.Add(this.comboBox_ObjType);
-            this.groupboxDetail.Controls.Add(this.checkBox_AllSoldiers);
             this.groupboxDetail.Controls.Add(this.label_Subtype);
             this.groupboxDetail.Controls.Add(this.comboBox_Subtype);
             this.groupboxDetail.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -61,10 +59,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelQuestBoxes.AutoScroll = true;
             this.panelQuestBoxes.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.panelQuestBoxes.Location = new System.Drawing.Point(3, 119);
+            this.panelQuestBoxes.Location = new System.Drawing.Point(3, 96);
             this.panelQuestBoxes.Margin = new System.Windows.Forms.Padding(0);
             this.panelQuestBoxes.Name = "panelQuestBoxes";
-            this.panelQuestBoxes.Size = new System.Drawing.Size(294, 327);
+            this.panelQuestBoxes.Size = new System.Drawing.Size(294, 350);
             this.panelQuestBoxes.TabIndex = 17;
             this.panelQuestBoxes.WrapContents = false;
             // 
@@ -93,18 +91,6 @@
             this.comboBox_ObjType.Name = "comboBox_ObjType";
             this.comboBox_ObjType.Size = new System.Drawing.Size(288, 21);
             this.comboBox_ObjType.TabIndex = 18;
-            // 
-            // checkBox_AllSoldiers
-            // 
-            this.checkBox_AllSoldiers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox_AllSoldiers.AutoSize = true;
-            this.checkBox_AllSoldiers.Location = new System.Drawing.Point(6, 99);
-            this.checkBox_AllSoldiers.Name = "checkBox_AllSoldiers";
-            this.checkBox_AllSoldiers.Size = new System.Drawing.Size(113, 17);
-            this.checkBox_AllSoldiers.TabIndex = 14;
-            this.checkBox_AllSoldiers.Text = "Enable All Soldiers";
-            this.checkBox_AllSoldiers.UseVisualStyleBackColor = true;
             // 
             // label_Subtype
             // 
@@ -147,7 +133,6 @@
         public System.Windows.Forms.FlowLayoutPanel panelQuestBoxes;
         private System.Windows.Forms.Label label_ObjType;
         public System.Windows.Forms.ComboBox comboBox_ObjType;
-        public System.Windows.Forms.CheckBox checkBox_AllSoldiers;
         private System.Windows.Forms.Label label_Subtype;
         public System.Windows.Forms.ComboBox comboBox_Subtype;
     }

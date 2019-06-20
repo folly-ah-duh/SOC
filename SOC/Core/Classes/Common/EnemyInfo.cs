@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SOC.Classes.Common
@@ -6,7 +7,6 @@ namespace SOC.Classes.Common
     public struct CP // each CP contains a CP name, The CP soldiers, the CP routes
     {
         public string CPname;
-        //public string CPArea;
         public string[] CPsoldiers;
         public string[] CPsoldierRoutes;
         public string[] CPheliRoutes;
@@ -14,13 +14,6 @@ namespace SOC.Classes.Common
         public CP(string name, string[] sol, string[] route, string[] hRoute)
         {
             CPname = name;
-            /*
-            string[] CPSplit = CPname.Split('_');
-            if (CPSplit.Length > 1)
-                CPArea = CPSplit[1];
-            else
-                CPArea = "NONE";
-            */
             CPsoldiers = sol;
             CPsoldierRoutes = route;
             CPheliRoutes = hRoute;
@@ -34,10 +27,6 @@ namespace SOC.Classes.Common
     {
         public const int MAXQUESTFOVA = 8;
 
-        public static int armorCount = 0;
-        public static int balaCount = 0;
-        public static int zombieCount = 0;
-
         public static string getRegion(CP currentCP)
         {
             if (AfghCPs.Contains(currentCP))
@@ -46,25 +35,6 @@ namespace SOC.Classes.Common
                 return "mafr";
             else
                 return "mtbs";
-        }
-
-        public static CP GetCPIndex(string CPName, int locId)
-        {
-            CP[] cpArray;
-            if (locId == 10)
-                cpArray = AfghCPs;
-            else if (locId == 20)
-                cpArray = MafrCPs;
-            else
-                return MtbsCP;
-
-            foreach (CP cp in cpArray)
-            {
-                if (cp.CPname.Equals(CPName))
-                    return cp;
-            }
-
-            return NoneCP;
         }
 
         public static CP GetCP(string CPName)
@@ -89,6 +59,30 @@ namespace SOC.Classes.Common
         public static string[] GetCPNames(params CP[] regionCPs)
         {
             return regionCPs.Select(entry => entry.CPname).ToArray();
+        }
+
+        public static string[] GetQuestSoldierNames(string CPName, int locId)
+        {
+            if (LoadAreas.isMtbs(locId))
+                return MtbsCP.CPsoldiers;
+
+            List<string> soldierNames = new List<string>();
+            soldierNames.AddRange(QuestSoldierNames);
+
+            if (LoadAreas.isAfgh(locId))
+                foreach (CP cp in AfghCPs)
+                {
+                    if (CPName == cp.CPname)
+                        soldierNames.AddRange(cp.CPsoldiers);
+                }
+            else
+                foreach (CP cp in MafrCPs)
+                {
+                    if (CPName == cp.CPname)
+                        soldierNames.AddRange(cp.CPsoldiers);
+                }
+
+            return soldierNames.ToArray();
         }
 
         public static CP MtbsCP = new CP("mtbs", new string[] { }, new string[] { }, new string[] { });
@@ -4051,6 +4045,17 @@ namespace SOC.Classes.Common
                 }),
         };
 
+        public static string[] QuestSoldierNames =
+        {
+            "sol_quest_0000",
+            "sol_quest_0001",
+            "sol_quest_0002",
+            "sol_quest_0003",
+            "sol_quest_0004",
+            "sol_quest_0005",
+            "sol_quest_0006",
+            "sol_quest_0007",
+        };
     }
 
 

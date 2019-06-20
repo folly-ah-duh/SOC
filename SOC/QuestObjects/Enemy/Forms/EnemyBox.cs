@@ -17,42 +17,52 @@ namespace SOC.QuestObjects.Enemy
     {
         public string enemyName;
 
-        public EnemyBox(Enemy qObject, List<string> routes) // separate into questenemy, exisitingenemy via conditional
+        private static int armorCount = 0;
+        private static int balaclavaCount = 0;
+        public static void ResetFovaCounts()
+        {
+            armorCount = 0;
+            balaclavaCount = 0;
+        }
+
+        public EnemyBox(Enemy qObject, List<string> routes, List<string> bodies)
         {
             InitializeComponent();
-            groupBox_main.Text = qObject.GetObjectName();
+            string soldierName = qObject.GetObjectName();
+            if (!soldierName.Contains("sol_quest"))
+            {
+                RelabelCPSoldier();
+                comboBox_sneakroute.Items.Add("DEFAULT");
+                comboBox_cautionroute.Items.Add("DEFAULT");
+            }
+            groupBox_main.Text = soldierName;
 
             checkBox_spawn.Checked = qObject.spawn;
             checkBox_target.Checked = qObject.isTarget;
             checkBox_balaclava.Checked = qObject.balaclava;
             checkBox_zombie.Checked = qObject.zombie;
-
-            comboBox_sneakroute.Items.Add("NONE"); // questenemy should not have none option
-            comboBox_sneakroute.Items.AddRange(routes.ToArray());
-            if (comboBox_sneakroute.Items.Contains(qObject.dRoute))
-            {
-                comboBox_sneakroute.Text = qObject.dRoute;
-            }
-            else
-            {
-                comboBox_sneakroute.Text = "NONE";
-            }
-
-            comboBox_cautionroute.Items.Add("NONE");
-            comboBox_cautionroute.Items.AddRange(routes.ToArray());
-            if (comboBox_cautionroute.Items.Contains(qObject.cRoute))
-            {
-                comboBox_cautionroute.Text = qObject.cRoute;
-            }
-            else
-            {
-                comboBox_cautionroute.Text = "NONE";
-            }
             
+            comboBox_sneakroute.Items.AddRange(routes.ToArray());
+            SetComboBox(comboBox_sneakroute, qObject.dRoute);
+
+            comboBox_cautionroute.Items.AddRange(routes.ToArray());
+            SetComboBox(comboBox_cautionroute, qObject.cRoute);
+
+            comboBox_power.Items.AddRange(EnemyInfo.powerSetting);
             listBox_power.Items.AddRange(qObject.powers);
 
             checkBox_armor.Checked = qObject.armored;
-            
+
+            comboBox_body.Items.AddRange(bodies.ToArray());
+            SetComboBox(comboBox_body, qObject.body);
+
+            comboBox_skill.Items.AddRange(NPCMtbsInfo.skills);
+            SetComboBox(comboBox_skill, qObject.skill);
+
+            comboBox_staff.Items.AddRange(NPCMtbsInfo.Staff_Type_ID);
+            SetComboBox(comboBox_staff, qObject.staffType);
+
+            UpdateSpawn(true);
         }
 
         public override QuestObject getQuestObject()
@@ -60,15 +70,21 @@ namespace SOC.QuestObjects.Enemy
             return new Enemy(this);
         }
 
-        /*
-        private void groupBox_main_Disposed(object sender, EventArgs e)
+        private void SetComboBox(ComboBox comboBox, string text)
         {
-            if (checkBox_armor.Checked)
-                QuestComponents.EnemyInfo.armorCount--;
-            if (checkBox_armor.Checked)
-                QuestComponents.EnemyInfo.zombieCount--;
-            if (checkBox_balaclava.Checked)
-                QuestComponents.EnemyInfo.balaCount--;
+            if (comboBox.Items.Contains(text))
+            {
+                comboBox.Text = text;
+            }
+            else
+            {
+                comboBox.SelectedIndex = 0;
+            }
+        }
+
+        private void RelabelCPSoldier()
+        {
+            checkBox_spawn.Text = "Customize";
         }
 
         private void checkBox_spawn_CheckedChanged(object sender, EventArgs e)
@@ -76,16 +92,17 @@ namespace SOC.QuestObjects.Enemy
             UpdateSpawn();
         }
 
-        private void UpdateSpawn()
+        private void UpdateSpawn(bool initialSetup = false)
         {
             if (checkBox_spawn.Checked)
             {
+                checkBox_balaclava.Enabled = true;
+                checkBox_armor.Enabled = true;
                 label_skill.Enabled = true;
                 label_sneakroute.Enabled = true;
                 label_staff.Enabled = true;
-                label_target.Enabled = true;
                 listBox_power.Enabled = true;
-                checkBox_armor.Enabled = true;
+                listBox_power.SelectedIndex = listBox_power.Items.Count - 1;
                 checkBox_target.Enabled = true;
                 comboBox_body.Enabled = true;
                 comboBox_cautionroute.Enabled = true;
@@ -93,31 +110,39 @@ namespace SOC.QuestObjects.Enemy
                 comboBox_skill.Enabled = true;
                 comboBox_sneakroute.Enabled = true;
                 comboBox_staff.Enabled = true;
-                label_armor.Enabled = true;
                 label_body.Enabled = true;
                 label_cautionroute.Enabled = true;
                 label_power.Enabled = true;
-                label_balaclava.Enabled = true;
-                checkBox_balaclava.Enabled = true;
-                label_zombie.Enabled = true;
                 checkBox_zombie.Enabled = true;
-                button_removepower.Enabled = true;
+
+                if(listBox_power.Items.Count > 0)
+                    button_removepower.Enabled = true;
+
                 button_SwapRoutes.Enabled = true;
                 button_SneakToCaution.Enabled = true;
                 button_CautionToSneak.Enabled = true;
 
-                if (checkBox_balaclava.Checked) { updateBalaclava(); }
-                if (checkBox_zombie.Checked) { updateZombie(); }
-                if (checkBox_armor.Checked) { updateArmor(); }
+                if (checkBox_armor.Checked)
+                    ArmorChecked();
+
+                if (checkBox_balaclava.Checked)
+                    BalaclavaChecked();
             }
             else
             {
+                checkBox_armor.Enabled = false;
+                if (checkBox_armor.Checked && !initialSetup)
+                    armorCount--;
+
+                checkBox_balaclava.Enabled = false;
+                if (checkBox_balaclava.Checked && !initialSetup)
+                    balaclavaCount--;
+
                 label_skill.Enabled = false;
                 label_sneakroute.Enabled = false;
                 label_staff.Enabled = false;
-                label_target.Enabled = false;
+                listBox_power.SelectedIndex = -1;
                 listBox_power.Enabled = false;
-                checkBox_armor.Enabled = false;
                 checkBox_target.Enabled = false;
                 comboBox_body.Enabled = false;
                 comboBox_cautionroute.Enabled = false;
@@ -125,25 +150,18 @@ namespace SOC.QuestObjects.Enemy
                 comboBox_skill.Enabled = false;
                 comboBox_sneakroute.Enabled = false;
                 comboBox_staff.Enabled = false;
-                label_armor.Enabled = false;
                 label_body.Enabled = false;
                 label_cautionroute.Enabled = false;
                 label_power.Enabled = false;
-                label_balaclava.Enabled = false;
-                checkBox_balaclava.Enabled = false;
-                label_zombie.Enabled = false;
                 checkBox_zombie.Enabled = false;
                 button_removepower.Enabled = false;
                 button_SwapRoutes.Enabled = false;
                 button_SneakToCaution.Enabled = false;
                 button_CautionToSneak.Enabled = false;
-
-                if (checkBox_balaclava.Checked) { QuestComponents.EnemyInfo.balaCount--; }
-                if (checkBox_zombie.Checked) { QuestComponents.EnemyInfo.zombieCount--; }
-                if (checkBox_armor.Checked) { QuestComponents.EnemyInfo.armorCount--; }
             }
 
         }
+
         private void SwapRoute_Button_Clicked(object sender, EventArgs e)
         {
             string cRoute = comboBox_cautionroute.Text;
@@ -163,99 +181,7 @@ namespace SOC.QuestObjects.Enemy
             comboBox_sneakroute.Text = comboBox_cautionroute.Text;
             groupBox_main.Focus();
         }
-
-        private void armor_Checkbox_Clicked(object sender, EventArgs e)
-        {
-            updateArmor();
-            groupBox_main.Focus();
-        }
-        private void balaclava_checkbox_clicked(object sender, EventArgs e)
-        {
-            updateBalaclava();
-            groupBox_main.Focus();
-
-        }
-        private void zombie_checkbox_clicked(object sender, EventArgs e)
-        {
-            updateZombie();
-            groupBox_main.Focus();
-        }
-
-        private void updateArmor()
-        {
-            if (checkBox_armor.Checked)
-            {
-                if (QuestComponents.EnemyInfo.armorCount >= QuestComponents.EnemyInfo.MAXQUESTFOVA)
-                {
-                    MessageBox.Show("Heavy Armor can only be applied to 8 soldiers maximum.", "Game Limitation Exceeded", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    checkBox_armor.Checked = false;
-                    if (listBox_power.Items.Contains("QUEST_ARMOR"))
-                    {
-                        listBox_power.Items.Remove("QUEST_ARMOR");
-                        listBox_power.SelectedIndex = listBox_power.Items.Count - 1;
-                    }
-                }
-                else
-                {
-                    QuestComponents.EnemyInfo.armorCount++;
-                    if (!listBox_power.Items.Contains("QUEST_ARMOR"))
-                    {
-                        listBox_power.Items.Add("QUEST_ARMOR");
-                        listBox_power.SelectedIndex = listBox_power.Items.Count - 1;
-                    }
-                    comboBox_body.Enabled = false;
-                    checkBox_balaclava.Enabled = false;
-                    label_body.Enabled = false;
-                    label_balaclava.Enabled = false;
-                }
-            }
-            else
-            {
-                QuestComponents.EnemyInfo.armorCount--;
-                comboBox_body.Enabled = true;
-                checkBox_balaclava.Enabled = true;
-                label_body.Enabled = true;
-                label_balaclava.Enabled = true;
-                listBox_power.Items.Remove("QUEST_ARMOR");
-                listBox_power.SelectedIndex = listBox_power.Items.Count - 1;
-            }
-
-            groupBox_main.Focus();
-        }
-
-        private void updateZombie()
-        {
-            if (checkBox_zombie.Checked)
-                QuestComponents.EnemyInfo.zombieCount++;
-            else
-                QuestComponents.EnemyInfo.zombieCount--;
-            groupBox_main.Focus();
-        }
-
-        private void updateBalaclava()
-        {
-            if (checkBox_balaclava.Checked)
-            {
-                if (QuestComponents.EnemyInfo.balaCount >= QuestComponents.EnemyInfo.MAXQUESTFOVA)
-                {
-                    MessageBox.Show("Balaclavas can only be applied to 8 soldiers maximum.", "Game Limitation Exceeded", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    checkBox_balaclava.Checked = false;
-                }
-                else
-                {
-                    QuestComponents.EnemyInfo.balaCount++;
-                    checkBox_armor.Enabled = false;
-                    label_armor.Enabled = false;
-                }
-            }
-            else
-            {
-                QuestComponents.EnemyInfo.balaCount--;
-                checkBox_armor.Enabled = true;
-                label_armor.Enabled = true;
-            }
-        }
-
+        
         private void listBox_power_selectedIndexChanged(object sender, EventArgs e)
         {
             if (listBox_power.SelectedIndex > -1)
@@ -265,32 +191,7 @@ namespace SOC.QuestObjects.Enemy
             groupBox_main.Focus();
         }
 
-        public override GroupBox getGroupBoxMain()
-        {
-            return groupBox_main;
-        }
-
-        public override void SetObject(QuestBox detail)
-        {
-            EnemyBox enemyDetail = (EnemyBox)detail;
-
-            checkBox_armor.Checked = enemyDetail.checkBox_armor.Checked;
-            checkBox_spawn.Checked = enemyDetail.checkBox_spawn.Checked;
-            checkBox_target.Checked = enemyDetail.checkBox_target.Checked;
-            checkBox_balaclava.Checked = enemyDetail.checkBox_balaclava.Checked;
-            checkBox_zombie.Checked = enemyDetail.checkBox_zombie.Checked;
-
-            listBox_power.Text = enemyDetail.listBox_power.Text;
-
-            comboBox_cautionroute.Text = enemyDetail.comboBox_cautionroute.Text;
-            comboBox_sneakroute.Text = enemyDetail.comboBox_sneakroute.Text;
-
-            comboBox_body.Text = enemyDetail.comboBox_body.Text;
-            comboBox_skill.Text = enemyDetail.comboBox_skill.Text;
-            comboBox_staff.Text = enemyDetail.comboBox_staff.Text;
-        }
-
-        private void powerChanged(object sender, EventArgs e)
+        private void comboBox_power_selectedIndexChanged(object sender, EventArgs e)
         {
             if (!listBox_power.Items.Contains(comboBox_power.Text))
             {
@@ -299,21 +200,94 @@ namespace SOC.QuestObjects.Enemy
                 groupBox_main.Focus();
             }
         }
+
         private void button_removepower_Click(object sender, EventArgs e)
         {
 
             if (listBox_power.Text.Equals("QUEST_ARMOR"))
             {
                 checkBox_armor.Checked = false;
-                updateArmor();
             }
             else if (listBox_power.SelectedIndex != -1)
             {
                 listBox_power.Items.RemoveAt(listBox_power.SelectedIndex);
                 listBox_power.SelectedIndex = listBox_power.Items.Count - 1;
-                groupBox_main.Focus();
+            }
+            groupBox_main.Focus();
+        }
+
+        private void checkBox_armor_Click(object sender, EventArgs e)
+        {
+            if (checkBox_armor.Checked)
+                ArmorChecked();
+            else
+                ArmorUnchecked();
+            Console.WriteLine(armorCount);
+        }
+
+        private void ArmorChecked()
+        {
+            if (armorCount >= EnemyInfo.MAXQUESTFOVA)
+            {
+                MessageBox.Show("Heavy Armor can only be applied to 8 soldiers maximum.", "Game Limitation Exceeded", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                checkBox_armor.Checked = false;
+                if (listBox_power.Items.Contains("QUEST_ARMOR"))
+                {
+                    listBox_power.Items.Remove("QUEST_ARMOR");
+                    listBox_power.SelectedIndex = listBox_power.Items.Count - 1;
+                }
+            }
+            else
+            {
+                armorCount++;
+                if (!listBox_power.Items.Contains("QUEST_ARMOR"))
+                {
+                    listBox_power.Items.Add("QUEST_ARMOR");
+                    listBox_power.SelectedIndex = listBox_power.Items.Count - 1;
+                }
+                comboBox_body.Enabled = false;
+                checkBox_balaclava.Enabled = false;
+                label_body.Enabled = false;
             }
         }
-        */
+
+        private void ArmorUnchecked()
+        {
+            armorCount--;
+            comboBox_body.Enabled = true;
+            checkBox_balaclava.Enabled = true;
+            label_body.Enabled = true;
+            listBox_power.Items.Remove("QUEST_ARMOR");
+            listBox_power.SelectedIndex = listBox_power.Items.Count - 1;
+        }
+
+        private void checkBox_balaclava_Click(object sender, EventArgs e)
+        {
+            if (checkBox_balaclava.Checked)
+                BalaclavaChecked();
+            else
+                BalaclavaUnchecked();
+            Console.WriteLine(balaclavaCount);
+        }
+
+        private void BalaclavaChecked()
+        {
+            if (balaclavaCount >= EnemyInfo.MAXQUESTFOVA)
+            {
+                MessageBox.Show("Balaclavas can only be applied to 8 soldiers maximum.", "Game Limitation Exceeded", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                checkBox_balaclava.Checked = false;
+            }
+            else
+            {
+                balaclavaCount++;
+                checkBox_armor.Enabled = false;
+            }
+        }
+
+        private void BalaclavaUnchecked()
+        {
+            balaclavaCount--;
+            checkBox_armor.Enabled = true;
+        }
     }
 }

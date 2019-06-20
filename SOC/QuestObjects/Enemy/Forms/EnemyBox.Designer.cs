@@ -63,6 +63,7 @@
             this.checkBox_balaclava.TabIndex = 5;
             this.checkBox_balaclava.Text = "Balaclava";
             this.checkBox_balaclava.UseVisualStyleBackColor = true;
+            this.checkBox_balaclava.Click += new System.EventHandler(this.checkBox_balaclava_Click);
             // 
             // checkBox_zombie
             // 
@@ -117,6 +118,7 @@
             this.comboBox_power.Name = "comboBox_power";
             this.comboBox_power.Size = new System.Drawing.Size(174, 21);
             this.comboBox_power.TabIndex = 22;
+            this.comboBox_power.SelectedIndexChanged += new System.EventHandler(this.comboBox_power_selectedIndexChanged);
             // 
             // button_removepower
             // 
@@ -127,6 +129,7 @@
             this.button_removepower.TabIndex = 21;
             this.button_removepower.Text = "Remove";
             this.button_removepower.UseVisualStyleBackColor = true;
+            this.button_removepower.Click += new System.EventHandler(this.button_removepower_Click);
             // 
             // label_power
             // 
@@ -158,6 +161,7 @@
             this.listBox_power.Name = "listBox_power";
             this.listBox_power.Size = new System.Drawing.Size(174, 54);
             this.listBox_power.TabIndex = 18;
+            this.listBox_power.SelectedIndexChanged += new System.EventHandler(this.listBox_power_selectedIndexChanged);
             // 
             // label_skill
             // 
@@ -267,6 +271,7 @@
             this.checkBox_armor.TabIndex = 3;
             this.checkBox_armor.Text = "Heavy Armor";
             this.checkBox_armor.UseVisualStyleBackColor = true;
+            this.checkBox_armor.Click += new System.EventHandler(this.checkBox_armor_Click);
             // 
             // checkBox_spawn
             // 
@@ -277,6 +282,7 @@
             this.checkBox_spawn.TabIndex = 1;
             this.checkBox_spawn.Text = "Spawn";
             this.checkBox_spawn.UseVisualStyleBackColor = true;
+            this.checkBox_spawn.CheckedChanged += new System.EventHandler(this.checkBox_spawn_CheckedChanged);
             // 
             // button_SneakToCaution
             // 
@@ -287,6 +293,7 @@
             this.button_SneakToCaution.TabIndex = 21;
             this.button_SneakToCaution.Text = "↓";
             this.button_SneakToCaution.UseVisualStyleBackColor = true;
+            this.button_SneakToCaution.Click += new System.EventHandler(this.SneakToCaution_Button_Clicked);
             // 
             // button_CautionToSneak
             // 
@@ -297,6 +304,7 @@
             this.button_CautionToSneak.TabIndex = 21;
             this.button_CautionToSneak.Text = "↑";
             this.button_CautionToSneak.UseVisualStyleBackColor = true;
+            this.button_CautionToSneak.Click += new System.EventHandler(this.CautionToSneak_Button_Clicked);
             // 
             // button_SwapRoutes
             // 
@@ -307,13 +315,14 @@
             this.button_SwapRoutes.TabIndex = 21;
             this.button_SwapRoutes.Text = "↕";
             this.button_SwapRoutes.UseVisualStyleBackColor = true;
+            this.button_SwapRoutes.Click += new System.EventHandler(this.SwapRoute_Button_Clicked);
             // 
-            // EnemyBoxF
+            // EnemyBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox_main);
-            this.Name = "EnemyBoxF";
+            this.Name = "EnemyBox";
             this.Size = new System.Drawing.Size(268, 319);
             this.groupBox_main.ResumeLayout(false);
             this.groupBox_main.PerformLayout();

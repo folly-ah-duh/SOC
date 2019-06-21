@@ -42,7 +42,7 @@ namespace SOC.QuestObjects.Hostage
 
         private static string BuildHostageList(HostageDetail hostageDetail)
         {
-            StringBuilder hostageListBuilder = new StringBuilder(@"hostageList = {");
+            StringBuilder hostageListBuilder = new StringBuilder("hostageList = {");
             List<Hostage> hostages = hostageDetail.hostages;
             HostageMetadata meta = hostageDetail.hostageMetadata;
 

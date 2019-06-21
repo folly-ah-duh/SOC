@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using SOC.Classes.Assets;
+using System.IO;
 using System.Reflection;
 
 namespace SOC.Core.Classes.Route
@@ -7,17 +8,14 @@ namespace SOC.Core.Classes.Route
     {
         public static string routeAssetsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//RouteAssets");
 
-        public static void BuildRouteAssets(string FPKPath, string routeName)
+        public static void BuildRouteAssets(string routeName, FileAssets fileAssets)
         {
-            string FPKPathAssets = FPKPath + "//Assets";
-            if (!Directory.Exists(FPKPathAssets))
-                Directory.CreateDirectory(FPKPathAssets);
             if (!routeName.Equals("NONE"))
             {
-                string sourceRouteFileName = Path.Combine(routeAssetsPath, routeName) + ".frt";
-                string destRouteFileName = Path.Combine(FPKPathAssets, routeName) + ".frt";
+                string frtFilePath = Path.Combine(routeAssetsPath, routeName) + ".frt";
+                string destinationFpkPath = Path.Combine(fileAssets.questFPKPath, "Assets", routeName + ".frt");
 
-                File.Copy(sourceRouteFileName, destRouteFileName, true);
+                fileAssets.AddIndividualFile(frtFilePath, destinationFpkPath);
             }
         }
     }

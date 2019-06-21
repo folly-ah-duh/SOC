@@ -7,6 +7,7 @@ using SOC.Classes.Common;
 using SOC.QuestObjects.Common;
 using System.IO;
 using SOC.Classes.Assets;
+using SOC.Core.Classes.Route;
 
 namespace SOC.Classes.QuestBuild.Assets
 {
@@ -15,6 +16,8 @@ namespace SOC.Classes.QuestBuild.Assets
         internal static void BuildAssets(CoreDetails coreDetails, MasterManager masterManager)
         {
             FileAssets fileAssets = new FileAssets(coreDetails.FpkName);
+
+            RouteAssets.BuildRouteAssets(coreDetails.routeName, fileAssets);
 
             foreach(DetailManager manager in masterManager.GetManagers())
             {

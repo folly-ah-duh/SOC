@@ -15,8 +15,6 @@ namespace SOC.QuestObjects.Enemy
 {
     public partial class EnemyBox : QuestBox
     {
-        public string enemyName;
-
         private static int armorCount = 0;
         private static int balaclavaCount = 0;
         public static void ResetFovaCounts()

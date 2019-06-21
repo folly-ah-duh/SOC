@@ -11,6 +11,7 @@ namespace SOC.QuestObjects.Common
         public static Type[] GetAllDetailTypes() // Note: attach modules here
         {
             Type[] AllDetailTypes = {
+                typeof(Enemy.EnemyDetail),
                 typeof(Hostage.HostageDetail),
                 typeof(Vehicle.VehicleDetail),
                 typeof(Helicopter.HelicopterDetail),
@@ -19,7 +20,6 @@ namespace SOC.QuestObjects.Common
                 typeof(Item.ItemDetail),
                 typeof(ActiveItem.ActiveItemDetail),
                 typeof(Model.ModelDetail),
-                typeof(Enemy.EnemyDetail)
             }; 
             return AllDetailTypes;
         }

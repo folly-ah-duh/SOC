@@ -19,18 +19,17 @@ namespace SOC.QuestObjects.Enemy
 
         public override void AddToDefinitionLua(DefinitionLua definitionLua)
         {
-        }
-
-        public override void AddToFox2Entities(DataSet dataSet, List<Fox2EntityClass> entityList)
-        {
+            EnemyLua.GetDefinition((EnemyDetail)detail, definitionLua);
         }
 
         public override void AddToMainLua(MainLua mainLua)
         {
+            EnemyLua.GetMain((EnemyDetail)detail, mainLua);
         }
 
         public override void AddToAssets(FileAssets fileAssets)
         {
+            EnemyAssets.GetEnemyAssets((EnemyDetail)detail, fileAssets);
         }
     }
 }

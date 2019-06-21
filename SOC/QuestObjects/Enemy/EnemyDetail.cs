@@ -51,7 +51,7 @@ namespace SOC.QuestObjects.Enemy
 
         public Enemy(EnemyBox box)
         {
-            name = box.enemyName;
+            name = box.groupBox_main.Text;
 
             spawn = box.checkBox_spawn.Checked;
             isTarget = box.checkBox_target.Checked;
@@ -76,7 +76,7 @@ namespace SOC.QuestObjects.Enemy
         [XmlAttribute]
         public string name { get; set; } = "sol_quest_0000";
 
-        [XmlElement]
+        [XmlAttribute]
         public bool spawn { get; set; } = false;
 
         [XmlElement]

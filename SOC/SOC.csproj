@@ -98,11 +98,22 @@
     <Compile Include="Core\Classes\Fox2\EntityClasses\ScriptBlockScript.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\StaticModel.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TexturePackLoadConditioner.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\TppAnimalLocatorParameter.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\TppAnimalParameter.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\TppBearLocatorParameter.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\TppBearParameter.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppHeli2LocatorParameter.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppHostage2LocatorParameter.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppHostage2Parameter.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\TppPickableLocatorParameter.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\TppPlacedLocatorParameter.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\TppVehicle2AttachmentData.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\TppVehicle2BodyData.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\TppVehicle2LocatorParameter.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppWalkerGear2LocatorParameter.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppWalkerGear2Parameter.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\TppWolfLocatorParameter.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\TppWolfParameter.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\Transform.cs" />
     <Compile Include="Core\Classes\Fox2\Fox2EntityClass.cs" />
     <Compile Include="Core\Classes\InfiniteHeaven\Position.cs" />
@@ -126,6 +137,8 @@
     </Compile>
     <Compile Include="QuestObjects\ActiveItem\ActiveItemManager.cs" />
     <Compile Include="QuestObjects\ActiveItem\ActiveItemVisualizer.cs" />
+    <Compile Include="QuestObjects\ActiveItem\Classes\ActiveItemFox2.cs" />
+    <Compile Include="QuestObjects\ActiveItem\Classes\ActiveItemLua.cs" />
     <Compile Include="QuestObjects\ActiveItem\Forms\ActiveItemBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -134,6 +147,8 @@
     </Compile>
     <Compile Include="QuestObjects\Animal\AnimalManager.cs" />
     <Compile Include="QuestObjects\Animal\AnimalVisualizer.cs" />
+    <Compile Include="QuestObjects\Animal\Classes\AnimalFox2.cs" />
+    <Compile Include="QuestObjects\Animal\Classes\AnimalLua.cs" />
     <Compile Include="QuestObjects\Animal\Forms\AnimalBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -233,6 +248,8 @@
     <Compile Include="QuestObjects\Hostage\Forms\HostageControl.Designer.cs">
       <DependentUpon>HostageControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuestObjects\Item\Classes\ItemFox2.cs" />
+    <Compile Include="QuestObjects\Item\Classes\ItemLua.cs" />
     <Compile Include="QuestObjects\Item\Classes\ItemNames.cs" />
     <Compile Include="QuestObjects\Item\Forms\ItemControl.cs">
       <SubType>UserControl</SubType>
@@ -261,6 +278,7 @@
     <Compile Include="QuestObjects\Model\ModelManager.cs" />
     <Compile Include="QuestObjects\Model\ModelVisualizer.cs" />
     <Compile Include="QuestObjects\Vehicle\Classes\VehicleAssets.cs" />
+    <Compile Include="QuestObjects\Vehicle\Classes\VehicleFox2.cs" />
     <Compile Include="QuestObjects\Vehicle\Forms\VehicleBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -274,7 +292,7 @@
       <DependentUpon>ItemBox.cs</DependentUpon>
     </Compile>
     <Compile Include="QuestObjects\Vehicle\VehicleVisualizer.cs" />
-    <Compile Include="QuestObjects\Vehicle\Classes\VehicleNames.cs" />
+    <Compile Include="QuestObjects\Vehicle\Classes\VehicleInfo.cs" />
     <Compile Include="QuestObjects\Vehicle\Forms\VehicleControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

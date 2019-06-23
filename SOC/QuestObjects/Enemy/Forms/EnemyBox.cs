@@ -74,7 +74,7 @@ namespace SOC.QuestObjects.Enemy
             {
                 comboBox.Text = text;
             }
-            else
+            else if (comboBox.Items.Count > 0)
             {
                 comboBox.SelectedIndex = 0;
             }

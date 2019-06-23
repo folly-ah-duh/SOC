@@ -189,12 +189,12 @@
             this.textBox_xcoord.Size = new System.Drawing.Size(54, 20);
             this.textBox_xcoord.TabIndex = 0;
             // 
-            // AnimalBoxF
+            // AnimalBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox_main);
-            this.Name = "AnimalBoxF";
+            this.Name = "AnimalBox";
             this.Size = new System.Drawing.Size(268, 183);
             this.groupBox_main.ResumeLayout(false);
             this.groupBox_main.PerformLayout();

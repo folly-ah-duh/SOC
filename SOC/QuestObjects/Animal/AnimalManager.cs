@@ -25,6 +25,7 @@ namespace SOC.QuestObjects.Animal
 
         public override void AddToFox2Entities(DataSet dataSet, List<Fox2EntityClass> entityList)
         {
+            AnimalFox2.AddQuestEntities((AnimalDetail)detail, dataSet, entityList);
         }
 
         public override void AddToMainLua(MainLua mainLua)

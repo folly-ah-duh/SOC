@@ -19,7 +19,7 @@ namespace SOC.QuestObjects.Vehicle
             foreach(Vehicle vehicle in questDetail.vehicles)
             {
                 string vehicleName;
-                VehicleNames.vehicleName.TryGetValue(vehicle.vehicle, out vehicleName);
+                VehicleInfo.vehicleLuaName.TryGetValue(vehicle.vehicle, out vehicleName);
 
                 fileAssets.AddFPKFolder(Path.Combine(VehFPKAssetsPath, $"{vehicleName}_fpk"));
                 fileAssets.AddFPKDFolder(Path.Combine(VehFPKDAssetsPath, $"{vehicleName}_fpkd"));

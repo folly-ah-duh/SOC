@@ -42,7 +42,8 @@ namespace SOC.QuestObjects.WalkerGear
             WalkerMetadata meta = walkerDetail.walkerMetadata;
 
             if (walkers.Count == 0)
-                walkerListBuilder.Append(" nil ");
+                walkerListBuilder.Append(@"
+        nil ");
             else
                 foreach (WalkerGear walker in walkers)
                 {

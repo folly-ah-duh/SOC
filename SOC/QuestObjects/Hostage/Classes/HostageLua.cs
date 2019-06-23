@@ -52,7 +52,8 @@ namespace SOC.QuestObjects.Hostage
             string untiedCommand = @"{id = ""SetHostage2Flag"",  flag=""unlocked"",   on=true,},";
 
             if (hostages.Count == 0)
-                hostageListBuilder.Append(" nil ");
+                hostageListBuilder.Append(@"
+        nil ");
             else
                 foreach (Hostage hostage in hostages)
                 {

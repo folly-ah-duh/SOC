@@ -28,12 +28,9 @@ namespace SOC.QuestObjects.Vehicle
             VehicleFox2.AddQuestEntities((VehicleDetail)detail, dataSet, entityList);
         }
 
-        public override void AddToDefinitionLua(DefinitionLua definitionLua)
-        {
-        }
-
         public override void AddToMainLua(MainLua mainLua)
         {
+            VehicleLua.GetMain((VehicleDetail)detail, mainLua);
         }
 
         public override void AddToAssets(FileAssets fileAssets)

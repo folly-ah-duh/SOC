@@ -9,7 +9,7 @@ namespace SOC.QuestObjects.Vehicle
 {
     static class VehicleAssets
     {
-        public static string VehAssetsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//VehicleAssets");
+        static string VehAssetsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//VehicleAssets");
 
         internal static void GetVehicleAssets(VehicleDetail questDetail, FileAssets fileAssets)
         {

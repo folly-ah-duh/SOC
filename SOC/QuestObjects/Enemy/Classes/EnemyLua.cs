@@ -172,7 +172,8 @@ namespace SOC.QuestObjects.Enemy
 
             if (enemyCount == 0)
             {
-                enemyListBuilder.Append(" nil ");
+                enemyListBuilder.Append(@"
+        nil ");
             }
             enemyListBuilder.Append(@"
     }");

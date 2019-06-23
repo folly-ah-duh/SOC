@@ -18,11 +18,7 @@ namespace SOC.QuestObjects.Animal
         static AnimalVisualizer visualizer = new AnimalVisualizer(stub, control);
 
         public AnimalManager(AnimalDetail detail) : base(detail, visualizer) { }
-
-        public override void AddToDefinitionLua(DefinitionLua definitionLua)
-        {
-        }
-
+        
         public override void AddToFox2Entities(DataSet dataSet, List<Fox2EntityClass> entityList)
         {
             AnimalFox2.AddQuestEntities((AnimalDetail)detail, dataSet, entityList);
@@ -30,6 +26,12 @@ namespace SOC.QuestObjects.Animal
 
         public override void AddToMainLua(MainLua mainLua)
         {
+            AnimalLua.GetMain((AnimalDetail)detail, mainLua);
+        }
+
+        public override void AddToAssets(FileAssets fileAssets)
+        {
+            AnimalAssets.GetAnimalAssets((AnimalDetail)detail, fileAssets);
         }
     }
 }

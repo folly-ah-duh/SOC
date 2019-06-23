@@ -38,7 +38,8 @@ namespace SOC.QuestObjects.Helicopter
             StringBuilder helicopterListBuilder = new StringBuilder(@"heliList = {");
 
             if (heliList.Count == 0)
-                helicopterListBuilder.Append(" nil ");
+                helicopterListBuilder.Append(@"
+        nil ");
             else
                 foreach (Helicopter heli in heliList)
                 {

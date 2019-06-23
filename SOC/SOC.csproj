@@ -279,6 +279,7 @@
     <Compile Include="QuestObjects\Model\ModelVisualizer.cs" />
     <Compile Include="QuestObjects\Vehicle\Classes\VehicleAssets.cs" />
     <Compile Include="QuestObjects\Vehicle\Classes\VehicleFox2.cs" />
+    <Compile Include="QuestObjects\Vehicle\Classes\VehicleLua.cs" />
     <Compile Include="QuestObjects\Vehicle\Forms\VehicleBox.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -2,33 +2,27 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using SOC.Classes.Assets;
+using System;
 
-namespace SOC.QuestObjects.Animal.Classes
+namespace SOC.QuestObjects.Animal
 {
-    /*
     static class AnimalAssets
     {
         static string animalAssetsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//AnimalAssets");
 
-        public static void BuildAssets(List<Animal> animalList, string FPKPath, string FPKDPath)
+        internal static void GetAnimalAssets(AnimalDetail questDetail, FileAssets fileAssets)
         {
-
             string AniFPKAssetsPath = Path.Combine(animalAssetsPath, "FPK_Files");
-            foreach (Animal animal in animalList)
-            {
-                string animalName = animal.animal;
-                string sourceDirPath = Path.Combine(AniFPKAssetsPath, string.Format("{0}_fpk", animalName));
-                Tools.CopyDirectory(sourceDirPath, FPKPath);
-            }
-
             string AniFPKDAssetsPath = Path.Combine(animalAssetsPath, "FPKD_Files");
-            foreach (Animal animal in animalList)
+
+            foreach (Animal animal in questDetail.animals)
             {
-                string animalName = animal.animal;
-                string sourceDirPath = Path.Combine(AniFPKDAssetsPath, string.Format("{0}_fpkd", animalName));
-                Tools.CopyDirectory(sourceDirPath, FPKDPath);
+                string animalType = animal.animal;
+
+                fileAssets.AddFPKFolder(Path.Combine(AniFPKAssetsPath, $"{animalType}_fpk"));
+                fileAssets.AddFPKDFolder(Path.Combine(AniFPKDAssetsPath, $"{animalType}_fpkd"));
             }
         }
     }
-    */
 }

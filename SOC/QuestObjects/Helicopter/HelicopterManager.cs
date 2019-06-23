@@ -9,7 +9,7 @@ using SOC.Classes.Common;
 
 namespace SOC.QuestObjects.Helicopter
 {
-    class HelicopterManager : LocationalManager
+    class HelicopterManager : LocationalManager // probably end up being a non-locational manager
     {
         static LocationalDataStub stub = new LocationalDataStub("Helicopter Spawn Locations");
 

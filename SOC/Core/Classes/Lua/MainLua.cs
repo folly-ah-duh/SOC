@@ -35,17 +35,20 @@ namespace SOC.Classes.Lua
             foreach (string tableItem in questTable)
             {
                 questTableBuilder.Append($@"
-    {tableItem},
-");
+    {tableItem},");
             }
 
             questTableBuilder.Append(@"
     targetList = {");
-            foreach(string targetName in targetList)
-            {
-                questTableBuilder.Append($@"
+            if(targetList.Any())
+                foreach (string targetName in targetList)
+                {
+                    questTableBuilder.Append($@"
         ""{targetName}"", ");
-            }
+                }
+            else
+                questTableBuilder.Append(@"
+        nil ");
             questTableBuilder.Append(@"
     },");
 

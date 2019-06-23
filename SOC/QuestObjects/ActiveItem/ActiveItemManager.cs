@@ -21,17 +21,12 @@ namespace SOC.QuestObjects.ActiveItem
 
         public override void AddToFox2Entities(DataSet dataSet, List<Fox2EntityClass> entityList)
         {
-
+            ActiveItemFox2.AddQuestEntities((ActiveItemDetail)detail, dataSet, entityList);
         }
 
         public override void AddToMainLua(MainLua mainLua)
         {
-
-        }
-
-        public override void AddToDefinitionLua(DefinitionLua definitionLua)
-        {
-
+            ActiveItemLua.GetMain((ActiveItemDetail)detail, mainLua);
         }
     }
 }

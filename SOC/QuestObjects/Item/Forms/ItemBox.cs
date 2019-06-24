@@ -29,10 +29,10 @@ namespace SOC.QuestObjects.Item
             textBox_ycoord.Text = qObject.position.coords.yCoord;
             textBox_zcoord.Text = qObject.position.coords.zCoord;
 
-            textBox_xrot.Text = qObject.position.rotation.quatRotation.xval;
-            textBox_yrot.Text = qObject.position.rotation.quatRotation.yval;
-            textBox_zrot.Text = qObject.position.rotation.quatRotation.zval;
-            textBox_wrot.Text = qObject.position.rotation.quatRotation.wval;
+            textBox_xrot.Text = qObject.position.rotation.xRot;
+            textBox_yrot.Text = qObject.position.rotation.yRot;
+            textBox_zrot.Text = qObject.position.rotation.zRot;
+            textBox_wrot.Text = qObject.position.rotation.wRot;
 
             comboBox_item.Items.AddRange(ItemNames.itemNames);
             comboBox_item.Text = qObject.item;

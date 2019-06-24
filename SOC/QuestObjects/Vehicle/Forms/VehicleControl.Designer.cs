@@ -72,7 +72,7 @@
             this.comboBox_ObjType.Location = new System.Drawing.Point(6, 32);
             this.comboBox_ObjType.Name = "comboBox_ObjType";
             this.comboBox_ObjType.Size = new System.Drawing.Size(288, 21);
-            this.comboBox_ObjType.TabIndex = 14;
+            this.comboBox_ObjType.TabIndex = 1;
             // 
             // panelQuestBoxes
             // 
@@ -84,7 +84,7 @@
             this.panelQuestBoxes.Location = new System.Drawing.Point(3, 59);
             this.panelQuestBoxes.Name = "panelQuestBoxes";
             this.panelQuestBoxes.Size = new System.Drawing.Size(294, 387);
-            this.panelQuestBoxes.TabIndex = 16;
+            this.panelQuestBoxes.TabIndex = 2;
             this.panelQuestBoxes.WrapContents = false;
             // 
             // VehicleControl

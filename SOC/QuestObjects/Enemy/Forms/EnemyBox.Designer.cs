@@ -60,7 +60,8 @@
             this.checkBox_balaclava.Location = new System.Drawing.Point(171, 40);
             this.checkBox_balaclava.Name = "checkBox_balaclava";
             this.checkBox_balaclava.Size = new System.Drawing.Size(73, 17);
-            this.checkBox_balaclava.TabIndex = 5;
+            this.checkBox_balaclava.TabIndex = 0;
+            this.checkBox_balaclava.TabStop = false;
             this.checkBox_balaclava.Text = "Balaclava";
             this.checkBox_balaclava.UseVisualStyleBackColor = true;
             this.checkBox_balaclava.Click += new System.EventHandler(this.checkBox_balaclava_Click);
@@ -71,7 +72,8 @@
             this.checkBox_zombie.Location = new System.Drawing.Point(85, 41);
             this.checkBox_zombie.Name = "checkBox_zombie";
             this.checkBox_zombie.Size = new System.Drawing.Size(61, 17);
-            this.checkBox_zombie.TabIndex = 1;
+            this.checkBox_zombie.TabIndex = 0;
+            this.checkBox_zombie.TabStop = false;
             this.checkBox_zombie.Text = "Zombie";
             this.checkBox_zombie.UseVisualStyleBackColor = true;
             // 
@@ -117,7 +119,7 @@
             this.comboBox_power.Location = new System.Drawing.Point(85, 127);
             this.comboBox_power.Name = "comboBox_power";
             this.comboBox_power.Size = new System.Drawing.Size(174, 21);
-            this.comboBox_power.TabIndex = 22;
+            this.comboBox_power.TabIndex = 7;
             this.comboBox_power.SelectedIndexChanged += new System.EventHandler(this.comboBox_power_selectedIndexChanged);
             // 
             // button_removepower
@@ -126,7 +128,7 @@
             this.button_removepower.Location = new System.Drawing.Point(204, 212);
             this.button_removepower.Name = "button_removepower";
             this.button_removepower.Size = new System.Drawing.Size(55, 23);
-            this.button_removepower.TabIndex = 21;
+            this.button_removepower.TabIndex = 10;
             this.button_removepower.Text = "Remove";
             this.button_removepower.UseVisualStyleBackColor = true;
             this.button_removepower.Click += new System.EventHandler(this.button_removepower_Click);
@@ -149,7 +151,7 @@
             this.comboBox_skill.Location = new System.Drawing.Point(85, 292);
             this.comboBox_skill.Name = "comboBox_skill";
             this.comboBox_skill.Size = new System.Drawing.Size(174, 21);
-            this.comboBox_skill.TabIndex = 17;
+            this.comboBox_skill.TabIndex = 13;
             // 
             // listBox_power
             // 
@@ -160,7 +162,7 @@
             this.listBox_power.Location = new System.Drawing.Point(85, 152);
             this.listBox_power.Name = "listBox_power";
             this.listBox_power.Size = new System.Drawing.Size(174, 54);
-            this.listBox_power.TabIndex = 18;
+            this.listBox_power.TabIndex = 8;
             this.listBox_power.SelectedIndexChanged += new System.EventHandler(this.listBox_power_selectedIndexChanged);
             // 
             // label_skill
@@ -181,7 +183,7 @@
             this.comboBox_staff.Location = new System.Drawing.Point(85, 267);
             this.comboBox_staff.Name = "comboBox_staff";
             this.comboBox_staff.Size = new System.Drawing.Size(174, 21);
-            this.comboBox_staff.TabIndex = 15;
+            this.comboBox_staff.TabIndex = 12;
             // 
             // label_staff
             // 
@@ -201,7 +203,7 @@
             this.comboBox_body.Location = new System.Drawing.Point(85, 242);
             this.comboBox_body.Name = "comboBox_body";
             this.comboBox_body.Size = new System.Drawing.Size(174, 21);
-            this.comboBox_body.TabIndex = 13;
+            this.comboBox_body.TabIndex = 11;
             // 
             // comboBox_cautionroute
             // 
@@ -212,7 +214,7 @@
             this.comboBox_cautionroute.Location = new System.Drawing.Point(102, 91);
             this.comboBox_cautionroute.Name = "comboBox_cautionroute";
             this.comboBox_cautionroute.Size = new System.Drawing.Size(140, 21);
-            this.comboBox_cautionroute.TabIndex = 12;
+            this.comboBox_cautionroute.TabIndex = 4;
             // 
             // label_cautionroute
             // 
@@ -232,7 +234,7 @@
             this.comboBox_sneakroute.Location = new System.Drawing.Point(102, 65);
             this.comboBox_sneakroute.Name = "comboBox_sneakroute";
             this.comboBox_sneakroute.Size = new System.Drawing.Size(140, 21);
-            this.comboBox_sneakroute.TabIndex = 10;
+            this.comboBox_sneakroute.TabIndex = 3;
             // 
             // label_sneakroute
             // 
@@ -258,7 +260,8 @@
             this.checkBox_target.Location = new System.Drawing.Point(171, 21);
             this.checkBox_target.Name = "checkBox_target";
             this.checkBox_target.Size = new System.Drawing.Size(68, 17);
-            this.checkBox_target.TabIndex = 5;
+            this.checkBox_target.TabIndex = 0;
+            this.checkBox_target.TabStop = false;
             this.checkBox_target.Text = "Is Target";
             this.checkBox_target.UseVisualStyleBackColor = true;
             // 
@@ -268,7 +271,7 @@
             this.checkBox_armor.Location = new System.Drawing.Point(85, 216);
             this.checkBox_armor.Name = "checkBox_armor";
             this.checkBox_armor.Size = new System.Drawing.Size(87, 17);
-            this.checkBox_armor.TabIndex = 3;
+            this.checkBox_armor.TabIndex = 9;
             this.checkBox_armor.Text = "Heavy Armor";
             this.checkBox_armor.UseVisualStyleBackColor = true;
             this.checkBox_armor.Click += new System.EventHandler(this.checkBox_armor_Click);
@@ -290,7 +293,7 @@
             this.button_SneakToCaution.Location = new System.Drawing.Point(245, 65);
             this.button_SneakToCaution.Name = "button_SneakToCaution";
             this.button_SneakToCaution.Size = new System.Drawing.Size(14, 23);
-            this.button_SneakToCaution.TabIndex = 21;
+            this.button_SneakToCaution.TabIndex = 5;
             this.button_SneakToCaution.Text = "↓";
             this.button_SneakToCaution.UseVisualStyleBackColor = true;
             this.button_SneakToCaution.Click += new System.EventHandler(this.SneakToCaution_Button_Clicked);
@@ -301,7 +304,7 @@
             this.button_CautionToSneak.Location = new System.Drawing.Point(245, 90);
             this.button_CautionToSneak.Name = "button_CautionToSneak";
             this.button_CautionToSneak.Size = new System.Drawing.Size(14, 23);
-            this.button_CautionToSneak.TabIndex = 21;
+            this.button_CautionToSneak.TabIndex = 6;
             this.button_CautionToSneak.Text = "↑";
             this.button_CautionToSneak.UseVisualStyleBackColor = true;
             this.button_CautionToSneak.Click += new System.EventHandler(this.CautionToSneak_Button_Clicked);
@@ -312,7 +315,7 @@
             this.button_SwapRoutes.Location = new System.Drawing.Point(85, 65);
             this.button_SwapRoutes.Name = "button_SwapRoutes";
             this.button_SwapRoutes.Size = new System.Drawing.Size(14, 48);
-            this.button_SwapRoutes.TabIndex = 21;
+            this.button_SwapRoutes.TabIndex = 2;
             this.button_SwapRoutes.Text = "↕";
             this.button_SwapRoutes.UseVisualStyleBackColor = true;
             this.button_SwapRoutes.Click += new System.EventHandler(this.SwapRoute_Button_Clicked);

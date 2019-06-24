@@ -92,7 +92,7 @@
             this.comboBox_ObjType.Location = new System.Drawing.Point(6, 32);
             this.comboBox_ObjType.Name = "comboBox_ObjType";
             this.comboBox_ObjType.Size = new System.Drawing.Size(288, 21);
-            this.comboBox_ObjType.TabIndex = 12;
+            this.comboBox_ObjType.TabIndex = 1;
             // 
             // checkBox_intrgt
             // 
@@ -103,6 +103,7 @@
             this.checkBox_intrgt.Name = "checkBox_intrgt";
             this.checkBox_intrgt.Size = new System.Drawing.Size(162, 17);
             this.checkBox_intrgt.TabIndex = 0;
+            this.checkBox_intrgt.TabStop = false;
             this.checkBox_intrgt.Text = "Interrogate For Whereabouts";
             this.checkBox_intrgt.UseVisualStyleBackColor = true;
             // 
@@ -126,7 +127,7 @@
             this.comboBox_Body.Location = new System.Drawing.Point(6, 72);
             this.comboBox_Body.Name = "comboBox_Body";
             this.comboBox_Body.Size = new System.Drawing.Size(288, 21);
-            this.comboBox_Body.TabIndex = 1;
+            this.comboBox_Body.TabIndex = 2;
             // 
             // HostageControl
             // 

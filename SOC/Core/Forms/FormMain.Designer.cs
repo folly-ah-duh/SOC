@@ -42,7 +42,7 @@
             this.buttonNext.Location = new System.Drawing.Point(1037, 468);
             this.buttonNext.Name = "buttonNext";
             this.buttonNext.Size = new System.Drawing.Size(109, 38);
-            this.buttonNext.TabIndex = 3;
+            this.buttonNext.TabIndex = 6;
             this.buttonNext.Text = "Next >>";
             this.buttonNext.UseVisualStyleBackColor = true;
             this.buttonNext.Click += new System.EventHandler(this.buttonNext_Click);
@@ -53,7 +53,7 @@
             this.buttonBack.Location = new System.Drawing.Point(922, 468);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(109, 38);
-            this.buttonBack.TabIndex = 3;
+            this.buttonBack.TabIndex = 5;
             this.buttonBack.Text = "<< Back";
             this.buttonBack.UseVisualStyleBackColor = true;
             this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
@@ -66,7 +66,7 @@
             this.panelMain.Location = new System.Drawing.Point(12, 12);
             this.panelMain.Name = "panelMain";
             this.panelMain.Size = new System.Drawing.Size(1134, 450);
-            this.panelMain.TabIndex = 11;
+            this.panelMain.TabIndex = 1;
             // 
             // buttonLoad
             // 
@@ -74,7 +74,7 @@
             this.buttonLoad.Location = new System.Drawing.Point(12, 468);
             this.buttonLoad.Name = "buttonLoad";
             this.buttonLoad.Size = new System.Drawing.Size(109, 38);
-            this.buttonLoad.TabIndex = 1;
+            this.buttonLoad.TabIndex = 2;
             this.buttonLoad.Text = "Load From Xml...";
             this.buttonLoad.UseVisualStyleBackColor = true;
             this.buttonLoad.Click += new System.EventHandler(this.buttonLoad_Click);
@@ -85,7 +85,7 @@
             this.buttonSave.Location = new System.Drawing.Point(127, 468);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(109, 38);
-            this.buttonSave.TabIndex = 2;
+            this.buttonSave.TabIndex = 3;
             this.buttonSave.Text = "Save To Xml...";
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
@@ -96,7 +96,7 @@
             this.buttonOpenFolder.Location = new System.Drawing.Point(258, 468);
             this.buttonOpenFolder.Name = "buttonOpenFolder";
             this.buttonOpenFolder.Size = new System.Drawing.Size(129, 38);
-            this.buttonOpenFolder.TabIndex = 12;
+            this.buttonOpenFolder.TabIndex = 4;
             this.buttonOpenFolder.Text = "Open SOC Folder";
             this.buttonOpenFolder.UseVisualStyleBackColor = true;
             this.buttonOpenFolder.Click += new System.EventHandler(this.buttonOpenFolder_Click);

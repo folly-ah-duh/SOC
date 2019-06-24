@@ -59,7 +59,7 @@ namespace SOC.QuestObjects.ActiveItem
 
             isTarget = box.checkBox_target.Checked;
             activeItem = box.comboBox_activeItem.Text;
-            position = new Position(new Coordinates(box.textBox_xcoord.Text, box.textBox_ycoord.Text, box.textBox_zcoord.Text), new Rotation(new Quaternion(box.textBox_xrot.Text, box.textBox_yrot.Text, box.textBox_zrot.Text, box.textBox_wrot.Text)));
+            position = new Position(new Coordinates(box.textBox_xcoord.Text, box.textBox_ycoord.Text, box.textBox_zcoord.Text), new Rotation(box.textBox_xrot.Text, box.textBox_yrot.Text, box.textBox_zrot.Text, box.textBox_wrot.Text));
         }
 
         [XmlElement]

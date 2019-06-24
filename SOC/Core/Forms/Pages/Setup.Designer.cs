@@ -126,7 +126,7 @@
             this.comboBoxRoute.Location = new System.Drawing.Point(363, 116);
             this.comboBoxRoute.Name = "comboBoxRoute";
             this.comboBoxRoute.Size = new System.Drawing.Size(134, 21);
-            this.comboBoxRoute.TabIndex = 31;
+            this.comboBoxRoute.TabIndex = 10;
             this.comboBoxRoute.DropDown += new System.EventHandler(this.comboBoxRoute_DropDown);
             // 
             // label15
@@ -135,7 +135,7 @@
             this.label15.Location = new System.Drawing.Point(294, 118);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(58, 13);
-            this.label15.TabIndex = 30;
+            this.label15.TabIndex = 0;
             this.label15.Text = "Route File:";
             // 
             // comboBoxCP
@@ -154,7 +154,7 @@
             this.label20.Location = new System.Drawing.Point(297, 92);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(55, 13);
-            this.label20.TabIndex = 29;
+            this.label20.TabIndex = 0;
             this.label20.Text = "Quest CP:";
             // 
             // label14
@@ -163,7 +163,7 @@
             this.label14.Location = new System.Drawing.Point(11, 161);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(83, 13);
-            this.label14.TabIndex = 26;
+            this.label14.TabIndex = 0;
             this.label14.Text = "Quest Category:";
             // 
             // comboBoxCategory
@@ -191,7 +191,7 @@
             this.comboBoxCategory.Location = new System.Drawing.Point(105, 158);
             this.comboBoxCategory.Name = "comboBoxCategory";
             this.comboBoxCategory.Size = new System.Drawing.Size(153, 21);
-            this.comboBoxCategory.TabIndex = 10;
+            this.comboBoxCategory.TabIndex = 11;
             // 
             // label11
             // 
@@ -199,7 +199,7 @@
             this.label11.Location = new System.Drawing.Point(16, 22);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(78, 13);
-            this.label11.TabIndex = 24;
+            this.label11.TabIndex = 0;
             this.label11.Text = ".FPK Filename:";
             // 
             // textBoxFPKName
@@ -218,7 +218,7 @@
             this.label12.Location = new System.Drawing.Point(208, 93);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(14, 13);
-            this.label12.TabIndex = 22;
+            this.label12.TabIndex = 0;
             this.label12.Text = "Z";
             // 
             // textBoxZCoord
@@ -238,7 +238,7 @@
             this.label10.Location = new System.Drawing.Point(155, 93);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(14, 13);
-            this.label10.TabIndex = 18;
+            this.label10.TabIndex = 0;
             this.label10.Text = "Y";
             // 
             // textBoxYCoord
@@ -258,7 +258,7 @@
             this.label9.Location = new System.Drawing.Point(102, 93);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(14, 13);
-            this.label9.TabIndex = 16;
+            this.label9.TabIndex = 0;
             this.label9.Text = "X";
             // 
             // textBoxXCoord
@@ -277,7 +277,7 @@
             this.label6.Location = new System.Drawing.Point(32, 65);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(62, 13);
-            this.label6.TabIndex = 12;
+            this.label6.TabIndex = 0;
             this.label6.Text = "Quest Map:";
             // 
             // comboBoxRegion
@@ -300,7 +300,7 @@
             this.label5.Location = new System.Drawing.Point(285, 161);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(67, 13);
-            this.label5.TabIndex = 10;
+            this.label5.TabIndex = 0;
             this.label5.Text = "Quest Rank:";
             // 
             // label4
@@ -309,7 +309,7 @@
             this.label4.Location = new System.Drawing.Point(289, 65);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(63, 13);
-            this.label4.TabIndex = 9;
+            this.label4.TabIndex = 0;
             this.label4.Text = "Quest Area:";
             // 
             // label3
@@ -318,7 +318,7 @@
             this.label3.Location = new System.Drawing.Point(51, 118);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 13);
-            this.label3.TabIndex = 8;
+            this.label3.TabIndex = 0;
             this.label3.Text = "Radius:";
             // 
             // label2
@@ -327,7 +327,7 @@
             this.label2.Location = new System.Drawing.Point(4, 93);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(90, 13);
-            this.label2.TabIndex = 7;
+            this.label2.TabIndex = 0;
             this.label2.Text = "Map Coordinates:";
             // 
             // label1
@@ -336,7 +336,7 @@
             this.label1.Location = new System.Drawing.Point(274, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 13);
-            this.label1.TabIndex = 6;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Quest Number:";
             // 
             // textBoxQuestNum
@@ -388,7 +388,7 @@
             this.comboBoxReward.Location = new System.Drawing.Point(363, 158);
             this.comboBoxReward.Name = "comboBoxReward";
             this.comboBoxReward.Size = new System.Drawing.Size(134, 21);
-            this.comboBoxReward.TabIndex = 11;
+            this.comboBoxReward.TabIndex = 12;
             // 
             // comboBoxLoadArea
             // 
@@ -425,7 +425,7 @@
             this.flowPanelLocationalStubs.Location = new System.Drawing.Point(3, 16);
             this.flowPanelLocationalStubs.Name = "flowPanelLocationalStubs";
             this.flowPanelLocationalStubs.Size = new System.Drawing.Size(548, 425);
-            this.flowPanelLocationalStubs.TabIndex = 0;
+            this.flowPanelLocationalStubs.TabIndex = 16;
             this.flowPanelLocationalStubs.WrapContents = false;
             this.flowPanelLocationalStubs.Layout += new System.Windows.Forms.LayoutEventHandler(this.flowPanelLocationalStubs_Layout);
             // 
@@ -452,7 +452,7 @@
             this.groupBoxFlavor.Location = new System.Drawing.Point(3, 206);
             this.groupBoxFlavor.Name = "groupBoxFlavor";
             this.groupBoxFlavor.Size = new System.Drawing.Size(514, 241);
-            this.groupBoxFlavor.TabIndex = 13;
+            this.groupBoxFlavor.TabIndex = 0;
             this.groupBoxFlavor.TabStop = false;
             this.groupBoxFlavor.Text = "Sideop Flavor Text";
             // 
@@ -474,7 +474,7 @@
             this.label13.Location = new System.Drawing.Point(6, 190);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(107, 13);
-            this.label13.TabIndex = 11;
+            this.label13.TabIndex = 0;
             this.label13.Text = "Progress Notification:";
             // 
             // label8
@@ -483,7 +483,7 @@
             this.label8.Location = new System.Drawing.Point(6, 68);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(94, 13);
-            this.label8.TabIndex = 14;
+            this.label8.TabIndex = 0;
             this.label8.Text = "Quest Description:";
             // 
             // comboBoxProgressNotifs
@@ -502,7 +502,7 @@
             this.label7.Location = new System.Drawing.Point(6, 20);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(61, 13);
-            this.label7.TabIndex = 13;
+            this.label7.TabIndex = 0;
             this.label7.Text = "Quest Title:";
             // 
             // textBoxQuestDesc
@@ -527,13 +527,13 @@
             this.textBoxQuestTitle.Size = new System.Drawing.Size(502, 20);
             this.textBoxQuestTitle.TabIndex = 13;
             // 
-            // Setup
+            // SetupDisplay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.Controls.Add(this.panelSetup);
-            this.Name = "Setup";
+            this.Name = "SetupDisplay";
             this.Size = new System.Drawing.Size(1080, 450);
             this.panelSetup.ResumeLayout(false);
             this.groupBoxSetup.ResumeLayout(false);

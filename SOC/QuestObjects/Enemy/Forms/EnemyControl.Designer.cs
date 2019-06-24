@@ -63,7 +63,7 @@
             this.panelQuestBoxes.Margin = new System.Windows.Forms.Padding(0);
             this.panelQuestBoxes.Name = "panelQuestBoxes";
             this.panelQuestBoxes.Size = new System.Drawing.Size(294, 350);
-            this.panelQuestBoxes.TabIndex = 17;
+            this.panelQuestBoxes.TabIndex = 3;
             this.panelQuestBoxes.WrapContents = false;
             // 
             // label_ObjType
@@ -74,7 +74,7 @@
             this.label_ObjType.Location = new System.Drawing.Point(6, 16);
             this.label_ObjType.Name = "label_ObjType";
             this.label_ObjType.Size = new System.Drawing.Size(113, 13);
-            this.label_ObjType.TabIndex = 19;
+            this.label_ObjType.TabIndex = 0;
             this.label_ObjType.Text = "Target Objective Type";
             // 
             // comboBox_ObjType
@@ -90,7 +90,7 @@
             this.comboBox_ObjType.Location = new System.Drawing.Point(6, 32);
             this.comboBox_ObjType.Name = "comboBox_ObjType";
             this.comboBox_ObjType.Size = new System.Drawing.Size(288, 21);
-            this.comboBox_ObjType.TabIndex = 18;
+            this.comboBox_ObjType.TabIndex = 1;
             // 
             // label_Subtype
             // 
@@ -100,7 +100,7 @@
             this.label_Subtype.Location = new System.Drawing.Point(6, 56);
             this.label_Subtype.Name = "label_Subtype";
             this.label_Subtype.Size = new System.Drawing.Size(53, 13);
-            this.label_Subtype.TabIndex = 16;
+            this.label_Subtype.TabIndex = 0;
             this.label_Subtype.Text = "Sub Type";
             // 
             // comboBox_Subtype
@@ -112,7 +112,7 @@
             this.comboBox_Subtype.Location = new System.Drawing.Point(6, 72);
             this.comboBox_Subtype.Name = "comboBox_Subtype";
             this.comboBox_Subtype.Size = new System.Drawing.Size(288, 21);
-            this.comboBox_Subtype.TabIndex = 15;
+            this.comboBox_Subtype.TabIndex = 2;
             // 
             // EnemyControl
             // 

@@ -65,7 +65,7 @@ namespace SOC.QuestObjects.Item
             isBoxed = box.checkBox_boxed.Checked;
             count = box.comboBox_count.Text;
             item = box.comboBox_item.Text;
-            position = new Position(new Coordinates(box.textBox_xcoord.Text, box.textBox_ycoord.Text, box.textBox_zcoord.Text), new Rotation(new Quaternion(box.textBox_xrot.Text, box.textBox_yrot.Text, box.textBox_zrot.Text, box.textBox_wrot.Text)));
+            position = new Position(new Coordinates(box.textBox_xcoord.Text, box.textBox_ycoord.Text, box.textBox_zcoord.Text), new Rotation(box.textBox_xrot.Text, box.textBox_yrot.Text, box.textBox_zrot.Text, box.textBox_wrot.Text));
         }
 
         public override void SetPosition(Position pos)

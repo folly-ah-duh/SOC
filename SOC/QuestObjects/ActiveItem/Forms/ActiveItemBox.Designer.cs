@@ -74,7 +74,8 @@
             this.checkBox_target.Location = new System.Drawing.Point(85, 100);
             this.checkBox_target.Name = "checkBox_target";
             this.checkBox_target.Size = new System.Drawing.Size(68, 17);
-            this.checkBox_target.TabIndex = 20;
+            this.checkBox_target.TabIndex = 0;
+            this.checkBox_target.TabStop = false;
             this.checkBox_target.Text = "Is Target";
             this.checkBox_target.UseVisualStyleBackColor = true;
             // 
@@ -85,7 +86,7 @@
             this.textBox_wrot.Location = new System.Drawing.Point(220, 45);
             this.textBox_wrot.Name = "textBox_wrot";
             this.textBox_wrot.Size = new System.Drawing.Size(39, 20);
-            this.textBox_wrot.TabIndex = 18;
+            this.textBox_wrot.TabIndex = 7;
             // 
             // textBox_zrot
             // 
@@ -94,7 +95,7 @@
             this.textBox_zrot.Location = new System.Drawing.Point(175, 45);
             this.textBox_zrot.Name = "textBox_zrot";
             this.textBox_zrot.Size = new System.Drawing.Size(39, 20);
-            this.textBox_zrot.TabIndex = 17;
+            this.textBox_zrot.TabIndex = 6;
             // 
             // textBox_yrot
             // 
@@ -103,7 +104,7 @@
             this.textBox_yrot.Location = new System.Drawing.Point(130, 45);
             this.textBox_yrot.Name = "textBox_yrot";
             this.textBox_yrot.Size = new System.Drawing.Size(39, 20);
-            this.textBox_yrot.TabIndex = 16;
+            this.textBox_yrot.TabIndex = 5;
             // 
             // label5
             // 
@@ -132,7 +133,7 @@
             this.comboBox_activeItem.Location = new System.Drawing.Point(85, 71);
             this.comboBox_activeItem.Name = "comboBox_activeItem";
             this.comboBox_activeItem.Size = new System.Drawing.Size(174, 21);
-            this.comboBox_activeItem.TabIndex = 10;
+            this.comboBox_activeItem.TabIndex = 8;
             // 
             // textBox_xrot
             // 
@@ -157,28 +158,28 @@
             this.textBox_zcoord.Location = new System.Drawing.Point(205, 19);
             this.textBox_zcoord.Name = "textBox_zcoord";
             this.textBox_zcoord.Size = new System.Drawing.Size(54, 20);
-            this.textBox_zcoord.TabIndex = 2;
+            this.textBox_zcoord.TabIndex = 3;
             // 
             // textBox_ycoord
             // 
             this.textBox_ycoord.Location = new System.Drawing.Point(145, 19);
             this.textBox_ycoord.Name = "textBox_ycoord";
             this.textBox_ycoord.Size = new System.Drawing.Size(54, 20);
-            this.textBox_ycoord.TabIndex = 1;
+            this.textBox_ycoord.TabIndex = 2;
             // 
             // textBox_xcoord
             // 
             this.textBox_xcoord.Location = new System.Drawing.Point(85, 19);
             this.textBox_xcoord.Name = "textBox_xcoord";
             this.textBox_xcoord.Size = new System.Drawing.Size(54, 20);
-            this.textBox_xcoord.TabIndex = 0;
+            this.textBox_xcoord.TabIndex = 1;
             // 
-            // ActiveItemBoxF
+            // ActiveItemBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox_main);
-            this.Name = "ActiveItemBoxF";
+            this.Name = "ActiveItemBox";
             this.Size = new System.Drawing.Size(268, 125);
             this.groupBox_main.ResumeLayout(false);
             this.groupBox_main.PerformLayout();

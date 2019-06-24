@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using SOC.Classes.Common;
 using System.Globalization;
 using SOC.Classes.QuestBuild;
-using static SOC.Classes.Common.EnemyInfo;
+using SOC.QuestObjects.Enemy;
 
 namespace SOC.UI
 {
@@ -131,19 +131,19 @@ namespace SOC.UI
                 case "Afghanistan":
                     locationID = 10;
                     loadArea = LoadAreas.afgh;
-                    cpNames = GetCPNames(AfghCPs);
+                    cpNames = EnemyInfo.GetCPNames(EnemyInfo.AfghCPs);
                     break;
 
                 case "Central Africa":
                     locationID = 20;
                     loadArea = LoadAreas.mafr;
-                    cpNames = GetCPNames(MafrCPs);
+                    cpNames = EnemyInfo.GetCPNames(EnemyInfo.MafrCPs);
                     break;
 
                 case "Mother Base":
                     locationID = 50;
                     loadArea = LoadAreas.mtbs;
-                    cpNames = GetCPNames(MtbsCP);
+                    cpNames = EnemyInfo.GetCPNames(EnemyInfo.MtbsCP);
                     disableRegionInput();
                     managerMaster.DisableVehicleBox();
                     comboBoxRadius.Text = "1";

@@ -14,19 +14,19 @@ namespace SOC.Classes.Common
             SetRotation(roty);
         }
 
-        public Rotation(Quaternion quat)
+        public Rotation(string x, string y, string z, string w)
         {
-            quatRotation = quat;
+            xRot = x; yRot = y; zRot = z; wRot = w;
         }
 
         public void SetRotation(string roty)
         {
-            quatRotation = new Quaternion("0", GetQuaternionY(roty), "0", GetQuaternionW(roty));
+            xRot = "0"; yRot = GetQuaternionY(roty); zRot = "0"; wRot = GetQuaternionW(roty);
         }
 
-        public void SetRotation(Quaternion quat)
+        public void SetRotation(string x, string y, string z, string w)
         {
-            quatRotation = quat;
+            xRot = x; yRot = y; zRot = z; wRot = w;
         }
 
         private string GetQuaternionY(string roty)
@@ -48,7 +48,7 @@ namespace SOC.Classes.Common
         public string GetDegreeRotY()
         {
             double degree = 0;
-            double.TryParse(quatRotation.yval, out degree);
+            double.TryParse(yRot, out degree);
             degree = Math.Asin(degree);
             return (degree / Math.PI * 360).ToString("F2", CultureInfo.InvariantCulture);
         }
@@ -56,7 +56,7 @@ namespace SOC.Classes.Common
         public string GetRadianRotY()
         {
             double radian = 0;
-            double.TryParse(quatRotation.yval, out radian);
+            double.TryParse(yRot, out radian);
             radian = Math.Asin(radian);
             return (radian * 2).ToString("F3", CultureInfo.InvariantCulture);
         }
@@ -65,12 +65,22 @@ namespace SOC.Classes.Common
         {
             return string.Format($@"
             <property name=""transform_rotation_quat"" type=""Quat"" container=""StaticArray"" arraySize=""1"">
-              <value x = ""{quatRotation.xval}"" y = ""{quatRotation.yval}"" z = ""{quatRotation.zval}"" w = ""{quatRotation.wval}"" />
+              <value x = ""{xRot}"" y = ""{yRot}"" z = ""{zRot}"" w = ""{wRot}"" />
             </property>
                                  ");
         }
 
-        [XmlElement]
-        public Quaternion quatRotation = new Quaternion();
+
+        [XmlAttribute]
+        public string xRot = "0";
+
+        [XmlAttribute]
+        public string yRot = "0";
+
+        [XmlAttribute]
+        public string zRot = "0";
+
+        [XmlAttribute]
+        public string wRot = "0";
     }
 }

@@ -10,6 +10,7 @@ using SOC.Forms.Pages;
 using System.Windows.Forms;
 using SOC.Classes.Common;
 using SOC.Core.Classes.Route;
+using SOC.QuestObjects.Enemy;
 
 namespace SOC.QuestObjects.Helicopter
 {

@@ -123,7 +123,6 @@
     <Compile Include="Core\Classes\QuestBuild\BuildManager.cs" />
     <Compile Include="Core\Classes\Common\LoadAreas.cs" />
     <Compile Include="Core\Classes\Common\NPCMtbsInfo.cs" />
-    <Compile Include="Core\Classes\Common\Quaternion.cs" />
     <Compile Include="Core\Classes\Common\Rotation.cs" />
     <Compile Include="Core\Classes\GzsTool\Hashing.cs" />
     <Compile Include="Core\Classes\QuestBuild\Builders\LangBuilder.cs" />
@@ -273,7 +272,6 @@
     <Compile Include="QuestObjects\Model\Forms\ModelControl.Designer.cs">
       <DependentUpon>ModelControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\Classes\Route\Route.cs" />
     <Compile Include="Core\Classes\Route\RouteAssets.cs" />
     <Compile Include="QuestObjects\Model\ModelManager.cs" />
     <Compile Include="QuestObjects\Model\ModelVisualizer.cs" />
@@ -334,7 +332,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="QuestObjects\Animal\Classes\AnimalInfo.cs" />
-    <Compile Include="Core\Classes\Common\EnemyInfo.cs" />
+    <Compile Include="QuestObjects\Enemy\Classes\EnemyInfo.cs" />
     <Compile Include="Core\Classes\Fox2\Fox2Info.cs" />
     <Compile Include="Core\Classes\Common\NPCBodyInfo.cs" />
     <Compile Include="QuestObjects\ActiveItem\ActiveItemDetail.cs" />
@@ -369,7 +367,7 @@
     <EmbeddedResource Include="Core\Forms\Pages\LocationalDataStub.resx">
       <DependentUpon>LocationalDataStub.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Core\Forms\Pages\Setup.resx">
+    <EmbeddedResource Include="Core\Forms\Pages\SetupDisplay.resx">
       <DependentUpon>SetupDisplay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Core\Forms\Pages\Waiting.resx">
@@ -409,6 +407,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="QuestObjects\Hostage\Forms\HostageControl.resx">
       <DependentUpon>HostageControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuestObjects\Item\Forms\ItemBox.resx">
+      <DependentUpon>ItemBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuestObjects\Item\Forms\ItemControl.resx">
       <DependentUpon>ItemControl.cs</DependentUpon>

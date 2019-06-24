@@ -14,6 +14,7 @@ namespace SOC.Classes.Common
 
         public Quest(CoreDetails core, List<Detail> details)
         {
+            version = GetSOCVersion().ToString();
             coreDetails = core;
             questObjectDetails = details;
         }
@@ -43,6 +44,11 @@ namespace SOC.Classes.Common
                 try
                 {
                     Quest loadedQuest = (Quest)deserializer.Deserialize(stream);
+                    if (loadedQuest.version == null)
+                    {
+                        System.Windows.Forms.MessageBox.Show("The selected xml file does not contain a version number. \n\nThe save file is likely earlier than SOC 0.7.0.0 and no longer supported.", "SOC", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                        return false;
+                    }
                     coreDetails = loadedQuest.coreDetails;
                     questObjectDetails = loadedQuest.questObjectDetails;
                     return true;
@@ -55,6 +61,14 @@ namespace SOC.Classes.Common
 
             return false;
         }
+
+        public static Version GetSOCVersion()
+        {
+            return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+        }
+
+        [XmlAttribute]
+        public string version { get; set; }
 
         [XmlElement]
         public CoreDetails coreDetails { get; set; }

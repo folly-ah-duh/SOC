@@ -1,8 +1,9 @@
-﻿using System;
+﻿using SOC.Classes.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SOC.Classes.Common
+namespace SOC.QuestObjects.Enemy
 {
     public struct CP // each CP contains a CP name, The CP soldiers, the CP routes
     {

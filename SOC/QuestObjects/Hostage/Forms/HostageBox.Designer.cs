@@ -49,7 +49,7 @@
             this.groupBox_main.SuspendLayout();
             this.SuspendLayout();
             // 
-            // h_groupBox_main
+            // groupBox_main
             // 
             this.groupBox_main.BackColor = System.Drawing.Color.DarkGray;
             this.groupBox_main.Controls.Add(this.label6);
@@ -72,7 +72,7 @@
             this.groupBox_main.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox_main.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.groupBox_main.Location = new System.Drawing.Point(0, 0);
-            this.groupBox_main.Name = "h_groupBox_main";
+            this.groupBox_main.Name = "groupBox_main";
             this.groupBox_main.Size = new System.Drawing.Size(268, 237);
             this.groupBox_main.TabIndex = 0;
             this.groupBox_main.TabStop = false;
@@ -131,7 +131,7 @@
             this.comboBox_skill.Location = new System.Drawing.Point(85, 210);
             this.comboBox_skill.Name = "comboBox_skill";
             this.comboBox_skill.Size = new System.Drawing.Size(174, 21);
-            this.comboBox_skill.TabIndex = 11;
+            this.comboBox_skill.TabIndex = 8;
             // 
             // comboBox_staff
             // 
@@ -141,7 +141,7 @@
             this.comboBox_staff.Location = new System.Drawing.Point(85, 183);
             this.comboBox_staff.Name = "comboBox_staff";
             this.comboBox_staff.Size = new System.Drawing.Size(174, 21);
-            this.comboBox_staff.TabIndex = 10;
+            this.comboBox_staff.TabIndex = 7;
             // 
             // comboBox_lang
             // 
@@ -157,7 +157,7 @@
             this.comboBox_lang.Location = new System.Drawing.Point(85, 156);
             this.comboBox_lang.Name = "comboBox_lang";
             this.comboBox_lang.Size = new System.Drawing.Size(174, 21);
-            this.comboBox_lang.TabIndex = 9;
+            this.comboBox_lang.TabIndex = 6;
             // 
             // comboBox_scared
             // 
@@ -167,7 +167,7 @@
             this.comboBox_scared.Location = new System.Drawing.Point(85, 129);
             this.comboBox_scared.Name = "comboBox_scared";
             this.comboBox_scared.Size = new System.Drawing.Size(174, 21);
-            this.comboBox_scared.TabIndex = 8;
+            this.comboBox_scared.TabIndex = 5;
             // 
             // checkBox_injured
             // 
@@ -175,7 +175,8 @@
             this.checkBox_injured.Location = new System.Drawing.Point(171, 102);
             this.checkBox_injured.Name = "checkBox_injured";
             this.checkBox_injured.Size = new System.Drawing.Size(58, 17);
-            this.checkBox_injured.TabIndex = 7;
+            this.checkBox_injured.TabIndex = 0;
+            this.checkBox_injured.TabStop = false;
             this.checkBox_injured.Text = "Injured";
             this.checkBox_injured.UseVisualStyleBackColor = true;
             // 
@@ -185,7 +186,8 @@
             this.checkBox_untied.Location = new System.Drawing.Point(85, 102);
             this.checkBox_untied.Name = "checkBox_untied";
             this.checkBox_untied.Size = new System.Drawing.Size(57, 17);
-            this.checkBox_untied.TabIndex = 6;
+            this.checkBox_untied.TabIndex = 0;
+            this.checkBox_untied.TabStop = false;
             this.checkBox_untied.Text = "Untied";
             this.checkBox_untied.UseVisualStyleBackColor = true;
             // 
@@ -195,7 +197,8 @@
             this.checkBox_target.Location = new System.Drawing.Point(85, 75);
             this.checkBox_target.Name = "checkBox_target";
             this.checkBox_target.Size = new System.Drawing.Size(68, 17);
-            this.checkBox_target.TabIndex = 5;
+            this.checkBox_target.TabIndex = 0;
+            this.checkBox_target.TabStop = false;
             this.checkBox_target.Text = "Is Target";
             this.checkBox_target.UseVisualStyleBackColor = true;
             // 
@@ -221,21 +224,21 @@
             this.textBox_zcoord.Location = new System.Drawing.Point(205, 19);
             this.textBox_zcoord.Name = "textBox_zcoord";
             this.textBox_zcoord.Size = new System.Drawing.Size(54, 20);
-            this.textBox_zcoord.TabIndex = 2;
+            this.textBox_zcoord.TabIndex = 3;
             // 
             // textBox_ycoord
             // 
             this.textBox_ycoord.Location = new System.Drawing.Point(145, 19);
             this.textBox_ycoord.Name = "textBox_ycoord";
             this.textBox_ycoord.Size = new System.Drawing.Size(54, 20);
-            this.textBox_ycoord.TabIndex = 1;
+            this.textBox_ycoord.TabIndex = 2;
             // 
             // textBox_xcoord
             // 
             this.textBox_xcoord.Location = new System.Drawing.Point(85, 19);
             this.textBox_xcoord.Name = "textBox_xcoord";
             this.textBox_xcoord.Size = new System.Drawing.Size(54, 20);
-            this.textBox_xcoord.TabIndex = 0;
+            this.textBox_xcoord.TabIndex = 1;
             // 
             // HostageBox
             // 

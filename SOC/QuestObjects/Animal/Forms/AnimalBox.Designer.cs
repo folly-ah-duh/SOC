@@ -115,7 +115,7 @@
             this.comboBox_count.Location = new System.Drawing.Point(85, 156);
             this.comboBox_count.Name = "comboBox_count";
             this.comboBox_count.Size = new System.Drawing.Size(174, 21);
-            this.comboBox_count.TabIndex = 10;
+            this.comboBox_count.TabIndex = 7;
             // 
             // comboBox_typeID
             // 
@@ -126,7 +126,7 @@
             this.comboBox_typeID.Location = new System.Drawing.Point(85, 129);
             this.comboBox_typeID.Name = "comboBox_typeID";
             this.comboBox_typeID.Size = new System.Drawing.Size(174, 21);
-            this.comboBox_typeID.TabIndex = 9;
+            this.comboBox_typeID.TabIndex = 6;
             // 
             // comboBox_animal
             // 
@@ -137,7 +137,7 @@
             this.comboBox_animal.Location = new System.Drawing.Point(85, 102);
             this.comboBox_animal.Name = "comboBox_animal";
             this.comboBox_animal.Size = new System.Drawing.Size(174, 21);
-            this.comboBox_animal.TabIndex = 8;
+            this.comboBox_animal.TabIndex = 5;
             this.comboBox_animal.SelectedIndexChanged += new System.EventHandler(this.comboBox_animal_selectedIndexChanged);
             // 
             // checkBox_target
@@ -146,7 +146,8 @@
             this.checkBox_target.Location = new System.Drawing.Point(85, 75);
             this.checkBox_target.Name = "checkBox_target";
             this.checkBox_target.Size = new System.Drawing.Size(68, 17);
-            this.checkBox_target.TabIndex = 5;
+            this.checkBox_target.TabIndex = 0;
+            this.checkBox_target.TabStop = false;
             this.checkBox_target.Text = "Is Target";
             this.checkBox_target.UseVisualStyleBackColor = true;
             // 
@@ -173,21 +174,21 @@
             this.textBox_zcoord.Location = new System.Drawing.Point(205, 19);
             this.textBox_zcoord.Name = "textBox_zcoord";
             this.textBox_zcoord.Size = new System.Drawing.Size(54, 20);
-            this.textBox_zcoord.TabIndex = 2;
+            this.textBox_zcoord.TabIndex = 3;
             // 
             // textBox_ycoord
             // 
             this.textBox_ycoord.Location = new System.Drawing.Point(145, 19);
             this.textBox_ycoord.Name = "textBox_ycoord";
             this.textBox_ycoord.Size = new System.Drawing.Size(54, 20);
-            this.textBox_ycoord.TabIndex = 1;
+            this.textBox_ycoord.TabIndex = 2;
             // 
             // textBox_xcoord
             // 
             this.textBox_xcoord.Location = new System.Drawing.Point(85, 19);
             this.textBox_xcoord.Name = "textBox_xcoord";
             this.textBox_xcoord.Size = new System.Drawing.Size(54, 20);
-            this.textBox_xcoord.TabIndex = 0;
+            this.textBox_xcoord.TabIndex = 1;
             // 
             // AnimalBox
             // 

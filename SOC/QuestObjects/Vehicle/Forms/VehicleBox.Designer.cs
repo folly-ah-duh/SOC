@@ -102,7 +102,7 @@
             this.comboBox_class.Location = new System.Drawing.Point(85, 129);
             this.comboBox_class.Name = "comboBox_class";
             this.comboBox_class.Size = new System.Drawing.Size(174, 21);
-            this.comboBox_class.TabIndex = 22;
+            this.comboBox_class.TabIndex = 6;
             // 
             // comboBox_vehicle
             // 
@@ -113,7 +113,7 @@
             this.comboBox_vehicle.Location = new System.Drawing.Point(85, 102);
             this.comboBox_vehicle.Name = "comboBox_vehicle";
             this.comboBox_vehicle.Size = new System.Drawing.Size(174, 21);
-            this.comboBox_vehicle.TabIndex = 21;
+            this.comboBox_vehicle.TabIndex = 5;
             // 
             // checkBox_target
             // 
@@ -122,7 +122,8 @@
             this.checkBox_target.Location = new System.Drawing.Point(85, 75);
             this.checkBox_target.Name = "checkBox_target";
             this.checkBox_target.Size = new System.Drawing.Size(68, 17);
-            this.checkBox_target.TabIndex = 20;
+            this.checkBox_target.TabIndex = 0;
+            this.checkBox_target.TabStop = false;
             this.checkBox_target.Text = "Is Target";
             this.checkBox_target.UseVisualStyleBackColor = true;
             // 
@@ -133,7 +134,7 @@
             this.textBox_rot.Location = new System.Drawing.Point(85, 45);
             this.textBox_rot.Name = "textBox_rot";
             this.textBox_rot.Size = new System.Drawing.Size(174, 20);
-            this.textBox_rot.TabIndex = 19;
+            this.textBox_rot.TabIndex = 4;
             // 
             // label1
             // 
@@ -150,7 +151,7 @@
             this.textBox_zcoord.Location = new System.Drawing.Point(205, 19);
             this.textBox_zcoord.Name = "textBox_zcoord";
             this.textBox_zcoord.Size = new System.Drawing.Size(54, 20);
-            this.textBox_zcoord.TabIndex = 17;
+            this.textBox_zcoord.TabIndex = 3;
             // 
             // textBox_ycoord
             // 
@@ -158,7 +159,7 @@
             this.textBox_ycoord.Location = new System.Drawing.Point(145, 19);
             this.textBox_ycoord.Name = "textBox_ycoord";
             this.textBox_ycoord.Size = new System.Drawing.Size(54, 20);
-            this.textBox_ycoord.TabIndex = 16;
+            this.textBox_ycoord.TabIndex = 2;
             // 
             // textBox_xcoord
             // 
@@ -166,7 +167,7 @@
             this.textBox_xcoord.Location = new System.Drawing.Point(85, 19);
             this.textBox_xcoord.Name = "textBox_xcoord";
             this.textBox_xcoord.Size = new System.Drawing.Size(54, 20);
-            this.textBox_xcoord.TabIndex = 15;
+            this.textBox_xcoord.TabIndex = 1;
             // 
             // VehicleBox
             // 

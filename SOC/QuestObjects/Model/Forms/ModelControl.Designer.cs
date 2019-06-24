@@ -55,7 +55,7 @@
             this.panelQuestBoxes.Margin = new System.Windows.Forms.Padding(0);
             this.panelQuestBoxes.Name = "panelQuestBoxes";
             this.panelQuestBoxes.Size = new System.Drawing.Size(294, 430);
-            this.panelQuestBoxes.TabIndex = 4;
+            this.panelQuestBoxes.TabIndex = 1;
             this.panelQuestBoxes.WrapContents = false;
             // 
             // ModelControl

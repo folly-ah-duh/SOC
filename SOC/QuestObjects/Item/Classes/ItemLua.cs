@@ -23,14 +23,14 @@ namespace SOC.QuestObjects.Item
                     requestList.Add(item.item);
                 }
             }
-            requestEquipBuilder.Append("},");
+            requestEquipBuilder.Append("}");
 
             definitionLua.AddDefinition(requestEquipBuilder.ToString());
         }
 
         internal static void GetMain(ItemDetail questDetail, MainLua mainLua)
         {
-            if (questDetail.items.Count > 0)
+            if (!mainLua.QuestTableContains("targetItemList"))
             {
                 mainLua.AddToLocalVariables("local itemQuestType =", "local itemQuestType = " + questDetail.itemMetadata.objectiveType);
                 mainLua.AddToQuestTable(BuildItemTargetList(questDetail.items));

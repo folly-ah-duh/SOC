@@ -16,10 +16,12 @@ namespace SOC.QuestObjects.Hostage
             hostageControl.comboBox_Body.SelectedIndexChanged += OnBodyIndexChanged;
         }
 
+        string[] bodyNames = new string[0];
+
         public override void DrawMetadata(Metadata meta)
         {
             HostageControl hostageControl = (HostageControl)detailControl;
-            hostageControl.SetMetadata((HostageMetadata)meta);
+            hostageControl.SetMetadata((HostageMetadata)meta, bodyNames);
         }
 
         public override Metadata GetMetadataFromControl()
@@ -40,6 +42,19 @@ namespace SOC.QuestObjects.Hostage
         public override QuestObject NewObject(Position objectPosition, int objectID)
         {
             return new Hostage(objectPosition, objectID);
+        }
+
+        public override void SetDetailsFromSetup(Detail detail, CoreDetails core)
+        {
+            base.SetDetailsFromSetup(detail, core);
+            if (LoadAreas.isMtbs(core.locationID))
+            {
+                bodyNames = NPCBodyInfo.BodyInfoArray.Where(bodyEntry => bodyEntry.hasface).Select(BodyEntry => BodyEntry.Name).ToArray();
+            }
+            else
+            {
+                bodyNames = NPCBodyInfo.BodyInfoArray.Select(bodyEntry => bodyEntry.Name).ToArray();
+            }
         }
 
         private void OnBodyIndexChanged(object sender, EventArgs e)

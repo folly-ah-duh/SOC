@@ -73,6 +73,10 @@ namespace SOC.Classes.QuestBuild.Lua
 
             mainLua.AddToQuestTable("questType = ELIMINATE");
             mainLua.AddToQuestTable("soldierSubType = SUBTYPE");
+            mainLua.AddToQuestTable(@"cpList = {
+        nil
+    }");
+
             foreach (DetailManager manager in managers)
             {
                 manager.AddToMainLua(mainLua);

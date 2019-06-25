@@ -11,7 +11,7 @@ namespace SOC.QuestObjects.ActiveItem
     {
         internal static void GetMain(ActiveItemDetail questDetail, MainLua mainLua)
         {
-            if (questDetail.activeItems.Count > 0)
+            if (!mainLua.QuestTableContains("targetItemList"))
             {
                 mainLua.AddToLocalVariables("local itemQuestType =", "local itemQuestType = " + questDetail.activeItemMetadata.objectiveType);
                 mainLua.AddToQuestTable(BuildItemTargetList(questDetail));

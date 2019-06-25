@@ -17,6 +17,14 @@ namespace SOC.Classes.Lua
             questTable.Add(table);
         }
 
+        public bool QuestTableContains(string tableName)
+        {
+            foreach (string table in questTable)
+                if (table.StartsWith(tableName))
+                    return true;
+            return false;
+        }
+
         public void AddToLocalVariables(string search, string replacement)
         {
             localVariables.Add(search, replacement);

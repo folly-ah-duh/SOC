@@ -360,11 +360,6 @@ namespace SOC.Classes.Common
                 ),
         };
 
-        public static string[] GetBodyNames()
-        {
-            return BodyInfoArray.Select(entry => entry.Name).ToArray();
-        }
-
         public static BodyInfoEntry GetBodyInfo(string bodyName)
         {
             foreach (BodyInfoEntry body in BodyInfoArray)

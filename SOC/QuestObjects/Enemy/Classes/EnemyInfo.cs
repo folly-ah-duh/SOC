@@ -86,6 +86,21 @@ namespace SOC.QuestObjects.Enemy
             return soldierNames.ToArray();
         }
 
+        public static string ChooseDistantCP(string currentCP, int locId)
+        {
+            if (LoadAreas.isAfgh(locId))
+                if (currentCP == "afgh_citadel_cp" || currentCP == "afgh_citadelSouth_ob")
+                    return "afgh_fieldEast_ob";
+                else
+                    return "afgh_citadel_cp";
+            else if (LoadAreas.isMafr(locId))
+                if (currentCP == "mafr_lab_cp" || currentCP == "mafr_labWest_ob")
+                    return "mafr_hillSouth_ob";
+                else
+                    return "mafr_labWest_ob";
+            else return "quest_cp";
+        }
+
         public static CP MtbsCP = new CP("mtbs", new string[] { }, new string[] { }, new string[] { });
 
         public static CP NoneCP = new CP("NONE", new string[] { }, new string[] { }, new string[] { });

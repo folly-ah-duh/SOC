@@ -21,34 +21,22 @@ namespace SOC.QuestObjects.UAV
             InitializeComponent();
             ID = qObject.ID;
             groupBox_main.Text = qObject.GetObjectName();
-            
+
+            checkBox_target.Checked = qObject.isTarget;
+            checkBox_docile.Checked = qObject.docile;
+
             textBox_xcoord.Text = qObject.position.coords.xCoord;
             textBox_ycoord.Text = qObject.position.coords.yCoord;
             textBox_zcoord.Text = qObject.position.coords.zCoord;
             textBox_rot.Text = qObject.position.rotation.GetDegreeRotY();
 
-
             comboBox_dRoute.Items.Add("NONE");
             comboBox_dRoute.Items.AddRange(routes.ToArray());
-            if (comboBox_dRoute.Items.Contains(qObject.dRoute))
-            {
-                comboBox_dRoute.Text = qObject.dRoute;
-            }
-            else
-            {
-                comboBox_dRoute.Text = "NONE";
-            }
-            
+            SetComboBox(comboBox_dRoute, qObject.dRoute);
+
             comboBox_aRoute.Items.Add("NONE");
             comboBox_aRoute.Items.AddRange(routes.ToArray());
-            if (comboBox_aRoute.Items.Contains(qObject.aRoute))
-            {
-                comboBox_aRoute.Text = qObject.aRoute;
-            }
-            else
-            {
-                comboBox_aRoute.Text = "NONE";
-            }
+            SetComboBox(comboBox_aRoute, qObject.aRoute);
         }
 
         public override QuestObject getQuestObject()
@@ -56,6 +44,17 @@ namespace SOC.QuestObjects.UAV
             return new UAV(this);
         }
 
+        private void SetComboBox(ComboBox comboBox, string text)
+        {
+            if (comboBox.Items.Contains(text))
+            {
+                comboBox.Text = text;
+            }
+            else if (comboBox.Items.Count > 0)
+            {
+                comboBox.SelectedIndex = 0;
+            }
+        }
 
     }
 }

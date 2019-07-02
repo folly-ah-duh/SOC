@@ -68,7 +68,8 @@ namespace SOC.Classes.QuestBuild.Lua
         private static List<string> BuildMain(List<string> questLua, CoreDetails coreDetails, DetailManager[] managers)
         {
             MainLua mainLua = new MainLua();
-            mainLua.AddToLocalVariables("local CPNAME =", $@"local CPNAME = ""{coreDetails.CPName}""");
+            mainLua.AddToLocalVariables("local CPNAME =", $@"local CPNAME = ""{(coreDetails.CPName == "NONE" ? "quest_cp" : $"{coreDetails.CPName}")}""");
+            mainLua.AddToLocalVariables("local DISTANTCP =", $@"local DISTANTCP = ""{QuestObjects.Enemy.EnemyInfo.ChooseDistantCP(coreDetails.CPName, coreDetails.locationID)}""");
             mainLua.AddToLocalVariables("local questTrapName =", $@"local questTrapName = ""trap_preDeactiveQuestArea_{coreDetails.loadArea}""");
 
             mainLua.AddToQuestTable("questType = ELIMINATE");

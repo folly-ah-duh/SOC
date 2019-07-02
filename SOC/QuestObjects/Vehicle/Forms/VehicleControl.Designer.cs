@@ -83,7 +83,7 @@
             this.panelQuestBoxes.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.panelQuestBoxes.Location = new System.Drawing.Point(3, 59);
             this.panelQuestBoxes.Name = "panelQuestBoxes";
-            this.panelQuestBoxes.Size = new System.Drawing.Size(294, 387);
+            this.panelQuestBoxes.Size = new System.Drawing.Size(294, 384);
             this.panelQuestBoxes.TabIndex = 2;
             this.panelQuestBoxes.WrapContents = false;
             // 

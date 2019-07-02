@@ -56,9 +56,12 @@ namespace SOC.QuestObjects.UAV
         public UAV(UAVBox box)
         {
             ID = box.ID;
+            isTarget = box.checkBox_target.Checked;
+
 
             aRoute = box.comboBox_aRoute.Text;
             dRoute = box.comboBox_dRoute.Text;
+            docile = box.checkBox_docile.Checked;
             position = new Position(new Coordinates(box.textBox_xcoord.Text, box.textBox_ycoord.Text, box.textBox_zcoord.Text), new Rotation(box.textBox_rot.Text));
         }
 
@@ -84,6 +87,12 @@ namespace SOC.QuestObjects.UAV
 
         [XmlElement]
         public int ID { get; set; } = 0;
+        
+        [XmlElement]
+        public bool isTarget { get; set; } = false;
+
+        [XmlElement]
+        public bool docile { get; set; } = false;
 
         [XmlElement]
         public string aRoute { get; set; } = "NONE";
@@ -98,5 +107,13 @@ namespace SOC.QuestObjects.UAV
     public class UAVMetadata : Metadata
     {
         public UAVMetadata() { }
+
+        public UAVMetadata(UAVControl control)
+        {
+            objectiveType = control.comboBox_ObjType.Text;
+        }
+
+        [XmlAttribute]
+        public string objectiveType { get; set; } = "KILLREQUIRED";
     }
 }

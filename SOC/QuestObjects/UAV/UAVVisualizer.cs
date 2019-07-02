@@ -10,6 +10,8 @@ using SOC.Forms;
 using SOC.Forms.Pages;
 using SOC.UI;
 using SOC.Classes.Common;
+using SOC.Core.Classes.Route;
+using SOC.QuestObjects.Enemy;
 
 namespace SOC.QuestObjects.UAV
 {
@@ -22,7 +24,7 @@ namespace SOC.QuestObjects.UAV
         public override void DrawMetadata(Metadata meta)
         {
             UAVControl control = (UAVControl)detailControl;
-            //UAVControl.SetMetadata((UAVMetadata)meta);
+            control.SetMetadata((UAVMetadata)meta);
         }
 
         public override Metadata GetMetadataFromControl()
@@ -43,6 +45,17 @@ namespace SOC.QuestObjects.UAV
         public override QuestObject NewObject(Position pos, int index)
         {
             return new UAV(pos, index);
+        }
+
+        public override void SetDetailsFromSetup(Detail detail, CoreDetails core)
+        {
+            // Routes
+            RouteManager router = new RouteManager();
+            List<string> uavRoutes = router.GetRouteNames(core.routeName);
+            uavRoutes.AddRange(EnemyInfo.GetCP(core.CPName).CPsoldierRoutes);
+
+            routes = uavRoutes;
+            base.SetDetailsFromSetup(detail, core);
         }
     }
 }

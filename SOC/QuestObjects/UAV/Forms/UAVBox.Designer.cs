@@ -40,12 +40,14 @@
             this.textBox_zcoord = new System.Windows.Forms.TextBox();
             this.textBox_ycoord = new System.Windows.Forms.TextBox();
             this.textBox_xcoord = new System.Windows.Forms.TextBox();
+            this.checkBox_docile = new System.Windows.Forms.CheckBox();
             this.groupBox_main.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox_main
             // 
             this.groupBox_main.BackColor = System.Drawing.Color.DarkGray;
+            this.groupBox_main.Controls.Add(this.checkBox_docile);
             this.groupBox_main.Controls.Add(this.label4);
             this.groupBox_main.Controls.Add(this.label3);
             this.groupBox_main.Controls.Add(this.label2);
@@ -169,6 +171,18 @@
             this.textBox_xcoord.Size = new System.Drawing.Size(54, 20);
             this.textBox_xcoord.TabIndex = 1;
             // 
+            // checkBox_friendly
+            // 
+            this.checkBox_docile.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.checkBox_docile.AutoSize = true;
+            this.checkBox_docile.Location = new System.Drawing.Point(171, 75);
+            this.checkBox_docile.Name = "checkBox_docile";
+            this.checkBox_docile.Size = new System.Drawing.Size(62, 17);
+            this.checkBox_docile.TabIndex = 7;
+            this.checkBox_docile.TabStop = false;
+            this.checkBox_docile.Text = "Docile";
+            this.checkBox_docile.UseVisualStyleBackColor = true;
+            // 
             // UAVBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -196,5 +210,6 @@
         public System.Windows.Forms.TextBox textBox_zcoord;
         public System.Windows.Forms.TextBox textBox_ycoord;
         public System.Windows.Forms.TextBox textBox_xcoord;
+        public System.Windows.Forms.CheckBox checkBox_docile;
     }
 }

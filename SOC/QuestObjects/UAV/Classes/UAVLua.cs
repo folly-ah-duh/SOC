@@ -12,6 +12,12 @@ namespace SOC.QuestObjects.UAV
         internal static void GetMain(UAVDetail detail, MainLua mainLua)
         {
             mainLua.AddToQuestTable(BuildUAVList(detail.UAVs));
+
+            foreach (UAV drone in detail.UAVs)
+            {
+                if (drone.isTarget)
+                    mainLua.AddToTargetList(drone.GetObjectName());
+            }
         }
 
         private static string BuildUAVList(List<UAV> UAVs)
@@ -42,7 +48,7 @@ namespace SOC.QuestObjects.UAV
             name = ""{drone.GetObjectName()}"",
             {(dRouteString == @"""NONE""" ? "" : $@"dRoute = {dRouteString}, ")}
             {(aRouteString == @"""NONE""" ? "" : $@"aRoute = {aRouteString}, ")}
-            cpName = CPNAME,");
+            docile = {(drone.docile ? "true" : "false")},");
                     UAVListBuilder.Append(@"
         },");
                 }

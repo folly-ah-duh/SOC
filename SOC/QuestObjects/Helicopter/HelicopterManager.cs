@@ -11,7 +11,7 @@ namespace SOC.QuestObjects.Helicopter
 {
     class HelicopterManager : LocationalManager // probably end up being a non-locational manager
     {
-        static LocationalDataStub stub = new LocationalDataStub("Helicopter Spawn Locations");
+        static LocationalDataStub stub = new LocationalDataStub("Helicopter Starting Locations (WIP, only 1 spawnable)");
 
         static HelicopterControl control = new HelicopterControl();
 

@@ -107,6 +107,8 @@
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppHostage2Parameter.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppPickableLocatorParameter.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppPlacedLocatorParameter.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\TppUavLocatorParameter.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\TppUavParameter.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppVehicle2AttachmentData.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppVehicle2BodyData.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppVehicle2LocatorParameter.cs" />
@@ -275,6 +277,24 @@
     <Compile Include="Core\Classes\Route\RouteAssets.cs" />
     <Compile Include="QuestObjects\Model\ModelManager.cs" />
     <Compile Include="QuestObjects\Model\ModelVisualizer.cs" />
+    <Compile Include="QuestObjects\UAV\Classes\UAVAssets.cs" />
+    <Compile Include="QuestObjects\UAV\Classes\UAVFox2.cs" />
+    <Compile Include="QuestObjects\UAV\Classes\UAVLua.cs" />
+    <Compile Include="QuestObjects\UAV\Forms\UAVBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuestObjects\UAV\Forms\UAVBox.Designer.cs">
+      <DependentUpon>UAVBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuestObjects\UAV\Forms\UAVControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuestObjects\UAV\Forms\UAVControl.Designer.cs">
+      <DependentUpon>UAVControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuestObjects\UAV\UAVDetail.cs" />
+    <Compile Include="QuestObjects\UAV\UAVManager.cs" />
+    <Compile Include="QuestObjects\UAV\UAVVisualizer.cs" />
     <Compile Include="QuestObjects\Vehicle\Classes\VehicleAssets.cs" />
     <Compile Include="QuestObjects\Vehicle\Classes\VehicleFox2.cs" />
     <Compile Include="QuestObjects\Vehicle\Classes\VehicleLua.cs" />
@@ -420,6 +440,12 @@
     <EmbeddedResource Include="QuestObjects\Model\Forms\ModelControl.resx">
       <DependentUpon>ModelControl.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuestObjects\UAV\Forms\UAVBox.resx">
+      <DependentUpon>UAVBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuestObjects\UAV\Forms\UAVControl.resx">
+      <DependentUpon>UAVControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuestObjects\Vehicle\Forms\VehicleBox.resx">
       <DependentUpon>VehicleBox.cs</DependentUpon>

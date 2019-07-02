@@ -112,7 +112,7 @@ namespace SOC.QuestObjects.Enemy
 
             foreach (Enemy enemy in enemies)
             {
-                if (enemy.isTarget)
+                if (enemy.isTarget && enemy.spawn)
                     mainLua.AddToTargetList(enemy.GetObjectName());
             }
         }
@@ -155,8 +155,8 @@ namespace SOC.QuestObjects.Enemy
                 enemyListBuilder.Append($@"
         {{
             enemyName = ""{enemy.name}"",
-            {(enemy.dRoute == "DEFAULT" ? "" : $"route_d = {DRouteString}, ")}
-            {(enemy.cRoute == "DEFAULT" ? "" : $"route_c = {CRouteString}, ")}
+            {(enemy.dRoute == @"""DEFAULT""" ? "" : $"route_d = {DRouteString}, ")}
+            {(enemy.cRoute == @"""DEFAULT""" ? "" : $"route_c = {CRouteString}, ")}
             cpName = CPNAME,
             soldierSubType = SUBTYPE,
             {(enemy.skill.Equals("NONE") ? "" : $@"skill = ""{enemy.skill}"", ")}

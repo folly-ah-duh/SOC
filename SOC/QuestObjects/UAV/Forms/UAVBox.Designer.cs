@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox_main = new System.Windows.Forms.GroupBox();
+            this.checkBox_docile = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -40,13 +41,20 @@
             this.textBox_zcoord = new System.Windows.Forms.TextBox();
             this.textBox_ycoord = new System.Windows.Forms.TextBox();
             this.textBox_xcoord = new System.Windows.Forms.TextBox();
-            this.checkBox_docile = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.comboBox_defense = new System.Windows.Forms.ComboBox();
+            this.comboBox_weapon = new System.Windows.Forms.ComboBox();
             this.groupBox_main.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox_main
             // 
             this.groupBox_main.BackColor = System.Drawing.Color.DarkGray;
+            this.groupBox_main.Controls.Add(this.label5);
+            this.groupBox_main.Controls.Add(this.label6);
+            this.groupBox_main.Controls.Add(this.comboBox_defense);
+            this.groupBox_main.Controls.Add(this.comboBox_weapon);
             this.groupBox_main.Controls.Add(this.checkBox_docile);
             this.groupBox_main.Controls.Add(this.label4);
             this.groupBox_main.Controls.Add(this.label3);
@@ -63,10 +71,22 @@
             this.groupBox_main.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.groupBox_main.Location = new System.Drawing.Point(0, 0);
             this.groupBox_main.Name = "groupBox_main";
-            this.groupBox_main.Size = new System.Drawing.Size(268, 156);
+            this.groupBox_main.Size = new System.Drawing.Size(268, 210);
             this.groupBox_main.TabIndex = 0;
             this.groupBox_main.TabStop = false;
             this.groupBox_main.Text = "UAVBox";
+            // 
+            // checkBox_docile
+            // 
+            this.checkBox_docile.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.checkBox_docile.AutoSize = true;
+            this.checkBox_docile.Location = new System.Drawing.Point(171, 75);
+            this.checkBox_docile.Name = "checkBox_docile";
+            this.checkBox_docile.Size = new System.Drawing.Size(56, 17);
+            this.checkBox_docile.TabIndex = 7;
+            this.checkBox_docile.TabStop = false;
+            this.checkBox_docile.Text = "Docile";
+            this.checkBox_docile.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -171,17 +191,54 @@
             this.textBox_xcoord.Size = new System.Drawing.Size(54, 20);
             this.textBox_xcoord.TabIndex = 1;
             // 
-            // checkBox_friendly
+            // label5
             // 
-            this.checkBox_docile.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.checkBox_docile.AutoSize = true;
-            this.checkBox_docile.Location = new System.Drawing.Point(171, 75);
-            this.checkBox_docile.Name = "checkBox_docile";
-            this.checkBox_docile.Size = new System.Drawing.Size(62, 17);
-            this.checkBox_docile.TabIndex = 7;
-            this.checkBox_docile.TabStop = false;
-            this.checkBox_docile.Text = "Docile";
-            this.checkBox_docile.UseVisualStyleBackColor = true;
+            this.label5.Location = new System.Drawing.Point(4, 183);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(76, 21);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Armor Rank:";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label6
+            // 
+            this.label6.Location = new System.Drawing.Point(4, 156);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(76, 21);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "Weapon:";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // comboBox_defense
+            // 
+            this.comboBox_defense.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox_defense.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_defense.FormattingEnabled = true;
+            this.comboBox_defense.Items.AddRange(new object[] {
+            "DEFAULT",
+            "9",
+            "10",
+            "11"});
+            this.comboBox_defense.Location = new System.Drawing.Point(85, 183);
+            this.comboBox_defense.Name = "comboBox_defense";
+            this.comboBox_defense.Size = new System.Drawing.Size(174, 21);
+            this.comboBox_defense.TabIndex = 11;
+            // 
+            // comboBox_weapon
+            // 
+            this.comboBox_weapon.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox_weapon.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_weapon.FormattingEnabled = true;
+            this.comboBox_weapon.Items.AddRange(new object[] {
+            "DEVELOP_LEVEL_LMG_0",
+            "DEVELOP_LEVEL_LMG_1",
+            "DEVELOP_LEVEL_LMG_2"});
+            this.comboBox_weapon.Location = new System.Drawing.Point(85, 156);
+            this.comboBox_weapon.Name = "comboBox_weapon";
+            this.comboBox_weapon.Size = new System.Drawing.Size(174, 21);
+            this.comboBox_weapon.TabIndex = 10;
             // 
             // UAVBox
             // 
@@ -189,7 +246,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox_main);
             this.Name = "UAVBox";
-            this.Size = new System.Drawing.Size(268, 156);
+            this.Size = new System.Drawing.Size(268, 210);
             this.groupBox_main.ResumeLayout(false);
             this.groupBox_main.PerformLayout();
             this.ResumeLayout(false);
@@ -211,5 +268,9 @@
         public System.Windows.Forms.TextBox textBox_ycoord;
         public System.Windows.Forms.TextBox textBox_xcoord;
         public System.Windows.Forms.CheckBox checkBox_docile;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        public System.Windows.Forms.ComboBox comboBox_defense;
+        public System.Windows.Forms.ComboBox comboBox_weapon;
     }
 }

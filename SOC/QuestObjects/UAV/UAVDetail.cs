@@ -58,6 +58,8 @@ namespace SOC.QuestObjects.UAV
             ID = box.ID;
             isTarget = box.checkBox_target.Checked;
 
+            weapon = box.comboBox_weapon.Text;
+            defenseGrade = box.comboBox_defense.Text;
 
             aRoute = box.comboBox_aRoute.Text;
             dRoute = box.comboBox_dRoute.Text;
@@ -99,6 +101,12 @@ namespace SOC.QuestObjects.UAV
 
         [XmlElement]
         public string dRoute { get; set; } = "NONE";
+
+        [XmlElement]
+        public string weapon { get; set; } = "DEVELOP_LEVEL_LMG_0";
+
+        [XmlElement]
+        public string defenseGrade { get; set; } = "DEFAULT";
 
         [XmlElement]
         public Position position = new Position(new Coordinates(), new Rotation());

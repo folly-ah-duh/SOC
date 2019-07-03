@@ -48,6 +48,8 @@ namespace SOC.QuestObjects.UAV
             name = ""{drone.GetObjectName()}"",
             {(dRouteString == @"""NONE""" ? "" : $@"dRoute = {dRouteString}, ")}
             {(aRouteString == @"""NONE""" ? "" : $@"aRoute = {aRouteString}, ")}
+            {(drone.defenseGrade == @"DEFAULT" ? "" : $@"defenseGrade = {drone.defenseGrade},")}
+            weapon = TppUav.{drone.weapon},
             docile = {(drone.docile ? "true" : "false")},");
                     UAVListBuilder.Append(@"
         },");

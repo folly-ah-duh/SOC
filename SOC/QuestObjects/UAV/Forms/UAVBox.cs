@@ -37,6 +37,9 @@ namespace SOC.QuestObjects.UAV
             comboBox_aRoute.Items.Add("NONE");
             comboBox_aRoute.Items.AddRange(routes.ToArray());
             SetComboBox(comboBox_aRoute, qObject.aRoute);
+
+            comboBox_defense.Text = qObject.defenseGrade;
+            comboBox_weapon.Text = qObject.weapon;
         }
 
         public override QuestObject getQuestObject()

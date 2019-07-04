@@ -107,6 +107,8 @@
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppHostage2Parameter.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppPickableLocatorParameter.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppPlacedLocatorParameter.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\TppSecurityCamera2LocatorParameter.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\TppSecurityCamera2Parameter.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppUavLocatorParameter.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppUavParameter.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppVehicle2AttachmentData.cs" />
@@ -156,6 +158,24 @@
     <Compile Include="QuestObjects\Animal\Forms\AnimalBox.Designer.cs">
       <DependentUpon>AnimalBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuestObjects\Camera\Classes\CameraAssets.cs" />
+    <Compile Include="QuestObjects\Camera\Forms\CameraBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuestObjects\Camera\Forms\CameraBox.Designer.cs">
+      <DependentUpon>CameraBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuestObjects\Camera\Forms\CameraControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuestObjects\Camera\Forms\CameraControl.Designer.cs">
+      <DependentUpon>CameraControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuestObjects\Camera\CameraDetail.cs" />
+    <Compile Include="QuestObjects\Camera\Classes\CameraFox2.cs" />
+    <Compile Include="QuestObjects\Camera\Classes\CameraLua.cs" />
+    <Compile Include="QuestObjects\Camera\CameraManager.cs" />
+    <Compile Include="QuestObjects\Camera\CameraVisualizer.cs" />
     <Compile Include="QuestObjects\Common\DetailVisualizer.cs" />
     <Compile Include="QuestObjects\Common\ManagerArray.cs" />
     <Compile Include="QuestObjects\Common\Detail.cs" />
@@ -409,6 +429,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="QuestObjects\Animal\Forms\AnimalControl.resx">
       <DependentUpon>AnimalControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuestObjects\Camera\Forms\CameraBox.resx">
+      <DependentUpon>CameraBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuestObjects\Camera\Forms\CameraControl.resx">
+      <DependentUpon>CameraControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuestObjects\Enemy\Forms\EnemyBox.resx">
       <DependentUpon>EnemyBox.cs</DependentUpon>

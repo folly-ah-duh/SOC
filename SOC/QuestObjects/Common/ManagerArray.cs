@@ -16,6 +16,7 @@ namespace SOC.QuestObjects.Common
                 typeof(Vehicle.VehicleDetail),
                 typeof(Helicopter.HelicopterDetail),
                 typeof(UAV.UAVDetail),
+                typeof(Camera.CameraDetail),
                 typeof(WalkerGear.WalkerDetail),
                 typeof(Animal.AnimalDetail),
                 typeof(Item.ItemDetail),

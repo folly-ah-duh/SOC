@@ -86,7 +86,7 @@ namespace SOC.QuestObjects.Model
         [XmlElement]
         public bool collision { get; set; } = true; // default to true, yeah?
 
-        [XmlElement]
+        [XmlAttribute]
         public int ID { get; set; } = 0;
 
         [XmlElement]

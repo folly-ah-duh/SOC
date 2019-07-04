@@ -14,10 +14,26 @@ namespace SOC.QuestObjects.Vehicle
             mainLua.AddToLocalVariables("local vehicleQuestType =", "local vehicleQuestType = " + detail.vehicleMetadata.ObjectiveType);
             mainLua.AddToQuestTable(BuildVehicleList(detail.vehicles));
 
-            foreach (Vehicle vehicle in detail.vehicles)
+            if (detail.vehicles.Count > 0)
             {
-                if (vehicle.isTarget)
-                    mainLua.AddToTargetList(vehicle.GetObjectName());
+                mainLua.AddToQStep_Start_OnEnter("InfCore.PCall(this.WarpVehicles)");
+                mainLua.AddCodeToScript(@"
+function this.WarpVehicles()
+  for i,vehicleInfo in ipairs(this.QUEST_TABLE.vehicleList)do
+    local gameObjectId= GetGameObjectId(vehicleInfo.locator)
+    if gameObjectId~=GameObject.NULL_ID then
+      local position=vehicleInfo.position
+      local command={id=""SetPosition"",rotY=position.rotY,position=Vector3(position.pos[1],position.pos[2],position.pos[3])}
+      GameObject.SendCommand(gameObjectId,command)
+    end
+  end
+end");
+
+                foreach (Vehicle vehicle in detail.vehicles)
+                {
+                    if (vehicle.isTarget)
+                        mainLua.AddToTargetList(vehicle.GetObjectName());
+                }
             }
         }
 
@@ -48,9 +64,9 @@ namespace SOC.QuestObjects.Vehicle
         {{
             id = ""Spawn"",
             locator = ""{vehicle.GetObjectName()}"",
-            type = {vehicleType},
-            {(subType == "NONE" ? "" : $@"subType = {subType}, ")}
-            {(vehicle.vehicleClass == "DEFAULT" ? "" : $@"class = Vehicle.class.{vehicle.vehicleClass}, ")}
+            type = {vehicleType}, {(subType == "NONE" ? "" : $@"
+            subType = {subType}, ")}{(vehicle.vehicleClass == "DEFAULT" ? "" : $@"
+            class = Vehicle.class.{vehicle.vehicleClass}, ")}
             position = {{pos = {{{vehicle.position.coords.xCoord},{vehicle.position.coords.yCoord},{vehicle.position.coords.zCoord}}}, rotY = {vehicle.position.rotation.GetRadianRotY()},}},");
                     vehicleListBuilder.Append(@"
         },");

@@ -45,9 +45,9 @@ namespace SOC.QuestObjects.Helicopter
                 {
                     helicopterListBuilder.Append($@"
         {{
-            heliName = ""{heli.GetObjectName()}"",
-            {((heli.heliRoute == "NONE") ? "" : $@"routeName = ""{heli.heliRoute}"",")}
-            {((heli.heliClass == "DEFAULT") ? "" : $"coloringType = TppDefine.ENEMY_HELI_COLORING_TYPE.{heli.heliClass},")}   ");
+            heliName = ""{heli.GetObjectName()}"",{((heli.heliRoute == "NONE") ? "" : $@"
+            routeName = ""{heli.heliRoute}"",")} {((heli.heliClass == "DEFAULT") ? "" : $@"
+            coloringType = TppDefine.ENEMY_HELI_COLORING_TYPE.{heli.heliClass},")}   ");
                     helicopterListBuilder.Append(@"
         },");
                 }

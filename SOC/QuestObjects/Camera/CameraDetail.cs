@@ -6,64 +6,58 @@ using System.Xml.Serialization;
 using System;
 using System.Linq;
 
-namespace SOC.QuestObjects.UAV
+namespace SOC.QuestObjects.Camera
 {
-    public class UAVDetail : Detail
+    public class CameraDetail : Detail
     {
-        public UAVDetail() { }
+        public CameraDetail() { }
 
-        public UAVDetail(List<UAV> UAVList, UAVMetadata meta)
+        public CameraDetail(List<Camera> cameraList, CameraMetadata meta)
         {
-            UAVs = UAVList; UAVmetadata = meta;
+            cameras = cameraList; cameraMetadata = meta;
         }
 
         [XmlElement]
-        public UAVMetadata UAVmetadata { get; set; } = new UAVMetadata();
+        public CameraMetadata cameraMetadata { get; set; } = new CameraMetadata();
 
         [XmlArray]
-        public List<UAV> UAVs { get; set; } = new List<UAV>();
+        public List<Camera> cameras { get; set; } = new List<Camera>();
 
         public override Metadata GetMetadata()
         {
-            return UAVmetadata;
+            return cameraMetadata;
         }
 
         public override DetailManager GetNewManager()
         {
-            return new UAVManager(this);
+            return new CameraManager(this);
         }
 
         public override List<QuestObject> GetQuestObjects()
         {
-            return UAVs.Cast<QuestObject>().ToList();
+            return cameras.Cast<QuestObject>().ToList();
         }
 
         public override void SetQuestObjects(List<QuestObject> qObjects)
         {
-            UAVs = qObjects.Cast<UAV>().ToList();
+            cameras = qObjects.Cast<Camera>().ToList();
         }
     }
 
-    public class UAV : QuestObject
+    public class Camera : QuestObject
     {
-        public UAV() { }
+        public Camera() { }
 
-        public UAV(Position pos, int numId)
+        public Camera(Position pos, int numId)
         {
             position = pos; ID = numId;
         }
 
-        public UAV(UAVBox box)
+        public Camera(CameraBox box)
         {
             ID = box.ID;
             isTarget = box.checkBox_target.Checked;
-
-            weapon = box.comboBox_weapon.Text;
-            defenseGrade = box.comboBox_defense.Text;
-
-            aRoute = box.comboBox_aRoute.Text;
-            dRoute = box.comboBox_dRoute.Text;
-            docile = box.checkBox_docile.Checked;
+            weapon = box.checkBox_weapon.Checked;
             position = new Position(new Coordinates(box.textBox_xcoord.Text, box.textBox_ycoord.Text, box.textBox_zcoord.Text), new Rotation(box.textBox_rot.Text));
         }
 
@@ -84,39 +78,27 @@ namespace SOC.QuestObjects.UAV
 
         public override string GetObjectName()
         {
-            return "UAV_" + ID;
+            return "Camera_" + ID;
         }
 
         [XmlAttribute]
         public int ID { get; set; } = 0;
-        
+
         [XmlElement]
         public bool isTarget { get; set; } = false;
 
         [XmlElement]
-        public bool docile { get; set; } = false;
-
-        [XmlElement]
-        public string aRoute { get; set; } = "NONE";
-
-        [XmlElement]
-        public string dRoute { get; set; } = "NONE";
-
-        [XmlElement]
-        public string weapon { get; set; } = "DEVELOP_LEVEL_LMG_0";
-
-        [XmlElement]
-        public string defenseGrade { get; set; } = "DEFAULT";
+        public bool weapon { get; set; } = false;
 
         [XmlElement]
         public Position position = new Position(new Coordinates(), new Rotation());
     }
 
-    public class UAVMetadata : Metadata
+    public class CameraMetadata : Metadata
     {
-        public UAVMetadata() { }
+        public CameraMetadata() { }
 
-        public UAVMetadata(UAVControl control)
+        public CameraMetadata(CameraControl control)
         {
             objectiveType = control.comboBox_ObjType.Text;
         }

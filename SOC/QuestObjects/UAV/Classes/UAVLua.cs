@@ -13,10 +13,35 @@ namespace SOC.QuestObjects.UAV
         {
             mainLua.AddToQuestTable(BuildUAVList(detail.UAVs));
 
-            foreach (UAV drone in detail.UAVs)
+            if (detail.UAVs.Count > 0)
             {
-                if (drone.isTarget)
-                    mainLua.AddToTargetList(drone.GetObjectName());
+
+                mainLua.AddToQStep_Start_OnEnter("this.SetupUAV()");
+                mainLua.AddCodeToScript(@"
+function this.SetupUAV()
+	for index, uavInfo in pairs(this.QUEST_TABLE.UAVList) do
+		local gameObjectId = GameObject.GetGameObjectId(uavInfo.name)
+		if gameObjectId ~= GameObject.NULL_ID then
+			GameObject.SendCommand( gameObjectId, {id = ""SetEnabled"", enabled = true } )
+			if uavInfo.dRoute then
+				GameObject.SendCommand( gameObjectId, {id = ""SetPatrolRoute"", route = uavInfo.dRoute } )
+			end
+			if uavInfo.aRoute then
+				GameObject.SendCommand( gameObjectId, {id = ""SetCombatRoute"", route = uavInfo.aRoute } )
+			end
+			if uavInfo.frenemy == true then
+			  GameObject.SendCommand(gameObjectId, {id = ""SetFriendly""})
+			end
+			GameObject.SendCommand( gameObjectId, {id = ""SetCommandPost"", cp = uavInfo.cpName } )
+		end
+	end
+end");
+
+                foreach (UAV drone in detail.UAVs)
+                {
+                    if (drone.isTarget)
+                        mainLua.AddToTargetList(drone.GetObjectName());
+                }
             }
         }
 
@@ -45,10 +70,10 @@ namespace SOC.QuestObjects.UAV
 
                     UAVListBuilder.Append($@"
         {{
-            name = ""{drone.GetObjectName()}"",
-            {(dRouteString == @"""NONE""" ? "" : $@"dRoute = {dRouteString}, ")}
-            {(aRouteString == @"""NONE""" ? "" : $@"aRoute = {aRouteString}, ")}
-            {(drone.defenseGrade == @"DEFAULT" ? "" : $@"defenseGrade = {drone.defenseGrade},")}
+            name = ""{drone.GetObjectName()}"", {(dRouteString == @"""NONE""" ? "" : $@"
+            dRoute = {dRouteString}, ")} {(aRouteString == @"""NONE""" ? "" : $@"
+            aRoute = {aRouteString}, ")} {(drone.defenseGrade == "DEFAULT" ? "" : $@"
+            defenseGrade = {drone.defenseGrade},")}
             weapon = TppUav.{drone.weapon},
             docile = {(drone.docile ? "true" : "false")},");
                     UAVListBuilder.Append(@"

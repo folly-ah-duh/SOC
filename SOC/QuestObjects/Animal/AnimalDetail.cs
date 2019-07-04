@@ -87,7 +87,7 @@ namespace SOC.QuestObjects.Animal
         [XmlElement]
         public bool target { get; set; } = false;
 
-        [XmlElement]
+        [XmlAttribute]
         public int ID { get; set; } = 0;
 
         [XmlElement]

@@ -94,7 +94,7 @@ namespace SOC.QuestObjects.Item
         [XmlElement]
         public bool isTarget { get; set; } = false;
 
-        [XmlElement]
+        [XmlAttribute]
         public int ID { get; set; } = 0;
 
         [XmlElement]

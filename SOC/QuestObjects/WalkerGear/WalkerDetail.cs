@@ -67,7 +67,7 @@ namespace SOC.QuestObjects.WalkerGear
         [XmlElement]
         public bool isTarget { get; set; } = false;
 
-        [XmlElement]
+        [XmlAttribute]
         public int ID { get; set; } = 0;
 
         [XmlElement]

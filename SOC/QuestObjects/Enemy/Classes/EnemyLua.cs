@@ -154,18 +154,17 @@ namespace SOC.QuestObjects.Enemy
 
                 enemyListBuilder.Append($@"
         {{
-            enemyName = ""{enemy.name}"",
-            {(enemy.dRoute == @"""DEFAULT""" ? "" : $"route_d = {DRouteString}, ")}
-            {(enemy.cRoute == @"""DEFAULT""" ? "" : $"route_c = {CRouteString}, ")}
+            enemyName = ""{enemy.name}"",{(DRouteString == @"""DEFAULT""" ? "" : $@"
+            route_d = {DRouteString}, ")}{(CRouteString == @"""DEFAULT""" ? "" : $@"
+            route_c = {CRouteString}, ")}
             cpName = CPNAME,
-            soldierSubType = SUBTYPE,
-            {(enemy.skill.Equals("NONE") ? "" : $@"skill = ""{enemy.skill}"", ")}
-            {powerSetting}
-            {(enemy.staffType.Equals("NONE") ? "" : $@"staffTypeId = TppDefine.STAFF_TYPE_ID.{enemy.staffType}, ")}
-            {(enemy.body.Equals("DEFAULT") || enemy.armored ? "" : $@"bodyId = TppEnemyBodyId.{enemy.body}, ")}
+            soldierSubType = SUBTYPE, {(enemy.skill.Equals("NONE") ? "" : $@"
+            skill = ""{enemy.skill}"", ")}{powerSetting}{(enemy.staffType.Equals("NONE") ? "" : $@"
+            staffTypeId = TppDefine.STAFF_TYPE_ID.{enemy.staffType}, ")}{(enemy.body.Equals("DEFAULT") || enemy.armored ? "" : $@"
+            bodyId = TppEnemyBodyId.{enemy.body}, ")}
             isBalaclava = {(enemy.balaclava ? "true" : "false")},
-            isZombie = {(enemy.zombie ? "true" : "false")},
-            {(enemy.zombie ? "isZombieUseRoute = true," : "")}");
+            isZombie = {(enemy.zombie ? "true" : "false")},{(enemy.zombie ? $@"
+            isZombieUseRoute = true," : "")}");
                 enemyListBuilder.Append(@"
         },");
             }

@@ -19,14 +19,58 @@ namespace SOC.QuestObjects.WalkerGear
             }
         }
 
-        internal static void GetMain(WalkerDetail walkerDetail, MainLua mainLua)
+        internal static void GetMain(WalkerDetail detail, MainLua mainLua)
         {
-            List<WalkerGear> walkers = walkerDetail.walkers;
-            WalkerMetadata meta = walkerDetail.walkerMetadata;
+            List<WalkerGear> walkers = detail.walkers;
+            WalkerMetadata meta = detail.walkerMetadata;
 
             mainLua.AddToLocalVariables("local walkerQuestType =", "local walkerQuestType = " + meta.objectiveType);
 
-            mainLua.AddToQuestTable(BuildWalkerList(walkerDetail));
+            if (detail.walkers.Count > 0)
+            {
+                mainLua.AddCodeToScript("local setupOnce = true");
+                mainLua.AddToOnUpdate("setupOnce = this.SetupGearsQuest(setupOnce)");
+                mainLua.AddCodeToScript(@"
+function this.SetupGearsQuest(setupOnce)
+  if setupOnce == true then
+    for i,walkerInfo in ipairs(this.QUEST_TABLE.walkerList)do
+      local walkerId = GetGameObjectId(""TppCommonWalkerGear2"",walkerInfo.walkerName)
+      if walkerId ~= GameObject.NULL_ID then
+
+        local commandWeapon={ id = ""SetMainWeapon"", weapon = walkerInfo.primaryWeapon}
+        GameObject.SendCommand(walkerId, commandWeapon)
+
+        local commandColor = { id = ""SetColoringType"", type = walkerInfo.colorType }
+        GameObject.SendCommand(walkerId, commandColor)
+
+        if walkerInfo.riderName then
+          local soldierId = GetGameObjectId( ""TppSoldier2"", walkerInfo.riderName )
+          local commandRide = { id = ""SetRelativeVehicle"", targetId = walkerId, rideFromBeginning = true  }
+          GameObject.SendCommand( soldierId, commandRide )
+        end
+
+		local position = walkerInfo.position
+        local commandPos={ id = ""SetPosition"", rotY = position.rotY, pos = position.pos}
+        GameObject.SendCommand(walkerId,commandPos)
+      end
+    end
+  end
+  return false
+end");
+
+                mainLua.AddToQStep_Start_OnEnter("this.BuildWalkerGameObjectIdList()");
+                mainLua.AddCodeToScript(@"
+function this.BuildWalkerGameObjectIdList()
+  for i,walkerInfo in ipairs(this.QUEST_TABLE.walkerList)do
+    local walkerId = GetGameObjectId(""TppCommonWalkerGear2"",walkerInfo.walkerName)
+    if walkerId ~= GameObject.NULL_ID then
+      questWalkerGearList[walkerId] = walkerInfo.walkerName
+    end
+  end
+end");
+            }
+
+            mainLua.AddToQuestTable(BuildWalkerList(detail));
 
             foreach (WalkerGear walker in walkers)
             {
@@ -49,8 +93,8 @@ namespace SOC.QuestObjects.WalkerGear
                 {
                     walkerListBuilder.Append($@"
         {{
-            walkerName = ""{walker.GetObjectName()}"",
-            {(walker.pilot.Equals("NONE") ? "" : $@"riderName = ""{walker.pilot}"",")}
+            walkerName = ""{walker.GetObjectName()}"",{(walker.pilot.Equals("NONE") ? "" : $@"
+            riderName = ""{walker.pilot}"",")}
             colorType = {walker.paint},
             primaryWeapon = {walker.weapon},
             position = {{pos = {{{walker.position.coords.xCoord},{walker.position.coords.yCoord},{walker.position.coords.zCoord}}}, rotY = {walker.position.rotation.GetDegreeRotY()},}},");

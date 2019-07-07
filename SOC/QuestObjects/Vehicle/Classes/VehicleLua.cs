@@ -11,11 +11,17 @@ namespace SOC.QuestObjects.Vehicle
     {
         public static void GetMain(VehicleDetail detail, MainLua mainLua)
         {
-            mainLua.AddToLocalVariables("local vehicleQuestType =", "local vehicleQuestType = " + detail.vehicleMetadata.ObjectiveType);
             mainLua.AddToQuestTable(BuildVehicleList(detail.vehicles));
 
             if (detail.vehicles.Count > 0)
             {
+                LuaFunction checkVehicle = new LuaFunction("CheckIsVehicle", @"
+function this.CheckIsVehicle(gameId)
+  return Tpp.IsVehicle(gameId)
+end");
+                ObjectiveTypesPair vehicleObjective = new ObjectiveTypesPair(mainLua, checkVehicle, detail.vehicleMetadata.ObjectiveType);
+
+                CheckQuestGenericEnemy checkQuestMethod = new CheckQuestGenericEnemy(mainLua);
                 mainLua.AddToQStep_Start_OnEnter("InfCore.PCall(this.WarpVehicles)");
                 mainLua.AddCodeToScript(@"
 function this.WarpVehicles()
@@ -58,7 +64,7 @@ end");
                     }
                     else
                     {
-                        vehicleType = VehicleInfo.vehicleLuaName[vehicle.vehicle];
+                        vehicleType = "Vehicle.type." + VehicleInfo.vehicleLuaName[vehicle.vehicle];
                     }
                     vehicleListBuilder.Append($@"
         {{

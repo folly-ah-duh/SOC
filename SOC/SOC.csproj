@@ -122,6 +122,12 @@
     <Compile Include="Core\Classes\Fox2\Fox2EntityClass.cs" />
     <Compile Include="Core\Classes\InfiniteHeaven\Position.cs" />
     <Compile Include="Core\Classes\Lua\DefinitionLua.cs" />
+    <Compile Include="Core\Classes\Lua\Functions\Common\CheckQuestAnimal.cs" />
+    <Compile Include="Core\Classes\Lua\Functions\Common\CheckQuestGenericEnemy.cs" />
+    <Compile Include="Core\Classes\Lua\Functions\Common\CheckQuestItem.cs" />
+    <Compile Include="Core\Classes\Lua\Functions\LuaFunction.cs" />
+    <Compile Include="Core\Classes\Lua\Functions\CheckQuestMethodsPair.cs" />
+    <Compile Include="Core\Classes\Lua\Functions\ObjectiveTypesPair.cs" />
     <Compile Include="Core\Classes\Lua\MainLua.cs" />
     <Compile Include="Core\Classes\QuestBuild\Builders\AssetsBuilder.cs" />
     <Compile Include="Core\Classes\QuestBuild\BuildManager.cs" />

@@ -12,6 +12,8 @@ namespace SOC.Classes.Lua
         List<string> targetList = new List<string>();
         List<string> functionList = new List<string>();
         List<string> startList_OnEnter = new List<string>();
+        List<CheckQuestMethodsPair> CheckQuestMethodList = new List<CheckQuestMethodsPair>();
+        List<ObjectiveTypesPair> ObjectiveTypesList = new List<ObjectiveTypesPair>();
         List<string> onUpdate = new List<string>();
         Dictionary<string, string> localVariables = new Dictionary<string, string>();
 
@@ -28,6 +30,22 @@ namespace SOC.Classes.Lua
         public void AddToQStep_Start_OnEnter(string functionCall)
         {
             startList_OnEnter.Add(functionCall);
+        }
+
+        public void AddToCheckQuestMethod(CheckQuestMethodsPair methodsPair)
+        {
+            if (!CheckQuestMethodList.Contains(methodsPair))
+            {
+                CheckQuestMethodList.Add(methodsPair);
+            }
+        }
+
+        public void AddToObjectiveTypes(ObjectiveTypesPair objectivePair)
+        {
+            if (!ObjectiveTypesList.Contains(objectivePair))
+            {
+                ObjectiveTypesList.Add(objectivePair);
+            }
         }
 
         public void AddToOnUpdate(string code)
@@ -108,6 +126,8 @@ namespace SOC.Classes.Lua
         {
             functionList.Add(BuildQStep_StartFunction());
             functionList.Add(BuildOnUpdateFunction());
+            BuildObjectiveTypeList();
+            BuildCheckQuestMethodList();
 
             StringBuilder functionBuilder = new StringBuilder();
             foreach (string function in functionList)
@@ -115,6 +135,7 @@ namespace SOC.Classes.Lua
                 functionBuilder.Append($@"
 {function}");
             }
+
             ReplaceLuaLine(luaList, "--ADDITIONAL FUNCTIONS--", functionBuilder.ToString());
         }
 
@@ -153,6 +174,47 @@ function this.OnUpdate()
 end");
 
             return onUpdateBuilder.ToString();
+        }
+
+        private void BuildCheckQuestMethodList()
+        {
+            foreach (CheckQuestMethodsPair pair in CheckQuestMethodList)
+            {
+                functionList.Add(pair.TargetMessageMethod.FunctionFull);
+                functionList.Add(pair.TallyMethod.FunctionFull);
+            }
+            StringBuilder methodListBuilder = new StringBuilder(@"
+local CheckQuestMethodList = {");
+
+            foreach (CheckQuestMethodsPair pair in CheckQuestMethodList)
+            {
+                methodListBuilder.Append($@"
+  {pair.GetTableFormat()},");
+            }
+            methodListBuilder.Append(@"
+}");
+
+            functionList.Add(methodListBuilder.ToString());
+        }
+
+        private void BuildObjectiveTypeList()
+        {
+            foreach (ObjectiveTypesPair pair in ObjectiveTypesList)
+            {
+                functionList.Add(pair.checkMethod.FunctionFull);
+            }
+            StringBuilder objectiveListBuilder = new StringBuilder(@"
+local ObjectiveTypeList = {");
+
+            foreach (ObjectiveTypesPair pair in ObjectiveTypesList)
+            {
+                objectiveListBuilder.Append($@"
+  {pair.GetTableFormat()},");
+            }
+            objectiveListBuilder.Append(@"
+}");
+
+            functionList.Add(objectiveListBuilder.ToString());
         }
 
         private static void ReplaceLuaLine(List<string> luaList, string searchFor, string replaceWith)

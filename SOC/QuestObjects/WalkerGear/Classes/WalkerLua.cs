@@ -9,28 +9,7 @@ namespace SOC.QuestObjects.WalkerGear
 {
     static class WalkerLua
     {
-        internal static void GetDefinition(WalkerDetail walkerDetail, DefinitionLua definitionLua)
-        {
-            int walkerCount = walkerDetail.walkers.Count;
-
-            if (walkerCount > 0)
-            {
-                definitionLua.AddPackPath("/Assets/tpp/pack/mission2/common/mis_com_walkergear.fpk");
-            }
-        }
-
-        internal static void GetMain(WalkerDetail detail, MainLua mainLua)
-        {
-            List<WalkerGear> walkers = detail.walkers;
-            WalkerMetadata meta = detail.walkerMetadata;
-
-            mainLua.AddToLocalVariables("local walkerQuestType =", "local walkerQuestType = " + meta.objectiveType);
-
-            if (detail.walkers.Count > 0)
-            {
-                mainLua.AddCodeToScript("local setupOnce = true");
-                mainLua.AddToOnUpdate("setupOnce = this.SetupGearsQuest(setupOnce)");
-                mainLua.AddCodeToScript(@"
+        static readonly LuaFunction SetupGearsQuest = new LuaFunction("SetupGearsQuest", @"
 function this.SetupGearsQuest(setupOnce)
   if setupOnce == true then
     for i,walkerInfo in ipairs(this.QUEST_TABLE.walkerList)do
@@ -58,8 +37,7 @@ function this.SetupGearsQuest(setupOnce)
   return false
 end");
 
-                mainLua.AddToQStep_Start_OnEnter("this.BuildWalkerGameObjectIdList()");
-                mainLua.AddCodeToScript(@"
+        static readonly LuaFunction BuildWalkerGameObjectIdList = new LuaFunction("BuildWalkerGameObjectIdList", @"
 function this.BuildWalkerGameObjectIdList()
   for i,walkerInfo in ipairs(this.QUEST_TABLE.walkerList)do
     local walkerId = GetGameObjectId(""TppCommonWalkerGear2"",walkerInfo.walkerName)
@@ -68,14 +46,47 @@ function this.BuildWalkerGameObjectIdList()
     end
   end
 end");
-            }
 
-            mainLua.AddToQuestTable(BuildWalkerList(detail));
+        static readonly LuaFunction checkWalkerGear = new LuaFunction("CheckIsWalkerGear", @"
+function this.CheckIsWalkerGear(gameId)
+  return Tpp.IsEnemyWalkerGear(gameId)
+end");
 
-            foreach (WalkerGear walker in walkers)
+        internal static void GetDefinition(WalkerDetail walkerDetail, DefinitionLua definitionLua)
+        {
+            int walkerCount = walkerDetail.walkers.Count;
+
+            if (walkerCount > 0)
             {
-                if (walker.isTarget)
-                    mainLua.AddToTargetList(walker.GetObjectName());
+                definitionLua.AddPackPath("/Assets/tpp/pack/mission2/common/mis_com_walkergear.fpk");
+            }
+        }
+
+        internal static void GetMain(WalkerDetail detail, MainLua mainLua)
+        {
+            List<WalkerGear> walkers = detail.walkers;
+            WalkerMetadata meta = detail.walkerMetadata;
+
+            if (detail.walkers.Count > 0)
+            {
+                mainLua.AddToQuestTable(BuildWalkerList(detail));
+                
+                mainLua.AddCodeToScript("local setupOnce = true");
+                mainLua.AddToOnUpdate("setupOnce = this.SetupGearsQuest(setupOnce)");
+                mainLua.AddCodeToScript(SetupGearsQuest);
+
+                mainLua.AddToQStep_Start_OnEnter(BuildWalkerGameObjectIdList);
+                mainLua.AddCodeToScript(BuildWalkerGameObjectIdList);
+
+                if (walkers.Any(walker => walker.isTarget))
+                {
+                    CheckQuestGenericEnemy checkQuestMethod = new CheckQuestGenericEnemy(mainLua, checkWalkerGear, meta.objectiveType);
+                    foreach (WalkerGear walker in walkers)
+                    {
+                        if (walker.isTarget)
+                            mainLua.AddToTargetList(walker.GetObjectName());
+                    }
+                }
             }
         }
 

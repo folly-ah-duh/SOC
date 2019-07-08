@@ -10,14 +10,7 @@ namespace SOC.QuestObjects.Camera
 {
     class CameraLua
     {
-        internal static void GetMain(CameraDetail detail, MainLua mainLua)
-        {
-            mainLua.AddToQuestTable(BuildCameraList(detail.cameras));
-            if (detail.cameras.Count > 0)
-            {
-
-                mainLua.AddToQStep_Start_OnEnter("this.SetCameraAttributes()");
-                mainLua.AddCodeToScript($@"
+        static readonly LuaFunction SetCameraAttributes = new LuaFunction("SetCameraAttributes", @"
 function this.SetCameraAttributes()
   GameObject.SendCommand({{type=""TppSecurityCamera2""}}, {{id=""SetDevelopLevel"", developLevel=6}})
   for i,cameraInfo in ipairs(this.QUEST_TABLE.cameraList)do
@@ -32,10 +25,22 @@ function this.SetCameraAttributes()
   end
 end");
 
-                foreach (Camera cam in detail.cameras)
+        internal static void GetMain(CameraDetail detail, MainLua mainLua)
+        {
+            if (detail.cameras.Count > 0)
+            {
+                mainLua.AddToQuestTable(BuildCameraList(detail.cameras));
+
+                mainLua.AddToQStep_Start_OnEnter(SetCameraAttributes);
+                mainLua.AddCodeToScript(SetCameraAttributes);
+                if(detail.cameras.Any(camera => camera.isTarget))
                 {
-                    if (cam.isTarget)
-                        mainLua.AddToTargetList(cam.GetObjectName());
+                    CheckQuestGenericEnemy cameraCheck = new CheckQuestGenericEnemy(mainLua);
+                    foreach (Camera cam in detail.cameras)
+                    {
+                        if (cam.isTarget)
+                            mainLua.AddToTargetList(cam.GetObjectName());
+                    }
                 }
             }
         }

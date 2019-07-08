@@ -9,21 +9,12 @@ namespace SOC.QuestObjects.Vehicle
 {
     class VehicleLua
     {
-        public static void GetMain(VehicleDetail detail, MainLua mainLua)
-        {
-            mainLua.AddToQuestTable(BuildVehicleList(detail.vehicles));
-
-            if (detail.vehicles.Count > 0)
-            {
-                LuaFunction checkVehicle = new LuaFunction("CheckIsVehicle", @"
+        static readonly LuaFunction checkVehicle = new LuaFunction("CheckIsVehicle", @"
 function this.CheckIsVehicle(gameId)
   return Tpp.IsVehicle(gameId)
 end");
-                ObjectiveTypesPair vehicleObjective = new ObjectiveTypesPair(mainLua, checkVehicle, detail.vehicleMetadata.ObjectiveType);
 
-                CheckQuestGenericEnemy checkQuestMethod = new CheckQuestGenericEnemy(mainLua);
-                mainLua.AddToQStep_Start_OnEnter("InfCore.PCall(this.WarpVehicles)");
-                mainLua.AddCodeToScript(@"
+        static readonly LuaFunction warpVehicles = new LuaFunction("WarpVehicles", @"
 function this.WarpVehicles()
   for i,vehicleInfo in ipairs(this.QUEST_TABLE.vehicleList)do
     local gameObjectId= GetGameObjectId(vehicleInfo.locator)
@@ -35,10 +26,23 @@ function this.WarpVehicles()
   end
 end");
 
-                foreach (Vehicle vehicle in detail.vehicles)
+        public static void GetMain(VehicleDetail detail, MainLua mainLua)
+        {
+            if (detail.vehicles.Count > 0)
+            {
+                mainLua.AddToQuestTable(BuildVehicleList(detail.vehicles));
+
+                mainLua.AddToQStep_Start_OnEnter(warpVehicles);
+                mainLua.AddCodeToScript(warpVehicles);
+
+                if(detail.vehicles.Any(vehicle => vehicle.isTarget))
                 {
-                    if (vehicle.isTarget)
-                        mainLua.AddToTargetList(vehicle.GetObjectName());
+                    CheckQuestGenericEnemy checkQuestMethod = new CheckQuestGenericEnemy(mainLua, checkVehicle, detail.vehicleMetadata.ObjectiveType);
+                    foreach (Vehicle vehicle in detail.vehicles)
+                    {
+                        if (vehicle.isTarget)
+                            mainLua.AddToTargetList(vehicle.GetObjectName());
+                    }
                 }
             }
         }

@@ -11,9 +11,15 @@ namespace SOC.QuestObjects.Animal
     {
         public static void GetMain(AnimalDetail detail, MainLua mainLua)
         {
-            mainLua.AddToLocalVariables("local animalQuestType =", "local animalQuestType = " + detail.animalMetadata.objectiveType);
-            mainLua.AddToQuestTable(BuildAnimalList(detail.animals));
-            mainLua.AddToQuestTable(BuildAnimalTargetList(detail.animals));
+            if(detail.animals.Count > 0)
+            {
+                mainLua.AddToQuestTable(BuildAnimalList(detail.animals));
+                if (detail.animals.Any(animal => animal.target))
+                {
+                    CheckQuestAnimal checkAnimal = new CheckQuestAnimal(mainLua, detail.animalMetadata.objectiveType);
+                    mainLua.AddToQuestTable(BuildAnimalTargetList(detail.animals));
+                }
+            }
         }
 
         private static string BuildAnimalList(List<Animal> animals)

@@ -12,35 +12,34 @@ namespace SOC.Classes.Lua
         static readonly LuaFunction IsTargetSetMessageIdForGenericEnemy = new LuaFunction("IsTargetSetMessageIdForGenericEnemy",
             @"
 function this.IsTargetSetMessageIdForGenericEnemy(gameId, messageId, checkAnimalId)
-	if mvars.ene_questTargetList[gameId] then
-		local targetInfo = mvars.ene_questTargetList[gameId]
-		local intended = true
-		if targetInfo.messageId ~= ""None"" and targetInfo.isTarget == true then
-			intended = false
-		elseif targetInfo.isTarget == false then
-			intended = false
-		end
-		targetInfo.messageId = messageId or ""None""
-		return true, intended
+  if mvars.ene_questTargetList[gameId] then
+	local targetInfo = mvars.ene_questTargetList[gameId]
+	local intended = true
+	if targetInfo.messageId ~= ""None"" and targetInfo.isTarget == true then
+	  intended = false
+	elseif targetInfo.isTarget == false then
+	  intended = false
 	end
-	return false, false
+	targetInfo.messageId = messageId or ""None""
+	return true, intended
+  end
+  return false, false
 end");
 
         static readonly LuaFunction TallyGenericTargets = new LuaFunction("TallyGenericTargets",
             @"
 function this.TallyGenericTargets(totalTargets, objectiveCompleteCount, objectiveFailedCount)
-	local dynamicQuestType = ELIMINATE
-	for targetGameId, targetInfo in pairs(mvars.ene_questTargetList) do
+  local dynamicQuestType = ELIMINATE
+  for targetGameId, targetInfo in pairs(mvars.ene_questTargetList) do
     local isTarget = targetInfo.isTarget or false
     local targetMessageId = targetInfo.messageId
 
     if isTarget == true then
-	  for _, ObjectiveTypeInfo in ipairs(ObjectiveTypeList) do
+	  for _, ObjectiveTypeInfo in ipairs(ObjectiveTypeList.genericTargets) do
 	    if ObjectiveTypeInfo.Check(targetGameId) == true then
 		  dynamicQuestType = ObjectiveTypeInfo.Type
 		  break
 		end
-		dynamicQuestType = ELIMINATE
 	  end
 
       if targetMessageId ~= ""None"" then
@@ -67,8 +66,10 @@ function this.TallyGenericTargets(totalTargets, objectiveCompleteCount, objectiv
       totalTargets = totalTargets + 1
     end
   end
-	return totalTargets, objectiveCompleteCount, objectiveFailedCount
+  return totalTargets, objectiveCompleteCount, objectiveFailedCount
 end");
+
+        public CheckQuestGenericEnemy(MainLua mainLua, LuaFunction checkFunction, string objectiveType) : base(mainLua, IsTargetSetMessageIdForGenericEnemy, TallyGenericTargets, checkFunction, objectiveType) { }
 
         public CheckQuestGenericEnemy(MainLua mainLua) : base(mainLua, IsTargetSetMessageIdForGenericEnemy, TallyGenericTargets) { }
     }

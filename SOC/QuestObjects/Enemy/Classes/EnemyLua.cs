@@ -9,6 +9,11 @@ namespace SOC.QuestObjects.Enemy
 {
     static class EnemyLua
     {
+        static readonly LuaFunction CheckIsSoldier = new LuaFunction("CheckIsSoldier", @"
+function this.CheckIsSoldier(gameId)
+  return Tpp.IsSoldier(gameId)
+end");
+
         public static void GetDefinition(EnemyDetail detail, DefinitionLua definitionLua)
         {
             if (detail.enemies.Count > 0)
@@ -102,18 +107,27 @@ namespace SOC.QuestObjects.Enemy
             EnemyMetadata meta = detail.enemyMetadata;
 
             mainLua.AddToLocalVariables("local SUBTYPE =", $@"local SUBTYPE = ""{meta.subtype}""");
-            mainLua.AddToLocalVariables("local enemyQuestType =", "local enemyQuestType = " + meta.objectiveType);
 
             mainLua.AddToQuestTable($"isQuestArmor = {(HasArmors(enemies) ? "true" : "false")}");
             mainLua.AddToQuestTable($"isQuestZombie = {(HasZombie(enemies) ? "true" : "false")}");
             mainLua.AddToQuestTable($"isQuestBalaclava = {(HasBalaclavas(enemies) ? "true" : "false")}");
 
-            mainLua.AddToQuestTable(BuildEnemyList(enemies));
-
+            int spawnedOrCustomizedEnemies = 0;
             foreach (Enemy enemy in enemies)
             {
-                if (enemy.isTarget && enemy.spawn)
-                    mainLua.AddToTargetList(enemy.GetObjectName());
+                if (enemy.spawn)
+                {
+                    spawnedOrCustomizedEnemies++;
+                    if (enemy.isTarget)
+                    {
+                        CheckQuestGenericEnemy CheckEnemy = new CheckQuestGenericEnemy(mainLua, CheckIsSoldier, meta.objectiveType);
+                        mainLua.AddToTargetList(enemy.GetObjectName());
+                    }
+                }
+            }
+            if (spawnedOrCustomizedEnemies > 0)
+            {
+                mainLua.AddToQuestTable(BuildEnemyList(enemies));
             }
         }
 

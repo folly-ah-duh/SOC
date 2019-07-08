@@ -9,15 +9,7 @@ namespace SOC.QuestObjects.UAV
 {
     class UAVLua
     {
-        internal static void GetMain(UAVDetail detail, MainLua mainLua)
-        {
-            mainLua.AddToQuestTable(BuildUAVList(detail.UAVs));
-
-            if (detail.UAVs.Count > 0)
-            {
-
-                mainLua.AddToQStep_Start_OnEnter("this.SetupUAV()");
-                mainLua.AddCodeToScript(@"
+        static readonly LuaFunction setupUAV = new LuaFunction("SetupUAV", @"
 function this.SetupUAV()
 	for index, uavInfo in pairs(this.QUEST_TABLE.UAVList) do
 		local gameObjectId = GameObject.GetGameObjectId(uavInfo.name)
@@ -37,10 +29,23 @@ function this.SetupUAV()
 	end
 end");
 
-                foreach (UAV drone in detail.UAVs)
+        internal static void GetMain(UAVDetail detail, MainLua mainLua)
+        {
+            if (detail.UAVs.Count > 0)
+            {
+                mainLua.AddToQuestTable(BuildUAVList(detail.UAVs));
+
+                mainLua.AddToQStep_Start_OnEnter(setupUAV);
+                mainLua.AddCodeToScript(setupUAV);
+
+                if(detail.UAVs.Any(uav => uav.isTarget))
                 {
-                    if (drone.isTarget)
-                        mainLua.AddToTargetList(drone.GetObjectName());
+                    CheckQuestGenericEnemy checkUAV = new CheckQuestGenericEnemy(mainLua);
+                    foreach (UAV drone in detail.UAVs)
+                    {
+                        if (drone.isTarget)
+                            mainLua.AddToTargetList(drone.GetObjectName());
+                    }
                 }
             }
         }

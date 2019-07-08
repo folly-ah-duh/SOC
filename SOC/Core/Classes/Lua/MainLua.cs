@@ -13,7 +13,7 @@ namespace SOC.Classes.Lua
         List<string> functionList = new List<string>();
         List<string> startList_OnEnter = new List<string>();
         List<CheckQuestMethodsPair> CheckQuestMethodList = new List<CheckQuestMethodsPair>();
-        List<ObjectiveTypesPair> ObjectiveTypesList = new List<ObjectiveTypesPair>();
+        ObjectiveTypesList objectiveTypesList = new ObjectiveTypesList();
         List<string> onUpdate = new List<string>();
         Dictionary<string, string> localVariables = new Dictionary<string, string>();
 
@@ -27,24 +27,42 @@ namespace SOC.Classes.Lua
             functionList.Add(code);
         }
 
+        public void AddCodeToScript(LuaFunction function)
+        {
+            functionList.Add(function.FunctionFull);
+        }
+
         public void AddToQStep_Start_OnEnter(string functionCall)
         {
             startList_OnEnter.Add(functionCall);
         }
 
+        public void AddToQStep_Start_OnEnter(LuaFunction function)
+        {
+            startList_OnEnter.Add($"InfCore.PCall(this.{function.FunctionName})");
+        }
+
         public void AddToCheckQuestMethod(CheckQuestMethodsPair methodsPair)
         {
-            if (!CheckQuestMethodList.Contains(methodsPair))
+            if (!CheckQuestMethodList.Exists(pair => pair.TallyMethod.Equals(methodsPair.TallyMethod) || pair.TargetMessageMethod.Equals(methodsPair.TargetMessageMethod)))
             {
                 CheckQuestMethodList.Add(methodsPair);
             }
         }
 
-        public void AddToObjectiveTypes(ObjectiveTypesPair objectivePair)
+        public void AddToObjectiveTypes(GenericTargetPair objectivePair)
         {
-            if (!ObjectiveTypesList.Contains(objectivePair))
+            if (!objectiveTypesList.genericTargets.Exists(pair => pair.checkMethod.Equals(objectivePair.checkMethod)))
             {
-                ObjectiveTypesList.Add(objectivePair);
+                objectiveTypesList.genericTargets.Add(objectivePair);
+            }
+        }
+
+        public void AddToObjectiveTypes(string oneLineObjective)
+        {
+            if (!objectiveTypesList.oneLineObjectiveTypes.Contains(oneLineObjective))
+            {
+                objectiveTypesList.oneLineObjectiveTypes.Add(oneLineObjective);
             }
         }
 
@@ -126,7 +144,7 @@ namespace SOC.Classes.Lua
         {
             functionList.Add(BuildQStep_StartFunction());
             functionList.Add(BuildOnUpdateFunction());
-            BuildObjectiveTypeList();
+            objectiveTypesList.BuildObjectiveTypesList(this);
             BuildCheckQuestMethodList();
 
             StringBuilder functionBuilder = new StringBuilder();
@@ -195,26 +213,6 @@ local CheckQuestMethodList = {");
 }");
 
             functionList.Add(methodListBuilder.ToString());
-        }
-
-        private void BuildObjectiveTypeList()
-        {
-            foreach (ObjectiveTypesPair pair in ObjectiveTypesList)
-            {
-                functionList.Add(pair.checkMethod.FunctionFull);
-            }
-            StringBuilder objectiveListBuilder = new StringBuilder(@"
-local ObjectiveTypeList = {");
-
-            foreach (ObjectiveTypesPair pair in ObjectiveTypesList)
-            {
-                objectiveListBuilder.Append($@"
-  {pair.GetTableFormat()},");
-            }
-            objectiveListBuilder.Append(@"
-}");
-
-            functionList.Add(objectiveListBuilder.ToString());
         }
 
         private static void ReplaceLuaLine(List<string> luaList, string searchFor, string replaceWith)

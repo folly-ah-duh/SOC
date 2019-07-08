@@ -13,8 +13,12 @@ namespace SOC.QuestObjects.ActiveItem
         {
             if (!mainLua.QuestTableContains("targetItemList"))
             {
-                mainLua.AddToLocalVariables("local itemQuestType =", "local itemQuestType = " + questDetail.activeItemMetadata.objectiveType);
-                mainLua.AddToQuestTable(BuildItemTargetList(questDetail));
+
+                if(questDetail.activeItems.Any(activeItem => activeItem.isTarget))
+                {
+                    CheckQuestItem checkQuestItem = new CheckQuestItem(mainLua, questDetail.activeItemMetadata.objectiveType);
+                    mainLua.AddToQuestTable(BuildItemTargetList(questDetail));
+                }
             }
         }
 

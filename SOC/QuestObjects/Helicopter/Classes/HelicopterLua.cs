@@ -23,12 +23,19 @@ namespace SOC.QuestObjects.Helicopter
 
         internal static void GetMain(HelicopterDetail questDetail, MainLua mainLua)
         {
-            mainLua.AddToQuestTable(BuildHeliList(questDetail));
-
-            foreach (Helicopter heli in questDetail.helicopters)
+            if (questDetail.helicopters.Count > 0)
             {
-                if (heli.isTarget)
-                    mainLua.AddToTargetList(heli.GetObjectName());
+                mainLua.AddToQuestTable(BuildHeliList(questDetail));
+
+                if (questDetail.helicopters.Any(helicopter => helicopter.isTarget))
+                {
+                    CheckQuestGenericEnemy helicopterCheck = new CheckQuestGenericEnemy(mainLua);
+                    foreach (Helicopter heli in questDetail.helicopters)
+                    {
+                        if (heli.isTarget)
+                            mainLua.AddToTargetList(heli.GetObjectName());
+                    }
+                }
             }
         }
 

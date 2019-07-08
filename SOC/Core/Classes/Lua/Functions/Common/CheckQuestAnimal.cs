@@ -11,37 +11,37 @@ namespace SOC.Classes.Lua
         static readonly LuaFunction IsTargetSetMessageIdForAnimal = new LuaFunction("IsTargetSetMessageIdForAnimal",
     @"
 function this.IsTargetSetMessageIdForAnimal(gameId, messageId, checkAnimalId)
-	if checkAnimalId ~= nil then
-		local databaseId = TppAnimal.GetDataBaseIdFromAnimalId(checkAnimalId)
-		local isTarget = false
-		for animalId, targetInfo in pairs(mvars.ani_questTargetList) do
-			if targetInfo.idType == ""animalId"" then
-				if animalId == checkAnimalId then
-					targetInfo.messageId = messageId or ""None""
-					isTarget = true
-				end
-			elseif targetInfo.idType == ""databaseId"" then
-				if animalId == databaseId then
-					targetInfo.messageId = messageId or ""None""
-					isTarget = true
-				end
-			elseif targetInfo.idType == ""targetName"" then
-				local animalGameId = GetGameObjectId(animalId)
-				if animalGameId == gameId then
-					targetInfo.messageId = messageId
-					isTarget = true
-				end
+  if checkAnimalId ~= nil then
+	local databaseId = TppAnimal.GetDataBaseIdFromAnimalId(checkAnimalId)
+	local isTarget = false
+	for animalId, targetInfo in pairs(mvars.ani_questTargetList) do
+		if targetInfo.idType == ""animalId"" then
+			if animalId == checkAnimalId then
+				targetInfo.messageId = messageId or ""None""
+				isTarget = true
+			end
+		elseif targetInfo.idType == ""databaseId"" then
+			if animalId == databaseId then
+				targetInfo.messageId = messageId or ""None""
+				isTarget = true
+			end
+		elseif targetInfo.idType == ""targetName"" then
+			local animalGameId = GetGameObjectId(animalId)
+			if animalGameId == gameId then
+				targetInfo.messageId = messageId
+				isTarget = true
 			end
 		end
-		return isTarget, true
 	end
-	return false, false
+    return isTarget, true
+  end
+  return false, false
 end");
 
         static readonly LuaFunction TallyAnimalTargets = new LuaFunction("TallyAnimalTargets",
             @"
 function this.TallyAnimalTargets(totalTargets, objectiveCompleteCount, objectiveFailedCount)
-	local dynamicQuestType = RECOVERED
+  local dynamicQuestType = ObjectiveTypeList.animalObjective
   for animalId, targetInfo in pairs(mvars.ani_questTargetList) do
     local targetMessageId = targetInfo.messageId
 
@@ -68,9 +68,9 @@ function this.TallyAnimalTargets(totalTargets, objectiveCompleteCount, objective
     end
     totalTargets = totalTargets + 1
   end
-	return totalTargets, objectiveCompleteCount, objectiveFailedCount
+  return totalTargets, objectiveCompleteCount, objectiveFailedCount
 end");
 
-        public CheckQuestAnimal(MainLua mainLua) : base(mainLua, IsTargetSetMessageIdForAnimal, TallyAnimalTargets) { }
+        public CheckQuestAnimal(MainLua mainLua, string objectiveType) : base(mainLua, IsTargetSetMessageIdForAnimal, TallyAnimalTargets, "animalObjective = " + objectiveType) { }
     }
 }

@@ -2,12 +2,44 @@
 using SOC.Classes.Lua;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace SOC.QuestObjects.Hostage
 {
     static class HostageLua
     {
+        static readonly LuaFunction WarpHostages = new LuaFunction("WarpHostages", @"
+function this.WarpHostages()
+  for i,hostageInfo in ipairs(this.QUEST_TABLE.hostageList)do
+    local gameObjectId= GetGameObjectId(hostageInfo.hostageName)
+    if gameObjectId~=GameObject.NULL_ID then
+      local position=hostageInfo.position
+      local command={id=""Warp"",degRotationY=position.rotY,position=Vector3(position.pos[1],position.pos[2],position.pos[3])}
+      GameObject.SendCommand(gameObjectId,command)
+    end
+  end
+end");
+
+        static readonly LuaFunction SetHostageAttributes = new LuaFunction("SetHostageAttributes", @"
+function this.SetHostageAttributes()
+  for i,hostageInfo in ipairs(this.QUEST_TABLE.hostageList)do
+    local gameObjectId= GetGameObjectId(hostageInfo.hostageName)
+    if gameObjectId~=GameObject.NULL_ID then
+	  if hostageInfo.commands then
+        for j,hostageCommand in ipairs(hostageInfo.commands)do
+	      GameObject.SendCommand(gameObjectId, hostageCommand)
+	    end
+	  end
+    end
+  end
+end");
+
+        static readonly LuaFunction CheckIsHostage = new LuaFunction("CheckIsHostage", @"
+function this.CheckIsHostage(gameId)
+  return Tpp.IsHostage(gameId) == true
+end");
+
         public static void GetDefinition(HostageDetail hostageDetail, DefinitionLua definitionLua)
         {
             int hostageCount = hostageDetail.hostages.Count;
@@ -27,47 +59,27 @@ namespace SOC.QuestObjects.Hostage
             List<Hostage> hostages = hostageDetail.hostages;
             HostageMetadata meta = hostageDetail.hostageMetadata;
 
-            if (hostages.Count > 0)
-            {
-                mainLua.AddToQStep_Start_OnEnter("InfCore.PCall(this.WarpHostages)");
-                mainLua.AddCodeToScript(@"
-function this.WarpHostages()
-  for i,hostageInfo in ipairs(this.QUEST_TABLE.hostageList)do
-    local gameObjectId= GetGameObjectId(hostageInfo.hostageName)
-    if gameObjectId~=GameObject.NULL_ID then
-      local position=hostageInfo.position
-      local command={id=""Warp"",degRotationY=position.rotY,position=Vector3(position.pos[1],position.pos[2],position.pos[3])}
-      GameObject.SendCommand(gameObjectId,command)
-    end
-  end
-end");
-
-                mainLua.AddToQStep_Start_OnEnter("this.SetHostageAttributes()");
-                mainLua.AddCodeToScript(@"
-function this.SetHostageAttributes()
-  for i,hostageInfo in ipairs(this.QUEST_TABLE.hostageList)do
-    local gameObjectId= GetGameObjectId(hostageInfo.hostageName)
-    if gameObjectId~=GameObject.NULL_ID then
-	  if hostageInfo.commands then
-        for j,hostageCommand in ipairs(hostageInfo.commands)do
-	      GameObject.SendCommand(gameObjectId, hostageCommand)
-	    end
-	  end
-    end
-  end
-end");
-            }
+            mainLua.AddToQuestTable(BuildHostageList(hostageDetail)); // leave outside if hostages.count > 0 for now, because the interrogation stuff isn't dynamically inserted into the lua yet
             mainLua.AddToLocalVariables("local hostageCount =", "local hostageCount = " + hostages.Count);
             mainLua.AddToLocalVariables("local useInter =", "local useInter = " + meta.canInterrogate.ToString().ToLower());
-            mainLua.AddToLocalVariables("local hostageQuestType =", "local hostageQuestType = " + meta.objectiveType); 
-            // QuestType local variables should be reworked into a buildable table. ultimately the "AddToLocalVariables" function should be phased out entirely
 
-            mainLua.AddToQuestTable(BuildHostageList(hostageDetail));
-
-            foreach (Hostage hostage in hostages)
+            if (hostages.Count > 0)
             {
-                if (hostage.isTarget)
-                    mainLua.AddToTargetList(hostage.GetObjectName());
+                mainLua.AddToQStep_Start_OnEnter(WarpHostages);
+                mainLua.AddCodeToScript(WarpHostages);
+
+                mainLua.AddToQStep_Start_OnEnter(SetHostageAttributes);
+                mainLua.AddCodeToScript(SetHostageAttributes);
+
+                if (hostages.Any(hostage => hostage.isTarget))
+                {
+                    CheckQuestGenericEnemy hostageCheck = new CheckQuestGenericEnemy(mainLua, CheckIsHostage, meta.objectiveType);
+                    foreach (Hostage hostage in hostages)
+                    {
+                        if (hostage.isTarget)
+                            mainLua.AddToTargetList(hostage.GetObjectName());
+                    }
+                }
             }
         }
 

@@ -127,7 +127,8 @@
     <Compile Include="Core\Classes\Lua\Functions\Common\CheckQuestItem.cs" />
     <Compile Include="Core\Classes\Lua\Functions\LuaFunction.cs" />
     <Compile Include="Core\Classes\Lua\Functions\CheckQuestMethodsPair.cs" />
-    <Compile Include="Core\Classes\Lua\Functions\ObjectiveTypesPair.cs" />
+    <Compile Include="Core\Classes\Lua\Functions\GenericTargetPair.cs" />
+    <Compile Include="Core\Classes\Lua\Functions\ObjectiveTypesList.cs" />
     <Compile Include="Core\Classes\Lua\MainLua.cs" />
     <Compile Include="Core\Classes\QuestBuild\Builders\AssetsBuilder.cs" />
     <Compile Include="Core\Classes\QuestBuild\BuildManager.cs" />

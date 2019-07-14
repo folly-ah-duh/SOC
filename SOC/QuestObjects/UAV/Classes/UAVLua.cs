@@ -14,17 +14,23 @@ function this.SetupUAV()
 	for index, uavInfo in pairs(this.QUEST_TABLE.UAVList) do
 		local gameObjectId = GameObject.GetGameObjectId(uavInfo.name)
 		if gameObjectId ~= GameObject.NULL_ID then
-			GameObject.SendCommand( gameObjectId, {id = ""SetEnabled"", enabled = true } )
+			GameObject.SendCommand(gameObjectId, {id = ""SetEnabled"", enabled = true} )
+            GameObject.SendCommand(gameObjectId, {id = ""SetDevelopLevel"", developLevel = uavInfo.weapon, empLevel = 0} )
 			if uavInfo.dRoute then
-				GameObject.SendCommand( gameObjectId, {id = ""SetPatrolRoute"", route = uavInfo.dRoute } )
+			  GameObject.SendCommand(gameObjectId, {id = ""SetPatrolRoute"", route = uavInfo.dRoute} )
 			end
 			if uavInfo.aRoute then
-				GameObject.SendCommand( gameObjectId, {id = ""SetCombatRoute"", route = uavInfo.aRoute } )
+			  GameObject.SendCommand(gameObjectId, {id = ""SetCombatRoute"", route = uavInfo.aRoute} )
 			end
-			if uavInfo.frenemy == true then
+            if uavInfo.defenseGrade then
+			  GameObject.SendCommand(gameObjectId, {id = ""SetCombatGrade"", defenseGrade = uavInfo.defenseGrade} )
+            end
+			if uavInfo.docile == true then
 			  GameObject.SendCommand(gameObjectId, {id = ""SetFriendly""})
-			end
-			GameObject.SendCommand( gameObjectId, {id = ""SetCommandPost"", cp = uavInfo.cpName } )
+			  GameObject.SendCommand(gameObjectId, {id = ""SetCommandPost"", cp = DISTANTCP } )
+			else
+			  GameObject.SendCommand(gameObjectId, {id = ""SetCommandPost"", cp = CPNAME } )
+            end
 		end
 	end
 end");

@@ -28,10 +28,10 @@ end");
 
         public static void GetMain(VehicleDetail detail, MainLua mainLua)
         {
+            mainLua.AddToQuestTable(BuildVehicleList(detail.vehicles));
+
             if (detail.vehicles.Count > 0)
             {
-                mainLua.AddToQuestTable(BuildVehicleList(detail.vehicles));
-
                 mainLua.AddToQStep_Start_OnEnter(warpVehicles);
                 mainLua.AddCodeToScript(warpVehicles);
 

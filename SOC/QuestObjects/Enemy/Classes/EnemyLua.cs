@@ -112,22 +112,17 @@ end");
             mainLua.AddToQuestTable($"isQuestZombie = {(HasZombie(enemies) ? "true" : "false")}");
             mainLua.AddToQuestTable($"isQuestBalaclava = {(HasBalaclavas(enemies) ? "true" : "false")}");
 
-            int spawnedOrCustomizedEnemies = 0;
+            mainLua.AddToQuestTable(BuildEnemyList(enemies));
             foreach (Enemy enemy in enemies)
             {
                 if (enemy.spawn)
                 {
-                    spawnedOrCustomizedEnemies++;
                     if (enemy.isTarget)
                     {
                         CheckQuestGenericEnemy CheckEnemy = new CheckQuestGenericEnemy(mainLua, CheckIsSoldier, meta.objectiveType);
                         mainLua.AddToTargetList(enemy.GetObjectName());
                     }
                 }
-            }
-            if (spawnedOrCustomizedEnemies > 0)
-            {
-                mainLua.AddToQuestTable(BuildEnemyList(enemies));
             }
         }
 

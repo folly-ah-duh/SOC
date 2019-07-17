@@ -11,7 +11,7 @@ namespace SOC.QuestObjects.Animal
     {
         public static void GetMain(AnimalDetail detail, MainLua mainLua)
         {
-            if(detail.animals.Count > 0)
+            if (detail.animals.Count > 0)
             {
                 mainLua.AddToQuestTable(BuildAnimalList(detail.animals));
                 if (detail.animals.Any(animal => animal.target))
@@ -22,74 +22,51 @@ namespace SOC.QuestObjects.Animal
             }
         }
 
-        private static string BuildAnimalList(List<Animal> animals)
+        private static Table BuildAnimalList(List<Animal> animals)
         {
-            StringBuilder animalListBuilder = new StringBuilder("animalList  = {");
-
-            if (animals.Count == 0)
+            Table animalList = new Table("animalList");
+            foreach (Animal animal in animals)
             {
-                animalListBuilder.Append(@"
-        nil ");
-            } else
-            {
-                foreach (Animal animal in animals)
-                {
-                    animalListBuilder.Append($@"
+                animalList.Add($@"
         {{
             animalName = ""{animal.GetObjectName()}"",
-            animalType = ""{animal.typeID}"",");
-                    animalListBuilder.Append(@"
-        },");
-                }
+            animalType = ""{animal.typeID}"",
+        }}");
             }
-
-            animalListBuilder.Append(@"
-    }");
-            return animalListBuilder.ToString();
+            return animalList;
         }
 
-        private static string BuildAnimalTargetList(List<Animal> animals)
+        private static Table BuildAnimalTargetList(List<Animal> animals)
         {
-            StringBuilder animalTargetListBuilder = new StringBuilder("targetAnimalList = {");
-            bool hasTargets = animals.Any(animal => animal.target == true);
-            animalTargetListBuilder.Append(@"
-        markerList = {");
-            if (hasTargets)
-            {
-                foreach(Animal animal in animals)
-                {
-                    if (animal.target)
-                        animalTargetListBuilder.Append($@"
-            ""{animal.GetObjectName()}"",");
-                }
-            }
-            else
-            {
-                animalTargetListBuilder.Append(@"
-        nil ");
-            }
-            animalTargetListBuilder.Append(@"
-        },
-        nameList = {");
-            if (hasTargets)
-            {
-                foreach (Animal animal in animals)
-                {
-                    if (animal.target)
-                        animalTargetListBuilder.Append($@"
-            ""{animal.GetObjectName()}"",");
-                }
-            }
-            else
-            {
-                animalTargetListBuilder.Append(@"
-        nil ");
-            }
-            animalTargetListBuilder.Append(@"
-        },
-    }");
+            Table targetAnimalList = new Table("targetAnimalList");
 
-            return animalTargetListBuilder.ToString();
+            StringBuilder animalTargetListBuilder = new StringBuilder(@"
+        markerList = {");
+
+            foreach (Animal animal in animals)
+            {
+                if (animal.target)
+                    animalTargetListBuilder.Append($@"
+            ""{animal.GetObjectName()}"",");
+            }
+            animalTargetListBuilder.Append(@"
+        }");
+            targetAnimalList.Add(animalTargetListBuilder.ToString());
+            animalTargetListBuilder.Clear();
+
+            animalTargetListBuilder.Append(@"
+        nameList = {");
+            foreach (Animal animal in animals)
+            {
+                if (animal.target)
+                    animalTargetListBuilder.Append($@"
+            ""{animal.GetObjectName()}"",");
+            }
+            animalTargetListBuilder.Append(@"
+        }");
+            targetAnimalList.Add(animalTargetListBuilder.ToString());
+
+            return targetAnimalList;
         }
     }
 }

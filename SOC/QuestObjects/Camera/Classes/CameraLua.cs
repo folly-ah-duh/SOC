@@ -30,9 +30,9 @@ end");
             if (detail.cameras.Count > 0)
             {
                 mainLua.AddToQuestTable(BuildCameraList(detail.cameras));
-
                 mainLua.AddToQStep_Start_OnEnter(SetCameraAttributes);
                 mainLua.AddCodeToScript(SetCameraAttributes);
+
                 if(detail.cameras.Any(camera => camera.isTarget))
                 {
                     CheckQuestGenericEnemy cameraCheck = new CheckQuestGenericEnemy(mainLua);
@@ -45,33 +45,25 @@ end");
             }
         }
 
-        private static string BuildCameraList(List<Camera> cameras)
+        private static Table BuildCameraList(List<Camera> cameras)
         {
-            StringBuilder cameraListBuilder = new StringBuilder("cameraList = {");
+            Table cameraList = new Table("cameraList");
+            string setCPCommand = @"{id = ""SetCommandPost"", cp=CPNAME}";
+            string typeCommand = @"{id=""NormalCamera""}";
+            string enabledCommand = @"{id=""SetEnabled"", enabled=true}";
 
-            if (cameras.Count == 0)
-                cameraListBuilder.Append(@"
-        nil ");
-            else
+            foreach (Camera camera in cameras)
             {
-                foreach (Camera camera in cameras)
-                {
-                    string setCPCommand = @"{id = ""SetCommandPost"", cp=CPNAME}";
-                    string typeCommand = $@"{{id=""{(camera.weapon ? "SetGunCamera" : "NormalCamera")}""}} ";
-                    string enabledCommand = @"{id=""SetEnabled"", enabled=true}";
-
-                    cameraListBuilder.Append($@"
+                typeCommand = $@"{{id=""{(camera.weapon ? "SetGunCamera" : "NormalCamera")}""}} ";
+                
+                cameraList.Add($@"
         {{
             name = ""{camera.GetObjectName()}"",
-            commands = {{{setCPCommand}, {typeCommand}, {enabledCommand}}},");
-                    cameraListBuilder.Append(@"
-        },");
-                }
+            commands = {{{setCPCommand}, {typeCommand}, {enabledCommand}}},
+        }}");
             }
-                
-            cameraListBuilder.Append(@"
-    }");
-            return cameraListBuilder.ToString();
+
+            return cameraList;
         }
     }
 }

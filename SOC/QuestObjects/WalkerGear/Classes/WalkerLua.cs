@@ -70,7 +70,7 @@ end");
             if (detail.walkers.Count > 0)
             {
                 mainLua.AddToQuestTable(BuildWalkerList(detail));
-                
+
                 mainLua.AddCodeToScript("local setupOnce = true");
                 mainLua.AddToOnUpdate("setupOnce = this.SetupGearsQuest(setupOnce)");
                 mainLua.AddCodeToScript(SetupGearsQuest);
@@ -90,31 +90,24 @@ end");
             }
         }
 
-        private static string BuildWalkerList(WalkerDetail walkerDetail)
+        private static Table BuildWalkerList(WalkerDetail walkerDetail)
         {
-            StringBuilder walkerListBuilder = new StringBuilder(@"walkerList = {");
+            Table walkerList = new Table("walkerList");
             List<WalkerGear> walkers = walkerDetail.walkers;
             WalkerMetadata meta = walkerDetail.walkerMetadata;
 
-            if (walkers.Count == 0)
-                walkerListBuilder.Append(@"
-        nil ");
-            else
-                foreach (WalkerGear walker in walkers)
-                {
-                    walkerListBuilder.Append($@"
+            foreach (WalkerGear walker in walkers)
+            {
+                walkerList.Add($@"
         {{
             walkerName = ""{walker.GetObjectName()}"",{(walker.pilot.Equals("NONE") ? "" : $@"
             riderName = ""{walker.pilot}"",")}
             colorType = {walker.paint},
             primaryWeapon = {walker.weapon},
-            position = {{pos = {{{walker.position.coords.xCoord},{walker.position.coords.yCoord},{walker.position.coords.zCoord}}}, rotY = {walker.position.rotation.GetDegreeRotY()},}},");
-                    walkerListBuilder.Append(@"
-        },");
-                }
-            walkerListBuilder.Append(@"
-    }");
-            return walkerListBuilder.ToString();
+            position = {{pos = {{{walker.position.coords.xCoord},{walker.position.coords.yCoord},{walker.position.coords.zCoord}}}, rotY = {walker.position.rotation.GetDegreeRotY()},}},
+        }}");
+            }
+            return walkerList;
         }
     }
 }

@@ -39,28 +39,20 @@ namespace SOC.QuestObjects.Helicopter
             }
         }
 
-        private static string BuildHeliList(HelicopterDetail questDetail)
+        private static Table BuildHeliList(HelicopterDetail questDetail)
         {
-            List<Helicopter> heliList = questDetail.helicopters;
-            StringBuilder helicopterListBuilder = new StringBuilder(@"heliList = {");
+            Table heliList = new Table("heliList");
 
-            if (heliList.Count == 0)
-                helicopterListBuilder.Append(@"
-        nil ");
-            else
-                foreach (Helicopter heli in heliList)
-                {
-                    helicopterListBuilder.Append($@"
+            foreach (Helicopter heli in questDetail.helicopters)
+            {
+                heliList.Add($@"
         {{
             heliName = ""{heli.GetObjectName()}"",{((heli.heliRoute == "NONE") ? "" : $@"
             routeName = ""{heli.heliRoute}"",")} {((heli.heliClass == "DEFAULT") ? "" : $@"
-            coloringType = TppDefine.ENEMY_HELI_COLORING_TYPE.{heli.heliClass},")}   ");
-                    helicopterListBuilder.Append(@"
-        },");
-                }
-            helicopterListBuilder.Append(@"
-    }");
-            return helicopterListBuilder.ToString();
-        } 
+            coloringType = TppDefine.ENEMY_HELI_COLORING_TYPE.{heli.heliClass},")}
+        }}");
+            }
+            return heliList;
+        }
     }
 }

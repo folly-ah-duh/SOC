@@ -6,18 +6,31 @@ using System.Threading.Tasks;
 
 namespace SOC.Classes.Lua
 {
-    public class ObjectiveTypesList
+    public class ObjectiveTypesList : LuaMainComponent
     {
         public List<GenericTargetPair> genericTargets = new List<GenericTargetPair>();
         public List<string> oneLineObjectiveTypes = new List<string>();
 
-        public void BuildObjectiveTypesList(MainLua main)
+        public override string GetComponent()
         {
-            foreach(GenericTargetPair pair in genericTargets)
-            {
-                main.AddCodeToScript(pair.checkMethod);
-            }
+            return $@"{GetObjectiveFunctions()}
+{GetObjectiveTypesList()}
+";
+        }
 
+        private string GetObjectiveFunctions()
+        {
+            StringBuilder functionsBuilder = new StringBuilder();
+            foreach (GenericTargetPair pair in genericTargets)
+            {
+                functionsBuilder.Append($@"
+{pair.checkMethod.FunctionFull}");
+            }
+            return functionsBuilder.ToString();
+        }
+
+        private string GetObjectiveTypesList()
+        {
             StringBuilder objectiveListBuilder = new StringBuilder(@"
 ObjectiveTypeList = {
   genericTargets = {");
@@ -35,7 +48,7 @@ ObjectiveTypeList = {
             }
             objectiveListBuilder.Append(@"
 }");
-            main.AddCodeToScript(objectiveListBuilder.ToString());
+            return objectiveListBuilder.ToString();
         }
     }
 }

@@ -11,45 +11,28 @@ namespace SOC.QuestObjects.ActiveItem
     {
         internal static void GetMain(ActiveItemDetail questDetail, MainLua mainLua)
         {
-            if (!mainLua.QuestTableContains("targetItemList"))
+            if (questDetail.activeItems.Any(activeItem => activeItem.isTarget))
             {
-
-                if(questDetail.activeItems.Any(activeItem => activeItem.isTarget))
-                {
-                    CheckQuestItem checkQuestItem = new CheckQuestItem(mainLua, questDetail.activeItemMetadata.objectiveType);
-                    mainLua.AddToQuestTable(BuildItemTargetList(questDetail));
-                }
+                CheckQuestItem checkQuestItem = new CheckQuestItem(mainLua, questDetail.activeItemMetadata.objectiveType);
+                mainLua.AddToQuestTable(BuildTargetItemList(questDetail));
             }
         }
 
-        private static string BuildItemTargetList(ActiveItemDetail detail)
+        private static Table BuildTargetItemList(ActiveItemDetail detail)
         {
-            List<ActiveItem> activeItems = detail.activeItems;
-            StringBuilder targetItemListBuilder = new StringBuilder("targetItemList  = {");
-            int targetItemCount = 0;
-
-            foreach (ActiveItem activeItem in activeItems)
+            Table targetItemList = new Table("targetItemList");
+            foreach (ActiveItem activeItem in detail.activeItems)
             {
                 if (!activeItem.isTarget)
                     continue;
-
-                targetItemCount++;
-                targetItemListBuilder.Append($@"
+                
+                targetItemList.Add($@"
         {{
             equipId = TppEquip.{activeItem.activeItem},
-            messageId = ""None"",");
-                targetItemListBuilder.Append(@"
-        },");
+            messageId = ""None"",
+        }}");
             }
-            if (targetItemCount == 0)
-            {
-                targetItemListBuilder.Append(@"
-        nil ");
-            }
-
-            targetItemListBuilder.Append(@"
-    }");
-            return targetItemListBuilder.ToString();
+            return targetItemList;
         }
     }
 }

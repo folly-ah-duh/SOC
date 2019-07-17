@@ -47,13 +47,13 @@ end");
             }
         }
 
-        private static string BuildVehicleList(List<Vehicle> vehicles)
+        private static Table BuildVehicleList(List<Vehicle> vehicles)
         {
-            StringBuilder vehicleListBuilder = new StringBuilder("vehicleList = {");
+            Table vehicleList = new Table("vehicleList");
 
             if (vehicles.Count == 0)
-                vehicleListBuilder.Append(@"
-        nil ");
+                vehicleList.Add(@"
+        nil");
             else
                 foreach (Vehicle vehicle in vehicles)
                 {
@@ -70,20 +70,17 @@ end");
                     {
                         vehicleType = "Vehicle.type." + VehicleInfo.vehicleLuaName[vehicle.vehicle];
                     }
-                    vehicleListBuilder.Append($@"
+                    vehicleList.Add($@"
         {{
             id = ""Spawn"",
             locator = ""{vehicle.GetObjectName()}"",
             type = {vehicleType}, {(subType == "NONE" ? "" : $@"
             subType = {subType}, ")}{(vehicle.vehicleClass == "DEFAULT" ? "" : $@"
             class = Vehicle.class.{vehicle.vehicleClass}, ")}
-            position = {{pos = {{{vehicle.position.coords.xCoord},{vehicle.position.coords.yCoord},{vehicle.position.coords.zCoord}}}, rotY = {vehicle.position.rotation.GetRadianRotY()},}},");
-                    vehicleListBuilder.Append(@"
-        },");
+            position = {{pos = {{{vehicle.position.coords.xCoord},{vehicle.position.coords.yCoord},{vehicle.position.coords.zCoord}}}, rotY = {vehicle.position.rotation.GetRadianRotY()},}},
+        }}");
                 }
-            vehicleListBuilder.Append(@"
-    }");
-            return vehicleListBuilder.ToString();
+            return vehicleList;
         }
     }
 }

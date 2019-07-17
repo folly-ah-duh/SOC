@@ -30,20 +30,16 @@ namespace SOC.QuestObjects.Item
 
         internal static void GetMain(ItemDetail questDetail, MainLua mainLua)
         {
-            if (!mainLua.QuestTableContains("targetItemList"))
+            if (questDetail.items.Any(item => item.isTarget))
             {
-                if (questDetail.items.Any(item => item.isTarget))
-                {
-                    CheckQuestItem checkQuestItem = new CheckQuestItem(mainLua, questDetail.itemMetadata.objectiveType);
-                    mainLua.AddToQuestTable(BuildItemTargetList(questDetail.items));
-                }
+                CheckQuestItem checkQuestItem = new CheckQuestItem(mainLua, questDetail.itemMetadata.objectiveType);
+                mainLua.AddToQuestTable(BuildItemTargetList(questDetail.items));
             }
-
         }
 
-        private static string BuildItemTargetList(List<Item> items)
+        private static Table BuildItemTargetList(List<Item> items)
         {
-            StringBuilder targetItemListBuilder = new StringBuilder("targetItemList  = {");
+            Table targetItemList = new Table("targetItemList");
             int targetItemCount = 0;
 
             foreach (Item item in items)
@@ -52,22 +48,14 @@ namespace SOC.QuestObjects.Item
                     continue;
 
                 targetItemCount++;
-                targetItemListBuilder.Append($@"
+                targetItemList.Add($@"
         {{
             equipId = TppEquip.{item.item},
-            messageId = ""None"",");
-                targetItemListBuilder.Append(@"
-        },");
-            }
-            if (targetItemCount == 0)
-            {
-                targetItemListBuilder.Append(@"
-        nil ");
+            messageId = ""None"",
+        }}");
             }
 
-            targetItemListBuilder.Append(@"
-    }");
-            return targetItemListBuilder.ToString();
+            return targetItemList;
         }
     }
 }

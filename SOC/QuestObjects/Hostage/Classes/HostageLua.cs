@@ -83,9 +83,9 @@ end");
             }
         }
 
-        private static string BuildHostageList(HostageDetail hostageDetail)
+        private static Table BuildHostageList(HostageDetail hostageDetail)
         {
-            StringBuilder hostageListBuilder = new StringBuilder("hostageList = {");
+            Table hostageList = new Table("hostageList");
             List<Hostage> hostages = hostageDetail.hostages;
             HostageMetadata meta = hostageDetail.hostageMetadata;
 
@@ -95,12 +95,12 @@ end");
             string untiedCommand = @"{id = ""SetHostage2Flag"",  flag=""unlocked"",   on=true,}";
 
             if (hostages.Count == 0)
-                hostageListBuilder.Append(@"
+                hostageList.Add(@"
         nil ");
             else
                 foreach (Hostage hostage in hostages)
                 {
-                    hostageListBuilder.Append($@"
+                    hostageList.Add($@"
         {{
             hostageName = ""{hostage.GetObjectName()}"",
             isFaceRandom = true,
@@ -111,13 +111,10 @@ end");
             skill = ""{hostage.skill}"", ")}
             bodyId = {NPCBodyInfo.GetBodyInfo(meta.hostageBodyName).gameId},
             position = {{pos = {{{hostage.position.coords.xCoord},{hostage.position.coords.yCoord},{hostage.position.coords.zCoord}}}, rotY = {hostage.position.rotation.GetDegreeRotY()},}},
-            commands = {{{(hostage.scared.Equals("ALWAYS") ? scaredCommand + "," : (hostage.scared.Equals("NEVER") ? braveCommand + "," : ""))}{(hostage.isInjured ? injuredCommand + "," : "")}{(hostage.isUntied ? untiedCommand + "," : "")}}},");
-                    hostageListBuilder.Append(@"
-        },");
+            commands = {{{(hostage.scared.Equals("ALWAYS") ? scaredCommand + "," : (hostage.scared.Equals("NEVER") ? braveCommand + "," : ""))}{(hostage.isInjured ? injuredCommand + "," : "")}{(hostage.isUntied ? untiedCommand + "," : "")}}},
+        }}");
                 }
-            hostageListBuilder.Append(@"
-    }");
-            return hostageListBuilder.ToString();
+            return hostageList;
         }
     }
 }

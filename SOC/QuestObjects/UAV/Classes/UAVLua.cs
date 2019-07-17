@@ -44,7 +44,7 @@ end");
                 mainLua.AddToQStep_Start_OnEnter(setupUAV);
                 mainLua.AddCodeToScript(setupUAV);
 
-                if(detail.UAVs.Any(uav => uav.isTarget))
+                if (detail.UAVs.Any(uav => uav.isTarget))
                 {
                     CheckQuestGenericEnemy checkUAV = new CheckQuestGenericEnemy(mainLua);
                     foreach (UAV drone in detail.UAVs)
@@ -56,43 +56,37 @@ end");
             }
         }
 
-        private static string BuildUAVList(List<UAV> UAVs)
+        private static Table BuildUAVList(List<UAV> UAVs)
         {
-            StringBuilder UAVListBuilder = new StringBuilder("UAVList = {");
+            Table UAVList = new Table("UAVList");
 
-            if (UAVs.Count == 0)
-                UAVListBuilder.Append(@"
-        nil ");
-            else
-                foreach (UAV drone in UAVs)
-                {
-                    string dRouteString;
-                    uint route;
-                    if (uint.TryParse(drone.dRoute, out route))
-                        dRouteString = drone.dRoute;
-                    else
-                        dRouteString = $@"""{drone.dRoute}""";
+            foreach (UAV drone in UAVs)
+            {
+                string dRouteString;
+                uint route;
+                if (uint.TryParse(drone.dRoute, out route))
+                    dRouteString = drone.dRoute;
+                else
+                    dRouteString = $@"""{drone.dRoute}""";
 
-                    string aRouteString;
-                    if (uint.TryParse(drone.aRoute, out route))
-                        aRouteString = drone.aRoute;
-                    else
-                        aRouteString = $@"""{drone.aRoute}""";
+                string aRouteString;
+                if (uint.TryParse(drone.aRoute, out route))
+                    aRouteString = drone.aRoute;
+                else
+                    aRouteString = $@"""{drone.aRoute}""";
 
-                    UAVListBuilder.Append($@"
+                UAVList.Add($@"
         {{
             name = ""{drone.GetObjectName()}"", {(dRouteString == @"""NONE""" ? "" : $@"
             dRoute = {dRouteString}, ")} {(aRouteString == @"""NONE""" ? "" : $@"
             aRoute = {aRouteString}, ")} {(drone.defenseGrade == "DEFAULT" ? "" : $@"
             defenseGrade = {drone.defenseGrade},")}
             weapon = TppUav.{drone.weapon},
-            docile = {(drone.docile ? "true" : "false")},");
-                    UAVListBuilder.Append(@"
-        },");
-                }
-            UAVListBuilder.Append(@"
-    }");
-            return UAVListBuilder.ToString();
+            docile = {(drone.docile ? "true" : "false")},
+        }}");
+            }
+
+            return UAVList;
         }
     }
 }

@@ -8,19 +8,16 @@ namespace SOC.Classes.Lua
 {
     public class MainLua
     {
-        List<string> questTable = new List<string>();
-        List<string> targetList = new List<string>();
         List<string> functionList = new List<string>();
-        List<string> startList_OnEnter = new List<string>();
-        List<CheckQuestMethodsPair> CheckQuestMethodList = new List<CheckQuestMethodsPair>();
+
+        QuestTable questTable = new QuestTable();
+        QStep_Start qStep_start = new QStep_Start();
+        QStep_Main qStep_main = new QStep_Main();
+        CheckQuestMethodsList checkQuestMethodList = new CheckQuestMethodsList();
         ObjectiveTypesList objectiveTypesList = new ObjectiveTypesList();
-        List<string> onUpdate = new List<string>();
+        OnUpdate onUpdate = new OnUpdate();
         Dictionary<string, string> localVariables = new Dictionary<string, string>();
 
-        public void AddToQuestTable(string table)
-        {
-            questTable.Add(table);
-        }
 
         public void AddCodeToScript(string code)
         {
@@ -32,38 +29,34 @@ namespace SOC.Classes.Lua
             functionList.Add(function.FunctionFull);
         }
 
-        public void AddToQStep_Start_OnEnter(string functionCall)
+        public void AddToQStep_Start_OnEnter(params string[] functionCalls)
         {
-            startList_OnEnter.Add(functionCall);
+            foreach (string functionCall in functionCalls)
+                qStep_start.AddToOnEnter(functionCall);
         }
 
-        public void AddToQStep_Start_OnEnter(LuaFunction function)
+        public void AddToQStep_Start_OnEnter(params LuaFunction[] functions)
         {
-            startList_OnEnter.Add($"InfCore.PCall(this.{function.FunctionName})");
+            foreach (LuaFunction function in functions)
+                qStep_start.AddToOnEnter($"InfCore.PCall(this.{function.FunctionName})");
         }
 
         public void AddToCheckQuestMethod(CheckQuestMethodsPair methodsPair)
         {
-            if (!CheckQuestMethodList.Exists(pair => pair.TallyMethod.Equals(methodsPair.TallyMethod) || pair.TargetMessageMethod.Equals(methodsPair.TargetMessageMethod)))
-            {
-                CheckQuestMethodList.Add(methodsPair);
-            }
+            if (!checkQuestMethodList.Contains(methodsPair))
+                checkQuestMethodList.Add(methodsPair);
         }
 
         public void AddToObjectiveTypes(GenericTargetPair objectivePair)
         {
             if (!objectiveTypesList.genericTargets.Exists(pair => pair.checkMethod.Equals(objectivePair.checkMethod)))
-            {
                 objectiveTypesList.genericTargets.Add(objectivePair);
-            }
         }
 
         public void AddToObjectiveTypes(string oneLineObjective)
         {
             if (!objectiveTypesList.oneLineObjectiveTypes.Contains(oneLineObjective))
-            {
                 objectiveTypesList.oneLineObjectiveTypes.Add(oneLineObjective);
-            }
         }
 
         public void AddToOnUpdate(string code)
@@ -71,148 +64,62 @@ namespace SOC.Classes.Lua
             onUpdate.Add(code);
         }
 
-        public bool QuestTableContains(string tableName)
-        {
-            foreach (string table in questTable)
-                if (table.StartsWith(tableName))
-                    return true;
-            return false;
-        }
-
         public void AddToLocalVariables(string search, string replacement)
         {
             localVariables.Add(search, replacement);
         }
 
+        public void AddToQuestTable(params object[] tableItems)
+        {
+            foreach(object tableItem in tableItems)
+            {
+                if (tableItem is Table)
+                    questTable.Add(tableItem as Table);
+                else if (tableItem is string)
+                    questTable.Add(tableItem as string);
+            }
+        }
+
         public void AddToTargetList(string targetName)
         {
-            targetList.Add(targetName);
+            questTable.AddTarget(targetName);
+        }
+
+        public void AddToQStep_Main(params QStep_Message[] messages)
+        {
+            foreach (QStep_Message message in messages)
+                qStep_main.Add(message);
         }
 
         public List<string> GetMainLuaFormatted(List<string> luaTemplate)
         {
-            List<string> luaList = luaTemplate;
-            AddQuestTableToLua(luaList);
-            AddLocalVariablesToLua(luaList);
-            AddFunctionsToLua(luaList);
+            AddLocalVariablesToLua(luaTemplate);
+            AddFunctionsToLua(luaTemplate);
 
-            return luaList;
-        }
-
-        private void AddQuestTableToLua(List<string> luaList)
-        {
-            StringBuilder questTableBuilder = new StringBuilder("this.QUEST_TABLE = {");
-            foreach (string tableItem in questTable)
-            {
-                questTableBuilder.Append($@"
-    {tableItem},");
-            }
-            questTableBuilder.Append(GetTargetListFormatted(luaList));
-            questTableBuilder.Append(@"
-}");
-
-            ReplaceLuaLine(luaList, "this.QUEST_TABLE = {}", questTableBuilder.ToString());
-        }
-
-        private string GetTargetListFormatted(List<string> luaList)
-        {
-            StringBuilder targetListBuilder = new StringBuilder(@"
-    targetList = {");
-            if (targetList.Any())
-                foreach (string targetName in targetList)
-                {
-                    targetListBuilder.Append($@"
-        ""{targetName}"", ");
-                }
-            else
-                targetListBuilder.Append(@"
-        nil ");
-            targetListBuilder.Append(@"
-    },");
-            return targetListBuilder.ToString();
+            return luaTemplate;
         }
 
         private void AddLocalVariablesToLua(List<string> luaList)
         {
             foreach (KeyValuePair<string, string> localVariable in localVariables)
-            {
                 ReplaceLuaLine(luaList, localVariable.Key, localVariable.Value);
-            }
         }
 
         private void AddFunctionsToLua(List<string> luaList)
         {
-            functionList.Add(BuildQStep_StartFunction());
-            functionList.Add(BuildOnUpdateFunction());
-            objectiveTypesList.BuildObjectiveTypesList(this);
-            BuildCheckQuestMethodList();
+            questTable.BuildComponent(this);
+            qStep_start.BuildComponent(this);
+            qStep_main.BuildComponent(this);
+            onUpdate.BuildComponent(this);
+            objectiveTypesList.BuildComponent(this);
+            checkQuestMethodList.BuildComponent(this);
 
             StringBuilder functionBuilder = new StringBuilder();
             foreach (string function in functionList)
-            {
                 functionBuilder.Append($@"
 {function}");
-            }
 
             ReplaceLuaLine(luaList, "--ADDITIONAL FUNCTIONS--", functionBuilder.ToString());
-        }
-
-        private string BuildQStep_StartFunction()
-        {
-            StringBuilder qStep_StartBuilder = new StringBuilder(@"
-quest_step.QStep_Start = {
-  OnEnter = function()");
-
-            foreach (string code in startList_OnEnter)
-            {
-                qStep_StartBuilder.Append($@"
-    {code}");
-            }
-            qStep_StartBuilder.Append(@"
-    this.SwitchEnableQuestHighIntTable(true, CPNAME, this.questCpInterrogation)
-    TppQuest.SetNextQuestStep(""QStep_Main"")
-  end,
-}"); //SwitchEnableQuestHighIntTable is temporary. Ideally, hostageLua should be able to set the function to OnTerminate and inside the QStep_Main messages as well.
-
-            return qStep_StartBuilder.ToString();
-        }
-
-        private string BuildOnUpdateFunction()
-        {
-            StringBuilder onUpdateBuilder = new StringBuilder(@"
-function this.OnUpdate()
-  TppQuest.QuestBlockOnUpdate(this)");
-
-            foreach (string code in onUpdate)
-            {
-                onUpdateBuilder.Append($@"
-  {code}");
-            }
-            onUpdateBuilder.Append(@"
-end");
-
-            return onUpdateBuilder.ToString();
-        }
-
-        private void BuildCheckQuestMethodList()
-        {
-            foreach (CheckQuestMethodsPair pair in CheckQuestMethodList)
-            {
-                functionList.Add(pair.TargetMessageMethod.FunctionFull);
-                functionList.Add(pair.TallyMethod.FunctionFull);
-            }
-            StringBuilder methodListBuilder = new StringBuilder(@"
-local CheckQuestMethodList = {");
-
-            foreach (CheckQuestMethodsPair pair in CheckQuestMethodList)
-            {
-                methodListBuilder.Append($@"
-  {pair.GetTableFormat()},");
-            }
-            methodListBuilder.Append(@"
-}");
-
-            functionList.Add(methodListBuilder.ToString());
         }
 
         private static void ReplaceLuaLine(List<string> luaList, string searchFor, string replaceWith)

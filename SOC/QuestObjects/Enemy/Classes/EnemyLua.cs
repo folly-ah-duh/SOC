@@ -108,11 +108,11 @@ end");
 
             mainLua.AddToLocalVariables("local SUBTYPE =", $@"local SUBTYPE = ""{meta.subtype}""");
 
-            mainLua.AddToQuestTable($"isQuestArmor = {(HasArmors(enemies) ? "true" : "false")}");
-            mainLua.AddToQuestTable($"isQuestZombie = {(HasZombie(enemies) ? "true" : "false")}");
-            mainLua.AddToQuestTable($"isQuestBalaclava = {(HasBalaclavas(enemies) ? "true" : "false")}");
+            string questarmor = $"isQuestArmor = {(HasArmors(enemies) ? "true" : "false")}";
+            string questZombie = $"isQuestZombie = {(HasZombie(enemies) ? "true" : "false")}";
+            string questBalaclava = $"isQuestBalaclava = {(HasBalaclavas(enemies) ? "true" : "false")}";
 
-            mainLua.AddToQuestTable(BuildEnemyList(enemies));
+            mainLua.AddToQuestTable(BuildEnemyList(enemies), questarmor, questZombie, questBalaclava);
             foreach (Enemy enemy in enemies)
             {
                 if (enemy.spawn)
@@ -126,9 +126,9 @@ end");
             }
         }
 
-        private static string BuildEnemyList(List<Enemy> enemies)
+        private static Table BuildEnemyList(List<Enemy> enemies)
         {
-            StringBuilder enemyListBuilder = new StringBuilder("enemyList = {");
+            Table enemyList = new Table("enemyList");
             int enemyCount = 0;
 
             foreach (Enemy enemy in enemies)
@@ -139,7 +139,7 @@ end");
 
                 string DRouteString;
                 uint route;
-                if (uint.TryParse(enemy.dRoute, out route)) // no quotations necessary if the route is hashed
+                if (uint.TryParse(enemy.dRoute, out route)) // no quotations if the route is hashed
                     DRouteString = enemy.dRoute;
                 else
                     DRouteString = $@"""{enemy.dRoute}""";
@@ -161,7 +161,7 @@ end");
                     powerSetting += "},";
                 }
 
-                enemyListBuilder.Append($@"
+                enemyList.Add($@"
         {{
             enemyName = ""{enemy.name}"",{(DRouteString == @"""DEFAULT""" ? "" : $@"
             route_d = {DRouteString}, ")}{(CRouteString == @"""DEFAULT""" ? "" : $@"
@@ -173,19 +173,17 @@ end");
             bodyId = TppEnemyBodyId.{enemy.body}, ")}
             isBalaclava = {(enemy.balaclava ? "true" : "false")},
             isZombie = {(enemy.zombie ? "true" : "false")},{(enemy.zombie ? $@"
-            isZombieUseRoute = true," : "")}");
-                enemyListBuilder.Append(@"
-        },");
+            isZombieUseRoute = true," : "")}
+        }}");
             }
 
             if (enemyCount == 0)
             {
-                enemyListBuilder.Append(@"
-        nil ");
+                enemyList.Add(@"
+        nil");
             }
-            enemyListBuilder.Append(@"
-    }");
-            return enemyListBuilder.ToString();
+
+            return enemyList;
         }
     }
 }

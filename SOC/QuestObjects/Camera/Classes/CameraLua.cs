@@ -31,7 +31,7 @@ end");
             {
                 mainLua.AddToQuestTable(BuildCameraList(detail.cameras));
                 mainLua.AddToQStep_Start_OnEnter(SetCameraAttributes);
-                mainLua.AddCodeToScript(SetCameraAttributes);
+                mainLua.AddToAuxiliary(SetCameraAttributes);
 
                 if(detail.cameras.Any(camera => camera.isTarget))
                 {

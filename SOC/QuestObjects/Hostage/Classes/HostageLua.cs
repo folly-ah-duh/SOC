@@ -66,10 +66,10 @@ end");
             if (hostages.Count > 0)
             {
                 mainLua.AddToQStep_Start_OnEnter(WarpHostages);
-                mainLua.AddCodeToScript(WarpHostages);
+                mainLua.AddToAuxiliary(WarpHostages);
 
                 mainLua.AddToQStep_Start_OnEnter(SetHostageAttributes);
-                mainLua.AddCodeToScript(SetHostageAttributes);
+                mainLua.AddToAuxiliary(SetHostageAttributes);
 
                 if (hostages.Any(hostage => hostage.isTarget))
                 {

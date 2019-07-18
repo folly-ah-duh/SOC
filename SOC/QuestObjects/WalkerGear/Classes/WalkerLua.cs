@@ -71,12 +71,12 @@ end");
             {
                 mainLua.AddToQuestTable(BuildWalkerList(detail));
 
-                mainLua.AddCodeToScript("local setupOnce = true");
+                mainLua.AddToAuxiliary("local setupOnce = true");
                 mainLua.AddToOnUpdate("setupOnce = this.SetupGearsQuest(setupOnce)");
-                mainLua.AddCodeToScript(SetupGearsQuest);
+                mainLua.AddToAuxiliary(SetupGearsQuest);
 
                 mainLua.AddToQStep_Start_OnEnter(BuildWalkerGameObjectIdList);
-                mainLua.AddCodeToScript(BuildWalkerGameObjectIdList);
+                mainLua.AddToAuxiliary(BuildWalkerGameObjectIdList);
 
                 if (walkers.Any(walker => walker.isTarget))
                 {

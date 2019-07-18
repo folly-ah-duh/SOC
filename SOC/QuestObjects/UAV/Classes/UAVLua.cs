@@ -42,7 +42,7 @@ end");
                 mainLua.AddToQuestTable(BuildUAVList(detail.UAVs));
 
                 mainLua.AddToQStep_Start_OnEnter(setupUAV);
-                mainLua.AddCodeToScript(setupUAV);
+                mainLua.AddToAuxiliary(setupUAV);
 
                 if (detail.UAVs.Any(uav => uav.isTarget))
                 {

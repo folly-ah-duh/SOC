@@ -33,7 +33,7 @@ end");
             if (detail.vehicles.Count > 0)
             {
                 mainLua.AddToQStep_Start_OnEnter(warpVehicles);
-                mainLua.AddCodeToScript(warpVehicles);
+                mainLua.AddToAuxiliary(warpVehicles);
 
                 if(detail.vehicles.Any(vehicle => vehicle.isTarget))
                 {

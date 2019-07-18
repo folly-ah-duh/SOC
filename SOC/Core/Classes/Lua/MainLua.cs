@@ -10,6 +10,8 @@ namespace SOC.Classes.Lua
     {
         List<string> functionList = new List<string>();
 
+        OpeningVariables openingVariables = new OpeningVariables();
+        AuxiliaryCode auxiliaryCode = new AuxiliaryCode();
         QuestTable questTable = new QuestTable();
         QStep_Start qStep_start = new QStep_Start();
         QStep_Main qStep_main = new QStep_Main();
@@ -17,16 +19,20 @@ namespace SOC.Classes.Lua
         ObjectiveTypesList objectiveTypesList = new ObjectiveTypesList();
         OnUpdate onUpdate = new OnUpdate();
         Dictionary<string, string> localVariables = new Dictionary<string, string>();
-
-
-        public void AddCodeToScript(string code)
+        
+        public void AddToOpeningVariables(string variableName, string value)
         {
-            functionList.Add(code);
+            openingVariables.Add(variableName, value);
         }
 
-        public void AddCodeToScript(LuaFunction function)
+        public void AddToAuxiliary(LuaFunction function)
         {
-            functionList.Add(function.FunctionFull);
+            auxiliaryCode.Add(function.FunctionFull);
+        }
+
+        public void AddToAuxiliary(string localVar)
+        {
+            auxiliaryCode.Add(localVar);
         }
 
         public void AddToQStep_Start_OnEnter(params string[] functionCalls)
@@ -35,9 +41,9 @@ namespace SOC.Classes.Lua
                 qStep_start.AddToOnEnter(functionCall);
         }
 
-        public void AddToQStep_Start_OnEnter(params LuaFunction[] functions)
+        public void AddToQStep_Start_OnEnter(params LuaFunction[] auxiliaryFunctions)
         {
-            foreach (LuaFunction function in functions)
+            foreach (LuaFunction function in auxiliaryFunctions)
                 qStep_start.AddToOnEnter($"InfCore.PCall(this.{function.FunctionName})");
         }
 
@@ -107,10 +113,16 @@ namespace SOC.Classes.Lua
 
         private void AddFunctionsToLua(List<string> luaList)
         {
+            openingVariables.BuildComponent(this); // decide whether to add "timeless" variables via constructor or during LuaBuilder's BuildMain
             questTable.BuildComponent(this);
+            auxiliaryCode.BuildComponent(this);
+            new OnAllocate().BuildComponent(this);
+            new Messages().BuildComponent(this);
+            new OnInitialize().BuildComponent(this);
+            onUpdate.BuildComponent(this);
+            new OnTerminate().BuildComponent(this);
             qStep_start.BuildComponent(this);
             qStep_main.BuildComponent(this);
-            onUpdate.BuildComponent(this);
             objectiveTypesList.BuildComponent(this);
             checkQuestMethodList.BuildComponent(this);
 
@@ -120,6 +132,11 @@ namespace SOC.Classes.Lua
 {function}");
 
             ReplaceLuaLine(luaList, "--ADDITIONAL FUNCTIONS--", functionBuilder.ToString());
+        }
+
+        public void AddCodeToScript(string code)
+        {
+            functionList.Add(code);
         }
 
         private static void ReplaceLuaLine(List<string> luaList, string searchFor, string replaceWith)

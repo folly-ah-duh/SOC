@@ -9,6 +9,51 @@ namespace SOC.QuestObjects.WalkerGear
 {
     static class WalkerLua
     {
+        static readonly QStep_Message ExitTrap = new QStep_Message("Trap", @"""Exit""", "questTrapName", @"function()
+              inMostActiveQuestArea = false
+              walkerGearGameId = vars.playerVehicleGameObjectId
+              if questWalkerGearList[walkerGearGameId] then
+                playerWGResetPosition = {pos= {vars.playerPosX, vars.playerPosY + 1, vars.playerPosZ},rotY= 0,}
+                GkEventTimerManager.Start(""OutOfMostActiveArea"", 7)
+                exitOnce = this.OneTimeAnnounce(""The Walker Gear cannot travel beyond this point."", ""Return to the Side Op area."", exitOnce)
+              end
+            end");
+
+        static readonly QStep_Message EnterTrap = new QStep_Message("Trap", @"""Enter""", "questTrapName", @"function()
+              inMostActiveQuestArea = true
+              if GkEventTimerManager.IsTimerActive(""OutOfMostActiveArea"") and walkerGearGameId == vars.playerVehicleGameObjectId then
+                GkEventTimerManager.Stop(""OutOfMostActiveArea"")
+                GkEventTimerManager.Start(""AnnounceOnceCooldown"", 3)
+              end
+            end");
+
+        static readonly QStep_Message FinishTimerActiveArea = new QStep_Message("Timer", @"""Finish""", @"""OutOfMostActiveArea""", @"function()
+              if inMostActiveQuestArea == false then
+                InfCore.DebugPrint(""Returning Walker Gear to Side Op area..."")
+                this.ReboundWalkerGear(walkerGearGameId)
+              end
+            end");
+
+        static readonly QStep_Message FinishTimerCooldown = new QStep_Message("Timer", @"""Finish""", @"""AnnounceOnceCooldown""", @"function()
+              exitOnce = true
+            end");
+
+        static readonly LuaFunction OneTimeAnnounce = new LuaFunction("OneTimeAnnounce", @"
+function this.OneTimeAnnounce(announceString1, announceString2, isFresh)
+  if isFresh == true then
+    InfCore.DebugPrint(announceString1)
+    InfCore.DebugPrint(announceString2)
+  end
+
+  return false
+end");
+
+        static readonly LuaFunction ReboundWalkerGear = new LuaFunction("ReboundWalkerGear", @"
+function this.ReboundWalkerGear(walkerGearGameObjectId)
+  local commandPos={ id = ""SetPosition"", rotY = playerWGResetPosition.rotY, pos = playerWGResetPosition.pos}
+  GameObject.SendCommand(walkerGearGameObjectId,commandPos)
+end");
+
         static readonly LuaFunction SetupGearsQuest = new LuaFunction("SetupGearsQuest", @"
 function this.SetupGearsQuest(setupOnce)
   if setupOnce == true then
@@ -69,7 +114,18 @@ end");
 
             if (detail.walkers.Count > 0)
             {
+                mainLua.AddToOpeningVariables("questWalkerGearList", "{}");
+                mainLua.AddToOpeningVariables("playerWGResetPosition");
+                mainLua.AddToOpeningVariables("walkerGearGameId");
+                mainLua.AddToOpeningVariables("inMostActiveQuestArea", "true");
+                mainLua.AddToOpeningVariables("exitOnce", "true");
+
                 mainLua.AddToQuestTable(BuildWalkerList(detail));
+
+                mainLua.AddToAuxiliary(OneTimeAnnounce);
+                mainLua.AddToAuxiliary(ReboundWalkerGear);
+                mainLua.AddToQStep_Main(ExitTrap, EnterTrap, FinishTimerActiveArea, FinishTimerCooldown);
+                mainLua.AddToQStep_Main(QStep_MainCommonMessages.mechaCaptureTargetMessages);
 
                 mainLua.AddToAuxiliary("local setupOnce = true");
                 mainLua.AddToOnUpdate("setupOnce = this.SetupGearsQuest(setupOnce)");
@@ -102,12 +158,38 @@ end");
         {{
             walkerName = ""{walker.GetObjectName()}"",{(walker.pilot.Equals("NONE") ? "" : $@"
             riderName = ""{walker.pilot}"",")}
-            colorType = {walker.paint},
-            primaryWeapon = {walker.weapon},
+            colorType = {GetEnum(walker.paint)},
+            primaryWeapon = {GetEnum(walker.weapon)},
             position = {{pos = {{{walker.position.coords.xCoord},{walker.position.coords.yCoord},{walker.position.coords.zCoord}}}, rotY = {walker.position.rotation.GetDegreeRotY()},}},
         }}");
             }
             return walkerList;
         }
+
+        private static int GetEnum(string value)
+        {
+            switch (value)
+            {
+                case "SOVIET":
+                    return (int)color.SOVIET;
+                case "ROGUE_COYOTE":
+                    return (int)color.ROGUE_COYOTE;
+                case "CFA":
+                    return (int)color.CFA;
+                case "ZRS":
+                    return (int)color.ZRS;
+                case "DDOGS":
+                    return (int)color.DDOGS;
+                case "WG_MACHINEGUN":
+                    return (int)weapon.WG_MACHINEGUN;
+                case "WG_MISSILE":
+                    return (int)weapon.WG_MISSILE;
+                default:
+                    return -1;
+            }
+        }
+
+        private enum color { SOVIET, ROGUE_COYOTE, CFA, ZRS, DDOGS }
+        private enum weapon { WG_MACHINEGUN, WG_MISSILE }
     }
 }

@@ -12,17 +12,22 @@ namespace SOC.Classes.Lua
 
         OpeningVariables openingVariables = new OpeningVariables();
         AuxiliaryCode auxiliaryCode = new AuxiliaryCode();
+        OnAllocate onAllocate = new OnAllocate();
         QuestTable questTable = new QuestTable();
         QStep_Start qStep_start = new QStep_Start();
         QStep_Main qStep_main = new QStep_Main();
         CheckQuestMethodsList checkQuestMethodList = new CheckQuestMethodsList();
         ObjectiveTypesList objectiveTypesList = new ObjectiveTypesList();
         OnUpdate onUpdate = new OnUpdate();
-        Dictionary<string, string> localVariables = new Dictionary<string, string>();
         
         public void AddToOpeningVariables(string variableName, string value)
         {
             openingVariables.Add(variableName, value);
+        }
+
+        public void AddToOpeningVariables(string variableName)
+        {
+            openingVariables.Add(variableName, "");
         }
 
         public void AddToAuxiliary(LuaFunction function)
@@ -33,6 +38,14 @@ namespace SOC.Classes.Lua
         public void AddToAuxiliary(string localVar)
         {
             auxiliaryCode.Add(localVar);
+        }
+
+        public void AddToOnTerminate(string call)
+        {
+            if (!onAllocate.contains(call))
+            {
+                onAllocate.AddOnTerminate(call);
+            }
         }
 
         public void AddToQStep_Start_OnEnter(params string[] functionCalls)
@@ -70,11 +83,6 @@ namespace SOC.Classes.Lua
             onUpdate.Add(code);
         }
 
-        public void AddToLocalVariables(string search, string replacement)
-        {
-            localVariables.Add(search, replacement);
-        }
-
         public void AddToQuestTable(params object[] tableItems)
         {
             foreach(object tableItem in tableItems)
@@ -94,29 +102,16 @@ namespace SOC.Classes.Lua
         public void AddToQStep_Main(params QStep_Message[] messages)
         {
             foreach (QStep_Message message in messages)
-                qStep_main.Add(message);
+                if (!qStep_main.Contains(message))
+                    qStep_main.Add(message);
         }
 
-        public List<string> GetMainLuaFormatted(List<string> luaTemplate)
+        public string GetMainLuaFormatted()
         {
-            AddLocalVariablesToLua(luaTemplate);
-            AddFunctionsToLua(luaTemplate);
-
-            return luaTemplate;
-        }
-
-        private void AddLocalVariablesToLua(List<string> luaList)
-        {
-            foreach (KeyValuePair<string, string> localVariable in localVariables)
-                ReplaceLuaLine(luaList, localVariable.Key, localVariable.Value);
-        }
-
-        private void AddFunctionsToLua(List<string> luaList)
-        {
-            openingVariables.BuildComponent(this); // decide whether to add "timeless" variables via constructor or during LuaBuilder's BuildMain
+            openingVariables.BuildComponent(this);
             questTable.BuildComponent(this);
             auxiliaryCode.BuildComponent(this);
-            new OnAllocate().BuildComponent(this);
+            onAllocate.BuildComponent(this);
             new Messages().BuildComponent(this);
             new OnInitialize().BuildComponent(this);
             onUpdate.BuildComponent(this);
@@ -125,13 +120,16 @@ namespace SOC.Classes.Lua
             qStep_main.BuildComponent(this);
             objectiveTypesList.BuildComponent(this);
             checkQuestMethodList.BuildComponent(this);
+            new CheckQuestAllTargetDynamic().BuildComponent(this);
+            functionList.Add(@"
+return this");
 
             StringBuilder functionBuilder = new StringBuilder();
             foreach (string function in functionList)
-                functionBuilder.Append($@"
-{function}");
+                functionBuilder.Append($@"{function}
+");
 
-            ReplaceLuaLine(luaList, "--ADDITIONAL FUNCTIONS--", functionBuilder.ToString());
+            return functionBuilder.ToString();
         }
 
         public void AddCodeToScript(string code)

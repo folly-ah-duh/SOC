@@ -41,6 +41,8 @@ end");
             {
                 mainLua.AddToQuestTable(BuildUAVList(detail.UAVs));
 
+                mainLua.AddToQStep_Main(QStep_MainCommonMessages.mechaNoCaptureTargetMessages);
+
                 mainLua.AddToQStep_Start_OnEnter(setupUAV);
                 mainLua.AddToAuxiliary(setupUAV);
 

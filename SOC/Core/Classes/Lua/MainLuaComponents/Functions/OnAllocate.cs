@@ -8,18 +8,30 @@ namespace SOC.Classes.Lua
 {
     class OnAllocate : LuaMainComponent
     {
+        List<string> onTerminateCalls = new List<string>();
+
+        public void AddOnTerminate(string call)
+        {
+            onTerminateCalls.Add(call);
+        }
+
+        public bool contains(string call)
+        {
+            return onTerminateCalls.Contains(call);
+        }
+
         public override string GetComponent()
         {
-            return @"
+            return $@"
 function this.OnAllocate()
-  TppQuest.RegisterQuestStepList{
+  TppQuest.RegisterQuestStepList{{
     ""QStep_Start"",
     ""QStep_Main"",
     nil
-  }
+  }}
   TppEnemy.OnAllocateQuestFova(this.QUEST_TABLE)
   TppQuest.RegisterQuestStepTable(quest_step)
-  TppQuest.RegisterQuestSystemCallbacks{
+  TppQuest.RegisterQuestSystemCallbacks{{
     OnActivate = function()
       TppEnemy.OnActivateQuest(this.QUEST_TABLE)
       TppAnimal.OnActivateQuest(this.QUEST_TABLE)
@@ -33,13 +45,26 @@ function this.OnAllocate()
 
     end,
     OnTerminate = function()
-      this.SwitchEnableQuestHighIntTable(false, CPNAME, this.questCpInterrogation)
-      TppEnemy.OnTerminateQuest(this.QUEST_TABLE)
-      TppAnimal.OnTerminateQuest(this.QUEST_TABLE)
+      {BuildOnTerminate()}
     end,
-  }
+  }}
   mvars.fultonInfo = NONE
 end";
+        }
+
+        private string BuildOnTerminate()
+        {
+            AddOnTerminate("TppEnemy.OnTerminateQuest(this.QUEST_TABLE)");
+            AddOnTerminate("TppAnimal.OnTerminateQuest(this.QUEST_TABLE)");
+
+            StringBuilder terminateBuilder = new StringBuilder();
+            foreach (string call in onTerminateCalls)
+            {
+                terminateBuilder.Append($@"
+      {call}");
+            }
+
+            return terminateBuilder.ToString();
         }
     }
 }

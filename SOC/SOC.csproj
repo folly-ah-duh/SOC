@@ -123,9 +123,11 @@
     <Compile Include="Core\Classes\InfiniteHeaven\Position.cs" />
     <Compile Include="Core\Classes\Lua\DefinitionLua.cs" />
     <Compile Include="Core\Classes\Lua\MainLuaComponents\AuxiliaryCode.cs" />
+    <Compile Include="Core\Classes\Lua\MainLuaComponents\Functions\CheckQuestAllTargetDynamic.cs" />
     <Compile Include="Core\Classes\Lua\MainLuaComponents\Functions\Common\CheckQuestAnimal.cs" />
     <Compile Include="Core\Classes\Lua\MainLuaComponents\Functions\Common\CheckQuestGenericEnemy.cs" />
     <Compile Include="Core\Classes\Lua\MainLuaComponents\Functions\Common\CheckQuestItem.cs" />
+    <Compile Include="Core\Classes\Lua\MainLuaComponents\Functions\Common\QStep_MainCommonMessages.cs" />
     <Compile Include="Core\Classes\Lua\MainLuaComponents\Functions\LuaFunction.cs" />
     <Compile Include="Core\Classes\Lua\MainLuaComponents\CheckQuestMethodsList.cs" />
     <Compile Include="Core\Classes\Lua\MainLuaComponents\Functions\Messages.cs" />

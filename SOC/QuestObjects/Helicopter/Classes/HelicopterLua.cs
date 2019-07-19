@@ -27,6 +27,8 @@ namespace SOC.QuestObjects.Helicopter
             {
                 mainLua.AddToQuestTable(BuildHeliList(questDetail));
 
+                mainLua.AddToQStep_Main(QStep_MainCommonMessages.mechaNoCaptureTargetMessages);
+
                 if (questDetail.helicopters.Any(helicopter => helicopter.isTarget))
                 {
                     CheckQuestGenericEnemy helicopterCheck = new CheckQuestGenericEnemy(mainLua);

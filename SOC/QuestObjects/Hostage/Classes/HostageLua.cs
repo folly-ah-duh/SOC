@@ -9,6 +9,28 @@ namespace SOC.QuestObjects.Hostage
 {
     static class HostageLua
     {
+
+        static readonly QStep_Message MarkerChangeToEnable = new QStep_Message("Marker", @"""ChangeToEnable""", @"function(arg0, arg1)
+              if arg0 == StrCode32(""Hostage_0"") then
+                hostagei = hostagei + 1
+                if hostagei >= hostageCount then
+                  this.SwitchEnableQuestHighIntTable(false, CPNAME, this.questCpInterrogation)
+                end
+              end
+            end");
+
+        static readonly LuaFunction SwitchEnableQuestHighIntTable = new LuaFunction("SwitchEnableQuestHighIntTable", @"
+this.SwitchEnableQuestHighIntTable = function(flag, commandPostName, questCpInterrogation)
+  local commandPostId = GetGameObjectId(""TppCommandPost2"", commandPostName)
+  if useInter then
+    if flag then
+      TppInterrogation.SetQuestHighIntTable(commandPostId, questCpInterrogation)
+    else
+      TppInterrogation.RemoveQuestHighIntTable(commandPostId, questCpInterrogation)
+    end
+  end
+end");
+
         static readonly LuaFunction WarpHostages = new LuaFunction("WarpHostages", @"
 function this.WarpHostages()
   for i,hostageInfo in ipairs(this.QUEST_TABLE.hostageList)do
@@ -59,12 +81,21 @@ end");
             List<Hostage> hostages = hostageDetail.hostages;
             HostageMetadata meta = hostageDetail.hostageMetadata;
 
-            mainLua.AddToQuestTable(BuildHostageList(hostageDetail)); // leave outside if hostages.count > 0 for now, because the interrogation stuff isn't dynamically inserted into the lua yet
-            mainLua.AddToLocalVariables("local hostageCount =", "local hostageCount = " + hostages.Count);
-            mainLua.AddToLocalVariables("local useInter =", "local useInter = " + meta.canInterrogate.ToString().ToLower());
+            mainLua.AddToQuestTable(BuildHostageList(hostageDetail));
 
             if (hostages.Count > 0)
             {
+                mainLua.AddToQStep_Main(MarkerChangeToEnable);
+                mainLua.AddToQStep_Main(QStep_MainCommonMessages.genericTargetMessages);
+
+                mainLua.AddToOpeningVariables("hostageCount", hostages.Count.ToString());
+                mainLua.AddToOpeningVariables("hostagei", "0");
+
+                mainLua.AddToQStep_Start_OnEnter("this.SwitchEnableQuestHighIntTable(true, CPNAME, this.questCpInterrogation)");
+                mainLua.AddToOnTerminate("this.SwitchEnableQuestHighIntTable(false, CPNAME, this.questCpInterrogation)");
+                mainLua.AddToOpeningVariables("useInter",  meta.canInterrogate.ToString().ToLower());
+                mainLua.AddToAuxiliary(SwitchEnableQuestHighIntTable);
+
                 mainLua.AddToQStep_Start_OnEnter(WarpHostages);
                 mainLua.AddToAuxiliary(WarpHostages);
 

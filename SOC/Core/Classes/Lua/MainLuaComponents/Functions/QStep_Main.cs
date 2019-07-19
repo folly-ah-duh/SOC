@@ -57,9 +57,12 @@ quest_step.QStep_Main = {{
                 {
                     if (msg.GetCategory() != category)
                         continue;
-                    formattedMessageBuilder.Append($@"{{{msg.GetMessageFormatted()}}},");
+                    formattedMessageBuilder.Append($@"
+          {{{msg.GetMessageFormatted()}
+          }},");
                 }
-                formattedMessageBuilder.Append("},");
+                formattedMessageBuilder.Append(@"
+        },");
             }
             return formattedMessageBuilder.ToString();
         }
@@ -69,11 +72,17 @@ quest_step.QStep_Main = {{
     {
         string msgCategory;
         string msgName;
+        string msgSender;
         string msgFunc;
 
         public QStep_Message(string category, string name, string function)
         {
-            msgCategory = category; msgName = name; msgFunc = function;
+            msgCategory = category; msgName = name; msgFunc = function; msgSender = "";
+        }
+
+        public QStep_Message(string category, string name, string sender, string function)
+        {
+            msgCategory = category; msgName = name; msgFunc = function; msgSender = sender;
         }
 
         public string GetCategory()
@@ -83,12 +92,10 @@ quest_step.QStep_Main = {{
 
         public string GetMessageFormatted()
         {
-            StringBuilder msgBuilder = new StringBuilder(@"
-            msg = ");
-            msgBuilder.Append($@"""{msgName}"",");
-            msgBuilder.Append($@"
-            func = {msgFunc}
-            end");
+            StringBuilder msgBuilder = new StringBuilder($@"
+            msg = {msgName}, {(msgSender == "" ? "" : $@"
+            sender = {msgSender}, ")}
+            func = {msgFunc}");
 
             return msgBuilder.ToString();
         }
@@ -97,7 +104,8 @@ quest_step.QStep_Main = {{
         {
             if (msgCategory == msg.msgCategory)
                 if (msgName == msg.msgName)
-                    return msgFunc == msg.msgFunc;
+                    if (msgSender == msg.msgSender)
+                        return msgFunc == msg.msgFunc;
             return false;
         }
     }

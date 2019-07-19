@@ -20,10 +20,9 @@ namespace SOC.Classes.Lua
             return$@"
 quest_step.QStep_Start = {{
   OnEnter = function(){GetEnterListFormatted()}
-    this.SwitchEnableQuestHighIntTable(true, CPNAME, this.questCpInterrogation)
     TppQuest.SetNextQuestStep(""QStep_Main"")
   end,
-}}"; //SwitchEnableQuestHighIntTable is temporary. Ideally, hostageLua should be able to set the function to OnTerminate and inside the QStep_Main messages as well.
+}}";
         }
 
         private string GetEnterListFormatted()

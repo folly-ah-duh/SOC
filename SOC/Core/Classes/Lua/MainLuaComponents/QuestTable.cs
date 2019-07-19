@@ -56,7 +56,8 @@ namespace SOC.Classes.Lua
 
         private string GetQuestTableFormatted()
         {
-            StringBuilder questTableBuilder = new StringBuilder("this.QUEST_TABLE = {");
+            StringBuilder questTableBuilder = new StringBuilder(@"
+this.QUEST_TABLE = {");
             foreach (string var in variables)
             {
                 questTableBuilder.Append($@"

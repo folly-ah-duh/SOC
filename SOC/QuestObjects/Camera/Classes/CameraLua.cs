@@ -30,6 +30,9 @@ end");
             if (detail.cameras.Count > 0)
             {
                 mainLua.AddToQuestTable(BuildCameraList(detail.cameras));
+
+                mainLua.AddToQStep_Main(QStep_MainCommonMessages.mechaNoCaptureTargetMessages);
+
                 mainLua.AddToQStep_Start_OnEnter(SetCameraAttributes);
                 mainLua.AddToAuxiliary(SetCameraAttributes);
 

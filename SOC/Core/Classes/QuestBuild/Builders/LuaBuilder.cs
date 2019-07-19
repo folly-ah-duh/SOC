@@ -54,7 +54,6 @@ namespace SOC.Classes.QuestBuild.Lua
 
         public static void WriteMainQuestLua(CoreDetails coreDetails, MasterManager masterManager)
         {
-            List<string> questLua = new List<string>(questLuaTemplate);
             DetailManager[] managers = masterManager.GetManagers();
 
             string LuaScriptPath = string.Format("Sideop_Build//Assets//tpp//pack//mission2//quest//ih//{0}_fpkd//Assets//tpp//level//mission2//quest//ih", coreDetails.FpkName);
@@ -62,15 +61,26 @@ namespace SOC.Classes.QuestBuild.Lua
 
             Directory.CreateDirectory(LuaScriptPath);
 
-            File.WriteAllLines(LuaScriptFile, BuildMain(questLua, coreDetails, managers));
+            File.WriteAllText(LuaScriptFile, BuildMain(coreDetails, managers));
         }
 
-        private static List<string> BuildMain(List<string> questLua, CoreDetails coreDetails, DetailManager[] managers)
+        private static string BuildMain(CoreDetails coreDetails, DetailManager[] managers)
         {
             MainLua mainLua = new MainLua();
-            mainLua.AddToLocalVariables("local CPNAME =", $@"local CPNAME = ""{(coreDetails.CPName == "NONE" ? "quest_cp" : $"{coreDetails.CPName}")}""");
-            mainLua.AddToLocalVariables("local DISTANTCP =", $@"local DISTANTCP = ""{QuestObjects.Enemy.EnemyInfo.ChooseDistantCP(coreDetails.CPName, coreDetails.locationID)}""");
-            mainLua.AddToLocalVariables("local questTrapName =", $@"local questTrapName = ""trap_preDeactiveQuestArea_{coreDetails.loadArea}""");
+            mainLua.AddToOpeningVariables("this", "{}");
+            mainLua.AddToOpeningVariables("quest_step", "{}");
+            mainLua.AddToOpeningVariables("StrCode32", "Fox.StrCode32");
+            mainLua.AddToOpeningVariables("StrCode32Table", "Tpp.StrCode32Table");
+            mainLua.AddToOpeningVariables("GetGameObjectId", "GameObject.GetGameObjectId");
+            mainLua.AddToOpeningVariables("ELIMINATE", "TppDefine.QUEST_TYPE.ELIMINATE");
+            mainLua.AddToOpeningVariables("RECOVERED", "TppDefine.QUEST_TYPE.RECOVERED");
+            mainLua.AddToOpeningVariables("KILLREQUIRED", "9");
+            mainLua.AddToOpeningVariables("CLEAR", "TppDefine.QUEST_CLEAR_TYPE.CLEAR");
+            mainLua.AddToOpeningVariables("NONE", "TppDefine.QUEST_CLEAR_TYPE.NONE");
+            mainLua.AddToOpeningVariables("FAILURE", "TppDefine.QUEST_CLEAR_TYPE.FAILURE");
+            mainLua.AddToOpeningVariables("CPNAME", $@"""{(coreDetails.CPName == "NONE" ? "quest_cp" : $"{coreDetails.CPName}")}""");
+            mainLua.AddToOpeningVariables("DISTANTCP", $@"""{QuestObjects.Enemy.EnemyInfo.ChooseDistantCP(coreDetails.CPName, coreDetails.locationID)}""");
+            mainLua.AddToOpeningVariables("questTrapName", $@"""trap_preDeactiveQuestArea_{coreDetails.loadArea}""");
 
             mainLua.AddToQuestTable("questType = ELIMINATE");
             mainLua.AddToQuestTable("soldierSubType = SUBTYPE");
@@ -83,7 +93,7 @@ namespace SOC.Classes.QuestBuild.Lua
                 manager.AddToMainLua(mainLua);
             }
 
-            return mainLua.GetMainLuaFormatted(questLua);
+            return mainLua.GetMainLuaFormatted();
         }
     }
 }

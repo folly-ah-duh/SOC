@@ -34,6 +34,7 @@ namespace SOC.QuestObjects.Item
             {
                 CheckQuestItem checkQuestItem = new CheckQuestItem(mainLua, questDetail.itemMetadata.objectiveType);
                 mainLua.AddToQuestTable(BuildItemTargetList(questDetail.items));
+                mainLua.AddToQStep_Main(QStep_MainCommonMessages.itemTargetMessages);
             }
         }
 

@@ -105,8 +105,8 @@ end");
         {
             List<Enemy> enemies = detail.enemies;
             EnemyMetadata meta = detail.enemyMetadata;
-
-            mainLua.AddToLocalVariables("local SUBTYPE =", $@"local SUBTYPE = ""{meta.subtype}""");
+            
+            mainLua.AddToOpeningVariables("SUBTYPE", $@"""{meta.subtype}""");
 
             string questarmor = $"isQuestArmor = {(HasArmors(enemies) ? "true" : "false")}";
             string questZombie = $"isQuestZombie = {(HasZombie(enemies) ? "true" : "false")}";
@@ -119,6 +119,7 @@ end");
                 {
                     if (enemy.isTarget)
                     {
+                        mainLua.AddToQStep_Main(QStep_MainCommonMessages.genericTargetMessages);
                         CheckQuestGenericEnemy CheckEnemy = new CheckQuestGenericEnemy(mainLua, CheckIsSoldier, meta.objectiveType);
                         mainLua.AddToTargetList(enemy.GetObjectName());
                     }

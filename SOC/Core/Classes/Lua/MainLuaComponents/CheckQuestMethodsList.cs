@@ -33,9 +33,9 @@ namespace SOC.Classes.Lua
             StringBuilder checkQuestBuilder = new StringBuilder();
             foreach (CheckQuestMethodsPair pair in CheckQuestMethods)
             {
-                checkQuestBuilder.Append($@"
-{pair.TargetMessageMethod.FunctionFull}
-{pair.TallyMethod.FunctionFull}");
+                checkQuestBuilder.Append($@"{pair.TargetMessageMethod.FunctionFull}
+{pair.TallyMethod.FunctionFull}
+");
             }
             return checkQuestBuilder.ToString();
         }
@@ -43,8 +43,7 @@ namespace SOC.Classes.Lua
         private string GetList()
         {
             StringBuilder checkQuestBuilder = new StringBuilder();
-            checkQuestBuilder.Append(@"
-local CheckQuestMethodList = {");
+            checkQuestBuilder.Append(@"local CheckQuestMethodList = {");
 
             foreach (CheckQuestMethodsPair pair in CheckQuestMethods)
             {

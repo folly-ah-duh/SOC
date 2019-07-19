@@ -28,10 +28,13 @@ namespace SOC.Classes.Lua
             StringBuilder variablesBuilder = new StringBuilder();
             foreach(KeyValuePair<string, string> variable in variableDictionary)
             {
-                variablesBuilder.Append($@"
-local {variable.Key} = {variable.Value}");
+                if (variable.Value == "")
+                    variablesBuilder.Append($@"local {variable.Key}
+");
+                else
+                    variablesBuilder.Append($@"local {variable.Key} = {variable.Value}
+");
             }
-
             return variablesBuilder.ToString();
         }
     }

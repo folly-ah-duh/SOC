@@ -32,6 +32,8 @@ end");
 
             if (detail.vehicles.Count > 0)
             {
+                mainLua.AddToQStep_Main(QStep_MainCommonMessages.mechaCaptureTargetMessages);
+
                 mainLua.AddToQStep_Start_OnEnter(warpVehicles);
                 mainLua.AddToAuxiliary(warpVehicles);
 

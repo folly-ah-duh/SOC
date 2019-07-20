@@ -108,18 +108,18 @@ namespace SOC.Classes.Lua
 
         public string GetMainLuaFormatted()
         {
-            openingVariables.BuildComponent(this);
-            questTable.BuildComponent(this);
-            auxiliaryCode.BuildComponent(this);
-            onAllocate.BuildComponent(this);
-            new Messages().BuildComponent(this);
+            openingVariables.BuildComponent(this); // local variables declared before the quest table
+            questTable.BuildComponent(this); // the quest table, which lists information on every lua quest object for the sideop
+            auxiliaryCode.BuildComponent(this); // functions and variables used for setting up quest objects and other misc. purposes
+            onAllocate.BuildComponent(this);// onallocate. namely contains OnTerminate logic 
+            new Messages().BuildComponent(this); // quest messages, not to be confused with qStep_main messages
             new OnInitialize().BuildComponent(this);
-            onUpdate.BuildComponent(this);
+            onUpdate.BuildComponent(this); // contains calls to frequent checks
             new OnTerminate().BuildComponent(this);
-            qStep_start.BuildComponent(this);
-            qStep_main.BuildComponent(this);
-            objectiveTypesList.BuildComponent(this);
-            checkQuestMethodList.BuildComponent(this);
+            qStep_start.BuildComponent(this); // calls auxiliary setup functions
+            qStep_main.BuildComponent(this); // contains a long list of messages which listen for quest updates
+            objectiveTypesList.BuildComponent(this); // contains logic for how a quest update is determined as well as what object has what objective type
+            checkQuestMethodList.BuildComponent(this); // determines what and how to tally up quest objectives
             new CheckQuestAllTargetDynamic().BuildComponent(this);
             functionList.Add(@"
 return this");
@@ -135,20 +135,6 @@ return this");
         public void AddCodeToScript(string code)
         {
             functionList.Add(code);
-        }
-
-        private static void ReplaceLuaLine(List<string> luaList, string searchFor, string replaceWith)
-        {
-            luaList[GetLineContaining(searchFor, luaList)] = replaceWith;
-        }
-
-        private static int GetLineContaining(string text, List<string> questLua)
-        {
-            for (int i = 0; i < questLua.Count; i++)
-                if (questLua[i].Contains(text))
-                    return i;
-
-            return -1;
         }
     }
 }

@@ -39,13 +39,10 @@ function this.OnAllocate()
     OnDeactivate = function()
       TppEnemy.OnDeactivateQuest(this.QUEST_TABLE)
       TppAnimal.OnDeactivateQuest(this.QUEST_TABLE)
-
     end,
-    OnOutOfAcitveArea = function()
-
+    OnOutOfAcitveArea = function() 
     end,
-    OnTerminate = function()
-      {BuildOnTerminate()}
+    OnTerminate = function(){BuildOnTerminate()}
     end,
   }}
   mvars.fultonInfo = NONE

@@ -26,17 +26,11 @@ namespace SOC.Classes.Lua
 quest_step.QStep_Main = {{
   Messages = function( self )
     return
-      StrCode32Table {{
-{GetMessagesFormatted()}
+      StrCode32Table {{{GetMessagesFormatted()}
       }}
   end,
-  OnEnter = function()
-
-    Fox.Log(""QStep_Main OnEnter"")
-  end,
-  OnLeave = function()
-    Fox.Log(""QStep_Main OnLeave"")
-  end,
+  OnEnter = function() end,
+  OnLeave = function() end,
 }}";
         }
 

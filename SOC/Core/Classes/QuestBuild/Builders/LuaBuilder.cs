@@ -75,9 +75,6 @@ namespace SOC.Classes.QuestBuild.Lua
             mainLua.AddToOpeningVariables("ELIMINATE", "TppDefine.QUEST_TYPE.ELIMINATE");
             mainLua.AddToOpeningVariables("RECOVERED", "TppDefine.QUEST_TYPE.RECOVERED");
             mainLua.AddToOpeningVariables("KILLREQUIRED", "9");
-            mainLua.AddToOpeningVariables("CLEAR", "TppDefine.QUEST_CLEAR_TYPE.CLEAR");
-            mainLua.AddToOpeningVariables("NONE", "TppDefine.QUEST_CLEAR_TYPE.NONE");
-            mainLua.AddToOpeningVariables("FAILURE", "TppDefine.QUEST_CLEAR_TYPE.FAILURE");
             mainLua.AddToOpeningVariables("CPNAME", $@"""{(coreDetails.CPName == "NONE" ? "quest_cp" : $"{coreDetails.CPName}")}""");
             mainLua.AddToOpeningVariables("DISTANTCP", $@"""{QuestObjects.Enemy.EnemyInfo.ChooseDistantCP(coreDetails.CPName, coreDetails.locationID)}""");
             mainLua.AddToOpeningVariables("questTrapName", $@"""trap_preDeactiveQuestArea_{coreDetails.loadArea}""");

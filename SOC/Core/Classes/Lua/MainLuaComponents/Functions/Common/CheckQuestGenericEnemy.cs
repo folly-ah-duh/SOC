@@ -29,18 +29,18 @@ end");
         static readonly LuaFunction TallyGenericTargets = new LuaFunction("TallyGenericTargets",
             @"
 function this.TallyGenericTargets(totalTargets, objectiveCompleteCount, objectiveFailedCount)
-  local dynamicQuestType = ELIMINATE
   for targetGameId, targetInfo in pairs(mvars.ene_questTargetList) do
+    local dynamicQuestType = ELIMINATE
     local isTarget = targetInfo.isTarget or false
     local targetMessageId = targetInfo.messageId
 
     if isTarget == true then
-	  for _, ObjectiveTypeInfo in ipairs(ObjectiveTypeList.genericTargets) do
-	    if ObjectiveTypeInfo.Check(targetGameId) == true then
-		  dynamicQuestType = ObjectiveTypeInfo.Type
-		  break
-		end
-	  end
+      for _, ObjectiveTypeInfo in ipairs(ObjectiveTypeList.genericTargets) do
+        if ObjectiveTypeInfo.Check(targetGameId) then
+          dynamicQuestType = ObjectiveTypeInfo.Type
+          break
+        end
+      end
 
       if targetMessageId ~= ""None"" then
         if dynamicQuestType == RECOVERED then
@@ -53,11 +53,11 @@ function this.TallyGenericTargets(totalTargets, objectiveCompleteCount, objectiv
         elseif dynamicQuestType == ELIMINATE then
           if (targetMessageId == ""Fulton"") or (targetMessageId == ""InHelicopter"") or (targetMessageId == ""FultonFailed"") or (targetMessageId == ""Dead"") or (targetMessageId == ""VehicleBroken"") or (targetMessageId == ""LostControl"") then
             objectiveCompleteCount = objectiveCompleteCount + 1
-		      end
+          end
 
         elseif dynamicQuestType == KILLREQUIRED then
-				  if (targetMessageId == ""FultonFailed"") or (targetMessageId == ""Dead"") or (targetMessageId == ""VehicleBroken"") or (targetMessageId == ""LostControl"") then
-		            objectiveCompleteCount = objectiveCompleteCount + 1
+          if (targetMessageId == ""FultonFailed"") or (targetMessageId == ""Dead"") or (targetMessageId == ""VehicleBroken"") or (targetMessageId == ""LostControl"") then
+            objectiveCompleteCount = objectiveCompleteCount + 1
           elseif (targetMessageId == ""Fulton"") or (targetMessageId == ""InHelicopter"")  then
             objectiveFailedCount = objectiveFailedCount + 1
           end

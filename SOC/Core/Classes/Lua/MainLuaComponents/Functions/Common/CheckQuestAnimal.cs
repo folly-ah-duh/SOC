@@ -12,29 +12,29 @@ namespace SOC.Classes.Lua
     @"
 function this.IsTargetSetMessageIdForAnimal(gameId, messageId, checkAnimalId)
   if checkAnimalId ~= nil then
-	local databaseId = TppAnimal.GetDataBaseIdFromAnimalId(checkAnimalId)
-	local isTarget = false
-	for animalId, targetInfo in pairs(mvars.ani_questTargetList) do
-		if targetInfo.idType == ""animalId"" then
-			if animalId == checkAnimalId then
-				targetInfo.messageId = messageId or ""None""
-				isTarget = true
-			end
-		elseif targetInfo.idType == ""databaseId"" then
-			if animalId == databaseId then
-				targetInfo.messageId = messageId or ""None""
-				isTarget = true
-			end
-		elseif targetInfo.idType == ""targetName"" then
-			local animalGameId = GetGameObjectId(animalId)
-			if animalGameId == gameId then
-				targetInfo.messageId = messageId
-				isTarget = true
-			end
-		end
-	end
-    return isTarget, true
-  end
+    local databaseId = TppAnimal.GetDataBaseIdFromAnimalId(checkAnimalId)
+    local isTarget = false
+    for animalId, targetInfo in pairs(mvars.ani_questTargetList) do
+      if targetInfo.idType == ""animalId"" then
+        if animalId == checkAnimalId then
+          targetInfo.messageId = messageId or ""None""
+            isTarget = true
+          end
+        elseif targetInfo.idType == ""databaseId"" then
+          if animalId == databaseId then
+            targetInfo.messageId = messageId or ""None""
+            isTarget = true
+          end
+        elseif targetInfo.idType == ""targetName"" then
+          local animalGameId = GetGameObjectId(animalId)
+          if animalGameId == gameId then
+            targetInfo.messageId = messageId
+            isTarget = true
+          end
+        end
+      end
+      return isTarget, true
+    end
   return false, false
 end");
 
@@ -58,9 +58,9 @@ function this.TallyAnimalTargets(totalTargets, objectiveCompleteCount, objective
           objectiveCompleteCount = objectiveCompleteCount + 1
         end
 
-		  elseif dynamicQuestType == KILLREQUIRED then
-		    if (targetMessageId == ""FultonFailed"") or (targetMessageId == ""Dead"") then
-	          objectiveCompleteCount = objectiveCompleteCount + 1
+      elseif dynamicQuestType == KILLREQUIRED then
+        if (targetMessageId == ""FultonFailed"") or (targetMessageId == ""Dead"") then
+          objectiveCompleteCount = objectiveCompleteCount + 1
         elseif (targetMessageId == ""Fulton"") then
           objectiveFailedCount = objectiveFailedCount + 1
         end

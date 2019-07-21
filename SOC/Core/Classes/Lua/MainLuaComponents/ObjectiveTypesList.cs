@@ -8,7 +8,7 @@ namespace SOC.Classes.Lua
 {
     public class ObjectiveTypesList : LuaMainComponent
     {
-        public List<GenericTargetPair> genericTargets = new List<GenericTargetPair>();
+        public List<GenericTargetTable> targetTables = new List<GenericTargetTable>();
         public List<string> oneLineObjectiveTypes = new List<string>();
 
         public override string GetComponent()
@@ -18,13 +18,31 @@ namespace SOC.Classes.Lua
 ";
         }
 
+        public void Add(string tableName, GenericTargetPair pair)
+        {
+            GenericTargetTable insertTable = targetTables.Find(table => table.GetName() == tableName);
+            if (insertTable != null)
+            {
+                insertTable.Add(pair);
+            }
+            else
+            {
+                insertTable = new GenericTargetTable(tableName);
+                insertTable.Add(pair);
+                targetTables.Add(insertTable);
+            }
+        }
+
         private string GetObjectiveFunctions()
         {
             StringBuilder functionsBuilder = new StringBuilder();
-            foreach (GenericTargetPair pair in genericTargets)
+            foreach (GenericTargetTable table in targetTables)
             {
-                functionsBuilder.Append($@"
+                foreach (GenericTargetPair pair in table.GetTargetPairs())
+                {
+                    functionsBuilder.Append($@"
 {pair.checkMethod.FunctionFull}");
+                }
             }
             return functionsBuilder.ToString();
         }
@@ -32,16 +50,17 @@ namespace SOC.Classes.Lua
         private string GetObjectiveTypesList()
         {
             StringBuilder objectiveListBuilder = new StringBuilder(@"
-ObjectiveTypeList = {
-  genericTargets = {");
-            foreach(GenericTargetPair pair in genericTargets)
+ObjectiveTypeList = {");
+
+            foreach (GenericTargetTable table in targetTables)
             {
-                objectiveListBuilder.Append($@"
-    {pair.GetTableFormat()},");
+                if (table.GetTargetPairs().Length > 0)
+                {
+                    objectiveListBuilder.Append(table.GetTableFormatted());
+                }
             }
-            objectiveListBuilder.Append(@"
-  },");
-            foreach(string oneLineObjectiveType in oneLineObjectiveTypes)
+
+            foreach (string oneLineObjectiveType in oneLineObjectiveTypes)
             {
                 objectiveListBuilder.Append($@"
   {oneLineObjectiveType},");
@@ -49,6 +68,51 @@ ObjectiveTypeList = {
             objectiveListBuilder.Append(@"
 }");
             return objectiveListBuilder.ToString();
+        }
+    }
+
+    public class GenericTargetTable
+    {
+        string tableName;
+        List<GenericTargetPair> genericTargets = new List<GenericTargetPair>();
+        
+        public GenericTargetTable(string name)
+        {
+            tableName = name;
+        }
+
+        public string GetName()
+        {
+            return tableName;
+        }
+
+        public GenericTargetPair[] GetTargetPairs()
+        {
+            return genericTargets.ToArray();
+        }
+
+        public void Add(params GenericTargetPair[] pairs)
+        {
+            foreach(GenericTargetPair pair in pairs)
+            {
+                if (!genericTargets.Exists(existingPair => existingPair.checkMethod.Equals(pair.checkMethod))) {
+                    genericTargets.Add(pair);
+                }
+            }
+        }
+
+        public string GetTableFormatted()
+        {
+            StringBuilder tableBuilder = new StringBuilder($@"
+  {tableName} = {{");
+            foreach (GenericTargetPair pair in genericTargets)
+            {
+                tableBuilder.Append($@"
+    {pair.GetTableFormat()},");
+            }
+            tableBuilder.Append(@"
+  },");
+            return tableBuilder.ToString();
         }
     }
 }

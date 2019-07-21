@@ -9,6 +9,11 @@ namespace SOC.QuestObjects.Item
 {
     class ItemLua
     {
+        static readonly LuaFunction checkIsDormantItem = new LuaFunction("checkIsDormantItem", @"
+function this.checkIsDormantItem(targetItemInfo)
+  return (targetItemInfo.active == false)
+end");
+
         internal static void GetDefinition(ItemDetail questDetail, DefinitionLua definitionLua)
         {
             List<string> requestList = new List<string>();
@@ -32,9 +37,9 @@ namespace SOC.QuestObjects.Item
         {
             if (questDetail.items.Any(item => item.isTarget))
             {
-                CheckQuestItem checkQuestItem = new CheckQuestItem(mainLua, questDetail.itemMetadata.objectiveType);
+                CheckQuestItem checkQuestItem = new CheckQuestItem(mainLua, checkIsDormantItem, questDetail.itemMetadata.objectiveType);
                 mainLua.AddToQuestTable(BuildItemTargetList(questDetail.items));
-                mainLua.AddToQStep_Main(QStep_MainCommonMessages.itemTargetMessages);
+                mainLua.AddToQStep_Main(QStep_MainCommonMessages.dormantItemTargetMessages);
             }
         }
 
@@ -53,6 +58,7 @@ namespace SOC.QuestObjects.Item
         {{
             equipId = TppEquip.{item.item},
             messageId = ""None"",
+            active = false,
         }}");
             }
 

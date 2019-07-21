@@ -60,11 +60,11 @@ namespace SOC.Classes.Lua
     {
         public LuaFunction TargetMessageMethod, TallyMethod;
 
-        public CheckQuestMethodsPair(MainLua mainLua, LuaFunction a, LuaFunction b, LuaFunction check, string objective)
+        public CheckQuestMethodsPair(MainLua mainLua, LuaFunction a, LuaFunction b, string targetTableName, LuaFunction check, string objective)
         {
             TargetMessageMethod = a; TallyMethod = b;
             mainLua.AddToCheckQuestMethod(this);
-            mainLua.AddToObjectiveTypes(new GenericTargetPair(check, objective));
+            mainLua.AddToObjectiveTypes(targetTableName, new GenericTargetPair(check, objective));
         }
 
         public CheckQuestMethodsPair(MainLua mainLua, LuaFunction a, LuaFunction b, string oneLineObjective)

@@ -69,7 +69,7 @@ function this.TallyGenericTargets(totalTargets, objectiveCompleteCount, objectiv
   return totalTargets, objectiveCompleteCount, objectiveFailedCount
 end");
 
-        public CheckQuestGenericEnemy(MainLua mainLua, LuaFunction checkFunction, string objectiveType) : base(mainLua, IsTargetSetMessageIdForGenericEnemy, TallyGenericTargets, checkFunction, objectiveType) { }
+        public CheckQuestGenericEnemy(MainLua mainLua, LuaFunction checkFunction, string objectiveType) : base(mainLua, IsTargetSetMessageIdForGenericEnemy, TallyGenericTargets, "genericTargets", checkFunction, objectiveType) { }
 
         public CheckQuestGenericEnemy(MainLua mainLua) : base(mainLua, IsTargetSetMessageIdForGenericEnemy, TallyGenericTargets) { }
     }

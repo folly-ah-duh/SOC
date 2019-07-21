@@ -66,10 +66,9 @@ namespace SOC.Classes.Lua
                 checkQuestMethodList.Add(methodsPair);
         }
 
-        public void AddToObjectiveTypes(GenericTargetPair objectivePair)
+        public void AddToObjectiveTypes(string tableName, GenericTargetPair objectivePair)
         {
-            if (!objectiveTypesList.genericTargets.Exists(pair => pair.checkMethod.Equals(objectivePair.checkMethod)))
-                objectiveTypesList.genericTargets.Add(objectivePair);
+            objectiveTypesList.Add(tableName, objectivePair);
         }
 
         public void AddToObjectiveTypes(string oneLineObjective)

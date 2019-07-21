@@ -9,13 +9,18 @@ namespace SOC.QuestObjects.ActiveItem
 {
     class ActiveItemLua
     {
+        static readonly LuaFunction checkIsActiveItem = new LuaFunction("checkIsActiveItem", @"
+function this.checkIsActiveItem(targetItemInfo)
+  return (targetItemInfo.active == true)
+end");
+
         internal static void GetMain(ActiveItemDetail questDetail, MainLua mainLua)
         {
             if (questDetail.activeItems.Any(activeItem => activeItem.isTarget))
             {
-                CheckQuestItem checkQuestItem = new CheckQuestItem(mainLua, questDetail.activeItemMetadata.objectiveType);
+                CheckQuestItem checkQuestItem = new CheckQuestItem(mainLua, checkIsActiveItem, questDetail.activeItemMetadata.objectiveType);
                 mainLua.AddToQuestTable(BuildTargetItemList(questDetail));
-                mainLua.AddToQStep_Main(QStep_MainCommonMessages.itemTargetMessages);
+                mainLua.AddToQStep_Main(QStep_MainCommonMessages.activeItemTargetMessages);
             }
         }
 
@@ -31,6 +36,7 @@ namespace SOC.QuestObjects.ActiveItem
         {{
             equipId = TppEquip.{activeItem.activeItem},
             messageId = ""None"",
+            active = true,
         }}");
             }
             return targetItemList;

@@ -9,13 +9,13 @@ namespace SOC.Classes.Lua
     public static class QStep_MainCommonMessages
     {
         static readonly QStep_Message PlayerPickUpWeapon = new QStep_Message("Player", @"""OnPickUpWeapon""", @"function(playerIndex, equipId)
-              local isClearType = this.CheckQuestAllTargetDynamic(""PickUp"", equipId)
-              TppQuest.ClearWithSave( isClearType )
+              local isClearType = this.CheckQuestAllTargetDynamic(""PickUpDormant"", equipId)
+              TppQuest.ClearWithSave(isClearType)
             end");
 
         static readonly QStep_Message PlayerPickUpPlaced = new QStep_Message("Player", @"""OnPickUpPlaced""", @"function(playerGameObjectId, equipId, index, isPlayer)
               if TppPlaced.IsQuestBlock(index) then
-                local isClearType = this.CheckQuestAllTargetDynamic(""PickUp"", equipId)
+                local isClearType = this.CheckQuestAllTargetDynamic(""PickUpActive"", equipId)
                 TppQuest.ClearWithSave(isClearType)
               end
             end");
@@ -76,7 +76,9 @@ namespace SOC.Classes.Lua
 
         public static readonly QStep_Message[] genericTargetMessages = { GameObjectDead, GameObjectFultonInfo, GameObjectFulton, GameObjectFultonFailed, GameObjectPlacedIntoHeli, GameObjectVehicleBroken, GameObjectLostControl };
 
-        public static readonly QStep_Message[] itemTargetMessages = { PlayerPickUpWeapon, PlayerPickUpPlaced, PlacedActivatePlaced };
+        public static readonly QStep_Message[] dormantItemTargetMessages = { PlayerPickUpWeapon };
+
+        public static readonly QStep_Message[] activeItemTargetMessages = { PlayerPickUpPlaced, PlacedActivatePlaced };
 
         public static readonly QStep_Message[] mechaCaptureTargetMessages = { GameObjectDead, GameObjectFultonInfo, GameObjectFulton, GameObjectFultonFailed, GameObjectVehicleBroken };
 

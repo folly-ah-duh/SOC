@@ -9,13 +9,11 @@ using SOC.Classes.Common;
 
 namespace SOC.QuestObjects.Helicopter
 {
-    class HelicopterManager : LocationalManager // probably end up being a non-locational manager
+    class HelicopterManager : NonLocationalManager // probably end up being a non-locational manager
     {
-        static LocationalDataStub stub = new LocationalDataStub("Helicopter Starting Locations (WIP, only 1 spawnable)");
-
         static HelicopterControl control = new HelicopterControl();
 
-        static HelicopterVisualizer visualizer = new HelicopterVisualizer(stub, control);
+        static HelicopterVisualizer visualizer = new HelicopterVisualizer(control);
 
         public HelicopterManager(HelicopterDetail detail) : base(detail, visualizer) { }
 

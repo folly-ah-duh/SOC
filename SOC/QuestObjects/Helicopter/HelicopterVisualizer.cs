@@ -14,9 +14,9 @@ using SOC.QuestObjects.Enemy;
 
 namespace SOC.QuestObjects.Helicopter
 {
-    class HelicopterVisualizer : LocationalVisualizer
+    class HelicopterVisualizer : NonLocationalVisualizer
     {
-        public HelicopterVisualizer(LocationalDataStub stub, HelicopterControl control) : base(stub, control, control.panelQuestBoxes) { }
+        public HelicopterVisualizer(HelicopterControl control) : base(control, control.panelQuestBoxes) { }
 
         private List<string> routes = new List<string>();
 
@@ -41,21 +41,34 @@ namespace SOC.QuestObjects.Helicopter
             return new HelicopterDetail(qObjects.Cast<Helicopter>().ToList(), (HelicopterMetadata)meta);
         }
 
-        public override QuestObject NewObject(Position pos, int index)
-        {
-            return new Helicopter(pos, index);
-        }
-
         public override void SetDetailsFromSetup(Detail detail, CoreDetails core)
         {
             // Routes
-            RouteManager heliRouter = new RouteManager();
-            List<string> heliRoutes = heliRouter.GetRouteNames(core.routeName);
+            List<string> heliRoutes = new List<string>();
+            if (core.routeName != "NONE")
+                heliRoutes = new RouteManager().GetRouteNames(core.routeName);
             heliRoutes.AddRange(EnemyInfo.GetCP(core.CPName).CPheliRoutes);
 
             routes = heliRoutes;
-            base.SetDetailsFromSetup(detail, core);
 
+            List<Helicopter> qObjects = detail.GetQuestObjects().Cast<Helicopter>().ToList();
+            int heliCount = (routes.Count > 0 ? 1 : 0);
+            int objectCount = qObjects.Count;
+
+            for (int i = 0; i < heliCount; i++)
+            {
+                if (i >= objectCount) // add
+                {
+                    qObjects.Add(new Helicopter(i));
+                }
+            }
+
+            for (int i = objectCount - 1; i >= heliCount; i--) //remove
+            {
+                qObjects.RemoveAt(i);
+            }
+
+            detail.SetQuestObjects(qObjects.Cast<QuestObject>().ToList());
         }
     }
 }

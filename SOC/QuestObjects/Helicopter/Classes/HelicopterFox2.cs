@@ -20,7 +20,7 @@ namespace SOC.QuestObjects.Helicopter
                     if (heli.ID == 0) continue;
 
                     GameObjectLocator heliLocator = new GameObjectLocator(heli.GetObjectName(), dataSet, "TppEnemyHeli");
-                    Transform heliTransform = new Transform(heliLocator, heli.position);
+                    Transform heliTransform = new Transform(heliLocator, new Core.Classes.InfiniteHeaven.Position());
                     TppHeli2LocatorParameter heliLocatorParameter = new TppHeli2LocatorParameter(heliLocator);
 
                     heliLocator.SetTransform(heliTransform);

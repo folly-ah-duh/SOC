@@ -49,9 +49,10 @@ namespace SOC.QuestObjects.Helicopter
     {
         public Helicopter() { }
 
-        public Helicopter(Position pos, int index)
+        public Helicopter(int index) // (Position pos, int index)
         {
-            position = pos; ID = index;
+            //position = pos;
+            ID = index;
         }
 
         public Helicopter(HelicopterBox box)
@@ -61,7 +62,7 @@ namespace SOC.QuestObjects.Helicopter
             isTarget = box.checkBox_target.Checked;
             heliRoute = box.comboBox_route.Text;
             heliClass = box.comboBox_class.Text;
-            position = new Position(new Coordinates(box.textBox_xcoord.Text, box.textBox_ycoord.Text, box.textBox_zcoord.Text), new Rotation(box.textBox_rot.Text));
+            //position = new Position(new Coordinates(box.textBox_xcoord.Text, box.textBox_ycoord.Text, box.textBox_zcoord.Text), new Rotation(box.textBox_rot.Text));
         }
 
         [XmlElement]
@@ -78,10 +79,10 @@ namespace SOC.QuestObjects.Helicopter
 
         [XmlElement]
         public string heliClass { get; set; } = "DEFAULT";
-
+        /*
         [XmlElement]
         public Position position { get; set; } = new Position(new Coordinates(), new Rotation());
-        
+        */
         public override int GetID()
         {
             return ID;
@@ -97,12 +98,12 @@ namespace SOC.QuestObjects.Helicopter
 
         public override Position GetPosition()
         {
-            return position;
+            return new Position();
         }
 
         public override void SetPosition(Position pos)
         {
-            position = pos;
+            return;
         }
     }
 

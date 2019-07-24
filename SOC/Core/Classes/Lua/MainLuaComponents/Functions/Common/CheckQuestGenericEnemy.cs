@@ -35,10 +35,12 @@ function this.TallyGenericTargets(totalTargets, objectiveCompleteCount, objectiv
     local targetMessageId = targetInfo.messageId
 
     if isTarget == true then
-      for _, ObjectiveTypeInfo in ipairs(ObjectiveTypeList.genericTargets) do
-        if ObjectiveTypeInfo.Check(targetGameId) then
-          dynamicQuestType = ObjectiveTypeInfo.Type
-          break
+      if ObjectiveTypeList.genericTargets ~= nil then
+        for _, ObjectiveTypeInfo in ipairs(ObjectiveTypeList.genericTargets) do
+          if ObjectiveTypeInfo.Check(targetGameId) then
+            dynamicQuestType = ObjectiveTypeInfo.Type
+            break
+          end
         end
       end
 

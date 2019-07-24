@@ -58,24 +58,29 @@ namespace SOC.QuestObjects.Helicopter
         public Helicopter(HelicopterBox box)
         {
             ID = box.ID;
-            
+
+            isSpawn = box.checkBox_spawn.Checked;
             isTarget = box.checkBox_target.Checked;
-            heliRoute = box.comboBox_route.Text;
+            dRoute = box.comboBox_dRoute.Text;
+            cRoute = box.comboBox_cRoute.Text;
             heliClass = box.comboBox_class.Text;
             //position = new Position(new Coordinates(box.textBox_xcoord.Text, box.textBox_ycoord.Text, box.textBox_zcoord.Text), new Rotation(box.textBox_rot.Text));
         }
 
         [XmlElement]
-        public bool isTarget { get; set; } = false;
+        public bool isSpawn { get; set; } = false;
 
         [XmlElement]
-        public bool isSpawn { get; set; } = false;
+        public bool isTarget { get; set; } = false;
 
         [XmlAttribute]
         public int ID { get; set; } = 0;
 
         [XmlElement]
-        public string heliRoute { get; set; } = "NONE";
+        public string dRoute { get; set; } = "NONE";
+
+        [XmlElement]
+        public string cRoute { get; set; } = "NONE";
 
         [XmlElement]
         public string heliClass { get; set; } = "DEFAULT";

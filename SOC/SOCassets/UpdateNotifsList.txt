@@ -24,3 +24,6 @@ mine_quest_log
 
 Animal Extracted
 quest_extract_animal
+
+Target Eliminated
+target_eliminate_custom

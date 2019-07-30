@@ -124,17 +124,19 @@ end");
                     }
                 }
             }
-            if (hasTarget)
-            {
-                mainLua.AddToQStep_Main(QStep_MainCommonMessages.genericTargetMessages);
-                CheckQuestGenericEnemy CheckEnemy = new CheckQuestGenericEnemy(mainLua, CheckIsSoldier, meta.objectiveType);
-            }
-            else if (hasSpawn)
+
+            if (hasSpawn)
             {
                 string questarmor = $"isQuestArmor = {(HasArmors(enemies) ? "true" : "false")}";
                 string questZombie = $"isQuestZombie = {(HasZombie(enemies) ? "true" : "false")}";
                 string questBalaclava = $"isQuestBalaclava = {(HasBalaclavas(enemies) ? "true" : "false")}";
                 mainLua.AddToQuestTable(questarmor, questZombie, questBalaclava);
+
+                if (hasTarget)
+                {
+                    mainLua.AddToQStep_Main(QStep_MainCommonMessages.genericTargetMessages);
+                    CheckQuestGenericEnemy CheckEnemy = new CheckQuestGenericEnemy(mainLua, CheckIsSoldier, meta.objectiveType);
+                }
             }
         }
 

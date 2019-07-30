@@ -14,7 +14,7 @@ namespace SOC.QuestObjects.Hostage
             Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
         }
 
-        public void SetMetadata(HostageMetadata meta, string[] bodyNames)
+        public void SetMetadata(HostageMetadata meta, string[] bodyNames, string cpName)
         {
             comboBox_Body.Items.Clear();
             comboBox_Body.Items.AddRange(bodyNames);
@@ -25,7 +25,19 @@ namespace SOC.QuestObjects.Hostage
                 comboBox_Body.SelectedIndex = 0;
 
             comboBox_ObjType.Text = meta.objectiveType;
-            checkBox_intrgt.Checked = meta.canInterrogate;
+
+            if (cpName != "NONE")
+            {
+                checkBox_intrgt.Enabled = true;
+                checkBox_intrgt.Checked = meta.canInterrogate;
+                checkBox_intrgt.Text = "Interrogate For Whereabouts";
+            }
+            else
+            {
+                checkBox_intrgt.Enabled = false;
+                checkBox_intrgt.Checked = false;
+                checkBox_intrgt.Text = "Interrogate For Whereabouts [Requires Quest CP]";
+            }
         }
     }
 }

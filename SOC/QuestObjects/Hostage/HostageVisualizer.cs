@@ -17,11 +17,12 @@ namespace SOC.QuestObjects.Hostage
         }
 
         string[] bodyNames = new string[0];
+        string cpName = "NONE";
 
         public override void DrawMetadata(Metadata meta)
         {
             HostageControl hostageControl = (HostageControl)detailControl;
-            hostageControl.SetMetadata((HostageMetadata)meta, bodyNames);
+            hostageControl.SetMetadata((HostageMetadata)meta, bodyNames, cpName);
         }
 
         public override Metadata GetMetadataFromControl()
@@ -55,6 +56,7 @@ namespace SOC.QuestObjects.Hostage
             {
                 bodyNames = NPCBodyInfo.BodyInfoArray.Select(bodyEntry => bodyEntry.Name).ToArray();
             }
+            cpName = core.CPName;
         }
 
         private void OnBodyIndexChanged(object sender, EventArgs e)

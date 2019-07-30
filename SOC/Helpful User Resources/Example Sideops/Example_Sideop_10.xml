@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<Quest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="0.7.0.0">
+  <coreDetails FpkName="Example_Sideop_10" QuestNum="30359">
+    <QuestTitle>Example: Reach the Prisoner</QuestTitle>
+    <QuestDesc>Example: Reach the prisoner at Serak Powerplant.</QuestDesc>
+    <locationID>10</locationID>
+    <loadArea>sovietBase</loadArea>
+    <coords xCoord="-730" yCoord="540" zCoord="-1356" />
+    <radius>1</radius>
+    <category>PRISONER</category>
+    <CPName>NONE</CPName>
+    <reward>D</reward>
+    <progNotif>3</progNotif>
+    <routeName>NONE</routeName>
+  </coreDetails>
+  <questObjectDetails>
+    <Detail xsi:type="EnemyDetail">
+      <enemyMetadata objectiveType="ELIMINATE" subtype="PF_A" />
+      <enemies />
+    </Detail>
+    <Detail xsi:type="HostageDetail">
+      <hostageMetadata objectiveType="RECOVERED" hostageBodyName="MAFR_HOSTAGE_FEMALE" canInterrogate="false" />
+      <hostages>
+        <Hostage ID="0">
+          <isTarget>true</isTarget>
+          <isUntied>false</isUntied>
+          <isInjured>false</isInjured>
+          <skill>SuppressorEngineer</skill>
+          <staffType>DEVELOP</staffType>
+          <scared>NEVER</scared>
+          <language>english</language>
+          <position>
+            <coords xCoord="-730.489" yCoord="543.334" zCoord="-1356.322" />
+            <rotation xRot="0" yRot="-0.89914" zRot="0" wRot="0.43767" />
+          </position>
+        </Hostage>
+      </hostages>
+    </Detail>
+    <Detail xsi:type="VehicleDetail">
+      <vehicleMetadata ObjectiveType="ELIMINATE" />
+      <vehicles />
+    </Detail>
+    <Detail xsi:type="HelicopterDetail">
+      <helicopterMetadata objectiveType="KILLREQUIRED" />
+      <helicopters />
+    </Detail>
+    <Detail xsi:type="UAVDetail">
+      <UAVmetadata objectiveType="KILLREQUIRED" />
+      <UAVs />
+    </Detail>
+    <Detail xsi:type="CameraDetail">
+      <cameraMetadata objectiveType="KILLREQUIRED" />
+      <cameras />
+    </Detail>
+    <Detail xsi:type="WalkerDetail">
+      <walkerMetadata objectiveType="ELIMINATE" />
+      <walkers />
+    </Detail>
+    <Detail xsi:type="AnimalDetail">
+      <animalMetadata objectiveType="RECOVERED" />
+      <animals />
+    </Detail>
+    <Detail xsi:type="ItemDetail">
+      <itemMetadata objectiveType="RECOVERED" />
+      <items />
+    </Detail>
+    <Detail xsi:type="ActiveItemDetail">
+      <activeItemMetadata objectiveType="ELIMINATE" />
+      <activeItems />
+    </Detail>
+    <Detail xsi:type="ModelDetail">
+      <modelMetadata />
+      <models>
+        <Model ID="0">
+          <position>
+            <coords xCoord="-726.679" yCoord="534.328" zCoord="-1366.811" />
+            <rotation xRot="0" yRot="-0.81678" zRot="0" wRot="0.57695" />
+          </position>
+          <collision>true</collision>
+          <model>AfghanRockMedium</model>
+        </Model>
+        <Model ID="1">
+          <position>
+            <coords xCoord="-712.273" yCoord="538.261" zCoord="-1387.468" />
+            <rotation xRot="0" yRot="-0.09876" zRot="0" wRot="0.99511" />
+          </position>
+          <collision>true</collision>
+          <model>MetalStaircase</model>
+        </Model>
+      </models>
+    </Detail>
+  </questObjectDetails>
+</Quest>

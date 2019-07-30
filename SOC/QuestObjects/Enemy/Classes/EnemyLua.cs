@@ -109,22 +109,32 @@ end");
             mainLua.AddToOpeningVariables("SUBTYPE", $@"""{meta.subtype}""");
 
             mainLua.AddToQuestTable(BuildEnemyList(enemies));
+            bool hasSpawn = false;
+            bool hasTarget = false;
+
             foreach (Enemy enemy in enemies)
             {
                 if (enemy.spawn)
                 {
-                    string questarmor = $"isQuestArmor = {(HasArmors(enemies) ? "true" : "false")}";
-                    string questZombie = $"isQuestZombie = {(HasZombie(enemies) ? "true" : "false")}";
-                    string questBalaclava = $"isQuestBalaclava = {(HasBalaclavas(enemies) ? "true" : "false")}";
-                    mainLua.AddToQuestTable(questarmor, questZombie, questBalaclava);
-
+                    hasSpawn = true;
                     if (enemy.isTarget)
                     {
-                        mainLua.AddToQStep_Main(QStep_MainCommonMessages.genericTargetMessages);
-                        CheckQuestGenericEnemy CheckEnemy = new CheckQuestGenericEnemy(mainLua, CheckIsSoldier, meta.objectiveType);
+                        hasTarget = true;
                         mainLua.AddToTargetList(enemy.GetObjectName());
                     }
                 }
+            }
+            if (hasTarget)
+            {
+                mainLua.AddToQStep_Main(QStep_MainCommonMessages.genericTargetMessages);
+                CheckQuestGenericEnemy CheckEnemy = new CheckQuestGenericEnemy(mainLua, CheckIsSoldier, meta.objectiveType);
+            }
+            else if (hasSpawn)
+            {
+                string questarmor = $"isQuestArmor = {(HasArmors(enemies) ? "true" : "false")}";
+                string questZombie = $"isQuestZombie = {(HasZombie(enemies) ? "true" : "false")}";
+                string questBalaclava = $"isQuestBalaclava = {(HasBalaclavas(enemies) ? "true" : "false")}";
+                mainLua.AddToQuestTable(questarmor, questZombie, questBalaclava);
             }
         }
 

@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<Quest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="0.7.0.0">
+  <coreDetails FpkName="Example_Sideop_9" QuestNum="30358">
+    <QuestTitle>Example: Extract the Cliffside Pilots</QuestTitle>
+    <QuestDesc>Extract the two pilots marooned on a cliff.</QuestDesc>
+    <locationID>20</locationID>
+    <loadArea>lab</loadArea>
+    <coords xCoord="2450" yCoord="112" zCoord="-943" />
+    <radius>2</radius>
+    <category>PRISONER</category>
+    <CPName>NONE</CPName>
+    <reward>D</reward>
+    <progNotif>3</progNotif>
+    <routeName>NONE</routeName>
+  </coreDetails>
+  <questObjectDetails>
+    <Detail xsi:type="EnemyDetail">
+      <enemyMetadata objectiveType="ELIMINATE" subtype="PF_A" />
+      <enemies />
+    </Detail>
+    <Detail xsi:type="HostageDetail">
+      <hostageMetadata objectiveType="RECOVERED" hostageBodyName="DDS_PILOT2" canInterrogate="false" />
+      <hostages>
+        <Hostage ID="0">
+          <isTarget>true</isTarget>
+          <isUntied>true</isUntied>
+          <isInjured>false</isInjured>
+          <skill>Ninja</skill>
+          <staffType>COMBAT</staffType>
+          <scared>NEVER</scared>
+          <language>english</language>
+          <position>
+            <coords xCoord="2455.432" yCoord="114.760" zCoord="-949.466" />
+            <rotation xRot="0" yRot="-0.70852" zRot="0" wRot="0.70569" />
+          </position>
+        </Hostage>
+        <Hostage ID="1">
+          <isTarget>true</isTarget>
+          <isUntied>true</isUntied>
+          <isInjured>false</isInjured>
+          <skill>Study</skill>
+          <staffType>COMBAT</staffType>
+          <scared>NEVER</scared>
+          <language>english</language>
+          <position>
+            <coords xCoord="2450.800" yCoord="112.136" zCoord="-943.453" />
+            <rotation xRot="0" yRot="-0.64279" zRot="0" wRot="0.76604" />
+          </position>
+        </Hostage>
+      </hostages>
+    </Detail>
+    <Detail xsi:type="VehicleDetail">
+      <vehicleMetadata ObjectiveType="ELIMINATE" />
+      <vehicles />
+    </Detail>
+    <Detail xsi:type="HelicopterDetail">
+      <helicopterMetadata objectiveType="KILLREQUIRED" />
+      <helicopters />
+    </Detail>
+    <Detail xsi:type="UAVDetail">
+      <UAVmetadata objectiveType="KILLREQUIRED" />
+      <UAVs />
+    </Detail>
+    <Detail xsi:type="CameraDetail">
+      <cameraMetadata objectiveType="KILLREQUIRED" />
+      <cameras />
+    </Detail>
+    <Detail xsi:type="WalkerDetail">
+      <walkerMetadata objectiveType="ELIMINATE" />
+      <walkers />
+    </Detail>
+    <Detail xsi:type="AnimalDetail">
+      <animalMetadata objectiveType="RECOVERED" />
+      <animals />
+    </Detail>
+    <Detail xsi:type="ItemDetail">
+      <itemMetadata objectiveType="RECOVERED" />
+      <items />
+    </Detail>
+    <Detail xsi:type="ActiveItemDetail">
+      <activeItemMetadata objectiveType="ELIMINATE" />
+      <activeItems>
+        <ActiveItem ID="0">
+          <isTarget>false</isTarget>
+          <activeItem>EQP_SWP_DMine_G03</activeItem>
+          <position>
+            <coords xCoord="2430.267" yCoord="95.913" zCoord="-928.802" />
+            <rotation xRot="0" yRot="-0.58913" zRot="0" wRot="0.80804" />
+          </position>
+        </ActiveItem>
+        <ActiveItem ID="1">
+          <isTarget>false</isTarget>
+          <activeItem>EQP_SWP_C4_G04</activeItem>
+          <position>
+            <coords xCoord="2430.246" yCoord="95.900" zCoord="-928.993" />
+            <rotation xRot="0" yRot="-0.57944" zRot="0" wRot="0.81501" />
+          </position>
+        </ActiveItem>
+        <ActiveItem ID="2">
+          <isTarget>false</isTarget>
+          <activeItem>EQP_SWP_DMine_G03</activeItem>
+          <position>
+            <coords xCoord="2424.468" yCoord="93.939" zCoord="-937.241" />
+            <rotation xRot="0" yRot="-0.66043" zRot="0" wRot="0.75088" />
+          </position>
+        </ActiveItem>
+        <ActiveItem ID="3">
+          <isTarget>false</isTarget>
+          <activeItem>EQP_SWP_C4_G04</activeItem>
+          <position>
+            <coords xCoord="2424.470" yCoord="93.868" zCoord="-937.243" />
+            <rotation xRot="0" yRot="-0.96341" zRot="0" wRot="0.26805" />
+          </position>
+        </ActiveItem>
+        <ActiveItem ID="4">
+          <isTarget>false</isTarget>
+          <activeItem>EQP_SWP_DMine_G03</activeItem>
+          <position>
+            <coords xCoord="2439.862" yCoord="105.392" zCoord="-943.147" />
+            <rotation xRot="0" yRot="-0.77829" zRot="0" wRot="0.62790" />
+          </position>
+        </ActiveItem>
+        <ActiveItem ID="5">
+          <isTarget>false</isTarget>
+          <activeItem>EQP_SWP_DMine_G03</activeItem>
+          <position>
+            <coords xCoord="2447.689" yCoord="108.907" zCoord="-937.101" />
+            <rotation xRot="0" yRot="-0.49957" zRot="0" wRot="0.86627" />
+          </position>
+        </ActiveItem>
+        <ActiveItem ID="6">
+          <isTarget>false</isTarget>
+          <activeItem>EQP_SWP_DMine_G03</activeItem>
+          <position>
+            <coords xCoord="2444.427" yCoord="108.225" zCoord="-958.442" />
+            <rotation xRot="0" yRot="-0.71541" zRot="0" wRot="0.69871" />
+          </position>
+        </ActiveItem>
+        <ActiveItem ID="7">
+          <isTarget>false</isTarget>
+          <activeItem>EQP_SWP_DMine_G03</activeItem>
+          <position>
+            <coords xCoord="2421.781" yCoord="104.458" zCoord="-964.589" />
+            <rotation xRot="0" yRot="-0.35455" zRot="0" wRot="0.93504" />
+          </position>
+        </ActiveItem>
+        <ActiveItem ID="8">
+          <isTarget>false</isTarget>
+          <activeItem>EQP_SWP_DMine_G03</activeItem>
+          <position>
+            <coords xCoord="2434.961" yCoord="105.470" zCoord="-952.828" />
+            <rotation xRot="0" yRot="-0.93671" zRot="0" wRot="0.35010" />
+          </position>
+        </ActiveItem>
+      </activeItems>
+    </Detail>
+    <Detail xsi:type="ModelDetail">
+      <modelMetadata />
+      <models>
+        <Model ID="0">
+          <position>
+            <coords xCoord="2464.259" yCoord="120.183" zCoord="-942.627" />
+            <rotation xRot="0" yRot="0.09020" zRot="0" wRot="0.99592" />
+          </position>
+          <collision>true</collision>
+          <model>RustedBlackfoot</model>
+        </Model>
+      </models>
+    </Detail>
+  </questObjectDetails>
+</Quest>

@@ -81,9 +81,7 @@ namespace SOC.Classes.QuestBuild.Lua
 
             mainLua.AddToQuestTable("questType = ELIMINATE");
             mainLua.AddToQuestTable("soldierSubType = SUBTYPE");
-            mainLua.AddToQuestTable(@"cpList = {
-        nil
-    }");
+            mainLua.AddToQuestTable(BuildCpList(coreDetails));
 
             foreach (DetailManager manager in managers)
             {
@@ -91,6 +89,26 @@ namespace SOC.Classes.QuestBuild.Lua
             }
 
             return mainLua.GetMainLuaFormatted();
+        }
+
+        private static string BuildCpList(CoreDetails coreDetails)
+        {
+            StringBuilder cpListBuilder = new StringBuilder("cpList = {");
+            if (coreDetails.CPName != "NONE")
+                cpListBuilder.Append(@"
+      nil");
+            else
+            {
+                cpListBuilder.Append($@"
+      cpName = ""quest_cp"",
+      cpPosition_x = {coreDetails.coords.xCoord}, cpPosition_y = {coreDetails.coords.yCoord}, cpPosition_z = {coreDetails.coords.zCoord}, cpPosition_r = {70},
+      isOuterBaseCp = true,
+      gtName = ""gt_quest_0000"",
+      gtPosition_x = {coreDetails.coords.xCoord}, gtPosition_y = {coreDetails.coords.yCoord}, gtPosition_z = {coreDetails.coords.zCoord}, gtPosition_r = {70},");
+            }
+            cpListBuilder.Append(@"
+    }");
+            return cpListBuilder.ToString();
         }
     }
 }

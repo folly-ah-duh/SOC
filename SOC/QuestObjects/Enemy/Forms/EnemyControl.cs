@@ -15,6 +15,8 @@ namespace SOC.QuestObjects.Enemy
         internal void SetMetadata(EnemyMetadata meta, List<string> subtypes)
         {
             comboBox_ObjType.Text = meta.objectiveType;
+
+            comboBox_Subtype.Items.Clear();
             comboBox_Subtype.Items.AddRange(subtypes.ToArray());
             if (comboBox_Subtype.Items.Contains(meta.subtype))
                 comboBox_Subtype.Text = meta.subtype;

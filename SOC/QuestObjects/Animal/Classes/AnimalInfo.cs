@@ -127,26 +127,26 @@
                     break;
                 case "Wolf":
                     partsPath = "/Assets/tpp/parts/chara/wlf/wlf0_main0_def_v00.parts";
-                    mog = "/Assets/tpp/motion/mtar/wolf/Wolf_layers.mtar";
-                    mtar = "/Assets/tpp/motion/motion_graph/wolf/Wolf_layers.mog";
+                    mog = "/Assets/tpp/motion/motion_graph/wolf/Wolf_layers.mog";
+                    mtar = "/Assets/tpp/motion/mtar/wolf/Wolf_layers.mtar";
                     fv2Path = "";
                     break;
                 case "Jackal":
                     partsPath = "/Assets/tpp/parts/chara/jcl/jcl0_main0_def_v00.parts";
-                    mog = "/Assets/tpp/motion/mtar/wolf/Wolf_layers.mtar";
-                    mtar = "/Assets/tpp/motion/motion_graph/wolf/Wolf_layers.mog";
+                    mog = "/Assets/tpp/motion/motion_graph/wolf/Wolf_layers.mog";
+                    mtar = "/Assets/tpp/motion/mtar/wolf/Wolf_layers.mtar";
                     fv2Path = "/Assets/tpp/fova/chara/jcl/jcl0_v00_c00.fv2";
                     break;
                 case "African_Wild_Dog":
                     partsPath = "/Assets/tpp/parts/chara/lyc/lyc0_main0_def_v00.parts";
-                    mog = "/Assets/tpp/motion/mtar/wolf/Wolf_layers.mtar";
-                    mtar = "/Assets/tpp/motion/motion_graph/wolf/Wolf_layers.mog";
+                    mog = "/Assets/tpp/motion/motion_graph/wolf/Wolf_layers.mog";
+                    mtar = "/Assets/tpp/motion/mtar/wolf/Wolf_layers.mtar";
                     fv2Path = "/Assets/tpp/fova/chara/jcl/jcl0_v00_c00.fv2";
                     break;
                 case "Bear":
                     partsPath = "/Assets/tpp/parts/chara/ber/ber0_main0_def_v00.parts";
-                    mog = "/Assets/tpp/motion/mtar/bear/Bear_layers.mtar";
-                    mtar = "/Assets/tpp/motion/motion_graph/bear/Bear_layers.mog";
+                    mog = "/Assets/tpp/motion/motion_graph/bear/Bear_layers.mog";
+                    mtar = "/Assets/tpp/motion/mtar/bear/Bear_layers.mtar";
                     fv2Path = "/Assets/tpp/fova/chara/ber/ber0_c00.fv2";
                     break;
 

@@ -75,7 +75,31 @@ namespace SOC.Classes.QuestBuild.Lua
             mainLua.AddToOpeningVariables("ELIMINATE", "TppDefine.QUEST_TYPE.ELIMINATE");
             mainLua.AddToOpeningVariables("RECOVERED", "TppDefine.QUEST_TYPE.RECOVERED");
             mainLua.AddToOpeningVariables("KILLREQUIRED", "9");
-            mainLua.AddToOpeningVariables("CPNAME", $@"""{(coreDetails.CPName == "NONE" ? "quest_cp" : $"{coreDetails.CPName}")}""");
+
+            string cpNameString = coreDetails.CPName;
+            if (coreDetails.CPName == "NONE")
+            {
+                /*
+                if (LoadAreas.isAfgh(coreDetails.locationID))
+                {
+                    cpNameString = @"""afgh_plantSouth_ob"""; // empty ob for afgh. doesn't trigger interrogations?
+                }
+                else if (LoadAreas.isMafr(coreDetails.locationID))
+                {
+                    cpNameString = @"""mafr_factory_cp"""; // empty cp for mafr
+                }
+                else
+                {
+                */
+                    cpNameString = $"InfMain.GetClosestCp{{{coreDetails.coords.xCoord},{coreDetails.coords.yCoord},{coreDetails.coords.zCoord}}}";
+                //}
+            }
+            else
+            {
+                cpNameString = $@"""{coreDetails.CPName}""";
+            }
+
+            mainLua.AddToOpeningVariables("CPNAME", cpNameString);
             mainLua.AddToOpeningVariables("DISTANTCP", $@"""{QuestObjects.Enemy.EnemyInfo.ChooseDistantCP(coreDetails.CPName, coreDetails.locationID)}""");
             mainLua.AddToOpeningVariables("questTrapName", $@"""trap_preDeactiveQuestArea_{coreDetails.loadArea}""");
 
@@ -94,9 +118,9 @@ namespace SOC.Classes.QuestBuild.Lua
         private static string BuildCpList(CoreDetails coreDetails)
         {
             StringBuilder cpListBuilder = new StringBuilder("cpList = {");
-            if (coreDetails.CPName != "NONE")
+            //if (coreDetails.CPName != "NONE")
                 cpListBuilder.Append(@"
-      nil");
+      nil");/*
             else
             {
                 cpListBuilder.Append($@"
@@ -107,7 +131,7 @@ namespace SOC.Classes.QuestBuild.Lua
         gtName = ""gt_quest_0000"",
         gtPosition_x = {coreDetails.coords.xCoord}, gtPosition_y = {coreDetails.coords.yCoord}, gtPosition_z = {coreDetails.coords.zCoord}, gtPosition_r = {70},
       }},");
-            }
+            }*/
             cpListBuilder.Append(@"
     }");
             return cpListBuilder.ToString();

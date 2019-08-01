@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,10 +10,16 @@ namespace SOC.Classes.LangTool
     [XmlRoot("LangFile")]
     public class LangFile
     {
+        public LangFile() { }
 
         public LangFile(List<LangEntry> entryList)
         {
             Entries = entryList;
+        }
+
+        public LangFile(string fileName)
+        {
+            Load(fileName);
         }
 
         [XmlArray("Entries")]
@@ -20,6 +27,42 @@ namespace SOC.Classes.LangTool
 
         [XmlAttribute("Endianess")]
         public string Endianess = "BigEndian";
+
+        public void Save(string fileName = "test.xml")
+        {
+            using (FileStream stream = new FileStream(fileName, FileMode.Create))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(LangFile));
+                serializer.Serialize(stream, this);
+            }
+        }
+
+        public bool Load(string fileName = "test.xml")
+        {
+
+            if (!File.Exists(fileName))
+            {
+                return false;
+            }
+
+            using (FileStream stream = new FileStream(fileName, FileMode.Open))
+            {
+                XmlSerializer deserializer = new XmlSerializer(typeof(LangFile));
+                try
+                {
+                    LangFile loadedQuest = (LangFile)deserializer.Deserialize(stream);
+                    Entries = loadedQuest.Entries;
+                    Endianess = loadedQuest.Endianess;
+                    return true;
+                }
+                catch (InvalidOperationException e)
+                {
+                    System.Windows.Forms.MessageBox.Show(string.Format("An Exception has occurred and the selected xml file could not be loaded. \n\nInnerException message: \n{0}", e.InnerException), "SOC", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                }
+            }
+
+            return false;
+        }
 
         public void Write(Stream outputStream)
         {

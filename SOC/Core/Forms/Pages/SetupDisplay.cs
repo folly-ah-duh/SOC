@@ -77,9 +77,10 @@ namespace SOC.UI
             comboBoxCP.Text = core.CPName;
 
             refreshNotifsList();
-            if (comboBoxProgressNotifs.Items.Count > core.progNotif)
-                comboBoxProgressNotifs.SelectedIndex = core.progNotif;
-            else
+            string displayNotification = UpdateNotifsManager.GetDisplayNotification(core.progressLangID);
+            if (displayNotification != null)
+                comboBoxProgressNotifs.Text = displayNotification;
+            else if (comboBoxProgressNotifs.Items.Count > 0)
                 comboBoxProgressNotifs.SelectedIndex = 0;
 
             refreshRoutesList();
@@ -96,7 +97,7 @@ namespace SOC.UI
 
         public void refreshNotifsList()
         {
-            UpdateComboBox(comboBoxProgressNotifs, UpdateNotifsManager.getDispNotifs());
+            UpdateComboBox(comboBoxProgressNotifs, UpdateNotifsManager.GetAllDisplayNotifications());
         }
 
         public void refreshRoutesList()

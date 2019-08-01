@@ -1,5 +1,6 @@
 ﻿using SOC.UI;
 using System.Xml.Serialization;
+using System.Linq;
 
 namespace SOC.Classes.Common
 {
@@ -9,7 +10,7 @@ namespace SOC.Classes.Common
 
         public CoreDetails() { }
 
-        public CoreDetails(string fpk, string quest, int locID, string loada, Coordinates c, string rad, string cat, string rew, int prog, string cpnme, string qtitle, string qdesc, string route)
+        public CoreDetails(string fpk, string quest, int locID, string loada, Coordinates c, string rad, string cat, string rew, string progId, string cpnme, string qtitle, string qdesc, string route)
         {
             FpkName = fpk;
             QuestNum = quest;
@@ -23,7 +24,10 @@ namespace SOC.Classes.Common
             CPName = cpnme;
 
             category = cat;
-            progNotif = prog;
+
+            if (QuestBuild.UpdateNotifsManager.GetAllLangIds().Contains(progId))
+                progressLangID = progId;
+
             reward = rew;
 
             routeName = route;
@@ -43,7 +47,11 @@ namespace SOC.Classes.Common
             CPName = setupPage.comboBoxCP.Text;
 
             category = setupPage.comboBoxCategory.Text;
-            progNotif = setupPage.comboBoxProgressNotifs.SelectedIndex;
+
+            progressLangID = QuestBuild.UpdateNotifsManager.GetLangId(setupPage.comboBoxProgressNotifs.Text);
+            if (progressLangID == null)
+                progressLangID = QuestBuild.UpdateNotifsManager.GetDefaultLangEntry().LangId;
+
             reward = setupPage.comboBoxReward.Text;
 
             routeName = setupPage.comboBoxRoute.Text;
@@ -83,7 +91,7 @@ namespace SOC.Classes.Common
         public string reward { get; set; } = "";
 
         [XmlElement]
-        public int progNotif { get; set; } = -1;
+        public string progressLangID { get; set; } = QuestBuild.UpdateNotifsManager.GetDefaultLangEntry().LangId;
 
         [XmlElement]
         public string routeName { get; set; } = "";

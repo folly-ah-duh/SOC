@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LangFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Endianess="BigEndian">
+  <Entries>
+    <Entry LangId="quest_extract_elite" Color="5" Value="Highly-Skilled Soldier Extracted" />
+    <Entry LangId="quest_defeat_armor" Color="5" Value="Heavy Infantry Eliminated" />
+    <Entry LangId="quest_defeat_zombie" Color="5" Value="Wandering Puppet Eliminated" />
+    <Entry LangId="quest_extract_hostage" Color="5" Value="Prisoner Extracted" />
+    <Entry LangId="quest_defeat_armor_vehicle" Color="5" Value="Armored Vehicle Unit Eliminated" />
+    <Entry LangId="quest_defeat_tunk" Color="5" Value="Tank Unit Eliminated" />
+    <Entry LangId="quest_target_eliminate" Color="5" Value="Target Destroyed" />
+    <Entry LangId="mine_quest_log" Color="5" Value="Mine Cleared" />
+    <Entry LangId="announce_quest_extract_animal" Color="5" Value="Animal Extracted" />
+    <Entry LangId="target_eliminate_custom" Color="5" Value="Target Eliminated" />
+  </Entries>
+</LangFile>

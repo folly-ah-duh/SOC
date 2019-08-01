@@ -28,7 +28,7 @@ namespace SOC.UI
 
         private void textBoxLangId_Leave(object sender, EventArgs e)
         {
-            string invalidchars = "[\\/\\?\\\\\\|\\*\\:\\\"\\<\\> ]";
+            string invalidchars = @"[\/\?\\\|\*\:\""\<\> ]";
             string replacement = "_";
             Regex fileNameFixer = new Regex(invalidchars);
             textBoxLangId.Text = fileNameFixer.Replace(textBoxLangId.Text, replacement);

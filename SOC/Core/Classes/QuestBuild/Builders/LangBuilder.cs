@@ -9,26 +9,40 @@ namespace SOC.Classes.QuestBuild.Lang
     {
         static string[] lngLanguages = { "eng", "fre", "ger", "ita", "jpn", "por", "rus", "spa" };
 
-        public static void WriteQuestLangs(CoreDetails coreDetails)
+        public static void WriteQuestLangs(string dir, params CoreDetails[] coreDetails)
         {
-            List<string> LangIdList = UpdateNotifsManager.getLangIds();
-            List<string> DisplayList = UpdateNotifsManager.getDispNotifs();
-            int notificationIndex = coreDetails.progNotif;
-
             List<LangEntry> langList = new List<LangEntry>();
+            List<string> notificationLangIds = new List<string>();
+            foreach(CoreDetails core in coreDetails)
+            {
+                string notifId = core.progressLangID;
 
-            langList.Add(new LangEntry(MakeLangId("name_q", coreDetails.QuestNum), coreDetails.QuestTitle, 5));
-            langList.Add(new LangEntry(MakeLangId("info_q", coreDetails.QuestNum), coreDetails.QuestDesc, 5));
+                if (!notificationLangIds.Contains(notifId) && UpdateNotifsManager.isCustomNotification(notifId))
+                {
+                    notificationLangIds.Add(notifId);
+                }
 
-            if (UpdateNotifsManager.isCustomNotification(LangIdList[notificationIndex]))
-                langList.Add(new LangEntry(LangIdList[notificationIndex], (DisplayList[notificationIndex] + " [%d/%d]"), 5));
+                langList.Add(new LangEntry("name_q" + core.QuestNum, core.QuestTitle, 5));
+                langList.Add(new LangEntry("info_q" + core.QuestNum, core.QuestDesc, 5));
+            }
 
+            foreach(string langId in notificationLangIds)
+            {
+                langList.Add(new LangEntry(langId, UpdateNotifsManager.GetDisplayNotification(langId) + " [%d/%d]", 5));
+            }
+            
             LangFile questLng = new LangFile(langList);
+
+            string fileName = "";
+            if (coreDetails.Length > 1)
+                fileName = $"ih_q{coreDetails[0].QuestNum}_q{coreDetails[coreDetails.Length - 1].QuestNum}";
+            else if (coreDetails.Length > 0)
+                fileName = $"ih_quest_q{coreDetails[0].QuestNum}";
 
             foreach (string language in lngLanguages)
             {
-                string lngPath = string.Format("Sideop_Build//Assets//tpp/pack//ui//lang//lang_default_data_{0}_fpk//Assets//tpp//lang//ui", language);
-                string lngFile = Path.Combine(lngPath, string.Format(@"ih_quest_q{0}.{1}.lng2", coreDetails.QuestNum, language));
+                string lngPath = $@"{dir}/Assets/tpp/pack/ui/lang/lang_default_data_{language}_fpk/Assets/tpp/lang/ui";
+                string lngFile = Path.Combine(lngPath, $"{fileName}.{language}.lng2");
                 Directory.CreateDirectory(lngPath);
 
                 using (FileStream outputStream = new FileStream(lngFile, FileMode.Create))
@@ -36,11 +50,6 @@ namespace SOC.Classes.QuestBuild.Lang
                     questLng.Write(outputStream);
                 }
             }
-        }
-
-        public static string MakeLangId(string prefix, string qNum)
-        {
-            return (prefix + qNum);
         }
     }
 }

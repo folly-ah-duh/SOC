@@ -3,55 +3,68 @@ using SOC.Classes.Common;
 using SOC.QuestObjects.Common;
 using System.IO;
 using SOC.Classes.Assets;
+using System.Linq;
 
 namespace SOC.Classes.QuestBuild
 {
-    class BuildManager
+    static class BuildManager
     {
-        private CoreDetails coreDetails;
-        private MasterManager masterManager;
+        private const string SINGLEBUILDDIR = "Sideop_Build";
+        private const string BATCHBUILDDIR = "Sideop_Batch_Build";
 
-        public BuildManager(CoreDetails core, MasterManager master)
+        internal static bool Build(params Quest[] quests)
         {
-            coreDetails = core; masterManager = master;
-        }
+            string buildDir;
+            if (quests.Length > 1)
+            {
+                buildDir = BATCHBUILDDIR;
+                ClearBatchFolder();
+            }
+            else buildDir = SINGLEBUILDDIR;
 
-        internal bool Build()
-        {
-            ClearQuestFolders();
-            Lang.LangBuilder.WriteQuestLangs(coreDetails);
+            Lang.LangBuilder.WriteQuestLangs(buildDir, quests.Select(singleQuest => singleQuest.coreDetails).ToArray());
+            
+            foreach(Quest quest in quests)
+            {
+                CoreDetails coreDetails = quest.coreDetails;
+                DetailManager[] managers = new ManagerArray(quest.questObjectDetails).GetManagers();
 
-            Lua.LuaBuilder.WriteDefinitionLua(coreDetails, masterManager);
-            Lua.LuaBuilder.WriteMainQuestLua(coreDetails, masterManager);
+                ClearQuestFolders(buildDir, coreDetails.FpkName);
 
-            Fox2.Fox2Builder.WriteQuestFox2(coreDetails.FpkName, masterManager);
-            //Fox2Builder.WriteItemFox2(definitionDetails, questDetails);?
-
-            Assets.AssetsBuilder.BuildAssets(coreDetails, masterManager);
+                Lua.LuaBuilder.WriteDefinitionLua(buildDir, coreDetails, managers);
+                Lua.LuaBuilder.WriteMainQuestLua(buildDir, coreDetails, managers);
+                Fox2.Fox2Builder.WriteQuestFox2(buildDir, coreDetails.FpkName, managers);
+                Assets.AssetsBuilder.BuildAssets(buildDir, coreDetails, managers);
+            }
 
             /*
             steps to building a quest:
             1. Clear possible existing fpk directories
-            2. Write lang files
+            2. Write lang files (preferably all custom quest langs would be stored in a single file)
             3. write definition lua
             4. write main quest lua
-            5. write fox2 file (how should I deal with the seperate item fox2?) 
+            5. write fox2 file
             6. Add necessary asset files
             */
             return true;
         }
 
-        public void ClearQuestFolders()
+        public static void ClearQuestFolders(string buildDir, string fpkName)
         {
-            string fpkName = coreDetails.FpkName;
-            string fpkdir = string.Format("Sideop_Build//Assets//tpp//pack//mission2//quest//ih//{0}_fpk", fpkName);
-            string fpkddir = string.Format("Sideop_Build//Assets//tpp//pack//mission2//quest//ih//{0}_fpkd", fpkName);
+            string fpkdir = $"{buildDir}//Assets//tpp//pack//mission2//quest//ih//{fpkName}_fpk";
+            string fpkddir = $"{buildDir}//Assets//tpp//pack//mission2//quest//ih//{fpkName}_fpkd";
 
             if (Directory.Exists(fpkdir))
                 FileAssets.DeleteDirectory(fpkdir);
 
             if (Directory.Exists(fpkddir))
                 FileAssets.DeleteDirectory(fpkddir);
+        }
+
+        private static void ClearBatchFolder()
+        {
+            if (Directory.Exists(BATCHBUILDDIR))
+                FileAssets.DeleteDirectory(BATCHBUILDDIR);
         }
     }
 }

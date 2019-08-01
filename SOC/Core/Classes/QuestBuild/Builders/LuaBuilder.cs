@@ -13,12 +13,10 @@ namespace SOC.Classes.QuestBuild.Lua
     {
         static string[] questLuaTemplate = File.ReadAllLines(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//questScript.lua"));
         
-        public static void WriteDefinitionLua(CoreDetails coreDetails, MasterManager masterManager)
+        public static void WriteDefinitionLua(string dir, CoreDetails coreDetails, DetailManager[] managers)
         {
-            DetailManager[] managers = masterManager.GetManagers();
-
-            string DefinitionLuaPath = "Sideop_Build//GameDir//mod//quests//";
-            string DefinitionLuaFile = Path.Combine(DefinitionLuaPath, string.Format("ih_quest_q{0}.lua", coreDetails.QuestNum));
+            string DefinitionLuaPath = $@"{dir}/GameDir/mod/quests/";
+            string DefinitionLuaFile = Path.Combine(DefinitionLuaPath, $"ih_quest_q{coreDetails.QuestNum}.lua");
 
             Directory.CreateDirectory(DefinitionLuaPath);
 
@@ -31,7 +29,7 @@ namespace SOC.Classes.QuestBuild.Lua
         private static string BuildDefinition(CoreDetails coreDetails, DetailManager[] managers) //rewrite
         {
             DefinitionLua definitionLua = new DefinitionLua();
-            string questCompleteLangId = UpdateNotifsManager.getLangIds()[coreDetails.progNotif];
+            string questCompleteLangId = coreDetails.progressLangID;
             
             definitionLua.AddDefinition($"locationId = {coreDetails.locationID}");
             definitionLua.AddDefinition($@"areaName = ""{coreDetails.loadArea}""");
@@ -52,11 +50,9 @@ namespace SOC.Classes.QuestBuild.Lua
             return definitionLua.GetDefinitionLuaFormatted();
         }
 
-        public static void WriteMainQuestLua(CoreDetails coreDetails, MasterManager masterManager)
+        public static void WriteMainQuestLua(string dir, CoreDetails coreDetails, DetailManager[] managers)
         {
-            DetailManager[] managers = masterManager.GetManagers();
-
-            string LuaScriptPath = string.Format("Sideop_Build//Assets//tpp//pack//mission2//quest//ih//{0}_fpkd//Assets//tpp//level//mission2//quest//ih", coreDetails.FpkName);
+            string LuaScriptPath = $@"{dir}/Assets/tpp/pack/mission2/quest/ih/{coreDetails.FpkName}_fpkd/Assets/tpp/level/mission2/quest/ih";
             string LuaScriptFile = Path.Combine(LuaScriptPath, coreDetails.FpkName + ".lua");
 
             Directory.CreateDirectory(LuaScriptPath);

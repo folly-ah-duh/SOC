@@ -112,9 +112,9 @@ namespace SOC.UI
         private void BuildQuest()
         {
             managerMaster.UpdateAllDetailsFromControl();
-            BuildManager buildManager = new BuildManager(setupPage.GetCoreDetails(), managerMaster);
-
-            if (buildManager.Build())
+            Quest quest = new Quest(setupPage.GetCoreDetails(), managerMaster.GetQuestObjectDetails());
+            
+            if (BuildManager.Build(quest))
             {
                 MessageBox.Show("Build Complete", "Sideop Companion", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -193,6 +193,46 @@ namespace SOC.UI
                 Process.Start(AppDomain.CurrentDomain.BaseDirectory);
             }
             catch { }
+        }
+
+        private void buttonBatchBuild_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog loadFile = new OpenFileDialog();
+            loadFile.Filter = "Xml Files|*.xml|All Files|*.*";
+            loadFile.Multiselect = true;
+
+            DialogResult result = loadFile.ShowDialog();
+            if (result != DialogResult.OK) return;
+            
+            List<Quest> quests = new List<Quest>();
+
+            int failedCount = 0;
+            foreach (string filePath in loadFile.FileNames)
+            {
+                Quest quest = new Quest();
+                if (quest.Load(filePath))
+                {
+                    if (!quests.Exists(questInList => questInList.coreDetails.FpkName == quest.coreDetails.FpkName)
+                        && !quests.Exists(questInList => questInList.coreDetails.QuestNum == quest.coreDetails.QuestNum))
+                        quests.Add(quest);
+                    else failedCount++;
+                }
+                else failedCount++;
+            }
+            if (failedCount > 0)
+                MessageBox.Show($"{failedCount} Sideops could not be built \n(Either caused by failing to load Xml file(s) or more than one sideop using the same .FPK Filename/Quest Number)", "Sideop Companion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            if (quests.Count > 0)
+            {
+                if (BuildManager.Build(quests.ToArray()))
+                {
+                    MessageBox.Show("Batch Build Complete", "Sideop Companion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Batch Build Failed", "Sideop Companion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
     }
 }

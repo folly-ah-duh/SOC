@@ -1,14 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Linq;
 
 namespace SOC.Classes.QuestBuild
 {
     static class UpdateNotifsManager
     {
-        public static string NotifsListPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//UpdateNotifsList.txt");
+        public static string NotifsListPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SOCassets//UpdateNotifsList.xml");
+        public static LangTool.LangFile notificationLangEntries = new LangTool.LangFile(NotifsListPath);
 
-        public static string[] defaultLangIds = {
+        public static string[] vanillaLangIds = {
             "quest_extract_elite",
             "quest_defeat_armor",
             "quest_defeat_zombie",
@@ -17,64 +19,70 @@ namespace SOC.Classes.QuestBuild
             "quest_defeat_tunk",
             "quest_target_eliminate",
             "mine_quest_log",
-            "quest_extract_animal"
+            "announce_quest_extract_animal"
         };
-
-        public static List<string> UpdateNotifsList = new List<string>();
-
-        public static void readList()
+        
+        private static void refreshList()
         {
-            UpdateNotifsList.Clear();
-            UpdateNotifsList.AddRange(File.ReadAllLines(NotifsListPath));
-            for (int i = UpdateNotifsList.Count - 1; i >= 0; i--)
-            {
-                if (string.IsNullOrEmpty(UpdateNotifsList[i]))
-                {
-                    UpdateNotifsList.RemoveAt(i);
-                }
-            }
+            notificationLangEntries.Load(NotifsListPath);
         }
 
-        public static List<string> getDispNotifs()
+        private static void saveList()
         {
-            List<string> DisplayList = new List<string>();
-            readList();
-            for (int i = 0; i < UpdateNotifsList.Count; i += 2)
-            {
-                DisplayList.Add(UpdateNotifsList[i]);
-            }
-
-            return DisplayList;
+            notificationLangEntries.Save(NotifsListPath);
         }
 
-        public static List<string> getLangIds()
+        public static string GetLangId(string value)
         {
-            List<string> LangIdList = new List<string>();
-            readList();
-            for (int i = 1; i < UpdateNotifsList.Count; i += 2)
+            if (value != null)
             {
-                LangIdList.Add(UpdateNotifsList[i]);
+                LangTool.LangEntry langEntry = notificationLangEntries.Entries.FirstOrDefault(entry => entry.Value == value);
+                if (langEntry != null)
+                    return langEntry.LangId;
             }
 
-            return LangIdList;
+            return null;
+        }
+
+        public static LangTool.LangEntry GetDefaultLangEntry()
+        {
+            if (notificationLangEntries.Entries.Count > 0)
+                return notificationLangEntries.Entries[0];
+            else
+                return new LangTool.LangEntry("","",5);
+        }
+
+        public static string GetDisplayNotification(string langId)
+        {
+            if (langId != null)
+            {
+                LangTool.LangEntry langEntry = notificationLangEntries.Entries.FirstOrDefault(entry => entry.LangId == langId);
+                if (langEntry != null)
+                    return langEntry.Value;
+            }
+
+            return null;
+        }
+
+        public static string[] GetAllDisplayNotifications()
+        {
+            return notificationLangEntries.Entries.Select(entry => entry.Value).ToArray();
+        }
+
+        public static string[] GetAllLangIds()
+        {
+            return notificationLangEntries.Entries.Select(entry => entry.LangId).ToArray();
         }
 
         public static void addNotification(string langId, string value)
         {
-            string[] langEntry = { "", value, langId };
-            File.AppendAllLines(NotifsListPath, langEntry);
+            notificationLangEntries.Entries.Add(new LangTool.LangEntry(langId, value, 5));
+            saveList();
         }
 
-        public static bool isCustomNotification(string LangId)
+        public static bool isCustomNotification(string langId)
         {
-            foreach (string defaultLangId in defaultLangIds)
-            {
-                if (defaultLangId.Equals(LangId))
-                {
-                    return false;
-                }
-            }
-            return true;
+            return !vanillaLangIds.Any(defaultEntry => defaultEntry == langId);
         }
     }
 }

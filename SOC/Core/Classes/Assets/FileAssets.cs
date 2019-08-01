@@ -16,10 +16,10 @@ namespace SOC.Classes.Assets
         public readonly string questFPKPath; 
         public readonly string questFPKDPath;
 
-        public FileAssets(string fpkName)
+        public FileAssets(string dir, string fpkName)
         {
-            questFPKPath = $@"Sideop_Build/Assets/tpp/pack/mission2/quest/ih/{fpkName}_fpk";
-            questFPKDPath = $@"Sideop_Build/Assets/tpp/pack/mission2/quest/ih/{fpkName}_fpkd";
+            questFPKPath = $@"{dir}/Assets/tpp/pack/mission2/quest/ih/{fpkName}_fpk";
+            questFPKDPath = $@"{dir}/Assets/tpp/pack/mission2/quest/ih/{fpkName}_fpkd";
         }
 
         public void AddIndividualFile(string whereToFind, string whereToPlace)

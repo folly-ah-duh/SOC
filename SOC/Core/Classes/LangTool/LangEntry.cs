@@ -5,6 +5,8 @@ namespace SOC.Classes.LangTool
     [XmlType("Entry")]
     public class LangEntry
     {
+        public LangEntry() { }
+
         public LangEntry(string lngId, string val, short col)
         {
             LangId = lngId; Value = val; Color = col;

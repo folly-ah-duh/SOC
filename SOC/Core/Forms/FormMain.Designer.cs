@@ -33,6 +33,7 @@
             this.panelMain = new System.Windows.Forms.Panel();
             this.buttonLoad = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
+            this.buttonBatchBuild = new System.Windows.Forms.Button();
             this.buttonOpenFolder = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -90,10 +91,21 @@
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
+            // buttonBatchBuild
+            // 
+            this.buttonBatchBuild.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonBatchBuild.Location = new System.Drawing.Point(242, 468);
+            this.buttonBatchBuild.Name = "buttonBatchBuild";
+            this.buttonBatchBuild.Size = new System.Drawing.Size(109, 38);
+            this.buttonBatchBuild.TabIndex = 7;
+            this.buttonBatchBuild.Text = "Batch Build Xml...";
+            this.buttonBatchBuild.UseVisualStyleBackColor = true;
+            this.buttonBatchBuild.Click += new System.EventHandler(this.buttonBatchBuild_Click);
+            // 
             // buttonOpenFolder
             // 
             this.buttonOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonOpenFolder.Location = new System.Drawing.Point(258, 468);
+            this.buttonOpenFolder.Location = new System.Drawing.Point(373, 468);
             this.buttonOpenFolder.Name = "buttonOpenFolder";
             this.buttonOpenFolder.Size = new System.Drawing.Size(129, 38);
             this.buttonOpenFolder.TabIndex = 4;
@@ -107,6 +119,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
             this.ClientSize = new System.Drawing.Size(1158, 512);
+            this.Controls.Add(this.buttonBatchBuild);
             this.Controls.Add(this.buttonOpenFolder);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonLoad);
@@ -131,6 +144,7 @@
         private System.Windows.Forms.Panel panelMain;
         private System.Windows.Forms.Button buttonLoad;
         private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Button buttonBatchBuild;
         private System.Windows.Forms.Button buttonOpenFolder;
     }
 }

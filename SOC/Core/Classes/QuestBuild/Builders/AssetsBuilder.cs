@@ -13,13 +13,13 @@ namespace SOC.Classes.QuestBuild.Assets
 {
     class AssetsBuilder
     {
-        internal static void BuildAssets(CoreDetails coreDetails, MasterManager masterManager)
+        internal static void BuildAssets(string dir, CoreDetails coreDetails, DetailManager[] managers)
         {
-            FileAssets fileAssets = new FileAssets(coreDetails.FpkName);
+            FileAssets fileAssets = new FileAssets(dir, coreDetails.FpkName);
 
             RouteAssets.BuildRouteAssets(coreDetails.routeName, fileAssets);
 
-            foreach(DetailManager manager in masterManager.GetManagers())
+            foreach(DetailManager manager in managers)
             {
                 manager.AddToAssets(fileAssets);
             }

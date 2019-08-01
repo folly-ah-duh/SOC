@@ -38,12 +38,12 @@ namespace SOC.Classes.QuestBuild.Fox2
             return entityList;
         }
 
-        public static void WriteQuestFox2(string fpkName, MasterManager masterManager)
+        public static void WriteQuestFox2(string dir, string fpkName, DetailManager[] managers)
         {
-            List<Fox2EntityClass> entityList = BuildQuestEntityList(fpkName, masterManager.GetManagers());
+            List<Fox2EntityClass> entityList = BuildQuestEntityList(fpkName, managers);
             SetAddresses(entityList, Fox2Info.baseQuestAddress);
 
-            string fox2Path = $@"Sideop_Build/Assets/tpp/pack/mission2/quest/ih/{fpkName}_fpkd/Assets/tpp/level/mission2/quest/ih";
+            string fox2Path = $@"{dir}/Assets/tpp/pack/mission2/quest/ih/{fpkName}_fpkd/Assets/tpp/level/mission2/quest/ih";
             string fox2QuestFile = Path.Combine(fox2Path, string.Format("{0}.fox2.xml", fpkName));
 
             Directory.CreateDirectory(fox2Path);

@@ -4,6 +4,7 @@ using SOC.QuestObjects.Common;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace SOC.UI
@@ -14,6 +15,7 @@ namespace SOC.UI
 
         private SetupDisplay setupPage;
         private DetailDisplay detailPage;
+        private Waiting waitingPage = new Waiting();
         private int pageNum = 0;
 
         public FormMain()
@@ -83,8 +85,10 @@ namespace SOC.UI
         private void ShowSetup()
         {
             buttonBack.Visible = false;
+            
             panelMain.Controls.Clear();
             panelMain.Controls.Add(setupPage);
+            setupPage.EnableScrolling();
             managerMaster.UpdateAllDetailsFromControl();
             managerMaster.RefreshAllStubTexts();
             buttonNext.Text = "Next >>";
@@ -92,21 +96,22 @@ namespace SOC.UI
 
         private void ShowWait()
         {
+            setupPage.DisableScrolling();
             panelMain.Controls.Clear();
-            Waiting waitingPage = new Waiting();
             panelMain.Controls.Add(waitingPage);
+
             buttonNext.Enabled = false;
-            Application.DoEvents();
         }
 
         private void ShowDetails()
         {
-            panelMain.Controls.Clear();
             buttonBack.Visible = true;
             buttonNext.Text = "Build";
-            panelMain.Controls.Add(detailPage);
             detailPage.RefreshObjectPanels(setupPage.GetCoreDetails());
             buttonNext.Enabled = true;
+
+            panelMain.Controls.Clear();
+            panelMain.Controls.Add(detailPage);
         }
 
         private void BuildQuest()

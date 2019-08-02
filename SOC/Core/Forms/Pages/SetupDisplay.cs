@@ -16,6 +16,7 @@ namespace SOC.UI
 {
     public partial class SetupDisplay : UserControl
     {
+        PanelScroll locationalTabsScrolling;
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern Int32 SendMessage(IntPtr hWnd, int msg, int wParam, [MarshalAs(UnmanagedType.LPWStr)]string lParam);
         public int locationID = -1;
@@ -25,6 +26,7 @@ namespace SOC.UI
         public SetupDisplay(MasterManager manMaster)
         {
             InitializeComponent();
+            locationalTabsScrolling = new PanelScroll(this.flowPanelLocationalStubs, true);
             SetManagerMaster(manMaster);
             Dock = DockStyle.Fill;
             SendMessage(textBoxQuestNum.Handle, 0x1501, 1, "30103");
@@ -221,6 +223,16 @@ namespace SOC.UI
             box.Items.Clear();
             box.Items.AddRange(itemList);
             box.SelectedIndex = currentIndex;
+        }
+
+        public void EnableScrolling()
+        {
+            Application.AddMessageFilter(locationalTabsScrolling);
+        }
+
+        public void DisableScrolling()
+        {
+            Application.RemoveMessageFilter(locationalTabsScrolling);
         }
     }
 }

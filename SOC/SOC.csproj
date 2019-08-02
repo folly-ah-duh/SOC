@@ -155,6 +155,7 @@
     <Compile Include="Core\Classes\LangTool\LangEntry.cs" />
     <Compile Include="Core\Classes\LangTool\LangFile.cs" />
     <Compile Include="Core\Classes\Common\Quest.cs" />
+    <Compile Include="Core\Forms\PanelScroll.cs" />
     <Compile Include="Core\Forms\QuestBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -379,9 +380,6 @@
     </Compile>
     <Compile Include="Core\Forms\Pages\Waiting.Designer.cs">
       <DependentUpon>Waiting.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Core\Forms\QuestPanel.cs">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

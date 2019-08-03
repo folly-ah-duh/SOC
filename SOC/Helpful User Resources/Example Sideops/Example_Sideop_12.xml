@@ -10,7 +10,7 @@
     <category>MINE_CLEARING</category>
     <CPName>mafr_lab_cp</CPName>
     <reward>C</reward>
-    <progNotif>7</progNotif>
+    <progressLangID>mine_quest_log</progressLangID>
     <routeName>NONE</routeName>
   </coreDetails>
   <questObjectDetails>

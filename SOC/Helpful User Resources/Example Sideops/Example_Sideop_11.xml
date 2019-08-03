@@ -10,7 +10,7 @@
     <category>ELIMINATE_ARMOR_VEHICLE</category>
     <CPName>mafr_flowStation_cp</CPName>
     <reward>D</reward>
-    <progNotif>4</progNotif>
+    <progressLangID>target_eliminate_custom</progressLangID>
     <routeName>NONE</routeName>
   </coreDetails>
   <questObjectDetails>

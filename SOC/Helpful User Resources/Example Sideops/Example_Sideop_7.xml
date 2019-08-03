@@ -10,7 +10,7 @@
     <category>CAPTURE_ANIMAL</category>
     <CPName>mtbs</CPName>
     <reward>E</reward>
-    <progNotif>8</progNotif>
+    <progressLangID>announce_quest_extract_animal</progressLangID>
     <routeName>NONE</routeName>
   </coreDetails>
   <questObjectDetails>

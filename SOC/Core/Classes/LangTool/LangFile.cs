@@ -23,7 +23,7 @@ namespace SOC.Classes.LangTool
         }
 
         [XmlArray("Entries")]
-        public List<LangEntry> Entries { get; set; }
+        public List<LangEntry> Entries { get; set; } = new List<LangEntry>();
 
         [XmlAttribute("Endianess")]
         public string Endianess = "BigEndian";

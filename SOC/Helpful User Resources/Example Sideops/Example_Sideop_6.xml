@@ -10,7 +10,7 @@
     <category>CAPTURE_ANIMAL</category>
     <CPName>NONE</CPName>
     <reward>C</reward>
-    <progNotif>8</progNotif>
+    <progressLangID>announce_quest_extract_animal</progressLangID>
     <routeName>NONE</routeName>
   </coreDetails>
   <questObjectDetails>

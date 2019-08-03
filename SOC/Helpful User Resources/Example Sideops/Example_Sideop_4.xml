@@ -10,7 +10,7 @@
     <category>ELIMINATE_TANK_UNIT</category>
     <CPName>afgh_field_cp</CPName>
     <reward>C</reward>
-    <progNotif>5</progNotif>
+    <progressLangID>target_eliminate_custom</progressLangID>
     <routeName>NONE</routeName>
   </coreDetails>
   <questObjectDetails>

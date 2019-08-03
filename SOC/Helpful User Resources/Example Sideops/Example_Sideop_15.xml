@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <Quest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="0.7.0.0">
   <coreDetails FpkName="Example_Sideop_15" QuestNum="30204">
-    <QuestTitle>Example: Kill the Heavy Infantry</QuestTitle>
-    <QuestDesc>Kill all of the Heavy Infantry at Munoko ya Nioka. Extracting any of the Heavy Infantry will result in mission failure.</QuestDesc>
+    <QuestTitle>Example: Kill the Prisoners</QuestTitle>
+    <QuestDesc>Kill both of the prisoners at Munoko ya Nioka. Extracting any of the targets will result in mission failure.</QuestDesc>
     <locationID>20</locationID>
     <loadArea>hill</loadArea>
     <coords xCoord="2188" yCoord="56" zCoord="383" />
@@ -10,21 +10,21 @@
     <category>ELIMINATE_HEAVY_INFANTRY</category>
     <CPName>mafr_hill_cp</CPName>
     <reward>B</reward>
-    <progNotif>1</progNotif>
-    <routeName>HillHeli</routeName>
+    <progressLangID>target_eliminate_custom</progressLangID>
+    <routeName>NONE</routeName>
   </coreDetails>
   <questObjectDetails>
     <Detail xsi:type="EnemyDetail">
-      <enemyMetadata objectiveType="KILLREQUIRED" subtype="PF_B" />
+      <enemyMetadata objectiveType="ELIMINATE" subtype="PF_B" />
       <enemies>
-        <Enemy name="sol_quest_0000" spawn="true">
-          <isTarget>true</isTarget>
+        <Enemy name="sol_quest_0000" spawn="false">
+          <isTarget>false</isTarget>
           <balaclava>false</balaclava>
           <zombie>false</zombie>
           <armored>true</armored>
           <body>DEFAULT</body>
-          <cRoute>rt_quest_c_0003</cRoute>
-          <dRoute>rt_quest_c_0003</dRoute>
+          <cRoute>rt_hill_c_0000</cRoute>
+          <dRoute>rt_hill_c_0000</dRoute>
           <skill>NONE</skill>
           <staffType>NONE</staffType>
           <powers>
@@ -32,14 +32,14 @@
             <string>COMBAT_SPECIAL</string>
           </powers>
         </Enemy>
-        <Enemy name="sol_quest_0001" spawn="true">
-          <isTarget>true</isTarget>
+        <Enemy name="sol_quest_0001" spawn="false">
+          <isTarget>false</isTarget>
           <balaclava>false</balaclava>
           <zombie>false</zombie>
           <armored>true</armored>
           <body>DEFAULT</body>
-          <cRoute>rt_quest_c_0000</cRoute>
-          <dRoute>rt_quest_c_0000</dRoute>
+          <cRoute>rt_hill_c_0000</cRoute>
+          <dRoute>rt_hill_c_0000</dRoute>
           <skill>NONE</skill>
           <staffType>NONE</staffType>
           <powers>
@@ -47,14 +47,14 @@
             <string>COMBAT_SPECIAL</string>
           </powers>
         </Enemy>
-        <Enemy name="sol_quest_0002" spawn="true">
-          <isTarget>true</isTarget>
+        <Enemy name="sol_quest_0002" spawn="false">
+          <isTarget>false</isTarget>
           <balaclava>false</balaclava>
           <zombie>false</zombie>
           <armored>true</armored>
           <body>DEFAULT</body>
-          <cRoute>rt_quest_c_0001</cRoute>
-          <dRoute>rt_quest_c_0001</dRoute>
+          <cRoute>rt_hill_c_0000</cRoute>
+          <dRoute>rt_hill_c_0000</dRoute>
           <skill>NONE</skill>
           <staffType>NONE</staffType>
           <powers>
@@ -62,14 +62,14 @@
             <string>COMBAT_SPECIAL</string>
           </powers>
         </Enemy>
-        <Enemy name="sol_quest_0003" spawn="true">
-          <isTarget>true</isTarget>
+        <Enemy name="sol_quest_0003" spawn="false">
+          <isTarget>false</isTarget>
           <balaclava>false</balaclava>
           <zombie>false</zombie>
           <armored>true</armored>
           <body>DEFAULT</body>
-          <cRoute>rt_quest_c_0002</cRoute>
-          <dRoute>rt_quest_c_0002</dRoute>
+          <cRoute>rt_hill_c_0000</cRoute>
+          <dRoute>rt_hill_c_0000</dRoute>
           <skill>NONE</skill>
           <staffType>NONE</staffType>
           <powers>
@@ -77,14 +77,14 @@
             <string>COMBAT_SPECIAL</string>
           </powers>
         </Enemy>
-        <Enemy name="sol_quest_0004" spawn="true">
-          <isTarget>true</isTarget>
+        <Enemy name="sol_quest_0004" spawn="false">
+          <isTarget>false</isTarget>
           <balaclava>false</balaclava>
           <zombie>false</zombie>
           <armored>true</armored>
           <body>DEFAULT</body>
-          <cRoute>rt_quest_d_0000</cRoute>
-          <dRoute>rt_quest_d_0000</dRoute>
+          <cRoute>rt_hill_c_0000</cRoute>
+          <dRoute>rt_hill_c_0000</dRoute>
           <skill>NONE</skill>
           <staffType>NONE</staffType>
           <powers>
@@ -92,14 +92,14 @@
             <string>COMBAT_SPECIAL</string>
           </powers>
         </Enemy>
-        <Enemy name="sol_quest_0005" spawn="true">
-          <isTarget>true</isTarget>
+        <Enemy name="sol_quest_0005" spawn="false">
+          <isTarget>false</isTarget>
           <balaclava>false</balaclava>
           <zombie>false</zombie>
           <armored>true</armored>
           <body>DEFAULT</body>
-          <cRoute>rt_quest_d_0001</cRoute>
-          <dRoute>rt_quest_d_0001</dRoute>
+          <cRoute>rt_hill_c_0000</cRoute>
+          <dRoute>rt_hill_c_0000</dRoute>
           <skill>NONE</skill>
           <staffType>NONE</staffType>
           <powers>
@@ -108,14 +108,14 @@
             <string>QUEST_ARMOR</string>
           </powers>
         </Enemy>
-        <Enemy name="sol_quest_0006" spawn="true">
-          <isTarget>true</isTarget>
+        <Enemy name="sol_quest_0006" spawn="false">
+          <isTarget>false</isTarget>
           <balaclava>false</balaclava>
           <zombie>false</zombie>
           <armored>true</armored>
           <body>DEFAULT</body>
-          <cRoute>rt_quest_d_0002</cRoute>
-          <dRoute>rt_quest_d_0002</dRoute>
+          <cRoute>rt_hill_c_0000</cRoute>
+          <dRoute>rt_hill_c_0000</dRoute>
           <skill>NONE</skill>
           <staffType>NONE</staffType>
           <powers>
@@ -123,14 +123,14 @@
             <string>QUEST_ARMOR</string>
           </powers>
         </Enemy>
-        <Enemy name="sol_quest_0007" spawn="true">
-          <isTarget>true</isTarget>
+        <Enemy name="sol_quest_0007" spawn="false">
+          <isTarget>false</isTarget>
           <balaclava>false</balaclava>
           <zombie>false</zombie>
           <armored>true</armored>
           <body>DEFAULT</body>
-          <cRoute>rt_quest_d_0003</cRoute>
-          <dRoute>rt_quest_d_0003</dRoute>
+          <cRoute>rt_hill_c_0000</cRoute>
+          <dRoute>rt_hill_c_0000</dRoute>
           <skill>NONE</skill>
           <staffType>NONE</staffType>
           <powers>
@@ -285,7 +285,7 @@
       </enemies>
     </Detail>
     <Detail xsi:type="HostageDetail">
-      <hostageMetadata objectiveType="RECOVERED" hostageBodyName="SNEAKING_SUIT_FEMALE" canInterrogate="true" />
+      <hostageMetadata objectiveType="KILLREQUIRED" hostageBodyName="MAFR_HOSTAGE" canInterrogate="true" />
       <hostages>
         <Hostage ID="0">
           <isTarget>true</isTarget>
@@ -326,7 +326,7 @@
           <isSpawn>true</isSpawn>
           <isTarget>false</isTarget>
           <dRoute>lz_drp_hill_I0000|rt_drp_hill_I_0000</dRoute>
-          <cRoute>rt_heli_quest_0000</cRoute>
+          <cRoute>lz_drp_hill_I0000|rt_drp_hill_I_0000</cRoute>
           <heliClass>BLACK</heliClass>
         </Helicopter>
       </helicopters>

@@ -10,8 +10,8 @@
     <category>EXTRACT_HIGHLY_SKILLED</category>
     <CPName>afgh_powerPlant_cp</CPName>
     <reward>C</reward>
-    <progNotif>3</progNotif>
-    <routeName>PowerPlant</routeName>
+    <progressLangID>custom_objective_complete</progressLangID>
+    <routeName>NONE</routeName>
   </coreDetails>
   <questObjectDetails>
     <Detail xsi:type="EnemyDetail">

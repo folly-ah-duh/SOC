@@ -33,6 +33,8 @@ namespace SOC.Classes.QuestBuild.Lua
             
             definitionLua.AddDefinition($"locationId = {coreDetails.locationID}");
             definitionLua.AddDefinition($@"areaName = ""{coreDetails.loadArea}""");
+            if (LoadAreas.isMtbs(coreDetails.locationID))
+                definitionLua.AddDefinition($@"clusterName = ""{coreDetails.loadArea.Substring(4)}""");
             definitionLua.AddDefinition($"iconPos = Vector3({coreDetails.coords.xCoord},{coreDetails.coords.yCoord},{coreDetails.coords.zCoord})");
             definitionLua.AddDefinition($"radius = {coreDetails.radius}");
             definitionLua.AddDefinition($"category = TppQuest.QUEST_CATEGORIES_ENUM.{coreDetails.category}");

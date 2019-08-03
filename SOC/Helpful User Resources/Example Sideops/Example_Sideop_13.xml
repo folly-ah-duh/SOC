@@ -10,7 +10,7 @@
     <category>PRISONER</category>
     <CPName>NONE</CPName>
     <reward>D</reward>
-    <progNotif>3</progNotif>
+    <progressLangID>quest_extract_hostage</progressLangID>
     <routeName>SkilledSoldier13</routeName>
   </coreDetails>
   <questObjectDetails>

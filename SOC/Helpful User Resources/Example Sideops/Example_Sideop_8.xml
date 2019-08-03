@@ -10,7 +10,7 @@
     <category>PRISONER</category>
     <CPName>mtbs</CPName>
     <reward>F</reward>
-    <progNotif>0</progNotif>
+    <progressLangID>quest_extract_elite</progressLangID>
     <routeName>NONE</routeName>
   </coreDetails>
   <questObjectDetails>

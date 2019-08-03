@@ -10,7 +10,7 @@
     <category>ELIMINATE_PUPPETS</category>
     <CPName>mafr_hill_cp</CPName>
     <reward>B</reward>
-    <progNotif>2</progNotif>
+    <progressLangID>quest_defeat_zombie</progressLangID>
     <routeName>NONE</routeName>
   </coreDetails>
   <questObjectDetails>

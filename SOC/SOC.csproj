@@ -209,6 +209,23 @@
     <Compile Include="QuestObjects\Enemy\Forms\EnemyBox.Designer.cs">
       <DependentUpon>EnemyBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuestObjects\GeoTrap\Classes\GeoTrapFox2.cs" />
+    <Compile Include="QuestObjects\GeoTrap\Classes\GeoTrapLua.cs" />
+    <Compile Include="QuestObjects\GeoTrap\Forms\GeoTrapBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuestObjects\GeoTrap\Forms\GeoTrapBox.Designer.cs">
+      <DependentUpon>GeoTrapBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuestObjects\GeoTrap\Forms\GeoTrapControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuestObjects\GeoTrap\Forms\GeoTrapControl.Designer.cs">
+      <DependentUpon>GeoTrapControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuestObjects\GeoTrap\GeoTrapDetail.cs" />
+    <Compile Include="QuestObjects\GeoTrap\GeoTrapManager.cs" />
+    <Compile Include="QuestObjects\GeoTrap\GeoTrapVisualizer.cs" />
     <Compile Include="QuestObjects\Helicopter\Classes\HelicopterFox2.cs" />
     <Compile Include="QuestObjects\Helicopter\Classes\HelicopterLua.cs" />
     <Compile Include="QuestObjects\Helicopter\Forms\HelicopterBox.cs">
@@ -459,6 +476,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="QuestObjects\Enemy\Forms\EnemyControl.resx">
       <DependentUpon>EnemyControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuestObjects\GeoTrap\Forms\GeoTrapBox.resx">
+      <DependentUpon>GeoTrapBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuestObjects\GeoTrap\Forms\GeoTrapControl.resx">
+      <DependentUpon>GeoTrapControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuestObjects\Helicopter\Forms\HelicopterBox.resx">
       <DependentUpon>HelicopterBox.cs</DependentUpon>

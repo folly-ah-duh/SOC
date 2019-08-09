@@ -23,12 +23,12 @@ namespace SOC.QuestObjects.GeoTrap
 
         public override void AddToFox2Entities(DataSet dataSet, List<Fox2EntityClass> entityList)
         {
-            //GeoTrapFox2.AddQuestEntities((GeoTrapDetail)detail, dataSet, entityList);
+            GeoTrapFox2.AddQuestEntities((GeoTrapDetail)detail, dataSet, entityList);
         }
 
         public override void AddToMainLua(MainLua mainLua)
         {
-            //GeoTrapLua.GetMain((GeoTrapDetail)detail, mainLua);
+            GeoTrapLua.GetMain((GeoTrapDetail)detail, mainLua);
         }
     }
 }

@@ -61,9 +61,9 @@ namespace SOC.QuestObjects.GeoTrap
             else
                 type = "sphere";
 
-            length = box.textBox_xscale.Text;
-            width = box.textBox_zscale.Text;
-            height = box.textBox_yscale.Text;
+            xScale = box.textBox_xscale.Text;
+            zScale = box.textBox_zscale.Text;
+            yScale = box.textBox_yscale.Text;
 
             position = new Position(new Coordinates(box.textBox_xcoord.Text, box.textBox_ycoord.Text, box.textBox_zcoord.Text), new Rotation(box.textBox_rot.Text));
         }
@@ -103,13 +103,13 @@ namespace SOC.QuestObjects.GeoTrap
         public string type { get; set; } = "box";
 
         [XmlElement]
-        public string length { get; set; } = "1";
+        public string xScale { get; set; } = "1";
 
         [XmlElement]
-        public string width { get; set; } = "1";
+        public string zScale { get; set; } = "1";
 
         [XmlElement]
-        public string height { get; set; } = "1";
+        public string yScale { get; set; } = "1";
 
         [XmlElement]
         public Position position { get; set; } = new Position(new Coordinates(), new Rotation());

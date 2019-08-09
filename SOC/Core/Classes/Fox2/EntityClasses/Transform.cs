@@ -8,12 +8,14 @@ namespace SOC.Classes.Fox2
         Fox2EntityClass owner;
         Rotation transform_rotation;
         Coordinates transform_translation;
+        string xscale, yscale, zscale;
 
-        public Transform(Fox2EntityClass _owner, Position position)
+        public Transform(Fox2EntityClass _owner, Position position, string _xscale = "1", string _yscale = "1", string _zscale = "1")
         {
             owner = _owner;
             transform_rotation = position.rotation;
             transform_translation = position.coords;
+            zscale = _zscale; xscale = _xscale; yscale = _yscale;
         }
 
         public override string GetFox2Format()
@@ -25,7 +27,7 @@ namespace SOC.Classes.Fox2
                 <value>{owner.GetHexAddress()}</value>
             </property>
             <property name=""transform_scale"" type=""Vector3"" container=""StaticArray"" arraySize=""1"">
-                <value x=""1"" y=""1"" z=""1"" w=""0"" />
+                <value x=""{xscale}"" y=""{yscale}"" z=""{zscale}"" w=""0"" />
             </property>
             {transform_rotation.ToFox2String()}
             {transform_translation.ToFox2String()}

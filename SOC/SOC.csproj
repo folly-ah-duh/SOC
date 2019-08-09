@@ -92,10 +92,14 @@
   <ItemGroup>
     <Compile Include="Core\Classes\Assets\FileAssets.cs" />
     <Compile Include="Core\Classes\Common\CoreDetails.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\BoxShape.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\DataSet.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\GameObject.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\GameObjectLocator.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\GeoModuleCondition.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\GeoTrap.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\ScriptBlockScript.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\SphereShape.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\StaticModel.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TexturePackLoadConditioner.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppAnimalLocatorParameter.cs" />
@@ -109,6 +113,7 @@
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppPlacedLocatorParameter.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppSecurityCamera2LocatorParameter.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppSecurityCamera2Parameter.cs" />
+    <Compile Include="Core\Classes\Fox2\EntityClasses\TppTrapCheckIsPlayerCallbackDataElement.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppUavLocatorParameter.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppUavParameter.cs" />
     <Compile Include="Core\Classes\Fox2\EntityClasses\TppVehicle2AttachmentData.cs" />

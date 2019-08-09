@@ -38,9 +38,9 @@ namespace SOC.QuestObjects.GeoTrap
             });
             comboBox_geotrap.Text = qObject.geoTrap;
 
-            textBox_xscale.Text = qObject.length;
-            textBox_yscale.Text = qObject.height;
-            textBox_zscale.Text = qObject.width;
+            textBox_xscale.Text = qObject.xScale;
+            textBox_yscale.Text = qObject.yScale;
+            textBox_zscale.Text = qObject.zScale;
         }
 
         public override QuestObject getQuestObject()

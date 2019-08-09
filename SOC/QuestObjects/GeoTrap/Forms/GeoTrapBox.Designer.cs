@@ -80,7 +80,7 @@
             this.textBox_zscale.Location = new System.Drawing.Point(205, 129);
             this.textBox_zscale.Name = "textBox_zscale";
             this.textBox_zscale.Size = new System.Drawing.Size(54, 20);
-            this.textBox_zscale.TabIndex = 31;
+            this.textBox_zscale.TabIndex = 10;
             // 
             // textBox_yscale
             // 
@@ -88,7 +88,7 @@
             this.textBox_yscale.Location = new System.Drawing.Point(145, 129);
             this.textBox_yscale.Name = "textBox_yscale";
             this.textBox_yscale.Size = new System.Drawing.Size(54, 20);
-            this.textBox_yscale.TabIndex = 30;
+            this.textBox_yscale.TabIndex = 9;
             // 
             // textBox_xscale
             // 
@@ -96,7 +96,7 @@
             this.textBox_xscale.Location = new System.Drawing.Point(85, 129);
             this.textBox_xscale.Name = "textBox_xscale";
             this.textBox_xscale.Size = new System.Drawing.Size(54, 20);
-            this.textBox_xscale.TabIndex = 29;
+            this.textBox_xscale.TabIndex = 8;
             // 
             // label5
             // 
@@ -113,7 +113,7 @@
             this.radioButton_sphere.Location = new System.Drawing.Point(171, 75);
             this.radioButton_sphere.Name = "radioButton_sphere";
             this.radioButton_sphere.Size = new System.Drawing.Size(59, 17);
-            this.radioButton_sphere.TabIndex = 27;
+            this.radioButton_sphere.TabIndex = 6;
             this.radioButton_sphere.TabStop = true;
             this.radioButton_sphere.Text = "Sphere";
             this.radioButton_sphere.UseVisualStyleBackColor = true;
@@ -124,7 +124,7 @@
             this.radioButton_box.Location = new System.Drawing.Point(85, 75);
             this.radioButton_box.Name = "radioButton_box";
             this.radioButton_box.Size = new System.Drawing.Size(43, 17);
-            this.radioButton_box.TabIndex = 26;
+            this.radioButton_box.TabIndex = 5;
             this.radioButton_box.TabStop = true;
             this.radioButton_box.Text = "Box";
             this.radioButton_box.UseVisualStyleBackColor = true;
@@ -165,7 +165,7 @@
             this.comboBox_geotrap.Location = new System.Drawing.Point(85, 102);
             this.comboBox_geotrap.Name = "comboBox_geotrap";
             this.comboBox_geotrap.Size = new System.Drawing.Size(174, 21);
-            this.comboBox_geotrap.TabIndex = 5;
+            this.comboBox_geotrap.TabIndex = 7;
             // 
             // textBox_rot
             // 

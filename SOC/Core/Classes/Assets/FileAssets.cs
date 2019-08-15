@@ -24,7 +24,8 @@ namespace SOC.Classes.Assets
 
         public void AddIndividualFile(string whereToFind, string whereToPlace)
         {
-            individualFiles.Add(whereToFind, whereToPlace);
+            if (!individualFiles.ContainsKey(whereToFind))
+                individualFiles.Add(whereToFind, whereToPlace);
         }
 
         public void AddFPKFolder(string directory)

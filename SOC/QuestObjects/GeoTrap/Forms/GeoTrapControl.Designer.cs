@@ -43,7 +43,7 @@
             this.panelQuestBoxes.Location = new System.Drawing.Point(3, 16);
             this.panelQuestBoxes.Margin = new System.Windows.Forms.Padding(0);
             this.panelQuestBoxes.Name = "panelQuestBoxes";
-            this.panelQuestBoxes.Size = new System.Drawing.Size(288, 411);
+            this.panelQuestBoxes.Size = new System.Drawing.Size(294, 430);
             this.panelQuestBoxes.TabIndex = 1;
             this.panelQuestBoxes.WrapContents = false;
             // 
@@ -53,7 +53,7 @@
             this.groupboxDetail.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupboxDetail.Location = new System.Drawing.Point(0, 0);
             this.groupboxDetail.Name = "groupboxDetail";
-            this.groupboxDetail.Size = new System.Drawing.Size(294, 430);
+            this.groupboxDetail.Size = new System.Drawing.Size(300, 449);
             this.groupboxDetail.TabIndex = 33;
             this.groupboxDetail.TabStop = false;
             this.groupboxDetail.Text = "GeoTrap Shapes";
@@ -64,7 +64,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupboxDetail);
             this.Name = "GeoTrapControl";
-            this.Size = new System.Drawing.Size(294, 430);
+            this.Size = new System.Drawing.Size(300, 449);
             this.groupboxDetail.ResumeLayout(false);
             this.ResumeLayout(false);
 

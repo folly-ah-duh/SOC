@@ -13,7 +13,7 @@ namespace SOC.QuestObjects.GeoTrap
     {
         public GeoTrapManager(Detail detail, LocationalVisualizer visual) : base(detail, visual) { }
 
-        static LocationalDataStub stub = new LocationalDataStub("GeoTrap Shape Locations");
+        static LocationalDataStub stub = new LocationalDataStub("[Advanced] GeoTrap Shape Locations");
 
         static GeoTrapControl control = new GeoTrapControl();
 

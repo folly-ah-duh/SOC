@@ -9,7 +9,7 @@ using SOC.Classes.Common;
 
 namespace SOC.QuestObjects.Helicopter
 {
-    class HelicopterManager : NonLocationalManager // probably end up being a non-locational manager
+    class HelicopterManager : NonLocationalManager
     {
         static HelicopterControl control = new HelicopterControl();
 
